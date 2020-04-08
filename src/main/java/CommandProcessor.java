@@ -1,11 +1,12 @@
+import Models.Account.Account;
+import Models.Account.Customer;
+
 import java.util.Scanner;
 
 public class CommandProcessor {
-
-    private boolean hasLoggedIn;
+    private Manager manager;
     private String command;
     private Scanner scanner = new Scanner(System.in);
-
     public void mainMenu() {
 
     }
@@ -15,7 +16,9 @@ public class CommandProcessor {
     }
 
     public void accountMenu() {
-
+        String password = "Jesus";
+        String newPassword = "Christ";
+        manager.changePassword(password, newPassword);
     }
 
     public void productPage() {
@@ -34,5 +37,7 @@ public class CommandProcessor {
 
     }
 
+    private void showCartProducts() {
 
+    }
 }

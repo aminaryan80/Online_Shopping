@@ -16,5 +16,11 @@ public class Account {
     protected double balance;
     protected List<Discount> discounts;
 
+    public boolean canChangePassword(String currentPassword) {
+        return currentPassword.equals(password);
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
