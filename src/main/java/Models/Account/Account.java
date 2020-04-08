@@ -1,4 +1,7 @@
-package Models;
+package Models.Account;
+
+import Models.Shop.Discount;
+import Models.Shop.Log;
 
 import java.util.List;
 
@@ -9,7 +12,9 @@ public class Account {
     protected String email;
     protected String phoneNumber;
     protected String password;
-    protected List<>
+    protected List<Log> logs;
     protected double balance;
-    protected List<>
+    protected List<Discount> discounts;
+
+
 }
