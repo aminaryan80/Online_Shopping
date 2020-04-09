@@ -2,6 +2,7 @@ package Control;
 
 import Models.Account.Account;
 import Models.Account.Customer;
+import Models.Account.Seller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,10 +59,6 @@ public class Manager {
 
     }
 
-    public void changeType(String username, String type) {
-
-    }
-
     public void deleteUsername(String username) {
 
     }
@@ -108,6 +105,74 @@ public class Manager {
     }
 
     public void deleteDiscountCode(String id) {
+
+    }
+
+    public void manageRequests() {
+
+    }
+
+    public void showRequestDetails(String id) {
+
+    }
+
+    private boolean hasRequestById(String id) {
+
+    }
+
+    public void acceptRequest(String id) {
+
+    }
+
+    public void declineRequest(String id) {
+
+    }
+
+    public void showCategories() {
+
+    }
+
+    public void editCategory(String category, String type, String newValue) {
+
+    }
+
+    public boolean hasCategoryWithName(String name) {
+
+    }
+
+    public void addCategory(String name, ArrayList<String> features, ArrayList<String> productIds) {
+
+    }
+
+    public void removeCategory(String name) {
+
+    }
+
+    public ArrayList<String> viewSalesHistory() {
+
+    }
+
+    public ArrayList<String> viewProducts() {
+
+    }
+
+    public String viewProductDetails(String id) {
+
+    }
+
+    public ArrayList<String> viewProductBuyers(String id) {
+
+    }
+
+    public boolean isEnteredProductFieldValid(String field) {
+
+    }
+
+    public void editProduct(String id) {
+
+    }
+
+    public void addProduct(String id, String name, String companyName, Seller seller, String category, double price, boolean iaAvailable, String description) {
 
     }
 }

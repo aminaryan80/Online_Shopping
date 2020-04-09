@@ -1,5 +1,6 @@
 package Models.Shop;
 
+import Models.Account.Customer;
 import Models.Account.Seller;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Product {
     private Category category;
     private String description;
     private double rate;
+    private ArrayList<Customer> allBuyers;
     private List<Comment> allComments;
     //TODO different sellers for one product
 
@@ -24,8 +26,33 @@ public class Product {
 
     }
 
+    public static boolean hasProductWithId(String id) {
+
+    }
+
     public static void deleteProduct(Product product) {
 
+    }
+
+    public static ArrayList<String> viewProductInShort() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", status=" + status +
+                ", name='" + name + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", price=" + price +
+                ", seller=" + seller +
+                ", isAvailable=" + isAvailable +
+                ", category=" + category +
+                ", description='" + description + '\'' +
+                ", rate=" + rate +
+                ", allComments=" + allComments +
+                '}';
     }
 
     private enum ProductStatus {

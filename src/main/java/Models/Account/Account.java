@@ -1,9 +1,9 @@
 package Models.Account;
 
 import Models.Shop.Discount;
-import Models.Shop.Log;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Account {
     private static ArrayList<Account> allAccounts = new ArrayList<Account>();
@@ -13,7 +13,6 @@ public class Account {
     protected String email;
     protected String phoneNumber;
     protected String password;
-    protected List<Log> logs;
     protected double balance;
     protected List<Discount> discounts;
 

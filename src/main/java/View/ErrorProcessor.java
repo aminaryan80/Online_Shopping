@@ -19,6 +19,12 @@ public class ErrorProcessor {
     public void invalidDiscountId() {
         System.out.println("Wrong discount id");
     }
+    public void invalidCategoryName() {
+        System.out.println("Wrong Category Name");
+    }
+    public void invalidRequestId() {
+        System.out.println("Wrong request id");
+    }
     public void noCustomerWithUsername() {
         System.out.println("Selected username doesn't belong to a customer");
     }

@@ -3,7 +3,6 @@ package View;
 import Control.Manager;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
 
 public class CommandProcessor {
     private Manager manager;
@@ -19,16 +18,6 @@ public class CommandProcessor {
     }
 
     public void accountMenu(String type) {
-
-    }
-
-    public void principalMenu() {
-        String password = "Jesus";
-        String newPassword = "Christ";
-        manager.changePassword(password, newPassword);
-    }
-
-    public void sellerMenu() {
 
     }
 
@@ -56,66 +45,5 @@ public class CommandProcessor {
     private void login(String username) {
         String password;
         manager.login(username, password);
-    }
-
-    private void editAttribute(String field) {
-        if (manager.isEnteredAccountFieldValid()) {
-            manager.editAccountAttribute(newAttribute)
-        }
-    }
-
-    private void manageUsers() {
-
-    }
-
-    private void viewManager(String username) {
-
-    }
-
-    private void changeType(String username, String type) {
-
-    }
-
-    private void deleteUser(String username) {
-
-    }
-
-    private void createManagerProfile() {
-        register("manager", username);
-    }
-
-    private void manageAllProducts() {
-
-    }
-
-    private void removeProduct(String id) {
-
-    }
-
-    private void createDiscountCode() {
-
-    }
-
-    private void viewDiscountCodes() {
-        // prints all discounts
-
-    }
-
-    private void viewSingleDiscountCode(String id) {
-
-    }
-
-    private void editDiscountCode(String id) {
-        // if code valid
-        // edit [field]
-        // if field valid
-
-    }
-
-    private void removeDiscountCode(String id) {
-
-    }
-
-    private Matcher getMatcher(String input, String regex) {
     }
 }
