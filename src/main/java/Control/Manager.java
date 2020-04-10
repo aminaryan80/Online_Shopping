@@ -3,6 +3,7 @@ package Control;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
+import Models.Shop.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -172,7 +173,37 @@ public class Manager {
 
     }
 
-    public void addProduct(String id, String name, String companyName, Seller seller, String category, double price, boolean iaAvailable, String description) {
+    public void addProduct(String id, String name, String companyName, Seller seller,
+                           String category, double price, boolean iaAvailable, String description) {
+
+    }
+
+    public void viewOffs(){
+
+    }
+
+    public String viewOffById(String id){
+
+    }
+
+    public void editOffAttribute(String id,String field,String newValue){
+
+    }
+
+    public void addOff(String id,String beginningDate,String endingDate,
+                       double discountAmount,ArrayList<String> productsNames){
+
+    }
+
+    private ArrayList<Product> getProductsListByNames(ArrayList<String> productsNames){
+
+    }
+
+    public double viewSellerBalance(){
+
+    }
+
+    public String viewCart(){
 
     }
 }

@@ -5,9 +5,9 @@ import Control.Manager;
 import java.util.Scanner;
 
 public class CommandProcessor {
-    private Manager manager;
-    private String command;
-    private Scanner scanner = new Scanner(System.in);
+    protected Manager manager;
+    protected String command;
+    protected Scanner scanner = new Scanner(System.in);
 
     public void mainMenu() {
 
@@ -21,15 +21,7 @@ public class CommandProcessor {
 
     }
 
-    public void customerMenu() {
-
-    }
-
     public void productPage() {
-
-    }
-
-    public void auctionMenu() {
 
     }
 
@@ -38,12 +30,5 @@ public class CommandProcessor {
 //        login(username);
     }
 
-    private void register(String type, String username) {
-        manager.createAccount(firstname, lastname, phoneNumber, email, balance, type, username, company);
-    }
 
-    private void login(String username) {
-        String password;
-        manager.login(username, password);
-    }
 }

@@ -33,4 +33,28 @@ public class SellerMenu extends MainMenu {
     private void deleteProduct(String id) {
 
     }
+
+    private void showCategories(){
+
+    }
+
+    private void viewOffs(){
+
+    }
+
+    private void viewOffById(String id){
+
+    }
+
+    private void editOffAttribute(String id){
+
+    }
+
+    private void addOff(){
+
+    }
+
+    private void viewSellerBalance(){
+
+    }
 }

@@ -28,4 +28,5 @@ public class ErrorProcessor {
     public void noCustomerWithUsername() {
         System.out.println("Selected username doesn't belong to a customer");
     }
+    public void invalidAuctionId(){System.out.println("Wrong off id");}
 }

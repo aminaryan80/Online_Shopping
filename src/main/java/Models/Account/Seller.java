@@ -1,15 +1,34 @@
 package Models.Account;
 
+import Models.Shop.Auction;
 import Models.Shop.SellingLog;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Seller extends Account {
     private String companyName;
     private ArrayList<SellingLog> allLogs;
+    private List<Auction> auctions = new ArrayList<Auction>();
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public ArrayList<String> viewOffsInShort() {
+
+    }
+
+    public boolean hasAuctionWithId(String id) {
+
+    }
+
+    public Auction getAuctionById(String id) {
+
+    }
+
+    public void addAuction(Auction auction){
+
     }
 
     @Override

@@ -34,15 +34,19 @@ public class Account {
 
     @Override
     public String toString() {
-            return "Account{" +
-                    "username='" + username + '\'' +
-                    ", firstName='" + firstName + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    ", email='" + email + '\'' +
-                    ", phoneNumber='" + phoneNumber + '\'' +
-                    ", password='" + password + '\'' +
-                    ", balance=" + balance +
-                    '}';
+        return "Account{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     public void setUsername(String username) {
