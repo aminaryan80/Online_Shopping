@@ -1,16 +1,16 @@
 package View;
 
 public class ErrorProcessor {
-    public void wrongPassword(){
+    public void wrongPassword() {
         System.out.println("Wrong password");
     }
-    public void wrongUsername(){
+    public void wrongUsername() {
         System.out.println("Wrong username");
     }
-    public void invalidInput(){
+    public void invalidInput() {
         System.out.println("Invalid input");
     }
-    public void invalidEditField(){
+    public void invalidEditField() {
         System.out.println("You can't change this field");
     }
     public void invalidProductId() {
@@ -28,5 +28,10 @@ public class ErrorProcessor {
     public void noCustomerWithUsername() {
         System.out.println("Selected username doesn't belong to a customer");
     }
-    public void invalidAuctionId(){System.out.println("Wrong off id");}
+    public void invalidAuctionId() {
+        System.out.println("Wrong off id");
+    }
+    public void notEnoughMoney() {
+        System.out.println("You don't have enough money to purchase");
+    }
 }

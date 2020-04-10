@@ -1,6 +1,7 @@
 package Models.Account;
 
 import Models.Shop.Auction;
+import Models.Shop.Product;
 import Models.Shop.SellingLog;
 
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class Seller extends Account {
     }
 
     public boolean hasAuctionWithId(String id) {
+
+    }
+
+    public boolean hasProductInAuctions(Product product) {
 
     }
 

@@ -2,7 +2,7 @@ package View;
 
 import java.util.regex.Matcher;
 
-public class ManagerMenu extends MainMenu{
+public class PrincipalMenu extends MainMenu {
     public void principalMenu() {
         String password = "Jesus";
         String newPassword = "Christ";

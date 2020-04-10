@@ -24,6 +24,10 @@ public class Account {
 
     }
 
+    public ArrayList<String> showAccountsInShort() {
+
+    }
+
     public boolean canChangePassword(String currentPassword) {
         return currentPassword.equals(password);
     }

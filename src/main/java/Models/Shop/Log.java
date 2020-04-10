@@ -8,6 +8,8 @@ public class Log {
     protected String id;
     protected Date date;
     protected double paymentAmount;
+    protected String Address;
+    protected String phoneNumber;
     protected List<Product> products;
     protected String customerName;
     protected boolean isReceived;

@@ -36,10 +36,13 @@ public class Discount {
         this.discountUseCount = discountUseCount;
     }
 
+    public int getDiscountPercent() {
+        return discountPercent;
+    }
+
     public ArrayList<String> viewDiscountInShort() {
 
     }
-
     public boolean hasDiscountWithId(String id) {
 
     }

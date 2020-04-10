@@ -26,6 +26,10 @@ public class Product {
 
     }
 
+    public Seller getSeller() {
+        return seller;
+    }
+
     public static boolean hasProductWithId(String id) {
 
     }
@@ -36,6 +40,10 @@ public class Product {
 
     public static ArrayList<String> viewProductInShort() {
 
+    }
+
+    private enum ProductStatus {
+        UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
 
     @Override
@@ -53,9 +61,5 @@ public class Product {
                 ", rate=" + rate +
                 ", allComments=" + allComments +
                 '}';
-    }
-
-    private enum ProductStatus {
-        UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED;
     }
 }
