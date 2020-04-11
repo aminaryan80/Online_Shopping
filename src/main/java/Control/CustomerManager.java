@@ -1,7 +1,6 @@
 package Control;
 
 import Models.Account.Customer;
-import Models.Shop.Auction;
 import Models.Shop.Product;
 
 import java.util.ArrayList;
@@ -60,6 +59,26 @@ public class CustomerManager extends MainManager {
     }
 
     private double getPaymentAmountDiscountApplied() {
+
+    }
+
+    public ArrayList<String> viewOrders() {
+
+    }
+
+    public String showOrderById(String id) {
+
+    }
+
+    public void rateProduct(String id, int score) {
+
+    }
+
+    public double viewCustomerBalance() {
+
+    }
+
+    public ArrayList<String> viewDiscountCodes() {
 
     }
 }

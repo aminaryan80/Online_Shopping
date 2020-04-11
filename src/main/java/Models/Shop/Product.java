@@ -5,6 +5,7 @@ import Models.Account.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<Product>();
@@ -20,9 +21,14 @@ public class Product {
     private double rate;
     private ArrayList<Customer> allBuyers;
     private List<Comment> allComments;
+    private Map<String, String> features;
     //TODO different sellers for one product
 
     public static Product getProductById(String id) {
+
+    }
+
+    public List<String> getComments() {
 
     }
 

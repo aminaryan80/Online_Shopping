@@ -61,7 +61,7 @@ public class PrincipalManager extends MainManager {
     }
 
     // view discount codes
-    public void viewDiscountCodes() {
+    public ArrayList<String> viewDiscountCodes() {
 
     }
 

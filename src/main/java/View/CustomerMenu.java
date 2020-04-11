@@ -51,4 +51,20 @@ public class CustomerMenu extends MainMenu {
     private void viewOrders() {
 
     }
+
+    private void showOrderById(String id) {
+
+    }
+
+    private void rateProduct(String id, int score) {
+
+    }
+
+    private void viewBalance() {
+
+    }
+
+    private void viewDiscountCodes() {
+
+    }
 }

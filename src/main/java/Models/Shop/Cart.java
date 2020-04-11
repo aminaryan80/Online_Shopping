@@ -2,7 +2,6 @@ package Models.Shop;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Cart {
@@ -12,11 +11,15 @@ public class Cart {
         return products;
     }
 
-    public ArrayList<String> showProductsInshort() {
+    public ArrayList<String> showProductsInShort() {
         // #id name count
     }
 
     public boolean hasProductInCartWithId(String id) {
+
+    }
+
+    public void addProduct(Product product) {
 
     }
 

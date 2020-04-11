@@ -12,4 +12,15 @@ public class Comment {
     private enum CommentStatus {
         PENDING, CONFIRMED, DENIED;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "account=" + account +
+                ", product=" + product +
+                ", text='" + text + '\'' +
+                ", status=" + status +
+                ", hasPurchased=" + hasPurchased +
+                '}';
+    }
 }

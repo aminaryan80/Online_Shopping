@@ -14,6 +14,18 @@ public class Category {
 
     }
 
+    public Category getCategoryByName(String name) {
+
+    }
+
+    public List<String> getFeatures() {
+        return features;
+    }
+
+    public List<String> filterBasedOnFeature(String feature, String value) {
+
+    }
+
     public void setName(String name) {
         this.name = name;
     }
