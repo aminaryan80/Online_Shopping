@@ -8,4 +8,8 @@ public class CommandProcessor {
     protected Manager manager;
     protected String command;
     protected Scanner scanner = new Scanner(System.in);
+
+    public CommandProcessor(Manager manager) {
+        this.manager = manager;
+    }
 }

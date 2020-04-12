@@ -1,6 +1,12 @@
 package View;
 
+import Control.Manager;
+
 public class ProductPage extends CommandProcessor {
+
+    public ProductPage(Manager manager) {
+        super(manager);
+    }
 
     private void digest() {
 

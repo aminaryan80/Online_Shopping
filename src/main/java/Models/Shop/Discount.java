@@ -16,6 +16,16 @@ public class Discount {
     private int discountUseCount;
     private List<Customer> allCustomers;
 
+    public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount, List<Customer> allCustomers) {
+        this.id = id;
+        this.beginningDate = beginningDate;
+        this.endingDate = endingDate;
+        this.discountPercent = discountPercent;
+        this.maximumDiscount = maximumDiscount;
+        this.discountUseCount = discountUseCount;
+        this.allCustomers = allCustomers;
+    }
+
     public void setBeginningDate(Date beginningDate) {
         this.beginningDate = beginningDate;
     }

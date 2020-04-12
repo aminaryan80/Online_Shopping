@@ -1,11 +1,16 @@
 package Control;
 
+import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Product;
 
 import java.util.ArrayList;
 
 public class SellerManager extends MainManager {
+
+    public SellerManager(Account account) {
+        super(account);
+    }
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {

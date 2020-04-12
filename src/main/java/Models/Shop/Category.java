@@ -10,6 +10,12 @@ public class Category {
     private List<Category> subCategories;
     private List<Product> allProducts;
 
+    public Category(String name, List<String> features, List<Product> allProducts) {
+        this.name = name;
+        this.features = features;
+        this.allProducts = allProducts;
+    }
+
     public static boolean hasCategoryWithName(String name) {
 
     }

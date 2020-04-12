@@ -11,6 +11,15 @@ public class Auction {
     private Date endingDate;
     private double discountAmount;
 
+    public Auction(String id, List<Product> products, AuctionStatus status, Date beginningDate, Date endingDate, double discountAmount) {
+        this.id = id;
+        this.products = products;
+        this.status = status;
+        this.beginningDate = beginningDate;
+        this.endingDate = endingDate;
+        this.discountAmount = discountAmount;
+    }
+
     public String getId() {
         return id;
     }

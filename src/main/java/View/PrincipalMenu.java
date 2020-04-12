@@ -1,8 +1,15 @@
 package View;
 
+import Control.Manager;
+
 import java.util.regex.Matcher;
 
 public class PrincipalMenu extends MainMenu {
+
+    public PrincipalMenu(Manager manager) {
+        super(manager);
+    }
+
     public void principalMenu() {
         String password = "Jesus";
         String newPassword = "Christ";

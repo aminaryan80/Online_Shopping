@@ -1,12 +1,15 @@
 package View;
 
 import Control.CustomerManager;
+import Control.Manager;
 
 import java.util.ArrayList;
 
 public class CustomerMenu extends MainMenu {
 
-    private CustomerManager customerManager;
+    public CustomerMenu(Manager manager) {
+        super(manager);
+    }
 
     public void customerMenu() {
 

@@ -1,8 +1,15 @@
 package View;
 
+import Control.Manager;
 import Models.Shop.Category;
 
 public class ProductsMenu extends CommandProcessor{
+
+    public ProductsMenu(Manager manager, Category category) {
+        super(manager);
+        this.category = category;
+    }
+
     private Category category;
 
     public void productsMenu() {
@@ -21,7 +28,7 @@ public class ProductsMenu extends CommandProcessor{
 
     }
 
-    private void filter(String filterType) {
+    private void applyFilter(String filterType) {
 
     }
 

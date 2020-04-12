@@ -1,6 +1,12 @@
 package View;
 
+import Control.Manager;
+
 public class SellerMenu extends MainMenu {
+
+    public SellerMenu(Manager manager) {
+        super(manager);
+    }
 
     public void sellerMenu() {
 

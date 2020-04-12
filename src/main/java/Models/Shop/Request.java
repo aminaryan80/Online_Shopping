@@ -10,6 +10,12 @@ public class Request {
     private Account seller;
     private RequestType type;
 
+    public Request(String id, Account seller, RequestType type) {
+        this.id = id;
+        this.seller = seller;
+        this.type = type;
+    }
+
     public static ArrayList<String> viewRequestInShort() {
 
     }

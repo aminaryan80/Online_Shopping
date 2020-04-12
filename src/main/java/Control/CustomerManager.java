@@ -1,11 +1,16 @@
 package Control;
 
+import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Product;
 
 import java.util.ArrayList;
 
 public class CustomerManager extends MainManager {
+
+    public CustomerManager(Account account) {
+        super(account);
+    }
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {
@@ -62,6 +67,7 @@ public class CustomerManager extends MainManager {
 
     }
 
+    // view orders
     public ArrayList<String> viewOrders() {
 
     }
@@ -74,10 +80,12 @@ public class CustomerManager extends MainManager {
 
     }
 
+    // view balance
     public double viewCustomerBalance() {
 
     }
 
+    // view discount codes
     public ArrayList<String> viewDiscountCodes() {
 
     }

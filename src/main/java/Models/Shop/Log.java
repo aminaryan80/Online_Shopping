@@ -3,7 +3,18 @@ package Models.Shop;
 import java.util.Date;
 import java.util.List;
 
-public class Log {
+public abstract class Log {
+
+    public Log(String id, Date date, double paymentAmount, String address, String phoneNumber, String customerName, boolean isReceived) {
+        this.id = id;
+        this.date = date;
+        this.paymentAmount = paymentAmount;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.customerName = customerName;
+        this.isReceived = isReceived;
+    }
+
     //TODO change name to receipt
     protected String id;
     protected Date date;

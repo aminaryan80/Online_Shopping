@@ -1,11 +1,16 @@
 package Control;
 
+import Models.Account.Account;
 import Models.Account.Customer;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PrincipalManager extends MainManager {
+
+    public PrincipalManager(Account account) {
+        super(account);
+    }
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {

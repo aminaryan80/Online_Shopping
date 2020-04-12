@@ -24,6 +24,22 @@ public class Product {
     private Map<String, String> features;
     //TODO different sellers for one product
 
+
+    public Product(String id, ProductStatus status, String name, String companyName, double price, Seller seller,
+                   boolean isAvailable, Category category, String description, double rate, Map<String, String> features) {
+        this.id = id;
+        this.status = status;
+        this.name = name;
+        this.companyName = companyName;
+        this.price = price;
+        this.seller = seller;
+        this.isAvailable = isAvailable;
+        this.category = category;
+        this.description = description;
+        this.rate = rate;
+        this.features = features;
+    }
+
     public static Product getProductById(String id) {
 
     }

@@ -1,13 +1,20 @@
 package Control;
 
+import Models.Account.Account;
 import Models.Shop.Product;
 
 import java.util.List;
 
-public class ProductManager extends Manager {
+public class ProductPageManager extends Manager {
+
+    public ProductPageManager(Account account, Product product) {
+        super(account);
+        this.product = product;
+    }
 
     private Product product;
 
+    // digest
     public String digest() {
 
     }
@@ -20,14 +27,17 @@ public class ProductManager extends Manager {
 
     }
 
+    // attributes
     public String attributes() {
 
     }
 
+    // compare [productId]
     public List<String> compare(String id) {
 
     }
 
+    // comments
     public List<String> comments() {
 
     }

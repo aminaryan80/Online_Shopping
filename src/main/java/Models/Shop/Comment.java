@@ -9,6 +9,14 @@ public class Comment {
     private CommentStatus status;
     private boolean hasPurchased;
 
+    public Comment(Account account, Product product, String text, CommentStatus status, boolean hasPurchased) {
+        this.account = account;
+        this.product = product;
+        this.text = text;
+        this.status = status;
+        this.hasPurchased = hasPurchased;
+    }
+
     private enum CommentStatus {
         PENDING, CONFIRMED, DENIED;
     }

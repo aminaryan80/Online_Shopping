@@ -1,17 +1,39 @@
 package Control;
 
+import Models.Account.Account;
 import Models.Shop.Category;
+import Models.Shop.Filter;
+import Models.Shop.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsManager extends Manager {
 
+    public ProductsManager(Account account, Category currentCategory) {
+        super(account);
+        this.currentCategory = currentCategory;
+    }
+
+    private Category currentCategory;
+    private List<Filter> filters;
+    private Sort currentSort;
+
+    // view categories
     public ArrayList<String> viewCategories() {
 
     }
 
-    public ArrayList<String> filter(Category category, String filterType, String filterValue) {
+    // filtering
+    public String showAvailableFilters() {
+
+    }
+
+    public boolean isEnteredFilterFieldValid(String field) {
+
+    }
+
+    public ArrayList<String> applyFilter(String filterType, String filterValue) {
 
     }
 
@@ -19,26 +41,37 @@ public class ProductsManager extends Manager {
 
     }
 
-    public List<String> disableFilter(String filter) {
+    public List<String> disableFilter(Filter filter) {
 
     }
 
-    public List<String> sort(String sort) {
+    private Filter getFilterByField(String field) {
 
     }
 
-    public List<String> currentSort() {
+    // sorting
+    public String showAvailableSorts() {
 
     }
 
-    public List<String> disableSort() {
+    public void sort(String sort) {
 
     }
 
+    public void currentSort() {
+
+    }
+
+    public void disableSort() {
+
+    }
+
+    // show products
     public List<String> showProducts() {
 
     }
 
+    // show product [productId]
     public void showProductById(String id) {
 
     }

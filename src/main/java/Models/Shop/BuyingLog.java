@@ -1,8 +1,16 @@
 package Models.Shop;
 
+import java.util.Date;
+
 public class BuyingLog extends Log {
     private double codeDiscountAmount;
     private String sellerName;
+
+    public BuyingLog(String id, Date date, double paymentAmount, String address, String phoneNumber, String customerName, boolean isReceived, double codeDiscountAmount, String sellerName) {
+        super(id, date, paymentAmount, address, phoneNumber, customerName, isReceived);
+        this.codeDiscountAmount = codeDiscountAmount;
+        this.sellerName = sellerName;
+    }
 
     @Override
     public String viewLogInShort() {

@@ -16,6 +16,16 @@ public class Account {
     protected double balance;
     protected List<Discount> discounts;
 
+    public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.balance = balance;
+    }
+
     public static Account getAccountByUsername(String username) {
 
     }

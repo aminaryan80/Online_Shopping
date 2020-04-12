@@ -1,15 +1,15 @@
 package Control;
 
 import Models.Account.Account;
-import Models.Account.Customer;
-import Models.Account.Seller;
-import Models.Shop.Product;
-
-import java.util.ArrayList;
-import java.util.Date;
+import Models.Shop.Cart;
 
 public class Manager {
     protected Account account;
+    protected Cart cart;
+
+    public Manager(Account account) {
+        this.account = account;
+    }
 
     public boolean userExistsWithUsername(String username) {
 
@@ -23,12 +23,8 @@ public class Manager {
 
     }
 
-    public void login(String username,String password){
-//        if(){
-//            if(){
-//
-//            }else View.ErrorProcessor.wrongPassword();
-//        }else
+    public void login(String username,String password) {
+
     }
 
     public boolean checkEmail(String email){
