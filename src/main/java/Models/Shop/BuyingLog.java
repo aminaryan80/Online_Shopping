@@ -25,7 +25,7 @@ public class BuyingLog extends Log {
                 ", id='" + id + '\'' +
                 ", date=" + date +
                 ", paymentAmount=" + paymentAmount +
-                ", Address='" + Address + '\'' +
+                ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", products=" + products +
                 ", customerName='" + customerName + '\'' +

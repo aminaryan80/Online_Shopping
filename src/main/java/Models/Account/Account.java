@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    private static ArrayList<Account> allAccounts = new ArrayList<Account>();
+    protected static ArrayList<Account> allAccounts = new ArrayList<>();
     protected String username;
     protected String firstName;
     protected String lastName;
@@ -14,7 +14,13 @@ public class Account {
     protected String phoneNumber;
     protected String password;
     protected double balance;
+    protected boolean isGuest;
     protected List<Discount> discounts;
+
+    public Account(boolean isGuest) {
+        if (isGuest)
+            this.isGuest = true;
+    }
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         this.username = username;
@@ -24,6 +30,8 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.balance = balance;
+        this.isGuest = false;
+        allAccounts.add(this);
     }
 
     public static Account getAccountByUsername(String username) {
@@ -34,8 +42,12 @@ public class Account {
 
     }
 
-    public ArrayList<String> showAccountsInShort() {
+    public static ArrayList<String> showAccountsInShort() {
 
+    }
+
+    public static void deleteAccount(Account account) {
+        allAccounts.remove(account);
     }
 
     public boolean canChangePassword(String currentPassword) {
@@ -44,19 +56,6 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
     }
 
     public double getBalance() {
@@ -87,7 +86,16 @@ public class Account {
         this.balance = balance;
     }
 
-    public static void deleteAccount(Account account) {
-
+    @Override
+    public String toString() {
+        return "Account{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

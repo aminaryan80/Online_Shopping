@@ -1,6 +1,7 @@
 package Control;
 
 import Models.Account.Account;
+import View.MainMenu;
 
 public class MainManager extends Manager {
 

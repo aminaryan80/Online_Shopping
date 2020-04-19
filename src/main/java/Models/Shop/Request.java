@@ -5,7 +5,7 @@ import Models.Account.Account;
 import java.util.ArrayList;
 
 public class Request {
-    private static ArrayList<Request> allRequests = new ArrayList<Request>();
+    private static ArrayList<Request> allRequests = new ArrayList<>();
     private String id;
     private Account seller;
     private RequestType type;
@@ -16,7 +16,7 @@ public class Request {
         this.type = type;
     }
 
-    public static ArrayList<String> viewRequestInShort() {
+    public static ArrayList<String> viewRequestsInShort() {
 
     }
 

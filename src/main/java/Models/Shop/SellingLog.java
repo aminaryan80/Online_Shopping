@@ -3,14 +3,14 @@ package Models.Shop;
 import java.util.Date;
 
 public class SellingLog extends Log {
+    private double auctionAmount;
+    private String buyerName;
+
     public SellingLog(String id, Date date, double paymentAmount, String address, String phoneNumber, String customerName, boolean isReceived, double auctionAmount, String buyerName) {
         super(id, date, paymentAmount, address, phoneNumber, customerName, isReceived);
         this.auctionAmount = auctionAmount;
         this.buyerName = buyerName;
     }
-
-    private double auctionAmount;
-    private String buyerName;
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public class SellingLog extends Log {
                 ", id='" + id + '\'' +
                 ", date=" + date +
                 ", paymentAmount=" + paymentAmount +
-                ", Address='" + Address + '\'' +
+                ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", products=" + products +
                 ", customerName='" + customerName + '\'' +

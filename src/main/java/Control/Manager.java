@@ -2,9 +2,14 @@ package Control;
 
 import Models.Account.Account;
 import Models.Shop.Cart;
+import Models.Shop.Category;
+
+import java.util.Scanner;
 
 public class Manager {
+    protected Scanner scanner;
     protected Account account;
+    protected Category mainCategory;
     protected Cart cart;
 
     public Manager(Account account) {

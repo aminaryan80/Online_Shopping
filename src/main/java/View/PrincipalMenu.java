@@ -8,35 +8,38 @@ public class PrincipalMenu extends MainMenu {
 
     public PrincipalMenu(Manager manager) {
         super(manager);
+        principalMenu();
     }
 
     public void principalMenu() {
-        String password = "Jesus";
-        String newPassword = "Christ";
-        manager.changePassword(password, newPassword);
+        while (true) {
+            Matcher matcher;
+            String input = scanner.nextLine();
+            if (getMatcher(input, "^view personal info$").find()) {
+
+            } else if ((matcher = getMatcher(input, "^edit (\\S+)$")).find()) {
+
+            } else if (getMatcher(input, "^manage users$").find()) {
+
+            } else if (getMatcher(input, "^manage all products$").find()) {
+
+            } else if (getMatcher(input, "^create discount code$").find()) {
+
+            } else if (getMatcher(input, "^view discount codes$").find()) {
+
+            } else if (getMatcher(input, "^manage requests$").find()) {
+
+            } else if (getMatcher(input, "^manage categories$").find()) {
+
+            }
+        }
     }
 
     private void manageUsers() {
 
     }
 
-    private void viewManager(String username) {
-
-    }
-
-    private void deleteUser(String username) {
-
-    }
-
-    private void createManagerProfile() {
-        register("manager", username);
-    }
-
     private void manageAllProducts() {
-
-    }
-
-    private void removeProduct(String id) {
 
     }
 
@@ -49,53 +52,11 @@ public class PrincipalMenu extends MainMenu {
 
     }
 
-    private void viewSingleDiscountCode(String id) {
-
-    }
-
-    private void editDiscountCode(String id) {
-        // if code valid
-        // edit [field]
-        // if field valid
-
-    }
-
-    private void removeDiscountCode(String id) {
-
-    }
-
-    private Matcher getMatcher(String input, String regex) {
-    }
-
     private void manageRequests() {
 
     }
 
-    private void showRequestDetails(String id) {
-
-    }
-
-    private void acceptRequest(String id) {
-
-    }
-
-    private void declineRequest(String id) {
-
-    }
-
     private void manageCategories() {
-
-    }
-
-    private void editCategory(String category) {
-
-    }
-
-    private void addCategory(String name) {
-
-    }
-
-    private void removeCategory(String name) {
 
     }
 }

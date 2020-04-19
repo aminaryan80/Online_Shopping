@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Product {
-    private static ArrayList<Product> allProducts = new ArrayList<Product>();
+    private static ArrayList<Product> allProducts = new ArrayList<>();
     private String id;
     private ProductStatus status;
     private String name;
@@ -40,19 +40,11 @@ public class Product {
         this.features = features;
     }
 
-    public static Product getProductById(String id) {
-
-    }
-
-    public List<String> getComments() {
-
-    }
-
-    public Seller getSeller() {
-        return seller;
-    }
-
     public static boolean hasProductWithId(String id) {
+
+    }
+
+    public static Product getProductById(String id) {
 
     }
 
@@ -62,6 +54,18 @@ public class Product {
 
     public static ArrayList<String> viewProductInShort() {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public List<String> getComments() {
+
+    }
+
+    public Seller getSeller() {
+        return seller;
     }
 
     private enum ProductStatus {
