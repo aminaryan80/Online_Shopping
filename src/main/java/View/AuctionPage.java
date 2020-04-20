@@ -2,7 +2,7 @@ package View;
 
 import Control.Manager;
 
-public class AuctionPage extends CommandProcessor {
+public class AuctionPage extends Menu {
 
     public AuctionPage(Manager manager) {
         super(manager);

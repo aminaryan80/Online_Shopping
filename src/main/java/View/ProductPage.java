@@ -2,7 +2,7 @@ package View;
 
 import Control.Manager;
 
-public class ProductPage extends CommandProcessor {
+public class ProductPage extends Menu {
 
     public ProductPage(Manager manager) {
         super(manager);

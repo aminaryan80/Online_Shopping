@@ -2,7 +2,7 @@ package View;
 
 import Control.Manager;
 
-public class LoginMenu extends CommandProcessor {
+public class LoginMenu extends Menu {
 
     public LoginMenu(Manager manager) {
         super(manager);

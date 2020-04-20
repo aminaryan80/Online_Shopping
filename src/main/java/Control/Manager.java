@@ -3,6 +3,7 @@ package Control;
 import Models.Account.Account;
 import Models.Shop.Cart;
 import Models.Shop.Category;
+import View.Menu;
 
 import java.util.Scanner;
 
@@ -11,9 +12,15 @@ public class Manager {
     protected Account account;
     protected Category mainCategory;
     protected Cart cart;
+    private Menu menu;
 
     public Manager(Account account) {
         this.account = account;
+        this.menu = new Menu(this);
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 
     public boolean userExistsWithUsername(String username) {
