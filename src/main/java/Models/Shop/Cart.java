@@ -13,10 +13,11 @@ public class Cart {
 
     public ArrayList<String> showProductsInShort() {
         // #id name count
+        return null;
     }
 
     public boolean hasProductInCartWithId(String id) {
-
+        return true;
     }
 
     public void addProduct(Product product) {
@@ -28,6 +29,6 @@ public class Cart {
     }
 
     public double getTotalPrice() {
-
+        return 1;
     }
 }

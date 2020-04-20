@@ -44,11 +44,11 @@ public class CustomerMenu extends MainMenu {
     }
 
     private ArrayList<String> getReceiverInformation() {
-
+        return null;
     }
 
     private String getBuyerDiscountCode() {
-
+        return null;
     }
 
     private void viewOrders() {

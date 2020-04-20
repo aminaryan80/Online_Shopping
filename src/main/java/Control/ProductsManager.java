@@ -21,37 +21,37 @@ public class ProductsManager extends Manager {
 
     // view categories
     public ArrayList<String> viewCategories() {
-
+return null;
     }
 
     // filtering
     public String showAvailableFilters() {
-
+        return null;
     }
 
     public boolean isEnteredFilterFieldValid(String field) {
-
+        return true;
     }
 
     public ArrayList<String> applyFilter(String filterType, String filterValue) {
-
+        return null;
     }
 
     public List<String> currentFilters() {
-
+        return null;
     }
 
     public List<String> disableFilter(Filter filter) {
-
+        return null;
     }
 
     private Filter getFilterByField(String field) {
-
+        return null;
     }
 
     // sorting
     public String showAvailableSorts() {
-
+        return null;
     }
 
     public void sort(String sort) {
@@ -68,7 +68,7 @@ public class ProductsManager extends Manager {
 
     // show products
     public List<String> showProducts() {
-
+        return null;
     }
 
     // show product [productId]

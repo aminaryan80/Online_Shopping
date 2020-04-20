@@ -10,8 +10,10 @@ public class MainMenu extends Menu {
 
     public void start(){
         String input;
-        while((input = scanner.nextLine().trim()).equalsIgnoreCase("exit"){
-            if(input.equals())
+        while((input = scanner.nextLine().trim()).equalsIgnoreCase("exit")) {
+            if(ConsoleCommand.EXIT.getStringMatcher(input).find()){
+                return;
+            }
         }
     }
 

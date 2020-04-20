@@ -35,15 +35,15 @@ public class Account {
     }
 
     public static Account getAccountByUsername(String username) {
-
+        return null;
     }
 
     public static boolean hasCustomerWithUsername(String username) {
-
+        return true;
     }
 
     public static ArrayList<String> showAccountsInShort() {
-
+        return null;
     }
 
     public static void deleteAccount(Account account) {

@@ -14,7 +14,7 @@ public class SellerManager extends MainManager {
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {
-
+        return true;
     }
 
     public void editAccountAttribute(String field, String newAttribute) {
@@ -22,34 +22,35 @@ public class SellerManager extends MainManager {
     }
 
     public boolean isEnteredFieldValid(String type) {
-
+        return true;
     }
 
     // view company information
     public String viewCompanyInformation() {
-
+        return null;
     }
 
     // view sales history
     public ArrayList<String> viewSalesHistory() {
-
+        return null;
     }
 
     // manage products
     public ArrayList<String> viewProducts() {
-
+        return null;
     }
 
     public String viewProductDetails(String id) {
-
+        return null;
     }
 
     public ArrayList<String> viewProductBuyers(String id) {
 
+        return null;
     }
 
     public boolean isEnteredProductFieldValid(String field) {
-
+        return true;
     }
 
     public void editProduct(String id) {
@@ -69,7 +70,7 @@ public class SellerManager extends MainManager {
 
     // show categories
     public ArrayList<String> showCategories() {
-
+        return null;
     }
 
     // view offs
@@ -78,7 +79,7 @@ public class SellerManager extends MainManager {
     }
 
     public String viewOffById(String id) {
-
+        return null;
     }
 
     public void editOffAttribute(String id, String field, String newValue) {
@@ -91,12 +92,12 @@ public class SellerManager extends MainManager {
     }
 
     private ArrayList<Product> getProductsListByNames(ArrayList<String> productsNames) {
-
+        return null;
     }
 
     // view balance
     public double viewSellerBalance() {
-
+        return 1;
     }
 
 }

@@ -14,7 +14,7 @@ public class CustomerManager extends MainManager {
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {
-
+return true;
     }
 
     public void editAccountAttribute(String field, String newAttribute) {
@@ -22,16 +22,17 @@ public class CustomerManager extends MainManager {
     }
 
     public boolean isEnteredFieldValid(String type) {
-
+        return true;
     }
 
     // view cart
     public String viewCart() {
         // show commands
+        return null;
     }
 
     public String showProducts() {
-
+        return null;
     }
 
     public void viewProductById(String id) {
@@ -48,6 +49,7 @@ public class CustomerManager extends MainManager {
 
     public boolean hasProductInAuctions(Product product) {
         product.getSeller().hasProductInAuctions(product);
+        return true;
     }
 
     public double getTotalPrice() {
@@ -60,20 +62,20 @@ public class CustomerManager extends MainManager {
     }
 
     public double canPay() {
-
+        return 1;
     }
 
     private double getPaymentAmountDiscountApplied() {
-
+        return 1;
     }
 
     // view orders
     public ArrayList<String> viewOrders() {
-
+        return null;
     }
 
     public String showOrderById(String id) {
-
+        return null;
     }
 
     public void rateProduct(String id, int score) {
@@ -82,11 +84,11 @@ public class CustomerManager extends MainManager {
 
     // view balance
     public double viewCustomerBalance() {
-
+        return 1;
     }
 
     // view discount codes
     public ArrayList<String> viewDiscountCodes() {
-
+        return null;
     }
 }

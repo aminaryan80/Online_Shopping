@@ -41,19 +41,18 @@ public class Product {
     }
 
     public static boolean hasProductWithId(String id) {
-
+        return true;
     }
 
     public static Product getProductById(String id) {
-
+        return null;
     }
 
     public static void deleteProduct(Product product) {
-
     }
 
     public static ArrayList<String> viewProductInShort() {
-
+        return null;
     }
 
     public String getId() {
@@ -61,7 +60,7 @@ public class Product {
     }
 
     public List<String> getComments() {
-
+        return null;
     }
 
     public Seller getSeller() {

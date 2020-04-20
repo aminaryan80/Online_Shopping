@@ -30,6 +30,7 @@ public abstract class Log {
     public abstract String toString();
 
     public boolean hasProductById(String id) {
+return true;
 
     }
 }

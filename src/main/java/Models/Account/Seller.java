@@ -22,19 +22,19 @@ public class Seller extends Account {
     }
 
     public ArrayList<String> viewOffsInShort() {
-
+        return null;
     }
 
     public boolean hasAuctionWithId(String id) {
-
+return true;
     }
 
     public boolean hasProductInAuctions(Product product) {
-
+return true;
     }
 
     public Auction getAuctionById(String id) {
-
+        return null;
     }
 
     public void addAuction(Auction auction) {
@@ -46,5 +46,6 @@ public class Seller extends Account {
 //        return super.toString() + "Seller{" +
 //                "companyName='" + companyName + '\'' +
 //                '}';
+        return null;
     }
 }

@@ -17,15 +17,15 @@ public class Request {
     }
 
     public static ArrayList<String> viewRequestsInShort() {
-
+        return null;
     }
 
     public static Request getRequestById(String id) {
-
+        return null;
     }
 
     public static boolean hasRequestById(String id) {
-
+return true;
     }
 
     public static void deleteRequest(Request request) {

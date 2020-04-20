@@ -24,7 +24,7 @@ public class Manager {
     }
 
     public boolean userExistsWithUsername(String username) {
-
+       return true;
     }
 
     public void changeFirstName(String newFirstName) {

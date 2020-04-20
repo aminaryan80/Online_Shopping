@@ -30,6 +30,6 @@ public class SellingLog extends Log {
 
     @Override
     public String viewLogInShort() {
-
+return null;
     }
 }

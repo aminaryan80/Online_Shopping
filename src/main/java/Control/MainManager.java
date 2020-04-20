@@ -17,6 +17,6 @@ public class MainManager extends Manager {
     }
 
     public boolean isDiscountCodeValid(String id) {
-
+return true;
     }
 }

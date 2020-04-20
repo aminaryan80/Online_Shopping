@@ -16,7 +16,7 @@ public class ProductPageManager extends Manager {
 
     // digest
     public String digest() {
-
+        return null;
     }
 
     public void addToCart() {
@@ -29,17 +29,17 @@ public class ProductPageManager extends Manager {
 
     // attributes
     public String attributes() {
-
+        return null;
     }
 
     // compare [productId]
     public List<String> compare(String id) {
-
+        return null;
     }
 
     // comments
     public List<String> comments() {
-
+        return null;
     }
 
     public void addComment(String title, String content) {

@@ -27,11 +27,11 @@ public class Discount {
     }
 
     public static boolean hasDiscountWithId(String id) {
-
+        return true;
     }
 
     public static Discount getDiscountById(String id) {
-
+        return null;
     }
 
     public static void deleteDiscount(Discount discount) {
@@ -63,7 +63,7 @@ public class Discount {
     }
 
     public static ArrayList<String> viewDiscountInShort() {
-
+        return null;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class PrincipalManager extends MainManager {
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {
-
+return true;
     }
 
     public void editAccountAttribute(String field, String newAttribute) {
@@ -24,12 +24,12 @@ public class PrincipalManager extends MainManager {
     }
 
     public boolean isEnteredFieldValid(String type) {
-
+        return true;
     }
 
     // manage users
     public String viewAccountByUsername(String username) {
-
+return null;
     }
 
     public void deleteUsername(String username) {
@@ -50,7 +50,7 @@ public class PrincipalManager extends MainManager {
     }
 
     public boolean hasProductWithId(String id) {
-
+        return true;
     }
 
     // create discount code
@@ -60,24 +60,24 @@ public class PrincipalManager extends MainManager {
     }
 
     private Date parseStringToDate(String string) {
-
+        return null;
     }
 
     private ArrayList<Customer> getCustomersListByUsernames(ArrayList<String> allowedCustumersUsernames) {
-
+return null;
     }
 
     // view discount codes
     public ArrayList<String> viewDiscountCodes() {
-
+        return null;
     }
 
     public String viewSingleDiscountCode(String id) {
-
+        return null;
     }
 
     public boolean isEnteredDiscountFieldValid(String field) {
-
+        return true;
     }
 
     public void editDiscountAttribute(String id, String field, String newAttribute) {
@@ -98,7 +98,7 @@ public class PrincipalManager extends MainManager {
     }
 
     private boolean hasRequestById(String id) {
-
+        return true;
     }
 
     public void acceptRequest(String id) {
@@ -119,7 +119,7 @@ public class PrincipalManager extends MainManager {
     }
 
     public boolean hasCategoryWithName(String name) {
-
+        return true;
     }
 
     public void addCategory(String name, ArrayList<String> features, ArrayList<String> productIds) {

@@ -35,6 +35,10 @@ public class PrincipalMenu extends MainMenu {
         }
     }
 
+    private Matcher getMatcher(String input, String s) {
+        return null;
+    }
+
     private void manageUsers() {
 
     }

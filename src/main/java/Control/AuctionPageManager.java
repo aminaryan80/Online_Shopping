@@ -12,7 +12,7 @@ public class AuctionPageManager extends Manager {
 
     // offs
     public List<String> showOffs() {
-
+        return null;
     }
 
     // show product [productId]
