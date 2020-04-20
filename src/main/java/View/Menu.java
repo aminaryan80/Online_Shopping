@@ -15,7 +15,7 @@ public class Menu {
     }
 
     public void start(){
-        Manager mainManager = new MainManager(null);
+        MainManager mainManager = new MainManager(null);
         mainManager.getMenu().start();
     }
 }

@@ -19,7 +19,7 @@ public class Manager {
         this.menu = new Menu(this);
     }
 
-    public Menu getMenu() {
+    public Menu getMenu(){
         return menu;
     }
 
