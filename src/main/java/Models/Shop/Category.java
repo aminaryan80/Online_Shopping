@@ -1,36 +1,49 @@
 package Models.Shop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Category {
-    private static ArrayList<Category> allCategories = new ArrayList<Category>();
+    private static ArrayList<Category> allCategories = new ArrayList<>();
     private String name;
-    private List<String> features;
+    private HashMap<String, Integer> features; // featureName - featureType
     private List<Category> subCategories;
     private List<Product> allProducts;
 
-    public Category(String name, List<String> features, List<Product> allProducts) {
+    public Category(String name, HashMap<String, Integer> features, List<Product> allProducts) {
         this.name = name;
         this.features = features;
         this.allProducts = allProducts;
     }
 
     public static boolean hasCategoryWithName(String name) {
-
+        for (Category category : allCategories) {
+            if(category.getName().equals(name))
+                return true;
+        }
+        return false;
     }
 
-    public Category getCategoryByName(String name) {
-
+    public static Category getCategoryByName(String name) {
+        for (Category category : allCategories) {
+            if(category.getName().equals(name))
+                return category;
+        }
+        return null;
     }
 
-    public List<String> getFeatures() {
-        return features;
+    public List<Category> getSubCategories() {
+        return subCategories;
     }
 
-    public List<String> filterBasedOnFeature(String feature, String value) {
-
+    public String getName() {
+        return name;
     }
+
+//    public List<String> filterBasedOnFeature(String feature, String value) {
+//
+//    }
 
     public void setName(String name) {
         this.name = name;

@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Discount {
-    private static ArrayList<Discount> allDiscounts = new ArrayList<Discount>();
+    private static ArrayList<Discount> allDiscounts = new ArrayList<>();
     private String id;
     private Date beginningDate;
     private Date endingDate;
@@ -24,6 +24,18 @@ public class Discount {
         this.maximumDiscount = maximumDiscount;
         this.discountUseCount = discountUseCount;
         this.allCustomers = allCustomers;
+    }
+
+    public static boolean hasDiscountWithId(String id) {
+
+    }
+
+    public static Discount getDiscountById(String id) {
+
+    }
+
+    public static void deleteDiscount(Discount discount) {
+
     }
 
     public void setBeginningDate(Date beginningDate) {
@@ -50,18 +62,7 @@ public class Discount {
         return discountPercent;
     }
 
-    public ArrayList<String> viewDiscountInShort() {
-
-    }
-    public boolean hasDiscountWithId(String id) {
-
-    }
-
-    public Discount getDiscountById(String id) {
-
-    }
-
-    public static void deleteDiscount(Discount discount) {
+    public static ArrayList<String> viewDiscountInShort() {
 
     }
 

@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Seller extends Account {
+    private String companyName;
+    private ArrayList<SellingLog> allLogs;
+    private List<Auction> auctions = new ArrayList<>();
+
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.companyName = companyName;
     }
-
-    private String companyName;
-    private ArrayList<SellingLog> allLogs;
-    private List<Auction> auctions = new ArrayList<Auction>();
 
     public String getCompanyName() {
         return companyName;
@@ -37,7 +37,7 @@ public class Seller extends Account {
 
     }
 
-    public void addAuction(Auction auction){
+    public void addAuction(Auction auction) {
 
     }
 
