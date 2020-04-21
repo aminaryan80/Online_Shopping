@@ -4,6 +4,7 @@ import Control.MainManager;
 import Control.Manager;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
 
 public abstract class Menu {
     protected Manager manager;
@@ -12,6 +13,4 @@ public abstract class Menu {
     public Menu(Manager manager) {
         this.manager = manager;
     }
-
-    public abstract void execute();
 }

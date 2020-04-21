@@ -11,7 +11,8 @@ import java.util.Date;
 public class PrincipalManager extends MainManager {
 
     public PrincipalManager(Account account, Menu menu) {
-        super(account, menu);
+        super(account);
+        this.menu = new PrincipalMenu(this);
     }
 
     // edit [field]

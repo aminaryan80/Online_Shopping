@@ -8,10 +8,6 @@ public class AuctionPage extends Menu {
         super(manager);
     }
 
-    @Override
-    public void execute() {
-
-    }
 
     public void auctionPage() {
 

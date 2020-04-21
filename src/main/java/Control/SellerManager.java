@@ -4,13 +4,15 @@ import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Product;
 import View.Menu;
+import View.SellerMenu;
 
 import java.util.ArrayList;
 
 public class SellerManager extends MainManager {
 
-    public SellerManager(Account account, Menu menu) {
-        super(account, menu);
+    public SellerManager(Account account) {
+        super(account);
+        this.menu = new SellerMenu(this);
     }
 
     // edit [field]

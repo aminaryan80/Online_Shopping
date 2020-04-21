@@ -64,8 +64,4 @@ public class ProductsMenu extends Menu {
 
     }
 
-    @Override
-    public void execute() {
-
-    }
 }

@@ -7,8 +7,9 @@ import java.util.List;
 
 public class AuctionPageManager extends Manager {
 
-    public AuctionPageManager(Account account,AuctionPage auctionPage) {
-        super(account,auctionPage);
+    public AuctionPageManager(Account account) {
+        super(account);
+        this.menu = new AuctionPage(this);
     }
 
     // offs

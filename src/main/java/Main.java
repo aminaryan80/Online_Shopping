@@ -1,9 +1,9 @@
 import Control.MainManager;
-import Control.Manager;
+import View.MainMenu;
 
 public class Main {
     public static void main(String[] args) {
         MainManager manager = new MainManager(null);
-        manager.getMenu().execute();
+        ((MainMenu) manager.getMenu()).execute();
     }
 }

@@ -2,12 +2,12 @@ package Control;
 
 import Models.Account.Account;
 import View.MainMenu;
-import View.Menu;
 
 public class MainManager extends Manager {
 
-    public MainManager(Account account, Menu menu) {
-        super(account, menu);
+    public MainManager(Account account) {
+        super(account);
+        this.menu = new MainMenu(this);
     }
 
     public String viewPersonalInfo() {

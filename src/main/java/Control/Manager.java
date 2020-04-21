@@ -12,14 +12,13 @@ public abstract class Manager {
     protected Account account;
     protected Category mainCategory;
     protected Cart cart;
-    private Menu menu;
+    protected Menu menu;
 
-    public Manager(Account account,Menu menu) {
+    public Manager(Account account) {
         this.account = account;
-        this.menu = menu;
     }
 
-    public Menu getMenu(){
+    public Menu getMenu() {
         return menu;
     }
 

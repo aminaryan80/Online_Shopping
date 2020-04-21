@@ -8,10 +8,6 @@ public class LoginMenu extends Menu {
         super(manager);
     }
 
-    @Override
-    public void execute() {
-
-    }
 
     private void register(String type, String username) {
      //   manager.createAccount(firstname, lastname, phoneNumber, email, balance, type, username, company);
