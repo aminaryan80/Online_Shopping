@@ -5,7 +5,7 @@ import Control.Manager;
 
 import java.util.Scanner;
 
-public class Menu {
+public abstract class Menu {
     protected Manager manager;
     protected Scanner scanner = new Scanner(System.in);
 
@@ -13,8 +13,5 @@ public class Menu {
         this.manager = manager;
     }
 
-    public void execute(){
-        MainManager mainManager = new MainManager(null);
-        mainManager.getMenu().execute();
-    }
+    public abstract void execute();
 }

@@ -63,4 +63,9 @@ public class ProductsMenu extends Menu {
     private void showProduct(String id) {
 
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

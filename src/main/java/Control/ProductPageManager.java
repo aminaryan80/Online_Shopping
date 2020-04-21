@@ -2,13 +2,14 @@ package Control;
 
 import Models.Account.Account;
 import Models.Shop.Product;
+import View.Menu;
 
 import java.util.List;
 
 public class ProductPageManager extends Manager {
 
-    public ProductPageManager(Account account, Product product) {
-        super(account);
+    public ProductPageManager(Account account, Menu menu, Product product) {
+        super(account, menu);
         this.product = product;
     }
 

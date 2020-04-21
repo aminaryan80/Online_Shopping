@@ -1,13 +1,14 @@
 package Control;
 
 import Models.Account.Account;
+import View.AuctionPage;
 
 import java.util.List;
 
 public class AuctionPageManager extends Manager {
 
-    public AuctionPageManager(Account account) {
-        super(account);
+    public AuctionPageManager(Account account,AuctionPage auctionPage) {
+        super(account,auctionPage);
     }
 
     // offs

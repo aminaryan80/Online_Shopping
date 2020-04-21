@@ -7,16 +7,16 @@ import View.Menu;
 
 import java.util.Scanner;
 
-public class Manager {
+public abstract class Manager {
     protected Scanner scanner;
     protected Account account;
     protected Category mainCategory;
     protected Cart cart;
     private Menu menu;
 
-    public Manager(Account account) {
+    public Manager(Account account,Menu menu) {
         this.account = account;
-        this.menu = new Menu(this);
+        this.menu = menu;
     }
 
     public Menu getMenu(){

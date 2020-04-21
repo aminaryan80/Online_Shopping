@@ -3,13 +3,15 @@ package Control;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Product;
+import View.MainMenu;
+import View.Menu;
 
 import java.util.ArrayList;
 
 public class CustomerManager extends MainManager {
 
-    public CustomerManager(Account account) {
-        super(account);
+    public CustomerManager(Account account, Menu menu) {
+        super(account, menu);
     }
 
     // edit [field]

@@ -4,14 +4,15 @@ import Models.Account.Account;
 import Models.Shop.Category;
 import Models.Shop.Filter;
 import Models.Shop.Sort;
+import View.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsManager extends Manager {
 
-    public ProductsManager(Account account, Category currentCategory) {
-        super(account);
+    public ProductsManager(Account account, Menu menu, Category currentCategory) {
+        super(account,menu);
         this.currentCategory = currentCategory;
     }
 

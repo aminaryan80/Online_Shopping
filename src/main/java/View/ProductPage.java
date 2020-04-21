@@ -8,6 +8,11 @@ public class ProductPage extends Menu {
         super(manager);
     }
 
+    @Override
+    public void execute() {
+
+    }
+
     private void digest() {
 
     }
