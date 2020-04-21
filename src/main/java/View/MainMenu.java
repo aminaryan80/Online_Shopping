@@ -8,7 +8,7 @@ public class MainMenu extends Menu {
         super(manager);
     }
 
-    public void start(){
+    public void execute(){
         String input;
         while((input = scanner.nextLine().trim()).equalsIgnoreCase("exit")) {
             if(ConsoleCommand.EXIT.getStringMatcher(input).find()){

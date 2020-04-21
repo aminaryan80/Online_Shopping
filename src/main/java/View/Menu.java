@@ -4,7 +4,6 @@ import Control.MainManager;
 import Control.Manager;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
 
 public class Menu {
     protected Manager manager;
@@ -14,8 +13,8 @@ public class Menu {
         this.manager = manager;
     }
 
-    public void start(){
+    public void execute(){
         MainManager mainManager = new MainManager(null);
-        mainManager.getMenu().start();
+        mainManager.getMenu().execute();
     }
 }
