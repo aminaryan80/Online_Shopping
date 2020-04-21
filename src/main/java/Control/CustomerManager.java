@@ -8,8 +8,11 @@ import View.MainMenu;
 import View.Menu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerManager extends MainManager {
+
+    Customer customer = (Customer) account;
 
     public CustomerManager(Account account) {
         super(account);
@@ -18,11 +21,16 @@ public class CustomerManager extends MainManager {
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {
-return true;
+        //if(field.matches("(?i)(first name|last name|"))
+        return true;
     }
 
     public void editAccountAttribute(String field, String newAttribute) {
 
+    }
+
+    public boolean isNewFieldAcceptable(String field,String newAttribute) {
+        return true;
     }
 
     public boolean isEnteredFieldValid(String type) {
@@ -36,7 +44,12 @@ return true;
     }
 
     public String showProducts() {
-        return null;
+        List<String> productsInfos = customer.getCart().showProductsInShort();
+        String allProductsInfo = "";
+        for (String productsInfo : productsInfos) {
+            allProductsInfo += productsInfo;
+        }
+        return allProductsInfo;
     }
 
     public void viewProductById(String id) {

@@ -13,6 +13,9 @@ public class ErrorProcessor {
     public static void invalidEditField() {
         System.out.println("You can't change this field");
     }
+    public static void invalidEnteredInEditField() {
+        System.out.println("What you have entered is not suitable for this field");
+    }
     public static void invalidProductId() {
         System.out.println("Wrong product id");
     }

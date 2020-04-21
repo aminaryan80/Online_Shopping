@@ -15,16 +15,12 @@ public class CustomerMenu extends MainMenu {
 
     }
 
-    private CustomerManager getCustomerManager(){
-        return (CustomerManager) manager;
-    }
-
     protected void viewPersonalInfo() {
-        getCustomerManager().viewPersonalInfo();
+        new ViewPersonalInfoCustomer(manager);
     }
 
     private void viewCart() {
-
+        new ViewCart(manager);
     }
 
     private void showProducts() {

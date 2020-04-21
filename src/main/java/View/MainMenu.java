@@ -1,8 +1,11 @@
 package View;
 
+import Control.CustomerManager;
 import Control.Manager;
 
 public class MainMenu extends Menu {
+
+    protected final CustomerManager customerManager = (CustomerManager) manager;
 
     public MainMenu(Manager manager) {
         super(manager);

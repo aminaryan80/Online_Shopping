@@ -4,7 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum ConsoleCommand {
-    EXIT("(?i)exit");
+    EXIT("(?i)exit"),
+
+    EDIT("(?i)edit (\\S+)"),
+
+    SHOW_PRODUCTS("(?i)show products");
 
     private final Pattern commandPattern;
 
