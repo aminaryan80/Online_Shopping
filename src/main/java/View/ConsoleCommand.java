@@ -8,7 +8,17 @@ public enum ConsoleCommand {
 
     EDIT("(?i)edit (\\S+)"),
 
-    SHOW_PRODUCTS("(?i)show products");
+    SHOW_PRODUCTS("(?i)show products"),
+
+    VIEW_PRODUCT_ID("(?i)view (\\S+)"),
+
+    INCREASE_PRODUCT("(?i)increase (\\S+)"),
+
+    DECREASE_PRODUCT("(?i)decrease (\\S+)"),
+
+    SHOW_TOTAL_PRICE("(?i)show total price"),
+
+    PURCHASE("(?i)purchase");
 
     private final Pattern commandPattern;
 

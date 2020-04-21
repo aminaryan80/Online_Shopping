@@ -4,6 +4,7 @@ import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Product;
 import View.CustomerMenu;
+import View.ErrorProcessor;
 import View.MainMenu;
 import View.Menu;
 
@@ -29,7 +30,7 @@ public class CustomerManager extends MainManager {
 
     }
 
-    public boolean isNewFieldAcceptable(String field,String newAttribute) {
+    public boolean isNewFieldAcceptable(String field, String newAttribute) {
         return true;
     }
 
@@ -56,12 +57,13 @@ public class CustomerManager extends MainManager {
         // goes to product page
     }
 
-    public void increaseProductQuantity(String id) {
-
-    }
-
-    public void decreaseProductQuantity(String id) {
-
+    public void ProductQuantity(String id,boolean isIncrease) {
+        Product product;
+        if ((product = Product.getProductById(id)) != null) {
+            if(isIncrease)
+            customer.getCart().addProduct(product);
+            else customer.getCart().deleteProduct(product);
+        } else ErrorProcessor.invalidProductId();
     }
 
     public boolean hasProductInAuctions(Product product) {

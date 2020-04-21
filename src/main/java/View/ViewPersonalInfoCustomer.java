@@ -6,7 +6,7 @@ import Control.Manager;
 import java.util.regex.Matcher;
 
 public class ViewPersonalInfoCustomer extends MainMenu {
-
+    CustomerManager customerManager =(CustomerManager) manager;
     public ViewPersonalInfoCustomer(Manager manager) {
         super(manager);
         viewPersonalInfoCustomer();

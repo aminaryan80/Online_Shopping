@@ -1,17 +1,18 @@
 package View;
 
 import Control.CustomerManager;
+import Control.MainManager;
 import Control.Manager;
 
 public class MainMenu extends Menu {
 
-    protected final CustomerManager customerManager = (CustomerManager) manager;
-
+    protected final MainManager mainManager = (MainManager) manager;
     public MainMenu(Manager manager) {
         super(manager);
+        execute();
     }
 
-    public void execute(){
+    private void execute(){
         String input;
         while((input = scanner.nextLine().trim()).equalsIgnoreCase("exit")) {
             if(ConsoleCommand.EXIT.getStringMatcher(input).find()){

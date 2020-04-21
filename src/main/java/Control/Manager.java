@@ -50,4 +50,8 @@ public abstract class Manager {
                               String lastName, String phoneNumber, double balance) {
 
     }
+
+    public Account getAccount() {
+        return account;
+    }
 }
