@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<Product,Integer> products = new HashMap<Product, Integer>();
+    private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     public Map<Product, Integer> getProducts() {
         return products;
@@ -21,14 +21,24 @@ public class Cart {
     }
 
     public void addProduct(Product product) {
-
+        if (products.containsKey(product)) {
+            products.replace(product, products.get(product) + 1);
+        } else products.put(product, 1);
     }
 
-    public void deleteProduct(Product product) {
-
+    public boolean deleteProduct(Product product) {
+        if (products.containsKey(product)) {
+            if (products.get(product) > 0)
+                products.replace(product, products.get(product) - 1);
+            return true;
+        } else return false;
     }
 
     public double getTotalPrice() {
-        return 1;
+        double sum = 0;
+        for (Product product : products.keySet()) {
+            sum += product.getPrice();
+        }
+        return sum;
     }
 }

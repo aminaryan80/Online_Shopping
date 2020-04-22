@@ -1,6 +1,5 @@
 package View;
 
-import Control.CustomerManager;
 import Control.Manager;
 
 import java.util.ArrayList;
@@ -16,11 +15,11 @@ public class CustomerMenu extends MainMenu {
     }
 
     protected void viewPersonalInfo() {
-        new ViewPersonalInfoCustomer(manager);
+        new ViewPersonalInfoCustomerMenu(manager);
     }
 
     private void viewCart() {
-        new ViewCart(manager);
+        new ViewCartMenu(manager);
     }
 
     private void showProducts() {
