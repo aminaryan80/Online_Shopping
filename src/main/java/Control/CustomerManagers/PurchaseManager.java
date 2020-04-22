@@ -25,7 +25,7 @@ public class PurchaseManager extends CustomerManager{
 
     // purchase
     public void pay(ArrayList<String> receiverInformation, String discountCode) {
-
+        customer.getCart().
     }
 
     private double getPaymentAmountDiscountApplied() {

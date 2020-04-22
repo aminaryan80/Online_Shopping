@@ -62,6 +62,10 @@ public class Account {
         return balance;
     }
 
+    public List<Discount> getDiscounts() {
+        return discounts;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }

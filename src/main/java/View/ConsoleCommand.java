@@ -18,7 +18,17 @@ public enum ConsoleCommand {
 
     SHOW_TOTAL_PRICE("(?i)show total price"),
 
-    PURCHASE("(?i)purchase");
+    PURCHASE("(?i)purchase"),
+
+    VIEW_CART("(?i)view cart"),
+
+    VIEW_ORDERS("(?i)view orders"),
+
+    VIEW_DISCOUNT_CODES("(?i)view orders"),
+
+    VIEW_BALANCE("(?i)view orders"),
+
+    VIEW_PERSONAL_INFO("(?i)view personal info");
 
     private final Pattern commandPattern;
 

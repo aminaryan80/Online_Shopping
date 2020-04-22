@@ -2,6 +2,7 @@ package Control;
 
 import Models.Account.Account;
 import Models.Account.Customer;
+import Models.Shop.Discount;
 import Models.Shop.Product;
 import View.CustomerMenu;
 
@@ -53,6 +54,10 @@ public class CustomerManager extends MainManager {
 
     // view discount codes
     public ArrayList<String> viewDiscountCodes() {
-        return customer.g;
+        ArrayList<String> discountsPercentagesAndIds = new ArrayList<>();
+        for (Discount discount : customer.getDiscounts()) {
+            discountsPercentagesAndIds.add(""+discount.getId()+discount.getDiscountPercent());
+        }
+        return discountsPercentagesAndIds;
     }
 }

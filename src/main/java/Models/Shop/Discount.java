@@ -38,6 +38,10 @@ public class Discount {
 
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void setBeginningDate(Date beginningDate) {
         this.beginningDate = beginningDate;
     }

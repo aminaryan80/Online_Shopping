@@ -2,7 +2,7 @@ package Control.CustomerManagers;
 
 import Control.CustomerManager;
 import Models.Account.Account;
-import Models.Account.Customer;
+import Models.Shop.Discount;
 import Models.Shop.Product;
 import View.CustomerMenus.ViewCartMenu;
 
@@ -35,8 +35,8 @@ public class ViewCartManager extends CustomerManager {
         } else throw new ProductDoNotExistAtAllException("Product does not exist at all");
     }
 
-    public double getTotalPrice() {
-        return ((Customer) account).getCart().getTotalPrice();
+    public double getTotalPrice(Discount discount) {
+        return customer.getCart().getTotalPrice(discount);
     }
 
     public static class ProductDoNotExistAtAllException extends Exception {

@@ -46,7 +46,7 @@ public class ViewCartMenu extends CustomerMenu {
                     System.out.println(e.getMessage());
                 }
             } else if ((matcher = ConsoleCommand.SHOW_TOTAL_PRICE.getStringMatcher(input)).find()) {
-                viewCartManager.getTotalPrice();
+                viewCartManager.getTotalPrice(null);
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
                 new PurchaseManager(manager.getAccount());
             } else if (input.matches("(?!)help")) {
