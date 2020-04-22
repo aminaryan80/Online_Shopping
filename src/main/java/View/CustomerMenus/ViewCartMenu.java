@@ -1,13 +1,17 @@
-package View;
+package View.CustomerMenus;
 
+import Control.CustomerManagers.PurchaseManager;
+import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
 import Control.ProductPageManager;
-import Control.ViewCartManager;
 import Models.Shop.Product;
+import View.ConsoleCommand;
+import View.CustomerMenu;
+import View.ErrorProcessor;
 
 import java.util.regex.Matcher;
 
-public class ViewCartMenu extends MainMenu {
+public class ViewCartMenu extends CustomerMenu {
     ViewCartManager viewCartManager =(ViewCartManager) manager;
 
     public ViewCartMenu(Manager manager) {
@@ -44,7 +48,9 @@ public class ViewCartMenu extends MainMenu {
             } else if ((matcher = ConsoleCommand.SHOW_TOTAL_PRICE.getStringMatcher(input)).find()) {
                 viewCartManager.getTotalPrice();
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
-                new PurchaseManager;
+                new PurchaseManager(manager.getAccount());
+            } else if (input.matches("(?!)help")) {
+                showCart();
             }
         }
     }

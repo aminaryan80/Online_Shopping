@@ -1,6 +1,7 @@
 package Control;
 
 import Models.Account.Account;
+import Models.Shop.Discount;
 import View.MainMenu;
 
 public class MainManager extends Manager {
@@ -15,6 +16,6 @@ public class MainManager extends Manager {
     }
 
     public boolean isDiscountCodeValid(String id) {
-return true;
+         return Discount.getDiscountById(id) != null;
     }
 }

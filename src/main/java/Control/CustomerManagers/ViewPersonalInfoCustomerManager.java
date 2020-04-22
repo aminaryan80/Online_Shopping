@@ -1,7 +1,8 @@
-package Control;
+package Control.CustomerManagers;
 
+import Control.CustomerManager;
 import Models.Account.Account;
-import View.ViewPersonalInfoCustomerMenu;
+import View.CustomerMenus.ViewPersonalInfoCustomerMenu;
 
 public class ViewPersonalInfoCustomerManager extends CustomerManager {
     public ViewPersonalInfoCustomerManager(Account account) {

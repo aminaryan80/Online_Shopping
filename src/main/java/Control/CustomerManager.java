@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class CustomerManager extends MainManager {
 
-    Customer customer = (Customer) account;
+    protected Customer customer = (Customer) account;
 
     public CustomerManager(Account account) {
         super(account);
@@ -36,10 +36,6 @@ public class CustomerManager extends MainManager {
     // purchase
     public void pay(ArrayList<String> receiverInformation, String discountCode) {
 
-    }
-
-    public double canPay() {
-        return 1;
     }
 
     private double getPaymentAmountDiscountApplied() {

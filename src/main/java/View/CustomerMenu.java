@@ -1,6 +1,8 @@
 package View;
 
 import Control.Manager;
+import View.CustomerMenus.ViewCartMenu;
+import View.CustomerMenus.ViewPersonalInfoCustomerMenu;
 
 import java.util.ArrayList;
 

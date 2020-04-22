@@ -1,9 +1,10 @@
-package Control;
+package Control.CustomerManagers;
 
+import Control.CustomerManager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Product;
-import View.ViewCartMenu;
+import View.CustomerMenus.ViewCartMenu;
 
 import java.util.List;
 
