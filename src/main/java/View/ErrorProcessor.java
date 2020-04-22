@@ -34,4 +34,7 @@ public class ErrorProcessor {
     public static void notEnoughMoney() {
         System.out.println("You don't have enough money to purchase");
     }
+    public static void notYourProduct() {
+        System.out.println("this is not your product");
+    }
 }

@@ -17,12 +17,24 @@ public class Category {
         this.allProducts = allProducts;
     }
 
+    public static ArrayList<String> getAllCategoriesNames() {
+        ArrayList<String> allCategoriesNames= new ArrayList<String>();
+        for (Category category : allCategories) {
+            allCategoriesNames.add(category.getName());
+        }
+        return allCategoriesNames;
+    }
+
     public static boolean hasCategoryWithName(String name) {
         for (Category category : allCategories) {
             if(category.getName().equals(name))
                 return true;
         }
         return false;
+    }
+
+    public ArrayList<String> getFeaturesNames() {
+        return (ArrayList<String>) features.keySet();
     }
 
     public static Category getCategoryByName(String name) {

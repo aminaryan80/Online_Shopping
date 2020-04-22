@@ -23,12 +23,4 @@ public class MainMenu extends CommandProcessor {
     private void openAuctionsMenu() {
 
     }
-
-    protected void viewPersonalInfo() {
-
-    }
-
-    protected void editAttribute(String field) {
-
-    }
 }

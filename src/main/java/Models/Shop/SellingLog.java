@@ -12,6 +12,10 @@ public class SellingLog extends Log {
         this.buyerName = buyerName;
     }
 
+    public String getBuyerName() {
+        return buyerName;
+    }
+
     @Override
     public String toString() {
         return "SellingLog{" +
