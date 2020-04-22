@@ -33,15 +33,6 @@ public class CustomerManager extends MainManager {
     }
 
 
-    // purchase
-    public void pay(ArrayList<String> receiverInformation, String discountCode) {
-
-    }
-
-    private double getPaymentAmountDiscountApplied() {
-        return 1;
-    }
-
     // view orders
     public ArrayList<String> viewOrders() {
         return null;
@@ -57,11 +48,11 @@ public class CustomerManager extends MainManager {
 
     // view balance
     public double viewCustomerBalance() {
-        return 1;
+        return customer.getBalance();
     }
 
     // view discount codes
     public ArrayList<String> viewDiscountCodes() {
-        return null;
+        return customer.g;
     }
 }

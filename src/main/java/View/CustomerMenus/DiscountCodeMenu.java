@@ -2,7 +2,6 @@ package View.CustomerMenus;
 
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
-import Models.Shop.Discount;
 import View.ErrorProcessor;
 
 public class DiscountCodeMenu extends PurchaseMenu {
@@ -29,7 +28,6 @@ public class DiscountCodeMenu extends PurchaseMenu {
                 new PaymentMenu(manager);
                 break;
             } else {
-                Discount discount;
                 if (isDiscountCodeValid(input)) {
                     discountCode = input;
                     new PaymentMenu(manager);

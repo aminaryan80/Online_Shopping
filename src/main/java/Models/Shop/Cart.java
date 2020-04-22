@@ -34,11 +34,20 @@ public class Cart {
         } else return false;
     }
 
-    public double getTotalPrice() {
+    public double getTotalPrice(Discount discount) {
         double sum = 0;
         for (Product product : products.keySet()) {
             sum += product.getPrice();
         }
-        return sum;
+        return affectDiscount(sum,discount);
+    }
+
+    private double affectDiscount(double sum,Discount discount) {
+        if(discount == null) return sum;
+        double sumWithDiscountPercent = discount.getDiscountPercent()*sum/100;
+        double sumWithMaximumDiscount = discount.getMaximumDiscount();
+        if(sumWithDiscountPercent > sumWithMaximumDiscount){
+            return sum - discount.getMaximumDiscount();
+        } else return discount.getDiscountPercent()*sum/100;
     }
 }

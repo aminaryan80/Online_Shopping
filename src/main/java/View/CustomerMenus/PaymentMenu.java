@@ -12,7 +12,7 @@ public class PaymentMenu extends PurchaseMenu {
     }
 
     private void pay() {
-        if(canPay()){
+        if(canPay(DiscountCodeMenu.getDiscountCode())){
             ArrayList<String> receiverInformation = new ArrayList<>();
             receiverInformation.add(ReceiverInformationMenu.getAddress());
             receiverInformation.add(ReceiverInformationMenu.getPhoneNum());
@@ -20,7 +20,7 @@ public class PaymentMenu extends PurchaseMenu {
         } else ErrorProcessor.notEnoughMoney();
     }
 
-    private boolean canPay() {
-       return purchaseManager.canPay();
+    private boolean canPay(String discountId) {
+       return purchaseManager.canPay(discountId);
     }
 }

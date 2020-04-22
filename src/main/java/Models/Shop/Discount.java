@@ -54,6 +54,10 @@ public class Discount {
         this.maximumDiscount = maximumDiscount;
     }
 
+    public double getMaximumDiscount() {
+        return maximumDiscount;
+    }
+
     public void setDiscountUseCount(int discountUseCount) {
         this.discountUseCount = discountUseCount;
     }
