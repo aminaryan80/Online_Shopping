@@ -33,6 +33,11 @@ public class Customer extends Account {
     }
 
     public Log getLogById(String id) {
+        for (BuyingLog log : allLogs) {
+            if(log.getId().equals(id)){
+                return log;
+            }
+        }
         return null;
     }
 

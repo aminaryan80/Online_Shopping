@@ -33,4 +33,8 @@ public abstract class Log {
 return true;
 
     }
+
+    public String getId() {
+        return id;
+    }
 }

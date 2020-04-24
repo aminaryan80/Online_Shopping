@@ -24,9 +24,13 @@ public enum ConsoleCommand {
 
     VIEW_ORDERS("(?i)view orders"),
 
-    VIEW_DISCOUNT_CODES("(?i)view orders"),
+    VIEW_DISCOUNT_CODES("(?i)view discount codes"),
 
-    VIEW_BALANCE("(?i)view orders"),
+    VIEW_BALANCE("(?i)view balance"),
+    //show order [orderId]
+    SHOW_ORDER("(?i)show order (\\S+)"),
+//rate [productId] [1-5],
+    RATE("(?i)rate (\\S+) (\\d)"),
 
     VIEW_PERSONAL_INFO("(?i)view personal info");
 

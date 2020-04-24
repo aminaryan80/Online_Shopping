@@ -2,6 +2,7 @@ package View;
 
 import Control.CustomerManager;
 import Control.CustomerManagers.ViewCartManager;
+import Control.CustomerManagers.ViewOrdersManager;
 import Control.CustomerManagers.ViewPersonalInfoCustomerManager;
 import Control.Manager;
 import View.CustomerMenus.ViewCartMenu;
@@ -26,7 +27,7 @@ public class CustomerMenu extends MainMenu {
             } else if (ConsoleCommand.VIEW_CART.getStringMatcher(input).find()) {
                 new ViewCartManager(manager.getAccount());
             } else if (ConsoleCommand.VIEW_ORDERS.getStringMatcher(input).find()) {
-                System.out.println("");
+                new ViewOrdersManager(manager.getAccount());
             } else if (ConsoleCommand.VIEW_DISCOUNT_CODES.getStringMatcher(input).find()){
                 customerManager.viewDiscountCodes().forEach(System.out::println);
             } else if (ConsoleCommand.VIEW_BALANCE.getStringMatcher(input).find()) {

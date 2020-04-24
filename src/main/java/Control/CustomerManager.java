@@ -40,7 +40,7 @@ public class CustomerManager extends MainManager {
     }
 
     public String showOrderById(String id) {
-        return null;
+        return customer.getLogById(id).toString();
     }
 
     public void rateProduct(String id, int score) {
