@@ -7,8 +7,12 @@ import java.util.Map;
 public class Cart {
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
-    public Map<Product, Integer> getProducts() {
-        return products;
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        for (Product product : products.keySet()) {
+            allProducts.add(product);
+        }
+        return allProducts;
     }
 
     public ArrayList<String> showProductsInShort() {
@@ -35,19 +39,24 @@ public class Cart {
     }
 
     public double getTotalPrice(Discount discount) {
-        double sum = 0;
-        for (Product product : products.keySet()) {
-            sum += product.getPrice();
-        }
-        return affectDiscount(sum,discount);
+        double sum = getTotalAmountWithoutDiscount();
+        return sum - amountOfDiscount(sum,discount);
     }
 
-    private double affectDiscount(double sum,Discount discount) {
-        if(discount == null) return sum;
+    public double getTotalAmountWithoutDiscount() {
+        double sum = 0;
+        for (Product product : products.keySet()) {
+            sum += product.getPrice() * products.get(product);
+        }
+        return sum;
+    }
+
+    public double amountOfDiscount(double sum,Discount discount) {
+        if(discount == null) return 0;
         double sumWithDiscountPercent = discount.getDiscountPercent()*sum/100;
         double sumWithMaximumDiscount = discount.getMaximumDiscount();
         if(sumWithDiscountPercent > sumWithMaximumDiscount){
-            return sum - discount.getMaximumDiscount();
-        } else return discount.getDiscountPercent()*sum/100;
+            return discount.getMaximumDiscount();
+        } else return discount.getDiscountPercent()/100 * sum;
     }
 }

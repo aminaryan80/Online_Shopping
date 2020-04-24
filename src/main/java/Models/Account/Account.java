@@ -66,6 +66,10 @@ public class Account {
         return discounts;
     }
 
+    public String getName() {
+        return firstName +" "+ lastName;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -86,8 +90,8 @@ public class Account {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void payMoney(double money) {
+        this.balance = balance - money;
     }
 
     @Override

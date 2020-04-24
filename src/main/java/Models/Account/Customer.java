@@ -43,4 +43,8 @@ public class Customer extends Account {
     public boolean hasProductById(String id) {
      return true;
     }
+
+    public void addLog(BuyingLog buyingLog) {
+        allLogs.add(buyingLog);
+    }
 }
