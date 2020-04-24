@@ -39,14 +39,6 @@ public class CustomerManager extends MainManager {
         return null;
     }
 
-    public String showOrderById(String id) {
-        return customer.getLogById(id).toString();
-    }
-
-    public void rateProduct(String id, int score) {
-
-    }
-
     // view balance
     public double viewCustomerBalance() {
         return customer.getBalance();

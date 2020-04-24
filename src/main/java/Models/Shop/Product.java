@@ -22,6 +22,7 @@ public class Product {
     private ArrayList<Customer> allBuyers;
     private List<Comment> allComments;
     private Map<String, String> features;
+    private List<Double> rates = new ArrayList<>();
     //TODO different sellers for one product
 
 
@@ -65,6 +66,14 @@ public class Product {
 
     public Seller getSeller() {
         return seller;
+    }
+
+    public void addRate(int score) {
+        rates.add((double) score);
+    }
+
+    public double getRate() {
+        return rates.stream().reduce((a, b) -> (a + b) / 2).orElse(0.0);
     }
 
     private enum ProductStatus {
