@@ -39,6 +39,7 @@ public class Product {
         this.description = description;
         this.rate = rate;
         this.features = features;
+        allProducts.add(this);
     }
 
     public static boolean hasProductWithId(String id) {
