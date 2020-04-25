@@ -47,6 +47,11 @@ public class Product {
     }
 
     public static Product getProductById(String id) {
+        for (Product product : allProducts) {
+            if(product.getId().equals(id)){
+                return product;
+            }
+        }
         return null;
     }
 
