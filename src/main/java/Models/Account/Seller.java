@@ -3,6 +3,7 @@ package Models.Account;
 import Models.Shop.Auction;
 import Models.Shop.Product;
 import Models.Shop.SellingLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class Seller extends Account {
     }
 
     public boolean hasProductInAuctions(Product product) {
-
+return true;
     }
 
     public Auction getAuctionById(String id) {
@@ -63,5 +64,6 @@ public class Seller extends Account {
 //        return super.toString() + "Seller{" +
 //                "companyName='" + companyName + '\'' +
 //                '}';
+        return null;
     }
 }

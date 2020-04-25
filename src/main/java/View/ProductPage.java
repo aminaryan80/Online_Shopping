@@ -1,8 +1,9 @@
 package View;
 
 import Control.Manager;
+import Models.Shop.Product;
 
-public class ProductPage extends CommandProcessor {
+public class ProductPage extends Menu {
 
     public ProductPage(Manager manager) {
         super(manager);

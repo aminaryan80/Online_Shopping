@@ -5,29 +5,58 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<Product,Integer> products = new HashMap<Product, Integer>();
+    private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
-    public Map<Product, Integer> getProducts() {
-        return products;
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> allProducts = new ArrayList<>();
+        for (Product product : products.keySet()) {
+            allProducts.add(product);
+        }
+        return allProducts;
     }
 
     public ArrayList<String> showProductsInShort() {
         // #id name count
+        return null;
     }
 
     public boolean hasProductInCartWithId(String id) {
-
+        return true;
     }
 
     public void addProduct(Product product) {
-
+        if (products.containsKey(product)) {
+            products.replace(product, products.get(product) + 1);
+        } else products.put(product, 1);
     }
 
-    public void deleteProduct(Product product) {
-
+    public boolean deleteProduct(Product product) {
+        if (products.containsKey(product)) {
+            if (products.get(product) > 0)
+                products.replace(product, products.get(product) - 1);
+            return true;
+        } else return false;
     }
 
-    public double getTotalPrice() {
+    public double getTotalPrice(Discount discount) {
+        double sum = getTotalAmountWithoutDiscount();
+        return sum - amountOfDiscount(sum,discount);
+    }
 
+    public double getTotalAmountWithoutDiscount() {
+        double sum = 0;
+        for (Product product : products.keySet()) {
+            sum += product.getPrice() * products.get(product);
+        }
+        return sum;
+    }
+
+    public double amountOfDiscount(double sum,Discount discount) {
+        if(discount == null) return 0;
+        double sumWithDiscountPercent = discount.getDiscountPercent()*sum/100;
+        double sumWithMaximumDiscount = discount.getMaximumDiscount();
+        if(sumWithDiscountPercent > sumWithMaximumDiscount){
+            return discount.getMaximumDiscount();
+        } else return discount.getDiscountPercent()/100 * sum;
     }
 }

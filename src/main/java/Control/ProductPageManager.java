@@ -2,13 +2,16 @@ package Control;
 
 import Models.Account.Account;
 import Models.Shop.Product;
+import View.Menu;
+import View.ProductPage;
 
 import java.util.List;
 
 public class ProductPageManager extends Manager {
 
-    public ProductPageManager(Account account, Product product) {
+    public ProductPageManager(Account account,Product product) {
         super(account);
+        this.menu = new ProductPage(this);
         this.product = product;
     }
 
@@ -16,7 +19,7 @@ public class ProductPageManager extends Manager {
 
     // digest
     public String digest() {
-
+        return null;
     }
 
     public void addToCart() {
@@ -29,17 +32,17 @@ public class ProductPageManager extends Manager {
 
     // attributes
     public String attributes() {
-
+        return null;
     }
 
     // compare [productId]
     public List<String> compare(String id) {
-
+        return null;
     }
 
     // comments
     public List<String> comments() {
-
+        return null;
     }
 
     public void addComment(String title, String content) {

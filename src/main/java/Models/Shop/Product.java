@@ -2,6 +2,7 @@ package Models.Shop;
 
 import Models.Account.Customer;
 import Models.Account.Seller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,10 @@ public class Product {
     //TODO different sellers for one product
 
 
-    public Product(String id, String name, String companyName, double price, Seller seller,
-                   boolean isAvailable, Category category, String description, ArrayList<Features> features) {
+    public Product(String id, ProductStatus status, String name, String companyName, double price, Seller seller,
+                   boolean isAvailable, Category category, String description, double rate, Map<String, String> features) {
         this.id = id;
+        this.status = status;
         this.name = name;
         this.companyName = companyName;
         this.price = price;
@@ -34,8 +36,9 @@ public class Product {
         this.isAvailable = isAvailable;
         this.category = category;
         this.description = description;
-        this.rate = 0;
+        this.rate = rate;
         this.features = features;
+        allProducts.add(this);
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
     }
 
@@ -65,6 +68,8 @@ public class Product {
 
     }
 
+    public static ArrayList<String> viewProductInShort() {
+        return null;
     private String viewProductInShort() {
         //ToDo
     }
@@ -91,8 +96,20 @@ public class Product {
         return seller;
     }
 
+    public void addRate(int score) {
+        rates.add((double) score);
+    }
+
+    public double getRate() {
+        return rates.stream().reduce((a, b) -> (a + b) / 2).orElse(0.0);
+    }
+
     private enum ProductStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setStatus(String status) {

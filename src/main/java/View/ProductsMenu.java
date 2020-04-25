@@ -3,7 +3,7 @@ package View;
 import Control.Manager;
 import Models.Shop.Category;
 
-public class ProductsMenu extends CommandProcessor{
+public class ProductsMenu extends Menu {
 
     public ProductsMenu(Manager manager, Category category) {
         super(manager);
@@ -63,4 +63,5 @@ public class ProductsMenu extends CommandProcessor{
     private void showProduct(String id) {
 
     }
+
 }

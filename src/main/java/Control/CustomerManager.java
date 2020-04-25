@@ -2,91 +2,54 @@ package Control;
 
 import Models.Account.Account;
 import Models.Account.Customer;
+import Models.Shop.Discount;
 import Models.Shop.Product;
+import View.CustomerMenu;
 
 import java.util.ArrayList;
 
 public class CustomerManager extends MainManager {
 
+    protected Customer customer = (Customer) account;
+
     public CustomerManager(Account account) {
         super(account);
+        this.menu = new CustomerMenu(this);
     }
 
-    // edit [field]
-    public boolean isEnteredAccountFieldValid(String field) {
-
-    }
-
-    public void editAccountAttribute(String field, String newAttribute) {
-
-    }
-
-    public boolean isEnteredFieldValid(String type) {
-
-    }
 
     // view cart
     public String viewCart() {
         // show commands
-    }
-
-    public String showProducts() {
-
+        return null;
     }
 
     public void viewProductById(String id) {
         // goes to product page
     }
 
-    public void increaseProductQuantity(String id) {
-
-    }
-
-    public void decreaseProductQuantity(String id) {
-
-    }
-
     public boolean hasProductInAuctions(Product product) {
         product.getSeller().hasProductInAuctions(product);
+        return true;
     }
 
-    public double getTotalPrice() {
-        return ((Customer) account).getCart().getTotalPrice();
-    }
-
-    // purchase
-    public void pay(ArrayList<String> receiverInformation, String discountCode) {
-
-    }
-
-    public double canPay() {
-
-    }
-
-    private double getPaymentAmountDiscountApplied() {
-
-    }
 
     // view orders
     public ArrayList<String> viewOrders() {
-
-    }
-
-    public String showOrderById(String id) {
-
-    }
-
-    public void rateProduct(String id, int score) {
-
+        return null;
     }
 
     // view balance
     public double viewCustomerBalance() {
-
+        return customer.getBalance();
     }
 
     // view discount codes
     public ArrayList<String> viewDiscountCodes() {
-
+        ArrayList<String> discountsPercentagesAndIds = new ArrayList<>();
+        for (Discount discount : customer.getDiscounts()) {
+            discountsPercentagesAndIds.add(""+discount.getId()+discount.getDiscountPercent());
+        }
+        return discountsPercentagesAndIds;
     }
 }

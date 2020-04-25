@@ -29,11 +29,16 @@ public class Customer extends Account {
     }
 
     public ArrayList<String> viewLogsInShort() {
-
+        return null;
     }
 
     public Log getLogById(String id) {
-
+        for (BuyingLog log : allLogs) {
+            if(log.getId().equals(id)){
+                return log;
+            }
+        }
+        return null;
     }
 
     public Cart getCart() {
@@ -41,6 +46,10 @@ public class Customer extends Account {
     }
 
     public boolean hasProductById(String id) {
+     return true;
+    }
 
+    public void addLog(BuyingLog buyingLog) {
+        allLogs.add(buyingLog);
     }
 }
