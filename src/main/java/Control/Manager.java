@@ -16,6 +16,10 @@ public class Manager {
         this.account = account;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
     public boolean userExistsWithUsername(String username) {
 
     }

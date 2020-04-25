@@ -2,6 +2,8 @@ package View.Seller;
 
 import Control.Manager;
 import Control.Seller.EditProductsManager;
+import Models.Account.Seller;
+import Models.Shop.EditProductRequest;
 import View.ErrorProcessor;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -56,7 +58,7 @@ public class EditProductsMenu extends SellerMenu{
         }
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();
-        ((EditProductsManager) manager).editProduct(id, field, newValue);
+        new EditProductRequest("random id", (Seller) manager.getAccount(), manager, id, field, newValue);
     }
 
     private void help() {

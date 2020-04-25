@@ -2,6 +2,9 @@ package View.Seller;
 
 import Control.Manager;
 import Control.Seller.OffsManager;
+import Models.Account.Seller;
+import Models.Shop.AddOffRequest;
+import Models.Shop.EditOffRequest;
 import View.ErrorProcessor;
 
 import java.util.ArrayList;
@@ -53,7 +56,7 @@ public class OffsMenu extends SellerMenu {
         }
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();
-        ((OffsManager) manager).editOffAttribute(id, field, newValue);
+        new EditOffRequest("random id", (Seller) manager.getAccount(), manager, id, field, newValue);
     }
 
     private void addOff(){
@@ -74,7 +77,8 @@ public class OffsMenu extends SellerMenu {
             }
             products.add(product);
         }
-        ((OffsManager) manager).addOff(id, beginningDate, endingDate, discountAmount, products);
+        new AddOffRequest("random id", (Seller) manager.getAccount(), manager, id, beginningDate,
+                endingDate, discountAmount, products);
     }
 
     private void help() {

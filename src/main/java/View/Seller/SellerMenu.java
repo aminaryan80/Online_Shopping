@@ -2,6 +2,8 @@ package View.Seller;
 
 import Control.Manager;
 import Control.Seller.SellerManager;
+import Models.Account.Seller;
+import Models.Shop.AddProductRequest;
 import Models.Shop.Category;
 import Models.Shop.Features;
 import Models.Shop.Product;
@@ -115,7 +117,9 @@ public class SellerMenu extends MainMenu {
             }
         }
         Category category = Category.getCategoryByName(categoryName);
-        ((SellerManager) manager).addProduct(id, name, companyName, category, price, isAvailable, description, getFeatures(category));
+        ArrayList<Features> allFeatures = getFeatures(category);
+        new AddProductRequest("random id", (Seller) manager.getAccount(), manager,
+                id, name, companyName, category, price, isAvailable, description, allFeatures);
     }
 
     private ArrayList<Features> getFeatures(Category category) {
