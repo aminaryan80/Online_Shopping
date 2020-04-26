@@ -1,8 +1,8 @@
 package View;
 
-import Control.CustomerManager;
 import Control.MainManager;
 import Control.Manager;
+import View.CustomerMenus.ConsoleCommand;
 
 public class MainMenu extends Menu {
 

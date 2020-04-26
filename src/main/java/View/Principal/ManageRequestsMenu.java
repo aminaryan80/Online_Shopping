@@ -40,13 +40,21 @@ public class ManageRequestsMenu extends MainMenu {
 
     private void acceptRequest(String id) {
         if (Request.hasRequestById(id)) {
-            // TODO Ali bayad bezane
+            // TODO
         } else ErrorProcessor.invalidRequestId();
     }
 
     private void declineRequest(String id) {
         if (Request.hasRequestById(id)) {
-            // TODO Ali bayad bezane
+            // TODO
         } else ErrorProcessor.invalidRequestId();
+    }
+
+    private void help() {
+        System.out.println("details [requestId]\n" +
+                "accept [requestId]\n" +
+                "decline [requestId]\n" +
+                "help\n" +
+                "back");
     }
 }

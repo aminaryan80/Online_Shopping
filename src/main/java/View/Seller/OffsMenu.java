@@ -19,6 +19,7 @@ public class OffsMenu extends SellerMenu {
     private void offsMenu() {
         Matcher matcher;
         while (true) {
+            String command = scanner.nextLine();
             if ((matcher = getMatcher(command, "^view (\\d+)$")).find()) {
                 viewOffById(matcher.group(1));
             } else if ((matcher = getMatcher(command, "^edit (\\d+)$")).find()) {

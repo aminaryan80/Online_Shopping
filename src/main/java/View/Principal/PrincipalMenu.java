@@ -1,6 +1,7 @@
-package View;
+package View.Principal;
 
 import Control.Manager;
+import View.MainMenu;
 
 import java.util.regex.Matcher;
 
@@ -33,10 +34,6 @@ public class PrincipalMenu extends MainMenu {
 
             }
         }
-    }
-
-    private Matcher getMatcher(String input, String s) {
-        return null;
     }
 
     private void manageUsers() {

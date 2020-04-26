@@ -18,6 +18,7 @@ public class EditProductsMenu extends SellerMenu{
     private void productsMenu() {
         Matcher matcher;
         while (true) {
+            String command = scanner.nextLine();
             if ((matcher = getMatcher(command, "^view (\\d+)$")).find()) {
                 viewProduct(matcher.group(1));
             } else if ((matcher = getMatcher(command, "^view buyers (\\d+)$")).find()) {

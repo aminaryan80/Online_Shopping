@@ -2,8 +2,6 @@ package View.CustomerMenus;
 
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.Manager;
-import View.ConsoleCommand;
-import View.CustomerMenu;
 
 import java.util.regex.Matcher;
 

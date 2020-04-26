@@ -1,6 +1,5 @@
 package Control.CustomerManagers;
 
-import Control.CustomerManager;
 import Models.Account.Account;
 import Models.Shop.Discount;
 import Models.Shop.Product;

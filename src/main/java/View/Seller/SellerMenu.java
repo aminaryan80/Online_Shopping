@@ -22,7 +22,7 @@ public class SellerMenu extends MainMenu {
     public void sellerMenu() {
         Matcher matcher;
         while (true) {
-            command = scanner.nextLine();
+            String command = scanner.nextLine();
             if ((matcher = getMatcher(command, "^view personal info$")).find()) {
                 viewPersonalInfo();
             } else if ((matcher = getMatcher(command, "^view company information$")).find()) {
@@ -54,7 +54,7 @@ public class SellerMenu extends MainMenu {
     private void viewPersonalInfo() {
         System.out.println(((SellerManager) manager).viewPersonalInfo());
         while (true) {
-            command = scanner.nextLine();
+            String command = scanner.nextLine();
             Matcher matcher;
             if ((matcher = getMatcher(command, "^edit$")).find()) {
                 editAttribute();

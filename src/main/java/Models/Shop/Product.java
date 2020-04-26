@@ -26,7 +26,7 @@ public class Product {
 
 
     public Product(String id, ProductStatus status, String name, String companyName, double price, Seller seller,
-                   boolean isAvailable, Category category, String description, double rate, Map<String, String> features) {
+                   boolean isAvailable, Category category, String description, double rate, ArrayList<Features> features) {
         this.id = id;
         this.status = status;
         this.name = name;
@@ -68,8 +68,6 @@ public class Product {
 
     }
 
-    public static ArrayList<String> viewProductInShort() {
-        return null;
     private String viewProductInShort() {
         //ToDo
     }
@@ -96,14 +94,6 @@ public class Product {
         return seller;
     }
 
-    public void addRate(int score) {
-        rates.add((double) score);
-    }
-
-    public double getRate() {
-        return rates.stream().reduce((a, b) -> (a + b) / 2).orElse(0.0);
-    }
-
     private enum ProductStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
@@ -121,8 +111,6 @@ public class Product {
             this.status = ProductStatus.CONFIRMED;
         }
     }
-
-    public void setFeature(String feature)
 
     public void setName(String name) {
         this.name = name;

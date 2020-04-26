@@ -5,8 +5,6 @@ import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
 import Control.ProductPageManager;
 import Models.Shop.Product;
-import View.ConsoleCommand;
-import View.CustomerMenu;
 import View.ErrorProcessor;
 
 import java.util.regex.Matcher;
