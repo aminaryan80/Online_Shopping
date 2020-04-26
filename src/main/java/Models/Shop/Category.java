@@ -28,6 +28,10 @@ public class Category {
         return false;
     }
 
+    public ArrayList<String> getFeaturesNames() {
+        return (ArrayList<String>) features.keySet();
+    }
+
     public static Category getCategoryByName(String name) {
         for (Category category : allCategories) {
             if (category.getName().equals(name))
