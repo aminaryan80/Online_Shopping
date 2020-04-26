@@ -35,15 +35,15 @@ public class Account {
     }
 
     public static Account getAccountByUsername(String username) {
-
+        return null;
     }
 
     public static boolean hasCustomerWithUsername(String username) {
-
+        return true;
     }
 
     public static ArrayList<String> showAccountsInShort() {
-
+        return null;
     }
 
     public static void deleteAccount(Account account) {
@@ -60,6 +60,14 @@ public class Account {
 
     public double getBalance() {
         return balance;
+    }
+
+    public List<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    public String getName() {
+        return firstName +" "+ lastName;
     }
 
     public void setUsername(String username) {
@@ -82,8 +90,8 @@ public class Account {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void payMoney(double money) {
+        this.balance = balance - money;
     }
 
     @Override

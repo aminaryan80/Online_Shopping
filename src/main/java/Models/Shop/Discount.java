@@ -27,15 +27,19 @@ public class Discount {
     }
 
     public static boolean hasDiscountWithId(String id) {
-
+        return true;
     }
 
     public static Discount getDiscountById(String id) {
-
+        return null;
     }
 
     public static void deleteDiscount(Discount discount) {
 
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setBeginningDate(Date beginningDate) {
@@ -54,6 +58,10 @@ public class Discount {
         this.maximumDiscount = maximumDiscount;
     }
 
+    public double getMaximumDiscount() {
+        return maximumDiscount;
+    }
+
     public void setDiscountUseCount(int discountUseCount) {
         this.discountUseCount = discountUseCount;
     }
@@ -63,7 +71,7 @@ public class Discount {
     }
 
     public static ArrayList<String> viewDiscountInShort() {
-
+        return null;
     }
 
     @Override

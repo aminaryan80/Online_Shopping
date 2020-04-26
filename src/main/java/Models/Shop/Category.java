@@ -20,6 +20,14 @@ public class Category {
         allCategories.add(this);
     }
 
+    public static ArrayList<String> getAllCategoriesNames() {
+        ArrayList<String> allCategoriesNames= new ArrayList<String>();
+        for (Category category : allCategories) {
+            allCategoriesNames.add(category.getName());
+        }
+        return allCategoriesNames;
+    }
+
     public static boolean hasCategoryWithName(String name) {
         for (Category category : allCategories) {
             if(category.getName().equals(name))

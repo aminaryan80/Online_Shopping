@@ -7,7 +7,7 @@ import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ProductsMenu extends CommandProcessor{
+public class ProductsMenu extends Menu {
 
     public ProductsMenu(Manager manager, Category category) {
         super(manager);
@@ -82,4 +82,5 @@ public class ProductsMenu extends CommandProcessor{
     private void showProduct(String id) {
 
     }
+
 }

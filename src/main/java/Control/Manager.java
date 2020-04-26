@@ -3,21 +3,27 @@ package Control;
 import Models.Account.Account;
 import Models.Shop.Cart;
 import Models.Shop.Category;
+import View.Menu;
 
 import java.util.Scanner;
 
-public class Manager {
+public abstract class Manager {
     protected Scanner scanner;
     protected Account account;
     protected Category mainCategory;
     protected Cart cart;
+    protected Menu menu;
 
     public Manager(Account account) {
         this.account = account;
     }
 
-    public boolean userExistsWithUsername(String username) {
+    public Menu getMenu() {
+        return menu;
+    }
 
+    public boolean userExistsWithUsername(String username) {
+       return true;
     }
 
     public void changeFirstName(String newFirstName) {
@@ -43,5 +49,9 @@ public class Manager {
     public void createAccount(String type, String username, String password, String email, String firstName,
                               String lastName, String phoneNumber, double balance) {
 
+    }
+
+    public Account getAccount() {
+        return account;
     }
 }

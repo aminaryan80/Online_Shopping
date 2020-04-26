@@ -11,10 +11,10 @@ public class Auction {
     private Date endingDate;
     private double discountAmount;
 
-    public Auction(String id, List<Product> products, AuctionStatus status, Date beginningDate, Date endingDate, double discountAmount) {
+    public Auction(String id, List<Product> products, Date beginningDate, Date endingDate, double discountAmount) {
         this.id = id;
         this.products = products;
-        this.status = status;
+        this.status = AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountAmount = discountAmount;
@@ -44,8 +44,14 @@ public class Auction {
         this.products = products;
     }
 
-    public void setStatus(AuctionStatus status) {
-        this.status = status;
+    public void setStatus(String statusName) {
+        if (statusName.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
+            this.status = AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+        } else if (statusName.equals("UNDER_REVIEW_FOR_EDITING")) {
+            this.status = AuctionStatus.UNDER_REVIEW_FOR_EDITING;
+        } else {
+            this.status = AuctionStatus.CONFIRMED;
+        }
     }
 
     @Override

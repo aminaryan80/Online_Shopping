@@ -8,6 +8,7 @@ public class AuctionPage extends Menu {
         super(manager);
     }
 
+
     public void auctionPage() {
 
     }

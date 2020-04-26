@@ -35,24 +35,7 @@ public class Product {
         this.isAvailable = isAvailable;
         this.category = category;
         this.description = description;
-        this.rate = rate;
         this.features = features;
-        allProducts.add(this);
-        this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-    }
-
-    public static ArrayList<Product> getProductsByName(String name) {
-        ArrayList<Product> products = new ArrayList<>();
-        for (Product product : allProducts) {
-            if (product.getName().equals(name)) {
-                products.add(product);
-            }
-        }
-        return products;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public static boolean hasProductWithId(String id) {
@@ -71,16 +54,6 @@ public class Product {
 
     }
 
-    public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<String>();
-        for (Product product : allProducts) {
-            if (product.getSeller().equals(seller)) {
-                allProductsInShort.add(product.viewProductInShort());
-            }
-        }
-        return allProductsInShort;
-    }
-
     public String getId() {
         return id;
     }
@@ -95,54 +68,6 @@ public class Product {
 
     private enum ProductStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setStatus(String status) {
-        if (status.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (status.equals(ProductStatus.UNDER_REVIEW_FOR_EDITING)) {
-            this.status = ProductStatus.UNDER_REVIEW_FOR_EDITING;
-        } else {
-            this.status = ProductStatus.CONFIRMED;
-        }
-    }
-
-    public void setFeature(String feature) {}
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
-    }
-
-    public static void addProduct(Product product) {
-        allProducts.add(product);
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
