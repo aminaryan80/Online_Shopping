@@ -18,17 +18,15 @@ public class Product {
     private boolean isAvailable;
     private Category category;
     private String description;
-    private double rate;
     private ArrayList<Customer> allBuyers;
     private List<Comment> allComments;
     private ArrayList<Features> features;
     //TODO different sellers for one product
 
 
-    public Product(String id, ProductStatus status, String name, String companyName, double price, Seller seller,
-                   boolean isAvailable, Category category, String description, double rate, ArrayList<Features> features) {
+    public Product(String id, String name, String companyName, double price, Seller seller,
+                   boolean isAvailable, Category category, String description, ArrayList<Features> features) {
         this.id = id;
-        this.status = status;
         this.name = name;
         this.companyName = companyName;
         this.price = price;
@@ -36,7 +34,6 @@ public class Product {
         this.isAvailable = isAvailable;
         this.category = category;
         this.description = description;
-        this.rate = rate;
         this.features = features;
         allProducts.add(this);
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
@@ -156,7 +153,6 @@ public class Product {
                 ", isAvailable=" + isAvailable +
                 ", category=" + category +
                 ", description='" + description + '\'' +
-                ", rate=" + rate +
                 ", allComments=" + allComments +
                 '}';
     }

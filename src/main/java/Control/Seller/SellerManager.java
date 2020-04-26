@@ -57,7 +57,7 @@ public class SellerManager extends MainManager {
 
     // remove product [productId]
     public boolean isItSellersProduct(String id) {
-        return Product.getProductById(id).getSeller().equals((Seller) account)
+        return Product.getProductById(id).getSeller().equals((Seller) account);
     }
 
     public void deleteProductById(String id) {
