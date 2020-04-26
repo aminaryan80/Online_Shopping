@@ -39,7 +39,7 @@ public class EditProductsManager extends SellerManager {
         return Product.hasProductWithId(id);
     }
 
-    public void editProduct(String id, String field, String newValue) {
+    public Product editProduct(String id, String field, String newValue) {
         Product product = Product.getProductById(id);
         if (field.equals("name")) {
             product.setName(newValue);
@@ -55,10 +55,10 @@ public class EditProductsManager extends SellerManager {
             product.setPrice(Double.parseDouble(newValue));
         } else if (field.equals("category")) {
             product.setCategory(Category.getCategoryByName(newValue));
-        } else if (field.equals("status")) {
-            product.setStatus(newValue);
         } else {
             //TODO introducing feature class
         }
+        product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_EDITING);
+        return product;
     }
 }

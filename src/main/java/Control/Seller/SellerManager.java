@@ -36,7 +36,7 @@ public class SellerManager extends MainManager {
     // view sales history
     public ArrayList<String> viewSalesHistory() {
         ArrayList<SellingLog> allLogs = ((Seller) account).getAllLogs();
-        ArrayList<String> salesHistory = new ArrayList<>();
+        ArrayList<String> salesHistory = new ArrayList<String>();
         for (SellingLog Log : allLogs) {
             salesHistory.add(Log.toString());
         }
@@ -49,10 +49,13 @@ public class SellerManager extends MainManager {
     }
 
     // add product
-    public void addProduct(String id, String name, String companyName,
+    public Product addProduct(String id, String name, String companyName,
                            Category category, double price, boolean iaAvailable,
                            String description, ArrayList<Features> features) {
-        Product.addProduct(new Product(id, name, companyName, price, (Seller) account, iaAvailable, category, description, features));
+        Product product = new Product(id, name, companyName, price, (Seller) account, iaAvailable, category, description, features);
+        Product.addProduct(product);
+        product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);
+        return product;
     }
 
     // remove product [productId]

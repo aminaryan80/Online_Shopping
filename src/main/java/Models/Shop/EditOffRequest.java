@@ -5,28 +5,22 @@ import Control.Seller.OffsManager;
 import Models.Account.Seller;
 
 public class EditOffRequest extends Request {
-    private String offId;
-    private String field;
-    private String newValue;
+    private Auction auction;
 
-    public EditOffRequest(String id, Seller seller, Manager manager, String offId, String field, String newValue) {
+    public EditOffRequest(String id, Seller seller, Manager manager, Auction auction) {
         super(id, seller, manager);
         this.type = RequestType.EDIT_OFF;
-        this.offId = offId;
-        this.field = field;
-        this.newValue = newValue;
+        this.auction = auction;
     }
 
     public void accept() {
-        ((OffsManager) manager).editOffAttribute(id, field, newValue);
+        auction.setStatus(Auction.AuctionStatus.CONFIRMED);
     }
 
     @Override
     public String toString() {
         return "EditOffRequest{" +
-                "offId='" + offId + '\'' +
-                ", field='" + field + '\'' +
-                ", newValue='" + newValue + '\'' +
+                "auction=" + auction +
                 ", id='" + id + '\'' +
                 ", seller=" + seller +
                 ", type=" + type +

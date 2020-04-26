@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
-    private static ArrayList<Product> allProducts = new ArrayList<>();
+    private static ArrayList<Product> allProducts = new ArrayList<Product>();
     private String id;
     private ProductStatus status;
     private String name;
@@ -70,7 +70,7 @@ public class Product {
     }
 
     public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<>();
+        ArrayList<String> allProductsInShort = new ArrayList<String>();
         for (Product product : allProducts) {
             if (product.getSeller().equals(seller)) {
                 allProductsInShort.add(product.viewProductInShort());
@@ -91,7 +91,7 @@ public class Product {
         return seller;
     }
 
-    private enum ProductStatus {
+    public enum ProductStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
 
@@ -99,14 +99,8 @@ public class Product {
         return price;
     }
 
-    public void setStatus(String status) {
-        if (status.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (status.equals(ProductStatus.UNDER_REVIEW_FOR_EDITING)) {
-            this.status = ProductStatus.UNDER_REVIEW_FOR_EDITING;
-        } else {
-            this.status = ProductStatus.CONFIRMED;
-        }
+    public void setStatus(ProductStatus status) {
+        this.status = status;
     }
 
     public void setName(String name) {
