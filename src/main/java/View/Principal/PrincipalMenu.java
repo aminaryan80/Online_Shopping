@@ -32,6 +32,10 @@ public class PrincipalMenu extends MainMenu {
 
             } else if (getMatcher(input, "^manage categories$").find()) {
 
+            } else if (getMatcher(input, "^help$").find()) {
+
+            } else if (getMatcher(input, "^back$").find()) {
+                return;
             }
         }
     }

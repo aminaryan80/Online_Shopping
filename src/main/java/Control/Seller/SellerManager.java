@@ -17,7 +17,7 @@ public class SellerManager extends MainManager {
 
     // edit [field]
     public boolean isEnteredAccountFieldValid(String field) {
-
+        return false;
     }
 
     public void editAccountAttribute(String field, String newAttribute) {
@@ -25,7 +25,7 @@ public class SellerManager extends MainManager {
     }
 
     public boolean isEnteredFieldValid(String type) {
-
+        return false;
     }
 
     // view company information
@@ -36,7 +36,7 @@ public class SellerManager extends MainManager {
     // view sales history
     public ArrayList<String> viewSalesHistory() {
         ArrayList<SellingLog> allLogs = ((Seller) account).getAllLogs();
-        ArrayList<String> salesHistory = new ArrayList<String>();
+        ArrayList<String> salesHistory = new ArrayList<>();
         for (SellingLog Log : allLogs) {
             salesHistory.add(Log.toString());
         }
@@ -65,8 +65,18 @@ public class SellerManager extends MainManager {
     }
 
     // show categories
-    public ArrayList<String> showCategories() {
-        return Category.getAllCategoriesNames();
+    public String showCategories() {
+        StringBuilder result = new StringBuilder();
+        buildCategoryList(mainCategory, result, 1);
+        return result.toString();
+    }
+
+    private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
+        categoryField.append("-".repeat(Math.max(0, categoryLevel)));
+        categoryField.append(currentCategory.getName()).append("\n");
+        for (Category category : currentCategory.getSubCategories()) {
+            buildCategoryList(category, categoryField, categoryLevel + 1);
+        }
     }
 
     // view offs
@@ -78,5 +88,4 @@ public class SellerManager extends MainManager {
     public double viewSellerBalance() {
         return ((Seller) account).getBalance();
     }
-
 }

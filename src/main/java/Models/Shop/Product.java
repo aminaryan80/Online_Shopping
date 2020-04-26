@@ -5,7 +5,6 @@ import Models.Account.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<>();
@@ -54,11 +53,11 @@ public class Product {
     }
 
     public static boolean hasProductWithId(String id) {
-
+        return false;
     }
 
     public static Product getProductById(String id) {
-
+        return null;
     }
 
     public static void deleteProduct(Product product) {
@@ -67,10 +66,11 @@ public class Product {
 
     private String viewProductInShort() {
         //ToDo
+        return null;
     }
 
     public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<String>();
+        ArrayList<String> allProductsInShort = new ArrayList<>();
         for (Product product : allProducts) {
             if (product.getSeller().equals(seller)) {
                 allProductsInShort.add(product.viewProductInShort());
@@ -84,7 +84,7 @@ public class Product {
     }
 
     public List<String> getComments() {
-
+        return null;
     }
 
     public Seller getSeller() {

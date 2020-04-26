@@ -9,6 +9,7 @@ import Models.Shop.Features;
 import Models.Shop.Product;
 import View.ErrorProcessor;
 import View.MainMenu;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
@@ -145,14 +146,11 @@ public class SellerMenu extends MainMenu {
         ((SellerManager) manager).deleteProductById(id);
     }
 
-    private void showCategories(){
-        ArrayList<String> allCategories = ((SellerManager) manager).showCategories();
-        for (String category : allCategories) {
-            System.out.println(category);
-        }
+    private void showCategories() {
+        System.out.println(((SellerManager) manager).showCategories());
     }
 
-    private void viewOffs(){
+    private void viewOffs() {
         ArrayList<String> allOffs = ((SellerManager) manager).viewOffs();
         for (String off : allOffs) {
             System.out.println(off);
