@@ -3,12 +3,10 @@ package View.Seller;
 import Control.Manager;
 import Control.Seller.SellerManager;
 import Models.Account.Seller;
-import Models.Shop.AddProductRequest;
-import Models.Shop.Category;
-import Models.Shop.Features;
-import Models.Shop.Product;
+import Models.Shop.*;
 import View.ErrorProcessor;
 import View.MainMenu;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
@@ -22,7 +20,7 @@ public class SellerMenu extends MainMenu {
     public void sellerMenu() {
         Matcher matcher;
         while (true) {
-            command = scanner.nextLine();
+            String command = scanner.nextLine();
             if ((matcher = getMatcher(command, "^view personal info$")).find()) {
                 viewPersonalInfo();
             } else if ((matcher = getMatcher(command, "^view company information$")).find()) {
@@ -54,7 +52,7 @@ public class SellerMenu extends MainMenu {
     private void viewPersonalInfo() {
         System.out.println(((SellerManager) manager).viewPersonalInfo());
         while (true) {
-            command = scanner.nextLine();
+            String command = scanner.nextLine();
             Matcher matcher;
             if ((matcher = getMatcher(command, "^edit$")).find()) {
                 editAttribute();
@@ -118,8 +116,8 @@ public class SellerMenu extends MainMenu {
         }
         Category category = Category.getCategoryByName(categoryName);
         ArrayList<Features> allFeatures = getFeatures(category);
-        new AddProductRequest("random id", (Seller) manager.getAccount(), manager,
-                id, name, companyName, category, price, isAvailable, description, allFeatures);
+        Product product = ((SellerManager) manager).addProduct(id, name, companyName, category, price, isAvailable, description, allFeatures);
+        new AddProductRequest("random id", (Seller) manager.getAccount(), manager, product);
     }
 
     private ArrayList<Features> getFeatures(Category category) {
@@ -145,14 +143,11 @@ public class SellerMenu extends MainMenu {
         ((SellerManager) manager).deleteProductById(id);
     }
 
-    private void showCategories(){
-        ArrayList<String> allCategories = ((SellerManager) manager).showCategories();
-        for (String category : allCategories) {
-            System.out.println(category);
-        }
+    private void showCategories() {
+        System.out.println(((SellerManager) manager).showCategories());
     }
 
-    private void viewOffs(){
+    private void viewOffs() {
         ArrayList<String> allOffs = ((SellerManager) manager).viewOffs();
         for (String off : allOffs) {
             System.out.println(off);

@@ -28,7 +28,7 @@ public class OffsManager extends SellerManager {
         return ((Seller) account).hasAuctionWithId(id);
     }
 
-    public void editOffAttribute(String id, String field, String newValue) {
+    public Auction editOffAttribute(String id, String field, String newValue) {
         Auction auction = ((Seller) account).getAuctionById(id);
         if (field.equals("beginningDate")) {
             auction.setBeginningDate(new Date(newValue));
@@ -36,14 +36,16 @@ public class OffsManager extends SellerManager {
             auction.setEndingDate(new Date(newValue));
         } else if (field.equals("amount")) {
             auction.setDiscountAmount(Double.parseDouble(newValue));
-        } else {
-            auction.setStatus(newValue);
         }
+        auction.setStatus(Auction.AuctionStatus.UNDER_REVIEW_FOR_EDITING);
+        return auction;
     }
 
-    public void addOff(String id, String beginningDate, String endingDate,
+    public Auction addOff(String id, String beginningDate, String endingDate,
                        double discountAmount, ArrayList<String> productsNames) {
-        ((Seller) account).addAuction(new Auction(id, getProductsListByNames(productsNames), new Date(beginningDate), new Date(endingDate), discountAmount));
+        Auction auction = new Auction(id, getProductsListByNames(productsNames), new Date(beginningDate), new Date(endingDate), discountAmount);
+        ((Seller) account).addAuction(auction);
+        return auction;
     }
 
     private ArrayList<Product> getProductsListByNames(ArrayList<String> productsNames) {

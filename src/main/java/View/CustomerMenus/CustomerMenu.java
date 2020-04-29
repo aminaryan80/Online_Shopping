@@ -1,12 +1,14 @@
-package View;
+package View.CustomerMenus;
 
-import Control.CustomerManager;
+import Control.CustomerManagers.CustomerManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.CustomerManagers.ViewPersonalInfoCustomerManager;
 import Control.Manager;
+import View.CustomerMenus.ConsoleCommand;
 import View.CustomerMenus.ViewCartMenu;
 import View.CustomerMenus.ViewPersonalInfoCustomerMenu;
+import View.MainMenu;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

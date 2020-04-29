@@ -4,6 +4,7 @@ import Control.Manager;
 import Control.Seller.EditProductsManager;
 import Models.Account.Seller;
 import Models.Shop.EditProductRequest;
+import Models.Shop.Product;
 import View.ErrorProcessor;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -18,6 +19,7 @@ public class EditProductsMenu extends SellerMenu{
     private void productsMenu() {
         Matcher matcher;
         while (true) {
+            String command = scanner.nextLine();
             if ((matcher = getMatcher(command, "^view (\\d+)$")).find()) {
                 viewProduct(matcher.group(1));
             } else if ((matcher = getMatcher(command, "^view buyers (\\d+)$")).find()) {
@@ -58,7 +60,8 @@ public class EditProductsMenu extends SellerMenu{
         }
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();
-        new EditProductRequest("random id", (Seller) manager.getAccount(), manager, id, field, newValue);
+        Product product = ((EditProductsManager) manager).editProduct(id, field, newValue);
+        new EditProductRequest("random id", (Seller) manager.getAccount(), manager, product);
     }
 
     private void help() {

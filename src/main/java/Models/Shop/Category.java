@@ -17,11 +17,12 @@ public class Category {
         this.features = features;
         this.allProducts = allProducts;
         this.supCategory = supCategory;
+        this.subCategories = new ArrayList<>();
         allCategories.add(this);
     }
 
     public static ArrayList<String> getAllCategoriesNames() {
-        ArrayList<String> allCategoriesNames= new ArrayList<String>();
+        ArrayList<String> allCategoriesNames= new ArrayList<>();
         for (Category category : allCategories) {
             allCategoriesNames.add(category.getName());
         }
@@ -71,10 +72,6 @@ public class Category {
     public String getName() {
         return name;
     }
-
-//    public List<String> filterBasedOnFeature(String feature, String value) {
-//
-//    }
 
     public void setName(String name) {
         this.name = name;

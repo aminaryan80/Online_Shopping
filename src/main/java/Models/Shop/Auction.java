@@ -44,14 +44,8 @@ public class Auction {
         this.products = products;
     }
 
-    public void setStatus(String statusName) {
-        if (statusName.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            this.status = AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (statusName.equals("UNDER_REVIEW_FOR_EDITING")) {
-            this.status = AuctionStatus.UNDER_REVIEW_FOR_EDITING;
-        } else {
-            this.status = AuctionStatus.CONFIRMED;
-        }
+    public void setStatus(AuctionStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -66,7 +60,7 @@ public class Auction {
                 '}';
     }
 
-    private enum AuctionStatus {
+    public enum AuctionStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED;
     }
 }

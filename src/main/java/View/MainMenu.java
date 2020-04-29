@@ -1,39 +1,38 @@
 package View;
 
-import Control.CustomerManager;
 import Control.MainManager;
 import Control.Manager;
+import Models.Shop.Category;
 
 public class MainMenu extends Menu {
 
-    protected final MainManager mainManager = (MainManager) manager;
     public MainMenu(Manager manager) {
         super(manager);
-        execute();
+        mainMenu();
     }
 
-    private void execute(){
-        String input;
-        while((input = scanner.nextLine().trim()).equalsIgnoreCase("exit")) {
-            if(ConsoleCommand.EXIT.getStringMatcher(input).find()){
+    private void mainMenu() {
+        while (true) {
+            String input = scanner.nextLine();
+            if (getMatcher(input, "^dashboard$").find()) {
+                //TODO
+            } else if (getMatcher(input, "^products$").find()) {
+                // TODO
+            } else if (getMatcher(input, "^offs$").find()) {
+                //TODO
+            } else if (getMatcher(input, "^help$").find()) {
+                help();
+            } else if (getMatcher(input, "^exit$").find()) {
                 return;
-            }
+            } else ErrorProcessor.invalidInput();
         }
     }
 
-    public void mainMenu() {
-
-    }
-
-    private void openLoginMenu() {
-
-    }
-
-    private void openProductsMenu() {
-
-    }
-
-    private void openAuctionsMenu() {
-
+    private void help() {
+        System.out.println("dashboard\n" +
+                "products\n" +
+                "offs\n" +
+                "help\n" +
+                "exit");
     }
 }

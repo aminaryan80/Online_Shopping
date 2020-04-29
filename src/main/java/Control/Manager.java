@@ -1,7 +1,6 @@
 package Control;
 
 import Models.Account.Account;
-import Models.Shop.Cart;
 import Models.Shop.Category;
 import View.Menu;
 
@@ -10,8 +9,7 @@ import java.util.Scanner;
 public abstract class Manager {
     protected Scanner scanner;
     protected Account account;
-    protected Category mainCategory;
-    protected Cart cart;
+    protected static Category mainCategory = new Category("mainCategory", null, null, null);
     protected Menu menu;
 
     public Manager(Account account) {
@@ -26,32 +24,19 @@ public abstract class Manager {
        return true;
     }
 
-    public void changeFirstName(String newFirstName) {
-
-    }
-
-    public void changeLastName(String newLastName) {
-
-    }
-
-    public void login(String username,String password) {
-
-    }
-
     public boolean checkEmail(String email){
         return true;
     }
 
-    public boolean checkPhoneNumber(String phoneNumber){
+    public boolean checkPhoneNumber(String phoneNumber) {
         return true;
-    }
-
-    public void createAccount(String type, String username, String password, String email, String firstName,
-                              String lastName, String phoneNumber, double balance) {
-
     }
 
     public Account getAccount() {
         return account;
+    }
+
+    public Category getMainCategory() {
+        return mainCategory;
     }
 }

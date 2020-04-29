@@ -1,6 +1,7 @@
 package Control;
 
 import Models.Account.Account;
+import Models.Shop.Category;
 import Models.Shop.Discount;
 import View.MainMenu;
 

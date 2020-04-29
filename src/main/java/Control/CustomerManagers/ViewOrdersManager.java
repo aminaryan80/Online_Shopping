@@ -1,6 +1,5 @@
 package Control.CustomerManagers;
 
-import Control.CustomerManager;
 import Models.Account.Account;
 import Models.Shop.Product;
 import View.CustomerMenus.ViewOrdersMenu;
@@ -17,6 +16,6 @@ public class ViewOrdersManager extends CustomerManager {
     }
 
     public void rateProduct(String productId, int score) {
-        Product.getProductById(productId).addRate(score);
+        // TODO: Rate is a Class
     }
 }

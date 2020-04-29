@@ -2,7 +2,6 @@ package View.CustomerMenus;
 
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
-import View.CustomerMenu;
 
 public class PurchaseMenu extends CustomerMenu {
 

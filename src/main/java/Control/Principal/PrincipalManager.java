@@ -1,9 +1,10 @@
-package Control;
+package Control.Principal;
 
+import Control.MainManager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import View.Menu;
-import View.PrincipalMenu;
+import View.Principal.PrincipalMenu;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,6 +1,5 @@
 package View;
 
-import Control.MainManager;
 import Control.Manager;
 
 import java.util.Scanner;
