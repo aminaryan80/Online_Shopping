@@ -112,10 +112,6 @@ return null;
     }
 
     // manage categories
-    public void showCategories() {
-
-    }
-
     public void editCategory(String category, String type, String newValue) {
 
     }

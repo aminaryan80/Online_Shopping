@@ -68,7 +68,7 @@ public class SellerManager extends MainManager {
     }
 
     // show categories
-    public String showCategories() {
+    /*public String showCategories() {
         StringBuilder result = new StringBuilder();
         buildCategoryList(mainCategory, result, 1);
         return result.toString();
@@ -80,7 +80,7 @@ public class SellerManager extends MainManager {
         for (Category category : currentCategory.getSubCategories()) {
             buildCategoryList(category, categoryField, categoryLevel + 1);
         }
-    }
+    }*/
 
     // view offs
     public ArrayList<String> viewOffs() {

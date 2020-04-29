@@ -22,7 +22,7 @@ public class ProductsMenu extends Menu {
             Matcher matcher;
             String input = scanner.nextLine();
             if (getMatcher(input, "^view categories$").find()) {
-                ((ProductsManager) manager).showCategories();
+                showCategories();
             } else if (getMatcher(input, "^filtering$").find()) {
                 // TODO by ali
             } else if (getMatcher(input, "^sorting$").find()) {
@@ -31,12 +31,16 @@ public class ProductsMenu extends Menu {
 
             } else if ((matcher = getMatcher(input, "^show product (\\S+)$")).find()) {
 
+            } else if (getMatcher(input, "^help$").find()) {
+                help();
+            } else if (getMatcher(input, "^back$").find()) {
+                return;
             }
         }
     }
 
-    public void viewCategories() {
-
+    public void showCategories() {
+        System.out.println(((ProductsManager) manager).showCategories());
     }
 
     private void filtering() {
@@ -83,4 +87,13 @@ public class ProductsMenu extends Menu {
 
     }
 
+    private void help() {
+        System.out.println("view categories\n" +
+                "filtering\n" +
+                "sorting\n" +
+                "show products\n" +
+                "show product pproductId]\n" +
+                "help\n" +
+                "back");
+    }
 }

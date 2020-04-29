@@ -1,11 +1,11 @@
-package Control;
+package Control.Products;
 
+import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category;
 import Models.Shop.Filter;
 import Models.Shop.Sort;
-import View.Menu;
-import View.ProductsMenu;
+import View.Products.ProductsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ public class ProductsManager extends Manager {
 
     public ProductsManager(Account account, Category currentCategory) {
         super(account);
-        this.menu = new ProductsMenu(this,currentCategory);
         this.currentCategory = currentCategory;
+        this.menu = new ProductsMenu(this,currentCategory);
     }
 
     private Category currentCategory;
@@ -23,9 +23,19 @@ public class ProductsManager extends Manager {
     private Sort currentSort;
 
     // view categories
-    public ArrayList<String> viewCategories() {
-return null;
+    /*public String showCategories() {
+        StringBuilder result = new StringBuilder();
+        buildCategoryList(mainCategory, result, 1);
+        return result.toString();
     }
+
+    private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
+        categoryField.append("-".repeat(Math.max(0, categoryLevel)));
+        categoryField.append(currentCategory.getName()).append("\n");
+        for (Category category : currentCategory.getSubCategories()) {
+            buildCategoryList(category, categoryField, categoryLevel + 1);
+        }
+    }*/
 
     // filtering
     public String showAvailableFilters() {

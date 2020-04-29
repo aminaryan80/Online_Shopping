@@ -9,7 +9,7 @@ import java.util.Scanner;
 public abstract class Manager {
     protected Scanner scanner;
     protected Account account;
-    protected static Category mainCategory = new Category("mainCategory", null, null, null);
+    protected final static Category mainCategory = new Category("mainCategory", null, null, null);
     protected Menu menu;
 
     public Manager(Account account) {
@@ -38,5 +38,22 @@ public abstract class Manager {
 
     public Category getMainCategory() {
         return mainCategory;
+    }
+
+    public String showCategories() {
+        StringBuilder result = new StringBuilder();
+        buildCategoryList(mainCategory, result, 1);
+        return result.toString();
+    }
+
+    private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
+        if(currentCategory != mainCategory) {
+            System.out.print("\n");
+        }
+        categoryField.append("-".repeat(Math.max(0, categoryLevel)));
+        categoryField.append(currentCategory.getName());
+        for (Category category : currentCategory.getSubCategories()) {
+            buildCategoryList(category, categoryField, categoryLevel + 1);
+        }
     }
 }

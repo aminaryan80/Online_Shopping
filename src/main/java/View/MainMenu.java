@@ -2,6 +2,7 @@ package View;
 
 import Control.MainManager;
 import Control.Manager;
+import Control.Products.ProductsManager;
 import Models.Shop.Category;
 
 public class MainMenu extends Menu {
@@ -17,7 +18,7 @@ public class MainMenu extends Menu {
             if (getMatcher(input, "^dashboard$").find()) {
                 //TODO
             } else if (getMatcher(input, "^products$").find()) {
-                // TODO
+                openProductsMenu();
             } else if (getMatcher(input, "^offs$").find()) {
                 //TODO
             } else if (getMatcher(input, "^help$").find()) {
@@ -26,6 +27,10 @@ public class MainMenu extends Menu {
                 return;
             } else ErrorProcessor.invalidInput();
         }
+    }
+
+    private void openProductsMenu() {
+        new ProductsManager(manager.getAccount(), manager.getMainCategory());
     }
 
     private void help() {

@@ -17,7 +17,7 @@ public class ManageCategoriesManager extends Manager {
         new ManageCategoriesMenu(this);
     }
 
-    public String showCategories() {
+    /*public String showCategories() {
         StringBuilder result = new StringBuilder();
         buildCategoryList(mainCategory, result, 1);
         return result.toString();
@@ -29,7 +29,7 @@ public class ManageCategoriesManager extends Manager {
         for (Category category : currentCategory.getSubCategories()) {
             buildCategoryList(category, categoryField, categoryLevel + 1);
         }
-    }
+    }*/
 
     public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsId) {
         Category supCategory = Category.getCategoryByName(supCategoryName);
