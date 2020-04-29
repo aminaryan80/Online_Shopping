@@ -1,3 +1,4 @@
+
 # Created by https://www.gitignore.io/api/intellij
 # Edit at https://www.gitignore.io/?templates=intellij
 
@@ -11,7 +12,8 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-src/test/java/*.java
+.idea/compiler.xml
+.idea/misc.xml
 
 # Generated files
 .idea/**/contentModel.xml
