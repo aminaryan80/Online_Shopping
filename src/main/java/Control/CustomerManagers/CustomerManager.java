@@ -1,6 +1,6 @@
 package Control.CustomerManagers;
 
-import Control.MainManager;
+import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Discount;
@@ -9,7 +9,7 @@ import View.CustomerMenus.CustomerMenu;
 
 import java.util.ArrayList;
 
-public class CustomerManager extends MainManager {
+public class CustomerManager extends Manager {
 
     protected Customer customer = (Customer) account;
 

@@ -1,9 +1,9 @@
 package View;
 
-import Control.MainManager;
 import Control.Manager;
 import Control.Products.ProductsManager;
-import Models.Shop.Category;
+import Control.UserPanel.DashboardManager;
+import Control.UserPanel.UserPanelManager;
 
 public class MainMenu extends Menu {
 
@@ -15,8 +15,8 @@ public class MainMenu extends Menu {
     private void mainMenu() {
         while (true) {
             String input = scanner.nextLine();
-            if (getMatcher(input, "^dashboard$").find()) {
-                //TODO
+            if (getMatcher(input, "^user panel$").find()) {
+                openUserPanel();
             } else if (getMatcher(input, "^products$").find()) {
                 openProductsMenu();
             } else if (getMatcher(input, "^offs$").find()) {
@@ -29,12 +29,19 @@ public class MainMenu extends Menu {
         }
     }
 
+    private void openUserPanel() {
+        if (manager.getAccount() == null)
+            new UserPanelManager(manager.getAccount());
+        if (manager.getAccount() != null)
+            new DashboardManager(manager.getAccount());
+    }
+
     private void openProductsMenu() {
         new ProductsManager(manager.getAccount(), manager.getMainCategory());
     }
 
     private void help() {
-        System.out.println("dashboard\n" +
+        System.out.println("user panel\n" +
                 "products\n" +
                 "offs\n" +
                 "help\n" +

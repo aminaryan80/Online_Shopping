@@ -22,21 +22,6 @@ public class ProductsManager extends Manager {
     private List<Filter> filters;
     private Sort currentSort;
 
-    // view categories
-    /*public String showCategories() {
-        StringBuilder result = new StringBuilder();
-        buildCategoryList(mainCategory, result, 1);
-        return result.toString();
-    }
-
-    private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
-        categoryField.append("-".repeat(Math.max(0, categoryLevel)));
-        categoryField.append(currentCategory.getName()).append("\n");
-        for (Category category : currentCategory.getSubCategories()) {
-            buildCategoryList(category, categoryField, categoryLevel + 1);
-        }
-    }*/
-
     // filtering
     public String showAvailableFilters() {
         return null;

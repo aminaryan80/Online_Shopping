@@ -4,11 +4,17 @@ public class ErrorProcessor {
     public static void wrongPassword() {
         System.out.println("Wrong password");
     }
+    public static void userExistsWithThisUsername() {
+        System.out.println("User exists with this username");
+    }
     public static void wrongUsername() {
         System.out.println("Wrong username");
     }
     public static void invalidInput() {
         System.out.println("Invalid input");
+    }
+    public static void invalidType() {
+        System.out.println("Invalid type. valid types are (customer|seller|principal)");
     }
     public static void invalidEditField() {
         System.out.println("You can't change this field");

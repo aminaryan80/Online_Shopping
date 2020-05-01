@@ -15,12 +15,6 @@ public class Account {
     protected String password;
     protected double balance;
     protected boolean isGuest;
-    protected List<Discount> discounts;
-
-    public Account(boolean isGuest) {
-        if (isGuest)
-            this.isGuest = true;
-    }
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         this.username = username;
@@ -35,11 +29,19 @@ public class Account {
     }
 
     public static Account getAccountByUsername(String username) {
+        for(Account account : allAccounts) {
+            if(account.username.equals(username))
+                return account;
+        }
         return null;
     }
 
-    public static boolean hasCustomerWithUsername(String username) {
-        return true;
+    public static boolean hasAccountWithUsername(String username) {
+        for(Account account : allAccounts) {
+            if(account.username.equals(username))
+                return true;
+        }
+        return false;
     }
 
     public static ArrayList<String> showAccountsInShort() {
@@ -62,12 +64,12 @@ public class Account {
         return balance;
     }
 
-    public List<Discount> getDiscounts() {
-        return discounts;
-    }
-
     public String getName() {
         return firstName +" "+ lastName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setUsername(String username) {

@@ -8,8 +8,7 @@ import java.util.regex.Pattern;
 
 public class Menu {
     protected Manager manager;
-    protected String command;
-    protected Scanner scanner = new Scanner(System.in);
+    protected static Scanner scanner = new Scanner(System.in);
 
     public Menu(Manager manager) {
         this.manager = manager;

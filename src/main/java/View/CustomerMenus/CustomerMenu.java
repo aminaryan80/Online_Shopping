@@ -5,15 +5,12 @@ import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.CustomerManagers.ViewPersonalInfoCustomerManager;
 import Control.Manager;
-import View.CustomerMenus.ConsoleCommand;
-import View.CustomerMenus.ViewCartMenu;
-import View.CustomerMenus.ViewPersonalInfoCustomerMenu;
-import View.MainMenu;
+import View.Menu;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class CustomerMenu extends MainMenu {
+public class CustomerMenu extends Menu {
 
     CustomerManager customerManager = (CustomerManager) manager;
 

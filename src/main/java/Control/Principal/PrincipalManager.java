@@ -1,17 +1,16 @@
 package Control.Principal;
 
-import Control.MainManager;
+import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
-import View.Menu;
 import View.Principal.PrincipalMenu;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PrincipalManager extends MainManager {
+public class PrincipalManager extends Manager {
 
-    public PrincipalManager(Account account, Menu menu) {
+    public PrincipalManager(Account account) {
         super(account);
         this.menu = new PrincipalMenu(this);
     }

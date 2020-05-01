@@ -5,12 +5,12 @@ import Control.Seller.SellerManager;
 import Models.Account.Seller;
 import Models.Shop.*;
 import View.ErrorProcessor;
-import View.MainMenu;
+import View.Menu;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class SellerMenu extends MainMenu {
+public class SellerMenu extends Menu {
 
     public SellerMenu(Manager manager) {
         super(manager);

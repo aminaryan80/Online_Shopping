@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<Product, Integer> products = new HashMap<Product, Integer>();
+    private Map<Product, Integer> products;
+
+    public Cart() {
+        products = new HashMap<>();
+    }
 
     public ArrayList<Product> getProducts() {
-        ArrayList<Product> allProducts = new ArrayList<>();
-        for (Product product : products.keySet()) {
-            allProducts.add(product);
-        }
-        return allProducts;
+        return new ArrayList<>(products.keySet());
     }
 
     public ArrayList<String> showProductsInShort() {

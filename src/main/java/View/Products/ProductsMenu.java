@@ -92,7 +92,7 @@ public class ProductsMenu extends Menu {
                 "filtering\n" +
                 "sorting\n" +
                 "show products\n" +
-                "show product pproductId]\n" +
+                "show product [productId]\n" +
                 "help\n" +
                 "back");
     }

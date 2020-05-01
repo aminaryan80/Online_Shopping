@@ -7,7 +7,6 @@ import View.ErrorProcessor;
 public class DiscountCodeMenu extends PurchaseMenu {
 
     private static String discountCode = "";
-    PurchaseManager purchaseManager = (PurchaseManager) manager;
 
     public DiscountCodeMenu(Manager manager) {
         super(manager);
@@ -38,7 +37,7 @@ public class DiscountCodeMenu extends PurchaseMenu {
     }
 
     private boolean isDiscountCodeValid(String input){
-        return purchaseManager.isDiscountCodeValid(input);
+        return ((PurchaseManager) manager).isDiscountCodeValid(input);
     }
 
     public static String getDiscountCode() {
