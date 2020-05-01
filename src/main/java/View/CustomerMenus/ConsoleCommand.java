@@ -27,12 +27,18 @@ public enum ConsoleCommand {
     VIEW_DISCOUNT_CODES("(?i)view discount codes"),
 
     VIEW_BALANCE("(?i)view balance"),
-    //show order [orderId]
+
     SHOW_ORDER("(?i)show order (\\S+)"),
-//rate [productId] [1-5],
+
     RATE("(?i)rate (\\S+) (\\d)"),
 
-    VIEW_PERSONAL_INFO("(?i)view personal info");
+    VIEW_PERSONAL_INFO("(?i)view personal info"),
+
+    ADD_TO_CART("(?i)add to cart"),
+
+    SELECT_SELLER("(?i)select seller (\\S+)"),
+
+    COMPARE("(?i)compare (\\S+)");
 
     private final Pattern commandPattern;
 

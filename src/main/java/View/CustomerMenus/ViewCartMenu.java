@@ -3,7 +3,7 @@ package View.CustomerMenus;
 import Control.CustomerManagers.PurchaseManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
-import Control.ProductPageManager;
+import Control.CustomerManagers.ProductPageManager;
 import Models.Shop.Product;
 import View.ErrorProcessor;
 

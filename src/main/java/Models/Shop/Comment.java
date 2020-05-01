@@ -21,6 +21,10 @@ public class Comment {
         PENDING, CONFIRMED, DENIED;
     }
 
+    public String getText() {
+        return text;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
