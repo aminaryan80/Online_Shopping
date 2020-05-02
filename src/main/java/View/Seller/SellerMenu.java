@@ -115,18 +115,18 @@ public class SellerMenu extends MainMenu {
             }
         }
         Category category = Category.getCategoryByName(categoryName);
-        ArrayList<Features> allFeatures = getFeatures(category);
+        ArrayList<Feature> allFeatures = getFeatures(category);
         Product product = ((SellerManager) manager).addProduct(id, name, companyName, category, price, isAvailable, description, allFeatures);
         new AddProductRequest("random id", (Seller) manager.getAccount(), manager, product);
     }
 
-    private ArrayList<Features> getFeatures(Category category) {
-        ArrayList<Features> features = new ArrayList<Features>();
+    private ArrayList<Feature> getFeatures(Category category) {
+        ArrayList<Feature> features = new ArrayList<Feature>();
         ArrayList<String> featuresNames = category.getFeaturesNames();
         for (String featureName : featuresNames) {
             System.out.printf("enter products's %s%n", featureName);
             String featureValue = scanner.nextLine();
-            features.add(new Features(featureName, featureValue));
+            features.add(new Feature(featureName, featureValue));
         }
         return features;
     }

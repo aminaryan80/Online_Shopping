@@ -19,12 +19,12 @@ public class Product {
     private String description;
     private ArrayList<Customer> allBuyers;
     private List<Comment> allComments;
-    private ArrayList<Features> features;
+    private ArrayList<Feature> features;
     //TODO different sellers for one product
 
 
     public Product(String id, String name, String companyName, double price, Seller seller,
-                   boolean isAvailable, Category category, String description, ArrayList<Features> features) {
+                   boolean isAvailable, Category category, String description, ArrayList<Feature> features) {
         this.id = id;
         this.name = name;
         this.companyName = companyName;
@@ -36,6 +36,19 @@ public class Product {
         this.features = features;
         allProducts.add(this);
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+    }
+
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public Feature getFeatureByName(String name) {
+        for (Feature feature : features) {
+            if (feature.getName().equals(name)) {
+                return feature;
+            }
+        }
+        return null;
     }
 
     public static ArrayList<Product> getProductsByName(String name) {
@@ -64,7 +77,7 @@ public class Product {
 
     }
 
-    private String viewProductInShort() {
+    public String viewProductInShort() {
         //ToDo
         return null;
     }
@@ -93,6 +106,30 @@ public class Product {
 
     public enum ProductStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
+    }
+
+    public static ProductStatus parseProductStatus(String statusName) {
+        if (statusName.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
+            return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION
+        } else if (statusName.equals("UNDER_REVIEW_FOR_EDITING")) {
+            return ProductStatus.UNDER_REVIEW_FOR_EDITING;
+        } else if (statusName.equals("CONFIRMED")) {
+            return ProductStatus.CONFIRMED;
+        } else {
+            return null;
+        }
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 
     public double getPrice() {

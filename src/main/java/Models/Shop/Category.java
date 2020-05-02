@@ -5,24 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Category {
-    private static ArrayList<Category> allCategories = new ArrayList<>();
+    private static ArrayList<Category> allCategories = new ArrayList<Category>();
     private Category supCategory;
     private String name;
     private HashMap<String, Integer> features; // featureName - featureType // 0 : int - 1 : String
     private List<Category> subCategories;
-    private List<Product> allProducts;
+    private ArrayList<Product> allProducts;
 
     public Category(String name, Category supCategory, HashMap<String, Integer> features, List<Product> allProducts) {
         this.name = name;
         this.features = features;
         this.allProducts = allProducts;
         this.supCategory = supCategory;
-        this.subCategories = new ArrayList<>();
+        this.subCategories = new ArrayList<Category>();
         allCategories.add(this);
     }
 
     public static ArrayList<String> getAllCategoriesNames() {
-        ArrayList<String> allCategoriesNames= new ArrayList<>();
+        ArrayList<String> allCategoriesNames= new ArrayList<String>();
         for (Category category : allCategories) {
             allCategoriesNames.add(category.getName());
         }
@@ -47,6 +47,10 @@ public class Category {
                 return category;
         }
         return null;
+    }
+
+    public ArrayList<Product> getAllProducts() {
+        return allProducts;
     }
 
     public static void deleteCategory(Category category) {
