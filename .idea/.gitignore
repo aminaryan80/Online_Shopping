@@ -14,6 +14,8 @@
 .idea/**/shelf
 .idea/compiler.xml
 .idea/misc.xml
+.Project_team-15.iml
+.Project.iml
 
 # Generated files
 .idea/**/contentModel.xml

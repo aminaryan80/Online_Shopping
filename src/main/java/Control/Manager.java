@@ -3,7 +3,6 @@ package Control;
 import Models.Account.Account;
 import Models.Shop.Category;
 import View.Menu;
-
 import java.util.Scanner;
 
 public abstract class Manager {
