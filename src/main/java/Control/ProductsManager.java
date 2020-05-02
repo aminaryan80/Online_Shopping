@@ -21,7 +21,7 @@ public class ProductsManager extends Manager {
     }
 
     private Category currentCategory;
-    private List<Filter> filters;
+    private List<Filter> filters = new ArrayList<>();
     private Sort currentSort;
     private ArrayList<Product> products;
 

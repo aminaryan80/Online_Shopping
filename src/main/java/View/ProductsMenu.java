@@ -72,6 +72,10 @@ public class ProductsMenu extends Menu {
     }
 
     private void disableFilter(String filter) {
+        if (!((ProductsManager) manager).isEnteredFilterFieldValid(filter)) {
+            ErrorProcessor.invalidEnteredInEditField();
+            return;
+        }
         List<String> productsNames = ((ProductsManager) manager).disableFilter(filter);
         for (String productsName : productsNames) {
             System.out.println(productsName);
