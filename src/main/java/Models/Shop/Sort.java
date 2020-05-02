@@ -16,4 +16,12 @@ public class Sort {
     public boolean isAscending() {
         return isAscending;
     }
+
+    @Override
+    public String toString() {
+        return "Sort{" +
+                "field='" + field + '\'' +
+                ", isAscending=" + isAscending +
+                '}';
+    }
 }

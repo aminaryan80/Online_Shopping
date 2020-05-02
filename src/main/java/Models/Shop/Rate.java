@@ -12,4 +12,8 @@ public class Rate {
         this.score = score;
         this.product = product;
     }
+
+    public int getScore() {
+        return score;
+    }
 }

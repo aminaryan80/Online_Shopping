@@ -38,6 +38,10 @@ public class Product {
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
     }
 
+    public double getRating() {
+        
+    }
+
     public ProductStatus getStatus() {
         return status;
     }

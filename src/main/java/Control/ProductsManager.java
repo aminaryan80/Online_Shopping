@@ -7,7 +7,10 @@ import View.Menu;
 import View.ProductsMenu;
 
 import javax.print.DocFlavor;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +25,8 @@ public class ProductsManager extends Manager {
 
     private Category currentCategory;
     private List<Filter> filters = new ArrayList<>();
-    private Sort currentSort;
-    private ArrayList<Product> products;
+    private Sort currentSort = null;
+    private List<Product> products;
 
     // view categories
     public ArrayList<String> viewCategories() {
@@ -57,10 +60,12 @@ return null;
     public ArrayList<String> applyFilter(String filterType, String filterValue) {
         filters.add(new Filter(filterType, filterValue));
         products = mainCategory.getAllProducts();
-        return setFilters();
+        setFilters();
+        applySort();
+        return productsInShort();
     }
 
-    private ArrayList<String> setFilters() {
+    private void setFilters() {
         for (Filter filter : filters) {
             String field = filter.getField();
             if (field.equals("status")) {
@@ -81,7 +86,6 @@ return null;
                 products = setFeaturesFilter(filter);
             }
         }
-        return productsInShort();
     }
 
     private ArrayList<String> productsInShort() {
@@ -177,7 +181,9 @@ return null;
         Filter filter = getFilterByField(filterField);
         filters.remove(filter);
         products = mainCategory.getAllProducts();
-        return setFilters();
+        setFilters();
+        applySort();
+        return productsInShort();
     }
 
     private Filter getFilterByField(String field) {
@@ -191,19 +197,92 @@ return null;
 
     // sorting
     public String showAvailableSorts() {
-        return null;
+        return "price\n" +
+                "name\n" +
+                "rating";
     }
 
-    public void sort(String sort) {
-
+    public ArrayList<String> sort(String sort, boolean isAscending) {
+        products = mainCategory.getAllProducts();
+        setFilters();
+        currentSort = new Sort(sort, isAscending);
+        applySort();
+        return productsInShort();
     }
 
-    public void currentSort() {
-
+    private void applySort() {
+        String field = currentSort.getField();
+        if (field.equals("price")) {
+            sortByPrice();
+        } else if (field.equals("name")) {
+            sortByName();
+        } else {
+            sortByRating();
+        }
+        if (!currentSort.isAscending()) {
+            Collections.reverse(products);
+        }
     }
 
-    public void disableSort() {
+    private void sortByPrice() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getPrice() > productsForSort[j].getPrice()) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
 
+    private void sortByName() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getName().compareTo(productsForSort[j].getName()) > 0) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    private void sortByRating() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getRating() > productsForSort[j].getRating()) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    public boolean isEnteredSortFieldValid(String field) {
+        if (field.equals("price") || field.equals("name") || field.equals("rating")) {
+            return true;
+        }
+        return false;
+    }
+
+    public String currentSort() {
+        return currentSort.toString();
+    }
+
+    public ArrayList<String> disableSort() {
+        currentSort = null;
+        products = mainCategory.getAllProducts();
+        setFilters();
+        applySort();
+        return productsInShort();
     }
 
     // show products
