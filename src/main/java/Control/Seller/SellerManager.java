@@ -4,7 +4,7 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Category;
-import Models.Shop.Features;
+import Models.Shop.Feature;
 import Models.Shop.Product;
 import Models.Shop.SellingLog;
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class SellerManager extends Manager {
     // add product
     public Product addProduct(String id, String name, String companyName,
                            Category category, double price, boolean iaAvailable,
-                           String description, ArrayList<Features> features) {
+                           String description, ArrayList<Feature> features) {
         Product product = new Product(id, name, companyName, price, (Seller) account, iaAvailable, category, description, features);
         Product.addProduct(product);
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);

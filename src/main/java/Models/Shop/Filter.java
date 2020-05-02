@@ -16,4 +16,12 @@ public class Filter {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "Filter{" +
+                "field='" + field + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

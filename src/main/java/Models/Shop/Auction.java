@@ -1,9 +1,11 @@
 package Models.Shop;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Auction {
+    private static List<Auction> allAuctions = new ArrayList<>();
     private String id;
     private List<Product> products;
     private AuctionStatus status;
@@ -18,6 +20,11 @@ public class Auction {
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountAmount = discountAmount;
+        allAuctions.add(this);
+    }
+
+    public static List<Auction> getAllAuctions() {
+        return allAuctions;
     }
 
     public String getId() {
@@ -58,6 +65,34 @@ public class Auction {
                 ", endingDate=" + endingDate +
                 ", discountAmount=" + discountAmount +
                 '}';
+    }
+
+    public String viewInShort() {
+
+    }
+
+    public static AuctionStatus parseAuctionStatus(String status) {
+        if (status.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
+            return AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+        } else if (status.equals("UNDER_REVIEW_FOR_EDITING")) {
+            return AuctionStatus.UNDER_REVIEW_FOR_EDITING;
+        } else if (status.equals("CONFIRMED")) {
+            return AuctionStatus.CONFIRMED;
+        } else {
+            return null;
+        }
+    }
+
+    public AuctionStatus getStatus() {
+        return status;
+    }
+
+    public Date getBeginningDate() {
+        return beginningDate;
+    }
+
+    public Date getEndingDate() {
+        return endingDate;
     }
 
     public enum AuctionStatus {
