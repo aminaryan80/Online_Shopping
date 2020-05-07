@@ -138,19 +138,22 @@ public class Account {
 
     public static void save(){
         for (Account account : allAccounts) {
+            save(account);
+        }
+    }
+
+    public static void save(Account account){
+        try {
+            String jsonAccount = Gson.INSTANCE.get().toJson(account);
             try {
-                String jsonAccount = Gson.INSTANCE.get().toJson(account);
-                System.out.println("created");
-                try {
-                    FileWriter file = new FileWriter(Address.ACCOUNTS.get() +"\\"+account.getUsername()+".json");
-                    file.write(jsonAccount);
-                    file.close();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
+                FileWriter file = new FileWriter(Address.ACCOUNTS.get() +"\\"+account.getUsername()+".json");
+                file.write(jsonAccount);
+                file.close();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
