@@ -1,8 +1,15 @@
 package Models.Shop;
 
+import Models.Address;
+import Models.Gson;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Auction {
     private static List<Auction> allAuctions = new ArrayList<>();
@@ -97,6 +104,50 @@ public class Auction {
 
     public enum AuctionStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED;
+    }
+
+    public static void open(){
+        File folder = new File(Address.AUCTIONS.get());
+        if(!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allAuctions.add(open(file));
+            }
+        }
+    }
+
+    public static Auction open(File file){
+        StringBuilder json = new StringBuilder();
+        try {
+            Scanner reader = new Scanner(file);
+            while (reader.hasNext()) {
+                json.append(reader.next());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Gson.INSTANCE.get().fromJson(json.toString(),Auction.class);
+    }
+
+    public static void save(){
+        for (Auction auction : allAuctions) {
+            save(auction);
+        }
+    }
+
+    public static void save(Auction auction){
+        try {
+            String jsonAccount = Gson.INSTANCE.get().toJson(auction);
+            try {
+                FileWriter file = new FileWriter(Address.AUCTIONS.get() +"\\"+auction.getId()+".json");
+                file.write(jsonAccount);
+                file.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
