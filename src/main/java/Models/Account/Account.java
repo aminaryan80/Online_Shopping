@@ -119,21 +119,25 @@ public class Account {
 
     public static void open(){
         File folder = new File(Address.ACCOUNTS.get());
-        if(!folder.exists()) folder.mkdir();
+        if(!folder.exists()) folder.mkdirs();
         else {
-            for (File file : folder.listFiles()) {
-                StringBuilder json = new StringBuilder();
-                try {
-                    Scanner reader = new Scanner(file);
-                    while (reader.hasNext()) {
-                        json.append(reader.next());
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                for (File file : folder.listFiles()) {
+                    allAccounts.add(open(file));
                 }
-                allAccounts.add(Gson.INSTANCE.get().fromJson(json.toString(),Account.class));
-            }
         }
+    }
+
+    public static Account open(File file){
+        StringBuilder json = new StringBuilder();
+        try {
+            Scanner reader = new Scanner(file);
+            while (reader.hasNext()) {
+                json.append(reader.next());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Gson.INSTANCE.get().fromJson(json.toString(),Account.class);
     }
 
     public static void save(){
