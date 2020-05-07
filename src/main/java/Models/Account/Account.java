@@ -1,9 +1,13 @@
 package Models.Account;
 
-import Models.Shop.Discount;
+import Models.Address;
+import Models.Gson;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Account {
     protected static ArrayList<Account> allAccounts = new ArrayList<>();
@@ -107,5 +111,46 @@ public class Account {
                 ", password='" + password + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public static void open(){
+        File folder = new File(Address.ACCOUNTS.get());
+        if(!folder.exists()) folder.mkdir();
+        else {
+            for (File file : folder.listFiles()) {
+                StringBuilder json = new StringBuilder();
+                try {
+                    Scanner reader = new Scanner(file);
+                    while (reader.hasNext()) {
+                        json.append(reader.next());
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                allAccounts.add(Gson.INSTANCE.get().fromJson(json.toString(),Account.class));
+            }
+        }
+    }
+
+    public static void save(){
+        for (Account account : allAccounts) {
+            try {
+                String jsonAccount = Gson.INSTANCE.get().toJson(account);
+                System.out.println("created");
+                try {
+                    FileWriter file = new FileWriter(Address.ACCOUNTS.get() +"\\"+account.getUsername()+".json");
+                    file.write(jsonAccount);
+                    file.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
