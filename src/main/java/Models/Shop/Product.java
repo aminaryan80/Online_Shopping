@@ -21,7 +21,7 @@ public class Product {
     private ArrayList<Rate> allRates;
     private ArrayList<Customer> allBuyers;
     private List<Comment> allComments;
-    private ArrayList<Features> features;
+    private ArrayList<Feature> features;
     private Auction auction;
     //TODO different sellers for one product
 
@@ -51,7 +51,7 @@ public class Product {
     }
 
     public static ArrayList<Product> getProductsByName(String name) {
-        ArrayList<Product> products = new ArrayList<Product>();
+        ArrayList<Product> products = new ArrayList<>();
         for (Product product : allProducts) {
             if (product.getName().equals(name)) {
                 products.add(product);
@@ -75,7 +75,7 @@ public class Product {
     public static Product getProductById(String id) {
         for (Product product : allProducts) {
             if (product.getId().toLowerCase().equals(id.toLowerCase())) {
-                return product
+                return product;
             }
         }
         return null;
@@ -136,12 +136,12 @@ public class Product {
                 "\nDiscount: " + auction.getDiscountAmount();
     }
 
-    public String getRate() {
-        int sum = 0;
+    public double getRate() {
+        double sum = 0;
         for (Rate rate : allRates) {
             sum += rate.getScore();
         }
-        return "" + sum / allRates.size();
+        return sum / allRates.size();
     }
 
     public void addRate(Account account, int rate) {
@@ -158,7 +158,7 @@ public class Product {
 
     public static ProductStatus parseProductStatus(String statusName) {
         if (statusName.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION
+            return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         } else if (statusName.equals("UNDER_REVIEW_FOR_EDITING")) {
             return ProductStatus.UNDER_REVIEW_FOR_EDITING;
         } else if (statusName.equals("CONFIRMED")) {

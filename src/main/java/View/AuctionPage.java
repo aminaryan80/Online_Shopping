@@ -2,7 +2,10 @@ package View;
 
 import Control.AuctionPageManager;
 import Control.Manager;
-import Control.ProductsManager;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
 
 import java.util.ArrayList;
 import java.util.List;

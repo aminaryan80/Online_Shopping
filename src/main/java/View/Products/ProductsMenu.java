@@ -9,9 +9,8 @@ import java.util.regex.Matcher;
 
 public class ProductsMenu extends Menu {
 
-    public ProductsMenu(Manager manager, Category category) {
+    public ProductsMenu(Manager manager) {
         super(manager);
-        this.category = category;
         productsMenu();
     }
 

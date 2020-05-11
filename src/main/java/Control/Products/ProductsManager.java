@@ -2,9 +2,8 @@ package Control.Products;
 
 import Control.Manager;
 import Models.Account.Account;
-import Models.Shop.Category;
-import Models.Shop.Filter;
-import Models.Shop.Sort;
+import Models.Account.Seller;
+import Models.Shop.*;
 import View.Products.ProductsMenu;
 
 import javax.print.DocFlavor;
@@ -252,7 +251,7 @@ public class ProductsManager extends Manager {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
-                if (productsForSort[i].getRating() > productsForSort[j].getRating()) {
+                if (productsForSort[i].getRate() > productsForSort[j].getRate()) {
                     Product temp = productsForSort[i];
                     productsForSort[i] = productsForSort[j];
                     productsForSort[j] = temp;

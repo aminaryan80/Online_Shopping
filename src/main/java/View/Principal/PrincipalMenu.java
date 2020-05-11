@@ -19,7 +19,6 @@ public class PrincipalMenu extends Menu {
 
     public void principalMenu() {
         while (true) {
-            Matcher matcher;
             String input = scanner.nextLine();
             if (getMatcher(input, "^view personal info$").find()) {
                 // TODO

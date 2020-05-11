@@ -68,7 +68,7 @@ public class Auction {
     }
 
     public String viewInShort() {
-
+        return null;
     }
 
     public static AuctionStatus parseAuctionStatus(String status) {

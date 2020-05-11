@@ -12,7 +12,7 @@ public class Category {
     private List<Category> subCategories;
     private ArrayList<Product> allProducts;
 
-    public Category(String name, Category supCategory, HashMap<String, Integer> features, List<Product> allProducts) {
+    public Category(String name, Category supCategory, HashMap<String, Integer> features, ArrayList<Product> allProducts) {
         this.name = name;
         this.features = features;
         this.allProducts = allProducts;

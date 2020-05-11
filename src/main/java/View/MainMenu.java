@@ -37,7 +37,7 @@ public class MainMenu extends Menu {
     }
 
     private void openProductsMenu() {
-        new ProductsManager(manager.getAccount(), manager.getMainCategory());
+        new ProductsManager(manager.getAccount());
     }
 
     private void help() {
