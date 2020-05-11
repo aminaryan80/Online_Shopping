@@ -5,10 +5,11 @@ import Control.Principal.ManageRequestsManager;
 import Models.Shop.Request;
 import View.ErrorProcessor;
 import View.MainMenu;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ManageRequestsMenu extends MainMenu {
+public class ManageRequestsMenu extends Menu {
     public ManageRequestsMenu(Manager manager) {
         super(manager);
         manageRequestsMenu();

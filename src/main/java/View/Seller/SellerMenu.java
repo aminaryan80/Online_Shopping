@@ -160,16 +160,16 @@ public class SellerMenu extends Menu {
     }
 
     private void help() {
-        System.out.println("view personal info%n" +
-                "view company information%n" +
-                "view sales history%n" +
-                "manage products%n" +
-                "add product%n" +
-                "remove product [product id]%n" +
-                "show categories%n" +
-                "view offs%n" +
-                "view balance%n" +
-                "back%n" +
-                "help");
+        System.out.println("view personal info\n" +
+                "view company information\n" +
+                "view sales history\n" +
+                "manage products\n" +
+                "add product\n" +
+                "remove product [product id]\n" +
+                "show categories\n" +
+                "view offs\n" +
+                "view balance\n" +
+                "help\n" +
+                "back");
     }
 }

@@ -6,6 +6,7 @@ import Control.Principal.ManageCategories.ManageCategoriesManager;
 import Control.Principal.ManageRequestsManager;
 import Control.Principal.ManageUsersManager;
 import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
+import View.ErrorProcessor;
 import View.Menu;
 
 import java.util.regex.Matcher;
@@ -27,7 +28,7 @@ public class PrincipalMenu extends Menu {
             } else if (getMatcher(input, "^manage all products$").find()) {
                 manageAllProducts();
             } else if (getMatcher(input, "^create discount code$").find()) {
-                createDiscountCode();
+                createDiscountCode(); // TODO
             } else if (getMatcher(input, "^view discount codes$").find()) {
                 viewDiscountCodes();
             } else if (getMatcher(input, "^manage requests$").find()) {
@@ -38,7 +39,7 @@ public class PrincipalMenu extends Menu {
                 help();
             } else if (getMatcher(input, "^back$").find()) {
                 return;
-            }
+            } else ErrorProcessor.invalidInput();
         }
     }
 

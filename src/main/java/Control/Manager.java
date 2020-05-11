@@ -57,7 +57,7 @@ public abstract class Manager {
 
     private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
         if (currentCategory != mainCategory) {
-            System.out.print("\n");
+            categoryField.append("\n");
         }
         categoryField.append("-".repeat(Math.max(0, categoryLevel)));
         categoryField.append(currentCategory.getName());

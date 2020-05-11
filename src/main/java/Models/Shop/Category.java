@@ -22,7 +22,7 @@ public class Category {
     }
 
     public static ArrayList<String> getAllCategoriesNames() {
-        ArrayList<String> allCategoriesNames= new ArrayList<String>();
+        ArrayList<String> allCategoriesNames = new ArrayList<>();
         for (Category category : allCategories) {
             allCategoriesNames.add(category.getName());
         }
@@ -50,13 +50,18 @@ public class Category {
     }
 
     public ArrayList<Product> getAllProducts() {
-        return allProducts;
+        ArrayList<Product> products = new ArrayList<>(allProducts);
+        for (Category category : subCategories) {
+            products.addAll(category.allProducts);
+        }
+        return products;
     }
 
     public static void deleteCategory(Category category) {
         category.supCategory.subCategories.remove(category);
         allCategories.remove(category);
-        for(Category subCategory : category.subCategories) {
+        ArrayList<Category> tmp = new ArrayList<>(category.subCategories);
+        for(Category subCategory : tmp) {
             deleteCategory(subCategory);
         }
     }

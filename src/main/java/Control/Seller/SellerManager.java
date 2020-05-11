@@ -7,12 +7,15 @@ import Models.Shop.Category;
 import Models.Shop.Feature;
 import Models.Shop.Product;
 import Models.Shop.SellingLog;
+import View.Seller.SellerMenu;
+
 import java.util.ArrayList;
 
 public class SellerManager extends Manager {
 
     public SellerManager(Account account) {
         super(account);
+        new SellerMenu(this);
     }
 
     // edit [field]

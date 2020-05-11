@@ -6,10 +6,11 @@ import Control.Principal.ManageUsersManager;
 import Models.Shop.Product;
 import View.ErrorProcessor;
 import View.MainMenu;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ManageAllProductsMenu extends MainMenu {
+public class ManageAllProductsMenu extends Menu {
     public ManageAllProductsMenu(Manager manager) {
         super(manager);
         manageAllProducts();

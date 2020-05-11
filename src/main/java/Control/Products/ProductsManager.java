@@ -6,8 +6,6 @@ import Models.Account.Seller;
 import Models.Shop.*;
 import View.Products.ProductsMenu;
 
-import javax.print.DocFlavor;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +16,9 @@ public class ProductsManager extends Manager {
 
     public ProductsManager(Account account) {
         super(account);
-        this.menu = new ProductsMenu(this);
         this.currentCategory = mainCategory;
         products = mainCategory.getAllProducts();
+        this.menu = new ProductsMenu(this);
     }
 
     private Category currentCategory;
@@ -84,7 +82,7 @@ public class ProductsManager extends Manager {
     }
 
     private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort= new ArrayList<String>();
+        ArrayList<String> productsInShort= new ArrayList<>();
         for (Product product : products) {
             productsInShort.add(product.viewProductInShort());
         }

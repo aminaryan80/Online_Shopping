@@ -1,9 +1,6 @@
 package Models.Account;
 
-import Models.Shop.Discount;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Account {
     protected static ArrayList<Account> allAccounts = new ArrayList<>();
@@ -45,7 +42,16 @@ public class Account {
     }
 
     public static ArrayList<String> showAccountsInShort() {
-        return null;
+        ArrayList<String> accountsInShort = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account instanceof Customer)
+                accountsInShort.add(account.username + " : Customer");
+            else if (account instanceof Principal)
+                accountsInShort.add(account.username + " : Principal");
+            else if (account instanceof Seller)
+                accountsInShort.add(account.username + " : Seller");
+        }
+        return accountsInShort;
     }
 
     public static void deleteAccount(Account account) {

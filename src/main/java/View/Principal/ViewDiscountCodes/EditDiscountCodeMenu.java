@@ -4,8 +4,9 @@ import Control.Manager;
 import Control.Principal.ViewDiscountCodes.EditDiscountCodeManager;
 import View.ErrorProcessor;
 import View.MainMenu;
+import View.Menu;
 
-public class EditDiscountCodeMenu extends MainMenu {
+public class EditDiscountCodeMenu extends Menu {
     public EditDiscountCodeMenu(Manager manager) {
         super(manager);
         editDiscountCode();

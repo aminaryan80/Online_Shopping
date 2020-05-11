@@ -18,7 +18,9 @@ public class ManageUsersManager extends Manager {
     }
 
     public String viewUsername(String username) {
-        return Account.getAccountByUsername(username).toString();
+        if (Account.hasAccountWithUsername(username))
+            return Account.getAccountByUsername(username).toString();
+        return null;
     }
 
     public void deleteUsername(String username) {

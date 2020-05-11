@@ -16,11 +16,11 @@ public class CustomerMenu extends Menu {
 
     public CustomerMenu(Manager manager) {
         super(manager);
+        customerMenu();
     }
 
     public void customerMenu() {
         String input;
-        Matcher matcher;
         while (!(input = scanner.nextLine().trim()).matches("(?i)exit")) {
             if (ConsoleCommand.VIEW_PERSONAL_INFO.getStringMatcher(input).find()) {
                 new ViewPersonalInfoCustomerManager(manager.getAccount());

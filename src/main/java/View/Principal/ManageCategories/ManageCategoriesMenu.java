@@ -4,13 +4,13 @@ import Control.Manager;
 import Control.Principal.ManageCategories.ManageCategoriesManager;
 import Models.Shop.Product;
 import View.ErrorProcessor;
-import View.MainMenu;
+import View.Menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
-public class ManageCategoriesMenu extends MainMenu {
+public class ManageCategoriesMenu extends Menu {
     public ManageCategoriesMenu(Manager manager) {
         super(manager);
         manageCategoriesMenu();
@@ -22,7 +22,7 @@ public class ManageCategoriesMenu extends MainMenu {
             Matcher matcher;
             String input = scanner.nextLine();
             if ((matcher = getMatcher(input, "^edit (\\S+)$")).find()) {
-                editCategory(matcher.group(1));
+                editCategory(matcher.group(1)); // TODO
             } else if ((matcher = getMatcher(input, "^add (\\S+)$")).find()) {
                 addCategory(matcher.group(1));
             } else if ((matcher = getMatcher(input, "^remove (\\S+)$")).find()) {
@@ -60,8 +60,10 @@ public class ManageCategoriesMenu extends MainMenu {
         HashMap<String, Integer> features = new HashMap<>();
         while (true) {
             String featureName = scanner.nextLine();
+            if (featureName.equals("0"))
+                break;
             String featureType = scanner.nextLine();
-            if (featureName.equals("0") || featureType.equals("0"))
+            if (featureType.equals("0"))
                 break;
             if (featureType.matches("^(text|number)$")) {
                 features.put(featureName, featureType.equals("text") ? 1 : 0);

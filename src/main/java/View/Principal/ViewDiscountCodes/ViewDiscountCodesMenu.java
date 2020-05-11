@@ -6,10 +6,11 @@ import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
 import Models.Shop.Discount;
 import View.ErrorProcessor;
 import View.MainMenu;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ViewDiscountCodesMenu extends MainMenu {
+public class ViewDiscountCodesMenu extends Menu {
     public ViewDiscountCodesMenu(Manager manager) {
         super(manager);
         viewDiscountCodesMenu();

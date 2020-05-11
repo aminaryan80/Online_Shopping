@@ -3,12 +3,12 @@ package View.Principal;
 import Control.Manager;
 import Control.Principal.ManageUsersManager;
 import View.ErrorProcessor;
-import View.MainMenu;
+import View.Menu;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class ManageUsersMenu extends MainMenu {
+public class ManageUsersMenu extends Menu {
     public ManageUsersMenu(Manager manager) {
         super(manager);
         manageUsers();
@@ -40,7 +40,10 @@ public class ManageUsersMenu extends MainMenu {
     }
 
     private void viewUsername(String username) {
-        System.out.println(((ManageUsersManager) manager).viewUsername(username));
+        String usernameInfo = ((ManageUsersManager) manager).viewUsername(username);
+        if (usernameInfo != null)
+            System.out.println(usernameInfo);
+        else ErrorProcessor.wrongUsername();
     }
 
     private void deleteUsername(String username) {
