@@ -1,8 +1,8 @@
-package View.CustomerMenus;
+package View.CustomerMenus.purchase;
 
 import Control.Manager;
 
-public class ReceiverInformationMenu extends PurchaseMenu{
+public class ReceiverInformationMenu extends PurchaseMenu {
 
     private static String address;
     private static String phoneNum;

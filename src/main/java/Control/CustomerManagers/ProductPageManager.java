@@ -1,11 +1,9 @@
 package Control.CustomerManagers;
 
-import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Comment;
 import Models.Shop.Product;
-import View.CustomerMenus.CustomerMenu;
-import View.CustomerMenus.ProductPage;
+import View.CustomerMenus.product.ProductPage;
 
 import java.util.ArrayList;
 import java.util.List;

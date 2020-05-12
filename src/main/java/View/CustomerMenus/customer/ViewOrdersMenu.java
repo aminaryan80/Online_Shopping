@@ -1,7 +1,8 @@
-package View.CustomerMenus;
+package View.CustomerMenus.customer;
 
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.Manager;
+import View.CustomerMenus.ConsoleCommand;
 
 import java.util.regex.Matcher;
 

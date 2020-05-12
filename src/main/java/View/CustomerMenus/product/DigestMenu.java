@@ -1,12 +1,14 @@
-package View.CustomerMenus;
+package View.CustomerMenus.product;
 
 import Control.CustomerManagers.DigestMenuManager;
 import Control.Manager;
+import View.CustomerMenus.ConsoleCommand;
+import View.CustomerMenus.customer.CustomerMenu;
 import View.ErrorProcessor;
 
 import java.util.regex.Matcher;
 
-public class DigestMenu extends CustomerMenu{
+public class DigestMenu extends CustomerMenu {
 
     DigestMenuManager digestMenuManager = (DigestMenuManager) manager;
     public DigestMenu(Manager manager) {

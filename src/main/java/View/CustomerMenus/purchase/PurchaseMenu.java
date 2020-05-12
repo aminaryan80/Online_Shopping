@@ -1,7 +1,8 @@
-package View.CustomerMenus;
+package View.CustomerMenus.purchase;
 
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
+import View.CustomerMenus.customer.CustomerMenu;
 
 public class PurchaseMenu extends CustomerMenu {
 

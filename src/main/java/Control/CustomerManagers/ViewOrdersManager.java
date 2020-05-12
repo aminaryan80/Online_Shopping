@@ -1,8 +1,7 @@
 package Control.CustomerManagers;
 
 import Models.Account.Account;
-import Models.Shop.Product;
-import View.CustomerMenus.ViewOrdersMenu;
+import View.CustomerMenus.customer.ViewOrdersMenu;
 
 public class ViewOrdersManager extends CustomerManager {
 

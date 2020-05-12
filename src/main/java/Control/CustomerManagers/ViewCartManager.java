@@ -3,7 +3,7 @@ package Control.CustomerManagers;
 import Models.Account.Account;
 import Models.Shop.Discount;
 import Models.Shop.Product;
-import View.CustomerMenus.ViewCartMenu;
+import View.CustomerMenus.customer.ViewCartMenu;
 
 import java.util.List;
 

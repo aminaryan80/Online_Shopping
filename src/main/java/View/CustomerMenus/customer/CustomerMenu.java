@@ -1,10 +1,12 @@
-package View.CustomerMenus;
+package View.CustomerMenus.customer;
 
 import Control.CustomerManagers.CustomerManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.CustomerManagers.ViewPersonalInfoCustomerManager;
 import Control.Manager;
+import View.CustomerMenus.ConsoleCommand;
+import View.ErrorProcessor;
 import View.Menu;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class CustomerMenu extends Menu {
                 customerManager.viewCustomerBalance();
             } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
                 System.out.println(help());
-            }
+            } else ErrorProcessor.invalidInput();
         }
     }
 

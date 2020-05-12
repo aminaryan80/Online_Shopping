@@ -4,7 +4,7 @@ import Models.Account.Account;
 import Models.Shop.BuyingLog;
 import Models.Shop.Discount;
 import Models.Shop.Product;
-import View.CustomerMenus.PurchaseMenu;
+import View.CustomerMenus.purchase.PurchaseMenu;
 
 import java.util.ArrayList;
 import java.util.Date;

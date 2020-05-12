@@ -1,4 +1,4 @@
-package View.CustomerMenus;
+package View.CustomerMenus.purchase;
 
 import Control.Manager;
 import View.ErrorProcessor;
