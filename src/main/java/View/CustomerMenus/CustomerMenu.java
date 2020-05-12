@@ -8,7 +8,6 @@ import Control.Manager;
 import View.Menu;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 
 public class CustomerMenu extends Menu {
 
@@ -32,8 +31,44 @@ public class CustomerMenu extends Menu {
                 customerManager.viewDiscountCodes().forEach(System.out::println);
             } else if (ConsoleCommand.VIEW_BALANCE.getStringMatcher(input).find()) {
                 customerManager.viewCustomerBalance();
+            } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
+                System.out.println(help());
             }
         }
+    }
+
+    private String help() {
+        return "Customer Menu : " +
+                "\n" +
+                "view personal info" +
+                "\n" +
+                "\t⇒ edit [field]" +
+                "\n" +
+                "view cart"+
+                "\n" +
+                "\t⇒ show products"+
+                "\n" +
+                "\t⇒ view [productId]"+
+                "\n" +
+                "\t⇒ increase [productId]"+
+                "\n" +
+                "\t⇒ decrease [productId]"+
+                "\n" +
+                "\t⇒ show total price"+
+                "\n" +
+                "\t⇒ purchase" +
+                "\n" +
+                "view orders"+
+                "\n" +
+                "\t⇒ show order [orderId]" +
+                "\n" +
+                "\t⇒ rate [productId] [1-5]" +
+                "\n" +
+                "view balance" +
+                "\n" +
+                "view discount codes" +
+                "\n"
+                ;
     }
 
     protected void viewPersonalInfo() {
