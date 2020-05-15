@@ -3,9 +3,15 @@ package Models.Shop;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
+import Models.Address;
+import Models.Gson;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Product {
     private static ArrayList<Product> allProducts = new ArrayList<Product>();
@@ -218,6 +224,50 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static void open(){
+        File folder = new File(Address.PRODUCTS.get());
+        if(!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allProducts.add(open(file));
+            }
+        }
+    }
+
+    public static Product open(File file){
+        StringBuilder json = new StringBuilder();
+        try {
+            Scanner reader = new Scanner(file);
+            while (reader.hasNext()) {
+                json.append(reader.next());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Gson.INSTANCE.get().fromJson(json.toString(),Product.class);
+    }
+
+    public static void save(){
+        for (Product product : allProducts) {
+            save(product);
+        }
+    }
+
+    public static void save(Product product){
+        try {
+            String jsonAccount = Gson.INSTANCE.get().toJson(product);
+            try {
+                FileWriter file = new FileWriter(Address.PRODUCTS.get() +"\\"+product.getId()+".json");
+                file.write(jsonAccount);
+                file.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

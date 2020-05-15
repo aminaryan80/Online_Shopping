@@ -1,8 +1,15 @@
 package Models.Shop;
 
+import Models.Address;
+import Models.Gson;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<Category>();
@@ -10,7 +17,7 @@ public class Category {
     private String name;
     private HashMap<String, Integer> features; // featureName - featureType // 0 : int - 1 : String
     private List<Category> subCategories;
-    private ArrayList<Product> allProducts;
+    private ArrayList<Product> allProducts = new ArrayList<>();
 
     public Category(String name, Category supCategory, HashMap<String, Integer> features, ArrayList<Product> allProducts) {
         this.name = name;
@@ -88,6 +95,50 @@ public class Category {
 
     public void setSubCategory(Category category) {
         this.subCategories.add(category);
+    }
+
+    public static void open(){
+        File folder = new File(Address.CATEGORIES.get());
+        if(!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allCategories.add(open(file));
+            }
+        }
+    }
+
+    public static Category open(File file){
+        StringBuilder json = new StringBuilder();
+        try {
+            Scanner reader = new Scanner(file);
+            while (reader.hasNext()) {
+                json.append(reader.next());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return Gson.INSTANCE.get().fromJson(json.toString(),Category.class);
+    }
+
+    public static void save(){
+        for (Category category : allCategories) {
+            save(category);
+        }
+    }
+
+    public static void save(Category category){
+        try {
+            String jsonAccount = Gson.INSTANCE.get().toJson(category);
+            try {
+                FileWriter file = new FileWriter(Address.CATEGORIES.get() +"\\"+category.getName()+".json");
+                file.write(jsonAccount);
+                file.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
