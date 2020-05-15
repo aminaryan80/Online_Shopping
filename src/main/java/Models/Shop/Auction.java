@@ -15,6 +15,7 @@ public class Auction {
     private static List<Auction> allAuctions = new ArrayList<>();
     private String id;
     private List<Product> products;
+    private List<String> productsIds;
     private AuctionStatus status;
     private Date beginningDate;
     private Date endingDate;
@@ -23,11 +24,24 @@ public class Auction {
     public Auction(String id, List<Product> products, Date beginningDate, Date endingDate, double discountAmount) {
         this.id = id;
         this.products = products;
+        this.productsIds = new ArrayList<>();
+        for (Product product : products) {
+            productsIds.add(product.getId());
+        }
         this.status = AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountAmount = discountAmount;
         allAuctions.add(this);
+    }
+
+    public static Auction getAuctionById(String id) {
+        for (Auction auction : allAuctions) {
+            if (auction.id.equals(id)) {
+                return auction;
+            }
+        }
+        return null;
     }
 
     public static List<Auction> getAllAuctions() {
@@ -147,6 +161,19 @@ public class Auction {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void loadReferences() {
+        for (Auction auction : allAuctions) {
+            auction.loadReference();
+        }
+    }
+
+    private void loadReference() {
+        products = new ArrayList<>();
+        for (String productsId : productsIds) {
+            products.add(Product.getProductById(productsId));
         }
     }
 }

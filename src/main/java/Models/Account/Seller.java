@@ -11,6 +11,7 @@ public class Seller extends Account {
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<SellingLog>();
     private List<Auction> auctions = new ArrayList<Auction>();
+    private List<String> auctionsId = new ArrayList<>();
 
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
@@ -57,6 +58,15 @@ return true;
 
     public void addAuction(Auction auction) {
         auctions.add(auction);
+        auctionsId.add(auction.getId());
+    }
+
+    @Override
+    protected void loadReference() {
+        auctions = new ArrayList<>();
+        for (String auctionId : auctionsId) {
+            auctions.add(Auction.getAuctionById(auctionId));
+        }
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Discount {
     private double maximumDiscount;
     private int discountUseCount;
     private List<Customer> allCustomers;
+    private List<String> allCustomersNames;
 
     public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount, List<Customer> allCustomers) {
         this.id = id;
@@ -30,6 +31,10 @@ public class Discount {
         this.maximumDiscount = maximumDiscount;
         this.discountUseCount = discountUseCount;
         this.allCustomers = allCustomers;
+        this.allCustomersNames = new ArrayList<>();
+        for (Customer customer : allCustomers) {
+            allCustomersNames.add(customer.getName());
+        }
         allDiscounts.add(this);
     }
 
@@ -135,6 +140,19 @@ public class Discount {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void loadReferences() {
+        for (Discount discount : allDiscounts) {
+            discount.loadReference();
+        }
+    }
+
+    private void loadReference() {
+        allCustomers = new ArrayList<>();
+        for (String customersName : allCustomersNames) {
+            allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
         }
     }
 }

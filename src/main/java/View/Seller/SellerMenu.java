@@ -21,15 +21,15 @@ public class SellerMenu extends Menu {
         Matcher matcher;
         while (true) {
             String command = scanner.nextLine();
-            if ((matcher = getMatcher(command, "^view personal info$")).find()) {
+            if (getMatcher(command, "^view personal info$").find()) {
                 viewPersonalInfo();
-            } else if ((matcher = getMatcher(command, "^view company information$")).find()) {
+            } else if (getMatcher(command, "^view company information$").find()) {
                 viewCompanyInformation();
-            } else if ((matcher = getMatcher(command, "^view sales history$")).find()) {
+            } else if (getMatcher(command, "^view sales history$").find()) {
                 viewSalesHistory();
-            } else if ((matcher = getMatcher(command, "^manage products$")).find()) {
+            } else if (getMatcher(command, "^manage products$").find()) {
                 manageProducts();
-            } else if ((matcher = getMatcher(command, "^add product$")).find()) {
+            } else if (getMatcher(command, "^add product$").find()) {
                 addProduct();
             } else if ((matcher = getMatcher(command, "^remove product (\\d+)$")).find()) {
                 deleteProduct(matcher.group(1));
@@ -56,7 +56,13 @@ public class SellerMenu extends Menu {
             Matcher matcher;
             if ((matcher = getMatcher(command, "^edit$")).find()) {
                 editAttribute();
-            } else ErrorProcessor.invalidInput();
+            } else if (getMatcher(command, "^back$").find()) {
+                return;
+            } else if (getMatcher(command, "^help$").find()) {
+                System.out.println("edit\nhelp\nback");
+            } else {
+                ErrorProcessor.invalidInput();
+            }
         }
     }
 

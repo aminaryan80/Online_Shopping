@@ -6,15 +6,22 @@ import Models.Account.Seller;
 
 public class EditProductRequest extends Request {
     private Product product;
+    private String productId;
 
-    public EditProductRequest(String id, Seller seller, Manager manager, Product product) {
-        super(id, seller, manager);
+    public EditProductRequest(String id, Seller seller, Product product) {
+        super(id, seller);
         this.type = RequestType.EDIT_PRODUCT;
         this.product = product;
+        this.productId = product.getId();
     }
 
     public void accept() {
         product.setStatus(Product.ProductStatus.CONFIRMED);
+    }
+
+    @Override
+    protected void loadReference() {
+        product = Product.getProductById(productId);
     }
 
     @Override

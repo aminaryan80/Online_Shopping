@@ -5,7 +5,6 @@ import Models.Account.Customer;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -21,14 +20,18 @@ public class Product {
     private String companyName;
     private double price;
     private Seller seller;
+    private String sellerName;
     private boolean isAvailable;
     private Category category;
+    private String categoryName;
     private String description;
-    private ArrayList<Rate> allRates;
-    private ArrayList<Customer> allBuyers;
-    private List<Comment> allComments;
+    private ArrayList<Rate> allRates = new ArrayList<>();
+    private ArrayList<Customer> allBuyers = new ArrayList<>();
+    private ArrayList<String> allBuyersNames = new ArrayList<>();
+    private List<Comment> allComments = new ArrayList<>();
     private ArrayList<Feature> features;
     private Auction auction;
+    private String auctionId;
     //TODO different sellers for one product
 
 
@@ -39,8 +42,10 @@ public class Product {
         this.companyName = companyName;
         this.price = price;
         this.seller = seller;
+        this.sellerName = seller.getName();
         this.isAvailable = isAvailable;
         this.category = category;
+        this.categoryName = category.getName();
         this.description = description;
         this.features = features;
         allProducts.add(this);
@@ -56,6 +61,11 @@ public class Product {
         return null;
     }
 
+    public void addBuyers(Customer buyer) {
+        allBuyers.add(buyer);
+        allBuyersNames.add(buyer.getName());
+    }
+
     public static ArrayList<Product> getProductsByName(String name) {
         ArrayList<Product> products = new ArrayList<>();
         for (Product product : allProducts) {
@@ -68,6 +78,7 @@ public class Product {
 
     public void setAuction(Auction auction) {
         this.auction = auction;
+        this.auctionId = auction.getId();
     }
 
     public String getName() {
@@ -88,7 +99,7 @@ public class Product {
     }
 
     public static void deleteProduct(Product product) {
-
+        allProducts.remove(product);
     }
 
     public String viewProductInShort() {
@@ -267,6 +278,22 @@ public class Product {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void loadReferences() {
+        for (Product product : allProducts) {
+            product.loadReference();
+        }
+    }
+
+    private void loadReference() {
+        seller = (Seller) Account.getAccountByUsername(sellerName);
+        category = Category.getCategoryByName(categoryName);
+        auction = Auction.getAuctionById(auctionId);
+        allBuyers = new ArrayList<>();
+        for (String buyersName : allBuyersNames) {
+            allBuyers.add((Customer) Account.getAccountByUsername(buyersName));
         }
     }
 

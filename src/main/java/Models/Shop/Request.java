@@ -1,10 +1,10 @@
 package Models.Shop;
 
 import Control.Manager;
+import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,14 +14,14 @@ import java.util.Scanner;
 public abstract class Request {
     protected static ArrayList<Request> allRequests = new ArrayList<Request>();
     protected String id;
-    protected Manager manager;
     protected Seller seller;
+    protected String sellerName;
     protected RequestType type;
 
-    public Request(String id, Seller seller, Manager manager) {
+    public Request(String id, Seller seller) {
         this.id = id;
         this.seller = seller;
-        this.manager = manager;
+        this.sellerName = seller.getName();
         allRequests.add(this);
     }
 
@@ -60,6 +60,7 @@ public abstract class Request {
     protected enum RequestType {
         ADD_PRODUCT, EDIT_PRODUCT, ADD_OFF, EDIT_OFF
     }
+
     public static void open(){
         File folder = new File(Address.REQUESTS.get());
         if(!folder.exists()) folder.mkdirs();
@@ -103,6 +104,15 @@ public abstract class Request {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void loadReferences() {
+        for (Request request : allRequests) {
+            request.seller = (Seller) Account.getAccountByUsername(request.sellerName);
+            request.loadReference();
+        }
+    }
+
+    protected abstract void loadReference();
 
     public String getId() {
         return id;

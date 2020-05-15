@@ -2,7 +2,6 @@ package Models.Shop;
 
 import Models.Address;
 import Models.Gson;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,17 +13,26 @@ import java.util.Scanner;
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<Category>();
     private Category supCategory;
+    private String supCategoryName;
     private String name;
     private HashMap<String, Integer> features; // featureName - featureType // 0 : int - 1 : String
     private List<Category> subCategories;
-    private ArrayList<Product> allProducts = new ArrayList<>();
+    private List<String> subCategoriesNames;
+    private ArrayList<Product> allProducts;
+    private ArrayList<String> allProductsIds;
 
     public Category(String name, Category supCategory, HashMap<String, Integer> features, ArrayList<Product> allProducts) {
         this.name = name;
         this.features = features;
         this.allProducts = allProducts;
+        this.allProductsIds = new ArrayList<>();
+        for (Product product : allProducts) {
+            this.allProductsIds.add(product.getId());
+        }
         this.supCategory = supCategory;
+        this.supCategoryName = supCategory.getName();
         this.subCategories = new ArrayList<Category>();
+        this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
     }
 
@@ -95,6 +103,7 @@ public class Category {
 
     public void setSubCategory(Category category) {
         this.subCategories.add(category);
+        this.subCategoriesNames.add(category.getName());
     }
 
     public static void open(){
@@ -138,6 +147,24 @@ public class Category {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void loadReferences() {
+        for (Category category : allCategories) {
+            category.loadReference();
+        }
+    }
+
+    private void loadReference() {
+        supCategory = Category.getCategoryByName(supCategoryName);
+        allProducts = new ArrayList<>();
+        for (String productsId : allProductsIds) {
+            allProducts.add(Product.getProductById(productsId));
+        }
+        subCategories = new ArrayList<>();
+        for (String subCategoriesName : subCategoriesNames) {
+            subCategories.add(Category.getCategoryByName(subCategoriesName));
         }
     }
 

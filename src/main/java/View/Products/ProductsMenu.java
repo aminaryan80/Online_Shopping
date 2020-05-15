@@ -14,8 +14,6 @@ public class ProductsMenu extends Menu {
         productsMenu();
     }
 
-    private Category category;
-
     public void productsMenu() {
         while (true) {
             Matcher matcher;

@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Account {
+public abstract class Account {
     protected static ArrayList<Account> allAccounts = new ArrayList<>();
     protected String username;
     protected String firstName;
@@ -160,4 +160,12 @@ public class Account {
             System.out.println(e.getMessage());
         }
     }
+
+    public static void loadReferences() {
+        for (Account account : allAccounts) {
+            account.loadReference();
+        }
+    }
+
+    protected abstract void loadReference();
 }
