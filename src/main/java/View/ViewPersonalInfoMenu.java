@@ -16,7 +16,7 @@ public class ViewPersonalInfoMenu extends Menu {
         while (true) {
             String input = scanner.nextLine();
             Matcher matcher;
-            if ((matcher = getMatcher(input, "^edit (\\S+)$")).find()) {
+            if ((matcher = getMatcher(input, "^edit (.+)$")).find()) {
                 editField(matcher.group(1));
             } else if (getMatcher(input, "^help$").find()) {
                 help();
@@ -31,7 +31,7 @@ public class ViewPersonalInfoMenu extends Menu {
             System.out.println("Enter your new Value:");
             String newValue = scanner.nextLine();
             ((ViewPersonalInfoManager) manager).editField(field, newValue);
-        }
+        } else ErrorProcessor.invalidEditField();
     }
 
 
