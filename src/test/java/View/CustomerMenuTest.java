@@ -1,8 +1,5 @@
 package View;
 
-import Models.Account.Account;
-import org.junit.Test;
-
 /*class CustomerMenuTest {
     private Account account = new Account("masihbr",
             "Masih",

@@ -1,9 +1,5 @@
 package Control;
 
-import Models.Account.Account;
-import org.junit.Assert;
-import org.junit.Test;
-
 /*class MainManagerTest {
     private Account account = new Account("masihbr",
             "Masih",

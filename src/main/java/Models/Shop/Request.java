@@ -91,6 +91,46 @@ public abstract class Request {
         }
     }
 
+    public static void openEditOffRequests(){
+        File folder = new File(Address.EDIT_OFF_REQUESTS.get());
+        if(!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allRequests.add(openEditOffRequest(file));
+            }
+        }
+    }
+
+    public static void openEditProductRequests(){
+        File folder = new File(Address.EDIT_PRODUCT_REQUESTS.get());
+        if(!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allRequests.add(openEditProductRequest(file));
+            }
+        }
+    }
+
+    public static AddOffRequest openAddOffRequest(File file){
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(),AddOffRequest.class);
+    }
+
+    public static AddProductRequest openAddProductRequest(File file){
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(),AddProductRequest.class);
+    }
+
+    public static EditOffRequest openEditOffRequest(File file){
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(),EditOffRequest.class);
+    }
+
+    public static EditProductRequest openEditProductRequest(File file){
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(),EditProductRequest.class);
+    }
+
     private static StringBuilder fileToString(File file) {
         StringBuilder json = new StringBuilder();
         try {

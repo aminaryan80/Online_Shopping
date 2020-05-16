@@ -18,12 +18,16 @@ public class Main {
     }
 
     private static void openFiles() {
-        Account.open();
-        Category.open();
-        Request.open();
-        Auction.open();
-        Discount.open();
-        Product.open();
+        try {
+            Account.open();
+            Category.open();
+            Request.open();
+            Auction.open();
+            Discount.open();
+            Product.open();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 
     private static void connectObjects() {
@@ -36,11 +40,15 @@ public class Main {
     }
 
     private static void saveFiles() {
-        Account.save();
-        Category.save();
-        Request.save();
-        Auction.save();
-        Discount.save();
-        Product.save();
+        try {
+            Account.save();
+            Category.save();
+            Request.save();
+            Auction.save();
+            Discount.save();
+            Product.save();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 }
