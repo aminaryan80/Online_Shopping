@@ -123,7 +123,7 @@ public class SellerMenu extends Menu {
         Category category = Category.getCategoryByName(categoryName);
         ArrayList<Feature> allFeatures = getFeatures(category);
         Product product = ((SellerManager) manager).addProduct(id, name, companyName, category, price, isAvailable, description, allFeatures);
-        new AddProductRequest("random id", (Seller) manager.getAccount(), manager, product);
+        new AddProductRequest("random id", (Seller) manager.getAccount(), product);
     }
 
     private ArrayList<Feature> getFeatures(Category category) {

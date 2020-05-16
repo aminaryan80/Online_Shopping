@@ -4,7 +4,7 @@ import Models.Account.Account;
 import org.junit.Assert;
 import org.junit.Test;
 
-class MainManagerTest {
+/*class MainManagerTest {
     private Account account = new Account("masihbr",
             "Masih",
             "Beigi",
@@ -27,4 +27,4 @@ class MainManagerTest {
                         '}'
                 );
     }
-}
+}*/

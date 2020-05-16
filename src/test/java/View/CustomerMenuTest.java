@@ -3,7 +3,7 @@ package View;
 import Models.Account.Account;
 import org.junit.Test;
 
-class CustomerMenuTest {
+/*class CustomerMenuTest {
     private Account account = new Account("masihbr",
             "Masih",
             "Beigi",
@@ -15,4 +15,4 @@ class CustomerMenuTest {
     public void testViewPersonalInfo(){
 
     }
-}
+}*/

@@ -61,7 +61,7 @@ public class EditProductsMenu extends SellerMenu{
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();
         Product product = ((EditProductsManager) manager).editProduct(id, field, newValue);
-        new EditProductRequest("random id", (Seller) manager.getAccount(), manager, product);
+        new EditProductRequest("random id", (Seller) manager.getAccount(), product);
     }
 
     private void help() {

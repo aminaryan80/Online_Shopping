@@ -7,6 +7,14 @@ public class Main {
         openFiles();
         connectObjects();
         MainManager manager = new MainManager(null);
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+
+            @Override
+            public void run() {
+                saveFiles();
+            }
+
+        });
     }
 
     private static void openFiles() {

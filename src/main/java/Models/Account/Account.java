@@ -1,8 +1,6 @@
 package Models.Account;
-
 import Models.Address;
 import Models.Gson;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

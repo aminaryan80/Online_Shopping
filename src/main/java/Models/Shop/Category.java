@@ -30,7 +30,9 @@ public class Category {
             this.allProductsIds.add(product.getId());
         }
         this.supCategory = supCategory;
-        this.supCategoryName = supCategory.getName();
+        if (supCategory != null) {
+            this.supCategoryName = supCategory.getName();
+        }
         this.subCategories = new ArrayList<Category>();
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);

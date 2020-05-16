@@ -5,12 +5,13 @@ import Models.Shop.Category;
 import Models.Shop.Discount;
 import View.Menu;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public abstract class Manager {
     protected static Account account;
-    protected final static Category mainCategory = new Category("mainCategory", null, null, null);
+    protected final static Category mainCategory = new Category("mainCategory", null, null, new ArrayList<>());
     protected Menu menu;
 
     public Manager(Account account) {
