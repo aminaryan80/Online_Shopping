@@ -16,8 +16,11 @@ public class Cart {
     }
 
     public ArrayList<String> showProductsInShort() {
-        // #id name count
-        return null;
+        ArrayList<String> productsNames=new ArrayList<String>();
+        for (Product product : getProducts()) {
+            productsNames.add(product.getName());
+        }
+        return productsNames;
     }
 
     public boolean hasProductInCartWithId(String id) {

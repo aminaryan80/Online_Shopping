@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 public class DigestMenu extends CustomerMenu {
 
     DigestMenuManager digestMenuManager = (DigestMenuManager) manager;
+
     public DigestMenu(Manager manager) {
         super(manager);
         digestMenu();
@@ -19,13 +20,19 @@ public class DigestMenu extends CustomerMenu {
     private void digestMenu() {
         String input;
         Matcher matcher;
-        while(!(input= scanner.nextLine().trim()).matches("(?i)back")){
-            if(ConsoleCommand.ADD_TO_CART.getStringMatcher(input).find()){
+        while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
+            if (ConsoleCommand.ADD_TO_CART.getStringMatcher(input).find()) {
                 digestMenuManager.addToCart();
-            } else if((matcher=ConsoleCommand.SELECT_SELLER.getStringMatcher(input)).find()){
-                digestMenuManager.selectSeller(matcher.group(1));
+            } else if ((matcher = ConsoleCommand.SELECT_SELLER.getStringMatcher(input)).find()) {
+                System.out.println("\nthis option will be added soon!\n");
+                //digestMenuManager.selectSeller(matcher.group(1));
+            } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
+                System.out.println(help());
             } else ErrorProcessor.invalidInput();
         }
     }
 
+    private String help() {
+        return "\n\t⇒ add to cart";
+    }
 }

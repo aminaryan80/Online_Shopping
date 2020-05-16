@@ -1,8 +1,8 @@
 package Control;
 
 import Models.Account.Account;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 
 class MainManagerTest {
     private Account account = new Account("masihbr",

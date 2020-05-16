@@ -14,8 +14,8 @@ public class ProductPageManager extends CustomerManager {
 
     public ProductPageManager(Account account,Product product) {
         super(account);
-        this.menu = new ProductPage(this);
         this.product = product;
+        this.menu = new ProductPage(this);
     }
 
     public String digest() {
@@ -28,8 +28,7 @@ public class ProductPageManager extends CustomerManager {
 
     // compare [productId]
 
-    public String compare(String id) {
-        Product otherProduct = Product.getProductById(id);
+    public String compare(Product otherProduct) {
         return product.getAttributes()+"\nCompared to\n"+otherProduct.getAttributes();
     }
     // comments

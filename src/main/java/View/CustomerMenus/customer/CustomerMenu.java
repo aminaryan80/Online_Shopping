@@ -17,26 +17,34 @@ public class CustomerMenu extends Menu {
 
     public CustomerMenu(Manager manager) {
         super(manager);
-        customerMenu();
+//        customerMenu();
     }
 
     public void customerMenu() {
         String input;
-        while (!(input = scanner.nextLine().trim()).matches("(?i)exit")) {
-            if (ConsoleCommand.VIEW_PERSONAL_INFO.getStringMatcher(input).find()) {
-                new ViewPersonalInfoCustomerManager(manager.getAccount());
-            } else if (ConsoleCommand.VIEW_CART.getStringMatcher(input).find()) {
-                new ViewCartManager(manager.getAccount());
-            } else if (ConsoleCommand.VIEW_ORDERS.getStringMatcher(input).find()) {
-                new ViewOrdersManager(manager.getAccount());
-            } else if (ConsoleCommand.VIEW_DISCOUNT_CODES.getStringMatcher(input).find()) {
-                customerManager.viewDiscountCodes().forEach(System.out::println);
-            } else if (ConsoleCommand.VIEW_BALANCE.getStringMatcher(input).find()) {
-                customerManager.viewCustomerBalance();
-            } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
-                System.out.println(help());
-            } else ErrorProcessor.invalidInput();
+        while (true) {
+            input = scanner.nextLine().trim();
+            if (executeCustomerMenu(input)) break;
         }
+    }
+
+    public boolean executeCustomerMenu(String input) {
+        if (input.matches("(?i)exit")) {
+            return true;
+        } else if (ConsoleCommand.VIEW_PERSONAL_INFO.getStringMatcher(input).find()) {
+            new ViewPersonalInfoCustomerManager(manager.getAccount());
+        } else if (ConsoleCommand.VIEW_CART.getStringMatcher(input).find()) {
+            new ViewCartManager(manager.getAccount());
+        } else if (ConsoleCommand.VIEW_ORDERS.getStringMatcher(input).find()) {
+            new ViewOrdersManager(manager.getAccount());
+        } else if (ConsoleCommand.VIEW_DISCOUNT_CODES.getStringMatcher(input).find()) {
+            customerManager.viewDiscountCodes().forEach(System.out::println);
+        } else if (ConsoleCommand.VIEW_BALANCE.getStringMatcher(input).find()) {
+            customerManager.viewCustomerBalance();
+        } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
+            System.out.println(help());
+        } else ErrorProcessor.invalidInput();
+        return false;
     }
 
     private String help() {
@@ -46,21 +54,21 @@ public class CustomerMenu extends Menu {
                 "\n" +
                 "\t⇒ edit [field]" +
                 "\n" +
-                "view cart"+
+                "view cart" +
                 "\n" +
-                "\t⇒ show products"+
+                "\t⇒ show products" +
                 "\n" +
-                "\t⇒ view [productId]"+
+                "\t⇒ view [productId]" +
                 "\n" +
-                "\t⇒ increase [productId]"+
+                "\t⇒ increase [productId]" +
                 "\n" +
-                "\t⇒ decrease [productId]"+
+                "\t⇒ decrease [productId]" +
                 "\n" +
-                "\t⇒ show total price"+
+                "\t⇒ show total price" +
                 "\n" +
                 "\t⇒ purchase" +
                 "\n" +
-                "view orders"+
+                "view orders" +
                 "\n" +
                 "\t⇒ show order [orderId]" +
                 "\n" +
