@@ -1,11 +1,9 @@
 package View.Principal.ViewDiscountCodes;
 
 import Control.Manager;
-import Control.Principal.ViewDiscountCodes.EditDiscountCodeManager;
 import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
-import Models.Shop.Discount;
+import Models.Shop.Off.Discount;
 import View.ErrorProcessor;
-import View.MainMenu;
 import View.Menu;
 
 import java.util.regex.Matcher;

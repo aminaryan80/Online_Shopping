@@ -1,8 +1,8 @@
 package Control;
 
 import Models.Account.Account;
-import Models.Shop.Auction;
-import Models.Shop.Filter;
+import Models.Shop.Off.Auction;
+import Models.Shop.Category.Filter;
 import View.AuctionPage;
 
 import java.util.ArrayList;

@@ -1,4 +1,6 @@
-package Models.Shop;
+package Models.Shop.Log;
+
+import Models.Shop.Product.Product;
 
 import java.util.Date;
 import java.util.List;

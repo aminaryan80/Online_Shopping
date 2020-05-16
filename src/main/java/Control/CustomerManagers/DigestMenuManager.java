@@ -1,7 +1,7 @@
 package Control.CustomerManagers;
 
 import Models.Account.Account;
-import Models.Shop.Product;
+import Models.Shop.Product.Product;
 import View.CustomerMenus.DigestMenu;
 
 public class DigestMenuManager extends ProductPageManager{

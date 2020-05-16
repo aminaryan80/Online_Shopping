@@ -3,10 +3,8 @@ package View.CustomerMenus;
 import Control.CustomerManagers.DigestMenuManager;
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
-import Models.Shop.Product;
 import View.ErrorProcessor;
 import View.Menu;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.regex.Matcher;
 

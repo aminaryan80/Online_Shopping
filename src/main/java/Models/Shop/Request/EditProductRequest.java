@@ -1,23 +1,19 @@
-package Models.Shop;
+package Models.Shop.Request;
 
-import Control.Manager;
-import Control.Seller.SellerManager;
 import Models.Account.Seller;
+import Models.Shop.Product.Product;
 
-import java.util.ArrayList;
-
-public class AddProductRequest extends Request {
+public class EditProductRequest extends Request {
     private Product product;
     private String productId;
 
-    public AddProductRequest(String id, Seller seller, Product product) {
+    public EditProductRequest(String id, Seller seller, Product product) {
         super(id, seller);
-        this.type = RequestType.ADD_PRODUCT;
+        this.type = RequestType.EDIT_PRODUCT;
         this.product = product;
         this.productId = product.getId();
     }
 
-    @Override
     public void accept() {
         product.setStatus(Product.ProductStatus.CONFIRMED);
     }
@@ -29,7 +25,7 @@ public class AddProductRequest extends Request {
 
     @Override
     public String toString() {
-        return "AddProductRequest{" +
+        return "EditProductRequest{" +
                 "product=" + product +
                 ", id='" + id + '\'' +
                 ", seller=" + seller +

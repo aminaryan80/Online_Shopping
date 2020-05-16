@@ -1,4 +1,4 @@
-package Models.Shop;
+package Models.Shop.Category;
 
 public class Filter {
     private String field;

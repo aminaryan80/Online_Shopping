@@ -3,7 +3,10 @@ package View.Seller;
 import Control.Manager;
 import Control.Seller.SellerManager;
 import Models.Account.Seller;
-import Models.Shop.*;
+import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
+import Models.Shop.Product.Product;
+import Models.Shop.Request.AddProductRequest;
 import View.ErrorProcessor;
 import View.Menu;
 

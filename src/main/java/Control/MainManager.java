@@ -1,7 +1,6 @@
 package Control;
 
 import Models.Account.Account;
-import Models.Shop.Discount;
 import View.MainMenu;
 
 public class MainManager extends Manager {

@@ -1,8 +1,7 @@
-package Models.Shop;
+package Models.Shop.Request;
 
-import Control.Manager;
-import Control.Seller.OffsManager;
 import Models.Account.Seller;
+import Models.Shop.Off.Auction;
 
 public class EditOffRequest extends Request {
     private Auction auction;

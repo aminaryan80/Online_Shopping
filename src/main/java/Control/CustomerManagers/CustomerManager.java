@@ -3,8 +3,8 @@ package Control.CustomerManagers;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
-import Models.Shop.Discount;
-import Models.Shop.Product;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import View.CustomerMenus.CustomerMenu;
 
 import java.util.ArrayList;

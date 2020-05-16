@@ -1,6 +1,10 @@
 package Models.Account;
 
 import Models.Shop.*;
+import Models.Shop.Log.BuyingLog;
+import Models.Shop.Log.Log;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

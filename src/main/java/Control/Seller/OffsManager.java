@@ -2,8 +2,8 @@ package Control.Seller;
 
 import Models.Account.Account;
 import Models.Account.Seller;
-import Models.Shop.Auction;
-import Models.Shop.Product;
+import Models.Shop.Off.Auction;
+import Models.Shop.Product.Product;
 import java.util.ArrayList;
 import java.util.Date;
 

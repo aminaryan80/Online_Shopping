@@ -2,7 +2,7 @@ package Control.Principal.ViewDiscountCodes;
 
 import Control.Manager;
 import Models.Account.Account;
-import Models.Shop.Discount;
+import Models.Shop.Off.Discount;
 import View.Principal.ViewDiscountCodes.ViewDiscountCodesMenu;
 
 public class ViewDiscountCodesManager extends Manager {

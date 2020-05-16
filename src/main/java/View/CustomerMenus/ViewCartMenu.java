@@ -4,7 +4,7 @@ import Control.CustomerManagers.PurchaseManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
 import Control.CustomerManagers.ProductPageManager;
-import Models.Shop.Product;
+import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 
 import java.util.regex.Matcher;

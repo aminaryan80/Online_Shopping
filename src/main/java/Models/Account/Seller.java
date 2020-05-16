@@ -1,8 +1,8 @@
 package Models.Account;
 
-import Models.Shop.Auction;
-import Models.Shop.Product;
-import Models.Shop.SellingLog;
+import Models.Shop.Off.Auction;
+import Models.Shop.Product.Product;
+import Models.Shop.Log.SellingLog;
 
 import java.util.ArrayList;
 import java.util.List;

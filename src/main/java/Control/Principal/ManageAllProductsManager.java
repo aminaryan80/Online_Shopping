@@ -3,9 +3,8 @@ package Control.Principal;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
-import Models.Shop.Product;
+import Models.Shop.Product.Product;
 import View.Principal.ManageAllProductsMenu;
-import View.Principal.ManageUsersMenu;
 
 public class ManageAllProductsManager extends Manager {
     public ManageAllProductsManager(Account account) {

@@ -1,5 +1,8 @@
 package Models.Shop;
 
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

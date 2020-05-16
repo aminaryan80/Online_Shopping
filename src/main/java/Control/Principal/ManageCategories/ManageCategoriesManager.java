@@ -3,8 +3,8 @@ package Control.Principal.ManageCategories;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
-import Models.Shop.Category;
-import Models.Shop.Product;
+import Models.Shop.Category.Category;
+import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Principal.ManageCategories.ManageCategoriesMenu;
 

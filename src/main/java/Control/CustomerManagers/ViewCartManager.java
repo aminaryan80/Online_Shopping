@@ -1,8 +1,8 @@
 package Control.CustomerManagers;
 
 import Models.Account.Account;
-import Models.Shop.Discount;
-import Models.Shop.Product;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import View.CustomerMenus.ViewCartMenu;
 
 import java.util.List;

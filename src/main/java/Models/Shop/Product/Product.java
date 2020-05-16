@@ -1,10 +1,13 @@
-package Models.Shop;
+package Models.Shop.Product;
 
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;
+import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
+import Models.Shop.Off.Auction;
 
 import java.io.File;
 import java.io.FileWriter;

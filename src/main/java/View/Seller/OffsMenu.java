@@ -3,9 +3,9 @@ package View.Seller;
 import Control.Manager;
 import Control.Seller.OffsManager;
 import Models.Account.Seller;
-import Models.Shop.AddOffRequest;
-import Models.Shop.Auction;
-import Models.Shop.EditOffRequest;
+import Models.Shop.Request.AddOffRequest;
+import Models.Shop.Off.Auction;
+import Models.Shop.Request.EditOffRequest;
 import View.ErrorProcessor;
 
 import java.util.ArrayList;

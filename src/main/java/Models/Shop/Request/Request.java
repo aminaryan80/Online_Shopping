@@ -1,4 +1,4 @@
-package Models.Shop;
+package Models.Shop.Request;
 
 import Control.Manager;
 import Models.Account.Account;

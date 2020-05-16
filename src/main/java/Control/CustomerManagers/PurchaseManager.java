@@ -1,9 +1,9 @@
 package Control.CustomerManagers;
 
 import Models.Account.Account;
-import Models.Shop.BuyingLog;
-import Models.Shop.Discount;
-import Models.Shop.Product;
+import Models.Shop.Log.BuyingLog;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import View.CustomerMenus.PurchaseMenu;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Models.Shop;
+package Models.Shop.Log;
 
 import java.util.Date;
 

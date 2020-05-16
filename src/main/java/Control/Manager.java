@@ -1,13 +1,12 @@
 package Control;
 
 import Models.Account.Account;
-import Models.Shop.Category;
-import Models.Shop.Discount;
+import Models.Shop.Category.Category;
+import Models.Shop.Off.Discount;
 import View.Menu;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public abstract class Manager {
     protected static Account account;

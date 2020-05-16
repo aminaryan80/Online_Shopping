@@ -2,7 +2,7 @@ package View.Principal.ManageCategories;
 
 import Control.Manager;
 import Control.Principal.ManageCategories.ManageCategoriesManager;
-import Models.Shop.Product;
+import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
 

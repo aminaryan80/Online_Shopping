@@ -1,4 +1,4 @@
-package Models.Shop;
+package Models.Shop.Product;
 
 import Models.Account.Account;
 

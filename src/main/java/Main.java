@@ -1,6 +1,10 @@
 import Control.MainManager;
 import Models.Account.Account;
-import Models.Shop.*;
+import Models.Shop.Category.Category;
+import Models.Shop.Off.Auction;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
+import Models.Shop.Request.Request;
 
 public class Main {
     public static void main(String[] args) {

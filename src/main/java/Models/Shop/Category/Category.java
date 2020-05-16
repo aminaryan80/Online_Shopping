@@ -1,7 +1,9 @@
-package Models.Shop;
+package Models.Shop.Category;
 
 import Models.Address;
 import Models.Gson;
+import Models.Shop.Product.Product;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;

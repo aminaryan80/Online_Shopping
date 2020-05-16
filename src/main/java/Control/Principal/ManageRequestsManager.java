@@ -2,9 +2,8 @@ package Control.Principal;
 
 import Control.Manager;
 import Models.Account.Account;
-import Models.Shop.Request;
+import Models.Shop.Request.Request;
 import View.Principal.ManageRequestsMenu;
-import View.Principal.ManageUsersMenu;
 
 public class ManageRequestsManager extends Manager {
     public ManageRequestsManager(Account account) {

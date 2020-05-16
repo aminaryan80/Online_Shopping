@@ -1,13 +1,9 @@
-package Models.Shop;
+package Models.Shop.Request;
 
-import Control.Manager;
-import Control.Seller.OffsManager;
 import Models.Account.Seller;
+import Models.Shop.Off.Auction;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-public class AddOffRequest extends Request{
+public class AddOffRequest extends Request {
     private Auction auction;
     private String auctionId;
 

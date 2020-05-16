@@ -1,4 +1,4 @@
-package Models.Shop;
+package Models.Shop.Off;
 
 import Models.Account.Customer;
 import Models.Address;

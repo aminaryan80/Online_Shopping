@@ -2,7 +2,6 @@ package View.Products;
 
 import Control.Manager;
 import Control.Products.ProductsManager;
-import Models.Shop.Category;
 import View.Menu;
 
 import java.util.regex.Matcher;
