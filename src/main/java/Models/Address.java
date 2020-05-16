@@ -1,7 +1,9 @@
 package Models;
 
 public enum Address {
-    ACCOUNTS("database"+"\\"+"accounts"),
+    CUSTOMERS("database"+"\\"+"accounts"+"\\"+"customers"),
+    SELLERS("database"+"\\"+"accounts"+"\\"+"sellers"),
+    PRINCIPALS("database"+"\\"+"accounts"+"\\"+"principals"),
     DISCOUNTS("database"+"\\"+"discounts"),
     PRODUCTS("database"+"\\"+"products"),
     CATEGORIES("database"+"\\"+"categories"),

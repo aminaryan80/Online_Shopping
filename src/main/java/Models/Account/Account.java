@@ -6,6 +6,7 @@ import Models.Gson;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,16 +34,16 @@ public class Account {
     }
 
     public static Account getAccountByUsername(String username) {
-        for(Account account : allAccounts) {
-            if(account.username.equals(username))
+        for (Account account : allAccounts) {
+            if (account.username.equals(username))
                 return account;
         }
         return null;
     }
 
     public static boolean hasAccountWithUsername(String username) {
-        for(Account account : allAccounts) {
-            if(account.username.equals(username))
+        for (Account account : allAccounts) {
+            if (account.username.equals(username))
                 return true;
         }
         return false;
@@ -69,7 +70,7 @@ public class Account {
     }
 
     public String getName() {
-        return firstName +" "+ lastName;
+        return firstName + " " + lastName;
     }
 
     public String getPassword() {
@@ -117,17 +118,58 @@ public class Account {
         return username;
     }
 
-    public static void open(){
-        File folder = new File(Address.ACCOUNTS.get());
-        if(!folder.exists()) folder.mkdirs();
+    public static void open() {
+        openCustomers();
+        openPrincipals();
+        openSellers();
+    }
+
+    public static void openCustomers() {
+        File folder = new File(Address.CUSTOMERS.get());
+        if (!folder.exists()) folder.mkdirs();
         else {
-                for (File file : folder.listFiles()) {
-                    allAccounts.add(open(file));
-                }
+            for (File file : folder.listFiles()) {
+                allAccounts.add(openCustomer(file));
+            }
         }
     }
 
-    public static Account open(File file){
+    public static void openSellers() {
+        File folder = new File(Address.SELLERS.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allAccounts.add(openSeller(file));
+            }
+        }
+    }
+
+    public static void openPrincipals() {
+        File folder = new File(Address.PRINCIPALS.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allAccounts.add(openPrincipal(file));
+            }
+        }
+    }
+
+    private static Customer openCustomer(File file) {
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(), Customer.class);
+    }
+
+    private static Seller openSeller(File file) {
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(), Seller.class);
+    }
+
+    private static Principal openPrincipal(File file) {
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(), Principal.class);
+    }
+
+    private static StringBuilder fileToString(File file) {
         StringBuilder json = new StringBuilder();
         try {
             Scanner reader = new Scanner(file);
@@ -137,27 +179,43 @@ public class Account {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return Gson.INSTANCE.get().fromJson(json.toString(),Account.class);
+        return json;
     }
 
-    public static void save(){
+    public static void save() throws Exception {
         for (Account account : allAccounts) {
             save(account);
         }
     }
 
-    public static void save(Account account){
-        try {
-            String jsonAccount = Gson.INSTANCE.get().toJson(account);
-            try {
-                FileWriter file = new FileWriter(Address.ACCOUNTS.get() +"\\"+account.getUsername()+".json");
-                file.write(jsonAccount);
-                file.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+    public static void save(Account account) throws Exception {
+            if (account instanceof Customer) {
+                saveCustomer(account);
+            } else if (account instanceof Seller) {
+                saveSeller(account);
+            } else if (account instanceof Principal) {
+                savePrincipal(account);
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    }
+
+    private static void savePrincipal(Account account) throws IOException {
+        String jsonAccount = Gson.INSTANCE.get().toJson((Principal) account);
+        FileWriter file = new FileWriter(Address.PRINCIPALS.get() + "\\" + account.getUsername() + ".json");
+        file.write(jsonAccount);
+        file.close();
+    }
+
+    private static void saveSeller(Account account) throws IOException {
+        String jsonAccount = Gson.INSTANCE.get().toJson((Seller) account);
+        FileWriter file = new FileWriter(Address.SELLERS.get() + "\\" + account.getUsername() + ".json");
+        file.write(jsonAccount);
+        file.close();
+    }
+
+    private static void saveCustomer(Account account) throws IOException {
+        String jsonAccount = Gson.INSTANCE.get().toJson((Customer) account);
+        FileWriter file = new FileWriter(Address.CUSTOMERS.get() + "\\" + account.getUsername() + ".json");
+        file.write(jsonAccount);
+        file.close();
     }
 }
