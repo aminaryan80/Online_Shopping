@@ -1,15 +1,17 @@
 package Models.Account;
 
-import Models.Shop.*;
+import Models.Shop.Cart;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Log.Log;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Customer extends Account {
+    private final String[] changeableFields = {"password", "email", "firstname", "lastname", "phone number", "balance"};
     private Cart cart;
     private ArrayList<BuyingLog> allLogs;
     private ArrayList<Discount> discounts;
@@ -37,8 +39,12 @@ public class Customer extends Account {
         }
     }
 
+    public ArrayList<String> getChangeableFields() {
+        return new ArrayList<>(Arrays.asList(changeableFields));
+    }
+
     public static void deleteProductFromCarts(Product product) {
-        for(Account account : allAccounts) {
+        for (Account account : allAccounts) {
             try {
                 if (((Customer) account).hasProductById(product.getId())) {
                     ((Customer) account).getCart().deleteProduct(product);

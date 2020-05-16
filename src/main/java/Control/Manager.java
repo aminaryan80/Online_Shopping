@@ -33,7 +33,7 @@ public abstract class Manager {
         return Account.hasAccountWithUsername(username);
     }
 
-    protected boolean checkType(String type) {
+    protected boolean checkAccountType(String type) {
         return type.matches("^(customer|seller|principal)$");
     }
 
@@ -46,7 +46,7 @@ public abstract class Manager {
     }
 
     public boolean checkBalance(String balance) {
-        return balance.matches("^\\d+$");
+        return balance.matches("^\\d+\\.\\d+$");
     }
 
     public String showCategories() {

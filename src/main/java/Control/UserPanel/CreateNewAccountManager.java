@@ -36,7 +36,7 @@ public class CreateNewAccountManager extends Manager {
     }
 
     public boolean canCreateNewAccount(String username, String type) {
-        if (checkType(type)) {
+        if (checkAccountType(type)) {
             if (!userExistsWithUsername(username)) {
                 return true;
             } else ErrorProcessor.userExistsWithThisUsername();

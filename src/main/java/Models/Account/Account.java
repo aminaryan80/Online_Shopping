@@ -32,6 +32,8 @@ public abstract class Account {
         allAccounts.add(this);
     }
 
+    public abstract ArrayList<String> getChangeableFields();
+
     public static Account getAccountByUsername(String username) {
         for (Account account : allAccounts) {
             if (account.username.equals(username))
@@ -60,10 +62,6 @@ public abstract class Account {
         return currentPassword.equals(password);
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public double getBalance() {
         return balance;
     }
@@ -76,8 +74,8 @@ public abstract class Account {
         return password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setFirstName(String firstName) {
@@ -94,6 +92,10 @@ public abstract class Account {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public void payMoney(double money) {

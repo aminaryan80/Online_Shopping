@@ -1,13 +1,15 @@
 package Models.Account;
 
+import Models.Shop.Log.SellingLog;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
-import Models.Shop.Log.SellingLog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Seller extends Account {
+    private final String[] changeableFields = {"password", "email", "firstname", "lastname", "phone number", "company name"};
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<SellingLog>();
     private List<Auction> auctions = new ArrayList<Auction>();
@@ -18,6 +20,10 @@ public class Seller extends Account {
         this.companyName = companyName;
     }
 
+    public ArrayList<String> getChangeableFields() {
+        return new ArrayList<>(Arrays.asList(changeableFields));
+    }
+
     public ArrayList<SellingLog> getAllLogs() {
         return allLogs;
     }
@@ -26,8 +32,12 @@ public class Seller extends Account {
         return companyName;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public ArrayList<String> viewOffsInShort() {
-        ArrayList<String> offsNames = new ArrayList<String>();
+        ArrayList<String> offsNames = new ArrayList<>();
         for (Auction auction : auctions) {
             offsNames.add("" + auction.getId() + " : " + auction.getDiscountAmount());
         }
