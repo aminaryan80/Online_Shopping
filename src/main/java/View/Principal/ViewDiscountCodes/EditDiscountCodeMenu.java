@@ -3,7 +3,6 @@ package View.Principal.ViewDiscountCodes;
 import Control.Manager;
 import Control.Principal.ViewDiscountCodes.EditDiscountCodeManager;
 import View.ErrorProcessor;
-import View.MainMenu;
 import View.Menu;
 
 public class EditDiscountCodeMenu extends Menu {
@@ -48,7 +47,7 @@ public class EditDiscountCodeMenu extends Menu {
     private void editBeginningDate() {
         System.out.println("Enter date(dd-mm-yyyy):");
         String input = scanner.nextLine();
-        if(getMatcher(input, "^\\d{2}-\\d{2}-\\d{4}$").find()) {
+        if (manager.checkDate(input)) {
             ((EditDiscountCodeManager) manager).editBeginningDate(input);
         } else ErrorProcessor.invalidInput();
     }
@@ -56,7 +55,7 @@ public class EditDiscountCodeMenu extends Menu {
     private void editEndingDate() {
         System.out.println("Enter date(dd-mm-yyyy):");
         String input = scanner.nextLine();
-        if(getMatcher(input, "^\\d{2}-\\d{2}-\\d{4}$").find()) {
+        if (manager.checkDate(input)) {
             ((EditDiscountCodeManager) manager).editEndingDate(input);
         } else ErrorProcessor.invalidInput();
 
@@ -65,7 +64,7 @@ public class EditDiscountCodeMenu extends Menu {
     private void editDiscountPercent() {
         System.out.println("Enter discount percent:");
         String input = scanner.nextLine();
-        if(getMatcher(input, "^(100|(\\d{1,2}))$").find()) {
+        if (manager.checkDate(input)) {
             ((EditDiscountCodeManager) manager).editDiscountPercent(Integer.parseInt(input));
         } else ErrorProcessor.invalidInput();
     }
@@ -73,7 +72,7 @@ public class EditDiscountCodeMenu extends Menu {
     private void editMaximumAmount() {
         System.out.println("Enter maximum amount:");
         String input = scanner.nextLine();
-        if(getMatcher(input, "^\\d+(\\.\\d+)?$").find()) {
+        if (manager.checkBalance(input)) {
             ((EditDiscountCodeManager) manager).editMaximumAmount(Double.parseDouble(input));
         } else ErrorProcessor.invalidInput();
     }

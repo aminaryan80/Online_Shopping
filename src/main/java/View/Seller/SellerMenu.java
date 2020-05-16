@@ -54,31 +54,6 @@ public class SellerMenu extends Menu {
 
     private void viewPersonalInfo() {
         manager.viewPersonalInfo();
-        while (true) {
-            String command = scanner.nextLine();
-            Matcher matcher;
-            if ((matcher = getMatcher(command, "^edit$")).find()) {
-                editAttribute();
-            } else if (getMatcher(command, "^back$").find()) {
-                return;
-            } else if (getMatcher(command, "^help$").find()) {
-                System.out.println("edit\nhelp\nback");
-            } else {
-                ErrorProcessor.invalidInput();
-            }
-        }
-    }
-
-    private void editAttribute() {
-        System.out.println("enter the field you want to edit");
-        String field = scanner.nextLine();
-        if (((SellerManager) manager).isEnteredAccountFieldValid(field)) {
-            ErrorProcessor.invalidEditField();
-            return;
-        }
-        System.out.println("enter the new value");
-        String newValue = scanner.nextLine();
-        //TODO the rest of method
     }
 
     private void viewCompanyInformation() {

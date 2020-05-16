@@ -3,12 +3,10 @@ package View.CustomerMenus;
 import Control.CustomerManagers.CustomerManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
-import Control.CustomerManagers.ViewPersonalInfoCustomerManager;
 import Control.Manager;
 import View.Menu;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 
 public class CustomerMenu extends Menu {
 
@@ -23,7 +21,7 @@ public class CustomerMenu extends Menu {
         String input;
         while (!(input = scanner.nextLine().trim()).matches("(?i)exit")) {
             if (ConsoleCommand.VIEW_PERSONAL_INFO.getStringMatcher(input).find()) {
-                new ViewPersonalInfoCustomerManager(manager.getAccount());
+                viewPersonalInfo();
             } else if (ConsoleCommand.VIEW_CART.getStringMatcher(input).find()) {
                 new ViewCartManager(manager.getAccount());
             } else if (ConsoleCommand.VIEW_ORDERS.getStringMatcher(input).find()) {
@@ -37,7 +35,7 @@ public class CustomerMenu extends Menu {
     }
 
     protected void viewPersonalInfo() {
-        new ViewPersonalInfoCustomerMenu(manager);
+        manager.viewPersonalInfo();
     }
 
     private void viewCart() {

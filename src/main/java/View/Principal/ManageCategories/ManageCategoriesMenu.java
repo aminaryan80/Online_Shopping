@@ -36,7 +36,7 @@ public class ManageCategoriesMenu extends Menu {
     }
 
     private void showCategories() {
-        System.out.println(((ManageCategoriesManager) manager).showCategories());
+        System.out.println(manager.showCategories());
     }
 
     private void editCategory(String categoryName) {
@@ -44,8 +44,8 @@ public class ManageCategoriesMenu extends Menu {
     }
 
     private void addCategory(String categoryName) {
-        System.out.println("In which category you want to add a new one?"); // this should change //
         showCategories();
+        System.out.println("In which category you want to add a new one?"); // this should change //
         String supCategoryName = scanner.nextLine();
         if (((ManageCategoriesManager) manager).canAddCategory(supCategoryName, categoryName)) {
             ((ManageCategoriesManager) manager).addCategory(supCategoryName, categoryName,

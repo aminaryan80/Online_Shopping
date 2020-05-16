@@ -49,6 +49,14 @@ public abstract class Manager {
         return balance.matches("^\\d+(\\.\\d+)?$");
     }
 
+    public boolean checkDate(String date) {
+        return date.matches("^\\d{2}-\\d{2}-\\d{4}$");
+    }
+
+    public boolean checkPercent(String date) {
+        return date.matches("^(100|(\\d{1,2}))$");
+    }
+
     public String showCategories() {
         StringBuilder result = new StringBuilder();
         buildCategoryList(mainCategory, result, 1);
