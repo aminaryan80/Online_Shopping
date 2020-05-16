@@ -5,15 +5,18 @@ import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Request {
     protected static ArrayList<Request> allRequests = new ArrayList<Request>();
     protected String id;
+    protected Manager manager;
     protected Seller seller;
     protected String sellerName;
     protected RequestType type;
@@ -62,16 +65,32 @@ public abstract class Request {
     }
 
     public static void open(){
-        File folder = new File(Address.REQUESTS.get());
+        openAddOffRequests();
+        openAddProductRequests();
+        openEditOffRequests();
+        openEditProductRequests();
+    }
+    public static void openAddOffRequests(){
+        File folder = new File(Address.ADD_OFF_REQUESTS.get());
         if(!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
-                allRequests.add(open(file));
+                allRequests.add(openAddOffRequest(file));
             }
         }
     }
 
-    public static Request open(File file){
+    public static void openAddProductRequests(){
+        File folder = new File(Address.ADD_PRODUCT_REQUESTS.get());
+        if(!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allRequests.add(openAddProductRequest(file));
+            }
+        }
+    }
+
+    private static StringBuilder fileToString(File file) {
         StringBuilder json = new StringBuilder();
         try {
             Scanner reader = new Scanner(file);
@@ -81,28 +100,55 @@ public abstract class Request {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return Gson.INSTANCE.get().fromJson(json.toString(),Request.class);
+        return json;
     }
 
-    public static void save(){
+    public static void save() throws Exception{
         for (Request request : allRequests) {
             save(request);
         }
     }
 
-    public static void save(Request request){
-        try {
-            String jsonAccount = Gson.INSTANCE.get().toJson(request);
-            try {
-                FileWriter file = new FileWriter(Address.CATEGORIES.get() +"\\"+request.getId()+".json");
-                file.write(jsonAccount);
-                file.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public static void save(Request request) throws Exception{
+        if (request instanceof AddOffRequest) {
+            saveAddOffRequest(request);
+        } else if (request instanceof AddProductRequest) {
+            saveAddProductRequest(request);
+        } else if (request instanceof EditOffRequest) {
+            saveEditOffRequest(request);
+        } else if (request instanceof EditProductRequest){
+            saveEditProductRequest(request);
         }
+    }
+
+    private static void saveAddOffRequest(Request request) throws Exception {
+        AddOffRequest addOffRequest = (AddOffRequest) request;
+        String jsonRequest = Gson.INSTANCE.get().toJson(addOffRequest);
+        write(request, jsonRequest, Address.ADD_OFF_REQUESTS);
+    }
+
+    private static void saveAddProductRequest(Request request) throws Exception {
+        AddProductRequest addProductRequest = (AddProductRequest) request;
+        String jsonRequest = Gson.INSTANCE.get().toJson(addProductRequest);
+        write(request, jsonRequest, Address.ADD_PRODUCT_REQUESTS);
+    }
+
+    private static void saveEditOffRequest(Request request) throws Exception {
+        EditOffRequest editOffRequest = (EditOffRequest) request;
+        String jsonRequest = Gson.INSTANCE.get().toJson(editOffRequest);
+        write(request, jsonRequest, Address.EDIT_PRODUCT_REQUESTS);
+    }
+
+    private static void saveEditProductRequest(Request request) throws Exception {
+      EditProductRequest editProductRequest = (EditProductRequest) request;
+        String jsonRequest = Gson.INSTANCE.get().toJson(editProductRequest);
+        write(request, jsonRequest, Address.EDIT_PRODUCT_REQUESTS);
+    }
+
+    private static void write(Request request, String jsonRequest, Address addProductRequests) throws IOException {
+        FileWriter file = new FileWriter(addProductRequests.get() + "\\" + request.getId() + ".json");
+        file.write(jsonRequest);
+        file.close();
     }
 
     public static void loadReferences() {

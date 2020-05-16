@@ -3,7 +3,6 @@ package Models.Shop;
 import Models.Address;
 import Models.Gson;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +47,7 @@ public class Category {
 
     public static boolean hasCategoryWithName(String name) {
         for (Category category : allCategories) {
-            if(category.getName().equals(name))
+            if (category.getName().equals(name))
                 return true;
         }
         return false;
@@ -78,7 +77,7 @@ public class Category {
         category.supCategory.subCategories.remove(category);
         allCategories.remove(category);
         ArrayList<Category> tmp = new ArrayList<>(category.subCategories);
-        for(Category subCategory : tmp) {
+        for (Category subCategory : tmp) {
             deleteCategory(subCategory);
         }
     }
@@ -108,9 +107,9 @@ public class Category {
         this.subCategoriesNames.add(category.getName());
     }
 
-    public static void open(){
+    public static void open() throws Exception {
         File folder = new File(Address.CATEGORIES.get());
-        if(!folder.exists()) folder.mkdirs();
+        if (!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
                 allCategories.add(open(file));
@@ -118,38 +117,24 @@ public class Category {
         }
     }
 
-    public static Category open(File file){
+    public static Category open(File file) throws Exception {
         StringBuilder json = new StringBuilder();
-        try {
-            Scanner reader = new Scanner(file);
-            while (reader.hasNext()) {
-                json.append(reader.next());
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return Gson.INSTANCE.get().fromJson(json.toString(),Category.class);
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        return Gson.INSTANCE.get().fromJson(json.toString(), Category.class);
     }
 
-    public static void save(){
+    public static void save() throws Exception {
         for (Category category : allCategories) {
             save(category);
         }
     }
 
-    public static void save(Category category){
-        try {
-            String jsonAccount = Gson.INSTANCE.get().toJson(category);
-            try {
-                FileWriter file = new FileWriter(Address.CATEGORIES.get() +"\\"+category.getName()+".json");
-                file.write(jsonAccount);
-                file.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public static void save(Category category) throws Exception {
+        String jsonAccount = Gson.INSTANCE.get().toJson(category);
+        FileWriter file = new FileWriter(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
+        file.write(jsonAccount);
+        file.close();
     }
 
     public static void loadReferences() {
