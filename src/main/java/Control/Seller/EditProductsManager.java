@@ -2,9 +2,9 @@ package Control.Seller;
 
 import Models.Account.Account;
 import Models.Account.Seller;
-import Models.Shop.Category;
-import Models.Shop.Product;
-import Models.Shop.SellingLog;
+import Models.Shop.Category.Category;
+import Models.Shop.Log.SellingLog;
+import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
 
@@ -27,12 +27,9 @@ public class EditProductsManager extends SellerManager {
     }
 
     public boolean isEnteredProductFieldValid(String field) {
-        if (field.equals("status") || field.equals("name") || field.equals("companyName") || field.equals("price")
+        return field.equals("status") || field.equals("name") || field.equals("companyName") || field.equals("price")
                 || field.equals("seller") || field.equals("isAvailable") || field.equals("category")
-                || field.equals("description") || field.equals("features")) {
-            return true;
-        }
-        return false;
+                || field.equals("description") || field.equals("features");
     }
 
     public boolean hasProductWithId(String id) {

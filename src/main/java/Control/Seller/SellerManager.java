@@ -3,10 +3,10 @@ package Control.Seller;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
-import Models.Shop.Category;
-import Models.Shop.Feature;
-import Models.Shop.Product;
-import Models.Shop.SellingLog;
+import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
+import Models.Shop.Log.SellingLog;
+import Models.Shop.Product.Product;
 import View.Seller.SellerMenu;
 
 import java.util.ArrayList;
@@ -53,8 +53,8 @@ public class SellerManager extends Manager {
 
     // add product
     public Product addProduct(String id, String name, String companyName,
-                           Category category, double price, boolean iaAvailable,
-                           String description, ArrayList<Feature> features) {
+                              Category category, double price, boolean iaAvailable,
+                              String description, ArrayList<Feature> features) {
         Product product = new Product(id, name, companyName, price, (Seller) account, iaAvailable, category, description, features);
         Product.addProduct(product);
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);
@@ -63,27 +63,12 @@ public class SellerManager extends Manager {
 
     // remove product [productId]
     public boolean isItSellersProduct(String id) {
-        return Product.getProductById(id).getSeller().equals((Seller) account);
+        return Product.getProductById(id).getSeller().equals(account);
     }
 
     public void deleteProductById(String id) {
         Product.deleteProduct(Product.getProductById(id));
     }
-
-    // show categories
-    /*public String showCategories() {
-        StringBuilder result = new StringBuilder();
-        buildCategoryList(mainCategory, result, 1);
-        return result.toString();
-    }
-
-    private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
-        categoryField.append("-".repeat(Math.max(0, categoryLevel)));
-        categoryField.append(currentCategory.getName()).append("\n");
-        for (Category category : currentCategory.getSubCategories()) {
-            buildCategoryList(category, categoryField, categoryLevel + 1);
-        }
-    }*/
 
     // view offs
     public ArrayList<String> viewOffs() {
@@ -92,6 +77,6 @@ public class SellerManager extends Manager {
 
     // view balance
     public double viewSellerBalance() {
-        return ((Seller) account).getBalance();
+        return account.getBalance();
     }
 }

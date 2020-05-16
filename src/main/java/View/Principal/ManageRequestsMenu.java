@@ -2,9 +2,8 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageRequestsManager;
-import Models.Shop.Request;
+import Models.Shop.Request.Request;
 import View.ErrorProcessor;
-import View.MainMenu;
 import View.Menu;
 
 import java.util.regex.Matcher;

@@ -2,10 +2,8 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageAllProductsManager;
-import Control.Principal.ManageUsersManager;
-import Models.Shop.Product;
+import Models.Shop.Product.Product;
 import View.ErrorProcessor;
-import View.MainMenu;
 import View.Menu;
 
 import java.util.regex.Matcher;
