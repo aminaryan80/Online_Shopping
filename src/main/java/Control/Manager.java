@@ -46,7 +46,7 @@ public abstract class Manager {
     }
 
     public boolean checkBalance(String balance) {
-        return balance.matches("^\\d+\\.\\d+$");
+        return balance.matches("^\\d+(\\.\\d+)?$");
     }
 
     public String showCategories() {
@@ -71,8 +71,9 @@ public abstract class Manager {
         return String.valueOf(rand.nextInt(100000));
     }
 
-    public String viewPersonalInfo() {
-        return account.toString();
+    public void viewPersonalInfo() {
+        System.out.println(account.toString());
+        new ViewPersonalInfoManager(account);
     }
 
     public boolean isDiscountCodeValid(String id) {

@@ -10,15 +10,8 @@ public class Main {
     public static void main(String[] args) {
         openFiles();
         connectObjects();
+        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
         MainManager manager = new MainManager(null);
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-
-            @Override
-            public void run() {
-                saveFiles();
-            }
-
-        });
     }
 
     private static void openFiles() {

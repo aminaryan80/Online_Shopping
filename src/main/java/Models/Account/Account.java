@@ -102,19 +102,6 @@ public abstract class Account {
         this.balance = balance - money;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
-
     public String getUsername() {
         return username;
     }
@@ -225,4 +212,8 @@ public abstract class Account {
     }
 
     protected abstract void loadReference();
+
+    @Override
+    public abstract String toString();
+
 }

@@ -53,7 +53,7 @@ public class SellerMenu extends Menu {
     }
 
     private void viewPersonalInfo() {
-        System.out.println(((SellerManager) manager).viewPersonalInfo());
+        manager.viewPersonalInfo();
         while (true) {
             String command = scanner.nextLine();
             Matcher matcher;
@@ -153,7 +153,7 @@ public class SellerMenu extends Menu {
     }
 
     private void showCategories() {
-        System.out.println(((SellerManager) manager).showCategories());
+        System.out.println(manager.showCategories());
     }
 
     private void viewOffs() {

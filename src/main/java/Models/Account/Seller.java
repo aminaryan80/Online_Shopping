@@ -81,9 +81,14 @@ return true;
 
     @Override
     public String toString() {
-//        return super.toString() + "Seller{" +
-//                "companyName='" + companyName + '\'' +
-//                '}';
-        return null;
+        return "{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }

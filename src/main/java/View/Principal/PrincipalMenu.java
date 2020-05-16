@@ -9,8 +9,6 @@ import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
 import View.ErrorProcessor;
 import View.Menu;
 
-import java.util.regex.Matcher;
-
 public class PrincipalMenu extends Menu {
 
     public PrincipalMenu(Manager manager) {
@@ -22,7 +20,7 @@ public class PrincipalMenu extends Menu {
         while (true) {
             String input = scanner.nextLine();
             if (getMatcher(input, "^view personal info$").find()) {
-                // TODO
+                viewPersonalInfo();
             } else if (getMatcher(input, "^manage users$").find()) {
                 manageUsers();
             } else if (getMatcher(input, "^manage all products$").find()) {
@@ -55,6 +53,10 @@ public class PrincipalMenu extends Menu {
         // TODO
     }
 
+    private void viewPersonalInfo() {
+        manager.viewPersonalInfo();
+    }
+
     private void viewDiscountCodes() {
         new ViewDiscountCodesManager(manager.getAccount());
     }
@@ -76,6 +78,6 @@ public class PrincipalMenu extends Menu {
                 "manage requests\n" +
                 "manage categories\n" +
                 "help\n" +
-                "exit");
+                "back");
     }
 }

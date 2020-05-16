@@ -83,4 +83,15 @@ public class Customer extends Account {
     public List<Discount> getDiscounts() {
         return discounts;
     }
+
+    @Override
+    public String toString() {
+        return "{username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance + '}';
+    }
 }

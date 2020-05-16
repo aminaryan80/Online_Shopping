@@ -38,6 +38,6 @@ public class ViewPersonalInfoMenu extends Menu {
     private void help() {
         System.out.println("edit [field]\n" +
                 "help\n" +
-                "exit");
+                "back");
     }
 }
