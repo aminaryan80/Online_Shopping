@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Category {
-    private static ArrayList<Category> allCategories = new ArrayList<Category>();
+    private static ArrayList<Category> allCategories = new ArrayList<>();
     private Category supCategory;
     private String supCategoryName;
     private String name;

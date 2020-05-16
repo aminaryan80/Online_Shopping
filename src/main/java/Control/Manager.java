@@ -5,7 +5,10 @@ import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import View.Menu;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public abstract class Manager {
@@ -53,6 +56,17 @@ public abstract class Manager {
         return date.matches("^\\d{2}-\\d{2}-\\d{4}$");
     }
 
+    protected Date parseDate(String stringDate) {
+        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = null;
+        try {
+            date = format.parse(stringDate);
+        } catch (Exception ignored) {
+
+        }
+        return date;
+    }
+
     public boolean checkPercent(String date) {
         return date.matches("^(100|(\\d{1,2}))$");
     }
@@ -74,7 +88,7 @@ public abstract class Manager {
         }
     }
 
-    private String generateNewId() {
+    protected String generateNewId() {
         Random rand = new Random();
         return String.valueOf(rand.nextInt(100000));
     }

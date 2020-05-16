@@ -15,6 +15,7 @@ public class ViewDiscountCodesMenu extends Menu {
     }
 
     private void viewDiscountCodesMenu() {
+        showDiscounts();
         while (true) {
             Matcher matcher;
             String input = scanner.nextLine();
@@ -30,6 +31,10 @@ public class ViewDiscountCodesMenu extends Menu {
                 return;
             } else ErrorProcessor.invalidInput();
         }
+    }
+
+    private void showDiscounts() {
+        ((ViewDiscountCodesManager) manager).showDiscounts();
     }
 
     private void deleteDiscountCode(String id) {
