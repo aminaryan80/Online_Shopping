@@ -5,7 +5,6 @@ import Models.Address;
 import Models.Gson;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,9 +93,9 @@ public class Discount {
                 '}';
     }
 
-    public static void open(){
+    public static void open() throws Exception {
         File folder = new File(Address.DISCOUNTS.get());
-        if(!folder.exists()) folder.mkdirs();
+        if (!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
                 allDiscounts.add(open(file));
@@ -104,37 +103,23 @@ public class Discount {
         }
     }
 
-    public static Discount open(File file){
+    public static Discount open(File file) throws Exception {
         StringBuilder json = new StringBuilder();
-        try {
-            Scanner reader = new Scanner(file);
-            while (reader.hasNext()) {
-                json.append(reader.next());
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return Gson.INSTANCE.get().fromJson(json.toString(),Discount.class);
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        return Gson.INSTANCE.get().fromJson(json.toString(), Discount.class);
     }
 
-    public static void save(){
+    public static void save() throws Exception {
         for (Discount discount : allDiscounts) {
             save(discount);
         }
     }
 
-    public static void save(Discount discount){
-        try {
-            String jsonAccount = Gson.INSTANCE.get().toJson(discount);
-            try {
-                FileWriter file = new FileWriter(Address.DISCOUNTS.get() +"\\"+discount.getId()+".json");
-                file.write(jsonAccount);
-                file.close();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public static void save(Discount discount) throws Exception {
+        String jsonAccount = Gson.INSTANCE.get().toJson(discount);
+        FileWriter file = new FileWriter(Address.DISCOUNTS.get() + "\\" + discount.getId() + ".json");
+        file.write(jsonAccount);
+        file.close();
     }
 }

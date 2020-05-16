@@ -16,6 +16,7 @@ public class SellingLog extends Log {
         return buyerName;
     }
 
+
     @Override
     public String toString() {
         return "SellingLog{" +
