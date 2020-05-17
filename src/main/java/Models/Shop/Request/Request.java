@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Request {
-    protected static ArrayList<Request> allRequests = new ArrayList<Request>();
+    protected static ArrayList<Request> allRequests = new ArrayList<>();
     protected String id;
     protected Manager manager;
     protected Seller seller;
@@ -31,12 +31,14 @@ public abstract class Request {
     public abstract void accept();
 
     public static ArrayList<String> viewRequestsInShort() {
-        ArrayList<String> allRequestsShortViews = new ArrayList<String>();
+        ArrayList<String> allRequestsShortViews = new ArrayList<>();
         for (Request request : allRequests) {
             allRequestsShortViews.add(request.id + " : " + request.type);
         }
         return allRequestsShortViews;
     }
+
+    public abstract void decline();
 
     public static Request getRequestById(String id) {
         for (Request request : allRequests) {
@@ -60,11 +62,18 @@ public abstract class Request {
         allRequests.remove(request);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public abstract String toString();
+
     protected enum RequestType {
         ADD_PRODUCT, EDIT_PRODUCT, ADD_OFF, EDIT_OFF
     }
 
-    public static void open(){
+    public static void open() {
         openAddOffRequests();
         openAddProductRequests();
         openEditOffRequests();
@@ -200,12 +209,5 @@ public abstract class Request {
     }
 
     protected abstract void loadReference();
-
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public abstract String toString();
 }
 

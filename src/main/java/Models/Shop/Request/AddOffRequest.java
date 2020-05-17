@@ -16,6 +16,12 @@ public class AddOffRequest extends Request {
 
     public void accept() {
         auction.setStatus(Auction.AuctionStatus.CONFIRMED);
+        deleteRequest(this);
+    }
+
+    @Override
+    public void decline() {
+        deleteRequest(this);
     }
 
     @Override
@@ -25,11 +31,10 @@ public class AddOffRequest extends Request {
 
     @Override
     public String toString() {
-        return "AddOffRequest{" +
-                "auction=" + auction +
-                ", id='" + id + '\'' +
-                ", seller=" + seller +
-                ", type=" + type +
-                '}';
+        return "AddOffRequest : " +
+                "\nauction = " + auction +
+                "\nid = '" + id + '\'' +
+                "\nseller = " + seller +
+                "\ntype = " + type;
     }
 }

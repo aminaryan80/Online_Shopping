@@ -4,21 +4,35 @@ public class ErrorProcessor {
     public static void wrongPassword() {
         System.out.println("Wrong password");
     }
+
     public static void userExistsWithThisUsername() {
         System.out.println("User exists with this username");
     }
+
     public static void wrongUsername() {
         System.out.println("Wrong username");
     }
+
+    public static void principalExists() {
+        System.out.println("You can't register as a new principal.");
+    }
+
+    public static void cantDeleteYourAccount() {
+        System.out.println("You can't delete your account.");
+    }
+
     public static void invalidInput() {
         System.out.println("Invalid input");
     }
+
     public static void invalidType() {
         System.out.println("Invalid type. valid types are (customer|seller|principal)");
     }
+
     public static void invalidEditField() {
         System.out.println("You can't change this field");
     }
+
     public static void invalidEnteredInEditField() {
         System.out.println("What you have entered is not suitable for this field");
     }
@@ -48,6 +62,6 @@ public class ErrorProcessor {
     }
 
     public static void somethingWentWrong() {
-        System.out.println("Ops something went wrong");
+        System.out.println("Oops something went wrong");
     }
 }

@@ -17,6 +17,12 @@ public class AddProductRequest extends Request {
     @Override
     public void accept() {
         product.setStatus(Product.ProductStatus.CONFIRMED);
+        deleteRequest(this);
+    }
+
+    @Override
+    public void decline() {
+        deleteRequest(this);
     }
 
     @Override
@@ -26,11 +32,10 @@ public class AddProductRequest extends Request {
 
     @Override
     public String toString() {
-        return "AddProductRequest{" +
-                "product=" + product +
-                ", id='" + id + '\'' +
-                ", seller=" + seller +
-                ", type=" + type +
-                '}';
+        return "AddProductRequest : " +
+                "\nproduct = " + product +
+                "\nid = '" + id + '\'' +
+                "\nseller = " + seller +
+                "\ntype = " + type;
     }
 }

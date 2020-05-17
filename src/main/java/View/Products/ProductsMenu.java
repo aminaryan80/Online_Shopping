@@ -1,6 +1,7 @@
 package View.Products;
 
 import Control.Manager;
+import View.ErrorProcessor;
 import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
@@ -42,7 +43,7 @@ public class ProductsMenu extends Menu {
     }
 
     public void showCategories() {
-        System.out.println(((ProductsManager) manager).showCategories());
+        System.out.println(manager.showCategories());
     }
 
     private void filtering() {

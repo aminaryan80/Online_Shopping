@@ -17,6 +17,7 @@ public class EditOffRequest extends Request {
     @Override
     protected void loadReference() {
         auction = Auction.getAuctionById(auctionId);
+        deleteRequest(this);
     }
 
     @Override
@@ -25,12 +26,16 @@ public class EditOffRequest extends Request {
     }
 
     @Override
+    public void decline() {
+        deleteRequest(this);
+    }
+
+    @Override
     public String toString() {
-        return "EditOffRequest{" +
-                "auction=" + auction +
-                ", id='" + id + '\'' +
-                ", seller=" + seller +
-                ", type=" + type +
-                '}';
+        return "EditOffRequest : " +
+                "\nauction=" + auction +
+                "\nid='" + id + '\'' +
+                "\nseller=" + seller +
+                "\ntype=" + type;
     }
 }

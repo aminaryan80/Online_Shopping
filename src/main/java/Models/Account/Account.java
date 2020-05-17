@@ -53,7 +53,7 @@ public abstract class Account {
     public static ArrayList<String> showAccountsInShort() {
         ArrayList<String> accountsInShort = new ArrayList<>();
         for (Account account : allAccounts) {
-            accountsInShort.add(account.getUsername() + "  " + account.getName() + "  " + account.getLastName() + "  " + account.getBalance());
+            accountsInShort.add(account.getUsername() + " : |" + account.email + "|  |" + account.getBalance() + "$|");
         }
         return accountsInShort;
     }

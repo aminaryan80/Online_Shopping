@@ -16,6 +16,12 @@ public class EditProductRequest extends Request {
 
     public void accept() {
         product.setStatus(Product.ProductStatus.CONFIRMED);
+        deleteRequest(this);
+    }
+
+    @Override
+    public void decline() {
+        deleteRequest(this);
     }
 
     @Override
@@ -25,11 +31,10 @@ public class EditProductRequest extends Request {
 
     @Override
     public String toString() {
-        return "EditProductRequest{" +
-                "product=" + product +
-                ", id='" + id + '\'' +
-                ", seller=" + seller +
-                ", type=" + type +
-                '}';
+        return "EditProductRequest : " +
+                "\nproduct=" + product +
+                "\nid='" + id + '\'' +
+                "\nseller=" + seller +
+                "\ntype=" + type;
     }
 }

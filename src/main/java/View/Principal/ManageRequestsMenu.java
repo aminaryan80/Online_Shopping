@@ -40,13 +40,13 @@ public class ManageRequestsMenu extends Menu {
 
     private void acceptRequest(String id) {
         if (Request.hasRequestById(id)) {
-            // TODO
+            Request.getRequestById(id).accept();
         } else ErrorProcessor.invalidRequestId();
     }
 
     private void declineRequest(String id) {
         if (Request.hasRequestById(id)) {
-            // TODO
+            Request.getRequestById(id).decline();
         } else ErrorProcessor.invalidRequestId();
     }
 

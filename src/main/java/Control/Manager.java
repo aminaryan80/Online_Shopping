@@ -15,6 +15,7 @@ public abstract class Manager {
     protected static Account account;
     protected final static Category mainCategory = new Category("mainCategory", null, null, new ArrayList<>());
     protected Menu menu;
+    protected boolean isPrincipalExists = false;
 
     public Manager(Account account) {
         Manager.account = account;
@@ -86,6 +87,10 @@ public abstract class Manager {
         for (Category category : currentCategory.getSubCategories()) {
             buildCategoryList(category, categoryField, categoryLevel + 1);
         }
+    }
+
+    public boolean isPrincipalExists() {
+        return isPrincipalExists;
     }
 
     protected String generateNewId() {

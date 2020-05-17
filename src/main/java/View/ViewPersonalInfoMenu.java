@@ -28,12 +28,18 @@ public class ViewPersonalInfoMenu extends Menu {
 
     private void editField(String field) {
         if (((ViewPersonalInfoManager) manager).isEnteredFieldValid(field)) {
+            if (field.equals("password")) {
+                System.out.println("Enter your current password:");
+                if (!manager.getAccount().canChangePassword(scanner.nextLine())) {
+                    ErrorProcessor.invalidInput();
+                    return;
+                }
+            }
             System.out.println("Enter your new Value:");
             String newValue = scanner.nextLine();
             ((ViewPersonalInfoManager) manager).editField(field, newValue);
         } else ErrorProcessor.invalidEditField();
     }
-
 
     private void help() {
         System.out.println("edit [field]\n" +

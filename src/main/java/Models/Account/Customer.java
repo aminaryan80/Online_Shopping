@@ -90,12 +90,12 @@ public class Customer extends Account {
 
     @Override
     public String toString() {
-        return "{username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance + '}';
+        return username + " : \n" +
+                ", firstName='" + firstName + '\n' +
+                ", lastName='" + lastName + '\n' +
+                ", email='" + email + '\n' +
+                ", phoneNumber='" + phoneNumber + '\n' +
+                ", password='" + password + '\n' +
+                ", balance=" + balance;
     }
 }

@@ -3,6 +3,7 @@ package Control.Principal;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Principal;
+import View.ErrorProcessor;
 import View.Principal.ManageUsersMenu;
 
 import java.util.ArrayList;
@@ -24,7 +25,9 @@ public class ManageUsersManager extends Manager {
     }
 
     public void deleteUsername(String username) {
-        Account.deleteAccount(Account.getAccountByUsername(username));
+        if (!username.equals(account.getUsername()))
+            Account.deleteAccount(Account.getAccountByUsername(username));
+        else ErrorProcessor.cantDeleteYourAccount();
     }
 
     public void createManagerProfile(ArrayList<String> inputs) {

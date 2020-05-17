@@ -22,6 +22,7 @@ public class Discount {
     private int discountUseCount;
     private ArrayList<Customer> allCustomers;
     private ArrayList<String> allCustomersNames;
+    private static DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<Customer> allCustomers) {
@@ -40,10 +41,18 @@ public class Discount {
     }
 
     public static boolean hasDiscountWithId(String id) {
-        return true;
+        for (Discount discount : allDiscounts) {
+            if (discount.id.equals(id))
+                return true;
+        }
+        return false;
     }
 
     public static Discount getDiscountById(String id) {
+        for (Discount discount : allDiscounts) {
+            if (discount.id.equals(id))
+                return discount;
+        }
         return null;
     }
 
@@ -89,7 +98,6 @@ public class Discount {
     public static ArrayList<String> getDiscountInShort() {
         ArrayList<String> discountsInShort = new ArrayList<>();
         for (Discount discount : allDiscounts) {
-            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
             discountsInShort.add(discountInShort);
         }
@@ -98,15 +106,13 @@ public class Discount {
 
     @Override
     public String toString() {
-        return "Discount{" +
-                "id='" + id + '\'' +
-                ", beginningDate=" + beginningDate +
-                ", endingDate=" + endingDate +
-                ", discountPercent=" + discountPercent +
-                ", maximumDiscount=" + maximumDiscount +
-                ", discountUseCount=" + discountUseCount +
-                ", allCustomers=" + allCustomers +
-                '}';
+        return "#" + id + " : " +
+                "beginningDate = " + dateFormat.format(beginningDate) +
+                "\nendingDate = " + dateFormat.format(endingDate) +
+                "\ndiscountPercent = " + discountPercent + "%" +
+                "\nmaximumDiscount = " + maximumDiscount +
+                "\ndiscountUseCount = " + discountUseCount +
+                "\nallowed customers = " + allCustomersNames;
     }
 
     public static void open() throws Exception {

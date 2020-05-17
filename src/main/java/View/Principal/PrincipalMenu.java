@@ -38,6 +38,8 @@ public class PrincipalMenu extends Menu {
                 manageRequests();
             } else if (getMatcher(input, "^manage categories$").find()) {
                 manageCategories();
+            } else if (getMatcher(input, "^offs$").find()) {
+                //TODO
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^back$").find()) {
@@ -100,7 +102,6 @@ public class PrincipalMenu extends Menu {
         }
     }
 
-    // TODO FUCK
     private ArrayList<String> getAllowedCustomersNames() {
         System.out.println("Enter names of customers whom are allowed to use discount(Enter 0 to stop):");
         ArrayList<String> customerNames = new ArrayList<>();
