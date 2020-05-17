@@ -1,4 +1,4 @@
-package View.CustomerMenus.customer;
+/*package View.CustomerMenus.customer;
 
 import Control.CustomerManagers.CustomerManager;
 import Models.Account.Customer;
@@ -22,4 +22,4 @@ class CustomerMenuTest {
         assertFalse(customerMenu.executeCustomerMenu("view DISCOUNT codes"));
         assertFalse(customerMenu.executeCustomerMenu("helP"));
     }
-}
+}*/

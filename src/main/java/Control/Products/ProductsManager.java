@@ -1,5 +1,6 @@
 package Control.Products;
 
+import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category.Category;
@@ -146,6 +147,15 @@ public class ProductsManager extends Manager {
         return filtersNames;
     }
 
+    public boolean isItSelectedFilter(String filterName) {
+        for (Filter filter : filters) {
+            if (filter.getField().equals(filterName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<String> disableFilter(String filterField) {
         Filter filter = getFilterByField(filterField);
         filters.remove(filter);
@@ -251,13 +261,25 @@ public class ProductsManager extends Manager {
         return productsInShort();
     }
 
+    public boolean hasProductWithId(String id) {
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // show products
     public List<String> showProducts() {
-        return null;
+        products = currentCategory.getAllProducts();
+        setFilters();
+        applySort();
+        return productsInShort();
     }
 
     // show product [productId]
     public void showProductById(String id) {
-
+        new ProductPageManager(this.getAccount(), Product.getProductById(id));
     }
 }

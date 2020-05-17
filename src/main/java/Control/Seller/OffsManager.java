@@ -1,5 +1,6 @@
 package Control.Seller;
 
+import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Off.Auction;
@@ -7,7 +8,7 @@ import Models.Shop.Product.Product;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class OffsManager extends SellerManager {
+public class OffsManager extends Manager {
     public OffsManager(Account account) {
         super(account);
     }

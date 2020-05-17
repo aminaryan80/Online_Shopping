@@ -6,10 +6,12 @@ import Models.Account.Seller;
 import Models.Shop.Request.EditProductRequest;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
+import View.Menu;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class EditProductsMenu extends SellerMenu{
+public class EditProductsMenu extends Menu {
 
     public EditProductsMenu(Manager manager) {
         super(manager);

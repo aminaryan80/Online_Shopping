@@ -1,5 +1,6 @@
 package Control.Seller;
 
+import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Category.Category;
@@ -8,7 +9,7 @@ import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
 
-public class EditProductsManager extends SellerManager {
+public class EditProductsManager extends Manager {
     public EditProductsManager(Account account) {
         super(account);
     }

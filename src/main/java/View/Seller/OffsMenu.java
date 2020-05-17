@@ -7,11 +7,12 @@ import Models.Shop.Request.AddOffRequest;
 import Models.Shop.Off.Auction;
 import Models.Shop.Request.EditOffRequest;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-public class OffsMenu extends SellerMenu {
+public class OffsMenu extends Menu {
     public OffsMenu(Manager manager) {
         super(manager);
         offsMenu();

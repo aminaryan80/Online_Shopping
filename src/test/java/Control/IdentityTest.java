@@ -1,4 +1,4 @@
-package Control;
+/*package Control;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,4 +13,4 @@ class IdentityTest {
         System.out.println(identity1);
         assertNotEquals(identity1,identity2);
     }
-}
+}*/
