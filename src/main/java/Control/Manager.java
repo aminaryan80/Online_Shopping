@@ -54,7 +54,7 @@ public abstract class Manager {
 
     public boolean checkDate(String date) {
         //return date.matches("^\\d{2}-\\d{2}-\\d{4}$");
-        return date.matches("^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2} (AM|PM))$");
+        return date.matches("^(\\d{4}-\\d{2}-\\d{2})$");
     }
 
     protected Date parseDate(String stringDate) {

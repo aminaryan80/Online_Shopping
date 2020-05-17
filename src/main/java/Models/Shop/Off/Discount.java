@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,15 +17,15 @@ import java.util.Scanner;
 public class Discount {
     private static ArrayList<Discount> allDiscounts = new ArrayList<>();
     private String id;
-    private LocalDateTime beginningDate;
-    private LocalDateTime endingDate;
+    private LocalDate beginningDate;
+    private LocalDate endingDate;
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
     //private ArrayList<Customer> allCustomers;
     private static ArrayList<String> allCustomersUsernames;
 
-    public Discount(String id, LocalDateTime beginningDate, LocalDateTime endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
+    public Discount(String id, LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<String> allcustomersUsernames) {
         this.id = id;
         this.beginningDate = beginningDate;
@@ -64,11 +65,11 @@ public class Discount {
         return id;
     }
 
-    public void setBeginningDate(LocalDateTime beginningDate) {
+    public void setBeginningDate(LocalDate beginningDate) {
         this.beginningDate = beginningDate;
     }
 
-    public void setEndingDate(LocalDateTime endingDate) {
+    public void setEndingDate(LocalDate endingDate) {
         this.endingDate = endingDate;
     }
 
