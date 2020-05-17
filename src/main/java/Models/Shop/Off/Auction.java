@@ -14,20 +14,20 @@ import java.util.Scanner;
 public class Auction {
     private static List<Auction> allAuctions = new ArrayList<>();
     private String id;
-    private List<Product> products;
+//    private List<Product> products;
     private List<String> productsIds;
     private AuctionStatus status;
     private Date beginningDate;
     private Date endingDate;
     private double discountAmount;
 
-    public Auction(String id, List<Product> products, Date beginningDate, Date endingDate, double discountAmount) {
+    public Auction(String id, List<String> productsIds, Date beginningDate, Date endingDate, double discountAmount) {
         this.id = id;
-        this.products = products;
-        this.productsIds = new ArrayList<>();
-        for (Product product : products) {
-            productsIds.add(product.getId());
-        }
+//        this.products = products;
+        this.productsIds = productsIds;
+//        for (Product product : products) {
+//            productsIds.add(product.getId());
+//        }
         this.status = AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
@@ -80,7 +80,7 @@ public class Auction {
     public String toString() {
         return "Auction{" +
                 "id='" + id + '\'' +
-                ", products=" + products +
+                ", products=" + getProducts() +
                 ", status=" + status +
                 ", beginningDate=" + beginningDate +
                 ", endingDate=" + endingDate +
@@ -150,17 +150,25 @@ public class Auction {
         file.close();
     }
 
-    public static void loadReferences() {
-        for (Auction auction : allAuctions) {
-            auction.loadReference();
-        }
-    }
+//    public static void loadReferences() {
+//        for (Auction auction : allAuctions) {
+//            auction.loadReference();
+//        }
+//    }
 
-    private void loadReference() {
-        products = new ArrayList<>();
+//    private void loadReference() {
+//        products = new ArrayList<>();
+//        for (String productsId : productsIds) {
+//            products.add(Product.getProductById(productsId));
+//        }
+//    }
+
+    public ArrayList<Product> getProducts(){
+        ArrayList<Product> products = new ArrayList<>();
         for (String productsId : productsIds) {
             products.add(Product.getProductById(productsId));
         }
+        return products;
     }
 }
 

@@ -31,7 +31,7 @@ public class Main {
         //Account.loadReferences();
         //Category.loadReferences();
         Request.loadReferences();
-        Auction.loadReferences();
+        //Auction.loadReferences();
         // Discount.loadReferences();
         Product.loadReferences();
     }
