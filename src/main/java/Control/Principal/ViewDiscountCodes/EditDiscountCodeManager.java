@@ -5,6 +5,10 @@ import Models.Account.Account;
 import Models.Shop.Off.Discount;
 import View.Principal.ViewDiscountCodes.EditDiscountCodeMenu;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EditDiscountCodeManager extends Manager {
 
     private Discount discount;
@@ -16,11 +20,11 @@ public class EditDiscountCodeManager extends Manager {
     }
 
     public void editBeginningDate(String stringDate) {
-        discount.setBeginningDate(parseDate(stringDate));
+        discount.setBeginningDate(LocalDate.parse(stringDate));
     }
 
     public void editEndingDate(String stringDate) {
-        discount.setEndingDate(parseDate(stringDate));
+        discount.setEndingDate(LocalDate.parse(stringDate));
     }
 
     public void editDiscountPercent(int percent) {

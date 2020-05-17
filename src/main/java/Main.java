@@ -1,3 +1,4 @@
+import Control.Identity;
 import Control.MainManager;
 import Models.Account.Account;
 import Models.Shop.Category.Category;
@@ -16,6 +17,7 @@ public class Main {
 
     private static void openFiles() {
         try {
+            Identity.open();
             Account.open();
             Category.open();
             Request.open();
@@ -24,15 +26,16 @@ public class Main {
             Product.open();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     private static void connectObjects() {
-        Account.loadReferences();
-        Category.loadReferences();
+        //Account.loadReferences();
+        //Category.loadReferences();
         Request.loadReferences();
-        Auction.loadReferences();
-        Discount.loadReferences();
+        //Auction.loadReferences();
+        // Discount.loadReferences();
         Product.loadReferences();
     }
 
@@ -44,6 +47,7 @@ public class Main {
             Auction.save();
             Discount.save();
             Product.save();
+            Identity.save();
         } catch (Exception e) {
             e.getStackTrace();
         }

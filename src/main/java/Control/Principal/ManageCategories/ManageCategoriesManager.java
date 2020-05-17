@@ -19,7 +19,7 @@ public class ManageCategoriesManager extends Manager {
 
     public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsId) {
         Category supCategory = Category.getCategoryByName(supCategoryName);
-        Category category = new Category(categoryName, supCategory, features, getProductsListByIds(productsId));
+        Category category = new Category(categoryName, supCategory.getName(), features, productsId);
         supCategory.setSubCategory(category);
     }
 
