@@ -82,15 +82,15 @@ public class PrincipalMenu extends Menu {
                 continue;
             }
             inputs.add(input);
-            System.out.println("Enter beginning date(dd-mm-yyyy):");
-            input = scanner.nextLine();
+            System.out.println("Enter beginning date(yyyy-MM-dd HH:mm:ss AM|PM):");
+            input = scanner.nextLine().trim();
             if (!manager.checkDate(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }
             inputs.add(input);
-            System.out.println("Enter ending date(dd-mm-yyyy):");
-            input = scanner.nextLine();
+            System.out.println("Enter ending date(yyyy-MM-dd HH:mm:ss AM|PM):");
+            input = scanner.nextLine().trim();
             if (!manager.checkDate(input)) {
                 ErrorProcessor.invalidInput();
                 continue;

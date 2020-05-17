@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -15,15 +16,15 @@ import java.util.Scanner;
 public class Discount {
     private static ArrayList<Discount> allDiscounts = new ArrayList<>();
     private String id;
-    private Date beginningDate;
-    private Date endingDate;
+    private LocalDateTime beginningDate;
+    private LocalDateTime endingDate;
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
     //private ArrayList<Customer> allCustomers;
     private static ArrayList<String> allCustomersUsernames;
 
-    public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
+    public Discount(String id, LocalDateTime beginningDate, LocalDateTime endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<String> allcustomersUsernames) {
         this.id = id;
         this.beginningDate = beginningDate;
@@ -63,11 +64,11 @@ public class Discount {
         return id;
     }
 
-    public void setBeginningDate(Date beginningDate) {
+    public void setBeginningDate(LocalDateTime beginningDate) {
         this.beginningDate = beginningDate;
     }
 
-    public void setEndingDate(Date endingDate) {
+    public void setEndingDate(LocalDateTime endingDate) {
         this.endingDate = endingDate;
     }
 
@@ -95,7 +96,8 @@ public class Discount {
         ArrayList<String> discountsInShort = new ArrayList<>();
         for (Discount discount : allDiscounts) {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
+            //String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
+            String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + discount.endingDate;
             discountsInShort.add(discountInShort);
         }
         return discountsInShort;
@@ -144,15 +146,15 @@ public class Discount {
         file.close();
     }
 
-    public static void loadReferences() {
-        for (Discount discount : allDiscounts) {
-            discount.loadReference();
-        }
-    }
-
-    private void loadReference() {
-        for (String customersName : allCustomersUsernames) {
-//            allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
-        }
-    }
+//    public static void loadReferences() {
+//        for (Discount discount : allDiscounts) {
+//            discount.loadReference();
+//        }
+//    }
+//
+//    private void loadReference() {
+//        for (String customersName : allCustomersUsernames) {
+//              allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
+//        }
+//    }
 }

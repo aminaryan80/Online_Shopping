@@ -45,7 +45,7 @@ public class EditDiscountCodeMenu extends Menu {
     }
 
     private void editBeginningDate() {
-        System.out.println("Enter date(dd-mm-yyyy):");
+        System.out.println("Enter date(yyyy-MM-dd HH:mm:ss AM|PM):");
         String input = scanner.nextLine();
         if (manager.checkDate(input)) {
             ((EditDiscountCodeManager) manager).editBeginningDate(input);
@@ -53,7 +53,7 @@ public class EditDiscountCodeMenu extends Menu {
     }
 
     private void editEndingDate() {
-        System.out.println("Enter date(dd-mm-yyyy):");
+        System.out.println("Enter date(yyyy-MM-dd HH:mm:ss AM|PM):");
         String input = scanner.nextLine();
         if (manager.checkDate(input)) {
             ((EditDiscountCodeManager) manager).editEndingDate(input);

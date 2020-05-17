@@ -21,7 +21,7 @@ public class Identity {
 
     public static String getId() {
         while (true) {
-            String id = UUID.randomUUID().toString().substring(0, 8);
+            String id = UUID.randomUUID().toString().toUpperCase().substring(0, 8);
             if (!doesExist(id)) {
                 identities.add(id);
                 return id;
