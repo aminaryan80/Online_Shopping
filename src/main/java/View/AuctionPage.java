@@ -22,14 +22,16 @@ public class AuctionPage extends Menu {
         Matcher matcher;
         showAuctionedProducts();
         while (true) {
-            String command = scanner.nextLine();
-            if ((matcher = getMatcher(command, "^show product (\\S+)$")).find()) {
+            String input = scanner.nextLine();
+            if (getMatcher(input, "^user panel$").find()) {
+                openUserPanel();
+            } else if ((matcher = getMatcher(input, "^show product (\\S+)$")).find()) {
                 showProductById(matcher.group(1));
-            } else if (getMatcher(command, "^filtering$").find()) {
+            } else if (getMatcher(input, "^filtering$").find()) {
                 filtering();
-            } else if (getMatcher(command, "^back$").find()) {
+            } else if (getMatcher(input, "^back$").find()) {
                 return;
-            } else if (getMatcher(command, "help").find()) {
+            } else if (getMatcher(input, "help").find()) {
                 help();
             } else {
                 ErrorProcessor.invalidInput();
@@ -46,12 +48,14 @@ public class AuctionPage extends Menu {
     private void showProductById(String id) {
         if (Product.hasProductWithId(id))
             new ProductPageManager(manager.getAccount(), Product.getProductById(id));
+        else ErrorProcessor.invalidProductId();
     }
 
     private void help() {
         System.out.println("show product [productId]\n" +
                 "filtering\n" +
                 "sorting\n" +
+                "user panel\n" +
                 "help\n" +
                 "back");
     }
@@ -76,9 +80,7 @@ public class AuctionPage extends Menu {
                         "back");
             } else if ((matcher = getMatcher(command, "back")).find()) {
                 return;
-            } else {
-                ErrorProcessor.invalidInput();
-            }
+            } else ErrorProcessor.invalidInput();
         }
     }
 

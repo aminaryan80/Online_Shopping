@@ -23,7 +23,9 @@ public class ProductPage extends Menu {
         String input;
         Matcher matcher;
         while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
-            if (input.matches("(?i)digest")) {
+            if (getMatcher(input, "^user panel$").find()) {
+                openUserPanel();
+            } else if (input.matches("(?i)digest")) {
                 System.out.println(productPageManager.digest());
                 new DigestMenuManager(manager.getAccount(), productPageManager.getProduct());
             } else if (input.matches("(?i)comments")) {
@@ -32,7 +34,7 @@ public class ProductPage extends Menu {
                 System.out.println(productPageManager.attributes());
             } else if ((matcher = ConsoleCommand.COMPARE.getStringMatcher(input)).find()) {
                 Product otherProduct = Product.getProductById(matcher.group(1));
-                if(otherProduct==null){
+                if (otherProduct == null) {
                     ErrorProcessor.invalidProductId();
                 } else System.out.println(productPageManager.compare(otherProduct));
             } else if (input.matches("(?i)add comment")) {
@@ -44,24 +46,13 @@ public class ProductPage extends Menu {
     }
 
     private String help() {
-        return "Product " + productPageManager.getProduct().getName() + " page :" +
-                "\n" +
-                "digest" +
-                "\n" +
-                "\t⇒ add to cart" +
-                "\n" +
-                "\t⇒ select seller [seller_username]" +
-                "\n" +
-                "attributes" +
-                "\n" +
-                "compare [product_ID]" +
-                "\n" +
-                "comments" +
-                "\t⇒ Add comment\n" +
-                "\tTitle:\n" +
-                "\tContent:"
-                +"\n"
-                ;
+        return "digest\n" +
+                "attributes\n" +
+                "compare [productId]\n" +
+                "Comments\n" +
+                "user panel\n" +
+                "help\n" +
+                "back";
     }
 
     private String getComment(boolean isTitle) {

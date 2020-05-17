@@ -1,8 +1,8 @@
 package Control;
 
 import Models.Account.Account;
-import Models.Shop.Off.Auction;
 import Models.Shop.Category.Filter;
+import Models.Shop.Off.Auction;
 import View.AuctionPage;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class AuctionPageManager extends Manager {
     }
 
     public List<String> currentFilters() {
-        ArrayList<String> filtersNames= new ArrayList<String>();
+        ArrayList<String> filtersNames = new ArrayList<>();
         for (Filter filter : filters) {
             filtersNames.add(filter.toString());
         }
@@ -58,11 +58,8 @@ public class AuctionPageManager extends Manager {
     }
 
     public boolean isEnteredFilterFieldValid(String field) {
-        if (field.equals("status") || field.equals("beginningDate") || field.equals("endingDate") ||
-                field.equals("discountAmount")){
-            return true;
-        }
-        return false;
+        return field.equals("status") || field.equals("beginningDate") || field.equals("endingDate") ||
+                field.equals("discountAmount");
     }
 
     private ArrayList<String> setFilters() {
@@ -91,37 +88,25 @@ public class AuctionPageManager extends Manager {
 
     private ArrayList<Auction> setStatusFilter(Filter filter) {
         return auctions.stream().filter(auction -> {
-            if (auction.getStatus().equals(Auction.parseAuctionStatus(filter.getValue()))) {
-                return true;
-            }
-            return false;
+            return auction.getStatus().equals(Auction.parseAuctionStatus(filter.getValue()));
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Auction> setBeginningDateFilter(Filter filter) {
         return auctions.stream().filter(auction -> {
-            if (auction.getBeginningDate().equals(new Date(filter.getValue()))) {
-                return true;
-            }
-            return false;
+            return auction.getBeginningDate().equals(new Date(filter.getValue()));
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Auction> setEndingDateFilter(Filter filter) {
         return auctions.stream().filter(auction -> {
-            if (auction.getEndingDate().equals(new Date(filter.getValue()))) {
-                return true;
-            }
-            return false;
+            return auction.getEndingDate().equals(new Date(filter.getValue()));
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Auction> setDiscountAmountFilter(Filter filter) {
         return auctions.stream().filter(auction -> {
-            if (auction.getDiscountAmount() == Double.parseDouble(filter.getValue())) {
-                return true;
-            }
-            return false;
+            return auction.getDiscountAmount() == Double.parseDouble(filter.getValue());
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 }

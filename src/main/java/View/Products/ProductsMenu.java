@@ -1,9 +1,7 @@
 package View.Products;
 
 import Control.Manager;
-import View.ErrorProcessor;
 import Control.Products.ProductsManager;
-import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -22,7 +20,9 @@ public class ProductsMenu extends Menu {
         while (true) {
             Matcher matcher;
             String input = scanner.nextLine();
-            if (getMatcher(input, "^view categories$").find()) {
+            if (getMatcher(input, "^user panel$").find()) {
+                openUserPanel();
+            } else if (getMatcher(input, "^view categories$").find()) {
                 showCategories();
             } else if (getMatcher(input, "^filtering$").find()) {
                 filtering();
@@ -32,6 +32,8 @@ public class ProductsMenu extends Menu {
                 showProducts();
             } else if ((matcher = getMatcher(input, "^show product (\\S+)$")).find()) {
                 showProduct(matcher.group(1));
+            } else if (getMatcher(input, "^user panel$").find()) {
+                openUserPanel();
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^back$").find()) {
@@ -190,6 +192,7 @@ public class ProductsMenu extends Menu {
                 "sorting\n" +
                 "show products\n" +
                 "show product [productId]\n" +
+                "user panel\n" +
                 "help\n" +
                 "back");
     }

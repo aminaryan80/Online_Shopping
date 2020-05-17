@@ -17,13 +17,13 @@ public class Main {
 
     private static void openFiles() {
         try {
-            Identity.open();
             Account.open();
             Category.open();
             Request.open();
             Auction.open();
             Discount.open();
             Product.open();
+            Identity.open();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());

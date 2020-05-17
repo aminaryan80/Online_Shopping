@@ -8,8 +8,6 @@ import Models.Shop.Off.Discount;
 import View.Principal.PrincipalMenu;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PrincipalManager extends Manager {
@@ -21,7 +19,6 @@ public class PrincipalManager extends Manager {
 
     public void createDiscountCode(ArrayList<String> newDiscountInputs, ArrayList<String> allowedCustomersNames) {
         // 0:discount percent - 1:maximumDiscount - 2:discountUseCount - 3:beginningDate - 4:endingDate
-        // Discount discount = new Discount(generateNewId(), parseDate(newDiscountInputs.get(3)), parseDate(newDiscountInputs.get(4)),
         Discount discount = new Discount(
                 Identity.getId(),
                 LocalDate.parse(newDiscountInputs.get(3)),

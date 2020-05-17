@@ -2,7 +2,10 @@ package Control;
 
 import Models.Address;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
@@ -58,7 +61,7 @@ public class Identity {
     }
 
     private static void save(String identity) throws IOException {
-        FileWriter file = new FileWriter(Address.DISCOUNTS.get() + "\\" + "identities");
+        FileWriter file = new FileWriter(Address.IDNETITIES.get() + "\\" + "identities");
         file.append("\n"+identity);
         file.close();
     }

@@ -1,6 +1,8 @@
 package View;
 
 import Control.Manager;
+import Control.UserPanel.DashboardManager;
+import Control.UserPanel.UserPanelManager;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -18,4 +20,12 @@ public class Menu {
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(input);
     }
+
+    protected void openUserPanel() {
+        if (manager.getAccount() == null)
+            new UserPanelManager(manager.getAccount());
+        if (manager.getAccount() != null)
+            new DashboardManager(manager.getAccount());
+    }
+
 }

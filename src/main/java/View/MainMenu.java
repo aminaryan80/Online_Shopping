@@ -2,8 +2,6 @@ package View;
 
 import Control.Manager;
 import Control.Products.ProductsManager;
-import Control.UserPanel.DashboardManager;
-import Control.UserPanel.UserPanelManager;
 
 public class MainMenu extends Menu {
 
@@ -27,13 +25,6 @@ public class MainMenu extends Menu {
                 return;
             } else ErrorProcessor.invalidInput();
         }
-    }
-
-    private void openUserPanel() {
-        if (manager.getAccount() == null)
-            new UserPanelManager(manager.getAccount());
-        if (manager.getAccount() != null)
-            new DashboardManager(manager.getAccount());
     }
 
     private void openProductsMenu() {
