@@ -15,11 +15,6 @@ public class Principal extends Account {
     }
 
     @Override
-    protected void loadReference() {
-
-    }
-
-    @Override
     public String toString() {
         return "{" +
                 "username='" + username + '\'' +

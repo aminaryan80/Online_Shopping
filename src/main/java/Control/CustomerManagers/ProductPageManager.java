@@ -2,6 +2,7 @@ package Control.CustomerManagers;
 
 import Control.Manager;
 import Models.Account.Account;
+import Models.Account.Customer;
 import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.product.ProductPage;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPageManager extends Manager {
-
+    protected Customer customer = (Customer) account;
     protected Product product;
 
     public ProductPageManager(Account account, Product product) {

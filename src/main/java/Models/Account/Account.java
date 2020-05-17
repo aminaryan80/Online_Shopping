@@ -213,13 +213,13 @@ public abstract class Account {
         file.close();
     }
 
-    public static void loadReferences() {
-        for (Account account : allAccounts) {
-            account.loadReference();
-        }
-    }
-
-    protected abstract void loadReference();
+//    public static void loadReferences() {
+//        for (Account account : allAccounts) {
+////            account.loadReference();
+//        }
+//    }
+//
+////    protected abstract void loadReference();
 
     @Override
     public abstract String toString();
