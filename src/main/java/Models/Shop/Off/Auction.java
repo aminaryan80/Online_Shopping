@@ -71,7 +71,7 @@ public class Auction {
 
     public ArrayList<String> getAuctionProducts() {
         ArrayList<String> productsInShort = new ArrayList<>();
-        for (Product product : products)
+        for (Product product : getProducts())
             productsInShort.add("#" + product.getId() + " : \n" +
                     "price = " + product.getPrice() +
                     "\nAuctioned price = " + product.getAuctionedPrice() +
