@@ -1,8 +1,10 @@
-package View.CustomerMenus;
+package View.CustomerMenus.product;
 
 import Control.CustomerManagers.DigestMenuManager;
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
+import Models.Shop.Product.Product;
+import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -29,11 +31,37 @@ public class ProductPage extends Menu {
             } else if (input.matches("(?i)attributes")) {
                 System.out.println(productPageManager.attributes());
             } else if ((matcher = ConsoleCommand.COMPARE.getStringMatcher(input)).find()) {
-                System.out.println(productPageManager.compare(matcher.group(1)));
+                Product otherProduct = Product.getProductById(matcher.group(1));
+                if(otherProduct==null){
+                    ErrorProcessor.invalidProductId();
+                } else System.out.println(productPageManager.compare(otherProduct));
             } else if (input.matches("(?i)add comment")) {
-                productPageManager.addComment(getComment(true),getComment(false));
+                productPageManager.addComment(getComment(true), getComment(false));
+            } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
+                System.out.println(help());
             } else ErrorProcessor.invalidInput();
         }
+    }
+
+    private String help() {
+        return "Product " + productPageManager.getProduct().getName() + " page :" +
+                "\n" +
+                "digest" +
+                "\n" +
+                "\t⇒ add to cart" +
+                "\n" +
+                "\t⇒ select seller [seller_username]" +
+                "\n" +
+                "attributes" +
+                "\n" +
+                "compare [product_ID]" +
+                "\n" +
+                "comments" +
+                "\t⇒ Add comment\n" +
+                "\tTitle:\n" +
+                "\tContent:"
+                +"\n"
+                ;
     }
 
     private String getComment(boolean isTitle) {

@@ -1,10 +1,11 @@
-package View.CustomerMenus;
+package View.CustomerMenus.customer;
 
+import Control.CustomerManagers.ProductPageManager;
 import Control.CustomerManagers.PurchaseManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
-import Control.CustomerManagers.ProductPageManager;
 import Models.Shop.Product.Product;
+import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 
 import java.util.regex.Matcher;

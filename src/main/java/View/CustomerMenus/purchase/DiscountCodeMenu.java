@@ -1,4 +1,4 @@
-package View.CustomerMenus;
+package View.CustomerMenus.purchase;
 
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;

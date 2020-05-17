@@ -11,6 +11,12 @@ public class ViewDiscountCodesManager extends Manager {
         new ViewDiscountCodesMenu(this);
     }
 
+    public void showDiscounts() {
+        for (String discountInShort : Discount.getDiscountInShort()) {
+            System.out.println(discountInShort);
+        }
+    }
+
     public void deleteDiscountCode(String id) {
         Discount.deleteDiscount(Discount.getDiscountById(id));
     }

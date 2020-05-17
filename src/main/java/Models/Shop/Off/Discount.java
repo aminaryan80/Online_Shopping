@@ -6,9 +6,10 @@ import Models.Gson;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Discount {
@@ -19,10 +20,11 @@ public class Discount {
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
-    private List<Customer> allCustomers;
-    private List<String> allCustomersNames;
+    private ArrayList<Customer> allCustomers;
+    private ArrayList<String> allCustomersNames;
 
-    public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount, List<Customer> allCustomers) {
+    public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
+                    ArrayList<Customer> allCustomers) {
         this.id = id;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
@@ -46,7 +48,10 @@ public class Discount {
     }
 
     public static void deleteDiscount(Discount discount) {
-
+        for (Customer customer : discount.allCustomers) {
+            customer.deleteDiscount(discount);
+        }
+        allDiscounts.remove(discount);
     }
 
     public String getId() {
@@ -81,8 +86,14 @@ public class Discount {
         return discountPercent;
     }
 
-    public static ArrayList<String> viewDiscountInShort() {
-        return null;
+    public static ArrayList<String> getDiscountInShort() {
+        ArrayList<String> discountsInShort = new ArrayList<>();
+        for (Discount discount : allDiscounts) {
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
+            discountsInShort.add(discountInShort);
+        }
+        return discountsInShort;
     }
 
     @Override

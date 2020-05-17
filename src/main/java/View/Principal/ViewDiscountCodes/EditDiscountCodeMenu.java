@@ -64,7 +64,7 @@ public class EditDiscountCodeMenu extends Menu {
     private void editDiscountPercent() {
         System.out.println("Enter discount percent:");
         String input = scanner.nextLine();
-        if (manager.checkDate(input)) {
+        if (manager.checkPercent(input)) {
             ((EditDiscountCodeManager) manager).editDiscountPercent(Integer.parseInt(input));
         } else ErrorProcessor.invalidInput();
     }

@@ -19,8 +19,11 @@ public class Cart {
     }
 
     public ArrayList<String> showProductsInShort() {
-        // #id name count
-        return null;
+        ArrayList<String> productsNames = new ArrayList<String>();
+        for (Product product : getProducts()) {
+            productsNames.add(product.getName());
+        }
+        return productsNames;
     }
 
     public boolean hasProductInCartWithId(String id) {
@@ -42,24 +45,25 @@ public class Cart {
     }
 
     public double getTotalPrice(Discount discount) {
-        double sum = getTotalAmountWithoutDiscount();
-        return sum - amountOfDiscount(sum,discount);
+        double totalPriceOfProducts = getTotalAmountWithoutDiscount();
+        return totalPriceOfProducts - amountOfDiscount(totalPriceOfProducts, discount);
     }
 
     public double getTotalAmountWithoutDiscount() {
-        double sum = 0;
+        double totalAmountWithoutDiscount = 0; // is auctioned
         for (Product product : products.keySet()) {
-            sum += product.getPrice() * products.get(product);
+            totalAmountWithoutDiscount += product.getAuctionedPrice() * products.get(product);
         }
-        return sum;
+        return totalAmountWithoutDiscount;
     }
 
-    public double amountOfDiscount(double sum,Discount discount) {
-        if(discount == null) return 0;
-        double sumWithDiscountPercent = discount.getDiscountPercent()*sum/100;
+    public double amountOfDiscount(double priceOfProducts, Discount discount) { //price of products after auction calculation
+        if (discount == null) return 0;
+        double discountPercent = (double) discount.getDiscountPercent() / 100;
+        double sumWithDiscountPercent = discountPercent * priceOfProducts;
         double sumWithMaximumDiscount = discount.getMaximumDiscount();
-        if(sumWithDiscountPercent > sumWithMaximumDiscount){
+        if (sumWithDiscountPercent > sumWithMaximumDiscount) {
             return discount.getMaximumDiscount();
-        } else return discount.getDiscountPercent()/100 * sum;
+        } else return discountPercent * priceOfProducts;
     }
 }

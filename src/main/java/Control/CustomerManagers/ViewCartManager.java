@@ -3,7 +3,7 @@ package Control.CustomerManagers;
 import Models.Account.Account;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.ViewCartMenu;
+import View.CustomerMenus.customer.ViewCartMenu;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ public class ViewCartManager extends CustomerManager {
 
     public String showProducts() {
         List<String> productsInfos = customer.getCart().showProductsInShort();
-        String allProductsInfo = "";
+        StringBuilder allProductsInfo = new StringBuilder();
         for (String productsInfo : productsInfos) {
-            allProductsInfo += productsInfo;
+            allProductsInfo.append(productsInfo);
         }
-        return allProductsInfo;
+        return allProductsInfo.toString();
     }
 
     public void ProductQuantity(String id, boolean isIncrease) throws ProductDoNotExistAtAllException,ProductDoNotExistInCartException {

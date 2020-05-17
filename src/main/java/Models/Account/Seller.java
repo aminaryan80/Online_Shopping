@@ -91,4 +91,12 @@ return true;
                 ", balance=" + balance +
                 '}';
     }
+
+    public void addLog(SellingLog log) {
+        allLogs.add(log);
+    }
+
+    public void receiveProductMoney(Product product) {
+        balance += product.getAuctionedPrice();
+    }
 }

@@ -25,10 +25,14 @@ public class Customer extends Account {
         this.discountsId = new ArrayList<>();
     }
 
-    // check this fucking piece of shit later
     public void addDiscount(Discount discount) {
         discounts.add(discount);
         discountsId.add(discount.getId());
+    }
+
+    public void deleteDiscount(Discount discount) {
+        discounts.remove(discount);
+        discountsId.remove(discount.getId());
     }
 
     @Override

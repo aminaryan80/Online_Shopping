@@ -38,10 +38,6 @@ public class CustomerMenu extends Menu {
         manager.viewPersonalInfo();
     }
 
-    private void viewCart() {
-        new ViewCartMenu(manager);
-    }
-
     private void showProducts() {
 
     }
