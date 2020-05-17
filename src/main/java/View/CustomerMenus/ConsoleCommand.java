@@ -38,6 +38,8 @@ public enum ConsoleCommand {
 
     SELECT_SELLER("(?i)select seller (\\S+)"),
 
+    HELP("(?i)help"),
+
     COMPARE("(?i)compare (\\S+)");
 
     private final Pattern commandPattern;

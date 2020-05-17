@@ -5,7 +5,7 @@ import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.CustomerMenu;
+import View.CustomerMenus.customer.CustomerMenu;
 
 import java.util.ArrayList;
 

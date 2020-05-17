@@ -1,35 +1,30 @@
 package Models.Shop.Log;
 
-import java.util.Date;
+import Models.Shop.Product.Product;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class SellingLog extends Log {
-    private double auctionAmount;
-    private String buyerName;
 
-    public SellingLog(String id, Date date, double paymentAmount, String address, String phoneNumber, String customerName, boolean isReceived, double auctionAmount, String buyerName) {
-        super(id, date, paymentAmount, address, phoneNumber, customerName, isReceived);
-        this.auctionAmount = auctionAmount;
-        this.buyerName = buyerName;
-    }
-
-    public String getBuyerName() {
-        return buyerName;
+    public SellingLog(String id, LocalDateTime date, double moneyReceived, double amountOfAuctionApplied, ArrayList<Product> soldProducts,
+                      String buyerName, String address, String phoneNumber, Status SendingStatus) {
+        super(id, date, moneyReceived, amountOfAuctionApplied, soldProducts, buyerName, address, phoneNumber, SendingStatus);
     }
 
 
     @Override
     public String toString() {
         return "SellingLog{" +
-                "auctionAmount=" + auctionAmount +
-                ", buyerName='" + buyerName + '\'' +
-                ", id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", date=" + date +
-                ", paymentAmount=" + paymentAmount +
+                ", money=" + money +
+                ", amount=" + amount +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", products=" + products +
-                ", customerName='" + customerName + '\'' +
-                ", isReceived=" + isReceived +
+                ", name='" + name + '\'' +
+                ", status=" + status +
                 '}';
     }
 

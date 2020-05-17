@@ -46,4 +46,8 @@ public class ErrorProcessor {
     public static void notYourProduct() {
         System.out.println("this is not your product");
     }
+
+    public static void somethingWentWrong() {
+        System.out.println("Ops something went wrong");
+    }
 }
