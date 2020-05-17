@@ -1,8 +1,9 @@
 package Control;
 
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotEquals;
 
 class IdentityTest {
     String identity1 = Identity.getId();

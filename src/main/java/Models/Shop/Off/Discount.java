@@ -20,23 +20,28 @@ public class Discount {
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
-    private ArrayList<Customer> allCustomers;
-    private ArrayList<String> allCustomersNames;
+    //private ArrayList<Customer> allCustomers;
+    private static ArrayList<String> allCustomersUsernames;
 
     public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
-                    ArrayList<Customer> allCustomers) {
+                    ArrayList<String> allcustomersUsernames) {
         this.id = id;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountPercent = discountPercent;
         this.maximumDiscount = maximumDiscount;
         this.discountUseCount = discountUseCount;
-        this.allCustomers = allCustomers;
-        this.allCustomersNames = new ArrayList<>();
-        for (Customer customer : allCustomers) {
-            allCustomersNames.add(customer.getName());
-        }
+        //this.allCustomers = allCustomers;
+        this.allCustomersUsernames = allcustomersUsernames;
         allDiscounts.add(this);
+    }
+
+    public static ArrayList<Customer> getAllCustomers() {
+        ArrayList<Customer> allCustomers = new ArrayList<>();
+        for (String customerUsername : allCustomersUsernames) {
+            allCustomers.add((Customer) Customer.getAccountByUsername(customerUsername));
+        }
+        return allCustomers;
     }
 
     public static boolean hasDiscountWithId(String id) {
@@ -48,7 +53,7 @@ public class Discount {
     }
 
     public static void deleteDiscount(Discount discount) {
-        for (Customer customer : discount.allCustomers) {
+        for (Customer customer : Discount.getAllCustomers()) {
             customer.deleteDiscount(discount);
         }
         allDiscounts.remove(discount);
@@ -105,7 +110,7 @@ public class Discount {
                 ", discountPercent=" + discountPercent +
                 ", maximumDiscount=" + maximumDiscount +
                 ", discountUseCount=" + discountUseCount +
-                ", allCustomers=" + allCustomers +
+                ", allCustomers=" + Discount.getAllCustomers() +
                 '}';
     }
 
@@ -146,9 +151,8 @@ public class Discount {
     }
 
     private void loadReference() {
-        allCustomers = new ArrayList<>();
-        for (String customersName : allCustomersNames) {
-            allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
+        for (String customersName : allCustomersUsernames) {
+//            allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
         }
     }
 }

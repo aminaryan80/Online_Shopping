@@ -19,7 +19,7 @@ public class PrincipalManager extends Manager {
         // 0:discount percent - 1:maximumDiscount - 2:discountUseCount - 3:beginningDate - 4:endingDate
         Discount discount = new Discount(generateNewId(), parseDate(newDiscountInputs.get(3)), parseDate(newDiscountInputs.get(4)),
                 Integer.parseInt(newDiscountInputs.get(0)), Double.parseDouble(newDiscountInputs.get(1)),
-                Integer.parseInt(newDiscountInputs.get(2)), getCustomersListByNames(allowedCustomersNames));
+                Integer.parseInt(newDiscountInputs.get(2)), allowedCustomersNames);
         for (Customer customer : getCustomersListByNames(allowedCustomersNames)) {
             customer.addDiscount(discount);
         }

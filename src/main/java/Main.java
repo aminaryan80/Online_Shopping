@@ -23,7 +23,7 @@ public class Main {
             Discount.open();
             Product.open();
         } catch (Exception e) {
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
