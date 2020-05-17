@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -15,29 +17,33 @@ import java.util.Scanner;
 public class Discount {
     private static ArrayList<Discount> allDiscounts = new ArrayList<>();
     private String id;
-    private Date beginningDate;
-    private Date endingDate;
+    private LocalDate beginningDate;
+    private LocalDate endingDate;
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
-    private ArrayList<Customer> allCustomers;
-    private ArrayList<String> allCustomersNames;
-    private static DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    //private ArrayList<Customer> allCustomers;
+    private static ArrayList<String> allCustomersUsernames;
 
-    public Discount(String id, Date beginningDate, Date endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
-                    ArrayList<Customer> allCustomers) {
+    public Discount(String id, LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
+                    ArrayList<String> allcustomersUsernames) {
         this.id = id;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountPercent = discountPercent;
         this.maximumDiscount = maximumDiscount;
         this.discountUseCount = discountUseCount;
-        this.allCustomers = allCustomers;
-        this.allCustomersNames = new ArrayList<>();
-        for (Customer customer : allCustomers) {
-            allCustomersNames.add(customer.getName());
-        }
+        //this.allCustomers = allCustomers;
+        this.allCustomersUsernames = allcustomersUsernames;
         allDiscounts.add(this);
+    }
+
+    public static ArrayList<Customer> getAllCustomers() {
+        ArrayList<Customer> allCustomers = new ArrayList<>();
+        for (String customerUsername : allCustomersUsernames) {
+            allCustomers.add((Customer) Customer.getAccountByUsername(customerUsername));
+        }
+        return allCustomers;
     }
 
     public static boolean hasDiscountWithId(String id) {
@@ -57,7 +63,7 @@ public class Discount {
     }
 
     public static void deleteDiscount(Discount discount) {
-        for (Customer customer : discount.allCustomers) {
+        for (Customer customer : Discount.getAllCustomers()) {
             customer.deleteDiscount(discount);
         }
         allDiscounts.remove(discount);
@@ -67,11 +73,11 @@ public class Discount {
         return id;
     }
 
-    public void setBeginningDate(Date beginningDate) {
+    public void setBeginningDate(LocalDate beginningDate) {
         this.beginningDate = beginningDate;
     }
 
-    public void setEndingDate(Date endingDate) {
+    public void setEndingDate(LocalDate endingDate) {
         this.endingDate = endingDate;
     }
 
@@ -98,7 +104,9 @@ public class Discount {
     public static ArrayList<String> getDiscountInShort() {
         ArrayList<String> discountsInShort = new ArrayList<>();
         for (Discount discount : allDiscounts) {
-            String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            //String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
+            String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + discount.endingDate;
             discountsInShort.add(discountInShort);
         }
         return discountsInShort;
@@ -106,13 +114,22 @@ public class Discount {
 
     @Override
     public String toString() {
-        return "#" + id + " : " +
-                "beginningDate = " + dateFormat.format(beginningDate) +
-                "\nendingDate = " + dateFormat.format(endingDate) +
-                "\ndiscountPercent = " + discountPercent + "%" +
-                "\nmaximumDiscount = " + maximumDiscount +
-                "\ndiscountUseCount = " + discountUseCount +
-                "\nallowed customers = " + allCustomersNames;
+        return "Discount{" +
+                "id='" + id + '\'' +
+                ", beginningDate=" + beginningDate +
+                ", endingDate=" + endingDate +
+                ", discountPercent=" + discountPercent +
+                ", maximumDiscount=" + maximumDiscount +
+                ", discountUseCount=" + discountUseCount +
+                ", allCustomers=" + Discount.getAllCustomers() +
+                '}';
+//        return "#" + id + " : " +
+//                "beginningDate = " + dateFormat.format(beginningDate) +
+//                "\nendingDate = " + dateFormat.format(endingDate) +
+//                "\ndiscountPercent = " + discountPercent + "%" +
+//                "\nmaximumDiscount = " + maximumDiscount +
+//                "\ndiscountUseCount = " + discountUseCount +
+//                "\nallowed customers = " + allCustomersNames;
     }
 
     public static void open() throws Exception {
@@ -145,16 +162,15 @@ public class Discount {
         file.close();
     }
 
-    public static void loadReferences() {
-        for (Discount discount : allDiscounts) {
-            discount.loadReference();
-        }
-    }
-
-    private void loadReference() {
-        allCustomers = new ArrayList<>();
-        for (String customersName : allCustomersNames) {
-            allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
-        }
-    }
+//    public static void loadReferences() {
+//        for (Discount discount : allDiscounts) {
+//            discount.loadReference();
+//        }
+//    }
+//
+//    private void loadReference() {
+//        for (String customersName : allCustomersUsernames) {
+//              allCustomers.add((Customer) Customer.getAccountByUsername(customersName));
+//        }
+//    }
 }

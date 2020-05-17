@@ -13,41 +13,41 @@ import java.util.Scanner;
 
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<>();
-    private Category supCategory;
-    private String supCategoryName;
+//    private Category supCategory;
+    private String supCategoryName = null;
     private String name;
     private HashMap<String, Integer> features; // featureName - featureType // 0 : int - 1 : String
-    private List<Category> subCategories;
+//    private List<Category> subCategories;
     private List<String> subCategoriesNames;
-    private ArrayList<Product> allProducts;
+//    private ArrayList<Product> allProducts;
     private ArrayList<String> allProductsIds;
 
-    public Category(String name, Category supCategory, HashMap<String, Integer> features, ArrayList<Product> allProducts) {
+    public Category(String name, String supCategoryName, HashMap<String, Integer> features, ArrayList<String> allProductsIds) {
         this.name = name;
         this.features = features;
-        this.allProducts = allProducts;
+//        this.allProducts = allProducts;
         this.allProductsIds = new ArrayList<>();
-        for (Product product : allProducts) {
-            this.allProductsIds.add(product.getId());
+ //       for (Product product : allProducts) {
+ //           this.allProductsIds.add(product.getId());
+//        }
+ //       this.supCategory = supCategory;
+        if (supCategoryName != null) {
+            this.supCategoryName = supCategoryName;
         }
-        this.supCategory = supCategory;
-        if (supCategory != null) {
-            this.supCategoryName = supCategory.getName();
-        }
-        this.subCategories = new ArrayList<>();
+//        this.subCategories = new ArrayList<Category>();
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
     }
 
     public void changeCategoryNameForProducts() {
-        for (Product product : allProducts) {
+        for (Product product : getProducts()) {
             product.setCompanyName(name);
         }
     }
 
     public void addFeature(String feature) {
         features.put(feature, 0);
-        for (Product product : allProducts) {
+        for (Product product : getProducts()) {
             product.addFeature(new Feature(feature, ""));
         }
     }
@@ -55,14 +55,14 @@ public class Category {
     public void editFeature(String oldName, String newName) {
         features.remove(oldName);
         features.put(newName, 0);
-        for (Product product : allProducts) {
+        for (Product product : getProducts()) {
             product.editFeature(oldName, newName);
         }
     }
 
     public void removeFeature(String feature) {
         features.remove(feature);
-        for (Product product : allProducts) {
+        for (Product product : getProducts()) {
             product.removeFeature(feature);
         }
     }
@@ -96,33 +96,33 @@ public class Category {
     }
 
     public ArrayList<Product> getAllProducts() {
-        ArrayList<Product> products = new ArrayList<>(allProducts);
-        for (Category category : subCategories) {
-            products.addAll(category.allProducts);
+        ArrayList<Product> products = new ArrayList<>(getProducts());
+        for (Category category : getSubCategories()) {
+            products.addAll(category.getProducts());
         }
         return products;
     }
 
     public static void deleteCategory(Category category) {
-        category.supCategory.subCategories.remove(category);
+        category.subCategoriesNames.remove(category.getName());
         allCategories.remove(category);
-        ArrayList<Category> tmp = new ArrayList<>(category.subCategories);
-        for (Category subCategory : tmp) {
+        ArrayList<Category> subCats = new ArrayList<>(category.getSubCategories());
+        for (Category subCategory : subCats) {
             deleteCategory(subCategory);
         }
     }
 
     public boolean hasCategoryInsideWithName(String name) {
-        for (Category category : subCategories) {
+        for (Category category : getSubCategories()) {
             if (category.getName().equals(name))
                 return true;
         }
         return false;
     }
 
-    public List<Category> getSubCategories() {
-        return subCategories;
-    }
+//    public List<Category> getSubCategories() {
+//        return subCategories;
+//    }
 
     public String getName() {
         return name;
@@ -133,7 +133,7 @@ public class Category {
     }
 
     public void setSubCategory(Category category) {
-        this.subCategories.add(category);
+//        this.subCategories.add(category);
         this.subCategoriesNames.add(category.getName());
     }
 
@@ -167,22 +167,35 @@ public class Category {
         file.close();
     }
 
-    public static void loadReferences() {
-        for (Category category : allCategories) {
-            category.loadReference();
+//    public static void loadReferences() {
+//        for (Category category : allCategories) {
+//            category.loadReference();
+//        }
+//    }
+//
+//    private void loadReference() {
+//        supCategory = Category.getCategoryByName(supCategoryName);
+//
+//    }
+
+    public ArrayList<Product> getProducts(){
+        ArrayList<Product> products = new ArrayList<>();
+        for (String productsId : allProductsIds) {
+            products.add(Product.getProductById(productsId));
         }
+        return products;
     }
 
-    private void loadReference() {
-        supCategory = Category.getCategoryByName(supCategoryName);
-        allProducts = new ArrayList<>();
-        for (String productsId : allProductsIds) {
-            allProducts.add(Product.getProductById(productsId));
-        }
-        subCategories = new ArrayList<>();
+    public Category getSupCategory() {
+        return Category.getCategoryByName(supCategoryName);
+    }
+
+    public ArrayList<Category> getSubCategories() {
+        ArrayList<Category> subCategories = new ArrayList<>();
         for (String subCategoriesName : subCategoriesNames) {
             subCategories.add(Category.getCategoryByName(subCategoriesName));
         }
+        return subCategories;
     }
 
     @Override
@@ -190,8 +203,8 @@ public class Category {
         return "Category{" +
                 "name='" + name + '\'' +
                 ", features=" + features +
-                ", subCategories=" + subCategories +
-                ", allProducts=" + allProducts +
+                ", subCategories=" + getSubCategories() +
+                ", allProducts=" + getAllProducts() + //????????????????????????????????//
                 '}';
     }
 

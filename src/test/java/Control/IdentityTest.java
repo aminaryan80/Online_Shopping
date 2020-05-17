@@ -1,5 +1,8 @@
-/*package Control;
+package Control;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotEquals;
@@ -13,4 +16,4 @@ class IdentityTest {
         System.out.println(identity1);
         assertNotEquals(identity1,identity2);
     }
-}*/
+}

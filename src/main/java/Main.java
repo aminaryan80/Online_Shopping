@@ -24,15 +24,16 @@ public class Main {
             Product.open();
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     private static void connectObjects() {
-        Account.loadReferences();
-        Category.loadReferences();
+        //Account.loadReferences();
+        //Category.loadReferences();
         Request.loadReferences();
-        Auction.loadReferences();
-        Discount.loadReferences();
+        //Auction.loadReferences();
+        // Discount.loadReferences();
         Product.loadReferences();
     }
 
