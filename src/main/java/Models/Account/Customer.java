@@ -8,7 +8,6 @@ import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Customer extends Account {
     private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "balance"};
@@ -22,7 +21,7 @@ public class Customer extends Account {
         this.cart = new Cart();
         this.allLogs = new ArrayList<>();
         //this.discounts = new ArrayList<>();
-        this.discountsIds = new ArrayList<>();
+        discountsIds = new ArrayList<>();
     }
 
 

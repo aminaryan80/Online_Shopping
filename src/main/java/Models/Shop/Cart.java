@@ -1,5 +1,6 @@
 package Models.Shop;
 
+import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 
@@ -18,16 +19,20 @@ public class Cart {
         return new ArrayList<>(products.keySet());
     }
 
-    public ArrayList<String> showProductsInShort() {
-        ArrayList<String> productsNames = new ArrayList<String>();
-        for (Product product : getProducts()) {
-            productsNames.add(product.getName());
-        }
-        return productsNames;
+    public static void addCartToCustomerCart(Customer account, Cart cart) {
+        account.getCart().products.putAll(cart.products);
     }
 
     public boolean hasProductInCartWithId(String id) {
         return true;
+    }
+
+    public ArrayList<String> showProductsInShort() {
+        ArrayList<String> productsNames = new ArrayList<>();
+        for (Product product : getProducts()) {
+            productsNames.add(product.getName());
+        }
+        return productsNames;
     }
 
     public void addProduct(Product product) {

@@ -3,13 +3,9 @@ package Control.UserPanel;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
-import Models.Account.Principal;
-import Models.Account.Seller;
+import Models.Shop.Cart;
 import View.ErrorProcessor;
-import View.UserPanel.CreateNewAccountMenu;
 import View.UserPanel.LoginToExistingAccountMenu;
-
-import java.util.ArrayList;
 
 public class LoginToExistingAccountManager extends Manager {
     public LoginToExistingAccountManager(Account account, String username) {
@@ -24,7 +20,9 @@ public class LoginToExistingAccountManager extends Manager {
     public void login(String username, String password) {
         Account account = Account.getAccountByUsername(username);
         if(account.getPassword().equals(password)) {
-            this.account = account;
+            Manager.account = account;
+            if (Manager.account instanceof Customer)
+                Cart.addCartToCustomerCart((Customer) (Manager.account), cart);
         } else ErrorProcessor.wrongPassword();
     }
 }

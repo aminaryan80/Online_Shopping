@@ -1,6 +1,7 @@
 package Control;
 
 import Models.Account.Account;
+import Models.Shop.Cart;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import View.Menu;
@@ -14,6 +15,7 @@ import java.util.Random;
 public abstract class Manager {
     protected static Account account;
     protected final static Category mainCategory = new Category("mainCategory", null, null, new ArrayList<>());
+    protected static Cart cart = new Cart();
     protected Menu menu;
     protected boolean isPrincipalExists = false;
 
