@@ -1,5 +1,6 @@
 package View.CustomerMenus.purchase;
 
+import Control.CustomerManagers.WrongDiscountIdException;
 import Control.Manager;
 import View.ErrorProcessor;
 
@@ -12,15 +13,24 @@ public class PaymentMenu extends PurchaseMenu {
     }
 
     private void pay() {
-        if(canPay(DiscountCodeMenu.getDiscountCode())){
+        if (canPay(DiscountCodeMenu.getDiscountCode())) {
             ArrayList<String> receiverInformation = new ArrayList<>();
             receiverInformation.add(ReceiverInformationMenu.getAddress());
             receiverInformation.add(ReceiverInformationMenu.getPhoneNum());
-            purchaseManager.pay(receiverInformation,DiscountCodeMenu.getDiscountCode());
-        } else ErrorProcessor.notEnoughMoney();
+            try {
+                purchaseManager.pay(receiverInformation, DiscountCodeMenu.getDiscountCode());
+            } catch (WrongDiscountIdException e) {
+                ErrorProcessor.invalidDiscountId();
+            }
+        } else ErrorProcessor.somethingWentWrong();
     }
 
     private boolean canPay(String discountId) {
-       return purchaseManager.canPay(discountId);
+        try {
+            return purchaseManager.canPay(discountId);
+        } catch (WrongDiscountIdException e) {
+            ErrorProcessor.invalidDiscountId();
+            return false;
+        }
     }
 }

@@ -17,7 +17,7 @@ public class CustomerMenu extends Menu {
 
     public CustomerMenu(Manager manager) {
         super(manager);
-//        customerMenu();
+        customerMenu();
     }
 
     public void customerMenu() {
@@ -52,27 +52,9 @@ public class CustomerMenu extends Menu {
                 "\n" +
                 "view personal info" +
                 "\n" +
-                "\t⇒ edit [field]" +
-                "\n" +
                 "view cart" +
                 "\n" +
-                "\t⇒ show products" +
-                "\n" +
-                "\t⇒ view [productId]" +
-                "\n" +
-                "\t⇒ increase [productId]" +
-                "\n" +
-                "\t⇒ decrease [productId]" +
-                "\n" +
-                "\t⇒ show total price" +
-                "\n" +
-                "\t⇒ purchase" +
-                "\n" +
                 "view orders" +
-                "\n" +
-                "\t⇒ show order [orderId]" +
-                "\n" +
-                "\t⇒ rate [productId] [1-5]" +
                 "\n" +
                 "view balance" +
                 "\n" +

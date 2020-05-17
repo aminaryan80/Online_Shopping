@@ -128,7 +128,7 @@ public class ProductsManager extends Manager {
 
     private ArrayList<Product> setPriceFilter(Filter filter) {
         return products.stream().filter(product -> {
-            if (product.getPrice() == Double.parseDouble(filter.getValue())) {
+            if (product.getAuctionedPrice() == Double.parseDouble(filter.getValue())) {
                 return true;
             }
             return false;
@@ -221,7 +221,7 @@ public class ProductsManager extends Manager {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
-                if (productsForSort[i].getPrice() > productsForSort[j].getPrice()) {
+                if (productsForSort[i].getAuctionedPrice() > productsForSort[j].getAuctionedPrice()) {
                     Product temp = productsForSort[i];
                     productsForSort[i] = productsForSort[j];
                     productsForSort[j] = temp;

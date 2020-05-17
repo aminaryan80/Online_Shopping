@@ -152,6 +152,10 @@ public class Product {
         allComments.add(comment);
     }
 
+    public Auction getAuction() {
+        return auction;
+    }
+
     public enum ProductStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
@@ -180,8 +184,13 @@ public class Product {
         return companyName;
     }
 
-    public double getPrice() {
+    public double getActualPrice() {
         return price;
+    }
+
+    public double getAuctionedPrice() {
+        if(auction == null) return price;
+        else return price - auction.getDiscountAmount();
     }
 
     public void setStatus(ProductStatus status) {

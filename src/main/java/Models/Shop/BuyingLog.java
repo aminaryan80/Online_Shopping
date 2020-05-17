@@ -1,35 +1,32 @@
 package Models.Shop;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class BuyingLog extends Log {
-    private double codeDiscountAmount;
-    private String sellerName;
 
-    public BuyingLog(String id, Date date, double paymentAmount, String address, String phoneNumber, String customerName, boolean isReceived, double codeDiscountAmount, String sellerName) {
-        super(id, date, paymentAmount, address, phoneNumber, customerName, isReceived);
-        this.codeDiscountAmount = codeDiscountAmount;
-        this.sellerName = sellerName;
+    public BuyingLog(String id, LocalDateTime date, double moneyPaid, double amountOfDiscountCodeApplied, ArrayList<Product> products,
+                     String sellerName, String address, String phoneNumber, Status ReceivingStatus) {
+        super(id, date, moneyPaid, amountOfDiscountCodeApplied, products, sellerName, address, phoneNumber, ReceivingStatus);
     }
 
     @Override
     public String viewLogInShort() {
-        return id + date + paymentAmount;
+        return id + date + money;
     }
 
     @Override
     public String toString() {
         return "BuyingLog{" +
-                "codeDiscountAmount=" + codeDiscountAmount +
-                ", sellerName='" + sellerName + '\'' +
-                ", id='" + id + '\'' +
+                "id='" + id + '\'' +
                 ", date=" + date +
-                ", paymentAmount=" + paymentAmount +
+                ", money=" + money +
+                ", amount=" + amount +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", products=" + products +
-                ", customerName='" + customerName + '\'' +
-                ", isReceived=" + isReceived +
+                ", name='" + name + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

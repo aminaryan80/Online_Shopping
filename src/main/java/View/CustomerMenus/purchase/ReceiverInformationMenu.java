@@ -1,6 +1,7 @@
 package View.CustomerMenus.purchase;
 
 import Control.Manager;
+import View.ErrorProcessor;
 
 public class ReceiverInformationMenu extends PurchaseMenu {
 
@@ -17,15 +18,21 @@ public class ReceiverInformationMenu extends PurchaseMenu {
         address = scanner.nextLine();
         System.out.println("Enter phone number:");
         phoneNum = scanner.nextLine();
-        System.out.println("type \"confirm\" to confirm the information\n" +
-                " \"change\" to enter information again\n" +
-                " \"back\" to exit this menu");
+        help();
         String option = scanner.nextLine();
         if(option.equals("confirm")){
             new DiscountCodeMenu(manager);
         } else if(option.equals("change")) {
             ReceiveInformation();
-        } else return;
+        } else if(option.matches("(?i)back")){
+            return;
+        } else ErrorProcessor.invalidInput();
+    }
+
+    private void help() {
+        System.out.println("\"confirm\"\t to confirm the information\n" +
+                " \"change\"\t to reEnter information\n" +
+                " \"back\"\t to exit this menu");
     }
 
     public static String getAddress() {
