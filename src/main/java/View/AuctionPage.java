@@ -1,11 +1,10 @@
 package View;
 
 import Control.AuctionPageManager;
+import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
+import Models.Shop.Off.Auction;
+import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +14,48 @@ public class AuctionPage extends Menu {
 
     public AuctionPage(Manager manager) {
         super(manager);
+        auctionPage();
     }
 
 
     public void auctionPage() {
-
+        Matcher matcher;
+        showAuctionedProducts();
+        while (true) {
+            String command = scanner.nextLine();
+            if ((matcher = getMatcher(command, "^show product (\\S+)$")).find()) {
+                showProductById(matcher.group(1));
+            } else if (getMatcher(command, "^filtering$").find()) {
+                // TODO By Ali
+            } else if (getMatcher(command, "^sorting$").find()) {
+                // TODO By Ali
+            } else if (getMatcher(command, "^back$").find()) {
+                return;
+            } else if (getMatcher(command, "help").find()) {
+                help();
+            } else {
+                ErrorProcessor.invalidInput();
+            }
+        }
     }
 
-    private void showOffs() {
-
+    private void showAuctionedProducts() {
+        for (String string : Auction.getAuctionedProducts()) {
+            System.out.println(string);
+        }
     }
 
     private void showProductById(String id) {
+        if (Product.hasProductWithId(id))
+            new ProductPageManager(manager.getAccount(), Product.getProductById(id));
+    }
 
+    private void help() {
+        System.out.println("show product [productId]\n" +
+                "filtering\n" +
+                "sorting\n" +
+                "help\n" +
+                "back");
     }
 
     private void filtering() {

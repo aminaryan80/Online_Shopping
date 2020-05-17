@@ -1,5 +1,6 @@
 package Control.CustomerManagers;
 
+import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
@@ -8,11 +9,11 @@ import View.CustomerMenus.product.ProductPage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductPageManager extends CustomerManager {
+public class ProductPageManager extends Manager {
 
     protected Product product;
 
-    public ProductPageManager(Account account,Product product) {
+    public ProductPageManager(Account account, Product product) {
         super(account);
         this.product = product;
         this.menu = new ProductPage(this);

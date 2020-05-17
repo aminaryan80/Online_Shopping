@@ -56,6 +56,19 @@ public class Auction {
         return discountAmount;
     }
 
+    public static ArrayList<String> getAuctionedProducts() {
+        ArrayList<String> productsInShort = new ArrayList<>();
+        for (Auction auction : allAuctions) {
+            for (Product product : auction.products)
+                productsInShort.add("#" + product.getId() + " : \n" +
+                        "price = " + product.getPrice() +
+                        "\nAuctioned price = " + product.getAuctionedPrice() +
+                        "\nAuction's ending date = " + auction.endingDate +
+                        "\n--------------------------------------------"); // TODO localDate shit
+        }
+        return productsInShort;
+    }
+
     public void setBeginningDate(Date beginningDate) {
         this.beginningDate = beginningDate;
     }
@@ -117,7 +130,7 @@ public class Auction {
     }
 
     public enum AuctionStatus {
-        UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED;
+        UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
 
     public static void open() throws Exception{
