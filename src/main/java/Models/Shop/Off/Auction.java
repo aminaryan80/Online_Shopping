@@ -69,6 +69,17 @@ public class Auction {
         return productsInShort;
     }
 
+    public ArrayList<String> getAuctionProducts() {
+        ArrayList<String> productsInShort = new ArrayList<>();
+        for (Product product : products)
+            productsInShort.add("#" + product.getId() + " : \n" +
+                    "price = " + product.getPrice() +
+                    "\nAuctioned price = " + product.getAuctionedPrice() +
+                    "\nAuction's ending date = " + endingDate +
+                    "\n--------------------------------------------"); // TODO localDate shit
+        return productsInShort;
+    }
+
     public void setBeginningDate(Date beginningDate) {
         this.beginningDate = beginningDate;
     }

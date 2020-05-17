@@ -26,9 +26,7 @@ public class AuctionPage extends Menu {
             if ((matcher = getMatcher(command, "^show product (\\S+)$")).find()) {
                 showProductById(matcher.group(1));
             } else if (getMatcher(command, "^filtering$").find()) {
-                // TODO By Ali
-            } else if (getMatcher(command, "^sorting$").find()) {
-                // TODO By Ali
+                filtering();
             } else if (getMatcher(command, "^back$").find()) {
                 return;
             } else if (getMatcher(command, "help").find()) {

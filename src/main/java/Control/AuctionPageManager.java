@@ -20,16 +20,6 @@ public class AuctionPageManager extends Manager {
         this.menu = new AuctionPage(this);
     }
 
-    // offs
-    public List<String> showOffs() {
-        return null;
-    }
-
-    // show product [productId]
-    public void showProduct(String id) {
-
-    }
-
     public String showAvailableFilters() {
         return "status\n" +
                 "beginningDate\n" +
@@ -88,15 +78,15 @@ public class AuctionPageManager extends Manager {
                 auctions = setDiscountAmountFilter(filter);
             }
         }
-        return auctionsInShort();
+        return productsInShort();
     }
 
-    private ArrayList<String> auctionsInShort() {
-        ArrayList<String> auctionsNames = new ArrayList<>();
+    private ArrayList<String> productsInShort() {
+        ArrayList<String> products = new ArrayList<>();
         for (Auction auction : auctions) {
-            auctionsNames.add(auction.viewInShort());
+            products.addAll(auction.getAuctionProducts());
         }
-        return auctionsNames;
+        return products;
     }
 
     private ArrayList<Auction> setStatusFilter(Filter filter) {
