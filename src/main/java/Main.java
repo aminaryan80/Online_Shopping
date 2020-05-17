@@ -28,8 +28,8 @@ public class Main {
     }
 
     private static void connectObjects() {
-        Account.loadReferences();
-        Category.loadReferences();
+        //Account.loadReferences();
+        //Category.loadReferences();
         Request.loadReferences();
         Auction.loadReferences();
         // Discount.loadReferences();
