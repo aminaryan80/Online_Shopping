@@ -12,8 +12,8 @@ public class Seller extends Account {
     private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "companyName"};
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<SellingLog>();
-    private List<Auction> auctions = new ArrayList<Auction>();
-    private List<String> auctionsId = new ArrayList<>();
+//    private List<Auction> auctions = new ArrayList<Auction>();
+    private static List<String> auctionsId = new ArrayList<String>();
 
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
@@ -38,14 +38,14 @@ public class Seller extends Account {
 
     public ArrayList<String> viewOffsInShort() {
         ArrayList<String> offsNames = new ArrayList<>();
-        for (Auction auction : auctions) {
+        for (Auction auction : getAuctions()) {
             offsNames.add("" + auction.getId() + " : " + auction.getDiscountAmount());
         }
         return offsNames;
     }
 
     public boolean hasAuctionWithId(String id) {
-        for (Auction auction : auctions) {
+        for (Auction auction : getAuctions()) {
             if (auction.getId().equals(id)) {
                 return true;
             }
@@ -58,7 +58,7 @@ return true;
     }
 
     public Auction getAuctionById(String id) {
-        for (Auction auction : auctions) {
+        for (Auction auction : getAuctions()) {
             if (auction.getId().equals(id)) {
                 return auction;
             }
@@ -67,16 +67,15 @@ return true;
     }
 
     public void addAuction(Auction auction) {
-        auctions.add(auction);
         auctionsId.add(auction.getId());
     }
 
-    @Override
-    protected void loadReference() {
-        auctions = new ArrayList<>();
+    protected static ArrayList<Auction> getAuctions() {
+        ArrayList<Auction> auctions = new ArrayList<>();
         for (String auctionId : auctionsId) {
             auctions.add(Auction.getAuctionById(auctionId));
         }
+        return auctions;
     }
 
     @Override

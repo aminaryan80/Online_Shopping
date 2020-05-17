@@ -14,33 +14,33 @@ public class Customer extends Account {
     private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "balance"};
     private Cart cart;
     private ArrayList<BuyingLog> allLogs;
-    private ArrayList<Discount> discounts;
-    private ArrayList<String> discountsIds;
+//    private ArrayList<Discount> discounts;
+    private static ArrayList<String> discountsIds;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.cart = new Cart();
         this.allLogs = new ArrayList<>();
-        this.discounts = new ArrayList<>();
+        //this.discounts = new ArrayList<>();
         this.discountsIds = new ArrayList<>();
     }
 
+
+
     public void addDiscount(Discount discount) {
-        discounts.add(discount);
         discountsIds.add(discount.getId());
     }
 
     public void deleteDiscount(Discount discount) {
-        discounts.remove(discount);
         discountsIds.remove(discount.getId());
     }
 
-    @Override
-    protected void loadReference() {
-        discounts = new ArrayList<>();
+    public static ArrayList<Discount> getDiscounts(){
+        ArrayList<Discount> discounts = new ArrayList<>();
         for (String discountId : discountsIds) {
             discounts.add(Discount.getDiscountById(discountId));
         }
+        return discounts;
     }
 
     public ArrayList<String> getChangeableFields() {
@@ -82,10 +82,6 @@ public class Customer extends Account {
 
     public void addLog(BuyingLog buyingLog) {
         allLogs.add(buyingLog);
-    }
-
-    public List<Discount> getDiscounts() {
-        return discounts;
     }
 
     @Override
