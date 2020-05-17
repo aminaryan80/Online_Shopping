@@ -39,6 +39,34 @@ public class Category {
         allCategories.add(this);
     }
 
+    public void changeCategoryNameForProducts() {
+        for (Product product : allProducts) {
+            product.setCompanyName(name);
+        }
+    }
+
+    public void addFeature(String feature) {
+        features.put(feature, 0);
+        for (Product product : allProducts) {
+            product.addFeature(new Feature(feature, ""));
+        }
+    }
+
+    public void editFeature(String oldName, String newName) {
+        features.remove(oldName);
+        features.put(newName, 0);
+        for (Product product : allProducts) {
+            product.editFeature(oldName, newName);
+        }
+    }
+
+    public void removeFeature(String feature) {
+        features.remove(feature);
+        for (Product product : allProducts) {
+            product.removeFeature(feature);
+        }
+    }
+
     public static ArrayList<String> getAllCategoriesNames() {
         ArrayList<String> allCategoriesNames = new ArrayList<>();
         for (Category category : allCategories) {

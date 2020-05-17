@@ -46,7 +46,7 @@ public class CreateNewAccountMenu extends Menu {
             if (type.equals("customer") || type.equals("seller")) {
                 System.out.println("Enter balance:");
                 input = scanner.nextLine();
-                if (!manager.checkBalance(input)) {
+                if (!manager.checkNumber(input)) {
                     ErrorProcessor.invalidInput();
                     continue;
                 }

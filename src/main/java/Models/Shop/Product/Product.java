@@ -55,6 +55,18 @@ public class Product {
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
     }
 
+    public void addFeature(Feature feature) {
+        features.add(feature);
+    }
+
+    public void editFeature(String oldName, String newName) {
+        getFeatureByName(oldName).setName(newName);
+    }
+
+    public void removeFeature(String feature) {
+        features.remove(getFeatureByName(feature));
+    }
+
     public Feature getFeatureByName(String name) {
         for (Feature feature : features) {
             if (feature.getName().equals(name)) {

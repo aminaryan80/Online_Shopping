@@ -9,6 +9,10 @@ public class Feature {
         this.value = value;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

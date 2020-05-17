@@ -2,11 +2,9 @@ package View.Seller;
 
 import Control.Manager;
 import Control.Seller.SellerManager;
-import Models.Account.Seller;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
 import Models.Shop.Product.Product;
-import Models.Shop.Request.AddProductRequest;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -76,14 +74,19 @@ public class SellerMenu extends Menu {
     }
 
     private void addProduct() {
-        System.out.println("enter product's id");
-        String id = scanner.nextLine();
-        System.out.println("enter product's price");
-        double price = scanner.nextFloat();
+        String priceString;
+        while (true) {
+            System.out.println("enter product's price");
+            priceString = scanner.nextLine();
+            if (manager.checkNumber(priceString)) {
+                break;
+            } else {
+                ErrorProcessor.invalidCategoryName();
+            }
+        }
+        double price = Double.parseDouble(priceString);
         System.out.println("enter product's name");
         String name = scanner.nextLine();
-        System.out.println("enter product's company name");
-        String companyName = scanner.nextLine();
         System.out.println("enter product's description");
         String description = scanner.nextLine();
         System.out.println("is your product available(answer with true or false)");
@@ -92,7 +95,7 @@ public class SellerMenu extends Menu {
         while (true) {
             System.out.println("enter product's category");
             categoryName = scanner.nextLine();
-            if (Category.hasCategoryWithName(categoryName)) {
+            if (Category.hasCategoryWithName(categoryName) && !categoryName.equals("mainCategory")) {
                 break;
             } else {
                 ErrorProcessor.invalidCategoryName();
@@ -100,8 +103,7 @@ public class SellerMenu extends Menu {
         }
         Category category = Category.getCategoryByName(categoryName);
         ArrayList<Feature> allFeatures = getFeatures(category);
-        Product product = ((SellerManager) manager).addProduct(id, name, companyName, category, price, isAvailable, description, allFeatures);
-        new AddProductRequest("random id", (Seller) manager.getAccount(), product);
+        ((SellerManager) manager).addProduct(name, category, price, isAvailable, description, allFeatures);
     }
 
     private ArrayList<Feature> getFeatures(Category category) {

@@ -45,8 +45,8 @@ public abstract class Manager {
         return phoneNumber.matches("^\\d{11}$");
     }
 
-    public boolean checkBalance(String balance) {
-        return balance.matches("^\\d+(\\.\\d+)?$");
+    public boolean checkNumber(String number) {
+        return number.matches("^\\d+(\\.\\d+)?$");
     }
 
     public boolean checkDate(String date) {
@@ -74,7 +74,7 @@ public abstract class Manager {
         }
     }
 
-    private String generateNewId() {
+    protected String generateNewId() {
         Random rand = new Random();
         return String.valueOf(rand.nextInt(100000));
     }

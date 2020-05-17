@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Customer extends Account {
-    private final String[] changeableFields = {"password", "email", "firstname", "lastname", "phone number", "balance"};
+    private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "balance"};
     private Cart cart;
     private ArrayList<BuyingLog> allLogs;
     private ArrayList<Discount> discounts;

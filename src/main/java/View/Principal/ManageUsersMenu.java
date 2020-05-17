@@ -51,7 +51,6 @@ public class ManageUsersMenu extends Menu {
     }
 
     private void createManagerProfile() {
-        // TODO This is all wrong. fix it later
         ((ManageUsersManager) manager).createManagerProfile(getNewManagerInput());
     }
 

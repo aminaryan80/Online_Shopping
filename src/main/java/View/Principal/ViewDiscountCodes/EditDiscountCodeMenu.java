@@ -72,7 +72,7 @@ public class EditDiscountCodeMenu extends Menu {
     private void editMaximumAmount() {
         System.out.println("Enter maximum amount:");
         String input = scanner.nextLine();
-        if (manager.checkBalance(input)) {
+        if (manager.checkNumber(input)) {
             ((EditDiscountCodeManager) manager).editMaximumAmount(Double.parseDouble(input));
         } else ErrorProcessor.invalidInput();
     }

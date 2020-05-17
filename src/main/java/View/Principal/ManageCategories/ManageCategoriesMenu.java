@@ -1,7 +1,9 @@
 package View.Principal.ManageCategories;
 
 import Control.Manager;
+import Control.Principal.ManageCategories.EditCategoryManager;
 import Control.Principal.ManageCategories.ManageCategoriesManager;
+import Models.Shop.Category.Category;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
@@ -22,7 +24,7 @@ public class ManageCategoriesMenu extends Menu {
             Matcher matcher;
             String input = scanner.nextLine();
             if ((matcher = getMatcher(input, "^edit (\\S+)$")).find()) {
-                editCategory(matcher.group(1)); // TODO
+                editCategory(matcher.group(1));
             } else if ((matcher = getMatcher(input, "^add (\\S+)$")).find()) {
                 addCategory(matcher.group(1));
             } else if ((matcher = getMatcher(input, "^remove (\\S+)$")).find()) {
@@ -40,7 +42,10 @@ public class ManageCategoriesMenu extends Menu {
     }
 
     private void editCategory(String categoryName) {
-        // TODO
+        if (!Category.hasCategoryWithName(categoryName)) {
+            ErrorProcessor.invalidCategoryName();
+        } else
+            new EditCategoryManager(manager.getAccount(), Category.getCategoryByName(categoryName));
     }
 
     private void addCategory(String categoryName) {

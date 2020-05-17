@@ -51,7 +51,15 @@ public abstract class Account {
     }
 
     public static ArrayList<String> showAccountsInShort() {
-        return null;
+        ArrayList<String> accountsInShort = new ArrayList<>();
+        for (Account account : allAccounts) {
+            accountsInShort.add(account.getUsername() + "  " + account.getName() + "  " + account.getLastName() + "  " + account.getBalance());
+        }
+        return accountsInShort;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public static void deleteAccount(Account account) {

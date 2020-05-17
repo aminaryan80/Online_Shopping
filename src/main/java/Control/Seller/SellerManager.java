@@ -7,6 +7,7 @@ import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
+import Models.Shop.Request.AddProductRequest;
 import View.Seller.SellerMenu;
 
 import java.util.ArrayList;
@@ -52,13 +53,15 @@ public class SellerManager extends Manager {
     }
 
     // add product
-    public Product addProduct(String id, String name, String companyName,
-                              Category category, double price, boolean iaAvailable,
-                              String description, ArrayList<Feature> features) {
+    public void addProduct(String name,
+                           Category category, double price, boolean iaAvailable,
+                           String description, ArrayList<Feature> features) {
+        String id = generateNewId();
+        String companyName = ((Seller) account).getCompanyName();
         Product product = new Product(id, name, companyName, price, (Seller) account, iaAvailable, category, description, features);
         Product.addProduct(product);
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);
-        return product;
+        new AddProductRequest(id, (Seller) account, product);
     }
 
     // remove product [productId]

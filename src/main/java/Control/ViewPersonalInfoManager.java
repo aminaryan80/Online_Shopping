@@ -31,17 +31,17 @@ public class ViewPersonalInfoManager extends Manager {
             case "lastname":
                 account.setLastName(newValue);
                 break;
-            case "phone number":
+            case "phonenumber":
                 if (checkPhoneNumber(newValue))
                     account.setPhoneNumber(newValue);
                 else ErrorProcessor.invalidInput();
                 break;
             case "balance":
-                if (checkBalance(newValue))
+                if (checkNumber(newValue))
                     account.setBalance(Double.parseDouble(newValue));
                 else ErrorProcessor.invalidInput();
                 break;
-            case "company name":
+            case "companyname":
                 ((Seller) account).setCompanyName(newValue);
                 break;
         }

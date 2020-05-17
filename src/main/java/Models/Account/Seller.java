@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Seller extends Account {
-    private final String[] changeableFields = {"password", "email", "firstname", "lastname", "phone number", "company name"};
+    private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "companyName"};
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<SellingLog>();
     private List<Auction> auctions = new ArrayList<Auction>();
