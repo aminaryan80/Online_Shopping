@@ -31,8 +31,12 @@ public class Identity {
 
     //TODO file
     public static void open() throws Exception {
-        File file = new File(Address.DISCOUNTS.get() + "\\" + "identities");
-        if (!file.exists()) file.createNewFile();
+        File file = new File(Address.IDNETITIES.get() + "\\" + "identities");
+        if (!file.exists()) {
+            File folder = new File(Address.IDNETITIES.get());
+            folder.mkdirs();
+            file.createNewFile();
+        }
         else {
             identities.addAll(open(file));
         }

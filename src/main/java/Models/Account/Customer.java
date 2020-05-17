@@ -15,7 +15,7 @@ public class Customer extends Account {
     private Cart cart;
     private ArrayList<BuyingLog> allLogs;
 //    private ArrayList<Discount> discounts;
-    private static ArrayList<String> discountsIds;
+    private static ArrayList<String> discountsIds= new ArrayList<>();
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
@@ -28,6 +28,7 @@ public class Customer extends Account {
 
 
     public void addDiscount(Discount discount) {
+        if(discount != null)
         discountsIds.add(discount.getId());
     }
 

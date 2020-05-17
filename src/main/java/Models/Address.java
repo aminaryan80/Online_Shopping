@@ -16,7 +16,9 @@ public enum Address {
     EDIT_PRODUCT_REQUESTS("database"+"\\"+"requests"+"\\"+"edit product requests"),
     ADD_OFF_REQUESTS("database"+"\\"+"requests"+"\\"+"add off requests"),
     EDIT_OFF_REQUESTS("database"+"\\"+"requests"+"\\"+"edit off requests"),
-    AUCTIONS("database"+"\\"+"auctions");
+    AUCTIONS("database"+"\\"+"auctions"),
+    IDNETITIES("database"+"\\"+"auctions")
+    ;
     private final String address;
     Address(String address) {
         this.address = address;
