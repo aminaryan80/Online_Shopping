@@ -70,14 +70,14 @@ public class PrincipalMenu extends Menu {
             inputs.add(input);
             System.out.println("Enter maximum discount amount:");
             input = scanner.nextLine();
-            if (!manager.checkBalance(input)) {
+            if (!manager.checkNumber(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }
             inputs.add(input);
             System.out.println("Enter discount allowed use count:"); // :/
             input = scanner.nextLine();
-            if (!manager.checkBalance(input)) {
+            if (!manager.checkNumber(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }
