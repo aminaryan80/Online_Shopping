@@ -34,7 +34,7 @@ public class Category {
         if (supCategory != null) {
             this.supCategoryName = supCategory.getName();
         }
-        this.subCategories = new ArrayList<Category>();
+        this.subCategories = new ArrayList<>();
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
     }

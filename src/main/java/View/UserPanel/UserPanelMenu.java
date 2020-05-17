@@ -3,6 +3,7 @@ package View.UserPanel;
 import Control.Manager;
 import Control.UserPanel.CreateNewAccountManager;
 import Control.UserPanel.LoginToExistingAccountManager;
+import View.ErrorProcessor;
 import View.Menu;
 
 import java.util.regex.Matcher;
@@ -33,7 +34,9 @@ public class UserPanelMenu extends Menu {
     }
 
     private void createNewAccount(String username, String type) {
-        new CreateNewAccountManager(manager.getAccount(), username, type);
+        if (type.equals("principal") && manager.isPrincipalExists())
+            ErrorProcessor.principalExists();
+        else new CreateNewAccountManager(manager.getAccount(), username, type);
     }
 
     private void loginToExistingAccount(String username) {

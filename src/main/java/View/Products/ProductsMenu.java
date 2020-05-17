@@ -1,7 +1,7 @@
 package View.Products;
 
 import Control.Manager;
-import Control.Products.ProductsManager;
+import View.ErrorProcessor;
 import View.Menu;
 
 import java.util.regex.Matcher;
@@ -31,12 +31,12 @@ public class ProductsMenu extends Menu {
                 help();
             } else if (getMatcher(input, "^back$").find()) {
                 return;
-            }
+            } else ErrorProcessor.invalidInput();
         }
     }
 
     public void showCategories() {
-        System.out.println(((ProductsManager) manager).showCategories());
+        System.out.println(manager.showCategories());
     }
 
     private void filtering() {

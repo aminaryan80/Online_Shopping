@@ -38,6 +38,8 @@ public class PrincipalMenu extends Menu {
                 manageRequests();
             } else if (getMatcher(input, "^manage categories$").find()) {
                 manageCategories();
+            } else if (getMatcher(input, "^offs$").find()) {
+                //TODO
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^back$").find()) {
@@ -70,14 +72,14 @@ public class PrincipalMenu extends Menu {
             inputs.add(input);
             System.out.println("Enter maximum discount amount:");
             input = scanner.nextLine();
-            if (!manager.checkBalance(input)) {
+            if (!manager.checkNumber(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }
             inputs.add(input);
             System.out.println("Enter discount allowed use count:"); // :/
             input = scanner.nextLine();
-            if (!manager.checkBalance(input)) {
+            if (!manager.checkNumber(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }
@@ -100,7 +102,6 @@ public class PrincipalMenu extends Menu {
         }
     }
 
-    // TODO FUCK
     private ArrayList<String> getAllowedCustomersNames() {
         System.out.println("Enter names of customers whom are allowed to use discount(Enter 0 to stop):");
         ArrayList<String> customerNames = new ArrayList<>();

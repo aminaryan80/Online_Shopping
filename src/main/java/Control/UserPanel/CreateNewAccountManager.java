@@ -31,6 +31,7 @@ public class CreateNewAccountManager extends Manager {
             case "principal":
                 // String username, String firstName, String lastName, String email, String phoneNumber, String password
                 new Principal(username, inputs.get(3), inputs.get(4), inputs.get(1), inputs.get(2), inputs.get(0));
+                isPrincipalExists = true;
                 break;
         }
     }
