@@ -21,7 +21,7 @@ public class EditProductsManager extends SellerManager {
         ArrayList<SellingLog> allLogs = ((Seller) account).getAllLogs();
         ArrayList<String> allBuyers = new ArrayList<String>();
         for (SellingLog log : allLogs) {
-            allBuyers.add(log.getBuyerName());
+            allBuyers.add(log.getName());
         }
         return allBuyers;
     }

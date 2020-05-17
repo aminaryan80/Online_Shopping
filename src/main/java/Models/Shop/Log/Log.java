@@ -45,6 +45,10 @@ return true;
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public enum Status {
         TO_BE_SEND,ON_THE_WAY,RECEIVED;
     }

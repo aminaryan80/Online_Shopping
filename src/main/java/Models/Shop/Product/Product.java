@@ -204,7 +204,7 @@ public class Product {
         return companyName;
     }
 
-    public double getActualPrice() {
+    public double getPrice() {
         return price;
     }
 
