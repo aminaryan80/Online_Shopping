@@ -1,11 +1,5 @@
 package View.CustomerMenus.customer;
 
-import Control.CustomerManagers.CustomerManager;
-import Models.Account.Customer;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CustomerMenuTest {
 //    Customer customer = new Customer("masihbr","masih","beigi","masihbr@gamil.com","09128569777","hello",1000000);
