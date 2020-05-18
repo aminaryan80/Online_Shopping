@@ -3,13 +3,13 @@ package Control.CustomerManagers;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
+
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
 import View.ErrorProcessor;
 
 public class ViewOrdersManager extends Manager {
     private Customer customer = (Customer) account;
-
     public ViewOrdersManager(Account account) {
         super(account);
         this.menu = new ViewOrdersMenu(this);
@@ -23,9 +23,9 @@ public class ViewOrdersManager extends Manager {
         return customer.getLogById(logId).toString();
     }
 
-    public void rateProduct(String productId, int score) { //TODO RECHECK
+    public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
         Product product = Product.getProductById(productId);
-        if (product != null) product.addRate(customer, score);
-        else ErrorProcessor.invalidProductId();
+        if(product != null) product.addRate(customer,score);
+        else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
     }
 }

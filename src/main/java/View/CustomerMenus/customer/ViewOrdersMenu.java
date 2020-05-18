@@ -1,9 +1,11 @@
 package View.CustomerMenus.customer;
 
+import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.Manager;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
+import View.ErrorProcessor;
 import View.Menu;
 
 import java.util.regex.Matcher;
@@ -24,29 +26,23 @@ public class ViewOrdersMenu extends Menu {
             input = scanner.nextLine().trim();
             if (input.matches("(?i)back")) {
                 return;
-            } else if (input.matches("(?i)help")) {
-                help();
+            } else if(input.matches("(?i)help")){
+                System.out.println(help());
             } else if ((matcher = ConsoleCommand.SHOW_ORDER.getStringMatcher(input)).find()) {
-                viewOrder(matcher.group(1));
+                System.out.println(viewOrdersManager.showOrderById(matcher.group(1)));
             } else if ((matcher = ConsoleCommand.RATE.getStringMatcher(input)).find()) {
-                rateProduct(matcher.group(1), Integer.parseInt(matcher.group(2)));
+                try {
+                    viewOrdersManager.rateProduct(matcher.group(1),Integer.parseInt(matcher.group(2)));
+                } catch (ViewCartManager.ProductDoNotExistAtAllException e) {
+                    ErrorProcessor.invalidProductId();
+                }
             }
         }
     }
 
-    private void rateProduct(String productId, int score) {
-        if (Product.hasProductWithId(productId)) {
-            viewOrdersManager.rateProduct(productId, score);
-        }
-    }
-
-    private void viewOrder(String id) {
-        if (viewOrdersManager.canShowOrderWithId(id))
-            System.out.println(viewOrdersManager.showOrderById(id));
-    }
-
-    private void help() {
-        System.out.println("show order [orderId]\n" +
-                "rate [productId] [1-5]");
+    private String help() {
+        return "⇒ show order [orderId]\n" +
+                "⇒ rate [productId] [1-5]\n"+
+                "help\nback";
     }
 }
