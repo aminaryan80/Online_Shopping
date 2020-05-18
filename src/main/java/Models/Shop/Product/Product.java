@@ -25,7 +25,7 @@ public class Product {
 //    private Seller seller;
     private String sellerUsername;
     private boolean isAvailable;
-    private Category category;
+//    private Category category;
     private String categoryName;
     private String description;
 //    private ArrayList<Rate> allRates = new ArrayList<>();
@@ -49,7 +49,7 @@ public class Product {
         this.price = price;
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
-        this.category = category;
+        this.categoryName = category.getName();
         this.categoryName = category.getName();
         this.description = description;
         this.features = features;
@@ -179,7 +179,7 @@ public class Product {
                 "\nCompany name: " + companyName +
                 "\nSeller: " + Seller.getAccountByUsername(sellerUsername).getName() +
                 "\nDescription: " + description +
-                "\n" + category.getFeaturesNames().toString();
+                "\n" + Category.getCategoryByName(categoryName).getFeaturesNames().toString();
     }
 
     public String digest() {
@@ -233,7 +233,7 @@ public class Product {
     }
 
     public Category getCategory() {
-        return category;
+        return Category.getCategoryByName(categoryName);
     }
 
     public boolean isAvailable() {
@@ -282,7 +282,7 @@ public class Product {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        this.categoryName = category.getName();
     }
 
     public void setDescription(String description) {
@@ -345,7 +345,7 @@ public class Product {
                 ", price=" + price +
                 ", seller=" + (Seller) Seller.getAccountByUsername(sellerUsername) +
                 ", isAvailable=" + isAvailable +
-                ", category=" + category +
+                ", category=" + Category.getCategoryByName(categoryName) +
                 ", description='" + description + '\'' +
                 ", allComments=" + getAllComments() +
                 '}';

@@ -3,6 +3,7 @@ package Control.CustomerManagers;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
+import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
 
 public class ViewOrdersManager extends Manager {
@@ -17,6 +18,7 @@ public class ViewOrdersManager extends Manager {
     }
 
     public void rateProduct(String productId, int score) {
-        // TODO: Rate is a Class
+        Product product = Product.getProductById(productId);
+        product.addRate(customer,score);
     }
 }

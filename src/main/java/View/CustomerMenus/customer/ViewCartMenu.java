@@ -7,10 +7,11 @@ import Control.Manager;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ViewCartMenu extends CustomerMenu {
+public class ViewCartMenu extends Menu {
     ViewCartManager viewCartManager =(ViewCartManager) manager;
 
     public ViewCartMenu(Manager manager) {
@@ -48,7 +49,7 @@ public class ViewCartMenu extends CustomerMenu {
                 viewCartManager.getTotalPrice(null);
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
                 new PurchaseManager(manager.getAccount());
-            } else if (input.matches("(?!)help")) {
+            } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
                 showCart();
             }
         }

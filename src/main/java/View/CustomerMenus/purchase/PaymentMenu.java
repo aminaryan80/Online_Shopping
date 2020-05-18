@@ -3,10 +3,13 @@ package View.CustomerMenus.purchase;
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.ArrayList;
 
-public class PaymentMenu extends PurchaseMenu {
+public class PaymentMenu extends Menu {
+    private PurchaseManager purchaseManager = (PurchaseManager) manager;
+    public static boolean purchaseWasSuccessful = false;
     public PaymentMenu(Manager manager) {
         super(manager);
         pay();
@@ -19,6 +22,8 @@ public class PaymentMenu extends PurchaseMenu {
             receiverInformation.add(ReceiverInformationMenu.getPhoneNum());
             try {
                 purchaseManager.pay(receiverInformation, DiscountCodeMenu.getDiscountCode());
+                purchaseWasSuccessful = true;
+                System.out.println("Successfully purchased!");
             } catch (PurchaseManager.WrongDiscountIdException e) {
                 ErrorProcessor.invalidDiscountId();
             }

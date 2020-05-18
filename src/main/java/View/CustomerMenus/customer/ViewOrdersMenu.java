@@ -3,10 +3,11 @@ package View.CustomerMenus.customer;
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.Manager;
 import View.CustomerMenus.ConsoleCommand;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ViewOrdersMenu extends CustomerMenu {
+public class ViewOrdersMenu extends Menu {
 
     ViewOrdersManager viewOrdersManager = (ViewOrdersManager) manager;
     public ViewOrdersMenu(Manager manager) {
