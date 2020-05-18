@@ -62,6 +62,7 @@ public class Discount {
         return null;
     }
 
+
     public void deleteDiscount(Discount discount) {
         for (Customer customer : getAllCustomers()) {
             customer.deleteDiscount(discount);

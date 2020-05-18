@@ -26,7 +26,7 @@ public class Category {
         this.name = name;
         this.features = features;
 //        this.allProducts = allProducts;
-        this.allProductsIds = new ArrayList<>();
+        this.allProductsIds = allProductsIds;
  //       for (Product product : allProducts) {
  //           this.allProductsIds.add(product.getId());
 //        }
@@ -132,7 +132,7 @@ public class Category {
         this.name = name;
     }
 
-    public void setSubCategory(Category category) {
+    public void addSubCategory(Category category) {
 //        this.subCategories.add(category);
         this.subCategoriesNames.add(category.getName());
     }

@@ -17,10 +17,10 @@ public class ManageCategoriesManager extends Manager {
         new ManageCategoriesMenu(this);
     }
 
-    public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsId) {
+    public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsIds) {
         Category supCategory = Category.getCategoryByName(supCategoryName);
-        Category category = new Category(categoryName, supCategory.getName(), features, productsId);
-        supCategory.setSubCategory(category);
+        Category category = new Category(categoryName, supCategory.getName(), features, productsIds);
+        supCategory.addSubCategory(category);
     }
 
 
