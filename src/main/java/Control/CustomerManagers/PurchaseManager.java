@@ -1,7 +1,9 @@
 package Control.CustomerManagers;
 
 import Control.Identity;
+import Control.Manager;
 import Models.Account.Account;
+import Models.Account.Customer;
 import Models.Account.Seller;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Log.Log;
@@ -14,7 +16,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class PurchaseManager extends CustomerManager {
+public class PurchaseManager extends Manager {
+    private Customer customer = (Customer) account;
     public PurchaseManager(Account account) {
         super(account);
         this.menu = new PurchaseMenu(this);

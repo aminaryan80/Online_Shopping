@@ -22,8 +22,8 @@ public class Product {
     private String name;
     private String companyName;
     private double price;
-    private Seller seller;
-    private String sellerName;
+//    private Seller seller;
+    private String sellerUsername;
     private boolean isAvailable;
     private Category category;
     private String categoryName;
@@ -47,8 +47,7 @@ public class Product {
         this.name = name;
         this.companyName = companyName;
         this.price = price;
-        this.seller = seller;
-        this.sellerName = seller.getName();
+        this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         this.category = category;
         this.categoryName = category.getName();
@@ -57,6 +56,8 @@ public class Product {
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         allProducts.add(this);
     }
+
+
 
     public void addFeature(Feature feature) {
         features.add(feature);
@@ -164,7 +165,7 @@ public class Product {
     }
 
     public Seller getSeller() {
-        return seller;
+        return (Seller) Seller.getAccountByUsername(sellerUsername);
     }
 
     public ProductStatus getStatus() {
@@ -176,7 +177,7 @@ public class Product {
         return "Name: " + name +
                 "\nId: " + id +
                 "\nCompany name: " + companyName +
-                "\nSeller: " + seller.getName() +
+                "\nSeller: " + Seller.getAccountByUsername(sellerUsername).getName() +
                 "\nDescription: " + description +
                 "\n" + category.getFeaturesNames().toString();
     }
@@ -269,7 +270,7 @@ public class Product {
     }
 
     public void setSeller(Seller seller) {
-        this.seller = seller;
+        this.sellerUsername = seller.getUsername();
     }
 
     public static void addProduct(Product product) {
@@ -342,7 +343,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", price=" + price +
-                ", seller=" + seller +
+                ", seller=" + (Seller) Seller.getAccountByUsername(sellerUsername) +
                 ", isAvailable=" + isAvailable +
                 ", category=" + category +
                 ", description='" + description + '\'' +

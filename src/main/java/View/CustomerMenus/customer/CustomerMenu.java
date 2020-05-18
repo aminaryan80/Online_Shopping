@@ -29,7 +29,7 @@ public class CustomerMenu extends Menu {
     }
 
     public boolean executeCustomerMenu(String input) {
-        if (input.matches("(?i)exit")) {
+        if (input.matches("(?i)back")) {
             return true;
         } else if (ConsoleCommand.VIEW_PERSONAL_INFO.getStringMatcher(input).find()) {
             new ViewPersonalInfoCustomerManager(manager.getAccount());

@@ -22,7 +22,7 @@ public class Discount {
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
-    //private ArrayList<Customer> allCustomers;
+//    private ArrayList<Customer> allCustomers;
     private ArrayList<String> allCustomersUsernames;
 
     public Discount(String id, LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class CustomerManager extends Manager {
 
-    protected Customer customer = (Customer) account;
+    private Customer customer = (Customer) account;
 
     public CustomerManager(Account account) {
         super(account);

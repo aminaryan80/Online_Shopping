@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum ConsoleCommand {
     EXIT("(?i)exit"),
 
-    EDIT("(?i)edit (\\S+)"),
+    EDIT("(?i)edit (.+)"),
 
     SHOW_PRODUCTS("(?i)show products"),
 
