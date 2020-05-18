@@ -24,19 +24,26 @@ public class PurchaseManager extends Manager {
         this.menu = new PurchaseMenu(this);
     }
 
-    public boolean canPay(String discountId) throws WrongDiscountIdException {
+    public boolean canPay(String discountId) throws WrongDiscountIdException, UsedDiscountIdException {
         Discount discount = Discount.getDiscountById(discountId);
         if (discount == null && discountId != null) {
-            throw new WrongDiscountIdException();
-        } else return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
+            throw new WrongDiscountIdException("Wrong Discount Id has been entered");
+        } else {
+            if(discount.canUseDiscount(customer))
+            return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
+            else throw new UsedDiscountIdException("you can not use this discount anymore");
+        }
     }
 
     // purchase
     public void pay(ArrayList<String> receiverInformation, String discountId) throws WrongDiscountIdException {
         Discount discount = Discount.getDiscountById(discountId);
         if (discount == null && discountId != null) {
-            throw new WrongDiscountIdException();
+            throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
+            if(discount != null){
+                discount.useDiscount(customer);
+            }
             double paymentAmount = customer.getCart().getTotalPrice(discount);
             ArrayList<Product> boughtProducts = customer.getCart().getProducts(); //TODO number of products not handled.
             HashSet<Seller> sellers = getSellers(boughtProducts);
@@ -130,7 +137,14 @@ public class PurchaseManager extends Manager {
     }
 
     public static class WrongDiscountIdException extends Exception {
-        public WrongDiscountIdException() {
+        public WrongDiscountIdException(String message) {
+            super(message);
+        }
+    }
+
+    public static class UsedDiscountIdException extends Exception {
+        public UsedDiscountIdException(String message) {
+            super(message);
         }
     }
 }

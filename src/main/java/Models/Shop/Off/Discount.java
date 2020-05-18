@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Discount {
@@ -27,7 +28,7 @@ public class Discount {
     private int discountUseCount;
 //    private ArrayList<Customer> allCustomers;
     private ArrayList<String> allCustomersUsernames;
-
+    private HashMap<String,Integer> customerToDiscountUseCountMap = new HashMap<>();
     public Discount(LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<String> allcustomersUsernames) {
         this.id = Identity.getId();
@@ -38,7 +39,14 @@ public class Discount {
         this.discountUseCount = discountUseCount;
         //this.allCustomers = allCustomers;
         this.allCustomersUsernames = allcustomersUsernames;
+        for (String username : allcustomersUsernames) {
+            customerToDiscountUseCountMap.put(username,discountUseCount);
+        }
         allDiscounts.add(this);
+    }
+
+    public void setDiscountUseCount(int discountUseCount) {
+        this.discountUseCount = discountUseCount;
     }
 
     public ArrayList<Customer> getAllCustomers() {
@@ -65,6 +73,16 @@ public class Discount {
         return null;
     }
 
+    public void useDiscount(Customer customer) {
+        if(canUseDiscount(customer)){
+            int numberOfDiscountUseLeft = customerToDiscountUseCountMap.get(customer.getUsername());
+            customerToDiscountUseCountMap.replace(customer.getUsername(),numberOfDiscountUseLeft-1);
+        }
+    }
+
+    public boolean canUseDiscount(Customer customer) {
+        return customerToDiscountUseCountMap.get(customer.getUsername())>=1;
+    }
 
     public void deleteDiscount(Discount discount) {
         for (Customer customer : getAllCustomers()) {
@@ -97,7 +115,7 @@ public class Discount {
         return maximumDiscount;
     }
 
-    public void setDiscountUseCount(int discountUseCount) {
+    public void reDiscountUseCount(int discountUseCount) {
         this.discountUseCount = discountUseCount;
     }
 
