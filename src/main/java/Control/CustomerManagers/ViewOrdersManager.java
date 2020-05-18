@@ -19,9 +19,9 @@ public class ViewOrdersManager extends Manager {
         return customer.getLogById(logId).toString();
     }
 
-    public void rateProduct(String productId, int score) { //TODO RECHECK
+    public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
         Product product = Product.getProductById(productId);
         if(product != null) product.addRate(customer,score);
-        else ErrorProcessor.invalidProductId();
+        else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
     }
 }
