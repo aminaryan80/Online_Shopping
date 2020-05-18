@@ -87,11 +87,11 @@ public class Customer extends Account {
     @Override
     public String toString() {
         return username + " : \n" +
-                ", firstName='" + firstName + '\n' +
-                ", lastName='" + lastName + '\n' +
-                ", email='" + email + '\n' +
-                ", phoneNumber='" + phoneNumber + '\n' +
-                ", password='" + password + '\n' +
-                ", balance=" + balance;
+                "firstName = " + firstName + '\n' +
+                "lastName = " + lastName + '\n' +
+                "email = " + email + '\n' +
+                "phoneNumber = " + phoneNumber + '\n' +
+                "password = " + password + '\n' +
+                "balance = " + balance;
     }
 }

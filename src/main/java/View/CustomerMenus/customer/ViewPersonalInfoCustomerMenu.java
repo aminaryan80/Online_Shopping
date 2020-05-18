@@ -4,10 +4,11 @@ import Control.CustomerManagers.ViewPersonalInfoCustomerManager;
 import Control.Manager;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ViewPersonalInfoCustomerMenu extends CustomerMenu {
+public class ViewPersonalInfoCustomerMenu extends Menu {
     ViewPersonalInfoCustomerManager viewPersonalInfoCustomerManager = (ViewPersonalInfoCustomerManager) manager;
 
     public ViewPersonalInfoCustomerMenu(Manager manager) {

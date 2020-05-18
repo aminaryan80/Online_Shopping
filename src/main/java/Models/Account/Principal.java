@@ -14,15 +14,21 @@ public class Principal extends Account {
         return new ArrayList<>(Arrays.asList(changeableFields));
     }
 
+    public static boolean isPrincipalExists() {
+        for (Account account : allAccounts) {
+            if (account instanceof Principal)
+                return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return username + " : \n" +
+                "firstName = " + firstName + '\n' +
+                "lastName = " + lastName + '\n' +
+                "email = " + email + '\n' +
+                "phoneNumber = " + phoneNumber + '\n' +
+                "password = " + password;
     }
 }

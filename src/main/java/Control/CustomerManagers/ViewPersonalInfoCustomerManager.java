@@ -1,9 +1,10 @@
 package Control.CustomerManagers;
 
+import Control.Manager;
 import Models.Account.Account;
 import View.CustomerMenus.customer.ViewPersonalInfoCustomerMenu;
 
-public class ViewPersonalInfoCustomerManager extends CustomerManager {
+public class ViewPersonalInfoCustomerManager extends Manager {
     public ViewPersonalInfoCustomerManager(Account account) {
         super(account);
         this.menu = new ViewPersonalInfoCustomerMenu(this);

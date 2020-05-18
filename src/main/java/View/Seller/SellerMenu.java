@@ -21,28 +21,31 @@ public class SellerMenu extends Menu {
     public void sellerMenu() {
         Matcher matcher;
         while (true) {
-            String command = scanner.nextLine();
-            if (getMatcher(command, "^view personal info$").find()) {
+            String input = scanner.nextLine();
+            if (getMatcher(input, "^view personal info$").find()) {
                 viewPersonalInfo();
-            } else if (getMatcher(command, "^view company information$").find()) {
+            } else if (getMatcher(input, "^view company information$").find()) {
                 viewCompanyInformation();
-            } else if (getMatcher(command, "^view sales history$").find()) {
+            } else if (getMatcher(input, "^view sales history$").find()) {
                 viewSalesHistory();
-            } else if (getMatcher(command, "^manage products$").find()) {
+            } else if (getMatcher(input, "^manage products$").find()) {
                 manageProducts();
-            } else if (getMatcher(command, "^add product$").find()) {
+            } else if (getMatcher(input, "^add product$").find()) {
                 addProduct();
-            } else if ((matcher = getMatcher(command, "^remove product (\\d+)$")).find()) {
+            } else if ((matcher = getMatcher(input, "^remove product (\\d+)$")).find()) {
                 deleteProduct(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "^show categories$")).find()) {
+            } else if ((matcher = getMatcher(input, "^show categories$")).find()) {
                 showCategories();
-            } else if ((matcher = getMatcher(command, "^view offs$")).find()) {
+            } else if ((matcher = getMatcher(input, "^view offs$")).find()) {
                 viewOffs();
-            } else if ((matcher = getMatcher(command, "view balance$")).find()) {
+            } else if ((matcher = getMatcher(input, "view balance$")).find()) {
                 viewSellerBalance();
-            } else if ((matcher = getMatcher(command, "^back$")).find()) {
+            } else if (getMatcher(input, "logout").find()) {
+                logout();
                 return;
-            } else if ((matcher = getMatcher(command, "help")).find()) {
+            } else if ((matcher = getMatcher(input, "^back$")).find()) {
+                return;
+            } else if ((matcher = getMatcher(input, "help")).find()) {
                 help();
             } else {
                 ErrorProcessor.invalidInput();
@@ -155,6 +158,7 @@ public class SellerMenu extends Menu {
                 "show categories\n" +
                 "view offs\n" +
                 "view balance\n" +
+                "logout\n" +
                 "help\n" +
                 "back");
     }

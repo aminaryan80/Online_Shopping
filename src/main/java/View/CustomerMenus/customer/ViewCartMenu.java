@@ -7,11 +7,12 @@ import Control.Manager;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class ViewCartMenu extends CustomerMenu {
-    ViewCartManager viewCartManager =(ViewCartManager) manager;
+public class ViewCartMenu extends Menu {
+    ViewCartManager viewCartManager = (ViewCartManager) manager;
 
     public ViewCartMenu(Manager manager) {
         super(manager);
@@ -55,12 +56,15 @@ public class ViewCartMenu extends CustomerMenu {
     }
 
     private void showCart() {
-        System.out.println("⇒ show products\n" +
-                "⇒ view [productId]\n" +
-                "⇒ increase [productId]\n" +
-                "⇒ decrease [productId]\n" +
-                "⇒ show total price\n" +
-                "⇒ purchase\n"
+        System.out.println("show products\n" +
+                "view [productId]\n" +
+                "increase [productId]\n" +
+                "decrease [productId]\n" +
+                "show total price\n" +
+                "purchase\n" +
+                "user panel\n" +
+                "help\n" +
+                "back"
         );
     }
 }

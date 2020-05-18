@@ -1,13 +1,17 @@
 package Control.CustomerManagers;
 
+import Control.Manager;
 import Models.Account.Account;
+import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewCartMenu;
 
 import java.util.List;
 
-public class ViewCartManager extends CustomerManager {
+public class ViewCartManager extends Manager {
+    protected Customer customer = (Customer) account;
+
     public ViewCartManager(Account account) {
         super(account);
         this.menu = new ViewCartMenu(this);

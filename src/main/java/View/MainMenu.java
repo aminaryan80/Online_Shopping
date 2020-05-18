@@ -14,7 +14,7 @@ public class MainMenu extends Menu {
         while (true) {
             String input = scanner.nextLine();
             if (getMatcher(input, "^user panel$").find()) {
-                openUserPanel();
+                openUserPanel(false);
             } else if (getMatcher(input, "^products$").find()) {
                 openProductsMenu();
             } else if (getMatcher(input, "^offs$").find()) {

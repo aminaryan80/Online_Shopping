@@ -10,14 +10,12 @@ import View.CustomerMenus.customer.CustomerMenu;
 import java.util.ArrayList;
 
 public class CustomerManager extends Manager {
-
     protected Customer customer = (Customer) account;
 
     public CustomerManager(Account account) {
         super(account);
         this.menu = new CustomerMenu(this);
     }
-
 
     // view cart
     public String viewCart() {
@@ -48,8 +46,8 @@ public class CustomerManager extends Manager {
     // view discount codes
     public ArrayList<String> viewDiscountCodes() {
         ArrayList<String> discountsPercentagesAndIds = new ArrayList<>();
-        for (Discount discount : customer.getDiscounts()) {
-            discountsPercentagesAndIds.add(""+discount.getId()+discount.getDiscountPercent());
+        for (Discount discount : Customer.getDiscounts()) {
+            discountsPercentagesAndIds.add("" + discount.getId() + discount.getDiscountPercent());
         }
         return discountsPercentagesAndIds;
     }

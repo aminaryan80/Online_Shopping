@@ -21,7 +21,7 @@ public class ProductsMenu extends Menu {
             Matcher matcher;
             String input = scanner.nextLine();
             if (getMatcher(input, "^user panel$").find()) {
-                openUserPanel();
+                openUserPanel(true);
             } else if (getMatcher(input, "^view categories$").find()) {
                 showCategories();
             } else if (getMatcher(input, "^filtering$").find()) {
@@ -32,8 +32,6 @@ public class ProductsMenu extends Menu {
                 showProducts();
             } else if ((matcher = getMatcher(input, "^show product (\\S+)$")).find()) {
                 showProduct(matcher.group(1));
-            } else if (getMatcher(input, "^user panel$").find()) {
-                openUserPanel();
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^back$").find()) {

@@ -2,11 +2,12 @@ package View.CustomerMenus.purchase;
 
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
-import View.CustomerMenus.customer.CustomerMenu;
+import View.Menu;
 
-public class PurchaseMenu extends CustomerMenu {
+public class PurchaseMenu extends Menu {
 
     protected PurchaseManager purchaseManager = (PurchaseManager) manager;
+
     public PurchaseMenu(Manager manager) {
         super(manager);
         purchase();

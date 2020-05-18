@@ -24,7 +24,7 @@ public class ProductPage extends Menu {
         Matcher matcher;
         while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
             if (getMatcher(input, "^user panel$").find()) {
-                openUserPanel();
+                openUserPanel(true);
             } else if (input.matches("(?i)digest")) {
                 System.out.println(productPageManager.digest());
                 new DigestMenuManager(manager.getAccount(), productPageManager.getProduct());

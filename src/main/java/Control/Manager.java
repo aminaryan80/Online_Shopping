@@ -1,6 +1,7 @@
 package Control;
 
 import Models.Account.Account;
+import Models.Account.Principal;
 import Models.Shop.Cart;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
@@ -17,7 +18,7 @@ public abstract class Manager {
     protected static Cart cart = new Cart();
     protected static Category mainCategory;
     protected Menu menu;
-    protected boolean isPrincipalExists = false;
+    protected boolean isPrincipalExists = Principal.isPrincipalExists();
 
     public Manager(Account account) {
         Manager.account = account;
@@ -38,6 +39,11 @@ public abstract class Manager {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public void logout() {
+        account = null;
+        cart = new Cart();
     }
 
     public boolean userExistsWithUsername(String username) {

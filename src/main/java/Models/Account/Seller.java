@@ -80,15 +80,14 @@ return true;
 
     @Override
     public String toString() {
-        return "{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
+        return username + " : " +
+                "\nfirstName = " + firstName +
+                "\nlastName = " + lastName +
+                "\nemail = " + email +
+                "\nphoneNumber = " + phoneNumber +
+                "\npassword = " + password +
+                "\nbalance = " + balance +
+                "\ncompany name = " + companyName;
     }
 
     public void addLog(SellingLog log) {

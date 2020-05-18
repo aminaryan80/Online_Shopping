@@ -24,7 +24,7 @@ public class AuctionPage extends Menu {
         while (true) {
             String input = scanner.nextLine();
             if (getMatcher(input, "^user panel$").find()) {
-                openUserPanel();
+                openUserPanel(true);
             } else if ((matcher = getMatcher(input, "^show product (\\S+)$")).find()) {
                 showProductById(matcher.group(1));
             } else if (getMatcher(input, "^filtering$").find()) {

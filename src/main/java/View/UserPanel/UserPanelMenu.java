@@ -25,8 +25,6 @@ public class UserPanelMenu extends Menu {
                 loginToExistingAccount(matcher.group(1));
                 if (manager.getAccount() != null)
                     return;
-            } else if (getMatcher(input, "^logout$").find()) {
-
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^back$").find()) {

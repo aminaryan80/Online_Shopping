@@ -21,11 +21,18 @@ public class Menu {
         return pattern.matcher(input);
     }
 
-    protected void openUserPanel() {
-        if (manager.getAccount() == null)
+    protected void openUserPanel(boolean status) {
+        if (manager.getAccount() == null) {
             new UserPanelManager(manager.getAccount());
-        if (manager.getAccount() != null)
+            if (status)
+                return;
+        }
+        if (manager.getAccount() != null) {
             new DashboardManager(manager.getAccount());
+        }
     }
 
+    protected void logout() {
+        manager.logout();
+    }
 }

@@ -40,6 +40,9 @@ public class PrincipalMenu extends Menu {
                 manageCategories();
             } else if (getMatcher(input, "^offs$").find()) {
                 //TODO
+            } else if (getMatcher(input, "logout").find()) {
+                logout();
+                return;
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^back$").find()) {
@@ -143,6 +146,7 @@ public class PrincipalMenu extends Menu {
                 "view discount codes\n" +
                 "manage requests\n" +
                 "manage categories\n" +
+                "logout\n" +
                 "help\n" +
                 "back");
     }
