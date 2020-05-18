@@ -19,7 +19,7 @@ public class EditOffRequest extends Request {
     @Override
     protected void loadReference() throws IOException {
         auction = Auction.getAuctionById(auctionId);
-        deleteRequest(this);
+        deleteRequest(this, "edit off requests");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class EditOffRequest extends Request {
 
     @Override
     public void decline() throws IOException {
-        deleteRequest(this);
+        deleteRequest(this, "edit off requests");
     }
 
     @Override

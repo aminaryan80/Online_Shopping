@@ -5,14 +5,15 @@ import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
+import View.Seller.OffsMenu;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class OffsManager extends Manager {
     public OffsManager(Account account) {
         super(account);
+        new OffsMenu(this);
     }
 
     public String viewOffById(String id) {
@@ -20,11 +21,8 @@ public class OffsManager extends Manager {
     }
 
     public boolean isOffFieldValid(String field) {
-        if (field.equals("beginningDate") || field.equals("endingDate") || field.equals("status") ||
-                field.equals("amount")) {
-            return true;
-        }
-        return false;
+        return field.equals("beginningDate") || field.equals("endingDate") || field.equals("status") ||
+                field.equals("amount");
     }
 
     public boolean isEnteredIdValid(String id) {
@@ -56,7 +54,7 @@ public class OffsManager extends Manager {
         for (String productsName : productsNames) {
             ArrayList<Product> productsWithTheSameName = Product.getProductsByName(productsName);
             for (Product product : productsWithTheSameName) {
-                if (product.getSeller().equals((Seller) account)) {
+                if (product.getSeller().equals(account)) {
                     products.add(product);
                 }
             }

@@ -29,12 +29,11 @@ public class ProductPageManager extends Manager {
     }
 
     // compare [productId]
-
     public String compare(Product otherProduct) {
         return product.getAttributes()+"\nCompared to\n"+otherProduct.getAttributes();
     }
-    // comments
 
+    // comments
     public List<String> comments() {
         List<String> comments = new ArrayList<>();
         comments.add("Rate:" + product.getRate());

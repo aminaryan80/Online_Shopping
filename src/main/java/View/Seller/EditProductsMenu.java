@@ -1,11 +1,10 @@
 package View.Seller;
 
 import Control.Manager;
-import Control.Products.ProductsManager;
 import Control.Seller.EditProductsManager;
 import Models.Account.Seller;
-import Models.Shop.Request.EditProductRequest;
 import Models.Shop.Product.Product;
+import Models.Shop.Request.EditProductRequest;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -23,13 +22,13 @@ public class EditProductsMenu extends Menu {
         Matcher matcher;
         while (true) {
             String command = scanner.nextLine();
-            if ((matcher = getMatcher(command, "^view (\\d+)$")).find()) {
+            if ((matcher = getMatcher(command, "^view (\\S+)$")).find()) {
                 viewProduct(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "^view buyers (\\d+)$")).find()) {
+            } else if ((matcher = getMatcher(command, "^view buyers (\\S+)$")).find()) {
                 viewProductBuyers(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "^edit (\\d+)$")).find()) {
+            } else if ((matcher = getMatcher(command, "^edit (\\S+)$")).find()) {
                 editProduct(matcher.group(1));
-            } if (command.equals("show available sorts")) {
+            } else if (command.equals("show available sorts")) {
                 showAvailableSorts();
             } else if ((matcher = getMatcher(command, "sort (\\S+)")).find()) {
                 sort(matcher.group(1));
@@ -65,7 +64,7 @@ public class EditProductsMenu extends Menu {
     private void editProduct(String id) {
         System.out.println("enter the field you want to change");
         String field = scanner.nextLine();
-        if (!((EditProductsManager) manager).isEnteredProductFieldValid(field)) {
+        if (!Product.isEnteredProductFieldValid(field)) {
             ErrorProcessor.invalidEditField();
             return;
         }
@@ -114,14 +113,14 @@ public class EditProductsMenu extends Menu {
     }
 
     private void help() {
-        System.out.println("view [product id]%n" +
-                "view buyers [product id]%n" +
-                "edit [product id]%n" +
+        System.out.println("view [product id]\n" +
+                "view buyers [product id]\n" +
+                "edit [product id]\n" +
                 "show available sorts\n" +
                 "sort [an available sort]\n" +
                 "current sort\n" +
                 "disable sort\n" +
-                "back%n" +
+                "back\n" +
                 "help");
     }
 }

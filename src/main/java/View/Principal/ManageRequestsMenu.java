@@ -16,6 +16,7 @@ public class ManageRequestsMenu extends Menu {
     }
 
     private void manageRequestsMenu() {
+        showRequests();
         while (true) {
             Matcher matcher;
             String input = scanner.nextLine();
@@ -30,6 +31,12 @@ public class ManageRequestsMenu extends Menu {
             } else if (getMatcher(input, "^back$").find()) {
                 return;
             } else ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void showRequests() {
+        for (String requestInfo : Request.viewRequestsInShort()) {
+            System.out.println(requestInfo);
         }
     }
 

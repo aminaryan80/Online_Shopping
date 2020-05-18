@@ -16,11 +16,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Product {
-    private static ArrayList<Product> allProducts = new ArrayList<Product>();
+    private final static String[] changeableFields = {"status", "name", "companyName", "price", "seller", "isAvailable", "category",
+            "description", "features"};
+    private static ArrayList<Product> allProducts = new ArrayList<>();
     private String id;
     private ProductStatus status;
     private String name;
@@ -42,7 +45,6 @@ public class Product {
     private ArrayList<Feature> features;
     private Auction auction;
     private String auctionId;
-    //TODO different sellers for one product
 
 
     public Product(String name, String companyName, double price, Seller seller,
@@ -63,6 +65,103 @@ public class Product {
 
     public static ArrayList<Product> getAllProducts() {
         return allProducts;
+    }
+
+    public static ArrayList<Product> getProductsByName(String name) {
+        ArrayList<Product> products = new ArrayList<>();
+        for (Product product : allProducts) {
+            if (product.getName().equals(name)) {
+                products.add(product);
+            }
+        }
+        return products;
+    }
+
+    public static boolean hasProductWithId(String id) {
+        for (Product product : allProducts) {
+            if (product.getId().toLowerCase().equals(id.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Product getProductById(String id) {
+        for (Product product : allProducts) {
+            if (product.getId().toLowerCase().equals(id.toLowerCase())) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isEnteredProductFieldValid(String field) {
+        List<String> fields = Arrays.asList(changeableFields);
+        return fields.contains(field);
+    }
+
+    public static void addProduct(Product product) {
+        allProducts.add(product);
+    }
+
+    public static void deleteProduct(Product product) throws IOException {
+        allProducts.remove(product);
+        File file = new File(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
+        FileUtils.forceDelete(file);
+    }
+
+    public static ArrayList<String> viewProductsInShort(Seller seller) {
+        ArrayList<String> allProductsInShort = new ArrayList<String>();
+        for (Product product : allProducts) {
+            if (product.getSeller().equals(seller)) {
+                allProductsInShort.add(product.viewProductInShort());
+            }
+        }
+        return allProductsInShort;
+    }
+
+    public static ProductStatus parseProductStatus(String statusName) {
+        switch (statusName) {
+            case "UNDER_REVIEW_FOR_CONSTRUCTION":
+                return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+            case "UNDER_REVIEW_FOR_EDITING":
+                return ProductStatus.UNDER_REVIEW_FOR_EDITING;
+            case "CONFIRMED":
+                return ProductStatus.CONFIRMED;
+            default:
+                return null;
+        }
+    }
+
+    public static void open() throws Exception {
+        File folder = new File(Address.PRODUCTS.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allProducts.add(open(file));
+            }
+        }
+    }
+
+    public static Product open(File file) throws Exception {
+        StringBuilder json = new StringBuilder();
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        reader.close();
+        return Gson.INSTANCE.get().fromJson(json.toString(), Product.class);
+    }
+
+    public static void save() throws Exception {
+        for (Product product : allProducts) {
+            save(product);
+        }
+    }
+
+    public static void save(Product product) throws Exception {
+        String jsonAccount = Gson.INSTANCE.get().toJson(product);
+        FileWriter file = new FileWriter(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
+        file.write(jsonAccount);
+        file.close();
     }
 
     public void addFeature(Feature feature) {
@@ -99,57 +198,16 @@ public class Product {
         return allBuyers;
     }
 
-    public static ArrayList<Product> getProductsByName(String name) {
-        ArrayList<Product> products = new ArrayList<>();
-        for (Product product : allProducts) {
-            if (product.getName().equals(name)) {
-                products.add(product);
-            }
-        }
-        return products;
-    }
-
-    public void setAuction(Auction auction) {
-        this.auction = auction;
-        this.auctionId = auction.getId();
-    }
-
     public String getName() {
         return name;
     }
 
-    public static boolean hasProductWithId(String id) {
-        return false;
-    }
-
-    public static Product getProductById(String id) {
-        for (Product product : allProducts) {
-            if (product.getId().toLowerCase().equals(id.toLowerCase())) {
-                return product;
-            }
-        }
-        return null;
-    }
-
-    public static void deleteProduct(Product product) throws IOException {
-        allProducts.remove(product);
-        File file = new File(Address.PRODUCTS.get()+"\\"+product.getId()+".json");
-        FileUtils.forceDelete(file);
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String viewProductInShort() {
-        //ToDo
-        return null;
-    }
-
-    public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<String>();
-        for (Product product : allProducts) {
-            if (product.getSeller().equals(seller)) {
-                allProductsInShort.add(product.viewProductInShort());
-            }
-        }
-        return allProductsInShort;
+        return "#" + id + " : " + name + " | " + price + "$";
     }
 
     public String getId() {
@@ -176,8 +234,16 @@ public class Product {
         return (Seller) Seller.getAccountByUsername(sellerUsername);
     }
 
+    public void setSeller(Seller seller) {
+        this.sellerUsername = seller.getUsername();
+    }
+
     public ProductStatus getStatus() {
         return status;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
     }
 
     public String getAttributes() {
@@ -224,37 +290,41 @@ public class Product {
         return auction;
     }
 
-    public enum ProductStatus {
-        UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
-    }
-
-    public static ProductStatus parseProductStatus(String statusName) {
-        switch (statusName) {
-            case "UNDER_REVIEW_FOR_CONSTRUCTION":
-                return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-            case "UNDER_REVIEW_FOR_EDITING":
-                return ProductStatus.UNDER_REVIEW_FOR_EDITING;
-            case "CONFIRMED":
-                return ProductStatus.CONFIRMED;
-            default:
-                return null;
-        }
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+        this.auctionId = auction.getId();
     }
 
     public Category getCategory() {
         return Category.getCategoryByName(categoryName);
     }
 
+    public void setCategory(Category category) {
+        this.categoryName = category.getName();
+    }
+
     public boolean isAvailable() {
         return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public String getCompanyName() {
         return companyName;
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public double getPrice() {
         return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getAuctionedPrice() {
@@ -265,71 +335,21 @@ public class Product {
         }
     }
 
-    public void setStatus(ProductStatus status) {
-        this.status = status;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setSeller(Seller seller) {
-        this.sellerUsername = seller.getUsername();
-    }
-
-    public static void addProduct(Product product) {
-        allProducts.add(product);
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
-
-    public void setCategory(Category category) {
-        this.categoryName = category.getName();
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public static void open() throws Exception {
-        File folder = new File(Address.PRODUCTS.get());
-        if (!folder.exists()) folder.mkdirs();
-        else {
-            for (File file : folder.listFiles()) {
-                allProducts.add(open(file));
-            }
-        }
-    }
-
-    public static Product open(File file) throws Exception {
-        StringBuilder json = new StringBuilder();
-        Scanner reader = new Scanner(file);
-        while (reader.hasNext()) json.append(reader.next());
-        reader.close();
-        return Gson.INSTANCE.get().fromJson(json.toString(), Product.class);
-    }
-
-    public static void save() throws Exception {
-        for (Product product : allProducts) {
-            save(product);
-        }
-    }
-
-    public static void save(Product product) throws Exception {
-        String jsonAccount = Gson.INSTANCE.get().toJson(product);
-        FileWriter file = new FileWriter(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
-        file.write(jsonAccount);
-        file.close();
+    @Override
+    public String toString() {
+        return "#" + id +
+                "\nstatus = " + status +
+                "\nname = '" + name + '\'' +
+                "\ncompanyName = '" + companyName + '\'' +
+                "\nprice = " + price +
+                "\nseller = '" + Seller.getAccountByUsername(sellerUsername) + '\'' +
+                "\nisAvailable = " + isAvailable +
+                "\ncategory = '" + Category.getCategoryByName(categoryName) + '\'' +
+                "\ndescription = '" + description + '\'';
     }
 
 //    public static void loadReferences() {
@@ -348,19 +368,7 @@ public class Product {
 //        }
 //    }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", status=" + status +
-                ", name='" + name + '\'' +
-                ", companyName='" + companyName + '\'' +
-                ", price=" + price +
-                ", seller=" + (Seller) Seller.getAccountByUsername(sellerUsername) +
-                ", isAvailable=" + isAvailable +
-                ", category=" + Category.getCategoryByName(categoryName) +
-                ", description='" + description + '\'' +
-                ", allComments=" + getAllComments() +
-                '}';
+    public enum ProductStatus {
+        UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
 }

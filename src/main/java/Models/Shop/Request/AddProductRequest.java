@@ -19,12 +19,13 @@ public class AddProductRequest extends Request {
     @Override
     public void accept() throws IOException {
         product.setStatus(Product.ProductStatus.CONFIRMED);
-        deleteRequest(this);
+        deleteRequest(this, "add product requests");
+        Product.addProduct(product);
     }
 
     @Override
     public void decline() throws IOException {
-        deleteRequest(this);
+        deleteRequest(this, "add product requests");
     }
 
     @Override

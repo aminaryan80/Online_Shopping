@@ -18,12 +18,12 @@ public class EditProductRequest extends Request {
 
     public void accept() throws IOException {
         product.setStatus(Product.ProductStatus.CONFIRMED);
-        deleteRequest(this);
+        deleteRequest(this, "edit product requests");
     }
 
     @Override
     public void decline() throws IOException {
-        deleteRequest(this);
+        deleteRequest(this, "edit product requests");
     }
 
     @Override

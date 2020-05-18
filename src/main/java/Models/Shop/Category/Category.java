@@ -86,7 +86,7 @@ public class Category {
     }
 
     public ArrayList<String> getFeaturesNames() {
-        return (ArrayList<String>) features.keySet();
+        return new ArrayList<>(features.keySet());
     }
 
     public static Category getCategoryByName(String name) {

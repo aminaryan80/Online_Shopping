@@ -4,7 +4,6 @@ import Control.CustomerManagers.ProductPageManager;
 import Control.CustomerManagers.PurchaseManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
-import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
@@ -25,17 +24,17 @@ public class ViewCartMenu extends Menu {
         showCart();
         String input;
         Matcher matcher;
-        while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
-            if (ConsoleCommand.SHOW_PRODUCTS.getStringMatcher(input).find()) {
-                System.out.println(viewCartManager.showProducts());
-            } else if ((matcher = ConsoleCommand.VIEW_PRODUCT_ID.getStringMatcher(input)).find()) {
-                Product product;
-                if((product = Product.getProductById(matcher.group(1))) != null)
-                new ProductPageManager(manager.getAccount(),product);
-                else ErrorProcessor.invalidProductId();
-            } else if ((matcher = ConsoleCommand.INCREASE_PRODUCT.getStringMatcher(input)).find()) {
-                try {
-                    viewCartManager.ProductQuantity(matcher.group(1), true);
+            while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
+                if (ConsoleCommand.SHOW_PRODUCTS.getStringMatcher(input).find()) {
+                    System.out.println(viewCartManager.showProducts());
+                } else if ((matcher = ConsoleCommand.VIEW_PRODUCT_ID.getStringMatcher(input)).find()) {
+                    Product product;
+                    if ((product = Product.getProductById(matcher.group(1))) != null)
+                        new ProductPageManager(manager.getAccount(), product);
+                    else ErrorProcessor.invalidProductId();
+                } else if ((matcher = ConsoleCommand.INCREASE_PRODUCT.getStringMatcher(input)).find()) {
+                    try {
+                        viewCartManager.ProductQuantity(matcher.group(1), true);
                     System.out.println("successful");
                 } catch (ViewCartManager.ProductDoNotExistAtAllException|ViewCartManager.ProductDoNotExistInCartException e) {
                     System.out.println(e.getMessage());

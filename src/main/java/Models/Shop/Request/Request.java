@@ -60,9 +60,9 @@ public abstract class Request {
         return false;
     }
 
-    public static void deleteRequest(Request request) throws IOException {
+    public static void deleteRequest(Request request, String address) throws IOException {
         allRequests.remove(request);
-        File file = new File(Address.REQUESTS.get()+"\\"+request.getId()+".json");
+        File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
         FileUtils.forceDelete(file);
     }
 
@@ -83,10 +83,10 @@ public abstract class Request {
         openEditOffRequests();
         openEditProductRequests();
     }
-    
-    public static void openAddOffRequests(){
+
+    public static void openAddOffRequests() {
         File folder = new File(Address.ADD_OFF_REQUESTS.get());
-        if(!folder.exists()) folder.mkdirs();
+        if (!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
                 allRequests.add(openAddOffRequest(file));
@@ -94,9 +94,9 @@ public abstract class Request {
         }
     }
 
-    public static void openAddProductRequests(){
+    public static void openAddProductRequests() {
         File folder = new File(Address.ADD_PRODUCT_REQUESTS.get());
-        if(!folder.exists()) folder.mkdirs();
+        if (!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
                 allRequests.add(openAddProductRequest(file));
@@ -104,9 +104,9 @@ public abstract class Request {
         }
     }
 
-    public static void openEditOffRequests(){
+    public static void openEditOffRequests() {
         File folder = new File(Address.EDIT_OFF_REQUESTS.get());
-        if(!folder.exists()) folder.mkdirs();
+        if (!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
                 allRequests.add(openEditOffRequest(file));
@@ -114,9 +114,9 @@ public abstract class Request {
         }
     }
 
-    public static void openEditProductRequests(){
+    public static void openEditProductRequests() {
         File folder = new File(Address.EDIT_PRODUCT_REQUESTS.get());
-        if(!folder.exists()) folder.mkdirs();
+        if (!folder.exists()) folder.mkdirs();
         else {
             for (File file : folder.listFiles()) {
                 allRequests.add(openEditProductRequest(file));
@@ -124,24 +124,24 @@ public abstract class Request {
         }
     }
 
-    public static AddOffRequest openAddOffRequest(File file){
+    public static AddOffRequest openAddOffRequest(File file) {
         StringBuilder json = fileToString(file);
-        return Gson.INSTANCE.get().fromJson(json.toString(),AddOffRequest.class);
+        return Gson.INSTANCE.get().fromJson(json.toString(), AddOffRequest.class);
     }
 
-    public static AddProductRequest openAddProductRequest(File file){
+    public static AddProductRequest openAddProductRequest(File file) {
         StringBuilder json = fileToString(file);
-        return Gson.INSTANCE.get().fromJson(json.toString(),AddProductRequest.class);
+        return Gson.INSTANCE.get().fromJson(json.toString(), AddProductRequest.class);
     }
 
-    public static EditOffRequest openEditOffRequest(File file){
+    public static EditOffRequest openEditOffRequest(File file) {
         StringBuilder json = fileToString(file);
-        return Gson.INSTANCE.get().fromJson(json.toString(),EditOffRequest.class);
+        return Gson.INSTANCE.get().fromJson(json.toString(), EditOffRequest.class);
     }
 
-    public static EditProductRequest openEditProductRequest(File file){
+    public static EditProductRequest openEditProductRequest(File file) {
         StringBuilder json = fileToString(file);
-        return Gson.INSTANCE.get().fromJson(json.toString(),EditProductRequest.class);
+        return Gson.INSTANCE.get().fromJson(json.toString(), EditProductRequest.class);
     }
 
     private static StringBuilder fileToString(File file) {
@@ -158,20 +158,20 @@ public abstract class Request {
         return json;
     }
 
-    public static void save() throws Exception{
+    public static void save() throws Exception {
         for (Request request : allRequests) {
             save(request);
         }
     }
 
-    public static void save(Request request) throws Exception{
+    public static void save(Request request) throws Exception {
         if (request instanceof AddOffRequest) {
             saveAddOffRequest(request);
         } else if (request instanceof AddProductRequest) {
             saveAddProductRequest(request);
         } else if (request instanceof EditOffRequest) {
             saveEditOffRequest(request);
-        } else if (request instanceof EditProductRequest){
+        } else if (request instanceof EditProductRequest) {
             saveEditProductRequest(request);
         }
     }
@@ -195,7 +195,7 @@ public abstract class Request {
     }
 
     private static void saveEditProductRequest(Request request) throws Exception {
-      EditProductRequest editProductRequest = (EditProductRequest) request;
+        EditProductRequest editProductRequest = (EditProductRequest) request;
         String jsonRequest = Gson.INSTANCE.get().toJson(editProductRequest);
         write(request, jsonRequest, Address.EDIT_PRODUCT_REQUESTS);
     }
@@ -206,7 +206,7 @@ public abstract class Request {
         file.close();
     }
 
-    public static void loadReferences() throws IOException{
+    public static void loadReferences() throws IOException {
         for (Request request : allRequests) {
             request.seller = (Seller) Account.getAccountByUsername(request.sellerName);
             request.loadReference();

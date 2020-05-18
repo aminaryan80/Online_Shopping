@@ -7,18 +7,20 @@ import Models.Shop.Category.Category;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
+import View.Seller.EditProductsMenu;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 public class EditProductsManager extends Manager {
-
     private Sort currentSort;
     private ArrayList<Product> products;
 
     public EditProductsManager(Account account) {
         super(account);
         products = Product.getAllProducts();
+        new EditProductsMenu(this);
     }
 
     public String viewProductDetails(String id) {
@@ -123,12 +125,6 @@ public class EditProductsManager extends Manager {
         currentSort = null;
         products = mainCategory.getAllProducts();
         return productsInShort();
-    }
-
-    public boolean isEnteredProductFieldValid(String field) {
-        return field.equals("status") || field.equals("name") || field.equals("companyName") || field.equals("price")
-                || field.equals("seller") || field.equals("isAvailable") || field.equals("category")
-                || field.equals("description") || field.equals("features");
     }
 
     public boolean hasProductWithId(String id) {

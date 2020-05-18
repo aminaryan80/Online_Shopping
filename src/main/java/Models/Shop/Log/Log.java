@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Log {
-    //TODO change name to receipt
     protected String id;
     protected LocalDateTime date;
     protected double money; //Selling log : received by seller | Buying log : paid by customer

@@ -1,7 +1,8 @@
 package View.Seller;
 
 import Control.Manager;
-import Control.Products.ProductsManager;
+import Control.Seller.EditProductsManager;
+import Control.Seller.OffsManager;
 import Control.Seller.SellerManager;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
@@ -34,7 +35,7 @@ public class SellerMenu extends Menu {
                 manageProducts();
             } else if (getMatcher(input, "^add product$").find()) {
                 addProduct();
-            } else if ((matcher = getMatcher(input, "^remove product (\\d+)$")).find()) {
+            } else if ((matcher = getMatcher(input, "^remove product (\\S+)$")).find()) {
                 deleteProduct(matcher.group(1));
             } else if ((matcher = getMatcher(input, "^show categories$")).find()) {
                 showCategories();
@@ -129,7 +130,7 @@ public class SellerMenu extends Menu {
         for (String product : allProducts) {
             System.out.println(product);
         }
-        new EditProductsMenu(manager);
+        new EditProductsManager(manager.getAccount());
     }
 
     private void addProduct() {
@@ -153,6 +154,7 @@ public class SellerMenu extends Menu {
         String categoryName;
         while (true) {
             System.out.println("enter product's category");
+            System.out.println(manager.showCategories());
             categoryName = scanner.nextLine();
             if (Category.hasCategoryWithName(categoryName) && !categoryName.equals("mainCategory")) {
                 break;
@@ -169,7 +171,7 @@ public class SellerMenu extends Menu {
         ArrayList<Feature> features = new ArrayList<Feature>();
         ArrayList<String> featuresNames = category.getFeaturesNames();
         for (String featureName : featuresNames) {
-            System.out.printf("enter products's %s%n", featureName);
+            System.out.printf("enter products's %s\n", featureName);
             String featureValue = scanner.nextLine();
             features.add(new Feature(featureName, featureValue));
         }
@@ -201,7 +203,7 @@ public class SellerMenu extends Menu {
         for (String off : allOffs) {
             System.out.println(off);
         }
-        new OffsMenu(manager);
+        new OffsManager(manager.getAccount());
     }
 
     private void viewSellerBalance(){

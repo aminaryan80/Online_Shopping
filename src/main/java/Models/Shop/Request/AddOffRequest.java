@@ -18,12 +18,13 @@ public class AddOffRequest extends Request {
 
     public void accept() throws IOException {
         auction.setStatus(Auction.AuctionStatus.CONFIRMED);
-        deleteRequest(this);
+        deleteRequest(this, "add off requests");
+        Auction.addAuction(auction);
     }
 
     @Override
     public void decline() throws IOException {
-        deleteRequest(this);
+        deleteRequest(this, "add off requests");
     }
 
     @Override

@@ -9,14 +9,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Auction {
     private static List<Auction> allAuctions = new ArrayList<>();
     private String id;
-    //    private List<Product> products;
     private List<String> productsIds;
     private AuctionStatus status;
     private LocalDate beginningDate;
@@ -25,16 +23,11 @@ public class Auction {
 
     public Auction(List<String> productsIds, LocalDate beginningDate, LocalDate endingDate, double discountAmount) {
         this.id = Identity.getId();
-//        this.products = products;
         this.productsIds = productsIds;
-//        for (Product product : products) {
-//            productsIds.add(product.getId());
-//        }
         this.status = AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountAmount = discountAmount;
-        allAuctions.add(this);
     }
 
     public static Auction getAuctionById(String id) {
@@ -80,6 +73,10 @@ public class Auction {
                     "\nAuction's ending date = " + endingDate +
                     "\n--------------------------------------------"); // TODO localDate shit
         return productsInShort;
+    }
+
+    public static void addAuction(Auction auction) {
+        allAuctions.add(auction);
     }
 
     public void setBeginningDate(LocalDate beginningDate) {

@@ -3,8 +3,8 @@ package View.Seller;
 import Control.Manager;
 import Control.Seller.OffsManager;
 import Models.Account.Seller;
-import Models.Shop.Request.AddOffRequest;
 import Models.Shop.Off.Auction;
+import Models.Shop.Request.AddOffRequest;
 import Models.Shop.Request.EditOffRequest;
 import View.ErrorProcessor;
 import View.Menu;
@@ -22,9 +22,9 @@ public class OffsMenu extends Menu {
         Matcher matcher;
         while (true) {
             String command = scanner.nextLine();
-            if ((matcher = getMatcher(command, "^view (\\d+)$")).find()) {
+            if ((matcher = getMatcher(command, "^view (\\ُS+)$")).find()) {
                 viewOffById(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "^edit (\\d+)$")).find()) {
+            } else if ((matcher = getMatcher(command, "^edit (\\S+)$")).find()) {
                 editOffAttribute(matcher.group(1));
             } else if ((matcher = getMatcher(command, "^add off$")).find()) {
                 addOff();

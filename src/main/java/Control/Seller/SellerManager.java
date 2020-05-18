@@ -6,16 +6,15 @@ import Models.Account.Seller;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
 import Models.Shop.Category.Sort;
-import Models.Shop.Log.Log;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
 import View.Seller.SellerMenu;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class SellerManager extends Manager {
 
@@ -49,7 +48,7 @@ public class SellerManager extends Manager {
     // view sales history
     public ArrayList<String> viewSalesHistory() {
         ArrayList<SellingLog> allLogs = ((Seller) account).getAllLogs();
-        ArrayList<String> salesHistory = new ArrayList<String>();
+        ArrayList<String> salesHistory = new ArrayList<>();
         for (SellingLog Log : allLogs) {
             salesHistory.add(Log.toString());
         }
@@ -67,7 +66,6 @@ public class SellerManager extends Manager {
                            String description, ArrayList<Feature> features) {
         String companyName = ((Seller) account).getCompanyName();
         Product product = new Product(name, companyName, price, (Seller) account, iaAvailable, category, description, features);
-        Product.addProduct(product);
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);
         new AddProductRequest((Seller) account, product);
     }
