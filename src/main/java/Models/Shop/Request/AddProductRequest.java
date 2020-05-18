@@ -3,6 +3,8 @@ package Models.Shop.Request;
 import Models.Account.Seller;
 import Models.Shop.Product.Product;
 
+import java.io.IOException;
+
 public class AddProductRequest extends Request {
     private Product product;
     private String productId;
@@ -15,13 +17,13 @@ public class AddProductRequest extends Request {
     }
 
     @Override
-    public void accept() {
+    public void accept() throws IOException {
         product.setStatus(Product.ProductStatus.CONFIRMED);
         deleteRequest(this);
     }
 
     @Override
-    public void decline() {
+    public void decline() throws IOException {
         deleteRequest(this);
     }
 

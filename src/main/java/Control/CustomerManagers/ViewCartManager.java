@@ -10,7 +10,8 @@ import View.CustomerMenus.customer.ViewCartMenu;
 import java.util.List;
 
 public class ViewCartManager extends Manager {
-    protected Customer customer = (Customer) account;
+
+    private Customer customer = (Customer) account;
 
     public ViewCartManager(Account account) {
         super(account);

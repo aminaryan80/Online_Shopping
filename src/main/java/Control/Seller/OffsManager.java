@@ -5,6 +5,8 @@ import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -32,9 +34,9 @@ public class OffsManager extends Manager {
     public Auction editOffAttribute(String id, String field, String newValue) {
         Auction auction = ((Seller) account).getAuctionById(id);
         if (field.equals("beginningDate")) {
-            auction.setBeginningDate(new Date(newValue));
+            auction.setBeginningDate(LocalDate.parse(newValue));
         } else if (field.equals("endingDate")) {
-            auction.setEndingDate(new Date(newValue));
+            auction.setEndingDate(LocalDate.parse(newValue));
         } else if (field.equals("amount")) {
             auction.setDiscountAmount(Double.parseDouble(newValue));
         }
@@ -44,7 +46,7 @@ public class OffsManager extends Manager {
 
     public Auction addOff(String beginningDate, String endingDate,
                        double discountAmount, ArrayList<String> productsNames) { //TODO recheck
-        Auction auction = new Auction(productsNames, new Date(beginningDate), new Date(endingDate), discountAmount);
+        Auction auction = new Auction( productsNames, LocalDate.parse(beginningDate), LocalDate.parse(endingDate), discountAmount);
         ((Seller) account).addAuction(auction);
         return auction;
     }

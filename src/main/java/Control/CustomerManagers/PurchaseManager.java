@@ -1,5 +1,7 @@
 package Control.CustomerManagers;
 
+import Control.Identity;
+
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -16,8 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class PurchaseManager extends Manager {
-    protected Customer customer = (Customer) account;
-
+    private Customer customer = (Customer) account;
     public PurchaseManager(Account account) {
         super(account);
         this.menu = new PurchaseMenu(this);

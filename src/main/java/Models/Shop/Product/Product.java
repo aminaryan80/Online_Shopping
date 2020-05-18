@@ -9,32 +9,35 @@ import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
 import Models.Shop.Off.Auction;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Product {
-    private static ArrayList<Product> allProducts = new ArrayList<Product>();
+    private static ArrayList<Product> allProducts = new ArrayList<>();
     private String id;
     private ProductStatus status;
     private String name;
     private String companyName;
     private double price;
-    private Seller seller;
-    private String sellerName;
+    //    private Seller seller;
+    private String sellerUsername;
     private boolean isAvailable;
-    private Category category;
+    //    private Category category;
     private String categoryName;
     private String description;
-//    private ArrayList<Rate> allRates = new ArrayList<>();
-    private ArrayList<String> allRatesIds= new ArrayList<>();
-//    private ArrayList<Customer> allBuyers = new ArrayList<>();
+    //    private ArrayList<Rate> allRates = new ArrayList<>();
+    private ArrayList<String> allRatesIds = new ArrayList<>();
+    //    private ArrayList<Customer> allBuyers = new ArrayList<>();
 //    private ArrayList<String> allBuyersNames = new ArrayList<>();
     private ArrayList<String> allBuyersUsernames = new ArrayList<>();
-//    private List<Comment> allComments = new ArrayList<>();
+    //    private List<Comment> allComments = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
     private Auction auction;
@@ -48,16 +51,16 @@ public class Product {
         this.name = name;
         this.companyName = companyName;
         this.price = price;
-        this.seller = seller;
-        this.sellerName = seller.getName();
+        this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
-        this.category = category;
+        this.categoryName = category.getName();
         this.categoryName = category.getName();
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         allProducts.add(this);
     }
+
 
     public void addFeature(Feature feature) {
         features.add(feature);
@@ -82,11 +85,11 @@ public class Product {
 
     public void addBuyers(Customer buyer) {
         allBuyersUsernames.add(buyer.getName());
-    //TODO use
+        //TODO use
     }
 
-    public ArrayList<Customer> getAllBuyers(){
-        ArrayList<Customer> allBuyers  = new ArrayList<>();
+    public ArrayList<Customer> getAllBuyers() {
+        ArrayList<Customer> allBuyers = new ArrayList<>();
         for (String buyerUsername : allBuyersUsernames) {
             allBuyers.add((Customer) Customer.getAccountByUsername(buyerUsername));
         }
@@ -125,8 +128,10 @@ public class Product {
         return null;
     }
 
-    public static void deleteProduct(Product product) {
+    public static void deleteProduct(Product product) throws IOException {
         allProducts.remove(product);
+        File file = new File(Address.PRODUCTS.get()+"\\"+product.getId()+".json");
+        FileUtils.forceDelete(file);
     }
 
     public String viewProductInShort() {
@@ -135,7 +140,7 @@ public class Product {
     }
 
     public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<String>();
+        ArrayList<String> allProductsInShort = new ArrayList<>();
         for (Product product : allProducts) {
             if (product.getSeller().equals(seller)) {
                 allProductsInShort.add(product.viewProductInShort());
@@ -148,7 +153,7 @@ public class Product {
         return id;
     }
 
-    public ArrayList<Comment> getAllComments(){
+    public ArrayList<Comment> getAllComments() {
         ArrayList<Comment> allComments = new ArrayList<>();
         for (String commentId : allCommentsIds) {
             allComments.add(Comment.getCommentById(commentId));
@@ -165,7 +170,7 @@ public class Product {
     }
 
     public Seller getSeller() {
-        return seller;
+        return (Seller) Seller.getAccountByUsername(sellerUsername);
     }
 
     public ProductStatus getStatus() {
@@ -177,9 +182,9 @@ public class Product {
         return "Name: " + name +
                 "\nId: " + id +
                 "\nCompany name: " + companyName +
-                "\nSeller: " + seller.getName() +
+                "\nSeller: " + Seller.getAccountByUsername(sellerUsername).getName() +
                 "\nDescription: " + description +
-                "\n" + category.getFeaturesNames().toString();
+                "\n" + Category.getCategoryByName(categoryName).getFeaturesNames().toString();
     }
 
     public String digest() {
@@ -188,13 +193,13 @@ public class Product {
                 "\nDiscount: " + auction.getDiscountAmount();
     }
 
-    public ArrayList<Rate> getAllRates(){
+    public ArrayList<Rate> getAllRates() {
         ArrayList<Rate> allRates = new ArrayList<>();
         for (String rateId : allRatesIds) {
             allRates.add(Rate.getRateById(rateId));
         }
         return allRates;
-     }
+    }
 
     public double getRate() {
         double sum = 0;
@@ -221,19 +226,20 @@ public class Product {
     }
 
     public static ProductStatus parseProductStatus(String statusName) {
-        if (statusName.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (statusName.equals("UNDER_REVIEW_FOR_EDITING")) {
-            return ProductStatus.UNDER_REVIEW_FOR_EDITING;
-        } else if (statusName.equals("CONFIRMED")) {
-            return ProductStatus.CONFIRMED;
-        } else {
-            return null;
+        switch (statusName) {
+            case "UNDER_REVIEW_FOR_CONSTRUCTION":
+                return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+            case "UNDER_REVIEW_FOR_EDITING":
+                return ProductStatus.UNDER_REVIEW_FOR_EDITING;
+            case "CONFIRMED":
+                return ProductStatus.CONFIRMED;
+            default:
+                return null;
         }
     }
 
     public Category getCategory() {
-        return category;
+        return Category.getCategoryByName(categoryName);
     }
 
     public boolean isAvailable() {
@@ -249,8 +255,11 @@ public class Product {
     }
 
     public double getAuctionedPrice() {
-        if(auction == null) return price;
-        else return price - auction.getDiscountAmount();
+        if (auction == null || !auction.isActive(LocalDate.now())) return price;
+        else {
+            if (auction.isActive(LocalDate.now())) return price - auction.getDiscountAmount();
+            else return price;
+        }
     }
 
     public void setStatus(ProductStatus status) {
@@ -270,7 +279,7 @@ public class Product {
     }
 
     public void setSeller(Seller seller) {
-        this.seller = seller;
+        this.sellerUsername = seller.getUsername();
     }
 
     public static void addProduct(Product product) {
@@ -282,14 +291,14 @@ public class Product {
     }
 
     public void setCategory(Category category) {
-        this.category = category;
+        this.categoryName = category.getName();
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public static void open() throws Exception{
+    public static void open() throws Exception {
         File folder = new File(Address.PRODUCTS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -303,6 +312,7 @@ public class Product {
         StringBuilder json = new StringBuilder();
         Scanner reader = new Scanner(file);
         while (reader.hasNext()) json.append(reader.next());
+        reader.close();
         return Gson.INSTANCE.get().fromJson(json.toString(), Product.class);
     }
 
@@ -343,9 +353,9 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", price=" + price +
-                ", seller=" + seller +
+                ", seller=" + (Seller) Seller.getAccountByUsername(sellerUsername) +
                 ", isAvailable=" + isAvailable +
-                ", category=" + category +
+                ", category=" + Category.getCategoryByName(categoryName) +
                 ", description='" + description + '\'' +
                 ", allComments=" + getAllComments() +
                 '}';

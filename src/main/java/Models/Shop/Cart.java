@@ -4,6 +4,7 @@ import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class Cart {
     }
 
     public double amountOfDiscount(double priceOfProducts, Discount discount) { //price of products after auction calculation
-        if (discount == null) return 0;
+        if (discount == null || !discount.isActive(LocalDate.now())) return 0;
         double discountPercent = (double) discount.getDiscountPercent() / 100;
         double sumWithDiscountPercent = discountPercent * priceOfProducts;
         double sumWithMaximumDiscount = discount.getMaximumDiscount();

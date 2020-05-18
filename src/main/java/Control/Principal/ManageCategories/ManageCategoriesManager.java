@@ -8,6 +8,7 @@ import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Principal.ManageCategories.ManageCategoriesMenu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -42,7 +43,7 @@ public class ManageCategoriesManager extends Manager {
         return productsList;
     }
 
-    public void deleteCategory(String categoryName) {
+    public void deleteCategory(String categoryName) throws IOException {
         Category.deleteCategory(Category.getCategoryByName(categoryName));
     }
 
@@ -55,7 +56,7 @@ public class ManageCategoriesManager extends Manager {
         return false;
     }
 
-    private void deleteProductsByList(ArrayList<Product> allProducts) {
+    private void deleteProductsByList(ArrayList<Product> allProducts) throws IOException {
         for (Product product : allProducts) {
             Product.deleteProduct(product);
             Customer.deleteProductFromCarts(product);

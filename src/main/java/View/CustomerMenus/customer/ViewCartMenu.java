@@ -12,7 +12,7 @@ import View.Menu;
 import java.util.regex.Matcher;
 
 public class ViewCartMenu extends Menu {
-    ViewCartManager viewCartManager = (ViewCartManager) manager;
+    ViewCartManager viewCartManager =(ViewCartManager) manager;
 
     public ViewCartMenu(Manager manager) {
         super(manager);
@@ -49,7 +49,7 @@ public class ViewCartMenu extends Menu {
                 viewCartManager.getTotalPrice(null);
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
                 new PurchaseManager(manager.getAccount());
-            } else if (input.matches("(?!)help")) {
+            } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
                 showCart();
             }
         }

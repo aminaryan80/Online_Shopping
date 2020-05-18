@@ -5,6 +5,7 @@ import Models.Shop.Category.Filter;
 import Models.Shop.Off.Auction;
 import View.AuctionPage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -94,13 +95,13 @@ public class AuctionPageManager extends Manager {
 
     private ArrayList<Auction> setBeginningDateFilter(Filter filter) {
         return auctions.stream().filter(auction -> {
-            return auction.getBeginningDate().equals(new Date(filter.getValue()));
+            return auction.getBeginningDate().equals(LocalDate.parse(filter.getValue())); //filter.getValue() yyyy-MM-dd
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Auction> setEndingDateFilter(Filter filter) {
         return auctions.stream().filter(auction -> {
-            return auction.getEndingDate().equals(new Date(filter.getValue()));
+            return auction.getEndingDate().equals(LocalDate.parse(filter.getValue())); //filter.getValue() yyyy-MM-dd
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 

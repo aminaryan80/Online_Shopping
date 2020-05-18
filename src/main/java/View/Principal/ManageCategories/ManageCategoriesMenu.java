@@ -8,6 +8,7 @@ import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -94,7 +95,11 @@ public class ManageCategoriesMenu extends Menu {
 
     private void deleteCategory(String categoryName) {
         if(((ManageCategoriesManager) manager).canDeleteCategory(categoryName)) {
-            ((ManageCategoriesManager) manager).deleteCategory(categoryName);
+            try {
+                ((ManageCategoriesManager) manager).deleteCategory(categoryName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

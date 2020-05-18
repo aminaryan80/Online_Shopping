@@ -3,10 +3,11 @@ package View.CustomerMenus.purchase;
 import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
 import View.ErrorProcessor;
+import View.Menu;
 
-public class DiscountCodeMenu extends PurchaseMenu {
-
-    private static String discountCode = "";
+public class DiscountCodeMenu extends Menu {
+    private PurchaseManager purchaseManager = (PurchaseManager) manager;
+    private static String discountCode = null;
 
     public DiscountCodeMenu(Manager manager) {
         super(manager);
@@ -15,29 +16,32 @@ public class DiscountCodeMenu extends PurchaseMenu {
 
     private void checkDiscountCode() {
         String input;
-        while (true) {
-            System.out.println("Enter discount code ID\n" +
-                    "type \"no\" to pass\n" +
+            System.out.println(" Enter discount code ID\n" +
+                    " type \"no\" to pass\n" +
                     " type \"back\" to go to last menu");
             input = scanner.nextLine();
             if (input.matches("(?i)back")) {
-                new ReceiverInformationMenu(manager);
-                break;
+                return;
             } else if (input.matches("(?i)no")) {
                 new PaymentMenu(manager);
-                break;
+                if(!PaymentMenu.purchaseWasSuccessful)
+                checkDiscountCode();
             } else {
                 if (isDiscountCodeValid(input)) {
                     discountCode = input;
                     new PaymentMenu(manager);
-                    break;
-                } else ErrorProcessor.invalidDiscountId();
+                    if(!PaymentMenu.purchaseWasSuccessful)
+                    checkDiscountCode();
+                } else {
+                    ErrorProcessor.invalidDiscountId();
+                    checkDiscountCode();
+                }
             }
-        }
+
     }
 
     private boolean isDiscountCodeValid(String input){
-        return ((PurchaseManager) manager).isDiscountCodeValid(input);
+        return purchaseManager.isDiscountCodeValid(input);
     }
 
     public static String getDiscountCode() {

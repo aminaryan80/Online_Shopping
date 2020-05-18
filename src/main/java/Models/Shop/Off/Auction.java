@@ -7,6 +7,7 @@ import Models.Shop.Product.Product;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,14 +16,14 @@ import java.util.Scanner;
 public class Auction {
     private static List<Auction> allAuctions = new ArrayList<>();
     private String id;
-//    private List<Product> products;
+    //    private List<Product> products;
     private List<String> productsIds;
     private AuctionStatus status;
-    private Date beginningDate;
-    private Date endingDate;
+    private LocalDate beginningDate;
+    private LocalDate endingDate;
     private double discountAmount;
 
-    public Auction(List<String> productsIds, Date beginningDate, Date endingDate, double discountAmount) {
+    public Auction(List<String> productsIds, LocalDate beginningDate, LocalDate endingDate, double discountAmount) {
         this.id = Identity.getId();
 //        this.products = products;
         this.productsIds = productsIds;
@@ -81,7 +82,7 @@ public class Auction {
         return productsInShort;
     }
 
-    public void setBeginningDate(Date beginningDate) {
+    public void setBeginningDate(LocalDate beginningDate) {
         this.beginningDate = beginningDate;
     }
 
@@ -89,7 +90,7 @@ public class Auction {
         this.discountAmount = discountAmount;
     }
 
-    public void setEndingDate(Date endingDate) {
+    public void setEndingDate(LocalDate endingDate) {
         this.endingDate = endingDate;
     }
 
@@ -118,14 +119,15 @@ public class Auction {
     }
 
     public static AuctionStatus parseAuctionStatus(String status) {
-        if (status.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            return AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (status.equals("UNDER_REVIEW_FOR_EDITING")) {
-            return AuctionStatus.UNDER_REVIEW_FOR_EDITING;
-        } else if (status.equals("CONFIRMED")) {
-            return AuctionStatus.CONFIRMED;
-        } else {
-            return null;
+        switch (status) {
+            case "UNDER_REVIEW_FOR_CONSTRUCTION":
+                return AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+            case "UNDER_REVIEW_FOR_EDITING":
+                return AuctionStatus.UNDER_REVIEW_FOR_EDITING;
+            case "CONFIRMED":
+                return AuctionStatus.CONFIRMED;
+            default:
+                return null;
         }
     }
 
@@ -133,19 +135,23 @@ public class Auction {
         return status;
     }
 
-    public Date getBeginningDate() {
+    public LocalDate getBeginningDate() {
         return beginningDate;
     }
 
-    public Date getEndingDate() {
+    public LocalDate getEndingDate() {
         return endingDate;
+    }
+
+    public boolean isActive(LocalDate now) {
+        return now.compareTo(beginningDate) > 0 && now.compareTo(endingDate) < 0;
     }
 
     public enum AuctionStatus {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
 
-    public static void open() throws Exception{
+    public static void open() throws Exception {
         File folder = new File(Address.AUCTIONS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -155,10 +161,11 @@ public class Auction {
         }
     }
 
-    public static Auction open(File file) throws Exception{
+    public static Auction open(File file) throws Exception {
         StringBuilder json = new StringBuilder();
-            Scanner reader = new Scanner(file);
-            while (reader.hasNext()) json.append(reader.next());
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        reader.close();
         return Gson.INSTANCE.get().fromJson(json.toString(), Auction.class);
     }
 
@@ -188,7 +195,7 @@ public class Auction {
 //        }
 //    }
 
-    public ArrayList<Product> getProducts(){
+    public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (String productsId : productsIds) {
             products.add(Product.getProductById(productsId));

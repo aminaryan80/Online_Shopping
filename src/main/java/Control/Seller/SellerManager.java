@@ -10,6 +10,7 @@ import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
 import View.Seller.SellerMenu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SellerManager extends Manager {
@@ -68,7 +69,7 @@ public class SellerManager extends Manager {
         return Product.getProductById(id).getSeller().equals(account);
     }
 
-    public void deleteProductById(String id) {
+    public void deleteProductById(String id) throws IOException {
         Product.deleteProduct(Product.getProductById(id));
     }
 

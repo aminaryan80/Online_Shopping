@@ -6,6 +6,7 @@ import Models.Shop.Request.Request;
 import View.ErrorProcessor;
 import View.Menu;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class ManageRequestsMenu extends Menu {
@@ -40,13 +41,21 @@ public class ManageRequestsMenu extends Menu {
 
     private void acceptRequest(String id) {
         if (Request.hasRequestById(id)) {
-            Request.getRequestById(id).accept();
+            try {
+                Request.getRequestById(id).accept();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else ErrorProcessor.invalidRequestId();
     }
 
     private void declineRequest(String id) {
         if (Request.hasRequestById(id)) {
-            Request.getRequestById(id).decline();
+            try {
+                Request.getRequestById(id).decline();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else ErrorProcessor.invalidRequestId();
     }
 

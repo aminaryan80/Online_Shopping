@@ -2,8 +2,13 @@ package Models.Shop.Product;
 
 import Control.Identity;
 import Models.Account.Account;
+import Models.Address;
+import Models.Gson;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.zip.CheckedOutputStream;
 
 public class Comment {
@@ -43,6 +48,37 @@ public class Comment {
             }
         }
         return null;
+    }
+
+    public static void open() throws Exception {
+        File folder = new File(Address.COMMENTS.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allComments.add(open(file));
+            }
+        }
+    }
+
+    public static Comment open(File file) throws Exception {
+        StringBuilder json = new StringBuilder();
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        reader.close();
+        return Gson.INSTANCE.get().fromJson(json.toString(), Comment.class);
+    }
+
+    public static void save() throws Exception {
+        for (Comment comment : allComments) {
+            save(comment);
+        }
+    }
+
+    public static void save(Comment comment) throws Exception {
+        String jsonAccount = Gson.INSTANCE.get().toJson(comment);
+        FileWriter file = new FileWriter(Address.RATES.get() + "\\" + comment.getId() + ".json");
+        file.write(jsonAccount);
+        file.close();
     }
 
     @Override

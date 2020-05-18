@@ -34,7 +34,7 @@ public class Identity {
 
     //TODO file
     public static void open() throws Exception {
-        File file = new File(Address.IDNETITIES.get() + "\\" + "identities");
+        File file = new File(Address.IDNETITIES.get()+"\\" + "identities.json");
         if (!file.exists()) {
             File folder = new File(Address.IDNETITIES.get());
             folder.mkdirs();
@@ -48,9 +48,10 @@ public class Identity {
     private static ArrayList<String> open(File file) throws FileNotFoundException {
         ArrayList<String> IDs = new ArrayList<>();
         Scanner reader = new Scanner(file);
-        if (reader.hasNext()) {
+        while (reader.hasNext()) {
             IDs.add(reader.nextLine());
         }
+        reader.close();
         return IDs;
     }
 
@@ -61,7 +62,7 @@ public class Identity {
     }
 
     private static void save(String identity) throws IOException {
-        FileWriter file = new FileWriter(Address.IDNETITIES.get() + "\\" + "identities");
+        FileWriter file = new FileWriter(Address.IDNETITIES.get() + "\\" + "identities.json");
         file.append("\n"+identity);
         file.close();
     }

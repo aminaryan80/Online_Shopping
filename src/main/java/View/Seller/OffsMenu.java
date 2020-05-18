@@ -57,7 +57,7 @@ public class OffsMenu extends Menu {
             ErrorProcessor.invalidEditField();
             return;
         }
-        System.out.println("enter the new value");
+        System.out.println("enter the new value"); //yyyy-MM-dd for LocalDate
         String newValue = scanner.nextLine();
         Auction auction = ((OffsManager) manager).editOffAttribute(id, field, newValue);
         new EditOffRequest((Seller) manager.getAccount(), auction);

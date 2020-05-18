@@ -117,7 +117,7 @@ public abstract class Manager {
         new ViewPersonalInfoManager(account);
     }
 
-    public boolean isDiscountCodeValid(String id) {
-        return Discount.getDiscountById(id) != null;
+    public boolean isDiscountCodeValid(String DiscountCodeId) {
+        return Discount.getDiscountById(DiscountCodeId) != null;
     }
 }

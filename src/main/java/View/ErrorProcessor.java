@@ -64,4 +64,8 @@ public class ErrorProcessor {
     public static void somethingWentWrong() {
         System.out.println("Oops something went wrong");
     }
+
+    public static void invalidPhoneNumber() {
+        System.out.println("Invalid phone number");
+    }
 }

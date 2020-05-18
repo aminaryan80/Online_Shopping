@@ -6,6 +6,7 @@ import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +30,7 @@ public abstract class Request {
         allRequests.add(this);
     }
 
-    public abstract void accept();
+    public abstract void accept() throws IOException;
 
     public static ArrayList<String> viewRequestsInShort() {
         ArrayList<String> allRequestsShortViews = new ArrayList<>();
@@ -39,7 +40,7 @@ public abstract class Request {
         return allRequestsShortViews;
     }
 
-    public abstract void decline();
+    public abstract void decline() throws IOException;
 
     public static Request getRequestById(String id) {
         for (Request request : allRequests) {
@@ -59,8 +60,10 @@ public abstract class Request {
         return false;
     }
 
-    public static void deleteRequest(Request request) {
+    public static void deleteRequest(Request request) throws IOException {
         allRequests.remove(request);
+        File file = new File(Address.REQUESTS.get()+"\\"+request.getId()+".json");
+        FileUtils.forceDelete(file);
     }
 
     public String getId() {
@@ -148,6 +151,7 @@ public abstract class Request {
             while (reader.hasNext()) {
                 json.append(reader.next());
             }
+            reader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -202,13 +206,13 @@ public abstract class Request {
         file.close();
     }
 
-    public static void loadReferences() {
+    public static void loadReferences() throws IOException{
         for (Request request : allRequests) {
             request.seller = (Seller) Account.getAccountByUsername(request.sellerName);
             request.loadReference();
         }
     }
 
-    protected abstract void loadReference();
+    protected abstract void loadReference() throws IOException;
 }
 
