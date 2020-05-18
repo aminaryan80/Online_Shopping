@@ -18,7 +18,7 @@ public class ViewDiscountCodesManager extends Manager {
     }
 
     public void deleteDiscountCode(String id) {
-        Discount.deleteDiscount(Discount.getDiscountById(id));
+        Discount.getDiscountById(id).deleteDiscount();
     }
 
     public void viewDiscountCode(String id) {

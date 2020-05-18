@@ -23,7 +23,7 @@ public class Discount {
     private double maximumDiscount;
     private int discountUseCount;
     //private ArrayList<Customer> allCustomers;
-    private static ArrayList<String> allCustomersUsernames;
+    private ArrayList<String> allCustomersUsernames;
 
     public Discount(String id, LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<String> allcustomersUsernames) {
@@ -38,7 +38,7 @@ public class Discount {
         allDiscounts.add(this);
     }
 
-    public static ArrayList<Customer> getAllCustomers() {
+    public ArrayList<Customer> getAllCustomers() {
         ArrayList<Customer> allCustomers = new ArrayList<>();
         for (String customerUsername : allCustomersUsernames) {
             allCustomers.add((Customer) Customer.getAccountByUsername(customerUsername));
@@ -62,8 +62,8 @@ public class Discount {
         return null;
     }
 
-    public static void deleteDiscount(Discount discount) {
-        for (Customer customer : Discount.getAllCustomers()) {
+    public void deleteDiscount(Discount discount) {
+        for (Customer customer : getAllCustomers()) {
             customer.deleteDiscount(discount);
         }
         allDiscounts.remove(discount);
@@ -121,7 +121,7 @@ public class Discount {
                 ", discountPercent=" + discountPercent +
                 ", maximumDiscount=" + maximumDiscount +
                 ", discountUseCount=" + discountUseCount +
-                ", allCustomers=" + Discount.getAllCustomers() +
+                ", allCustomers=" + getAllCustomers() +
                 '}';
 //        return "#" + id + " : " +
 //                "beginningDate = " + dateFormat.format(beginningDate) +
@@ -160,6 +160,13 @@ public class Discount {
         FileWriter file = new FileWriter(Address.DISCOUNTS.get() + "\\" + discount.getId() + ".json");
         file.write(jsonAccount);
         file.close();
+    }
+
+    public void deleteDiscount() {
+        for (Customer customer : getAllCustomers()) {
+            customer.deleteDiscount(this);
+        }
+        allDiscounts.remove(this);
     }
 
 //    public static void loadReferences() {

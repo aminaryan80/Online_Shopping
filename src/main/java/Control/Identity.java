@@ -65,6 +65,4 @@ public class Identity {
         file.append("\n"+identity);
         file.close();
     }
-
-
 }
