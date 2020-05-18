@@ -303,6 +303,7 @@ public class Product {
         StringBuilder json = new StringBuilder();
         Scanner reader = new Scanner(file);
         while (reader.hasNext()) json.append(reader.next());
+        reader.close();
         return Gson.INSTANCE.get().fromJson(json.toString(), Product.class);
     }
 

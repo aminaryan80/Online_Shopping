@@ -3,9 +3,11 @@ package Models.Shop.Off;
 import Models.Account.Customer;
 import Models.Address;
 import Models.Gson;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -105,7 +107,7 @@ public class Discount {
     public static ArrayList<String> getDiscountInShort() {
         ArrayList<String> discountsInShort = new ArrayList<>();
         for (Discount discount : allDiscounts) {
-            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
             //String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
             String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + discount.endingDate;
             discountsInShort.add(discountInShort);
@@ -147,6 +149,7 @@ public class Discount {
         StringBuilder json = new StringBuilder();
         Scanner reader = new Scanner(file);
         while (reader.hasNext()) json.append(reader.next());
+        reader.close();
         return Gson.INSTANCE.get().fromJson(json.toString(), Discount.class);
     }
 
@@ -163,11 +166,14 @@ public class Discount {
         file.close();
     }
 
-    public void deleteDiscount() {
+    public void deleteDiscount() throws IOException {
         for (Customer customer : getAllCustomers()) {
             customer.deleteDiscount(this);
         }
         allDiscounts.remove(this);
+        File file = new File(Address.DISCOUNTS.get()+"\\"+this.getId()+".json");
+        FileUtils.forceDelete(file);
+        //file.delete();
     }
 
 //    public static void loadReferences() {

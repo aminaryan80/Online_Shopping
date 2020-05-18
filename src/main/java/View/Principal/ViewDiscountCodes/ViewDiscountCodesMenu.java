@@ -6,6 +6,7 @@ import Models.Shop.Off.Discount;
 import View.ErrorProcessor;
 import View.Menu;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 
 public class ViewDiscountCodesMenu extends Menu {
@@ -39,7 +40,11 @@ public class ViewDiscountCodesMenu extends Menu {
 
     private void deleteDiscountCode(String id) {
         if (Discount.hasDiscountWithId(id)) {
-            ((ViewDiscountCodesManager) manager).deleteDiscountCode(id);
+            try {
+                ((ViewDiscountCodesManager) manager).deleteDiscountCode(id);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else ErrorProcessor.invalidDiscountId();
     }
 

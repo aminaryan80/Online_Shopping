@@ -5,6 +5,8 @@ import Models.Account.Account;
 import Models.Shop.Off.Discount;
 import View.Principal.ViewDiscountCodes.ViewDiscountCodesMenu;
 
+import java.io.IOException;
+
 public class ViewDiscountCodesManager extends Manager {
     public ViewDiscountCodesManager(Account account) {
         super(account);
@@ -17,7 +19,7 @@ public class ViewDiscountCodesManager extends Manager {
         }
     }
 
-    public void deleteDiscountCode(String id) {
+    public void deleteDiscountCode(String id) throws IOException {
         Discount.getDiscountById(id).deleteDiscount();
     }
 

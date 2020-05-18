@@ -147,6 +147,7 @@ public abstract class Request {
             while (reader.hasNext()) {
                 json.append(reader.next());
             }
+            reader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

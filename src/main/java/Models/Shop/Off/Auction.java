@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Auction {
     private static List<Auction> allAuctions = new ArrayList<>();
     private String id;
-//    private List<Product> products;
+    //    private List<Product> products;
     private List<String> productsIds;
     private AuctionStatus status;
     private LocalDate beginningDate;
@@ -145,7 +145,7 @@ public class Auction {
         UNDER_REVIEW_FOR_CONSTRUCTION, UNDER_REVIEW_FOR_EDITING, CONFIRMED
     }
 
-    public static void open() throws Exception{
+    public static void open() throws Exception {
         File folder = new File(Address.AUCTIONS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -155,10 +155,11 @@ public class Auction {
         }
     }
 
-    public static Auction open(File file) throws Exception{
+    public static Auction open(File file) throws Exception {
         StringBuilder json = new StringBuilder();
-            Scanner reader = new Scanner(file);
-            while (reader.hasNext()) json.append(reader.next());
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        reader.close();
         return Gson.INSTANCE.get().fromJson(json.toString(), Auction.class);
     }
 
@@ -188,7 +189,7 @@ public class Auction {
 //        }
 //    }
 
-    public ArrayList<Product> getProducts(){
+    public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (String productsId : productsIds) {
             products.add(Product.getProductById(productsId));
