@@ -56,7 +56,7 @@ public class ViewDiscountCodesMenu extends Menu {
 
     private void viewDiscountCode(String id) {
         if (Discount.hasDiscountWithId(id)) {
-            ((ViewDiscountCodesManager) manager).viewDiscountCode(id);
+            System.out.println(((ViewDiscountCodesManager) manager).viewDiscountCode(id));
         } else ErrorProcessor.invalidDiscountId();
     }
 

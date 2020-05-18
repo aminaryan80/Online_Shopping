@@ -37,9 +37,12 @@ public abstract class Log {
     @Override
     public abstract String toString();
 
-    public boolean hasProductById(String id) {
-return true;
-
+    public boolean hasProductInLog(Product product) {
+        for (Product p : products) {
+            if (p == product)
+                return true;
+        }
+        return false;
     }
 
     public String getId() {
@@ -51,6 +54,6 @@ return true;
     }
 
     public enum Status {
-        TO_BE_SEND,ON_THE_WAY,RECEIVED;
+        TO_BE_SEND, ON_THE_WAY, RECEIVED
     }
 }

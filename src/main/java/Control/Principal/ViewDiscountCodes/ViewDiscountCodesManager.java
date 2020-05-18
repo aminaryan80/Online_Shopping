@@ -23,8 +23,8 @@ public class ViewDiscountCodesManager extends Manager {
         Discount.getDiscountById(id).deleteDiscount();
     }
 
-    public void viewDiscountCode(String id) {
-        System.out.println(Discount.getDiscountById(id).toString());
+    public String viewDiscountCode(String id) {
+        return Discount.getDiscountById(id).toString();
     }
 
     public void editDiscountCode(String id) {
