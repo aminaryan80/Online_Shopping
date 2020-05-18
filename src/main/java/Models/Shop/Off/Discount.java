@@ -127,10 +127,6 @@ public class Discount {
         return maximumDiscount;
     }
 
-    public void reDiscountUseCount(int discountUseCount) {
-        this.discountUseCount = discountUseCount;
-    }
-
     public int getDiscountPercent() {
         return discountPercent;
     }

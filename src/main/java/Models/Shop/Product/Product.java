@@ -54,7 +54,6 @@ public class Product {
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         this.categoryName = category.getName();
-        this.categoryName = category.getName();
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;

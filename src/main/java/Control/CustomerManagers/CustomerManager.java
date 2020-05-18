@@ -1,6 +1,7 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
@@ -15,7 +16,7 @@ public class CustomerManager extends Manager {
 
     public CustomerManager(Account account) {
         super(account);
-        if(!account.getUsername().equals("utilTestObjectCode20010917"))
+        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new CustomerMenu(this);
     }
 

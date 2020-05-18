@@ -1,5 +1,6 @@
 package Control.CustomerManagers;
 
+import Control.UtilTestObject;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import org.junit.Test;
@@ -11,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class CustomerManagerTest {
 
-    Customer customer = new Customer("utilTestObjectCode20010917","masih","beigi","masihbr@gamil.com","09128569777","hello",500);
+    Customer customer = new Customer(UtilTestObject.CUSTOMER,"masih","beigi","masihbr@gamil.com","09128569777","hello",500);
     CustomerManager customerManager = new CustomerManager(customer);
     @Test
     public void viewCustomerBalance() {
