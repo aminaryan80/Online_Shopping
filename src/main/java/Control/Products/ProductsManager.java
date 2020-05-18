@@ -257,7 +257,6 @@ public class ProductsManager extends Manager {
         currentSort = null;
         products = mainCategory.getAllProducts();
         setFilters();
-        applySort();
         return productsInShort();
     }
 

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Product {
-    private static ArrayList<Product> allProducts = new ArrayList<>();
+    private static ArrayList<Product> allProducts = new ArrayList<Product>();
     private String id;
     private ProductStatus status;
     private String name;
@@ -61,6 +61,10 @@ public class Product {
         allProducts.add(this);
     }
 
+
+    public static ArrayList<Product> getAllProducts() {
+        return allProducts;
+    }
 
     public void addFeature(Feature feature) {
         features.add(feature);
@@ -140,7 +144,7 @@ public class Product {
     }
 
     public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<>();
+        ArrayList<String> allProductsInShort = new ArrayList<String>();
         for (Product product : allProducts) {
             if (product.getSeller().equals(seller)) {
                 allProductsInShort.add(product.viewProductInShort());

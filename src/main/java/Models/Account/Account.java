@@ -32,6 +32,10 @@ public abstract class Account {
         allAccounts.add(this);
     }
 
+    public static ArrayList<Account> getAllAccounts() {
+        return allAccounts;
+    }
+
     public abstract ArrayList<String> getChangeableFields();
 
     public static Account getAccountByUsername(String username) {
