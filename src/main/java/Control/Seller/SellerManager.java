@@ -56,12 +56,11 @@ public class SellerManager extends Manager {
     public void addProduct(String name,
                            Category category, double price, boolean iaAvailable,
                            String description, ArrayList<Feature> features) {
-        String id = generateNewId();
         String companyName = ((Seller) account).getCompanyName();
-        Product product = new Product(id, name, companyName, price, (Seller) account, iaAvailable, category, description, features);
+        Product product = new Product(name, companyName, price, (Seller) account, iaAvailable, category, description, features);
         Product.addProduct(product);
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);
-        new AddProductRequest(id, (Seller) account, product);
+        new AddProductRequest((Seller) account, product);
     }
 
     // remove product [productId]

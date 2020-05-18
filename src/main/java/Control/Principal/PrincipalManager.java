@@ -20,7 +20,6 @@ public class PrincipalManager extends Manager {
     public void createDiscountCode(ArrayList<String> newDiscountInputs, ArrayList<String> allowedCustomersNames) {
         // 0:discount percent - 1:maximumDiscount - 2:discountUseCount - 3:beginningDate - 4:endingDate
         Discount discount = new Discount(
-                Identity.getId(),
                 LocalDate.parse(newDiscountInputs.get(3)),
                 LocalDate.parse(newDiscountInputs.get(4)),
                 Integer.parseInt(newDiscountInputs.get(0)),

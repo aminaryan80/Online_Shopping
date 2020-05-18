@@ -1,5 +1,6 @@
 package Models.Shop.Off;
 
+import Control.Identity;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
@@ -21,8 +22,8 @@ public class Auction {
     private Date endingDate;
     private double discountAmount;
 
-    public Auction(String id, List<String> productsIds, Date beginningDate, Date endingDate, double discountAmount) {
-        this.id = id;
+    public Auction(List<String> productsIds, Date beginningDate, Date endingDate, double discountAmount) {
+        this.id = Identity.getId();
 //        this.products = products;
         this.productsIds = productsIds;
 //        for (Product product : products) {

@@ -14,13 +14,18 @@ import java.util.Random;
 
 public abstract class Manager {
     protected static Account account;
-    protected final static Category mainCategory = new Category("mainCategory", null, null, new ArrayList<>());
     protected static Cart cart = new Cart();
+    protected static Category mainCategory;
     protected Menu menu;
     protected boolean isPrincipalExists = false;
 
     public Manager(Account account) {
         Manager.account = account;
+        if (!Category.hasCategoryWithName("mainCategory")) {
+            mainCategory = new Category("mainCategory", null, null, new ArrayList<>());
+        } else {
+            mainCategory = Category.getCategoryByName("mainCategory");
+        }
     }
 
     public Account getAccount() {

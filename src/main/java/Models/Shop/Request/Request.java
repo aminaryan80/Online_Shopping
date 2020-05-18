@@ -1,5 +1,6 @@
 package Models.Shop.Request;
 
+import Control.Identity;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
@@ -21,8 +22,8 @@ public abstract class Request {
     protected String sellerName;
     protected RequestType type;
 
-    public Request(String id, Seller seller) {
-        this.id = id;
+    public Request(Seller seller) {
+        this.id = Identity.getId();
         this.seller = seller;
         this.sellerName = seller.getName();
         allRequests.add(this);

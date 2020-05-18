@@ -7,8 +7,8 @@ public class EditOffRequest extends Request {
     private Auction auction;
     private String auctionId;
 
-    public EditOffRequest(String id, Seller seller, Auction auction) {
-        super(id, seller);
+    public EditOffRequest(Seller seller, Auction auction) {
+        super(seller);
         this.type = RequestType.EDIT_OFF;
         this.auction = auction;
         this.auctionId = auction.getId();

@@ -7,8 +7,8 @@ public class AddOffRequest extends Request {
     private Auction auction;
     private String auctionId;
 
-    public AddOffRequest(String id, Seller seller, Auction auction) {
-        super(id, seller);
+    public AddOffRequest(Seller seller, Auction auction) {
+        super(seller);
         this.type = RequestType.ADD_OFF;
         this.auction = auction;
         this.auctionId = auction.getId();

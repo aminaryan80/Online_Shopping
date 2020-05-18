@@ -60,7 +60,7 @@ public class OffsMenu extends Menu {
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();
         Auction auction = ((OffsManager) manager).editOffAttribute(id, field, newValue);
-        new EditOffRequest("random id", (Seller) manager.getAccount(), auction);
+        new EditOffRequest((Seller) manager.getAccount(), auction);
     }
 
     private void addOff(){
@@ -81,8 +81,8 @@ public class OffsMenu extends Menu {
             }
             products.add(product);
         }
-        Auction auction = ((OffsManager) manager).addOff(id, beginningDate, endingDate, discountAmount, products);
-        new AddOffRequest("random id", (Seller) manager.getAccount(), auction);
+        Auction auction = ((OffsManager) manager).addOff(beginningDate, endingDate, discountAmount, products);
+        new AddOffRequest((Seller) manager.getAccount(), auction);
     }
 
     private void help() {

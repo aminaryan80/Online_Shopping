@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public class SellingLog extends Log {
 
-    public SellingLog(String id, LocalDateTime date, double moneyReceived, double amountOfAuctionApplied, ArrayList<Product> soldProducts,
+    public SellingLog(LocalDateTime date, double moneyReceived, double amountOfAuctionApplied, ArrayList<Product> soldProducts,
                       String buyerName, String address, String phoneNumber, Status SendingStatus) {
-        super(id, date, moneyReceived, amountOfAuctionApplied, soldProducts, buyerName, address, phoneNumber, SendingStatus);
+        super(date, moneyReceived, amountOfAuctionApplied, soldProducts, buyerName, address, phoneNumber, SendingStatus);
     }
 
 

@@ -1,5 +1,6 @@
 package Models.Shop.Product;
 
+import Control.Identity;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
@@ -41,9 +42,9 @@ public class Product {
     //TODO different sellers for one product
 
 
-    public Product(String id, String name, String companyName, double price, Seller seller,
+    public Product(String name, String companyName, double price, Seller seller,
                    boolean isAvailable, Category category, String description, ArrayList<Feature> features) {
-        this.id = id;
+        this.id = Identity.getId();
         this.name = name;
         this.companyName = companyName;
         this.price = price;

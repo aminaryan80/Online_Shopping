@@ -1,5 +1,6 @@
 package Models.Shop.Off;
 
+import Control.Identity;
 import Models.Account.Customer;
 import Models.Address;
 import Models.Gson;
@@ -25,9 +26,9 @@ public class Discount {
     //private ArrayList<Customer> allCustomers;
     private ArrayList<String> allCustomersUsernames;
 
-    public Discount(String id, LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
+    public Discount(LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<String> allcustomersUsernames) {
-        this.id = id;
+        this.id = Identity.getId();
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountPercent = discountPercent;

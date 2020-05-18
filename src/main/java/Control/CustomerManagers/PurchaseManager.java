@@ -55,7 +55,6 @@ public class PurchaseManager extends CustomerManager {
 
     private BuyingLog getBuyingLog(ArrayList<String> receiverInformation, Discount discount, Seller seller, ArrayList<Product> productsBoughtFromThisSeller) {
         return new BuyingLog(
-                Identity.getId(),
                 LocalDateTime.now(),
                 getMoneyPaidByCustomer(productsBoughtFromThisSeller,discount),
                 getAmountOfDiscountCodeApplied(productsBoughtFromThisSeller, discount),
@@ -69,7 +68,6 @@ public class PurchaseManager extends CustomerManager {
 
     private SellingLog getSellingLog(ArrayList<String> receiverInformation, ArrayList<Product> productsBoughtFromThisSeller) {
         return new SellingLog(
-                Identity.getId(),
                 LocalDateTime.now(),
                 getMoneyReceivedBySeller(productsBoughtFromThisSeller),
                 getAmountOfAuctionApplied(productsBoughtFromThisSeller),

@@ -1,5 +1,6 @@
 package Models.Shop.Log;
 
+import Control.Identity;
 import Models.Shop.Product.Product;
 
 import java.time.LocalDateTime;
@@ -18,9 +19,9 @@ public abstract class Log {
     protected String name; //Selling log : buyer's name |  Buying log : seller's name
     protected Status status;
 
-    public Log(String id, LocalDateTime date, double money,double amount,ArrayList<Product> products,
+    public Log(LocalDateTime date, double money,double amount,ArrayList<Product> products,
                String name, String address, String phoneNumber,Status status) {
-        this.id = id;
+        this.id = Identity.getId();
         this.date = date;
         this.money = money;
         this.amount = amount;

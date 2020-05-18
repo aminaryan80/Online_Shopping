@@ -7,8 +7,8 @@ public class AddProductRequest extends Request {
     private Product product;
     private String productId;
 
-    public AddProductRequest(String id, Seller seller, Product product) {
-        super(id, seller);
+    public AddProductRequest(Seller seller, Product product) {
+        super(seller);
         this.type = RequestType.ADD_PRODUCT;
         this.product = product;
         this.productId = product.getId();
