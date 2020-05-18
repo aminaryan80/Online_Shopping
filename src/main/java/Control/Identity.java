@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class Identity {
     private String id = "";
-    private static ArrayList<String> identities = new ArrayList<String>();
+    private static ArrayList<String> identities = new ArrayList<>();
 
     private static boolean doesExist(String id) {
         for (String identity : identities) {
