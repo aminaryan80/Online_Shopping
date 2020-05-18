@@ -4,7 +4,6 @@ import Control.Identity;
 import Models.Account.Account;
 import Models.Address;
 import Models.Gson;
-import Models.Shop.Category.Category;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Rate {
+    private static ArrayList<Rate> allRates = new ArrayList<>();
     private Account account;
     private int score;
     private Product product;
     private String id;
-    private static ArrayList<Rate> allRates = new ArrayList<>();
     public Rate(Account account, int score, Product product) {
         this.account = account;
         this.score = score;

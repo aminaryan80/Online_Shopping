@@ -15,6 +15,10 @@ public class ViewOrdersManager extends Manager {
         this.menu = new ViewOrdersMenu(this);
     }
 
+    public boolean canShowOrderWithId(String logId) {
+        return customer.getLogById(logId) != null;
+    }
+
     public String showOrderById(String logId) {
         return customer.getLogById(logId).toString();
     }

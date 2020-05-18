@@ -30,7 +30,7 @@ public enum ConsoleCommand {
 
     SHOW_ORDER("(?i)show order (\\S+)"),
 
-    RATE("(?i)rate (\\S+) (\\d)"),
+    RATE("(?i)rate (\\S+) ([1-5])"),
 
     VIEW_PERSONAL_INFO("(?i)view personal info"),
 
