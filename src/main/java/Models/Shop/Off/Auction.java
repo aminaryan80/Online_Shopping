@@ -6,6 +6,7 @@ import Models.Shop.Product.Product;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,11 +18,11 @@ public class Auction {
 //    private List<Product> products;
     private List<String> productsIds;
     private AuctionStatus status;
-    private Date beginningDate;
-    private Date endingDate;
+    private LocalDate beginningDate;
+    private LocalDate endingDate;
     private double discountAmount;
 
-    public Auction(String id, List<String> productsIds, Date beginningDate, Date endingDate, double discountAmount) {
+    public Auction(String id, List<String> productsIds, LocalDate beginningDate, LocalDate endingDate, double discountAmount) {
         this.id = id;
 //        this.products = products;
         this.productsIds = productsIds;
@@ -80,7 +81,7 @@ public class Auction {
         return productsInShort;
     }
 
-    public void setBeginningDate(Date beginningDate) {
+    public void setBeginningDate(LocalDate beginningDate) {
         this.beginningDate = beginningDate;
     }
 
@@ -88,7 +89,7 @@ public class Auction {
         this.discountAmount = discountAmount;
     }
 
-    public void setEndingDate(Date endingDate) {
+    public void setEndingDate(LocalDate endingDate) {
         this.endingDate = endingDate;
     }
 
@@ -132,11 +133,11 @@ public class Auction {
         return status;
     }
 
-    public Date getBeginningDate() {
+    public LocalDate getBeginningDate() {
         return beginningDate;
     }
 
-    public Date getEndingDate() {
+    public LocalDate getEndingDate() {
         return endingDate;
     }
 

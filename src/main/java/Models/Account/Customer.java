@@ -24,8 +24,6 @@ public class Customer extends Account {
         discountsIds = new ArrayList<>();
     }
 
-
-
     public void addDiscount(Discount discount) {
         if(discount != null)
         discountsIds.add(discount.getId());
