@@ -28,10 +28,13 @@ public class Product {
     private Category category;
     private String categoryName;
     private String description;
-    private ArrayList<Rate> allRates = new ArrayList<>();
-    private ArrayList<Customer> allBuyers = new ArrayList<>();
-    private ArrayList<String> allBuyersNames = new ArrayList<>();
-    private List<Comment> allComments = new ArrayList<>();
+//    private ArrayList<Rate> allRates = new ArrayList<>();
+    private ArrayList<String> allRatesIds= new ArrayList<>();
+//    private ArrayList<Customer> allBuyers = new ArrayList<>();
+//    private ArrayList<String> allBuyersNames = new ArrayList<>();
+    private ArrayList<String> allBuyersUsernames = new ArrayList<>();
+//    private List<Comment> allComments = new ArrayList<>();
+    private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
     private Auction auction;
     private String auctionId;
@@ -51,8 +54,8 @@ public class Product {
         this.categoryName = category.getName();
         this.description = description;
         this.features = features;
-        allProducts.add(this);
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+        allProducts.add(this);
     }
 
     public void addFeature(Feature feature) {
@@ -77,8 +80,16 @@ public class Product {
     }
 
     public void addBuyers(Customer buyer) {
-        allBuyers.add(buyer);
-        allBuyersNames.add(buyer.getName());
+        allBuyersUsernames.add(buyer.getName());
+    //TODO use
+    }
+
+    public ArrayList<Customer> getAllBuyers(){
+        ArrayList<Customer> allBuyers  = new ArrayList<>();
+        for (String buyerUsername : allBuyersUsernames) {
+            allBuyers.add((Customer) Customer.getAccountByUsername(buyerUsername));
+        }
+        return allBuyers;
     }
 
     public static ArrayList<Product> getProductsByName(String name) {
@@ -136,9 +147,17 @@ public class Product {
         return id;
     }
 
+    public ArrayList<Comment> getAllComments(){
+        ArrayList<Comment> allComments = new ArrayList<>();
+        for (String commentId : allCommentsIds) {
+            allComments.add(Comment.getCommentById(commentId));
+        }
+        return allComments;
+    }
+
     public List<String> getComments() {
         List<String> comments = new ArrayList<>();
-        for (Comment comment : allComments) {
+        for (Comment comment : getAllComments()) {
             comments.add(comment.getText());
         }
         return comments;
@@ -168,20 +187,28 @@ public class Product {
                 "\nDiscount: " + auction.getDiscountAmount();
     }
 
+    public ArrayList<Rate> getAllRates(){
+        ArrayList<Rate> allRates = new ArrayList<>();
+        for (String rateId : allRatesIds) {
+            allRates.add(Rate.getRateById(rateId));
+        }
+        return allRates;
+     }
+
     public double getRate() {
         double sum = 0;
-        for (Rate rate : allRates) {
+        for (Rate rate : getAllRates()) {
             sum += rate.getScore();
         }
-        return sum / allRates.size();
+        return sum / allRatesIds.size();
     }
 
     public void addRate(Account account, int rate) {
-        allRates.add(new Rate(account, rate, this));
+        allRatesIds.add((new Rate(account, rate, this)).getId());
     }
 
     public void addComment(Comment comment) {
-        allComments.add(comment);
+        allCommentsIds.add(comment.getId());
     }
 
     public Auction getAuction() {
@@ -291,21 +318,21 @@ public class Product {
         file.close();
     }
 
-    public static void loadReferences() {
-        for (Product product : allProducts) {
-            product.loadReference();
-        }
-    }
+//    public static void loadReferences() {
+//        for (Product product : allProducts) {
+//            product.loadReference();
+//        }
+//    }
 
-    private void loadReference() {
-        seller = (Seller) Account.getAccountByUsername(sellerName);
-        category = Category.getCategoryByName(categoryName);
-        auction = Auction.getAuctionById(auctionId);
-        allBuyers = new ArrayList<>();
-        for (String buyersName : allBuyersNames) {
-            allBuyers.add((Customer) Account.getAccountByUsername(buyersName));
-        }
-    }
+//    private void loadReference() {
+//        seller = (Seller) Account.getAccountByUsername(sellerName);
+//        category = Category.getCategoryByName(categoryName);
+//        auction = Auction.getAuctionById(auctionId);
+//        allBuyers = new ArrayList<>();
+//        for (String buyersName : allBuyersUsernames) {
+//            allBuyers.add((Customer) Account.getAccountByUsername(buyersName));
+//        }
+//    }
 
     @Override
     public String toString() {
@@ -319,7 +346,7 @@ public class Product {
                 ", isAvailable=" + isAvailable +
                 ", category=" + category +
                 ", description='" + description + '\'' +
-                ", allComments=" + allComments +
+                ", allComments=" + getAllComments() +
                 '}';
     }
 }

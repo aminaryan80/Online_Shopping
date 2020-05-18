@@ -36,7 +36,7 @@ public class Main {
         Request.loadReferences();
         //Auction.loadReferences();
         // Discount.loadReferences();
-        Product.loadReferences();
+        //Product.loadReferences();
     }
 
     private static void saveFiles() {
