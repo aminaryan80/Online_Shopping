@@ -11,29 +11,30 @@ import Models.Shop.Off.Auction;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Product {
-    private static ArrayList<Product> allProducts = new ArrayList<Product>();
+    private static ArrayList<Product> allProducts = new ArrayList<>();
     private String id;
     private ProductStatus status;
     private String name;
     private String companyName;
     private double price;
-//    private Seller seller;
+    //    private Seller seller;
     private String sellerUsername;
     private boolean isAvailable;
-//    private Category category;
+    //    private Category category;
     private String categoryName;
     private String description;
-//    private ArrayList<Rate> allRates = new ArrayList<>();
-    private ArrayList<String> allRatesIds= new ArrayList<>();
-//    private ArrayList<Customer> allBuyers = new ArrayList<>();
+    //    private ArrayList<Rate> allRates = new ArrayList<>();
+    private ArrayList<String> allRatesIds = new ArrayList<>();
+    //    private ArrayList<Customer> allBuyers = new ArrayList<>();
 //    private ArrayList<String> allBuyersNames = new ArrayList<>();
     private ArrayList<String> allBuyersUsernames = new ArrayList<>();
-//    private List<Comment> allComments = new ArrayList<>();
+    //    private List<Comment> allComments = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
     private Auction auction;
@@ -56,7 +57,6 @@ public class Product {
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         allProducts.add(this);
     }
-
 
 
     public void addFeature(Feature feature) {
@@ -82,11 +82,11 @@ public class Product {
 
     public void addBuyers(Customer buyer) {
         allBuyersUsernames.add(buyer.getName());
-    //TODO use
+        //TODO use
     }
 
-    public ArrayList<Customer> getAllBuyers(){
-        ArrayList<Customer> allBuyers  = new ArrayList<>();
+    public ArrayList<Customer> getAllBuyers() {
+        ArrayList<Customer> allBuyers = new ArrayList<>();
         for (String buyerUsername : allBuyersUsernames) {
             allBuyers.add((Customer) Customer.getAccountByUsername(buyerUsername));
         }
@@ -135,7 +135,7 @@ public class Product {
     }
 
     public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<String>();
+        ArrayList<String> allProductsInShort = new ArrayList<>();
         for (Product product : allProducts) {
             if (product.getSeller().equals(seller)) {
                 allProductsInShort.add(product.viewProductInShort());
@@ -148,7 +148,7 @@ public class Product {
         return id;
     }
 
-    public ArrayList<Comment> getAllComments(){
+    public ArrayList<Comment> getAllComments() {
         ArrayList<Comment> allComments = new ArrayList<>();
         for (String commentId : allCommentsIds) {
             allComments.add(Comment.getCommentById(commentId));
@@ -188,13 +188,13 @@ public class Product {
                 "\nDiscount: " + auction.getDiscountAmount();
     }
 
-    public ArrayList<Rate> getAllRates(){
+    public ArrayList<Rate> getAllRates() {
         ArrayList<Rate> allRates = new ArrayList<>();
         for (String rateId : allRatesIds) {
             allRates.add(Rate.getRateById(rateId));
         }
         return allRates;
-     }
+    }
 
     public double getRate() {
         double sum = 0;
@@ -221,14 +221,15 @@ public class Product {
     }
 
     public static ProductStatus parseProductStatus(String statusName) {
-        if (statusName.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (statusName.equals("UNDER_REVIEW_FOR_EDITING")) {
-            return ProductStatus.UNDER_REVIEW_FOR_EDITING;
-        } else if (statusName.equals("CONFIRMED")) {
-            return ProductStatus.CONFIRMED;
-        } else {
-            return null;
+        switch (statusName) {
+            case "UNDER_REVIEW_FOR_CONSTRUCTION":
+                return ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+            case "UNDER_REVIEW_FOR_EDITING":
+                return ProductStatus.UNDER_REVIEW_FOR_EDITING;
+            case "CONFIRMED":
+                return ProductStatus.CONFIRMED;
+            default:
+                return null;
         }
     }
 
@@ -249,8 +250,11 @@ public class Product {
     }
 
     public double getAuctionedPrice() {
-        if(auction == null) return price;
-        else return price - auction.getDiscountAmount();
+        if (auction == null || !auction.isActive(LocalDate.now())) return price;
+        else {
+            if (auction.isActive(LocalDate.now())) return price - auction.getDiscountAmount();
+            else return price;
+        }
     }
 
     public void setStatus(ProductStatus status) {
@@ -289,7 +293,7 @@ public class Product {
         this.description = description;
     }
 
-    public static void open() throws Exception{
+    public static void open() throws Exception {
         File folder = new File(Address.PRODUCTS.get());
         if (!folder.exists()) folder.mkdirs();
         else {

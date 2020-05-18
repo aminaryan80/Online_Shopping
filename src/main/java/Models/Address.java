@@ -10,6 +10,8 @@ public enum Address {
     PRODUCTS("database"+"\\"+"products"),
 
     CATEGORIES("database"+"\\"+"categories"),
+    RATES("database"+"\\"+"rates"),
+    COMMENTS("database"+"\\"+"comments"),
 
     REQUESTS("database"+"\\"+"requests"),
     ADD_PRODUCT_REQUESTS("database"+"\\"+"requests"+"\\"+"add product requests"),

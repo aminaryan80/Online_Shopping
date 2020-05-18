@@ -4,7 +4,9 @@ import Models.Account.Account;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Auction;
 import Models.Shop.Off.Discount;
+import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
+import Models.Shop.Product.Rate;
 import Models.Shop.Request.Request;
 
 import java.io.IOException;
@@ -19,6 +21,8 @@ public class Main {
 
     private static void openFiles() {
         try {
+            Comment.open();
+            Rate.open();
             Account.open();
             Category.open();
             Request.open();
@@ -43,6 +47,8 @@ public class Main {
 
     private static void saveFiles() {
         try {
+            Rate.save();
+            Comment.save();
             Account.save();
             Category.save();
             Request.save();

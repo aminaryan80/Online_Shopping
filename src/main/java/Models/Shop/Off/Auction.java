@@ -118,14 +118,15 @@ public class Auction {
     }
 
     public static AuctionStatus parseAuctionStatus(String status) {
-        if (status.equals("UNDER_REVIEW_FOR_CONSTRUCTION")) {
-            return AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        } else if (status.equals("UNDER_REVIEW_FOR_EDITING")) {
-            return AuctionStatus.UNDER_REVIEW_FOR_EDITING;
-        } else if (status.equals("CONFIRMED")) {
-            return AuctionStatus.CONFIRMED;
-        } else {
-            return null;
+        switch (status) {
+            case "UNDER_REVIEW_FOR_CONSTRUCTION":
+                return AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+            case "UNDER_REVIEW_FOR_EDITING":
+                return AuctionStatus.UNDER_REVIEW_FOR_EDITING;
+            case "CONFIRMED":
+                return AuctionStatus.CONFIRMED;
+            default:
+                return null;
         }
     }
 
@@ -139,6 +140,10 @@ public class Auction {
 
     public LocalDate getEndingDate() {
         return endingDate;
+    }
+
+    public boolean isActive(LocalDate now) {
+        return now.compareTo(beginningDate) > 0 && now.compareTo(endingDate) < 0;
     }
 
     public enum AuctionStatus {

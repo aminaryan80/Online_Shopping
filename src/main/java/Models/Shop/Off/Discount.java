@@ -176,6 +176,13 @@ public class Discount {
         //file.delete();
     }
 
+    public boolean isActive(LocalDate now) {
+        if(now.compareTo(beginningDate)>0 && now.compareTo(endingDate)<0){
+            return true;
+        }
+        return false;
+    }
+
 //    public static void loadReferences() {
 //        for (Discount discount : allDiscounts) {
 //            discount.loadReference();
