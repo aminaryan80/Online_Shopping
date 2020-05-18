@@ -8,9 +8,11 @@ import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
 import Models.Shop.Off.Auction;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,8 +127,10 @@ public class Product {
         return null;
     }
 
-    public static void deleteProduct(Product product) {
+    public static void deleteProduct(Product product) throws IOException {
         allProducts.remove(product);
+        File file = new File(Address.PRODUCTS.get()+"\\"+product.getId()+".json");
+        FileUtils.forceDelete(file);
     }
 
     public String viewProductInShort() {

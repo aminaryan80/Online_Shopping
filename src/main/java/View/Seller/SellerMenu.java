@@ -8,6 +8,7 @@ import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
@@ -126,7 +127,11 @@ public class SellerMenu extends Menu {
             ErrorProcessor.notYourProduct();
             return;
         }
-        ((SellerManager) manager).deleteProductById(id);
+        try {
+            ((SellerManager) manager).deleteProductById(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showCategories() {

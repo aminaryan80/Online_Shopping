@@ -3,6 +3,8 @@ package Models.Shop.Request;
 import Models.Account.Seller;
 import Models.Shop.Off.Auction;
 
+import java.io.IOException;
+
 public class EditOffRequest extends Request {
     private Auction auction;
     private String auctionId;
@@ -15,7 +17,7 @@ public class EditOffRequest extends Request {
     }
 
     @Override
-    protected void loadReference() {
+    protected void loadReference() throws IOException {
         auction = Auction.getAuctionById(auctionId);
         deleteRequest(this);
     }
@@ -26,7 +28,7 @@ public class EditOffRequest extends Request {
     }
 
     @Override
-    public void decline() {
+    public void decline() throws IOException {
         deleteRequest(this);
     }
 

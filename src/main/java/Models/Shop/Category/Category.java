@@ -3,9 +3,11 @@ package Models.Shop.Category;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,13 +105,15 @@ public class Category {
         return products;
     }
 
-    public static void deleteCategory(Category category) {
+    public static void deleteCategory(Category category) throws IOException {
         category.subCategoriesNames.remove(category.getName());
         allCategories.remove(category);
         ArrayList<Category> subCats = new ArrayList<>(category.getSubCategories());
         for (Category subCategory : subCats) {
             deleteCategory(subCategory);
         }
+        File file = new File(Address.CATEGORIES.get()+"\\"+category.getName()+".json");
+        FileUtils.forceDelete(file);
     }
 
     public boolean hasCategoryInsideWithName(String name) {

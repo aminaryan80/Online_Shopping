@@ -39,7 +39,11 @@ public class Main {
     private static void connectObjects() {
         //Account.loadReferences();
         //Category.loadReferences();
-        Request.loadReferences();
+        try {
+            Request.loadReferences();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //Auction.loadReferences();
         //Discount.loadReferences();
         //Product.loadReferences();
