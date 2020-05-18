@@ -33,8 +33,8 @@ public class PaymentMenu extends Menu {
     private boolean canPay(String discountId) {
         try {
             return purchaseManager.canPay(discountId);
-        } catch (PurchaseManager.WrongDiscountIdException e) {
-            ErrorProcessor.invalidDiscountId();
+        } catch (PurchaseManager.WrongDiscountIdException| PurchaseManager.UsedDiscountIdException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
