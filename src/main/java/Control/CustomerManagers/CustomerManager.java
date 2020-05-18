@@ -48,7 +48,7 @@ public class CustomerManager extends Manager {
     public ArrayList<String> viewDiscountCodes() {
         ArrayList<String> discountsPercentagesAndIds = new ArrayList<>();
         for (Discount discount : customer.getDiscounts()) {
-            discountsPercentagesAndIds.add("" + discount.getId() + discount.getDiscountPercent());
+            discountsPercentagesAndIds.add("" + discount.getId() +": "+ discount.getDiscountPercent());
         }
         return discountsPercentagesAndIds;
     }

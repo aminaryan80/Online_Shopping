@@ -24,6 +24,7 @@ public class CustomerManagerTest {
         ArrayList<String> customers = new ArrayList<>();
         customers.add(customer.getUsername());
         Discount discount = new Discount(LocalDate.parse("2000-01-01"),LocalDate.parse("2002-01-01"),20,50,1,customers);
-
+        customer.addDiscount(discount);
+        assertEquals(customerManager.viewDiscountCodes().get(0),discount.getId()+": "+discount.getDiscountPercent());
     }
 }
