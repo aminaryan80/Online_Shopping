@@ -4,11 +4,13 @@ import Control.CustomerManagers.ProductPageManager;
 import Control.CustomerManagers.PurchaseManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
+import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 import View.Menu;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ViewCartMenu extends Menu {
@@ -51,12 +53,54 @@ public class ViewCartMenu extends Menu {
                 new PurchaseManager(manager.getAccount());
             } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
                 showCart();
+            } else if (input.equals("show available sorts")) {
+                showAvailableSorts();
+            } else if ((matcher = getMatcher(input, "sort (\\S+)")).find()) {
+                sort(matcher.group(1));
+            } else if (input.equals("current sort")) {
+                currentSort();
+            } else if (input.equals("disable sort")) {
+                disableSort();
+            } else {
+                ErrorProcessor.invalidInput();
             }
+        }
+    }
+
+    private void showAvailableSorts() {
+        System.out.println(((ViewCartManager) manager).showAvailableSorts());
+    }
+
+    private void sort(String sort) {
+        if (((ViewCartManager) manager).isEnteredSortFieldValid(sort)) {
+            System.out.println("do you want it to be ascending (answer with true or false)");
+            String isAscending = scanner.nextLine();
+            ArrayList<String> sortedProducts = ((ViewCartManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (String sortedProduct : sortedProducts) {
+                System.out.println(sortedProduct);
+            }
+        } else {
+            ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void currentSort() {
+        System.out.println(((ViewCartManager) manager).currentSort());
+    }
+
+    private void disableSort() {
+        ArrayList<String> products = ((ViewCartManager) manager).disableSort();
+        for (String product : products) {
+            System.out.println(product);
         }
     }
 
     private void showCart() {
         System.out.println("show products\n" +
+                "show available sorts\n" +
+                "sort [an available sort]\n" +
+                "current sort\n" +
+                "disable sort\n" +
                 "view [productId]\n" +
                 "increase [productId]\n" +
                 "decrease [productId]\n" +

@@ -110,6 +110,7 @@ public class ManageAllProductsManager extends Manager {
         products = (ArrayList<Product>) Arrays.asList(productsForSort);
     }
 
+
     public boolean isEnteredSortFieldValid(String field) {
         return field.equals("price") || field.equals("name") || field.equals("rating");
     }

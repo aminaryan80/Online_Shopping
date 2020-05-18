@@ -1,6 +1,7 @@
 package View.Seller;
 
 import Control.Manager;
+import Control.Products.ProductsManager;
 import Control.Seller.SellerManager;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
@@ -66,6 +67,60 @@ public class SellerMenu extends Menu {
         ArrayList<String> allHistory = ((SellerManager) manager).viewSalesHistory();
         for (String history : allHistory) {
             System.out.println(history);
+        }
+        while (true) {
+            Matcher matcher;
+            String command = scanner.nextLine();
+            if (command.equals("show available sorts")) {
+                showAvailableSorts();
+            } else if ((matcher = getMatcher(command, "sort (\\S+)")).find()) {
+                sort(matcher.group(1));
+            } else if (command.equals("current sort")) {
+                currentSort();
+            } else if (command.equals("disable sort")) {
+                disableSort();
+            } else if (command.equals("help")) {
+                sortingHelp();
+            } else if (command.equals("back")) {
+                return;
+            }
+        }
+    }
+
+    private void sortingHelp() {
+        System.out.println("show available sorts\n" +
+                "sort [an available sort]\n" +
+                "current sort\n" +
+                "disable sort\n" +
+                "help\n" +
+                "back");
+    }
+
+    private void showAvailableSorts() {
+        System.out.println(((SellerManager) manager).showAvailableSorts());
+    }
+
+    private void sort(String sort) {
+        if (((SellerManager) manager).isEnteredSortFieldValid(sort)) {
+            System.out.println("do you want it to be ascending (answer with true or false)");
+            String isAscending = scanner.nextLine();
+            ArrayList<String> sortedLogs = ((SellerManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (String sortedLog : sortedLogs) {
+                System.out.println(sortedLog);
+            }
+        } else {
+            ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void currentSort() {
+        System.out.println(((SellerManager) manager).currentSort());
+    }
+
+    private void disableSort() {
+        ArrayList<String> Logs = ((SellerManager) manager).disableSort();
+        for (String Log : Logs) {
+            System.out.println(Log);
         }
     }
 

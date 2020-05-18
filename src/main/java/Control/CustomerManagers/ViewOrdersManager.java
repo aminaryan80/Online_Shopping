@@ -4,14 +4,27 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
 
+import Models.Account.Seller;
+import Models.Shop.Category.Sort;
+import Models.Shop.Log.BuyingLog;
+import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
 import View.ErrorProcessor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class ViewOrdersManager extends Manager {
+
+    private Sort currentSort;
+    private List<BuyingLog> logs;
     private Customer customer = (Customer) account;
     public ViewOrdersManager(Account account) {
         super(account);
+        logs = ((Customer) account).getAllLogs();
         this.menu = new ViewOrdersMenu(this);
     }
 
@@ -27,5 +40,79 @@ public class ViewOrdersManager extends Manager {
         Product product = Product.getProductById(productId);
         if(product != null) product.addRate(customer,score);
         else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
+    }
+
+    private ArrayList<String> logsInShort() {
+        ArrayList<String> logsInShort= new ArrayList<>();
+        for (BuyingLog log : logs) {
+            logsInShort.add(log.viewLogInShort());
+        }
+        return logsInShort;
+    }
+
+    public String showAvailableSorts() {
+        return "money\n" +
+                "date";
+    }
+
+    public ArrayList<String> sort(String sort, boolean isAscending) {
+        logs = ((Customer) account).getAllLogs();
+        currentSort = new Sort(sort, isAscending);
+        applySort();
+        return logsInShort();
+    }
+
+    private void applySort() {
+        String field = currentSort.getField();
+        if (field.equals("money")) {
+            sortByMoney();
+        } else {
+            sortByDate();
+        }
+        if (!currentSort.isAscending()) {
+            Collections.reverse(logs);
+        }
+    }
+
+    private void sortByMoney() {
+        BuyingLog[] logsForSort = logs.toArray(new BuyingLog[0]);
+        for (int i = 0; i < logsForSort.length; i++) {
+            for (int j = i + 1; j < logsForSort.length; j++) {
+                if (logsForSort[i].getMoney() > logsForSort[j].getMoney()) {
+                    BuyingLog temp = logsForSort[i];
+                    logsForSort[i] = logsForSort[j];
+                    logsForSort[j] = temp;
+                }
+            }
+        }
+        logs = Arrays.asList(logsForSort);
+    }
+
+    private void sortByDate() {
+        BuyingLog[] logsForSort = logs.toArray(new BuyingLog[0]);
+        for (int i = 0; i < logsForSort.length; i++) {
+            for (int j = i + 1; j < logsForSort.length; j++) {
+                if (logsForSort[i].getDate().isBefore(logsForSort[j].getDate())) {
+                    BuyingLog temp = logsForSort[i];
+                    logsForSort[i] = logsForSort[j];
+                    logsForSort[j] = temp;
+                }
+            }
+        }
+        logs = Arrays.asList(logsForSort);
+    }
+
+    public boolean isEnteredSortFieldValid(String field) {
+        return field.equals("money") || field.equals("date");
+    }
+
+    public String currentSort() {
+        return currentSort.toString();
+    }
+
+    public ArrayList<String> disableSort() {
+        currentSort = null;
+        logs = ((Customer) account).getAllLogs();
+        return logsInShort();
     }
 }

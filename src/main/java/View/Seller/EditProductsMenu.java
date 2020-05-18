@@ -1,6 +1,7 @@
 package View.Seller;
 
 import Control.Manager;
+import Control.Products.ProductsManager;
 import Control.Seller.EditProductsManager;
 import Models.Account.Seller;
 import Models.Shop.Request.EditProductRequest;
@@ -28,6 +29,14 @@ public class EditProductsMenu extends Menu {
                 viewProductBuyers(matcher.group(1));
             } else if ((matcher = getMatcher(command, "^edit (\\d+)$")).find()) {
                 editProduct(matcher.group(1));
+            } if (command.equals("show available sorts")) {
+                showAvailableSorts();
+            } else if ((matcher = getMatcher(command, "sort (\\S+)")).find()) {
+                sort(matcher.group(1));
+            } else if (command.equals("current sort")) {
+                currentSort();
+            } else if (command.equals("disable sort")) {
+                disableSort();
             } else if ((matcher = getMatcher(command, "^back$")).find()) {
                 return;
             } else if ((matcher = getMatcher(command, "^help$")).find()) {
@@ -60,16 +69,58 @@ public class EditProductsMenu extends Menu {
             ErrorProcessor.invalidEditField();
             return;
         }
+        String feature = "";
+        if (field.equals("features")) {
+            System.out.println("enter which field you want to change");
+            feature = scanner.nextLine();
+        }
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();
-        Product product = ((EditProductsManager) manager).editProduct(id, field, newValue);
+        Product product;
+        if (field.equals("features")) {
+            product = ((EditProductsManager) manager).editProduct(id, feature, newValue);
+        } else {
+            product = ((EditProductsManager) manager).editProduct(id, field, newValue);
+        }
         new EditProductRequest((Seller) manager.getAccount(), product);
+    }
+
+    private void showAvailableSorts() {
+        System.out.println(((EditProductsManager) manager).showAvailableSorts());
+    }
+
+    private void sort(String sort) {
+        if (((EditProductsManager) manager).isEnteredSortFieldValid(sort)) {
+            System.out.println("do you want it to be ascending (answer with true or false)");
+            String isAscending = scanner.nextLine();
+            ArrayList<String> sortedProducts = ((EditProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (String sortedProduct : sortedProducts) {
+                System.out.println(sortedProduct);
+            }
+        } else {
+            ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void currentSort() {
+        System.out.println(((EditProductsManager) manager).currentSort());
+    }
+
+    private void disableSort() {
+        ArrayList<String> products = ((EditProductsManager) manager).disableSort();
+        for (String product : products) {
+            System.out.println(product);
+        }
     }
 
     private void help() {
         System.out.println("view [product id]%n" +
                 "view buyers [product id]%n" +
                 "edit [product id]%n" +
+                "show available sorts\n" +
+                "sort [an available sort]\n" +
+                "current sort\n" +
+                "disable sort\n" +
                 "back%n" +
                 "help");
     }

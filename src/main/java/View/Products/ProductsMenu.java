@@ -149,6 +149,15 @@ public class ProductsMenu extends Menu {
         if (((ProductsManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
+            if (sort.equals("features")) {
+                System.out.println("enter the feature you want to sort by");
+                String temp = scanner.nextLine();
+                if (((ProductsManager) manager).hasFeatureWithName(temp)) {
+                    sort = temp;
+                } else {
+                    ErrorProcessor.invalidInput();
+                }
+            }
             ArrayList<String> sortedProducts = ((ProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
             for (String sortedProduct : sortedProducts) {
                 System.out.println(sortedProduct);

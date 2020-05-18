@@ -9,7 +9,6 @@ import Models.Shop.Category.Filter;
 import Models.Shop.Category.Sort;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,6 +39,13 @@ public class ProductsManager extends Manager {
                 "isAvailable\n" +
                 "category\n" +
                 currentCategory.getFeaturesNames().toString();
+    }
+
+    public boolean hasFeatureWithName(String name) {
+        if (currentCategory == getMainCategory()) {
+            return false;
+        }
+        return currentCategory.getFeaturesNames().contains(name);
     }
 
     public boolean isEnteredFilterFieldValid(String field) {
@@ -178,7 +184,8 @@ public class ProductsManager extends Manager {
     public String showAvailableSorts() {
         return "price\n" +
                 "name\n" +
-                "rating";
+                "rating\n" +
+                "features";
     }
 
     public ArrayList<String> sort(String sort, boolean isAscending) {
@@ -195,8 +202,10 @@ public class ProductsManager extends Manager {
             sortByPrice();
         } else if (field.equals("name")) {
             sortByName();
-        } else {
+        } else if (field.equals("rating")){
             sortByRating();
+        } else {
+            sortByFeature();
         }
         if (!currentSort.isAscending()) {
             Collections.reverse(products);
@@ -231,6 +240,20 @@ public class ProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
+    private void sortByFeature() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getFeatureByName(currentSort.getField()).getValue().compareTo(productsForSort[j].getFeatureByName(currentSort.getField()).getValue()) > 0) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
     private void sortByRating() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
@@ -246,7 +269,7 @@ public class ProductsManager extends Manager {
     }
 
     public boolean isEnteredSortFieldValid(String field) {
-        return field.equals("price") || field.equals("name") || field.equals("rating");
+        return field.equals("price") || field.equals("name") || field.equals("rating") || field.equals("features");
     }
 
     public String currentSort() {

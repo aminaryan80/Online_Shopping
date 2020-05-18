@@ -24,6 +24,10 @@ public class Customer extends Account {
         discountsIds = new ArrayList<>();
     }
 
+    public ArrayList<BuyingLog> getAllLogs() {
+        return allLogs;
+    }
+
     public void addDiscount(Discount discount) {
         if(discount != null)
         discountsIds.add(discount.getId());

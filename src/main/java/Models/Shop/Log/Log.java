@@ -32,6 +32,14 @@ public abstract class Log {
         this.status = status;
     }
 
+    public double getMoney() {
+        return money;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     public abstract String viewLogInShort();
 
     @Override
