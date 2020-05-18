@@ -41,6 +41,18 @@ public class Discount {
         allDiscounts.add(this);
     }
 
+    public LocalDate getBeginningDate() {
+        return beginningDate;
+    }
+
+    public LocalDate getEndingDate() {
+        return endingDate;
+    }
+
+    public static ArrayList<Discount> getAllDiscounts() {
+        return allDiscounts;
+    }
+
     public ArrayList<Customer> getAllCustomers() {
         ArrayList<Customer> allCustomers = new ArrayList<>();
         for (String customerUsername : allCustomersUsernames) {

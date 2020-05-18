@@ -2,10 +2,12 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageAllProductsManager;
+import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ManageAllProductsMenu extends Menu {
@@ -17,14 +19,50 @@ public class ManageAllProductsMenu extends Menu {
     private void manageAllProducts() {
         while (true) {
             Matcher matcher;
-            String input = scanner.nextLine();
-            if ((matcher = getMatcher(input, "^remove (\\S+)$")).find()) {
+            String command = scanner.nextLine();
+            if ((matcher = getMatcher(command, "^remove (\\S+)$")).find()) {
                 removeProductById(matcher.group(1));
-            } else if(getMatcher(input, "^help$").find()) {
+            } else if (command.equals("show available sorts")) {
+                showAvailableSorts();
+            } else if ((matcher = getMatcher(command, "sort (\\S+)")).find()) {
+                sort(matcher.group(1));
+            } else if (command.equals("current sort")) {
+                currentSort();
+            } else if (command.equals("disable sort")) {
+                disableSort();
+            }if(getMatcher(command, "^help$").find()) {
                 help();
-            } else if(getMatcher(input, "^back$").find()) {
+            } else if(getMatcher(command, "^back$").find()) {
                 return;
             } else ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void showAvailableSorts() {
+        System.out.println(((ManageAllProductsManager) manager).showAvailableSorts());
+    }
+
+    private void sort(String sort) {
+        if (((ManageAllProductsManager) manager).isEnteredSortFieldValid(sort)) {
+            System.out.println("do you want it to be ascending (answer with true or false)");
+            String isAscending = scanner.nextLine();
+            ArrayList<String> sortedProducts = ((ManageAllProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (String sortedProduct : sortedProducts) {
+                System.out.println(sortedProduct);
+            }
+        } else {
+            ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void currentSort() {
+        System.out.println(((ManageAllProductsManager) manager).currentSort());
+    }
+
+    private void disableSort() {
+        ArrayList<String> products = ((ManageAllProductsManager) manager).disableSort();
+        for (String product : products) {
+            System.out.println(product);
         }
     }
 
@@ -36,6 +74,10 @@ public class ManageAllProductsMenu extends Menu {
 
     private void help() {
         System.out.println("remove [productId]\n" +
+                "show available sorts\n" +
+                "sort [an available sort]\n" +
+                "current sort\n" +
+                "disable sort\n" +
                 "help\n" +
                 "back");
     }

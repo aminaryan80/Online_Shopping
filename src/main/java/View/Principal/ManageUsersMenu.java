@@ -2,6 +2,7 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageUsersManager;
+import Control.Products.ProductsManager;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -18,18 +19,56 @@ public class ManageUsersMenu extends Menu {
         showUsers();
         while (true) {
             Matcher matcher;
-            String input = scanner.nextLine();
-            if ((matcher = getMatcher(input, "^view (\\S+)$")).find()) {
+            String command = scanner.nextLine();
+            if ((matcher = getMatcher(command, "^view (\\S+)$")).find()) {
                 viewUsername(matcher.group(1));
-            } else if ((matcher = getMatcher(input, "^delete user (\\S+)$")).find()) {
+            } else if ((matcher = getMatcher(command, "^delete user (\\S+)$")).find()) {
                 deleteUsername(matcher.group(1));
-            } else if (getMatcher(input, "^create manager profile$").find()) {
+            } else if (getMatcher(command, "^create manager profile$").find()) {
                 createManagerProfile();
-            } else if(getMatcher(input, "^back$").find()) {
-                return;
-            } else if(getMatcher(input, "^help$").find()) {
+            } else if (command.equals("show available sorts")) {
+                showAvailableSorts();
+            } else if ((matcher = getMatcher(command, "sort (\\S+)")).find()) {
+                sort(matcher.group(1));
+            } else if (command.equals("current sort")) {
+                currentSort();
+            } else if (command.equals("disable sort")) {
+                disableSort();
+            } else if(getMatcher(command, "^help$").find()) {
                 help();
-            } else ErrorProcessor.invalidInput();
+            } else if (command.equals("back")) {
+                return;
+            } else {
+                ErrorProcessor.invalidInput();
+            }
+        }
+    }
+
+    private void currentSort() {
+        System.out.println(((ManageUsersManager) manager).currentSort());
+    }
+
+    private void disableSort() {
+        ArrayList<String> users = ((ManageUsersManager) manager).disableSort();
+        for (String user : users) {
+            System.out.println(user);
+        }
+    }
+
+    private void showAvailableSorts() {
+        System.out.println(((ManageUsersManager) manager).showAvailableSorts());
+    }
+
+    private void sort(String sort) {
+        if (((ManageUsersManager) manager).isEnteredSortFieldValid(sort)) {
+            System.out.println("do you want it to be ascending (answer with true or false)");
+            String isAscending = scanner.nextLine();
+            ArrayList<String> sortedUsers = ((ManageUsersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (String sortedUser : sortedUsers) {
+                System.out.println(sortedUser);
+            }
+        } else {
+            ErrorProcessor.invalidInput();
         }
     }
 
@@ -92,6 +131,10 @@ public class ManageUsersMenu extends Menu {
         System.out.println("view [username]\n" +
                 "delete user [username]\n" +
                 "create manager profile\n" +
+                "show available sorts\n" +
+                "sort [an available sort]\n" +
+                "current sort\n" +
+                "disable sort\n" +
                 "help\n" +
                 "back");
     }
