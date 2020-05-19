@@ -29,7 +29,7 @@ public class Comment {
         allComments.add(this);
     }
 
-    private enum CommentStatus {
+    public enum CommentStatus {
         PENDING, CONFIRMED, DENIED;
     }
 

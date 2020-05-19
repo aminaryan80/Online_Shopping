@@ -1,6 +1,7 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Product.Comment;
@@ -11,13 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPageManager extends Manager {
-    protected Customer customer = (Customer) account;
-    protected Product product;
+    private Customer customer = (Customer) account; //TODO should this field be static?
+    private Product product;
 
     public ProductPageManager(Account account, Product product) {
         super(account);
         this.product = product;
+        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new ProductPage(this);
+    }
+
+    public void setCustomer(Customer customer) {
+        ProductPageManager.setAccount(customer);
+        this.customer = customer;
     }
 
     public String digest() {
@@ -36,13 +43,15 @@ public class ProductPageManager extends Manager {
     // comments
     public List<String> comments() {
         List<String> comments = new ArrayList<>();
-        comments.add("Rate:" + product.getRate());
-        comments.addAll(product.getComments());
+        comments.add("Rate:" + product.getRate()+"\n");
+        comments.addAll( product.getComments());
         return comments;
     }
 
     public void addComment(String title, String content) {
-        Comment comment = new Comment(account,product,content,null,false);
+        Comment comment = new Comment(customer,product,title+":\n"+"\t"+content,null,false);
+        //TODO how to know if the customer has purchased the product
+        //TODO where to use hasPurchased
         product.addComment(comment);
     }
 

@@ -56,6 +56,8 @@ public class Product {
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         this.categoryName = category.getName();
+        //TODO THIS IS A CORRECT WAY TO FILL CONSTRUCTOR : GET AN OBJECT AND PUT ITS
+        // ID|NAME|USERNAME IN THE ASSIGNED FIELD FIX ANYWHERE THAT THIS IS NOT HANDLED
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
@@ -224,8 +226,10 @@ public class Product {
 
     public List<String> getComments() {
         List<String> comments = new ArrayList<>();
+        int i = 1;
         for (Comment comment : getAllComments()) {
-            comments.add(comment.getText());
+            comments.add("comment "+i+":"+"\n"+comment.getText()+"\n");
+            i++;
         }
         return comments;
     }
@@ -247,6 +251,7 @@ public class Product {
     }
 
     public String getAttributes() {
+        if(sellerUsername == null || categoryName == null) throw new NullPointerException();
         //TODO make better
         return "Name: " + name +
                 "\nId: " + id +
@@ -257,9 +262,13 @@ public class Product {
     }
 
     public String digest() {
-        return "\nDescription: " + description +
-                "\nPrice: " + price +
-                "\nDiscount: " + auction.getDiscountAmount();
+        if (auction != null)
+            return "\nDescription: " + description +
+                    "\nPrice: " + price +
+                    "\nAuction amount: " + auction.getDiscountAmount();
+        else return "\nDescription: " + description +
+                "\nPrice: " + price+
+                "\nNot on any auction";
     }
 
     public ArrayList<Rate> getAllRates() {
@@ -275,7 +284,9 @@ public class Product {
         for (Rate rate : getAllRates()) {
             sum += rate.getScore();
         }
+        if(allRatesIds.size() != 0)
         return sum / allRatesIds.size();
+        else return 0;
     }
 
     public void addRate(Account account, int rate) {

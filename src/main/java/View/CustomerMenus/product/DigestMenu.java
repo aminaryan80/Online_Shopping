@@ -22,6 +22,7 @@ public class DigestMenu extends CustomerMenu {
         Matcher matcher;
         while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
             if (ConsoleCommand.ADD_TO_CART.getStringMatcher(input).find()) {
+                //TODO IF NOT LOGGED IN LOG IN FIRST
                 digestMenuManager.addToCart();
             } else if ((matcher = ConsoleCommand.SELECT_SELLER.getStringMatcher(input)).find()) {
                 System.out.println("\nthis option will be added soon!\n");
@@ -32,7 +33,11 @@ public class DigestMenu extends CustomerMenu {
         }
     }
 
+
+
     private String help() {
-        return "\n\t⇒ add to cart";
+        return "\n\t⇒ add to cart"+
+                "\nhelp" +
+                "\nback";
     }
 }

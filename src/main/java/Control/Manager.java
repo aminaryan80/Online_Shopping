@@ -120,4 +120,8 @@ public abstract class Manager {
     public boolean isDiscountCodeValid(String DiscountCodeId) {
         return Discount.getDiscountById(DiscountCodeId) != null;
     }
+
+    public static void setAccount(Account account) {
+        Manager.account = account;
+    }
 }

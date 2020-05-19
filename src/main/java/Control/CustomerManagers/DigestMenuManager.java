@@ -8,8 +8,8 @@ import Models.Shop.Product.Product;
 import View.CustomerMenus.product.DigestMenu;
 
 public class DigestMenuManager extends Manager {
-    protected Customer customer = (Customer) account;
-    protected Product product;
+    private Customer customer = (Customer) account;
+    private Product product;
 
     public DigestMenuManager(Account account, Product product) {
         super(account);
