@@ -43,7 +43,7 @@ public class Product {
     //    private List<Comment> allComments = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
-    private Auction auction;
+    private Auction auction; //TODO should only be handled with Id
     private String auctionId;
 
 
