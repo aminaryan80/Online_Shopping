@@ -38,7 +38,7 @@ public class OffsMenu extends Menu {
         }
     }
 
-    private void viewOffById(String id){
+    private void viewOffById(String id) {
         if (!((OffsManager) manager).isEnteredIdValid(id)) {
             ErrorProcessor.invalidAuctionId();
             return;
@@ -46,7 +46,7 @@ public class OffsMenu extends Menu {
         System.out.println(((OffsManager) manager).viewOffById(id));
     }
 
-    private void editOffAttribute(String id){
+    private void editOffAttribute(String id) {
         if (!((OffsManager) manager).isEnteredIdValid(id)) {
             ErrorProcessor.invalidAuctionId();
             return;
@@ -63,7 +63,7 @@ public class OffsMenu extends Menu {
         new EditOffRequest((Seller) manager.getAccount(), auction);
     }
 
-    private void addOff(){
+    private void addOff() {
         System.out.println("enter off's id");
         String id = scanner.nextLine();
         System.out.println("enter off's beginningDate");
@@ -73,13 +73,14 @@ public class OffsMenu extends Menu {
         System.out.println("enter off's amount");
         double discountAmount = scanner.nextDouble();
         ArrayList<String> products = new ArrayList<String>();
-        System.out.println("enter off's products names(end to finish)");
+        System.out.println("enter off's products Ids(end to finish)");
         while (true) {
-            String product = scanner.nextLine();
-            if (product.equals("end")) {
+            String productId = scanner.nextLine();
+            if (productId.equals("end")) {
                 break;
-            }
-            products.add(product);
+            } else if (((OffsManager) manager).doesProductExist(productId)){
+                products.add(productId);
+            } else ErrorProcessor.invalidProductId();
         }
         Auction auction = ((OffsManager) manager).addOff(beginningDate, endingDate, discountAmount, products);
         new AddOffRequest((Seller) manager.getAccount(), auction);

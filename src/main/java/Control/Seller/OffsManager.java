@@ -43,8 +43,8 @@ public class OffsManager extends Manager {
     }
 
     public Auction addOff(String beginningDate, String endingDate,
-                       double discountAmount, ArrayList<String> productsNames) { //TODO recheck
-        Auction auction = new Auction( productsNames, LocalDate.parse(beginningDate), LocalDate.parse(endingDate), discountAmount);
+                       double discountAmount, ArrayList<String> productsIds) { //TODO recheck
+        Auction auction = new Auction( productsIds, LocalDate.parse(beginningDate), LocalDate.parse(endingDate), discountAmount);
         ((Seller) account).addAuction(auction);
         return auction;
     }

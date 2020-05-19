@@ -19,9 +19,9 @@ public class ManageCategoriesManager extends Manager {
     }
 
     public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsIds) {
-        Category supCategory = Category.getCategoryByName(supCategoryName);
-        Category category = new Category(categoryName, supCategory.getName(), features, productsIds);
-        supCategory.addSubCategory(category);
+//        Category supCategory = Category.getCategoryByName(supCategoryName); canAddCategory checks existence
+        Category category = new Category(categoryName, supCategoryName, features, productsIds);
+//        supCategory.addSubCategory(category); handled in constructor
     }
 
 

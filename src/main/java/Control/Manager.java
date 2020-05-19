@@ -5,6 +5,7 @@ import Models.Account.Principal;
 import Models.Shop.Cart;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import View.Menu;
 
 import java.text.DateFormat;
@@ -123,5 +124,9 @@ public abstract class Manager {
 
     public static void setAccount(Account account) {
         Manager.account = account;
+    }
+
+    public boolean doesProductExist(String productId){
+        return Product.getProductById(productId) != null;
     }
 }

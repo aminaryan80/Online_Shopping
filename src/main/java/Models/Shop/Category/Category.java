@@ -1,5 +1,6 @@
 package Models.Shop.Category;
 
+import Control.Identity;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
@@ -15,28 +16,20 @@ import java.util.Scanner;
 
 public class Category {
     private static ArrayList<Category> allCategories = new ArrayList<>();
-//    private Category supCategory;
-    private String supCategoryName = null;
+    private String supCategoryName;
     private String name;
     private HashMap<String, Integer> features; // featureName - featureType // 0 : int - 1 : String
-//    private List<Category> subCategories;
-    private List<String> subCategoriesNames;
-//    private ArrayList<Product> allProducts;
-    private ArrayList<String> allProductsIds;
-
-    public Category(String name, String supCategoryName, HashMap<String, Integer> features, ArrayList<String> allProductsIds) {
+    private ArrayList<String> subCategoriesNames;
+    private ArrayList<String> allProductsIds = new ArrayList<>();
+    private String id;
+    public Category(String name,String supCategoryName, HashMap<String, Integer> features, ArrayList<String> allProductsIds) {
+        id = Identity.getId(); //future TODO category should be unified by id
         this.name = name;
         this.features = features;
-//        this.allProducts = allProducts;
         this.allProductsIds = allProductsIds;
- //       for (Product product : allProducts) {
- //           this.allProductsIds.add(product.getId());
-//        }
- //       this.supCategory = supCategory;
-        if (supCategoryName != null) {
-            this.supCategoryName = supCategoryName;
-        }
-//        this.subCategories = new ArrayList<Category>();
+        this.supCategoryName = supCategoryName;
+        if(supCategoryName!=null)
+        getSupCategory().addSubCategory(this);
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
     }
@@ -137,7 +130,6 @@ public class Category {
     }
 
     public void addSubCategory(Category category) {
-//        this.subCategories.add(category);
         this.subCategoriesNames.add(category.getName());
     }
 
