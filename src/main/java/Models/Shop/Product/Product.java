@@ -43,7 +43,7 @@ public class Product {
     //    private List<Comment> allComments = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
-    private Auction auction; //TODO should only be handled with Id
+//    private Auction auction;
     private String auctionId;
 
 
@@ -271,10 +271,10 @@ public class Product {
     }
 
     public String digest() {
-        if (auction != null)
+        if (auctionId != null)
             return "\nDescription: " + description +
                     "\nPrice: " + price +
-                    "\nAuction amount: " + auction.getDiscountAmount();
+                    "\nAuction amount: " + getAuction().getDiscountAmount();
         else return "\nDescription: " + description +
                 "\nPrice: " + price+
                 "\nNot on any auction";
@@ -307,11 +307,10 @@ public class Product {
     }
 
     public Auction getAuction() {
-        return auction;
+        return Auction.getAuctionById(auctionId);
     }
 
-    public void setAuction(Auction auction) {
-        this.auction = auction;
+    public void setAuction(Auction auction) { //TODO setters should work like this
         this.auctionId = auction.getId();
     }
 
@@ -348,9 +347,9 @@ public class Product {
     }
 
     public double getAuctionedPrice() {
-        if (auction == null || !auction.isActive(LocalDate.now())) return price;
+        if (getAuction() == null || !getAuction().isActive(LocalDate.now())) return price;
         else {
-            if (auction.isActive(LocalDate.now())) return price - auction.getDiscountAmount();
+            if (getAuction().isActive(LocalDate.now())) return price - getAuction().getDiscountAmount();
             else return price;
         }
     }

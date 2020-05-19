@@ -12,13 +12,13 @@ import java.util.Scanner;
 import java.util.zip.CheckedOutputStream;
 
 public class Comment {
+    private static ArrayList<Comment> allComments = new ArrayList<>();
     private Account account;
     private Product product;
     private String text;
     private CommentStatus status;
     private boolean hasPurchased;
     private String id;
-    private static ArrayList<Comment> allComments = new ArrayList<>();
     public Comment(Account account, Product product, String text, CommentStatus status, boolean hasPurchased) {
         this.account = account;
         this.product = product;
