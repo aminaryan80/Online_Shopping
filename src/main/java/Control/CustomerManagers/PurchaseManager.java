@@ -20,10 +20,11 @@ import java.util.HashSet;
 
 public class PurchaseManager extends Manager {
     private Customer customer = (Customer) account;
+
     public PurchaseManager(Account account) {
         super(account);
-        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
-        this.menu = new PurchaseMenu(this);
+        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
+            this.menu = new PurchaseMenu(this);
     }
 
     public boolean canPay(String discountId) throws WrongDiscountIdException, UsedDiscountIdException {
@@ -31,10 +32,11 @@ public class PurchaseManager extends Manager {
         if (discount == null && discountId != null) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
-            if(discount.canUseDiscount(customer)) {
-                return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
-            }
-            else throw new UsedDiscountIdException("you can not use this discount anymore");
+            if (discount != null) {
+                if (!discount.canUseDiscount(customer)) {
+                    throw new UsedDiscountIdException("you can not use this discount anymore");
+                } else return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
+            } else return customer.getCart().getTotalPrice(null) <= customer.getBalance();
         }
     }
 
@@ -44,7 +46,7 @@ public class PurchaseManager extends Manager {
         if (discount == null && discountId != null) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
-            if(discount != null){
+            if (discount != null) {
                 discount.useDiscount(customer);
             }
             double paymentAmount = customer.getCart().getTotalPrice(discount);
@@ -70,7 +72,7 @@ public class PurchaseManager extends Manager {
     private BuyingLog getBuyingLog(ArrayList<String> receiverInformation, Discount discount, Seller seller, ArrayList<Product> productsBoughtFromThisSeller) {
         return new BuyingLog(
                 LocalDateTime.now(),
-                getMoneyPaidByCustomer(productsBoughtFromThisSeller,discount),
+                getMoneyPaidByCustomer(productsBoughtFromThisSeller, discount),
                 getAmountOfDiscountCodeApplied(productsBoughtFromThisSeller, discount),
                 productsBoughtFromThisSeller,
                 seller.getName(),
@@ -94,18 +96,18 @@ public class PurchaseManager extends Manager {
     }
 
     private double getAmountOfDiscountCodeApplied(ArrayList<Product> productsBoughtFromThisSeller, Discount discount) {
-        return getMoneyReceivedBySeller(productsBoughtFromThisSeller) - getMoneyPaidByCustomer(productsBoughtFromThisSeller,discount);
+        return getMoneyReceivedBySeller(productsBoughtFromThisSeller) - getMoneyPaidByCustomer(productsBoughtFromThisSeller, discount);
     }
 
     private double getMoneyPaidByCustomer(ArrayList<Product> productsBoughtFromThisSeller, Discount discount) {
         if (discount == null) return getMoneyReceivedBySeller(productsBoughtFromThisSeller);
         else {
-            double moneyPaidToThisSeller =  getMoneyReceivedBySeller(productsBoughtFromThisSeller);
+            double moneyPaidToThisSeller = getMoneyReceivedBySeller(productsBoughtFromThisSeller);
             double moneyPaidToAllSellers = 0;
             for (Product product : customer.getCart().getProducts()) {
                 moneyPaidToAllSellers += product.getAuctionedPrice();
             }
-            return (moneyPaidToThisSeller/moneyPaidToAllSellers) * customer.getCart().getTotalPrice(discount);
+            return (moneyPaidToThisSeller / moneyPaidToAllSellers) * customer.getCart().getTotalPrice(discount);
         }
     }
 
