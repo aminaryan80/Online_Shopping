@@ -64,8 +64,6 @@ public class OffsMenu extends Menu {
     }
 
     private void addOff() {
-        System.out.println("enter off's id");
-        String id = scanner.nextLine();
         System.out.println("enter off's beginningDate");
         String beginningDate = scanner.nextLine();
         System.out.println("enter off's endingDate");
@@ -78,9 +76,13 @@ public class OffsMenu extends Menu {
             String productId = scanner.nextLine();
             if (productId.equals("end")) {
                 break;
-            } else if (((OffsManager) manager).doesProductExist(productId)){
+            } else if (!((OffsManager) manager).hasProductWithId(productId)){
+                ErrorProcessor.invalidProductId();
+            } else if (((OffsManager) manager).hasAuction(productId)) {
+                System.out.println("this product already has an auction");
+            } else {
                 products.add(productId);
-            } else ErrorProcessor.invalidProductId();
+            }
         }
         Auction auction = ((OffsManager) manager).addOff(beginningDate, endingDate, discountAmount, products);
         new AddOffRequest((Seller) manager.getAccount(), auction);

@@ -9,6 +9,7 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
+import Models.Shop.Request.DeleteProductRequest;
 import View.Seller.SellerMenu;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class SellerManager extends Manager {
     }
 
     public void deleteProductById(String id) throws IOException {
-        Product.deleteProduct(Product.getProductById(id));
+        new DeleteProductRequest((Seller) account, Product.getProductById(id));
     }
 
     // view offs

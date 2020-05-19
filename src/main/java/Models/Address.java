@@ -17,6 +17,8 @@ public enum Address {
     ADD_PRODUCT_REQUESTS("database"+"\\"+"requests"+"\\"+"add product requests"),
     EDIT_PRODUCT_REQUESTS("database"+"\\"+"requests"+"\\"+"edit product requests"),
     ADD_OFF_REQUESTS("database"+"\\"+"requests"+"\\"+"add off requests"),
+    DELETE_PRODUCT_REQUEST("database" + "\\" + "requests" + "\\" + "delete product requests"),
+    ADD_SELLER_REQUEST("database" + "\\" + "requests" + "\\" + "add seller requests"),
     EDIT_OFF_REQUESTS("database"+"\\"+"requests"+"\\"+"edit off requests"),
     AUCTIONS("database"+"\\"+"auctions"),
     IDNETITIES("database" + "\\" + "identities")

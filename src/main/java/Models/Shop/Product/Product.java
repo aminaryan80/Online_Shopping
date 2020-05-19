@@ -62,6 +62,10 @@ public class Product {
         allProducts.add(this);
     }
 
+    public boolean hasAuction() {
+        return auctionId != null;
+    }
+
 
     public static ArrayList<Product> getAllProducts() {
         return allProducts;

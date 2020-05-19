@@ -6,6 +6,7 @@ import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Account.Seller;
 import Models.Gson;
+import Models.Shop.Request.AddSellerRequest;
 import View.ErrorProcessor;
 import View.UserPanel.CreateNewAccountMenu;
 
@@ -26,8 +27,8 @@ public class CreateNewAccountManager extends Manager {
                 break;
             case "seller":
                 // String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName
-                new Seller(username, inputs.get(3), inputs.get(4), inputs.get(1), inputs.get(2), inputs.get(0),
-                        Double.parseDouble(inputs.get(5)), inputs.get(6));
+                new AddSellerRequest(username, inputs.get(3), inputs.get(4), inputs.get(1), inputs.get(2),
+                        inputs.get(0), Double.parseDouble(inputs.get(5)), inputs.get(6));
                 break;
             case "principal":
                 // String username, String firstName, String lastName, String email, String phoneNumber, String password

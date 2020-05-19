@@ -49,6 +49,14 @@ public class OffsManager extends Manager {
         return auction;
     }
 
+    public boolean hasProductWithId(String id) {
+        return Product.hasProductWithId(id, account.getUsername());
+    }
+
+    public boolean hasAuction(String id) {
+        return Product.getProductById(id).hasAuction();
+    }
+
     private ArrayList<Product> getProductsListByNames(ArrayList<String> productsNames) {
         ArrayList<Product> products = new ArrayList<Product>();
         for (String productsName : productsNames) {

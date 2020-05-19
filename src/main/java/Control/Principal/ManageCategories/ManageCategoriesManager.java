@@ -34,15 +34,6 @@ public class ManageCategoriesManager extends Manager {
         return false;
     }
 
-
-    private ArrayList<Product> getProductsListByIds(ArrayList<String> productsId) {
-        ArrayList<Product> productsList = new ArrayList<>();
-        for (String id : productsId) {
-            productsList.add(Product.getProductById(id));
-        }
-        return productsList;
-    }
-
     public void deleteCategory(String categoryName) throws IOException {
         Category.deleteCategory(Category.getCategoryByName(categoryName));
     }

@@ -30,6 +30,11 @@ public abstract class Request {
         allRequests.add(this);
     }
 
+    public Request() {
+        this.id = Identity.getId();
+        allRequests.add(this);
+    }
+
     public abstract void accept() throws IOException;
 
     public static ArrayList<String> viewRequestsInShort() {
@@ -60,7 +65,7 @@ public abstract class Request {
         return false;
     }
 
-    public static void deleteRequest(Request request, String address) throws IOException {
+    protected static void deleteRequest(Request request, String address) throws IOException {
         allRequests.remove(request);
         File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
         FileUtils.forceDelete(file);
@@ -74,7 +79,7 @@ public abstract class Request {
     public abstract String toString();
 
     protected enum RequestType {
-        ADD_PRODUCT, EDIT_PRODUCT, ADD_OFF, EDIT_OFF
+        ADD_PRODUCT, EDIT_PRODUCT, ADD_OFF, EDIT_OFF, DELETE_PRODUCT, ADD_SELLER_REQUEST
     }
 
     public static void open() {
@@ -82,9 +87,31 @@ public abstract class Request {
         openAddProductRequests();
         openEditOffRequests();
         openEditProductRequests();
+        openDeleteProductRequest();
+        openAddSellerRequests();
     }
 
-    public static void openAddOffRequests() {
+    private static void openAddSellerRequests() {
+        File folder = new File(Address.ADD_SELLER_REQUEST.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allRequests.add(openAddSellerRequest(file));
+            }
+        }
+    }
+
+    private static void openDeleteProductRequest() {
+        File folder = new File(Address.DELETE_PRODUCT_REQUEST.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allRequests.add(openDeleteProductRequest(file));
+            }
+        }
+    }
+
+    private static void openAddOffRequests() {
         File folder = new File(Address.ADD_OFF_REQUESTS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -94,7 +121,7 @@ public abstract class Request {
         }
     }
 
-    public static void openAddProductRequests() {
+    private static void openAddProductRequests() {
         File folder = new File(Address.ADD_PRODUCT_REQUESTS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -104,7 +131,7 @@ public abstract class Request {
         }
     }
 
-    public static void openEditOffRequests() {
+    private static void openEditOffRequests() {
         File folder = new File(Address.EDIT_OFF_REQUESTS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -114,7 +141,7 @@ public abstract class Request {
         }
     }
 
-    public static void openEditProductRequests() {
+    private static void openEditProductRequests() {
         File folder = new File(Address.EDIT_PRODUCT_REQUESTS.get());
         if (!folder.exists()) folder.mkdirs();
         else {
@@ -124,22 +151,32 @@ public abstract class Request {
         }
     }
 
-    public static AddOffRequest openAddOffRequest(File file) {
+    private static AddSellerRequest openAddSellerRequest(File file) {
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(), AddSellerRequest.class);
+    }
+
+    private static DeleteProductRequest openDeleteProductRequest(File file) {
+        StringBuilder json = fileToString(file);
+        return Gson.INSTANCE.get().fromJson(json.toString(), DeleteProductRequest.class);
+    }
+
+    private static AddOffRequest openAddOffRequest(File file) {
         StringBuilder json = fileToString(file);
         return Gson.INSTANCE.get().fromJson(json.toString(), AddOffRequest.class);
     }
 
-    public static AddProductRequest openAddProductRequest(File file) {
+    private static AddProductRequest openAddProductRequest(File file) {
         StringBuilder json = fileToString(file);
         return Gson.INSTANCE.get().fromJson(json.toString(), AddProductRequest.class);
     }
 
-    public static EditOffRequest openEditOffRequest(File file) {
+    private static EditOffRequest openEditOffRequest(File file) {
         StringBuilder json = fileToString(file);
         return Gson.INSTANCE.get().fromJson(json.toString(), EditOffRequest.class);
     }
 
-    public static EditProductRequest openEditProductRequest(File file) {
+    private static EditProductRequest openEditProductRequest(File file) {
         StringBuilder json = fileToString(file);
         return Gson.INSTANCE.get().fromJson(json.toString(), EditProductRequest.class);
     }
@@ -164,7 +201,7 @@ public abstract class Request {
         }
     }
 
-    public static void save(Request request) throws Exception {
+    private static void save(Request request) throws Exception {
         if (request instanceof AddOffRequest) {
             saveAddOffRequest(request);
         } else if (request instanceof AddProductRequest) {
@@ -173,7 +210,23 @@ public abstract class Request {
             saveEditOffRequest(request);
         } else if (request instanceof EditProductRequest) {
             saveEditProductRequest(request);
+        } else if (request instanceof DeleteProductRequest) {
+            saveDeleteProductRequest(request);
+        } else if (request instanceof AddSellerRequest) {
+            saveAddSellerRequest(request);
         }
+    }
+
+    private static void saveAddSellerRequest(Request request) throws IOException {
+        AddSellerRequest addSellerRequest = (AddSellerRequest) request;
+        String jsonRequest = Gson.INSTANCE.get().toJson(addSellerRequest);
+        write(request, jsonRequest, Address.ADD_SELLER_REQUEST);
+    }
+
+    private static void saveDeleteProductRequest(Request request) throws IOException {
+        DeleteProductRequest deleteProductRequest = (DeleteProductRequest) request;
+        String jsonRequest = Gson.INSTANCE.get().toJson(deleteProductRequest);
+        write(request, jsonRequest, Address.DELETE_PRODUCT_REQUEST);
     }
 
     private static void saveAddOffRequest(Request request) throws Exception {

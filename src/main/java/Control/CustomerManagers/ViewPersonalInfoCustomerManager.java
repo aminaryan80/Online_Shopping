@@ -46,10 +46,6 @@ public class ViewPersonalInfoCustomerManager extends Manager {
         else return false;
     }
 
-    public boolean isEnteredFieldValid(String type) {
-        return true;
-    }
-
     public boolean checkPassword(String oldPassword) {
         if(customer.getPassword().equals(oldPassword)) return true;
         else return false;
