@@ -96,13 +96,6 @@ public class Discount {
         return customerToDiscountUseCountMap.get(customer.getUsername())>=1;
     }
 
-    public void deleteDiscount(Discount discount) {
-        for (Customer customer : getAllCustomers()) {
-            customer.deleteDiscount(discount);
-        }
-        allDiscounts.remove(discount);
-    }
-
     public String getId() {
         return id;
     }

@@ -111,10 +111,6 @@ public class Auction {
                 '}';
     }
 
-    public String viewInShort() {
-        return null;
-    }
-
     public static AuctionStatus parseAuctionStatus(String status) {
         switch (status) {
             case "UNDER_REVIEW_FOR_CONSTRUCTION":

@@ -17,7 +17,7 @@ public class Comment {
     private Product product;
     private String text;
     private CommentStatus status;
-    private boolean hasPurchased;
+    private boolean hasPurchased; //TODO use
     private String id;
     public Comment(Account account, Product product, String text, CommentStatus status, boolean hasPurchased) {
         this.account = account;

@@ -18,7 +18,7 @@ public class MainMenu extends Menu {
             } else if (getMatcher(input, "^products$").find()) {
                 openProductsMenu();
             } else if (getMatcher(input, "^offs$").find()) {
-                //TODO
+                //TODO open
             } else if (getMatcher(input, "^help$").find()) {
                 help();
             } else if (getMatcher(input, "^exit$").find()) {

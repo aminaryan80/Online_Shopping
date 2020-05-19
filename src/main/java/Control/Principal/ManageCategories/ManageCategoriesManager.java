@@ -56,7 +56,7 @@ public class ManageCategoriesManager extends Manager {
         return false;
     }
 
-    private void deleteProductsByList(ArrayList<Product> allProducts) throws IOException {
+    private void deleteProductsByList(ArrayList<Product> allProducts) throws IOException { //TODO HANDLE
         for (Product product : allProducts) {
             Product.deleteProduct(product);
             Customer.deleteProductFromCarts(product);

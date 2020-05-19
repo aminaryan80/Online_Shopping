@@ -39,7 +39,7 @@ public class PrincipalMenu extends Menu {
             } else if (getMatcher(input, "^manage categories$").find()) {
                 manageCategories();
             } else if (getMatcher(input, "^offs$").find()) {
-                //TODO
+                //TODO OPEN OFFS
             } else if (getMatcher(input, "logout").find()) {
                 logout();
                 return;

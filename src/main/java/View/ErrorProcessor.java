@@ -54,9 +54,11 @@ public class ErrorProcessor {
     public static void invalidAuctionId() {
         System.out.println("Wrong off id");
     }
+
     public static void notEnoughMoney() {
         System.out.println("You don't have enough money to purchase");
-    }
+    } //TODO USE
+
     public static void notYourProduct() {
         System.out.println("this is not your product");
     }

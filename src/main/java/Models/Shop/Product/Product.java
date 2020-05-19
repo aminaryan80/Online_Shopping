@@ -56,8 +56,6 @@ public class Product {
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         this.categoryName = category.getName();
-        //TODO THIS IS A CORRECT WAY TO FILL CONSTRUCTOR : GET AN OBJECT AND PUT ITS
-        // ID|NAME|USERNAME IN THE ASSIGNED FIELD FIX ANYWHERE THAT THIS IS NOT HANDLED
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
@@ -310,7 +308,7 @@ public class Product {
         return Auction.getAuctionById(auctionId);
     }
 
-    public void setAuction(Auction auction) { //TODO setters should work like this
+    public void setAuction(Auction auction) {
         this.auctionId = auction.getId();
     }
 

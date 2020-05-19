@@ -53,10 +53,6 @@ public class Seller extends Account {
         return false;
     }
 
-    public boolean hasProductInAuctions(Product product) {
-return true;
-    }
-
     public Auction getAuctionById(String id) {
         for (Auction auction : getAuctions()) {
             if (auction.getId().equals(id)) {
