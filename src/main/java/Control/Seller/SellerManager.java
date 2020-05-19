@@ -27,19 +27,6 @@ public class SellerManager extends Manager {
         new SellerMenu(this);
     }
 
-    // edit [field]
-    public boolean isEnteredAccountFieldValid(String field) {
-        return false;
-    }
-
-    public void editAccountAttribute(String field, String newAttribute) {
-
-    }
-
-    public boolean isEnteredFieldValid(String type) {
-        return false;
-    }
-
     // view company information
     public String viewCompanyInformation() {
         return ((Seller) account).getCompanyName();

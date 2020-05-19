@@ -107,11 +107,6 @@ public abstract class Manager {
         return isPrincipalExists;
     }
 
-    protected String generateNewId() {
-        Random rand = new Random();
-        return String.valueOf(rand.nextInt(100000));
-    }
-
     public void viewPersonalInfo() {
         System.out.println(account.toString());
         new ViewPersonalInfoManager(account);

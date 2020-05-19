@@ -32,7 +32,6 @@ public class Identity {
         }
     }
 
-    //TODO file
     public static void open() throws Exception {
         File file = new File(Address.IDNETITIES.get()+"\\" + "identities.json");
         if (!file.exists()) {

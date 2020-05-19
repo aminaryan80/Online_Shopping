@@ -62,9 +62,13 @@ public class EditProductsMenu extends Menu {
     }
 
     private void editProduct(String id) {
+        if (!((EditProductsManager) manager).hasProductWithId(id)) {
+            ErrorProcessor.invalidProductId();
+            return;
+        }
         System.out.println("enter the field you want to change");
         String field = scanner.nextLine();
-        if (!Product.isEnteredProductFieldValid(field)) {
+        if (!((EditProductsManager) manager).isEnteredProductEditFieldValid(field)) {
             ErrorProcessor.invalidEditField();
             return;
         }
@@ -72,6 +76,10 @@ public class EditProductsMenu extends Menu {
         if (field.equals("features")) {
             System.out.println("enter which field you want to change");
             feature = scanner.nextLine();
+        }
+        if (!((EditProductsManager) manager).isFeatureFieldValid(feature, id)) {
+            ErrorProcessor.invalidInput();
+            return;
         }
         System.out.println("enter the new value");
         String newValue = scanner.nextLine();

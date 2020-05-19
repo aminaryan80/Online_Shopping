@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Product {
-    private final static String[] changeableFields = {"status", "name", "companyName", "price", "seller", "isAvailable", "category",
+    private final static String[] changeableFields = {"name", "price", "isAvailable",
             "description", "features"};
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String id;
@@ -82,6 +82,15 @@ public class Product {
     public static boolean hasProductWithId(String id) {
         for (Product product : allProducts) {
             if (product.getId().toLowerCase().equals(id.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasProductWithId(String id, String sellerUsername) {
+        for (Product product : allProducts) {
+            if (product.getId().toLowerCase().equals(id.toLowerCase()) && product.getSeller().getUsername().equals(sellerUsername)) {
                 return true;
             }
         }

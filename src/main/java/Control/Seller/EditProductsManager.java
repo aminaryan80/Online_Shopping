@@ -128,7 +128,7 @@ public class EditProductsManager extends Manager {
     }
 
     public boolean hasProductWithId(String id) {
-        return Product.hasProductWithId(id);
+        return Product.hasProductWithId(id, ((Seller) account).getUsername());
     }
 
     public Product editProduct(String id, String field, String newValue) {
@@ -152,5 +152,13 @@ public class EditProductsManager extends Manager {
         }
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_EDITING);
         return product;
+    }
+
+    public boolean isFeatureFieldValid(String field, String id) {
+        return Product.getProductById(id).getCategory().getFeaturesNames().contains(field);
+    }
+
+    public boolean isEnteredProductEditFieldValid(String field) {
+        return Product.isEnteredProductFieldValid(field);
     }
 }
