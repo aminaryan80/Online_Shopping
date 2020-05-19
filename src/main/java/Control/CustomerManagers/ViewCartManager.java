@@ -34,7 +34,7 @@ public class ViewCartManager extends Manager {
         return allProductsInfo.toString();
     }
 
-    public void ProductQuantity(String id, boolean isIncrease) throws ProductDoNotExistAtAllException,ProductDoNotExistInCartException {
+    public void ProductQuantity(String id, boolean isIncrease) throws ProductDoNotExistAtAllException, ProductDoNotExistInCartException {
         Product product;
         if ((product = Product.getProductById(id)) != null) {
             if (isIncrease)
@@ -48,6 +48,10 @@ public class ViewCartManager extends Manager {
 
     public double getTotalPrice(Discount discount) {
         return customer.getCart().getTotalPrice(discount);
+    }
+
+    public boolean doesProductExistInCart(Product product) {
+        return customer.getCart().getProducts().contains(product);
     }
 
     public static class ProductDoNotExistAtAllException extends Exception {
@@ -146,14 +150,14 @@ public class ViewCartManager extends Manager {
     }
 
     private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort= new ArrayList<>();
+        ArrayList<String> productsInShort = new ArrayList<>();
         for (Product product : products) {
             productsInShort.add(product.viewProductInShort());
         }
         return productsInShort;
     }
 
-    public boolean isCartEmpty(){
-        return customer.getCart().getProducts().size()==0;
+    public boolean isCartEmpty() {
+        return customer.getCart().getProducts().size() == 0;
     }
 }

@@ -49,9 +49,13 @@ public class ProductPageManager extends Manager {
     }
 
     public void addComment(String title, String content) {
-        Comment comment = new Comment(customer,product,title+":\n"+"\t"+content,null,false);
-        //TODO how to know if the customer has purchased the product
-        //TODO where to use hasPurchased
+        boolean hasPurchased = false;
+        for (Customer buyer : product.getAllBuyers()) {
+            if(customer.getUsername().equals(buyer.getUsername())){
+                hasPurchased = true;
+            }
+        }
+        Comment comment = new Comment(customer,product,title+":\n"+"\t"+content,null,hasPurchased);
         product.addComment(comment);
     }
 

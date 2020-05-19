@@ -1,7 +1,5 @@
 package Control.CustomerManagers;
 
-import Control.Identity;
-
 import Control.Manager;
 import Control.UtilTestObject;
 import Models.Account.Account;
@@ -28,11 +26,11 @@ public class PurchaseManager extends Manager {
     }
 
     public boolean canPay(String discountId) throws WrongDiscountIdException, UsedDiscountIdException {
-        Discount discount = Discount.getDiscountById(discountId);
-        if (discount == null && discountId != null) {
+        Discount discount = getDiscountById(discountId);
+        if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
-            if (discount != null) {
+            if (hasDiscountCode(discount)) {
                 if (!discount.canUseDiscount(customer)) {
                     throw new UsedDiscountIdException("you can not use this discount anymore");
                 } else return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
@@ -42,32 +40,52 @@ public class PurchaseManager extends Manager {
 
     // purchase
     public void pay(ArrayList<String> receiverInformation, String discountId) throws WrongDiscountIdException {
-        Discount discount = Discount.getDiscountById(discountId);
-        if (discount == null && discountId != null) {
+        Discount discount = getDiscountById(discountId);
+        if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
-            if (discount != null) {
-                discount.useDiscount(customer);
+            if (hasDiscountCode(discount)) {
+                discount.useDiscount(customer); //if customer could'nt use it, he would'nt get here
             }
             double paymentAmount = customer.getCart().getTotalPrice(discount);
             ArrayList<Product> boughtProducts = customer.getCart().getProducts(); //TODO number of products not handled.
-            HashSet<Seller> sellers = getSellers(boughtProducts);
-            for (Seller seller : sellers) {
-                ArrayList<Product> productsBoughtFromThisSeller = new ArrayList<>();
-                for (Product product : boughtProducts) {
-                    if (product.getSeller().equals(seller)) productsBoughtFromThisSeller.add(product);
-                }
-                seller.addLog(
-                        getSellingLog(receiverInformation, productsBoughtFromThisSeller)
-                );
-                customer.addLog(
-                        getBuyingLog(receiverInformation, discount, seller, productsBoughtFromThisSeller)
-                );
-            }
+            addBuyers(boughtProducts);
+            addLogs(receiverInformation, discount, boughtProducts);
             customer.payMoney(paymentAmount);
             sellersGetPaid(boughtProducts);
         }
     }
+
+    private void addLogs(ArrayList<String> receiverInformation, Discount discount, ArrayList<Product> boughtProducts) {
+        HashSet<Seller> sellers = getSellers(boughtProducts);
+        for (Seller seller : sellers) { // each log is formed based on a seller
+            ArrayList<Product> productsBoughtFromThisSeller = new ArrayList<>();
+            for (Product product : boughtProducts) {
+                if (product.getSeller().equals(seller)) productsBoughtFromThisSeller.add(product);
+            }
+            seller.addLog(
+                    getSellingLog(receiverInformation, productsBoughtFromThisSeller)
+            );
+            customer.addLog(
+                    getBuyingLog(receiverInformation, discount, seller, productsBoughtFromThisSeller)
+            );
+        }
+    }
+
+    private void addBuyers(ArrayList<Product> boughtProducts) {
+        for (Product product : boughtProducts) {
+            product.addBuyer(customer);
+        }
+    }
+
+    private boolean hasDiscountCode(Discount discount) {
+        return discount != null;
+    }
+
+    private boolean DiscountWithThisIdDoesNotExist(String discountId, Discount discount) {
+        return discount == null && discountId != null;
+    }
+
 
     private BuyingLog getBuyingLog(ArrayList<String> receiverInformation, Discount discount, Seller seller, ArrayList<Product> productsBoughtFromThisSeller) {
         return new BuyingLog(

@@ -194,9 +194,8 @@ public class Product {
         return null;
     }
 
-    public void addBuyers(Customer buyer) {
-        allBuyersUsernames.add(buyer.getName());
-        //TODO use
+    public void addBuyer(Customer buyer) {
+        allBuyersUsernames.add(buyer.getUsername());
     }
 
     public ArrayList<Customer> getAllBuyers() {

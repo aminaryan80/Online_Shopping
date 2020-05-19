@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ViewCartMenu extends Menu {
-    ViewCartManager viewCartManager =(ViewCartManager) manager;
+    ViewCartManager viewCartManager = (ViewCartManager) manager;
 
     public ViewCartMenu(Manager manager) {
         super(manager);
@@ -24,35 +24,35 @@ public class ViewCartMenu extends Menu {
         showCart();
         String input;
         Matcher matcher;
-            while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
-                if (ConsoleCommand.SHOW_PRODUCTS.getStringMatcher(input).find()) {
-                    System.out.println(viewCartManager.showProducts());
-                } else if ((matcher = ConsoleCommand.VIEW_PRODUCT_ID.getStringMatcher(input)).find()) {
-                    Product product;
-                    if ((product = Product.getProductById(matcher.group(1))) != null){ //TODO product should be in cart
-                        new ProductPageManager(manager.getAccount(), product);
-                    }
-                    else ErrorProcessor.invalidProductId();
-                } else if ((matcher = ConsoleCommand.INCREASE_PRODUCT.getStringMatcher(input)).find()) {
-                    try {
-                        viewCartManager.ProductQuantity(matcher.group(1), true);
+        while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
+            if (ConsoleCommand.SHOW_PRODUCTS.getStringMatcher(input).find()) {
+                System.out.println(viewCartManager.showProducts());
+            } else if ((matcher = ConsoleCommand.VIEW_PRODUCT_ID.getStringMatcher(input)).find()) {
+                Product product = viewCartManager.getProduct(matcher.group(1));
+                if (product != null) {
+                    if (viewCartManager.doesProductExistInCart(product))
+                    new ProductPageManager(manager.getAccount(), product);
+                } else ErrorProcessor.invalidProductId();
+            } else if ((matcher = ConsoleCommand.INCREASE_PRODUCT.getStringMatcher(input)).find()) {
+                try {
+                    viewCartManager.ProductQuantity(matcher.group(1), true);
                     System.out.println("successful");
-                } catch (ViewCartManager.ProductDoNotExistAtAllException|ViewCartManager.ProductDoNotExistInCartException e) {
+                } catch (ViewCartManager.ProductDoNotExistAtAllException | ViewCartManager.ProductDoNotExistInCartException e) {
                     System.out.println(e.getMessage());
                 }
             } else if ((matcher = ConsoleCommand.DECREASE_PRODUCT.getStringMatcher(input)).find()) {
                 try {
                     viewCartManager.ProductQuantity(matcher.group(1), false);
                     System.out.println("successful");
-                } catch (ViewCartManager.ProductDoNotExistAtAllException|ViewCartManager.ProductDoNotExistInCartException e) {
+                } catch (ViewCartManager.ProductDoNotExistAtAllException | ViewCartManager.ProductDoNotExistInCartException e) {
                     System.out.println(e.getMessage());
                 }
             } else if ((matcher = ConsoleCommand.SHOW_TOTAL_PRICE.getStringMatcher(input)).find()) {
                 viewCartManager.getTotalPrice(null);
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
-                    if(!viewCartManager.isCartEmpty())
+                if (!viewCartManager.isCartEmpty())
                     new PurchaseManager(manager.getAccount());
-                    else ErrorProcessor.emptyCart();
+                else ErrorProcessor.emptyCart();
             } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
                 showCart();
             } else if (input.equals("show available sorts")) {

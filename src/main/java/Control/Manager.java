@@ -124,4 +124,12 @@ public abstract class Manager {
     public boolean doesProductExist(String productId){
         return Product.getProductById(productId) != null;
     }
+
+    public Discount getDiscountById(String discountId) {
+        return Discount.getDiscountById(discountId);
+    }
+
+    public Product getProduct(String productId) {
+        return Product.getProductById(productId);
+    }
 }
