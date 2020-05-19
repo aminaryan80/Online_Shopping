@@ -29,8 +29,11 @@ public class ViewCartMenu extends Menu {
                     System.out.println(viewCartManager.showProducts());
                 } else if ((matcher = ConsoleCommand.VIEW_PRODUCT_ID.getStringMatcher(input)).find()) {
                     Product product;
-                    if ((product = Product.getProductById(matcher.group(1))) != null)
+                    if ((product = Product.getProductById(matcher.group(1))) != null){
+                        if(!viewCartManager.isCartEmpty())
                         new ProductPageManager(manager.getAccount(), product);
+                        else ErrorProcessor.emptyCart();
+                    }
                     else ErrorProcessor.invalidProductId();
                 } else if ((matcher = ConsoleCommand.INCREASE_PRODUCT.getStringMatcher(input)).find()) {
                     try {
@@ -49,7 +52,8 @@ public class ViewCartMenu extends Menu {
             } else if ((matcher = ConsoleCommand.SHOW_TOTAL_PRICE.getStringMatcher(input)).find()) {
                 viewCartManager.getTotalPrice(null);
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
-                new PurchaseManager(manager.getAccount());
+                if(viewCartManager)
+                    new PurchaseManager(manager.getAccount());
             } else if (ConsoleCommand.HELP.getStringMatcher(input).find()) {
                 showCart();
             } else if (input.equals("show available sorts")) {

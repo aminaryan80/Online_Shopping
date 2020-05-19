@@ -3,6 +3,7 @@ package Control.CustomerManagers;
 import Control.Identity;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
@@ -21,6 +22,7 @@ public class PurchaseManager extends Manager {
     private Customer customer = (Customer) account;
     public PurchaseManager(Account account) {
         super(account);
+        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new PurchaseMenu(this);
     }
 
@@ -29,8 +31,9 @@ public class PurchaseManager extends Manager {
         if (discount == null && discountId != null) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
-            if(discount.canUseDiscount(customer))
-            return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
+            if(discount.canUseDiscount(customer)) {
+                return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
+            }
             else throw new UsedDiscountIdException("you can not use this discount anymore");
         }
     }

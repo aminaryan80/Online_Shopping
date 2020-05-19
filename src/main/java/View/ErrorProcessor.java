@@ -68,4 +68,8 @@ public class ErrorProcessor {
     public static void invalidPhoneNumber() {
         System.out.println("Invalid phone number");
     }
+
+    public static void emptyCart() {
+        System.out.println("there is nothing to purchase select a product first");
+    }
 }

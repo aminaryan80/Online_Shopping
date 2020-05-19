@@ -152,4 +152,8 @@ public class ViewCartManager extends Manager {
         }
         return productsInShort;
     }
+
+    public boolean isCartEmpty(){
+        return customer.getCart().getProducts().size()==0;
+    }
 }
