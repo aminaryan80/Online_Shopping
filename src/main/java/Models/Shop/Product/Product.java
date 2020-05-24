@@ -34,6 +34,7 @@ public class Product {
     private boolean isAvailable;
     //    private Category category;
     private String categoryName;
+    private String categoryId;
     private String description;
     //    private ArrayList<Rate> allRates = new ArrayList<>();
     private ArrayList<String> allRatesIds = new ArrayList<>();
@@ -55,7 +56,10 @@ public class Product {
         this.price = price;
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
-        this.categoryName = category.getName();
+        if(category != null) {
+            this.categoryName = category.getName();
+            this.categoryId = category.getId();
+        }
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
@@ -261,14 +265,14 @@ public class Product {
     }
 
     public String getAttributes() {
-        if(sellerUsername == null || categoryName == null) throw new NullPointerException();
+        if(sellerUsername == null || categoryId == null) throw new NullPointerException();
         //TODO make better
         return "Name: " + name +
                 "\nId: " + id +
                 "\nCompany name: " + companyName +
                 "\nSeller: " + Seller.getAccountByUsername(sellerUsername).getName() +
                 "\nDescription: " + description +
-                "\n" + Category.getCategoryByName(categoryName).getFeaturesNames().toString();
+                "\n" + Category.getCategoryById(categoryId).getFeaturesNames().toString();
     }
 
     public String digest() {

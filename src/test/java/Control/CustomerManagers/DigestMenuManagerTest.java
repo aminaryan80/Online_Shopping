@@ -13,7 +13,7 @@ public class DigestMenuManagerTest {
     Customer customer = new Customer(UtilTestObject.CUSTOMER,"masih","beigi","masihbr@gamil.com","09128569777","hello",500);
     Product product = new Product("macbook","apple",
             1000,new Seller(UtilTestObject.SELLER,"masih","beigi","masihbr@gamil.com","09128569777","hello",500,"apple"),true,
-            new Category("1","2",null,null),"",null);
+            new Category("1",null,null,null),"",null);
     DigestMenuManager digestMenuManager = new DigestMenuManager(customer,product);
     @Test
     public void addToCart() {

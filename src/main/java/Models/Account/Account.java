@@ -229,4 +229,9 @@ public abstract class Account {
     @Override
     public abstract String toString();
 
+    public boolean equals(Account account) {
+        return (this.getUsername().equals(account.getUsername()));
+    }
+
+
 }

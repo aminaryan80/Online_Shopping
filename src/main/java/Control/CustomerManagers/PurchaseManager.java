@@ -8,6 +8,7 @@ import Models.Account.Seller;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Log.Log;
 import Models.Shop.Log.SellingLog;
+import Models.Shop.Off.Auction;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.purchase.PurchaseMenu;
@@ -132,7 +133,9 @@ public class PurchaseManager extends Manager {
     private double getAmountOfAuctionApplied(ArrayList<Product> productsBoughtFromThisSeller) {
         double amountOfAuctionApplied = 0;
         for (Product product : productsBoughtFromThisSeller) {
-            amountOfAuctionApplied += product.getAuction().getDiscountAmount();
+            Auction thisProductAuction = product.getAuction();
+            if (thisProductAuction == null) amountOfAuctionApplied += 0;
+            else amountOfAuctionApplied += thisProductAuction.getDiscountAmount();
         }
         return amountOfAuctionApplied;
     }

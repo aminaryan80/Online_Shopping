@@ -47,6 +47,10 @@ public class Category {
         }
     }
 
+    public String getId() {
+        return id;
+    }
+
     public void editFeature(String oldName, String newName) {
         features.remove(oldName);
         features.put(newName, 0);
@@ -85,6 +89,15 @@ public class Category {
     public static Category getCategoryByName(String name) {
         for (Category category : allCategories) {
             if (category.getName().equals(name))
+                return category;
+        }
+        return null;
+    }
+
+
+    public static Category getCategoryById(String id) {
+        for (Category category : allCategories) {
+            if (category.getId().equals(id))
                 return category;
         }
         return null;
