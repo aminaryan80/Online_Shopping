@@ -33,7 +33,7 @@ public class Product {
     private String sellerUsername;
     private boolean isAvailable;
     //    private Category category;
-    private String categoryName;
+//    private String categoryName;
     private String categoryId;
     private String description;
     //    private ArrayList<Rate> allRates = new ArrayList<>();
@@ -57,7 +57,7 @@ public class Product {
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         if(category != null) {
-            this.categoryName = category.getName();
+//            this.categoryName = category.getName();
             this.categoryId = category.getId();
         }
         this.description = description;
@@ -320,11 +320,11 @@ public class Product {
     }
 
     public Category getCategory() {
-        return Category.getCategoryByName(categoryName);
+        return Category.getCategoryByName(categoryId);
     }
 
     public void setCategory(Category category) {
-        this.categoryName = category.getName();
+        this.categoryId= category.getId();
     }
 
     public boolean isAvailable() {
@@ -372,7 +372,7 @@ public class Product {
                 "\nprice = " + price +
                 "\nseller = '" + Seller.getAccountByUsername(sellerUsername) + '\'' +
                 "\nisAvailable = " + isAvailable +
-                "\ncategory = '" + Category.getCategoryByName(categoryName) + '\'' +
+                "\ncategory = '" + Category.getCategoryById(categoryId) + '\'' +
                 "\ndescription = '" + description + '\'';
     }
 
