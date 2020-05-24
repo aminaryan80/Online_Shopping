@@ -15,7 +15,6 @@ import java.util.HashMap;
 import static org.junit.Assert.*;
 
 public class PurchaseManagerTest {
-    Customer customer = new Customer(UtilTestObject.CUSTOMER,"masih","beigi","masihbr@gamil.com","09128569777","hello",500);
     HashMap<String,Integer> features = new HashMap<>();
     Seller seller = new Seller(UtilTestObject.SELLER,"masih","beigi","masihbr@gamil.com","09128569777","hello",500,"apple");
     Product product = new Product("macbook",
@@ -25,11 +24,14 @@ public class PurchaseManagerTest {
             new Category("1",null,features,null),
             "des",
             null);
-    Product product2 = new Product("macbook2","apple",
-            1020,seller,true,
-            new Category("1",null,features,null),"des",null);
+    Product product2 = new Product("macbook2",
+            "apple",
+            1020,seller,
+            true,
+            new Category("1",null,features,null),
+            "des",
+            null);
 
-    PurchaseManager purchaseManager = new PurchaseManager(customer);
     @Test
     public void canPay() {
         Customer customerTest = new Customer(UtilTestObject.CUSTOMER,"masih","beigi","masihbr@gamil.com","09128569777","hello",500);

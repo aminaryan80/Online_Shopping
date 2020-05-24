@@ -28,12 +28,28 @@ public class Cart {
         return true;
     }
 
-    public ArrayList<String> showProductsInShort() {
-        ArrayList<String> productsNames = new ArrayList<>();
+    public Product getProductInCartById(String id) {
         for (Product product : getProducts()) {
-            productsNames.add(product.getName());
+            if (product.getId().equals(id)) return product;
         }
-        return productsNames;
+        return null;
+    }
+
+    public String getProductNumberInCartById(String id) {
+        for (Product product : getProducts()) {
+            if (product.getId().equals(id)) return products.get(product).toString();
+        }
+        return null;
+    }
+
+    public ArrayList<String> showProductsInShort() {
+        ArrayList<String> productsNamesAndIds = new ArrayList<>();
+        for (Product product : getProducts()) {
+            productsNamesAndIds.add("Name: " + product.getName() +
+                    "\nId: " + product.getId() +
+                    "\nNumber: " + products.get(product));
+        }
+        return productsNamesAndIds;
     }
 
     public void addProduct(Product product) {
@@ -42,12 +58,12 @@ public class Cart {
         } else products.put(product, 1);
     }
 
-    public boolean deleteProduct(Product product) {
-        if (products.containsKey(product)) {
-            if (products.get(product) > 0)
-                products.replace(product, products.get(product) - 1);
-            return true;
-        } else return false;
+    public void removeProduct(Product product) {
+        int numberOfThisProduct = products.get(product) - 1;
+        products.replace(product,numberOfThisProduct);
+        if(numberOfThisProduct == 0){
+            products.remove(product);
+        }
     }
 
     public double getTotalPrice(Discount discount) {

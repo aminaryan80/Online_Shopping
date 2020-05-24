@@ -1,6 +1,7 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Category.Sort;
@@ -22,6 +23,7 @@ public class ViewCartManager extends Manager {
     public ViewCartManager(Account account) {
         super(account);
         products = Product.getAllProducts();
+        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new ViewCartMenu(this);
     }
 
@@ -29,21 +31,20 @@ public class ViewCartManager extends Manager {
         List<String> productsInfos = customer.getCart().showProductsInShort();
         StringBuilder allProductsInfo = new StringBuilder();
         for (String productsInfo : productsInfos) {
-            allProductsInfo.append(productsInfo);
+            allProductsInfo.append("\n"+productsInfo);
         }
         return allProductsInfo.toString();
     }
 
-    public void ProductQuantity(String id, boolean isIncrease) throws ProductDoNotExistAtAllException, ProductDoNotExistInCartException {
+    public void productQuantity(String id, boolean isIncrease) throws ProductDoNotExistInCartException {
         Product product;
-        if ((product = Product.getProductById(id)) != null) {
+        if ((product = customer.getCart().getProductInCartById(id)) != null) {
             if (isIncrease)
                 customer.getCart().addProduct(product);
             else {
-                if (!customer.getCart().deleteProduct(product))
-                    throw new ProductDoNotExistInCartException("Product does not exist in cart");
+                customer.getCart().removeProduct(product);
             }
-        } else throw new ProductDoNotExistAtAllException("Product does not exist at all");
+        } else throw new ProductDoNotExistInCartException("Product does not exist in cart");
     }
 
     public double getTotalPrice(Discount discount) {

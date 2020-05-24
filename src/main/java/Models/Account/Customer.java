@@ -53,7 +53,7 @@ public class Customer extends Account {
         for (Account account : allAccounts) {
             try {
                 if (((Customer) account).hasProductById(product.getId())) {
-                    ((Customer) account).getCart().deleteProduct(product);
+                    ((Customer) account).getCart().removeProduct(product);
                 }
             } catch (Exception ignored) {
 

@@ -32,19 +32,20 @@ public class ViewCartMenu extends Menu {
                 if (product != null) {
                     if (viewCartManager.doesProductExistInCart(product))
                     new ProductPageManager(manager.getAccount(), product);
+                    else ErrorProcessor.productDoesNotExistInCart();
                 } else ErrorProcessor.invalidProductId();
             } else if ((matcher = ConsoleCommand.INCREASE_PRODUCT.getStringMatcher(input)).find()) {
                 try {
-                    viewCartManager.ProductQuantity(matcher.group(1), true);
+                    viewCartManager.productQuantity(matcher.group(1), true);
                     System.out.println("successful");
-                } catch (ViewCartManager.ProductDoNotExistAtAllException | ViewCartManager.ProductDoNotExistInCartException e) {
+                } catch (ViewCartManager.ProductDoNotExistInCartException e) {
                     System.out.println(e.getMessage());
                 }
             } else if ((matcher = ConsoleCommand.DECREASE_PRODUCT.getStringMatcher(input)).find()) {
                 try {
-                    viewCartManager.ProductQuantity(matcher.group(1), false);
+                    viewCartManager.productQuantity(matcher.group(1), false);
                     System.out.println("successful");
-                } catch (ViewCartManager.ProductDoNotExistAtAllException | ViewCartManager.ProductDoNotExistInCartException e) {
+                } catch (ViewCartManager.ProductDoNotExistInCartException e) {
                     System.out.println(e.getMessage());
                 }
             } else if ((matcher = ConsoleCommand.SHOW_TOTAL_PRICE.getStringMatcher(input)).find()) {

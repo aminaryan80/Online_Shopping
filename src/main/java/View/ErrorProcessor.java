@@ -74,4 +74,8 @@ public class ErrorProcessor {
     public static void emptyCart() {
         System.out.println("there is nothing to purchase select a product first");
     }
+
+    public static void productDoesNotExistInCart() {
+        System.out.println("product does not exist in cart");
+    }
 }
