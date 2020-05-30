@@ -2,6 +2,7 @@ package View.Products;
 
 import Control.Manager;
 import Control.Products.ProductsManager;
+import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -56,14 +57,18 @@ public class ProductsMenu extends Menu {
                 applyFilter(matcher.group(1));
             } else if (command.equals("current filters")) {
                 currentFilters();
+            } else if (command.equals("show available lengthfilters")) {
+                showAvailableLengthFilter();
+            } else if ((matcher = getMatcher(command, "lengthfilter (\\S+)")).find()) {
+                lengthFilter(matcher.group(1));
             } else if ((matcher = getMatcher(command, "disable filter (\\S+)")).find()) {
-                disableFilter(matcher.group(1));
+                    disableFilter(matcher.group(1));
             } else if (command.equals("help")) {
-                filteringHelp();
+                    filteringHelp();
             } else if (command.equals("back")) {
-                return;
+                    return;
             } else {
-                ErrorProcessor.invalidInput();
+                    ErrorProcessor.invalidInput();
             }
         }
     }
@@ -71,10 +76,31 @@ public class ProductsMenu extends Menu {
     private void filteringHelp() {
         System.out.println("show available filters\n" +
                 "filter [an available filter]\n" +
+                "show available lengthFilters\n" +
+                "lengthFilter [an available filter]\n" +
                 "current filters\n" +
                 "disable filter [a selected filter]\n" +
                 "help\n" +
                 "back");
+    }
+
+    private void lengthFilter(String field) {
+        if (((ProductsManager) manager).isEnteredLengthFilterFieldValid(field)) {
+            System.out.println("enter the minimum value of the filter");
+            String minFilterValue = scanner.nextLine();
+            System.out.println("enter the maximum value of the filter");
+            String maxFilterValue = scanner.nextLine();
+            ArrayList<String> filteredProducts = ((ProductsManager) manager).applyFilter(field, minFilterValue, maxFilterValue);
+            for (String filteredProduct : filteredProducts) {
+                System.out.println(filteredProduct);
+            }
+        } else {
+            ErrorProcessor.invalidInput();
+        }
+    }
+
+    private void showAvailableLengthFilter() {
+        System.out.println(((ProductsManager) manager).showAvailableLengthFilter());
     }
 
     private void showAvailableFilters() {

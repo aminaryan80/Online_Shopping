@@ -3,12 +3,11 @@ package Control.Products;
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
 import Models.Account.Account;
-import Models.Shop.Category.Category;
-import Models.Shop.Category.Feature;
-import Models.Shop.Category.Filter;
-import Models.Shop.Category.Sort;
+import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
+
+import javax.management.ObjectName;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +25,7 @@ public class ProductsManager extends Manager {
 
     private Category currentCategory;
     private List<Filter> filters = new ArrayList<>();
+    private List<LengthFilter> lengthFilters = new ArrayList<>();
     private Sort currentSort = null;
     private List<Product> products;
 
@@ -65,6 +65,14 @@ public class ProductsManager extends Manager {
         return productsInShort();
     }
 
+    public ArrayList<String> applyFilter(String filterType, String minValue, String maxValue) {
+        lengthFilters.add(new LengthFilter(filterType, minValue, maxValue));
+        products = mainCategory.getAllProducts();
+        setFilters();
+        applySort();
+        return productsInShort();
+    }
+
     private void setFilters() {
         for (Filter filter : filters) {
             String field = filter.getField();
@@ -86,6 +94,17 @@ public class ProductsManager extends Manager {
                 products = setFeaturesFilter(filter);
             }
         }
+        for (LengthFilter lengthFilter : lengthFilters) {
+            if (lengthFilter.getField().equals("price")) {
+                setPriceLengthFilter(lengthFilter);
+            }
+        }
+    }
+
+    private ArrayList<Product> setPriceLengthFilter(LengthFilter filter) {
+        return products.stream().filter(product -> {
+            return product.getPrice() <= Double.parseDouble(filter.getMaxValue()) || product.getPrice() >= Double.parseDouble(filter.getMinValue());
+        }).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<String> productsInShort() {
@@ -150,6 +169,9 @@ public class ProductsManager extends Manager {
         for (Filter filter : filters) {
             filtersNames.add(filter.toString());
         }
+        for (LengthFilter lengthFilter : lengthFilters) {
+            filtersNames.add(lengthFilter.toString());
+        }
         return filtersNames;
     }
 
@@ -159,22 +181,44 @@ public class ProductsManager extends Manager {
                 return true;
             }
         }
+        for (LengthFilter lengthFilter : lengthFilters) {
+            if (lengthFilter.getField().equals(filterName)) {
+                return true;
+            }
+        }
         return false;
     }
 
+    public boolean isEnteredLengthFilterFieldValid(String field) {
+        return field.equals("price");
+    }
+
+    public String showAvailableLengthFilter() {
+        return "price";
+    }
+
     public List<String> disableFilter(String filterField) {
-        Filter filter = getFilterByField(filterField);
-        filters.remove(filter);
+        Object filter = getFilterByField(filterField);
+        if (filter instanceof Filter) {
+            filters.remove(filter);
+        } else {
+            lengthFilters.remove(filter);
+        }
         products = mainCategory.getAllProducts();
         setFilters();
         applySort();
         return productsInShort();
     }
 
-    private Filter getFilterByField(String field) {
+    private Object getFilterByField(String field) {
         for (Filter filter : filters) {
             if (filter.getField().equals(field)) {
                 return filter;
+            }
+        }
+        for (LengthFilter lengthFilter : lengthFilters) {
+            if (lengthFilter.getField().equals(field)) {
+                return lengthFilter;
             }
         }
         return null;
