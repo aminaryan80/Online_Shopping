@@ -81,6 +81,9 @@ public class ViewCartManager extends Manager {
     }
 
     private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
         String field = currentSort.getField();
         if (field.equals("price")) {
             sortByPrice();

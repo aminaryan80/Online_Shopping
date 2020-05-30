@@ -58,6 +58,9 @@ public class EditProductsManager extends Manager {
     }
 
     private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
         String field = currentSort.getField();
         if (field.equals("price")) {
             sortByPrice();
@@ -135,18 +138,12 @@ public class EditProductsManager extends Manager {
         Product product = Product.getProductById(id);
         if (field.equals("name")) {
             product.setName(newValue);
-        } else if (field.equals("companyName")) {
-            product.setCompanyName(newValue);
         } else if (field.equals("description")) {
             product.setDescription(newValue);
-        } else if (field.equals("seller")) {
-            product.setSeller((Seller) Seller.getAccountByUsername(newValue));
         } else if (field.equals("isAvailable")) {
             product.setAvailable(Boolean.parseBoolean(newValue));
         } else if (field.equals("price")) {
             product.setPrice(Double.parseDouble(newValue));
-        } else if (field.equals("category")) {
-            product.setCategory(Category.getCategoryByName(newValue));
         } else {
             product.getFeatureByName(field).setValue(newValue);
         }

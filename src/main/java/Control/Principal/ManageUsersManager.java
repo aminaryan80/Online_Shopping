@@ -66,6 +66,9 @@ public class ManageUsersManager extends Manager {
     }
 
     private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
         Account[] usersForSort = users.toArray(new Account[0]);
         for (int i = 0; i < usersForSort.length; i++) {
             for (int j = i + 1; j < usersForSort.length; j++) {

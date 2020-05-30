@@ -69,6 +69,9 @@ public class ViewDiscountCodesManager extends Manager {
     }
 
     private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
         String field = currentSort.getField();
         if (field.equals("discountpercent")) {
             sortByDiscountPercentage();
