@@ -2,7 +2,6 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageUsersManager;
-import Control.Products.ProductsManager;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -107,14 +106,14 @@ public class ManageUsersMenu extends Menu {
             inputs.add(scanner.nextLine());
             System.out.println("Enter email:");
             input = scanner.nextLine();
-            if(manager.checkEmail(input)) {
+            if (!manager.checkEmail(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }
             inputs.add(input);
             System.out.println("Enter phone number:");
             input = scanner.nextLine();
-            if(manager.checkPhoneNumber(input)) {
+            if (!manager.checkPhoneNumber(input)) {
                 ErrorProcessor.invalidInput();
                 continue;
             }

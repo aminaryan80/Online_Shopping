@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
+import java.util.HashMap;
 
 public abstract class Manager {
     protected static Account account;
@@ -24,7 +24,7 @@ public abstract class Manager {
     public Manager(Account account) {
         Manager.account = account;
         if (!Category.hasCategoryWithName("mainCategory")) {
-            mainCategory = new Category("mainCategory", null, null, new ArrayList<>());
+            mainCategory = new Category("mainCategory", null, new HashMap<>(), new ArrayList<>());
         } else {
             mainCategory = Category.getCategoryByName("mainCategory");
         }

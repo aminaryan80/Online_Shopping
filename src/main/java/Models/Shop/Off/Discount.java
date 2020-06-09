@@ -9,12 +9,8 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -191,16 +187,17 @@ public class Discount {
             customer.deleteDiscount(this);
         }
         allDiscounts.remove(this);
-        File file = new File(Address.DISCOUNTS.get()+"\\"+this.getId()+".json");
-        FileUtils.forceDelete(file);
+        File file = new File(Address.DISCOUNTS.get() + "\\" + this.getId() + ".json");
+        try {
+            FileUtils.forceDelete(file);
+        } catch (Exception ignored) {
+
+        }
         //file.delete();
     }
 
     public boolean isActive(LocalDate now) {
-        if(now.compareTo(beginningDate)>0 && now.compareTo(endingDate)<0){
-            return true;
-        }
-        return false;
+        return now.compareTo(beginningDate) > 0 && now.compareTo(endingDate) < 0;
     }
 
 //    public static void loadReferences() {

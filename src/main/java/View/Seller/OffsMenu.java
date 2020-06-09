@@ -69,14 +69,14 @@ public class OffsMenu extends Menu {
         System.out.println("enter off's endingDate");
         String endingDate = scanner.nextLine();
         System.out.println("enter off's amount");
-        double discountAmount = scanner.nextDouble();
+        double discountAmount = Double.parseDouble(scanner.nextLine());
         ArrayList<String> products = new ArrayList<String>();
-        System.out.println("enter off's products Ids(end to finish)");
+        System.out.println("enter off's products Ids(enter 0 to stop)");
         while (true) {
             String productId = scanner.nextLine();
-            if (productId.equals("end")) {
+            if (productId.equals("0")) {
                 break;
-            } else if (!((OffsManager) manager).hasProductWithId(productId)){
+            } else if (!((OffsManager) manager).hasProductWithId(productId)) {
                 ErrorProcessor.invalidProductId();
             } else if (((OffsManager) manager).hasAuction(productId)) {
                 System.out.println("this product already has an auction");
@@ -89,10 +89,10 @@ public class OffsMenu extends Menu {
     }
 
     private void help() {
-        System.out.println("view [off id]%n" +
-                "edit [off id]%n" +
-                "add off%n" +
-                "back%n" +
+        System.out.println("view [off id]\n" +
+                "edit [off id]\n" +
+                "add off\n" +
+                "back\n" +
                 "help");
     }
 }

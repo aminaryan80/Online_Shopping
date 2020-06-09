@@ -78,7 +78,7 @@ public class ManageCategoriesMenu extends Menu {
         return features;
     }
 
-    private ArrayList<String> getProductsNamesToAddCategory() {
+    private ArrayList<String> getProductsNamesToAddCategory() { //TODO :/
         System.out.println("Enter product id:(Enter 0 to stop)");
         ArrayList<String> productsNames = new ArrayList<>();
         while (true) {

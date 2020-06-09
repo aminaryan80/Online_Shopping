@@ -54,7 +54,6 @@ public class SellerManager extends Manager {
                            String description, ArrayList<Feature> features) {
         String companyName = ((Seller) account).getCompanyName();
         Product product = new Product(name, companyName, price, (Seller) account, iaAvailable, category, description, features);
-        product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION);
         new AddProductRequest((Seller) account, product);
     }
 

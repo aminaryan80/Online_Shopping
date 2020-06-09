@@ -1,6 +1,6 @@
 package View;
 
-import Control.AuctionPageManager;
+import Control.AuctionsPageManager;
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
 import Models.Shop.Off.Auction;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
-public class AuctionPage extends Menu {
+public class AuctionsPageMenu extends Menu {
 
-    public AuctionPage(Manager manager) {
+    public AuctionsPageMenu(Manager manager) {
         super(manager);
         auctionPage();
     }
@@ -85,35 +85,35 @@ public class AuctionPage extends Menu {
     }
 
     private void showAvailableFilters() {
-        System.out.println(((AuctionPageManager) manager).showAvailableFilters());
+        System.out.println(((AuctionsPageManager) manager).showAvailableFilters());
     }
 
     private void applyFilter(String filterType) {
-        if (!((AuctionPageManager) manager).isEnteredFilterFieldValid(filterType)) {
+        if (!((AuctionsPageManager) manager).isEnteredFilterFieldValid(filterType)) {
             ErrorProcessor.invalidEnteredInEditField();
             return;
         }
         System.out.println("enter value of the filter");
         String filterValue = scanner.nextLine();
-        ArrayList<String> auctionsNames = ((AuctionPageManager) manager).applyFilter(filterType, filterValue);
+        ArrayList<String> auctionsNames = ((AuctionsPageManager) manager).applyFilter(filterType, filterValue);
         for (String auctionName : auctionsNames) {
             System.out.println(auctionName);
         }
     }
 
     private void currentFilters() {
-        List<String> filtersNames = ((AuctionPageManager) manager).currentFilters();
+        List<String> filtersNames = ((AuctionsPageManager) manager).currentFilters();
         for (String filtersName : filtersNames) {
             System.out.println(filtersName);
         }
     }
 
     private void disableFilter(String filter) {
-        if (!((AuctionPageManager) manager).isEnteredFilterFieldValid(filter)) {
+        if (!((AuctionsPageManager) manager).isEnteredFilterFieldValid(filter)) {
             ErrorProcessor.invalidEnteredInEditField();
             return;
         }
-        List<String> auctionsNames = ((AuctionPageManager) manager).disableFilter(filter);
+        List<String> auctionsNames = ((AuctionsPageManager) manager).disableFilter(filter);
         for (String auctionName : auctionsNames) {
             System.out.println(auctionName);
         }

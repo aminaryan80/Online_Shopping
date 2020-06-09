@@ -68,7 +68,11 @@ public abstract class Request {
     protected static void deleteRequest(Request request, String address) throws IOException {
         allRequests.remove(request);
         File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
-        FileUtils.forceDelete(file);
+        try {
+            FileUtils.forceDelete(file);
+        } catch (Exception ignored) {
+
+        }
     }
 
     public String getId() {

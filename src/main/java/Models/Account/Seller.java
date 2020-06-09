@@ -9,15 +9,23 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Seller extends Account {
+    //    private List<Auction> auctions = new ArrayList<Auction>();
+    private static List<String> auctionsId = new ArrayList<String>();
     private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "companyName"};
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<SellingLog>();
-//    private List<Auction> auctions = new ArrayList<Auction>();
-    private static List<String> auctionsId = new ArrayList<String>();
 
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.companyName = companyName;
+    }
+
+    protected static ArrayList<Auction> getAuctions() {
+        ArrayList<Auction> auctions = new ArrayList<>();
+        for (String auctionId : auctionsId) {
+            auctions.add(Auction.getAuctionById(auctionId));
+        }
+        return auctions;
     }
 
     public ArrayList<String> getChangeableFields() {
@@ -39,7 +47,8 @@ public class Seller extends Account {
     public ArrayList<String> viewOffsInShort() {
         ArrayList<String> offsNames = new ArrayList<>();
         for (Auction auction : getAuctions()) {
-            offsNames.add("" + auction.getId() + " : " + auction.getDiscountAmount());
+            if (auction.getStatus() == Auction.AuctionStatus.CONFIRMED)
+                offsNames.add("" + auction.getId() + " : " + auction.getDiscountAmount());
         }
         return offsNames;
     }
@@ -64,14 +73,6 @@ public class Seller extends Account {
 
     public void addAuction(Auction auction) {
         auctionsId.add(auction.getId());
-    }
-
-    protected static ArrayList<Auction> getAuctions() {
-        ArrayList<Auction> auctions = new ArrayList<>();
-        for (String auctionId : auctionsId) {
-            auctions.add(Auction.getAuctionById(auctionId));
-        }
-        return auctions;
     }
 
     @Override

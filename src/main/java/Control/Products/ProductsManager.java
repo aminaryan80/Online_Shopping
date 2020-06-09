@@ -7,7 +7,6 @@ import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
 
-import javax.management.ObjectName;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,18 +15,18 @@ import java.util.stream.Collectors;
 
 public class ProductsManager extends Manager {
 
+    private Category currentCategory;
+    private List<Filter> filters = new ArrayList<>();
+    private List<LengthFilter> lengthFilters = new ArrayList<>();
+    private Sort currentSort = null;
+    private List<Product> products;
+
     public ProductsManager(Account account) {
         super(account);
         this.currentCategory = mainCategory;
         products = mainCategory.getAllProducts();
         this.menu = new ProductsMenu(this);
     }
-
-    private Category currentCategory;
-    private List<Filter> filters = new ArrayList<>();
-    private List<LengthFilter> lengthFilters = new ArrayList<>();
-    private Sort currentSort = null;
-    private List<Product> products;
 
     // filtering
     public String showAvailableFilters() {
@@ -50,11 +49,12 @@ public class ProductsManager extends Manager {
 
     public boolean isEnteredFilterFieldValid(String field) {
         if (field.equals("status") || field.equals("name") || field.equals("companyName") ||
-        field.equals("price") || field.equals("seller") || field.equals("isAvailable") ||
-        currentCategory.getFeaturesNames().contains(field)) {
+                field.equals("price") || field.equals("seller") || field.equals("isAvailable")) {
             return true;
         }
-        return field.equals("category") && !currentCategory.getSubCategories().equals(null);
+        if (!currentCategory.equals(mainCategory) && currentCategory.getFeaturesNames().contains(field))
+            return true;
+        return field.equals("category") && currentCategory.getSubCategories() != null;
     }
 
     public ArrayList<String> applyFilter(String filterType, String filterValue) {
@@ -108,7 +108,7 @@ public class ProductsManager extends Manager {
     }
 
     private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort= new ArrayList<>();
+        ArrayList<String> productsInShort = new ArrayList<>();
         for (Product product : products) {
             productsInShort.add(product.viewProductInShort());
         }
@@ -146,13 +146,13 @@ public class ProductsManager extends Manager {
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product>setCompanyNameFilter(Filter filter) {
+    private ArrayList<Product> setCompanyNameFilter(Filter filter) {
         return products.stream().filter(product -> {
             return product.getCompanyName().equals(filter.getValue());
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product>setNameFilter(Filter filter) {
+    private ArrayList<Product> setNameFilter(Filter filter) {
         return products.stream().filter(product -> {
             return product.getName().equals(filter.getValue());
         }).collect(Collectors.toCollection(ArrayList::new));
@@ -165,7 +165,7 @@ public class ProductsManager extends Manager {
     }
 
     public List<String> currentFilters() {
-        ArrayList<String> filtersNames= new ArrayList<String>();
+        ArrayList<String> filtersNames = new ArrayList<String>();
         for (Filter filter : filters) {
             filtersNames.add(filter.toString());
         }
@@ -249,7 +249,7 @@ public class ProductsManager extends Manager {
             sortByPrice();
         } else if (field.equals("name")) {
             sortByName();
-        } else if (field.equals("rating")){
+        } else if (field.equals("rating")) {
             sortByRating();
         } else {
             sortByFeature();

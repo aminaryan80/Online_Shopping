@@ -2,7 +2,6 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageAllProductsManager;
-import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
@@ -30,9 +29,9 @@ public class ManageAllProductsMenu extends Menu {
                 currentSort();
             } else if (command.equals("disable sort")) {
                 disableSort();
-            }if(getMatcher(command, "^help$").find()) {
+            } else if (getMatcher(command, "^help$").find()) {
                 help();
-            } else if(getMatcher(command, "^back$").find()) {
+            } else if (getMatcher(command, "^back$").find()) {
                 return;
             } else ErrorProcessor.invalidInput();
         }

@@ -22,7 +22,7 @@ public class DigestMenu extends CustomerMenu {
         Matcher matcher;
         while (!(input = scanner.nextLine().trim()).matches("(?i)back")) {
             if (ConsoleCommand.ADD_TO_CART.getStringMatcher(input).find()) {
-                //TODO IF NOT LOGGED IN LOG IN FIRST
+                //TODO IF NOT LOGGED IN LOG IN FIRST |||| Don't think that's necessary
                 //TODO ADD ONLY IF PRODUCT IS AVAILABLE
                 digestMenuManager.addToCart();
             } else if ((matcher = ConsoleCommand.SELECT_SELLER.getStringMatcher(input)).find()) {

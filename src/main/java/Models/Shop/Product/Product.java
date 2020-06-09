@@ -63,7 +63,6 @@ public class Product {
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-        allProducts.add(this);
     }
 
     public boolean hasAuction() {
@@ -124,7 +123,11 @@ public class Product {
     public static void deleteProduct(Product product) throws IOException {
         allProducts.remove(product);
         File file = new File(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
-        FileUtils.forceDelete(file);
+        try {
+            FileUtils.forceDelete(file);
+        } catch (Exception ignored) {
+
+        }
     }
 
     public static ArrayList<String> viewProductsInShort(Seller seller) {

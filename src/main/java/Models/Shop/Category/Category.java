@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class Category {
@@ -118,8 +117,12 @@ public class Category {
         for (Category subCategory : subCats) {
             deleteCategory(subCategory);
         }
-        File file = new File(Address.CATEGORIES.get()+"\\"+category.getName()+".json");
-        FileUtils.forceDelete(file);
+        File file = new File(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
+        try {
+            FileUtils.forceDelete(file);
+        } catch (Exception ignored) {
+
+        }
     }
 
     public boolean hasCategoryInsideWithName(String name) {

@@ -28,7 +28,6 @@ public class Auction {
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountAmount = discountAmount;
-        allAuctions.add(this);
     }
 
     public static Auction getAuctionById(String id) {

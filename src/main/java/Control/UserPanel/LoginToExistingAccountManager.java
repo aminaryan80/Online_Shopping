@@ -21,8 +21,10 @@ public class LoginToExistingAccountManager extends Manager {
         Account account = Account.getAccountByUsername(username);
         if(account.getPassword().equals(password)) {
             Manager.account = account;
-            if (Manager.account instanceof Customer)
+            if (Manager.account instanceof Customer) {
                 Cart.addCartToCustomerCart((Customer) (Manager.account), cart);
+                cart = ((Customer) account).getCart();
+            }
         } else ErrorProcessor.wrongPassword();
     }
 }

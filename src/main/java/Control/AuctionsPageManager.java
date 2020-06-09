@@ -3,22 +3,21 @@ package Control;
 import Models.Account.Account;
 import Models.Shop.Category.Filter;
 import Models.Shop.Off.Auction;
-import View.AuctionPage;
+import View.AuctionsPageMenu;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AuctionPageManager extends Manager {
+public class AuctionsPageManager extends Manager {
 
     private List<Filter> filters = new ArrayList<>();
     private List<Auction> auctions = Auction.getAllAuctions();
 
-    public AuctionPageManager(Account account) {
+    public AuctionsPageManager(Account account) {
         super(account);
-        this.menu = new AuctionPage(this);
+        this.menu = new AuctionsPageMenu(this);
     }
 
     public String showAvailableFilters() {

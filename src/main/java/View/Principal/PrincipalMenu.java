@@ -1,5 +1,6 @@
 package View.Principal;
 
+import Control.AuctionsPageManager;
 import Control.Manager;
 import Control.Principal.ManageAllProductsManager;
 import Control.Principal.ManageCategories.ManageCategoriesManager;
@@ -39,7 +40,7 @@ public class PrincipalMenu extends Menu {
             } else if (getMatcher(input, "^manage categories$").find()) {
                 manageCategories();
             } else if (getMatcher(input, "^offs$").find()) {
-                //TODO OPEN OFFS
+                openAuctionsMenu();
             } else if (getMatcher(input, "logout").find()) {
                 logout();
                 return;
@@ -80,7 +81,7 @@ public class PrincipalMenu extends Menu {
                 continue;
             }
             inputs.add(input);
-            System.out.println("Enter discount allowed use count:"); // :/
+            System.out.println("Enter maximum use count:"); // :/
             input = scanner.nextLine();
             if (!manager.checkNumber(input)) {
                 ErrorProcessor.invalidInput();
@@ -136,6 +137,10 @@ public class PrincipalMenu extends Menu {
 
     private void manageCategories() {
         new ManageCategoriesManager(manager.getAccount());
+    }
+
+    private void openAuctionsMenu() {
+        new AuctionsPageManager(manager.getAccount());
     }
 
     private void help() {
