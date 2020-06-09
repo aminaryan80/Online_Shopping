@@ -189,6 +189,7 @@ public class Discount {
         allDiscounts.remove(this);
         File file = new File(Address.DISCOUNTS.get() + "\\" + this.getId() + ".json");
         try {
+            if(file.exists())
             FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
