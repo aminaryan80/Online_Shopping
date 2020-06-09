@@ -69,6 +69,7 @@ public abstract class Request {
         allRequests.remove(request);
         File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
         try {
+            if(file.exists())
             FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 

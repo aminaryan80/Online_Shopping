@@ -119,6 +119,7 @@ public class Category {
         }
         File file = new File(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
         try {
+            if(file.exists())
             FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
