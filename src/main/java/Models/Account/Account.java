@@ -1,8 +1,6 @@
 package Models.Account;
-
 import Models.Address;
 import Models.Gson;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -232,6 +230,5 @@ public abstract class Account {
     public boolean equals(Account account) {
         return (this.getUsername().equals(account.getUsername()));
     }
-
 
 }

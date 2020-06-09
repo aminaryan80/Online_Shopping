@@ -323,7 +323,7 @@ public class Product {
     }
 
     public Category getCategory() {
-        return Category.getCategoryByName(categoryId);
+        return Category.getCategoryById(categoryId);
     }
 
     public void setCategory(Category category) {
@@ -376,7 +376,8 @@ public class Product {
                 "\nseller = '" + Seller.getAccountByUsername(sellerUsername) + '\'' +
                 "\nisAvailable = " + isAvailable +
                 "\ncategory = '" + Category.getCategoryById(categoryId) + '\'' +
-                "\ndescription = '" + description + '\'';
+                "\ndescription = '" + description + '\'' +
+                "\nfeatures = '" + features + '\'';
     }
 
 //    public static void loadReferences() {
