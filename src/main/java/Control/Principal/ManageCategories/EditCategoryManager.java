@@ -1,26 +1,26 @@
 package Control.Principal.ManageCategories;
 
+import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category.Category;
 import View.Principal.ManageCategories.EditCategoryMenu;
 
 import java.util.ArrayList;
 
-public class EditCategoryManager extends ManageCategoriesManager {
+public class EditCategoryManager extends Manager {
 
-    Category category;
-    ArrayList<String> features;
+    private Category editingCategory;
+    private ArrayList<String> features;
 
     public EditCategoryManager(Account account, Category category) {
         super(account);
-        new EditCategoryMenu(this);
-        this.category = category;
+        this.editingCategory = category;
         this.features = category.getFeaturesNames();
+        new EditCategoryMenu(this);
     }
 
     public void editName(String newName) {
-        category.setName(newName);
-        category.changeCategoryNameForProducts();
+        editingCategory.editName(newName);
     }
 
     public boolean hasFeatureWithName(String name) {
@@ -29,17 +29,17 @@ public class EditCategoryManager extends ManageCategoriesManager {
 
     public void addFeature(String feature) {
         features.add(feature);
-        category.addFeature(feature);
+        editingCategory.addFeature(feature);
     }
 
     public void editFeature(String oldName, String newName) {
         features.remove(oldName);
         features.add(newName);
-        category.editFeature(oldName, newName);
+        editingCategory.editFeature(oldName, newName);
     }
 
     public void removeFeature(String feature) {
         features.remove(feature);
-        category.removeFeature(feature);
+        editingCategory.removeFeature(feature);
     }
 }

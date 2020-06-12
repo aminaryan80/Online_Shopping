@@ -6,7 +6,6 @@ import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 import View.Menu;
 
-import javax.imageio.plugins.tiff.ExifInteroperabilityTagSet;
 import java.util.regex.Matcher;
 
 public class ViewPersonalInfoCustomerMenu extends Menu {
