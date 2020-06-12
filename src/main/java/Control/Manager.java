@@ -44,7 +44,7 @@ public abstract class Manager {
 
     public void logout() {
         account = null;
-        cart = new Cart();
+//        cart = new Cart();
     }
 
     public boolean userExistsWithUsername(String username) {
@@ -97,7 +97,9 @@ public abstract class Manager {
         if (currentCategory != mainCategory) {
             categoryField.append("\n");
         }
-        categoryField.append("-".repeat(Math.max(0, categoryLevel)));
+        for (int i = 0; i < categoryLevel; i++) {
+            categoryField.append("-");
+        }
         categoryField.append(currentCategory.getName());
         for (Category category : currentCategory.getSubCategories()) {
             buildCategoryList(category, categoryField, categoryLevel + 1);

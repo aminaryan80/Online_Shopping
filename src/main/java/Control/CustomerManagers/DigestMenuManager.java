@@ -19,10 +19,8 @@ public class DigestMenuManager extends Manager {
     }
 
     public void addToCart() {
-        cart.addProduct(product);
+        if(customer == null) cart.addProduct(product);
+        else customer.getCart().addProduct(product);
     }
 
-//    public void selectSeller(String sellerUsername) {
-//    // TODO WHAT TO DO WHAT NOT TO DO?
-//    }
 }

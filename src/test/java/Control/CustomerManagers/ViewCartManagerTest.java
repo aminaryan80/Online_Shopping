@@ -111,6 +111,10 @@ public class ViewCartManagerTest {
 
     @Test
     public void isEnteredSortFieldValid() {
+        assertFalse(viewCartManager.isEnteredSortFieldValid("chert"));
+        assertTrue(viewCartManager.isEnteredSortFieldValid("price"));
+        assertTrue(viewCartManager.isEnteredSortFieldValid("name"));
+        assertTrue(viewCartManager.isEnteredSortFieldValid("rating"));
     }
 
     @Test
@@ -123,5 +127,8 @@ public class ViewCartManagerTest {
 
     @Test
     public void isCartEmpty() {
+        assertTrue(viewCartManager.isCartEmpty());
+        customer.getCart().addProduct(product);
+        assertFalse(viewCartManager.isCartEmpty());
     }
 }
