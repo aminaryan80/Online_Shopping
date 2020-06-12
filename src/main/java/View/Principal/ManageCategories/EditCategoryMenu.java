@@ -4,10 +4,11 @@ import Control.Manager;
 import Control.Principal.ManageCategories.EditCategoryManager;
 import Models.Shop.Category.Category;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class EditCategoryMenu extends ManageCategoriesMenu {
+public class EditCategoryMenu extends Menu {
     public EditCategoryMenu(Manager manager) {
         super(manager);
         editCategory();
