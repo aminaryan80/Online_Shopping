@@ -27,15 +27,18 @@ public class PurchaseManager extends Manager {
     }
 
     public boolean canPay(String discountId) throws WrongDiscountIdException, UsedDiscountIdException {
+        if (discountId == null) {
+            return customer.getCart().getTotalPrice(null) <= customer.getBalance();
+        }
         Discount discount = getDiscountById(discountId);
         if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
         } else {
-            if (hasDiscountCode(discount)) {
+            if (discount.belongsToCustomer(customer)) {
                 if (!discount.canUseDiscount(customer)) {
                     throw new UsedDiscountIdException("you can not use this discount anymore");
                 } else return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
-            } else return customer.getCart().getTotalPrice(null) <= customer.getBalance();
+            } else throw new WrongDiscountIdException("Discount Id entered DOES NOT BELONG TO YOU");
         }
     }
 

@@ -201,6 +201,15 @@ public class Discount {
         return now.compareTo(beginningDate) > 0 && now.compareTo(endingDate) < 0;
     }
 
+    public boolean belongsToCustomer(Customer customer) {
+        for (String customersUsername : allCustomersUsernames) {
+            if(customer.getUsername().equals(customersUsername)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 //    public static void loadReferences() {
 //        for (Discount discount : allDiscounts) {
 //            discount.loadReference();
