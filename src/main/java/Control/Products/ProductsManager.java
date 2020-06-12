@@ -24,7 +24,7 @@ public class ProductsManager extends Manager {
         super(account);
         this.currentCategory = mainCategory;
         products = mainCategory.getAllProducts();
-        this.menu = new ProductsMenu(this);
+        this.menu = new ProductsMenu(this, productsInShort());
     }
 
     // filtering

@@ -12,8 +12,11 @@ import java.util.regex.Matcher;
 
 public class ProductsMenu extends Menu {
 
-    public ProductsMenu(Manager manager) {
+    public ProductsMenu(Manager manager, ArrayList<String> products) {
         super(manager);
+        for (String product : products) {
+            System.out.println(product);
+        }
         productsMenu();
     }
 
