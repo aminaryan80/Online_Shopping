@@ -85,7 +85,6 @@ public class OffsMenu extends Menu {
             }
         }
         Auction auction = ((OffsManager) manager).addOff(beginningDate, endingDate, discountAmount, products);
-        ((Seller) manager.getAccount()).addAuction(auction);
         new AddOffRequest((Seller) manager.getAccount(), auction);
     }
 

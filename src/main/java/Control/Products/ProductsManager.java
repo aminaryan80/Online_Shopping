@@ -47,6 +47,11 @@ public class ProductsManager extends Manager {
     }
 
     public boolean isEnteredFilterFieldValid(String field) {
+        for (Filter filter : filters) {
+            if (filter.getField().equals(field)) {
+                return false;
+            }
+        }
         if (field.equals("status") || field.equals("name") || field.equals("companyName") ||
                 field.equals("price") || field.equals("seller") || field.equals("isAvailable")) {
             return true;
