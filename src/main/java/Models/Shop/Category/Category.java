@@ -46,6 +46,10 @@ public class Category {
         }
     }
 
+    public void addProduct(String productId) {
+        allProductsIds.add(productId);
+    }
+
     public String getId() {
         return id;
     }
@@ -103,8 +107,10 @@ public class Category {
     }
 
     public ArrayList<Product> getAllProducts() {
-        ArrayList<Product> products = new ArrayList<>(getProducts());
-        for (Category category : getSubCategories()) {
+        ArrayList<Product> products = new ArrayList<>();
+        products.addAll(getProducts());
+        ArrayList<Category> subCategories = getSubCategories();
+        for (Category category : subCategories) {
             products.addAll(category.getProducts());
         }
         return products;

@@ -6,7 +6,6 @@ import Models.Account.Account;
 import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

@@ -4,7 +4,6 @@ import Control.Identity;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
