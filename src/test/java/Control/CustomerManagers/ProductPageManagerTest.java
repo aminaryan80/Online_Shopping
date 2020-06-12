@@ -25,12 +25,12 @@ public class ProductPageManagerTest {
             "apple",
             1000,seller,
             true,
-            new Category("1",null,features,null),
+            new Category("1",null,features,new ArrayList<String>()),
             "des",
             null);
     Product product2 = new Product("macbook2","apple",
             1020,seller,true,
-            new Category("1",null,features,null),"des",null);
+            new Category("1",null,features,new ArrayList<String>()),"des",null);
 
     ProductPageManager productPageManager = new ProductPageManager(customer,product);
 
@@ -56,7 +56,7 @@ public class ProductPageManagerTest {
     public void attributes() {
         HashMap<String,Integer> features = new HashMap<>();
         features.put("a",1);
-        Category category = new Category("1",null,features,null);
+        Category category = new Category("1",null,features,new ArrayList<String>());
         Product product = new Product("macbook","apple",
                 1000,seller,true,
                 category,"des",null);

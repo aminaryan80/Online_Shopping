@@ -23,14 +23,14 @@ public class ViewCartManagerTest {
             "apple",
             10000,seller,
             true,
-            new Category("1",null,features,null),
+            new Category("1",null,features,new ArrayList<String>()),
             "des",
             null);
     Product product2 = new Product("macbook2",
             "apple",
             1020,seller,
             true,
-            new Category("1",null,features,null),
+            new Category("1",null,features,new ArrayList<String>()),
             "des",
             null);
 
