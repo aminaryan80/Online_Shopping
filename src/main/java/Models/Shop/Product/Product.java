@@ -59,6 +59,7 @@ public class Product {
         if (category != null) {
 //            this.categoryName = category.getName();
             this.categoryId = category.getId();
+            category.addProduct(id);
         }
         this.description = description;
         this.features = features;
@@ -376,7 +377,7 @@ public class Product {
                 "\nprice = " + price +
                 "\nseller = '" + Seller.getAccountByUsername(sellerUsername) + '\'' +
                 "\nisAvailable = " + isAvailable +
-                "\ncategory = '" + Category.getCategoryById(categoryId) + '\'' +
+                "\ncategory = '" + Category.getCategoryById(categoryId).getName() + '\'' +
                 "\ndescription = '" + description + '\'' +
                 "\nfeatures = '" + features + '\'';
     }

@@ -46,7 +46,8 @@ public class Seller extends Account {
 
     public ArrayList<String> viewOffsInShort() {
         ArrayList<String> offsNames = new ArrayList<>();
-        for (Auction auction : getAuctions()) {
+        ArrayList<Auction> auctions = getAuctions();
+        for (Auction auction : auctions) {
             if (auction.getStatus() == Auction.AuctionStatus.CONFIRMED)
                 offsNames.add("" + auction.getId() + " : " + auction.getDiscountAmount());
         }
