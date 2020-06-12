@@ -80,6 +80,10 @@ public abstract class Account {
         return firstName + " " + lastName;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -223,6 +227,15 @@ public abstract class Account {
 //    }
 //
 ////    protected abstract void loadReference();
+
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 
     @Override
     public abstract String toString();
