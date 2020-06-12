@@ -23,7 +23,7 @@ public class ProductsManager extends Manager {
     public ProductsManager(Account account) {
         super(account);
         this.currentCategory = mainCategory;
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         this.menu = new ProductsMenu(this, productsInShort());
     }
 
@@ -63,7 +63,7 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> applyFilter(String filterType, String filterValue) {
         filters.add(new Filter(filterType, filterValue));
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         applySort();
         return productsInShort();
@@ -71,7 +71,7 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> applyFilter(String filterType, String minValue, String maxValue) {
         lengthFilters.add(new LengthFilter(filterType, minValue, maxValue));
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         applySort();
         return productsInShort();
@@ -208,7 +208,7 @@ public class ProductsManager extends Manager {
         } else {
             lengthFilters.remove(filter);
         }
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         applySort();
         return productsInShort();
@@ -237,7 +237,7 @@ public class ProductsManager extends Manager {
     }
 
     public ArrayList<String> sort(String sort, boolean isAscending) {
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         currentSort = new Sort(sort, isAscending);
         applySort();
@@ -329,7 +329,7 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> disableSort() {
         currentSort = null;
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         return productsInShort();
     }
