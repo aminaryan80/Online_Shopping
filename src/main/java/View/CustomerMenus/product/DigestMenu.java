@@ -5,10 +5,11 @@ import Control.Manager;
 import View.CustomerMenus.ConsoleCommand;
 import View.CustomerMenus.customer.CustomerMenu;
 import View.ErrorProcessor;
+import View.Menu;
 
 import java.util.regex.Matcher;
 
-public class DigestMenu extends CustomerMenu {
+public class DigestMenu extends Menu {
 
     DigestMenuManager digestMenuManager = (DigestMenuManager) manager;
 

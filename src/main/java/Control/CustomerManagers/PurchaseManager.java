@@ -54,6 +54,7 @@ public class PurchaseManager extends Manager {
             addLogs(receiverInformation, discount, boughtProducts);
             customer.payMoney(paymentAmount);
             sellersGetPaid(boughtProducts);
+            customer.getCart().empty();
         }
     }
 

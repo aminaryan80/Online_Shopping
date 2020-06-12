@@ -51,7 +51,8 @@ public class ProductPage extends Menu {
         return "digest\n" +
                 "attributes\n" +
                 "compare [productId]\n" +
-                "Comments\n" +
+                "comments\n" +
+                "add comment\n"+
                 "user panel\n" +
                 "help\n" +
                 "back";

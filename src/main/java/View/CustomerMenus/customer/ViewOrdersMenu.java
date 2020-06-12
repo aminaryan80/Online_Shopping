@@ -31,7 +31,9 @@ public class ViewOrdersMenu extends Menu {
             } else if(command.matches("(?i)help")){
                 System.out.println(help());
             } else if ((matcher = ConsoleCommand.SHOW_ORDER.getStringMatcher(command)).find()) {
-                System.out.println(viewOrdersManager.showOrderById(matcher.group(1)));
+                if(viewOrdersManager.doesLogExist(matcher.group(1)))
+                    System.out.println(viewOrdersManager.showOrderById(matcher.group(1)));
+                else ErrorProcessor.invalidLogId();
             } else if ((matcher = ConsoleCommand.RATE.getStringMatcher(command)).find()) {
                 try {
                     viewOrdersManager.rateProduct(matcher.group(1),Integer.parseInt(matcher.group(2)));

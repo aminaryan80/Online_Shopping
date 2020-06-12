@@ -8,6 +8,7 @@ import Models.Account.Customer;
 import Models.Account.Seller;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.BuyingLog;
+import Models.Shop.Log.Log;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
@@ -32,6 +33,10 @@ public class ViewOrdersManager extends Manager {
 
     public boolean canShowOrderWithId(String logId) {
         return customer.getLogById(logId) != null;
+    }
+
+    public boolean doesLogExist(String logId){
+        return customer.getLogById(logId)!=null;
     }
 
     public String showOrderById(String logId) {
