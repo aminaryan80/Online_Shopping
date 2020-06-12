@@ -63,6 +63,9 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> applyFilter(String filterType, String filterValue) {
         filters.add(new Filter(filterType, filterValue));
+        if (filterType.equals("category")) {
+            currentCategory = Category.getCategoryByName(filterValue);
+        }
         products = Product.getAllProducts();
         setFilters();
         applySort();
@@ -209,6 +212,9 @@ public class ProductsManager extends Manager {
             lengthFilters.remove(filter);
         }
         products = Product.getAllProducts();
+        if (filterField.equals("category")) {
+            currentCategory = mainCategory;
+        }
         setFilters();
         applySort();
         return productsInShort();

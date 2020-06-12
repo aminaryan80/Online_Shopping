@@ -127,7 +127,7 @@ public class Category {
         products.addAll(getProducts());
         ArrayList<Category> subCategories = getSubCategories();
         for (Category category : subCategories) {
-            products.addAll(category.getProducts());
+            products.addAll(category.getAllProducts());
         }
         return products;
     }

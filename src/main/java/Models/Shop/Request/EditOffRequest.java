@@ -17,14 +17,14 @@ public class EditOffRequest extends Request {
     }
 
     @Override
-    protected void loadReference() throws IOException {
+    protected void loadReference() {
         auction = Auction.getAuctionById(auctionId);
-        deleteRequest(this, "edit off requests");
     }
 
     @Override
-    public void accept() {
+    public void accept() throws IOException {
         auction.setStatus(Auction.AuctionStatus.CONFIRMED);
+        deleteRequest(this, "edit off requests");
     }
 
     @Override
