@@ -44,7 +44,7 @@ public abstract class Manager {
 
     public void logout() {
         account = null;
-        cart = new Cart();
+//        cart = new Cart();
     }
 
     public boolean userExistsWithUsername(String username) {
