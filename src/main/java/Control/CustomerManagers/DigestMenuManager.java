@@ -19,8 +19,7 @@ public class DigestMenuManager extends Manager {
     }
 
     public void addToCart() {
-        if(customer == null) cart.addProduct(product);
-        else customer.getCart().addProduct(product);
+        cart.addProduct(product);
     }
 
 }

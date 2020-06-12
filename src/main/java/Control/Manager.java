@@ -134,4 +134,8 @@ public abstract class Manager {
     public Product getProduct(String productId) {
         return Product.getProductById(productId);
     }
+
+    public static Cart getCart() {
+        return cart;
+    }
 }

@@ -1,6 +1,7 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 
@@ -25,6 +26,7 @@ public class ViewOrdersManager extends Manager {
     public ViewOrdersManager(Account account) {
         super(account);
         logs = ((Customer) account).getAllLogs();
+        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new ViewOrdersMenu(this);
     }
 
