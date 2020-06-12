@@ -61,8 +61,15 @@ public class Identity {
     }
 
     private static void save(String identity) throws IOException {
-        FileWriter file = new FileWriter(Address.IDNETITIES.get() + "\\" + "identities.json");
-        file.append("\n"+identity);
-        file.close();
+        File file = new File(Address.IDNETITIES.get() + "\\" + "identities.json");
+        if(!file.exists()) {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write("\n" + identity);
+            fileWriter.close();
+        } else {
+            FileWriter fileWriter = new FileWriter(file,true);
+            fileWriter.write("\n" + identity);
+            fileWriter.close();
+        }
     }
 }

@@ -6,19 +6,23 @@ import Models.Shop.Product.Product;
 import java.io.IOException;
 
 public class DeleteProductRequest extends Request {
-    private Product product;
+//    private Product product;
     private String productId;
 
     public DeleteProductRequest(Seller seller, Product product) {
         super(seller);
         this.type = RequestType.DELETE_PRODUCT;
-        this.product = product;
+//        this.product = product;
         this.productId = product.getId();
     }
 
     public void accept() throws IOException {
-        Product.deleteProduct(product);
+        Product.deleteProduct(getProduct());
         deleteRequest(this, "delete product requests");
+    }
+
+    public Product getProduct() {
+        return Product.getProductById(productId);
     }
 
     @Override
@@ -26,15 +30,15 @@ public class DeleteProductRequest extends Request {
         deleteRequest(this, "delete product requests");
     }
 
-    @Override
-    protected void loadReference() {
-        product = Product.getProductById(productId);
-    }
+//    @Override
+//    protected void loadReference() {
+//        product = Product.getProductById(productId);
+//    }
 
     @Override
     public String toString() {
         return "DeleteProductRequest : " +
-                "\nproduct=" + product +
+                "\nproduct=" + getProduct() +
                 "\nid='" + id + '\'' +
                 "\nseller=" + seller +
                 "\ntype=" + type;
