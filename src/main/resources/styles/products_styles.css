@@ -1,0 +1,4 @@
+.product_image {
+    -fx-background-color: palegreen;
+    -fx-effect: dropshadow(three-pass-box, gray, 10, 0, 0, 0);
+}

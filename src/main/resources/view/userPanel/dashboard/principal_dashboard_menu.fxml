@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="gui.DashboardController">
+    <children>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+              prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
+            <children>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Manage Users">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Manage Products">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Manage Requests">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Manage Categories">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Create Discount Code">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="View Discount Codes">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Offs">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </VBox>
+        <ImageView fitHeight="125.0" fitWidth="123.0" layoutX="294.0" layoutY="97.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../../../images/user.png"/>
+            </image>
+        </ImageView>
+        <Label alignment="CENTER" layoutX="281.0" layoutY="237.0" prefHeight="32.0" prefWidth="150.0" text="Username">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Label>
+        <Button layoutX="269.0" layoutY="280.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="175.0"
+                text="Edit Password">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+        <TextField layoutX="609.0" layoutY="63.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field"
+                   stylesheets="@../../../styles/user_panel_styles.css">
+            <padding>
+                <Insets left="8.0" right="8.0"/>
+            </padding>
+        </TextField>
+        <Label layoutX="500.0" layoutY="66.0" text="First Name:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <TextField layoutX="609.0" layoutY="105.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field"
+                   stylesheets="@../../../styles/user_panel_styles.css">
+            <padding>
+                <Insets left="8.0" right="8.0"/>
+            </padding>
+        </TextField>
+        <Label layoutX="500.0" layoutY="108.0" text="Last Name:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <TextField layoutX="609.0" layoutY="147.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field"
+                   stylesheets="@../../../styles/user_panel_styles.css">
+            <padding>
+                <Insets left="8.0" right="8.0"/>
+            </padding>
+        </TextField>
+        <Label layoutX="520.0" layoutY="150.0" text="Email:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <TextField layoutX="609.0" layoutY="189.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field"
+                   stylesheets="@../../../styles/user_panel_styles.css">
+            <padding>
+                <Insets left="8.0" right="8.0"/>
+            </padding>
+        </TextField>
+        <Label layoutX="482.0" layoutY="192.0" text="Phone Number:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <TableView layoutX="826.0" layoutY="50.0" prefHeight="213.0" prefWidth="326.0">
+            <columns>
+                <TableColumn editable="false" prefWidth="75.0" resizable="false" text="Username"/>
+                <TableColumn editable="false" prefWidth="128.7999267578125" resizable="false" text="Type"/>
+                <TableColumn editable="false" prefWidth="121.60001220703123" resizable="false" text="Balance"/>
+            </columns>
+        </TableView>
+        <Label layoutX="820.0" layoutY="30.0" text="Users:"/>
+        <TableView layoutX="469.0" layoutY="317.0" prefHeight="214.0" prefWidth="326.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Id"/>
+                <TableColumn prefWidth="57.5999755859375" text="Percent"/>
+                <TableColumn prefWidth="66.39996337890625" text="Use Limit"/>
+                <TableColumn prefWidth="127.20001220703125" text="Beginning Date"/>
+            </columns>
+        </TableView>
+        <Label layoutX="463.0" layoutY="295.0" text="Discounts:"/>
+        <TableView layoutX="826.0" layoutY="317.0" prefHeight="214.0" prefWidth="326.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="Id"/>
+                <TableColumn prefWidth="125.5999755859375" text="Type"/>
+                <TableColumn prefWidth="124.0" text="Sender"/>
+            </columns>
+        </TableView>
+        <Label layoutX="819.0" layoutY="296.0" text="Requests:"/>
+        <Button layoutX="481.0" layoutY="231.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="302.0"
+                text="Update Profile"/>
+        <Label alignment="CENTER" layoutX="280.0" layoutY="59.0" prefHeight="32.0" prefWidth="150.0" text="Principal">
+            <font>
+                <Font size="21.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

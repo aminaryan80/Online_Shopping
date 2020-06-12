@@ -1,5 +1,4 @@
 import Control.Identity;
-import Control.MainManager;
 import Models.Account.Account;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Auction;
@@ -8,16 +7,41 @@ import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import Models.Shop.Product.Rate;
 import Models.Shop.Request.Request;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        openFiles();
+        connectObjects();
+        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
+        initialize(stage);
+    }
+
+    private void initialize(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("view/userPanel/dashboard/dashboard_menu.fxml"));
+        Scene scene = new Scene(root);
+        stage.setTitle("IT WORKS");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /*public static void main(String[] args) {
         openFiles();
         connectObjects();
         Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
         MainManager manager = new MainManager(null);
-    }
+    }*/
 
     private static void openFiles() {
         try {

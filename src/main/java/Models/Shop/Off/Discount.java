@@ -33,7 +33,6 @@ public class Discount {
         this.discountPercent = discountPercent;
         this.maximumDiscount = maximumDiscount;
         this.discountUseCount = discountUseCount;
-        //this.allCustomers = allCustomers;
         this.allCustomersUsernames = allcustomersUsernames;
         for (String username : allcustomersUsernames) {
             customerToDiscountUseCountMap.put(username,discountUseCount);

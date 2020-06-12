@@ -34,9 +34,9 @@ public class SellerMenu extends Menu {
             } else if (getMatcher(input, "^manage products$").find()) {
                 manageProducts();
             } else if (getMatcher(input, "^add product$").find()) {
-                addProduct();
+                addProduct(); // TODO This should go to manage products
             } else if ((matcher = getMatcher(input, "^remove product (\\S+)$")).find()) {
-                deleteProduct(matcher.group(1));
+                deleteProduct(matcher.group(1)); // TODO This should go to manage products
             } else if ((matcher = getMatcher(input, "^show categories$")).find()) {
                 showCategories();
             } else if ((matcher = getMatcher(input, "^view offs$")).find()) {

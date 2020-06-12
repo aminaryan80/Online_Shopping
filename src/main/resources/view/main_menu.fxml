@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="1200.0"
+            styleClass="background" stylesheets="@../styles/main_menu_styles.css"
+            xmlns="http://javafx.com/javafx/11.0.1">
+    <children>
+        <ImageView fitHeight="376.0" fitWidth="468.0" layoutX="718.0" layoutY="132.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../images/kisspng-web-development-online-shopping-prezi-e-commerce-t-5b09f38804d278.0040413115273788240198.png"/>
+            </image>
+        </ImageView>
+        <VBox layoutX="136.0" layoutY="200.0" prefHeight="200.0" prefWidth="168.0">
+            <children>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="167.0" styleClass="button"
+                        text="User Panel">
+                    <VBox.margin>
+                        <Insets bottom="5.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <stylesheets>
+                        <URL value="@../styles/main_menu_styles.css"/>
+                        <URL value="@../styles/styles.css"/>
+                    </stylesheets>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="167.0" styleClass="button" text="Products">
+                    <VBox.margin>
+                        <Insets bottom="5.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <stylesheets>
+                        <URL value="@../styles/main_menu_styles.css"/>
+                        <URL value="@../styles/styles.css"/>
+                    </stylesheets>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="167.0" styleClass="button" text="Offs">
+                    <VBox.margin>
+                        <Insets bottom="5.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <stylesheets>
+                        <URL value="@../styles/main_menu_styles.css"/>
+                        <URL value="@../styles/styles.css"/>
+                    </stylesheets>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="167.0" styleClass="button"
+                        text="About Us :/">
+                    <VBox.margin>
+                        <Insets bottom="6.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <stylesheets>
+                        <URL value="@../styles/main_menu_styles.css"/>
+                        <URL value="@../styles/styles.css"/>
+                    </stylesheets>
+                </Button>
+            </children>
+        </VBox>
+        <Label layoutX="296.0" layoutY="92.0" text="An online shopping app which is made for grades" textFill="#ff5e5e">
+            <font>
+                <Font name="System Bold" size="27.0"/>
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
