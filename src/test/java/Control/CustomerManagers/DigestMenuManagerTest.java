@@ -18,6 +18,6 @@ public class DigestMenuManagerTest {
     @Test
     public void addToCart() {
         digestMenuManager.addToCart();
-        assertTrue(customer.getCart().getProducts().contains(product));
+        assertTrue(digestMenuManager.getCart().getProducts().contains(product));
     }
 }
