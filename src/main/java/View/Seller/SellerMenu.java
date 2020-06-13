@@ -141,7 +141,7 @@ public class SellerMenu extends Menu {
             if (manager.checkNumber(priceString)) {
                 break;
             } else {
-                ErrorProcessor.invalidCategoryName();
+                ErrorProcessor.invalidInput();
             }
         }
         double price = Double.parseDouble(priceString);

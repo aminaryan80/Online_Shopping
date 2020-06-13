@@ -123,8 +123,7 @@ public class Category {
     }
 
     public ArrayList<Product> getAllProducts() {
-        ArrayList<Product> products = new ArrayList<>();
-        products.addAll(getProducts());
+        ArrayList<Product> products = new ArrayList<>(getProducts());
         ArrayList<Category> subCategories = getSubCategories();
         for (Category category : subCategories) {
             products.addAll(category.getAllProducts());
