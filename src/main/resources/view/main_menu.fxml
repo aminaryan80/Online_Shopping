@@ -15,7 +15,7 @@
         <ImageView fitHeight="376.0" fitWidth="468.0" layoutX="718.0" layoutY="132.0" pickOnBounds="true"
                    preserveRatio="true">
             <image>
-                <Image url="@../images/kisspng-web-development-online-shopping-prezi-e-commerce-t-5b09f38804d278.0040413115273788240198.png"/>
+                <Image url="@../images/logo.png"/>
             </image>
         </ImageView>
         <VBox layoutX="136.0" layoutY="200.0" prefHeight="200.0" prefWidth="168.0">
