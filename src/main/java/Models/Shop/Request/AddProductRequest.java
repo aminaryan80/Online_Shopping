@@ -6,26 +6,27 @@ import Models.Shop.Product.Product;
 import java.io.IOException;
 
 public class AddProductRequest extends Request {
-//    private Product product;
-    private String productId;
+    private Product product;
+//    private String productId;
 
     public AddProductRequest(Seller seller, Product product) {
         super(seller);
         this.type = RequestType.ADD_PRODUCT;
-//        this.product = product;
-        this.productId = product.getId();
+        this.product = product;
+//        this.productId = product.getId();
     }
 
     @Override
     public void accept() throws IOException {
-        getProduct().setStatus(Product.ProductStatus.CONFIRMED);
+//        getProduct().setStatus(Product.ProductStatus.CONFIRMED);
+        product.setStatus(Product.ProductStatus.CONFIRMED);
         deleteRequest(this, "add product requests");
-        Product.addProduct(getProduct());
+        Product.addProduct(product);
     }
 
-    public Product getProduct() {
-        return Product.getProductById(productId);
-    }
+//    public Product getProduct() {
+//        return Product.getProductById(productId);
+//    }
 
     @Override
     public void decline() throws IOException {
@@ -40,7 +41,8 @@ public class AddProductRequest extends Request {
     @Override
     public String toString() {
         return "AddProductRequest : " +
-                "\nproduct = " + getProduct() +
+//                "\nproduct = " + getProduct() +
+                "\nproduct = " + product +
                 "\nid = '" + id + '\'' +
                 "\nseller = " + seller +
                 "\ntype = " + type;

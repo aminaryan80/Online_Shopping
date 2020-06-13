@@ -47,7 +47,6 @@ public class Product {
     //    private Auction auction;
     private String auctionId;
 
-
     public Product(String name, String companyName, double price, Seller seller,
                    boolean isAvailable, Category category, String description, ArrayList<Feature> features) {
         this.id = Identity.getId();
@@ -64,6 +63,7 @@ public class Product {
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+        allProducts.add(this);
     }
 
     public boolean hasAuction() {

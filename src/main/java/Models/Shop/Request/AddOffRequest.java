@@ -6,26 +6,28 @@ import Models.Shop.Off.Auction;
 import java.io.IOException;
 
 public class AddOffRequest extends Request {
- //   private Auction auction;
-    private String auctionId;
+    private Auction auction;
+//    private String auctionId;
 
     public AddOffRequest(Seller seller, Auction auction) {
         super(seller);
         this.type = RequestType.ADD_OFF;
-//        this.auction = auction;
-        this.auctionId = auction.getId();
+        this.auction = auction;
+//        this.auctionId = auction.getId();
     }
 
     public void accept() throws IOException {
-        getAuction().setStatus(Auction.AuctionStatus.CONFIRMED);
+//        getAuction().setStatus(Auction.AuctionStatus.CONFIRMED);
+        auction.setStatus(Auction.AuctionStatus.CONFIRMED);
         deleteRequest(this, "add off requests");
-        Auction.addAuction(getAuction());
+//        Auction.addAuction(getAuction());
+        Auction.addAuction(auction);
     }
 
-    public Auction getAuction() {
-        return Auction.getAuctionById(auctionId);
-    }
-
+//    public Auction getAuction() {
+//        return Auction.getAuctionById(auctionId);
+//    }
+//
     @Override
     public void decline() throws IOException {
         deleteRequest(this, "add off requests");
@@ -39,7 +41,8 @@ public class AddOffRequest extends Request {
     @Override
     public String toString() {
         return "AddOffRequest : " +
-                "\nauction = " + getAuction() +
+//                "\nauction = " + getAuction() +
+                "\nauction = " + auction +
                 "\nid = '" + id + '\'' +
                 "\nseller = " + seller +
                 "\ntype = " + type;
