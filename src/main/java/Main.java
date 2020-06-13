@@ -1,4 +1,5 @@
 import Control.Identity;
+import Control.MainManager;
 import Models.Account.Account;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Auction;
@@ -7,6 +8,7 @@ import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import Models.Shop.Product.Rate;
 import Models.Shop.Request.Request;
+import View.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,29 +21,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        openFiles();
-        connectObjects();
-        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
-        initialize(stage);
-    }
-
-    private void initialize(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("view/main_menu.fxml"));
-        Scene scene = new Scene(root);
-        stage.setTitle("AP Project");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    /*public static void main(String[] args) {
-        openFiles();
-        connectObjects();
-        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
-        MainManager manager = new MainManager(null);
-    }*/
 
     private static void openFiles() {
         try {
@@ -73,6 +52,13 @@ public class Main extends Application {
         //Product.loadReferences();
     }
 
+    /*public static void main(String[] args) {
+        openFiles();
+        connectObjects();
+        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
+        MainManager manager = new MainManager(null);
+    }*/
+
     private static void saveFiles() {
         try {
             Rate.save();
@@ -87,5 +73,25 @@ public class Main extends Application {
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        openFiles();
+        connectObjects();
+        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
+        initialize(stage);
+    }
+
+    private void initialize(Stage stage) throws IOException {
+        MainManager manager = new MainManager(null);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/main_menu.fxml"));
+        Parent root = loader.load();
+        MainController mainController = loader.getController();
+        mainController.setManager(manager);
+        Scene scene = new Scene(root);
+        stage.setTitle("AP Project");
+        stage.setScene(scene);
+        stage.show();
     }
 }
