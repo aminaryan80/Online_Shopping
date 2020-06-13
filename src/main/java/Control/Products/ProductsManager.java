@@ -6,7 +6,6 @@ import Models.Account.Account;
 import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,8 +23,8 @@ public class ProductsManager extends Manager {
     public ProductsManager(Account account) {
         super(account);
         this.currentCategory = mainCategory;
-        products = mainCategory.getAllProducts();
-        this.menu = new ProductsMenu(this);
+        products = Product.getAllProducts();
+        this.menu = new ProductsMenu(this, productsInShort());
     }
 
     // filtering
@@ -48,6 +47,11 @@ public class ProductsManager extends Manager {
     }
 
     public boolean isEnteredFilterFieldValid(String field) {
+        for (Filter filter : filters) {
+            if (filter.getField().equals(field)) {
+                return false;
+            }
+        }
         if (field.equals("status") || field.equals("name") || field.equals("companyName") ||
                 field.equals("price") || field.equals("seller") || field.equals("isAvailable")) {
             return true;
@@ -59,7 +63,10 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> applyFilter(String filterType, String filterValue) {
         filters.add(new Filter(filterType, filterValue));
-        products = mainCategory.getAllProducts();
+        if (filterType.equals("category")) {
+            currentCategory = Category.getCategoryByName(filterValue);
+        }
+        products = Product.getAllProducts();
         setFilters();
         applySort();
         return productsInShort();
@@ -67,7 +74,7 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> applyFilter(String filterType, String minValue, String maxValue) {
         lengthFilters.add(new LengthFilter(filterType, minValue, maxValue));
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         applySort();
         return productsInShort();
@@ -204,7 +211,10 @@ public class ProductsManager extends Manager {
         } else {
             lengthFilters.remove(filter);
         }
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
+        if (filterField.equals("category")) {
+            currentCategory = mainCategory;
+        }
         setFilters();
         applySort();
         return productsInShort();
@@ -233,7 +243,7 @@ public class ProductsManager extends Manager {
     }
 
     public ArrayList<String> sort(String sort, boolean isAscending) {
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         currentSort = new Sort(sort, isAscending);
         applySort();
@@ -325,7 +335,7 @@ public class ProductsManager extends Manager {
 
     public ArrayList<String> disableSort() {
         currentSort = null;
-        products = mainCategory.getAllProducts();
+        products = Product.getAllProducts();
         setFilters();
         return productsInShort();
     }

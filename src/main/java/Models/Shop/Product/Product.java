@@ -44,9 +44,8 @@ public class Product {
     //    private List<Comment> allComments = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
-//    private Auction auction;
+    //    private Auction auction;
     private String auctionId;
-
 
     public Product(String name, String companyName, double price, Seller seller,
                    boolean isAvailable, Category category, String description, ArrayList<Feature> features) {
@@ -56,13 +55,15 @@ public class Product {
         this.price = price;
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
-        if(category != null) {
+        if (category != null) {
 //            this.categoryName = category.getName();
             this.categoryId = category.getId();
+            category.addProduct(id);
         }
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
+        allProducts.add(this);
     }
 
     public boolean hasAuction() {
@@ -124,6 +125,7 @@ public class Product {
         allProducts.remove(product);
         File file = new File(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
         try {
+            if(file.exists())
             FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
@@ -245,7 +247,7 @@ public class Product {
         List<String> comments = new ArrayList<>();
         int i = 1;
         for (Comment comment : getAllComments()) {
-            comments.add("comment "+i+":"+"\n"+comment.getText()+"\n");
+            comments.add("comment " + i + ":" + "\n" + comment.getText() + "\n");
             i++;
         }
         return comments;
@@ -268,7 +270,7 @@ public class Product {
     }
 
     public String getAttributes() {
-        if(sellerUsername == null || categoryId == null) throw new NullPointerException();
+        if (sellerUsername == null || categoryId == null) throw new NullPointerException();
         //TODO make better
         return "Name: " + name +
                 "\nId: " + id +
@@ -284,7 +286,7 @@ public class Product {
                     "\nPrice: " + price +
                     "\nAuction amount: " + getAuction().getDiscountAmount();
         else return "\nDescription: " + description +
-                "\nPrice: " + price+
+                "\nPrice: " + price +
                 "\nNot on any auction";
     }
 
@@ -301,8 +303,8 @@ public class Product {
         for (Rate rate : getAllRates()) {
             sum += rate.getScore();
         }
-        if(allRatesIds.size() != 0)
-        return sum / allRatesIds.size();
+        if (allRatesIds.size() != 0)
+            return sum / allRatesIds.size();
         else return 0;
     }
 
@@ -323,11 +325,11 @@ public class Product {
     }
 
     public Category getCategory() {
-        return Category.getCategoryByName(categoryId);
+        return Category.getCategoryById(categoryId);
     }
 
     public void setCategory(Category category) {
-        this.categoryId= category.getId();
+        this.categoryId = category.getId();
     }
 
     public boolean isAvailable() {
@@ -375,8 +377,9 @@ public class Product {
                 "\nprice = " + price +
                 "\nseller = '" + Seller.getAccountByUsername(sellerUsername) + '\'' +
                 "\nisAvailable = " + isAvailable +
-                "\ncategory = '" + Category.getCategoryById(categoryId) + '\'' +
-                "\ndescription = '" + description + '\'';
+                "\ncategory = '" + Category.getCategoryById(categoryId).getName() + '\'' +
+                "\ndescription = '" + description + '\'' +
+                "\nfeatures = '" + features + '\'';
     }
 
 //    public static void loadReferences() {

@@ -12,8 +12,11 @@ import java.util.regex.Matcher;
 
 public class ProductsMenu extends Menu {
 
-    public ProductsMenu(Manager manager) {
+    public ProductsMenu(Manager manager, ArrayList<String> products) {
         super(manager);
+        for (String product : products) {
+            System.out.println(product);
+        }
         productsMenu();
     }
 
@@ -53,15 +56,15 @@ public class ProductsMenu extends Menu {
             String command = scanner.nextLine();
             if (command.equals("show available filters")) {
                 showAvailableFilters();
-            } else if ((matcher = getMatcher(command, "filter (\\S+)")).find()) {
+            } else if ((matcher = getMatcher(command, "filter (\\S+)")).matches()) {
                 applyFilter(matcher.group(1));
             } else if (command.equals("current filters")) {
                 currentFilters();
             } else if (command.equals("show available lengthfilters")) {
                 showAvailableLengthFilter();
-            } else if ((matcher = getMatcher(command, "lengthfilter (\\S+)")).find()) {
+            } else if ((matcher = getMatcher(command, "lengthfilter (\\S+)")).matches()) {
                 lengthFilter(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "disable filter (\\S+)")).find()) {
+            } else if ((matcher = getMatcher(command, "disable filter (\\S+)")).matches()) {
                     disableFilter(matcher.group(1));
             } else if (command.equals("help")) {
                     filteringHelp();

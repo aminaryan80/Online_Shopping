@@ -4,7 +4,6 @@ import Control.Identity;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -28,6 +27,7 @@ public class Auction {
         this.beginningDate = beginningDate;
         this.endingDate = endingDate;
         this.discountAmount = discountAmount;
+        allAuctions.add(this);
     }
 
     public static Auction getAuctionById(String id) {

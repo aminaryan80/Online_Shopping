@@ -27,10 +27,26 @@ public class Category {
         this.features = features;
         this.allProductsIds = allProductsIds;
         this.supCategoryName = supCategoryName;
-        if(supCategoryName!=null)
-        getSupCategory().addSubCategory(this);
+        if (supCategoryName != null)
+            getSupCategory().addSubCategory(this);
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
+    }
+
+    public static void deleteCategory(Category category) throws IOException {
+        getCategoryByName(category.supCategoryName).subCategoriesNames.remove(category.getName());
+        allCategories.remove(category);
+        ArrayList<Category> subCats = new ArrayList<>(category.getSubCategories());
+        for (Category subCategory : subCats) {
+            deleteCategory(subCategory);
+        }
+        File file = new File(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
+        try {
+            if (file.exists())
+                FileUtils.forceDelete(file);
+        } catch (Exception ignored) {
+
+        }
     }
 
     public void changeCategoryNameForProducts() {
@@ -44,6 +60,10 @@ public class Category {
         for (Product product : getProducts()) {
             product.addFeature(new Feature(feature, ""));
         }
+    }
+
+    public void addProduct(String productId) {
+        allProductsIds.add(productId);
     }
 
     public String getId() {
@@ -104,25 +124,26 @@ public class Category {
 
     public ArrayList<Product> getAllProducts() {
         ArrayList<Product> products = new ArrayList<>(getProducts());
-        for (Category category : getSubCategories()) {
-            products.addAll(category.getProducts());
+        ArrayList<Category> subCategories = getSubCategories();
+        for (Category category : subCategories) {
+            products.addAll(category.getAllProducts());
         }
         return products;
     }
 
-    public static void deleteCategory(Category category) throws IOException {
-        category.subCategoriesNames.remove(category.getName());
-        allCategories.remove(category);
-        ArrayList<Category> subCats = new ArrayList<>(category.getSubCategories());
-        for (Category subCategory : subCats) {
-            deleteCategory(subCategory);
-        }
-        File file = new File(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
+    public void editName(String newName) {
+        getCategoryByName(this.supCategoryName).subCategoriesNames.remove(this.name);
+        getCategoryByName(this.supCategoryName).subCategoriesNames.add(newName);
+        File file = new File(Address.CATEGORIES.get() + "\\" + this.name + ".json");
         try {
-            FileUtils.forceDelete(file);
+            if (file.exists())
+                FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
         }
+        this.setName(newName);
+        this.changeCategoryNameForProducts();
+
     }
 
     public boolean hasCategoryInsideWithName(String name) {

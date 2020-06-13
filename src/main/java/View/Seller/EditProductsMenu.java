@@ -77,7 +77,7 @@ public class EditProductsMenu extends Menu {
             System.out.println("enter which field you want to change");
             feature = scanner.nextLine();
         }
-        if (!((EditProductsManager) manager).isFeatureFieldValid(feature, id)) {
+        if (field.equals("features") && !((EditProductsManager) manager).isFeatureFieldValid(feature, id)) {
             ErrorProcessor.invalidInput();
             return;
         }

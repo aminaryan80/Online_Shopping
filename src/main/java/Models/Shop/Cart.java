@@ -88,4 +88,8 @@ public class Cart {
             return discount.getMaximumDiscount();
         } else return discountPercent * priceOfProducts;
     }
+
+    public void empty() {
+        products = new HashMap<>();
+    }
 }

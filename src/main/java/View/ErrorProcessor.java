@@ -78,4 +78,8 @@ public class ErrorProcessor {
     public static void productDoesNotExistInCart() {
         System.out.println("product does not exist in cart");
     }
+
+    public static void invalidLogId() {
+        System.out.println("invalid log id");
+    }
 }

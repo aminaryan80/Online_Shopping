@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Seller extends Account {
     //    private List<Auction> auctions = new ArrayList<Auction>();
-    private static List<String> auctionsId = new ArrayList<String>();
+    private List<String> auctionsId = new ArrayList<String>();
     private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "companyName"};
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<SellingLog>();
@@ -20,7 +20,7 @@ public class Seller extends Account {
         this.companyName = companyName;
     }
 
-    protected static ArrayList<Auction> getAuctions() {
+    protected ArrayList<Auction> getAuctions() {
         ArrayList<Auction> auctions = new ArrayList<>();
         for (String auctionId : auctionsId) {
             auctions.add(Auction.getAuctionById(auctionId));
@@ -46,7 +46,8 @@ public class Seller extends Account {
 
     public ArrayList<String> viewOffsInShort() {
         ArrayList<String> offsNames = new ArrayList<>();
-        for (Auction auction : getAuctions()) {
+        ArrayList<Auction> auctions = getAuctions();
+        for (Auction auction : auctions) {
             if (auction.getStatus() == Auction.AuctionStatus.CONFIRMED)
                 offsNames.add("" + auction.getId() + " : " + auction.getDiscountAmount());
         }

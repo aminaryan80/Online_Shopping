@@ -49,11 +49,10 @@ public class SellerManager extends Manager {
     }
 
     // add product
-    public void addProduct(String name,
-                           Category category, double price, boolean iaAvailable,
+    public void addProduct(String name, Category category, double price, boolean isAvailable,
                            String description, ArrayList<Feature> features) {
         String companyName = ((Seller) account).getCompanyName();
-        Product product = new Product(name, companyName, price, (Seller) account, iaAvailable, category, description, features);
+        Product product = new Product(name, companyName, price, (Seller) account, isAvailable, category, description, features);
         new AddProductRequest((Seller) account, product);
     }
 

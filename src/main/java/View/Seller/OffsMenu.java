@@ -22,15 +22,15 @@ public class OffsMenu extends Menu {
         Matcher matcher;
         while (true) {
             String command = scanner.nextLine();
-            if ((matcher = getMatcher(command, "^view (\\ُS+)$")).find()) {
-                viewOffById(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "^edit (\\S+)$")).find()) {
+            if ((matcher = getMatcher(command, "edit (\\S+)")).matches()) {
                 editOffAttribute(matcher.group(1));
-            } else if ((matcher = getMatcher(command, "^add off$")).find()) {
+            } else if ((matcher = getMatcher(command, "view (\\S+)")).matches()) {
+                viewOffById(matcher.group(1));
+            } else if ((matcher = getMatcher(command, "add off")).matches()) {
                 addOff();
-            } else if ((matcher = getMatcher(command, "^back$")).find()) {
+            } else if ((matcher = getMatcher(command, "back")).matches()) {
                 return;
-            } else if ((matcher = getMatcher(command, "^help$")).find()) {
+            } else if ((matcher = getMatcher(command, "help")).matches()) {
                 help();
             } else {
                 ErrorProcessor.invalidInput();

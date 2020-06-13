@@ -1,12 +1,14 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 
 import Models.Account.Seller;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.BuyingLog;
+import Models.Shop.Log.Log;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
@@ -25,11 +27,16 @@ public class ViewOrdersManager extends Manager {
     public ViewOrdersManager(Account account) {
         super(account);
         logs = ((Customer) account).getAllLogs();
+        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new ViewOrdersMenu(this);
     }
 
     public boolean canShowOrderWithId(String logId) {
         return customer.getLogById(logId) != null;
+    }
+
+    public boolean doesLogExist(String logId){
+        return customer.getLogById(logId)!=null;
     }
 
     public String showOrderById(String logId) {

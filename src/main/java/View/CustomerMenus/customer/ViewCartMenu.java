@@ -49,7 +49,7 @@ public class ViewCartMenu extends Menu {
                     System.out.println(e.getMessage());
                 }
             } else if ((matcher = ConsoleCommand.SHOW_TOTAL_PRICE.getStringMatcher(input)).find()) {
-                viewCartManager.getTotalPrice(null);
+                System.out.println(viewCartManager.getTotalPrice(null));
             } else if ((matcher = ConsoleCommand.PURCHASE.getStringMatcher(input)).find()) {
                 if (!viewCartManager.isCartEmpty())
                     new PurchaseManager(manager.getAccount());

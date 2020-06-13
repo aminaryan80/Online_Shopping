@@ -28,10 +28,10 @@ public class AddSellerRequest extends Request {
         this.type = RequestType.ADD_SELLER_REQUEST;
     }
 
-    @Override
-    protected void loadReference() {
-
-    }
+//    @Override
+//    protected void loadReference() {
+//
+//    }
 
     @Override
     public void accept() throws IOException {

@@ -23,14 +23,14 @@ public class ViewCartManagerTest {
             "apple",
             10000,seller,
             true,
-            new Category("1",null,features,null),
+            new Category("1",null,features,new ArrayList<String>()),
             "des",
             null);
     Product product2 = new Product("macbook2",
             "apple",
             1020,seller,
             true,
-            new Category("1",null,features,null),
+            new Category("1",null,features,new ArrayList<String>()),
             "des",
             null);
 
@@ -111,6 +111,10 @@ public class ViewCartManagerTest {
 
     @Test
     public void isEnteredSortFieldValid() {
+        assertFalse(viewCartManager.isEnteredSortFieldValid("chert"));
+        assertTrue(viewCartManager.isEnteredSortFieldValid("price"));
+        assertTrue(viewCartManager.isEnteredSortFieldValid("name"));
+        assertTrue(viewCartManager.isEnteredSortFieldValid("rating"));
     }
 
     @Test
@@ -123,5 +127,8 @@ public class ViewCartManagerTest {
 
     @Test
     public void isCartEmpty() {
+        assertTrue(viewCartManager.isCartEmpty());
+        customer.getCart().addProduct(product);
+        assertFalse(viewCartManager.isCartEmpty());
     }
 }

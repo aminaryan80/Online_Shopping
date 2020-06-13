@@ -188,6 +188,7 @@ public class Discount {
         allDiscounts.remove(this);
         File file = new File(Address.DISCOUNTS.get() + "\\" + this.getId() + ".json");
         try {
+            if(file.exists())
             FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
@@ -197,6 +198,15 @@ public class Discount {
 
     public boolean isActive(LocalDate now) {
         return now.compareTo(beginningDate) > 0 && now.compareTo(endingDate) < 0;
+    }
+
+    public boolean belongsToCustomer(Customer customer) {
+        for (String customersUsername : allCustomersUsernames) {
+            if(customer.getUsername().equals(customersUsername)){
+                return true;
+            }
+        }
+        return false;
     }
 
 //    public static void loadReferences() {

@@ -63,11 +63,11 @@ public class Main extends Application {
     private static void connectObjects() {
         //Account.loadReferences();
         //Category.loadReferences();
-        try {
-            Request.loadReferences();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Request.loadReferences();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         //Auction.loadReferences();
         //Discount.loadReferences();
         //Product.loadReferences();

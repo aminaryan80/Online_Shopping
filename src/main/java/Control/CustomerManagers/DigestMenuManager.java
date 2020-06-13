@@ -22,7 +22,4 @@ public class DigestMenuManager extends Manager {
         cart.addProduct(product);
     }
 
-//    public void selectSeller(String sellerUsername) {
-//    // TODO WHAT TO DO WHAT NOT TO DO?
-//    }
 }

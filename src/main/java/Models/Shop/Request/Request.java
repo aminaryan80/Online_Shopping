@@ -69,6 +69,7 @@ public abstract class Request {
         allRequests.remove(request);
         File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
         try {
+            if(file.exists())
             FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
@@ -263,13 +264,13 @@ public abstract class Request {
         file.close();
     }
 
-    public static void loadReferences() throws IOException {
-        for (Request request : allRequests) {
-            request.seller = (Seller) Account.getAccountByUsername(request.sellerName);
-            request.loadReference();
-        }
-    }
+//    public static void loadReferences() throws IOException {
+//        for (Request request : allRequests) {
+//            request.seller = (Seller) Account.getAccountByUsername(request.sellerName);
+//            request.loadReference();
+//        }
+//    }
 
-    protected abstract void loadReference() throws IOException;
+ //   protected abstract void loadReference() throws IOException;
 }
 

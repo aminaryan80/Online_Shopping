@@ -1,6 +1,7 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
+import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import View.CustomerMenus.customer.ViewPersonalInfoCustomerMenu;
@@ -10,6 +11,7 @@ public class ViewPersonalInfoCustomerManager extends Manager {
 
     public ViewPersonalInfoCustomerManager(Account account) {
         super(account);
+        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
         this.menu = new ViewPersonalInfoCustomerMenu(this);
     }
 
@@ -39,10 +41,10 @@ public class ViewPersonalInfoCustomerManager extends Manager {
         }
     }
 
-    public boolean isNewFieldAcceptable(String field, String newAttribute) {
+    public boolean  isNewFieldAcceptable(String field, String newAttribute) {
         if (field.matches("(?i)(name|last name|email|password)")) return true;
-        else if (newAttribute.matches("\\d{11}")) return true;
-        else if(newAttribute.matches("\\d+(\\.\\d+)?")) return true;
+        else if (field.matches("(?i)phone number") && newAttribute.matches("\\d{11}")) return true;
+        else if(field.matches("(?i)balance") && newAttribute.matches("\\d+(\\.\\d+)?")) return true;
         else return false;
     }
 

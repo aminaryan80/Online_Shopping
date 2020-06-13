@@ -1,8 +1,6 @@
 package Models.Account;
-
 import Models.Address;
 import Models.Gson;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -80,6 +78,10 @@ public abstract class Account {
 
     public String getName() {
         return firstName + " " + lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getPassword() {
@@ -226,12 +228,20 @@ public abstract class Account {
 //
 ////    protected abstract void loadReference();
 
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public abstract String toString();
 
     public boolean equals(Account account) {
         return (this.getUsername().equals(account.getUsername()));
     }
-
 
 }

@@ -96,4 +96,5 @@ public class Customer extends Account {
                 "password = " + password + '\n' +
                 "balance = " + balance;
     }
+
 }
