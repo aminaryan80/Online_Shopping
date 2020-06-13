@@ -29,9 +29,9 @@ public class Main extends Application {
     }
 
     private void initialize(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("view/userPanel/dashboard/dashboard_menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/main_menu.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("IT WORKS");
+        stage.setTitle("AP Project");
         stage.setScene(scene);
         stage.show();
     }
