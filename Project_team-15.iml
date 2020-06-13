@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -16,5 +16,12 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:19.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:12-ea+8" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:12-ea+8" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:12-ea+8" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:12-ea+8" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:12-ea+8" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:12-ea+8" level="project" />
+    <orderEntry type="library" name="Maven: com.jfoenix:jfoenix:8.0.1" level="project" />
   </component>
 </module>
