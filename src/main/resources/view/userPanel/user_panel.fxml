@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0" styleClass="background"
-            xmlns="http://javafx.com/javafx/11.0.1">
+            xmlns="http://javafx.com/javafx/8.0.251">
     <children>
         <TextField layoutX="280.0" layoutY="167.0" prefHeight="34.0" prefWidth="222.0" styleClass="text-field"
                    stylesheets="@../../styles/user_panel_styles.css"/>
