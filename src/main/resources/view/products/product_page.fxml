@@ -10,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vbarPolicy="ALWAYS"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="View.ProductController">
+            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="View.ProductController">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1200.0" stylesheets="@../../styles/products_styles.css">
          <children>
