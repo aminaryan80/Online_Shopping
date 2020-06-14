@@ -2,7 +2,6 @@ package View;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -15,15 +14,15 @@ public class ViewCartController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for(int i=0;i<10;i++) {
+        for (int i = 0; i < 10; i++) {
             try {
+                gridPane.setPrefHeight((i + 1) * 340);
                 GridPane item = FXMLLoader.load(getClass().getResource("../view/userPanel/Customer/itemInCart.fxml"));
-                gridPane.add(item,0,i);
+                gridPane.add(item, 0, i);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        gridPane.setPrefHeight(450);
     }
 }
