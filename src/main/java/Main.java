@@ -80,7 +80,13 @@ public class Main extends Application {
         openFiles();
         connectObjects();
         Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
-        initialize(stage);
+        //initialize(stage);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/products/product_page.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setTitle("AP Project");
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void initialize(Stage stage) throws IOException {

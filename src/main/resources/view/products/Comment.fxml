@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="250.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/11.0.1">
+   <children>
+      <Label alignment="CENTER" layoutX="96.0" layoutY="42.0" prefHeight="27.0" text="Sender Name:">
+         <font>
+            <Font size="18.0"/>
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="145.0" layoutY="80.0" prefHeight="149.0" prefWidth="910.0"
+             text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+             textAlignment="JUSTIFY" wrapText="true">
+         <font>
+            <Font size="16.0"/>
+         </font>
+      </Label>
+      <Line endX="924.333251953125" endY="-6.103515625E-5" layoutX="191.0" layoutY="250.0" startX="-135.40000915527344"
+            startY="-3.0517578125E-5"/>
+   </children>
+</AnchorPane>
