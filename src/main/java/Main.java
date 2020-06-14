@@ -81,7 +81,7 @@ public class Main extends Application {
         connectObjects();
         Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
         //initialize(stage);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/products/product_page.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/userPanel/Customer/ViewCart.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setTitle("AP Project");
