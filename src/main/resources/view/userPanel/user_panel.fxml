@@ -7,12 +7,13 @@
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0" styleClass="background"
-            xmlns="http://javafx.com/javafx/8.0.251">
+            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="ViewController.userPanel.UserPanelController">
     <children>
-        <TextField layoutX="280.0" layoutY="167.0" prefHeight="34.0" prefWidth="222.0" styleClass="text-field"
-                   stylesheets="@../../styles/user_panel_styles.css"/>
-        <TextField accessibleRole="PASSWORD_FIELD" layoutX="280.0" layoutY="215.0" prefHeight="34.0" prefWidth="222.0"
+        <TextField fx:id="userNameField" layoutX="280.0" layoutY="167.0" prefHeight="34.0" prefWidth="222.0"
                    styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css"/>
+        <TextField fx:id="passwordField" accessibleRole="PASSWORD_FIELD" layoutX="280.0" layoutY="215.0"
+                   prefHeight="34.0" prefWidth="222.0" styleClass="text-field"
+                   stylesheets="@../../styles/user_panel_styles.css"/>
         <Label layoutX="179.0" layoutY="170.0" text="Username:">
             <font>
                 <Font size="18.0"/>
@@ -23,8 +24,8 @@
                 <Font size="18.0"/>
             </font>
         </Label>
-        <Button layoutX="181.0" layoutY="266.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="321.0"
-                stylesheets="@../../styles/styles.css" text="Login"/>
+        <Button layoutX="181.0" layoutY="266.0" mnemonicParsing="false" onAction="#login" prefHeight="42.0"
+                prefWidth="321.0" stylesheets="@../../styles/styles.css" text="Login"/>
         <Button layoutX="180.0" layoutY="317.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="322.0"
                 stylesheets="@../../styles/styles.css" text="Register"/>
         <ImageView fitHeight="247.0" fitWidth="255.0" layoutX="848.0" layoutY="143.0" pickOnBounds="true"
@@ -33,6 +34,8 @@
                 <Image url="@../../images/login.png"/>
             </image>
         </ImageView>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="42.0"
+                stylesheets="@../../styles/styles.css" text="Back"/>
     </children>
     <stylesheets>
         <URL value="@../../styles/user_panel_styles.css"/>

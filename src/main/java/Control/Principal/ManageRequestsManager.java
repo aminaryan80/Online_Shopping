@@ -11,6 +11,12 @@ public class ManageRequestsManager extends Manager {
         new ManageRequestsMenu(this);
     }
 
+    public ManageRequestsManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        //new ManageRequestsMenu(this);
+        loadFxml(Addresses.MANAGE_REQUESTS);
+    }
+
     public String showRequestDetails(String id) {
         return Request.getRequestById(id).toString();
     }

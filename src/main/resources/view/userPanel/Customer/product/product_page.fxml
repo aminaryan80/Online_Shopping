@@ -10,29 +10,30 @@
 <?import javafx.scene.text.*?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml/1" hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vbarPolicy="ALWAYS"
-            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="View.ProductController">
-   <content>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1200.0" stylesheets="@../../styles/products_styles.css">
-         <children>
-            <ImageView fitHeight="330.0" fitWidth="330.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true"
-                       preserveRatio="true" styleClass="product_image">
-               <image>
-                  <Image url="@../../images/product.jpg"/>
-               </image>
-            </ImageView>
-            <Label layoutX="390.0" layoutY="46.0" text="Name:">
-               <font>
-                  <Font size="18.0"/>
-               </font>
-            </Label>
-            <Label alignment="CENTER" layoutX="452.0" layoutY="46.0" prefWidth="115.0" text="ProductName">
-               <font>
-                  <Font size="18.0"/>
-               </font>
-            </Label>
-            <Label layoutX="398.0" layoutY="89.0" text="Seller:">
-               <font>
-                  <Font size="18.0"/>
+            xmlns="http://javafx.com/javafx/8.0.251">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1200.0"
+                    stylesheets="@../../../../styles/products_styles.css">
+            <children>
+                <ImageView fitHeight="330.0" fitWidth="330.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true"
+                           preserveRatio="true" styleClass="product_image">
+                    <image>
+                        <Image url="@../../../../images/product.jpg"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="390.0" layoutY="46.0" text="Name:">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="452.0" layoutY="46.0" prefWidth="115.0" text="ProductName">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="398.0" layoutY="89.0" text="Seller:">
+                    <font>
+                        <Font size="18.0"/>
                </font>
             </Label>
             <Label alignment="CENTER" layoutX="452.0" layoutY="89.0" prefHeight="27.0" prefWidth="115.0"

@@ -2,13 +2,18 @@ package Control.UserPanel;
 
 import Control.Manager;
 import Models.Account.Account;
-import View.ErrorProcessor;
-import View.UserPanel.UserPanelMenu;
+import ViewController.userPanel.UserPanelController;
 
 public class UserPanelManager extends Manager {
-    //TODO userpanel manager is handeled in manager
+    //TODO userPanel manager is handled in manager
     public UserPanelManager(Account account) {
         super(account);
-        this.menu = new UserPanelMenu(this);
+        //this.menu = new UserPanelMenu(this);
+        loadFxml(Addresses.USER_PANEL);
+    }
+
+    public UserPanelManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        UserPanelController controller = (UserPanelController) loadFxml(Addresses.USER_PANEL);
     }
 }

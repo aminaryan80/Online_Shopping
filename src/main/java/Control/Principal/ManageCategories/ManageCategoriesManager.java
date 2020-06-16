@@ -18,6 +18,12 @@ public class ManageCategoriesManager extends Manager {
         new ManageCategoriesMenu(this);
     }
 
+    public ManageCategoriesManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        //new ManageCategoriesMenu(this);
+        loadFxml(Addresses.MANAGE_CATEGORIES);
+    }
+
     public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsIds) {
 //        Category supCategory = Category.getCategoryByName(supCategoryName); canAddCategory checks existence
         Category category = new Category(categoryName, supCategoryName, features, productsIds);

@@ -1,4 +1,4 @@
-package View;
+package ViewController;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

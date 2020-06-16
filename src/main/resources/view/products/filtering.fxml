@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
+            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.251">
+    <children>
+        <Label alignment="CENTER" layoutY="55.0" prefHeight="27.0" prefWidth="400.0" text="Filtering:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="74.0" layoutY="143.0" text="Filter Type:">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+        <TextField layoutX="173.0" layoutY="141.0" prefHeight="30.0" prefWidth="155.0"/>
+        <Label layoutX="92.0" layoutY="183.0" text="Value:">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+        <TextField layoutX="173.0" layoutY="181.0" prefHeight="30.0" prefWidth="155.0"/>
+        <Button layoutX="40.0" layoutY="225.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="319.0"
+                text="Filter">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

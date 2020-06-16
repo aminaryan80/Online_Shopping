@@ -1,6 +1,8 @@
 package Models.Account;
+
 import Models.Address;
 import Models.Gson;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,8 +36,6 @@ public abstract class Account {
         return allAccounts;
     }
 
-    public abstract ArrayList<String> getChangeableFields();
-
     public static Account getAccountByUsername(String username) {
         for (Account account : allAccounts) {
             if (account.username.equals(username))
@@ -60,64 +60,8 @@ public abstract class Account {
         return accountsInShort;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
     public static void deleteAccount(Account account) {
         allAccounts.remove(account);
-    }
-
-    public boolean canChangePassword(String currentPassword) {
-        return currentPassword.equals(password);
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public String getName() {
-        return firstName + " " + lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public void payMoney(double money) {
-        this.balance = balance - money;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public static void open() throws Exception {
@@ -205,7 +149,6 @@ public abstract class Account {
         Seller seller = (Seller) account;
         String jsonAccount = Gson.INSTANCE.get().toJson(seller);
         write(account, jsonAccount, Address.SELLERS);
-        return;
     }
 
     private static void saveCustomer(Account account) throws IOException {
@@ -220,6 +163,74 @@ public abstract class Account {
         file.close();
     }
 
+    public String getType() {
+        if (this instanceof Principal)
+            return "Principal";
+        else if (this instanceof Seller)
+            return "Seller";
+        else if (this instanceof Customer)
+            return "Customer";
+        return null;
+    }
+
+    public abstract ArrayList<String> getChangeableFields();
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean canChangePassword(String currentPassword) {
+        return currentPassword.equals(password);
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void payMoney(double money) {
+        this.balance = balance - money;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 //    public static void loadReferences() {
 //        for (Account account : allAccounts) {
 ////            account.loadReference();
@@ -228,13 +239,12 @@ public abstract class Account {
 //
 ////    protected abstract void loadReference();
 
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.principal.ManageProductsController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="User Panel">
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="12.0"/>
+               </font>
+               <VBox.margin>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+      <TextField alignment="CENTER" layoutX="317.0" layoutY="193.0" prefHeight="32.0" prefWidth="218.0"
+                 promptText="Product Id"/>
+      <Button layoutX="318.0" layoutY="232.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
+              text="View Product"/>
+      <Button layoutX="318.0" layoutY="268.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
+              text="Delete Product"/>
+      <Label layoutX="306.0" layoutY="173.0" text="Manage Product:"/>
+      <TableView layoutX="564.0" layoutY="47.0" prefHeight="436.0" prefWidth="542.0">
+         <columns>
+            <TableColumn prefWidth="105.60003662109375" text="Product Id"/>
+            <TableColumn prefWidth="172.800048828125" text="Product Name"/>
+            <TableColumn prefWidth="108.79998779296875" text="Price"/>
+            <TableColumn prefWidth="152.79998779296875" text="Seller"/>
+         </columns>
+      </TableView>
+      <Button layoutX="575.0" layoutY="492.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="64.0" text="Sort"/>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="647.0" layoutY="492.0" mnemonicParsing="false"
+              prefHeight="58.0" prefWidth="64.0" text="Available Sorts" textAlignment="CENTER" wrapText="true"/>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="719.0" layoutY="492.0" mnemonicParsing="false"
+              prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="790.0" layoutY="492.0" mnemonicParsing="false"
+              prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
+   </children>
+</AnchorPane>

@@ -4,9 +4,9 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Principal;
 import Models.Shop.Category.Sort;
-import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Principal.ManageUsersMenu;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,6 +20,13 @@ public class ManageUsersManager extends Manager {
         super(account);
         this.users = Account.getAllAccounts();
         new ManageUsersMenu(this);
+    }
+
+    public ManageUsersManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        this.users = Account.getAllAccounts();
+        //new ManageUsersMenu(this);
+        loadFxml(Addresses.MANAGE_USERS);
     }
 
     public ArrayList<String> showUsers() {

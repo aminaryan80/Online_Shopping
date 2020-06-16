@@ -7,11 +7,10 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Product.Product;
 import View.Principal.ManageAllProductsMenu;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-
-import java.io.IOException;
 
 public class ManageAllProductsManager extends Manager {
 
@@ -22,6 +21,13 @@ public class ManageAllProductsManager extends Manager {
         super(account);
         products = Product.getAllProducts();
         new ManageAllProductsMenu(this);
+    }
+
+    public ManageAllProductsManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        products = Product.getAllProducts();
+        //new ManageAllProductsMenu(this);
+        loadFxml(Addresses.MANAGE_PRODUCTS);
     }
 
     public void removeProductById(String id) {

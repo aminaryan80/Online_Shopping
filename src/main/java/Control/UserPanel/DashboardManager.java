@@ -12,12 +12,17 @@ import Models.Account.Seller;
 public class DashboardManager extends Manager {
     public DashboardManager(Account account) {
         super(account);
-        dashboard(account);
+        //dashboard(account);
     }
 
-    private void dashboard(Account account) {
+    public DashboardManager(Account account, Addresses address, Manager manager) {
+        super(account);
+        dashboard(account, address, manager);
+    }
+
+    private void dashboard(Account account, Addresses address, Manager manager) {
         if (account instanceof Principal) {
-            new PrincipalManager(account);
+            new PrincipalManager(account, address, manager);
         } else if (account instanceof Customer) {
             new CustomerManager(account);
         } else if (account instanceof Seller) {

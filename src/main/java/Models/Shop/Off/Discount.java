@@ -22,9 +22,10 @@ public class Discount {
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
-//    private ArrayList<Customer> allCustomers;
+    //    private ArrayList<Customer> allCustomers;
     private ArrayList<String> allCustomersUsernames;
-    private HashMap<String,Integer> customerToDiscountUseCountMap = new HashMap<>();
+    private HashMap<String, Integer> customerToDiscountUseCountMap = new HashMap<>();
+
     public Discount(LocalDate beginningDate, LocalDate endingDate, int discountPercent, double maximumDiscount, int discountUseCount,
                     ArrayList<String> allcustomersUsernames) {
         this.id = Identity.getId();
@@ -35,33 +36,13 @@ public class Discount {
         this.discountUseCount = discountUseCount;
         this.allCustomersUsernames = allcustomersUsernames;
         for (String username : allcustomersUsernames) {
-            customerToDiscountUseCountMap.put(username,discountUseCount);
+            customerToDiscountUseCountMap.put(username, discountUseCount);
         }
         allDiscounts.add(this);
     }
 
-    public void setDiscountUseCount(int discountUseCount) {
-        this.discountUseCount = discountUseCount;
-    }
-
-    public LocalDate getBeginningDate() {
-        return beginningDate;
-    }
-
-    public LocalDate getEndingDate() {
-        return endingDate;
-    }
-
     public static ArrayList<Discount> getAllDiscounts() {
         return allDiscounts;
-    }
-
-    public ArrayList<Customer> getAllCustomers() {
-        ArrayList<Customer> allCustomers = new ArrayList<>();
-        for (String customerUsername : allCustomersUsernames) {
-            allCustomers.add((Customer) Customer.getAccountByUsername(customerUsername));
-        }
-        return allCustomers;
     }
 
     public static boolean hasDiscountWithId(String id) {
@@ -80,45 +61,6 @@ public class Discount {
         return null;
     }
 
-    public void useDiscount(Customer customer) {
-        if(canUseDiscount(customer)){
-            int numberOfDiscountUseLeft = customerToDiscountUseCountMap.get(customer.getUsername());
-            customerToDiscountUseCountMap.replace(customer.getUsername(),numberOfDiscountUseLeft-1);
-        }
-    }
-
-    public boolean canUseDiscount(Customer customer) {
-        return customerToDiscountUseCountMap.get(customer.getUsername())>=1;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setBeginningDate(LocalDate beginningDate) {
-        this.beginningDate = beginningDate;
-    }
-
-    public void setEndingDate(LocalDate endingDate) {
-        this.endingDate = endingDate;
-    }
-
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
-    }
-
-    public void setMaximumDiscount(double maximumDiscount) {
-        this.maximumDiscount = maximumDiscount;
-    }
-
-    public double getMaximumDiscount() {
-        return maximumDiscount;
-    }
-
-    public int getDiscountPercent() {
-        return discountPercent;
-    }
-
     public static ArrayList<String> getDiscountInShort() {
         ArrayList<String> discountsInShort = new ArrayList<>();
         for (Discount discount : allDiscounts) {
@@ -128,26 +70,6 @@ public class Discount {
             discountsInShort.add(discountInShort);
         }
         return discountsInShort;
-    }
-
-    @Override
-    public String toString() {
-        return "Discount{" +
-                "id='" + id + '\'' +
-                ", beginningDate=" + beginningDate +
-                ", endingDate=" + endingDate +
-                ", discountPercent=" + discountPercent +
-                ", maximumDiscount=" + maximumDiscount +
-                ", discountUseCount=" + discountUseCount +
-                ", allCustomers=" + getAllCustomers() +
-                '}';
-//        return "#" + id + " : " +
-//                "beginningDate = " + dateFormat.format(beginningDate) +
-//                "\nendingDate = " + dateFormat.format(endingDate) +
-//                "\ndiscountPercent = " + discountPercent + "%" +
-//                "\nmaximumDiscount = " + maximumDiscount +
-//                "\ndiscountUseCount = " + discountUseCount +
-//                "\nallowed customers = " + allCustomersNames;
     }
 
     public static void open() throws Exception {
@@ -181,6 +103,85 @@ public class Discount {
         file.close();
     }
 
+    public void setDiscountUseCount(int discountUseCount) {
+        this.discountUseCount = discountUseCount;
+    }
+
+    public LocalDate getBeginningDate() {
+        return beginningDate;
+    }
+
+    public void setBeginningDate(LocalDate beginningDate) {
+        this.beginningDate = beginningDate;
+    }
+
+    public LocalDate getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(LocalDate endingDate) {
+        this.endingDate = endingDate;
+    }
+
+    public ArrayList<Customer> getAllCustomers() {
+        ArrayList<Customer> allCustomers = new ArrayList<>();
+        for (String customerUsername : allCustomersUsernames) {
+            allCustomers.add((Customer) Customer.getAccountByUsername(customerUsername));
+        }
+        return allCustomers;
+    }
+
+    public void useDiscount(Customer customer) {
+        if (canUseDiscount(customer)) {
+            int numberOfDiscountUseLeft = customerToDiscountUseCountMap.get(customer.getUsername());
+            customerToDiscountUseCountMap.replace(customer.getUsername(), numberOfDiscountUseLeft - 1);
+        }
+    }
+
+    public boolean canUseDiscount(Customer customer) {
+        return customerToDiscountUseCountMap.get(customer.getUsername()) >= 1;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getMaximumDiscount() {
+        return maximumDiscount;
+    }
+
+    public void setMaximumDiscount(double maximumDiscount) {
+        this.maximumDiscount = maximumDiscount;
+    }
+
+    public int getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    @Override
+    public String toString() {
+        return "Discount{" +
+                "id='" + id + '\'' +
+                ", beginningDate=" + beginningDate +
+                ", endingDate=" + endingDate +
+                ", discountPercent=" + discountPercent +
+                ", maximumDiscount=" + maximumDiscount +
+                ", discountUseCount=" + discountUseCount +
+                ", allCustomers=" + getAllCustomers() +
+                '}';
+//        return "#" + id + " : " +
+//                "beginningDate = " + dateFormat.format(beginningDate) +
+//                "\nendingDate = " + dateFormat.format(endingDate) +
+//                "\ndiscountPercent = " + discountPercent + "%" +
+//                "\nmaximumDiscount = " + maximumDiscount +
+//                "\ndiscountUseCount = " + discountUseCount +
+//                "\nallowed customers = " + allCustomersNames;
+    }
+
     public void deleteDiscount() throws IOException {
         for (Customer customer : getAllCustomers()) {
             customer.deleteDiscount(this);
@@ -188,8 +189,8 @@ public class Discount {
         allDiscounts.remove(this);
         File file = new File(Address.DISCOUNTS.get() + "\\" + this.getId() + ".json");
         try {
-            if(file.exists())
-            FileUtils.forceDelete(file);
+            if (file.exists())
+                FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
         }
@@ -202,7 +203,7 @@ public class Discount {
 
     public boolean belongsToCustomer(Customer customer) {
         for (String customersUsername : allCustomersUsernames) {
-            if(customer.getUsername().equals(customersUsername)){
+            if (customer.getUsername().equals(customersUsername)) {
                 return true;
             }
         }

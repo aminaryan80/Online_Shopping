@@ -10,7 +10,7 @@
 <?import java.net.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="1200.0"
             styleClass="background" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.251"
-            fx:controller="View.MainController">
+            fx:controller="ViewController.MainController">
     <children>
         <ImageView fitHeight="376.0" fitWidth="468.0" layoutX="718.0" layoutY="132.0" pickOnBounds="true"
                    preserveRatio="true">
@@ -74,7 +74,8 @@
                 </Button>
             </children>
         </VBox>
-        <Label layoutX="296.0" layoutY="92.0" text="An online shopping app which is made for grades" textFill="#ff5e5e">
+        <Label fx:id="test" layoutX="296.0" layoutY="92.0" text="An online shopping app which is made for grades"
+               textFill="#ff5e5e">
             <font>
                 <Font name="System Bold" size="27.0"/>
             </font>

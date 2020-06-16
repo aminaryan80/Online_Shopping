@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="380.0" prefWidth="310.0"
+            xmlns="http://javafx.com/javafx/8.0.251">
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="380.0" prefWidth="310.0">
+            <children>
+                <Label alignment="CENTER" prefHeight="27.0" prefWidth="310.0" text="Id">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="16.0"/>
+                    </VBox.margin>
+                </Label>
+                <ImageView fitHeight="180.0" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/product.jpg"/>
+                    </image>
+                </ImageView>
+                <Label alignment="CENTER" prefHeight="27.0" prefWidth="310.0" text="Name">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="12.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label alignment="CENTER" prefHeight="27.0" prefWidth="310.0" text="Price">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="4.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label alignment="CENTER" prefHeight="27.0" prefWidth="310.0" text="isAvailable">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="5.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label alignment="CENTER" prefHeight="27.0" prefWidth="310.0" text="Rate">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

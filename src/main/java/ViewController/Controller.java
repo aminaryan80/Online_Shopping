@@ -1,8 +1,9 @@
-package View;
+package ViewController;
 
 import Control.Manager;
 import Control.UserPanel.DashboardManager;
 import Control.UserPanel.UserPanelManager;
+import javafx.event.ActionEvent;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -21,18 +22,22 @@ public class Controller {
         return pattern.matcher(input);
     }
 
-    protected void openUserPanel(boolean status) {
+    protected void openUserPanel(boolean status, Manager.Addresses address) {
         if (manager.getAccount() == null) {
-            new UserPanelManager(manager.getAccount());
+            new UserPanelManager(manager.getAccount(), address, manager);
             if (status)
                 return;
         }
         if (manager.getAccount() != null) {
-            new DashboardManager(manager.getAccount());
+            new DashboardManager(manager.getAccount(), address, manager);
         }
     }
 
     protected void logout() {
         manager.logout();
+    }
+
+    public void back(ActionEvent actionEvent) {
+        manager.back();
     }
 }

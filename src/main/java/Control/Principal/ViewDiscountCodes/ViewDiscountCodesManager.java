@@ -4,7 +4,6 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category.Sort;
 import Models.Shop.Off.Discount;
-import Models.Shop.Product.Product;
 import View.Principal.ViewDiscountCodes.ViewDiscountCodesMenu;
 
 import java.io.IOException;
@@ -21,6 +20,13 @@ public class ViewDiscountCodesManager extends Manager {
         super(account);
         discounts = Discount.getAllDiscounts();
         new ViewDiscountCodesMenu(this);
+    }
+
+    public ViewDiscountCodesManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        discounts = Discount.getAllDiscounts();
+        //new ViewDiscountCodesMenu(this);
+        loadFxml(Addresses.VIEW_DISCOUNT_CODES);
     }
 
     public void showDiscounts() {

@@ -2,7 +2,6 @@ package Models.Shop.Request;
 
 import Control.Identity;
 import Control.Manager;
-import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;
@@ -35,7 +34,9 @@ public abstract class Request {
         allRequests.add(this);
     }
 
-    public abstract void accept() throws IOException;
+    public static ArrayList<Request> getAllRequests() {
+        return allRequests;
+    }
 
     public static ArrayList<String> viewRequestsInShort() {
         ArrayList<String> allRequestsShortViews = new ArrayList<>();
@@ -44,8 +45,6 @@ public abstract class Request {
         }
         return allRequestsShortViews;
     }
-
-    public abstract void decline() throws IOException;
 
     public static Request getRequestById(String id) {
         for (Request request : allRequests) {
@@ -69,22 +68,11 @@ public abstract class Request {
         allRequests.remove(request);
         File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
         try {
-            if(file.exists())
-            FileUtils.forceDelete(file);
+            if (file.exists())
+                FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
         }
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public abstract String toString();
-
-    protected enum RequestType {
-        ADD_PRODUCT, EDIT_PRODUCT, ADD_OFF, EDIT_OFF, DELETE_PRODUCT, ADD_SELLER_REQUEST
     }
 
     public static void open() {
@@ -264,6 +252,21 @@ public abstract class Request {
         file.close();
     }
 
+    public abstract void accept() throws IOException;
+
+    public abstract void decline() throws IOException;
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public abstract String toString();
+
+    protected enum RequestType {
+        ADD_PRODUCT, EDIT_PRODUCT, ADD_OFF, EDIT_OFF, DELETE_PRODUCT, ADD_SELLER_REQUEST
+    }
+
 //    public static void loadReferences() throws IOException {
 //        for (Request request : allRequests) {
 //            request.seller = (Seller) Account.getAccountByUsername(request.sellerName);
@@ -271,6 +274,6 @@ public abstract class Request {
 //        }
 //    }
 
- //   protected abstract void loadReference() throws IOException;
+    //   protected abstract void loadReference() throws IOException;
 }
 

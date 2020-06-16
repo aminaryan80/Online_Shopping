@@ -43,7 +43,7 @@ public class ManageAllProductsMenu extends Menu {
 
     private void sort(String sort) {
         if (((ManageAllProductsManager) manager).isEnteredSortFieldValid(sort)) {
-            System.out.println("do you want it to be ascending (answer with true or false)");
+            System.out.println("do you want it to be ascending? (answer with true or false)");
             String isAscending = scanner.nextLine();
             ArrayList<String> sortedProducts = ((ManageAllProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
             for (String sortedProduct : sortedProducts) {

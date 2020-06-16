@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
+            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.251">
+    <children>
+        <Label alignment="CENTER" layoutY="55.0" prefHeight="27.0" prefWidth="400.0" text="Sorting:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="93.0" layoutY="133.0" text="Sort By:">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+        <TextField layoutX="173.0" layoutY="131.0" prefHeight="30.0" prefWidth="155.0"/>
+        <Button layoutX="40.0" layoutY="169.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="319.0" text="Sort">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+        <Button layoutX="40.0" layoutY="288.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="155.0"
+                text="Show Available Sorts" wrapText="true">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="203.0" layoutY="288.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="155.0"
+                text="Current Sort">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+        <Button layoutX="40.0" layoutY="233.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="319.0"
+                text="Disable Sort">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

@@ -1,10 +1,14 @@
-package View;
+package ViewController;
 
+import Control.Manager;
 import Control.Products.ProductsManager;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 
 public class MainController extends Controller {
+
+    public Label test;
 
     private void help() {
         System.out.println("user panel\n" +
@@ -21,7 +25,7 @@ public class MainController extends Controller {
     }
 
     public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel(false);
+        openUserPanel(false, Manager.Addresses.MAIN_MENU);
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
