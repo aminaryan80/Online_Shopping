@@ -22,6 +22,10 @@ public class Controller {
         return pattern.matcher(input);
     }
 
+    protected void openUserPanel(boolean status) {
+        openUserPanel(status, Manager.Addresses.MAIN_MENU);
+    }
+
     protected void openUserPanel(boolean status, Manager.Addresses address) {
         if (manager.getAccount() == null) {
             new UserPanelManager(manager.getAccount(), address, manager);
@@ -40,4 +44,13 @@ public class Controller {
     public void back(ActionEvent actionEvent) {
         manager.back();
     }
+
+    public void openUserPanel(ActionEvent actionEvent) {
+        openUserPanel(true);
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        // TODO
+    }
+
 }

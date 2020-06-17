@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
+            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="ViewController.principal.manageCategories.editCategory.EditFeatureCategoryController">
+    <children>
+        <Label alignment="CENTER" layoutY="39.0" prefHeight="27.0" prefWidth="400.0" text="Edit Category Features:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="55.0" layoutY="166.0" text="Feature Name:">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="featureNameField" layoutX="173.0" layoutY="164.0" prefHeight="30.0" prefWidth="155.0"/>
+        <Button layoutX="40.0" layoutY="301.0" mnemonicParsing="false" onAction="#editCategory" prefHeight="47.0"
+                prefWidth="319.0" text="Edit Category Name">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+        <RadioButton fx:id="addRB" contentDisplay="BOTTOM" layoutX="35.0" layoutY="79.0" mnemonicParsing="false"
+                     onAction="#openAddFeature" selected="true" text="Add Feature">
+            <toggleGroup>
+                <ToggleGroup fx:id="t"/>
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="editRB" contentDisplay="BOTTOM" layoutX="157.0" layoutY="79.0" mnemonicParsing="false"
+                     onAction="#openEditFeature" text="Edit Feature" toggleGroup="$t"/>
+        <RadioButton fx:id="deleteRB" contentDisplay="BOTTOM" layoutX="272.0" layoutY="79.0" mnemonicParsing="false"
+                     onAction="#openDeleteFeature" text="Delete Feature" toggleGroup="$t"/>
+        <Label fx:id="newNameLabel" layoutX="66.0" layoutY="202.0" text="New Name:" visible="false">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="newNameField" layoutX="172.0" layoutY="200.0" prefHeight="30.0" prefWidth="155.0"
+                   visible="false"/>
+    </children>
+</AnchorPane>

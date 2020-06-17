@@ -7,6 +7,9 @@ import Models.Shop.Category.Category;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Principal.ManageCategories.ManageCategoriesMenu;
+import ViewController.principal.manageCategories.AddCategoryController;
+import ViewController.principal.manageCategories.ManageCategoriesController;
+import javafx.scene.control.TreeItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +24,16 @@ public class ManageCategoriesManager extends Manager {
     public ManageCategoriesManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         //new ManageCategoriesMenu(this);
-        loadFxml(Addresses.MANAGE_CATEGORIES);
+        ManageCategoriesController controller = (ManageCategoriesController) loadFxml(Addresses.MANAGE_CATEGORIES);
+        controller.init();
     }
 
     public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsIds) {
 //        Category supCategory = Category.getCategoryByName(supCategoryName); canAddCategory checks existence
-        Category category = new Category(categoryName, supCategoryName, features, productsIds);
-//        supCategory.addSubCategory(category); handled in constructor
+        if (canAddCategory(supCategoryName, categoryName)) {
+            Category category = new Category(categoryName, supCategoryName, features, productsIds);
+            success("Category created successfully.");
+        }
     }
 
 
@@ -35,8 +41,8 @@ public class ManageCategoriesManager extends Manager {
         if (Category.hasCategoryWithName(supCategoryName)) {
             if (!Category.getCategoryByName(supCategoryName).hasCategoryInsideWithName(categoryName)) {
                 return true;
-            } else ErrorProcessor.invalidCategoryName();
-        } else ErrorProcessor.invalidCategoryName();
+            } else error("Invalid category name");
+        } else error("Invalid category name");
         return false;
     }
 
@@ -58,5 +64,29 @@ public class ManageCategoriesManager extends Manager {
             Product.deleteProduct(product);
             Customer.deleteProductFromCarts(product);
         }
+    }
+
+    public void openAddCategory(String categoryName) {
+        AddCategoryController controller = (AddCategoryController) loadFxml(Addresses.ADD_CATEGORY, true);
+        controller.setCategoryName(categoryName);
+    }
+
+    public void openEditCategory(String categoryName) {
+        if (Category.hasCategoryWithName(categoryName))
+            new EditCategoryManager(account, Category.getCategoryByName(categoryName));
+        else error("Invalid category name");
+    }
+
+    public TreeItem<String> getCategoriesInTable() {
+        return getCategoriesInTable(mainCategory);
+    }
+
+    private TreeItem<String> getCategoriesInTable(Category category) {
+        TreeItem<String> categories = new TreeItem<>(category.getName());
+        for (Category subCategory : category.getSubCategories()) {
+            categories.getChildren().add(getCategoriesInTable(subCategory));
+        }
+        categories.setExpanded(true);
+        return categories;
     }
 }

@@ -31,12 +31,15 @@ public class ManageAllProductsManager extends Manager {
     }
 
     public void removeProductById(String id) {
-        try {
-            Product.deleteProduct(Product.getProductById(id));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Customer.deleteProductFromCarts(Product.getProductById(id));
+        if (Product.hasProductWithId(id)) {
+            try {
+                Product.deleteProduct(Product.getProductById(id));
+                Customer.deleteProductFromCarts(Product.getProductById(id));
+                success("Product deleted successfully.");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else error("Invalid id");
     }
 
     public String showAvailableSorts() {
@@ -53,7 +56,7 @@ public class ManageAllProductsManager extends Manager {
     }
 
     private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort= new ArrayList<>();
+        ArrayList<String> productsInShort = new ArrayList<>();
         for (Product product : products) {
             productsInShort.add(product.viewProductInShort());
         }

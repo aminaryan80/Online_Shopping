@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="ViewController.principal.manageCategories.ManageCategories">
+            fx:controller="ViewController.principal.manageCategories.ManageCategoriesController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
@@ -41,14 +41,14 @@
             </Button>
          </children>
       </VBox>
-      <TextField alignment="CENTER" layoutX="346.0" layoutY="193.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Category Name"/>
-      <Button layoutX="347.0" layoutY="232.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
-              text="Add Category"/>
-      <Button layoutX="347.0" layoutY="268.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
-              text="Edit Category"/>
+      <TextField fx:id="categoryNameField" alignment="CENTER" layoutX="346.0" layoutY="193.0" prefHeight="32.0"
+                 prefWidth="218.0" promptText="Category Name"/>
+      <Button layoutX="347.0" layoutY="232.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="32.0"
+              prefWidth="216.0" text="Add Category"/>
+      <Button layoutX="347.0" layoutY="268.0" mnemonicParsing="false" onAction="#editCategory" prefHeight="32.0"
+              prefWidth="216.0" text="Edit Category"/>
       <Label layoutX="335.0" layoutY="173.0" text="Manage Categories:"/>
-      <TreeView layoutX="663.0" layoutY="44.0" prefHeight="479.0" prefWidth="482.0"/>
+      <TreeView fx:id="categoriesTableView" layoutX="663.0" layoutY="44.0" prefHeight="479.0" prefWidth="482.0"/>
       <Button layoutX="347.0" layoutY="304.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
               text="Delete Category"/>
    </children>

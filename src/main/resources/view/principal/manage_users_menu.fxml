@@ -7,80 +7,83 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.principal.ManageUsersController">
-   <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="User Panel">
+    <children>
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+              prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
+            <children>
+                <Button mnemonicParsing="false" onAction="#openUserPanel" prefHeight="38.0" prefWidth="234.0"
+                        text="User Panel">
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                </VBox.margin>
                <cursor>
-                  <Cursor fx:constant="HAND"/>
+                   <Cursor fx:constant="HAND"/>
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND"/>
-               </cursor>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
-               <font>
-                  <Font name="System Bold" size="12.0"/>
-               </font>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
-               </VBox.margin>
-               <cursor>
-                  <Cursor fx:constant="HAND"/>
-               </cursor>
-            </Button>
-         </children>
-      </VBox>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="60.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Username"/>
-      <Button layoutX="294.0" layoutY="99.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
-              text="View User"/>
-      <Button layoutX="294.0" layoutY="135.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
-              text="Delete User"/>
-      <Label layoutX="282.0" layoutY="40.0" text="Manage Product:"/>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="250.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Username"/>
-      <Label layoutX="282.0" layoutY="230.0" text="Create new Principal Account:"/>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="362.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Password"/>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="399.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Email"/>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="437.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Phone Number"/>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="287.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="First Name"/>
-      <TextField alignment="CENTER" layoutX="293.0" layoutY="325.0" prefHeight="32.0" prefWidth="218.0"
-                 promptText="Last Name"/>
-      <Button layoutX="294.0" layoutY="480.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="216.0"
-              text="Create New Principal"/>
-      <TableView layoutX="587.0" layoutY="236.0" prefHeight="276.0" prefWidth="460.0">
-         <columns>
-            <TableColumn prefWidth="118.39996337890625" text="Username"/>
-            <TableColumn prefWidth="245.60003662109375" text="aryanmohammadamin@gmail.com"/>
-            <TableColumn prefWidth="93.60009765625" text="Balance"/>
-         </columns>
-      </TableView>
-      <Label alignment="CENTER" layoutX="588.0" layoutY="40.0" prefHeight="162.0" prefWidth="531.0"
-             style="-fx-background-color: #eeeeee;" text="View User" textAlignment="JUSTIFY">
-         <font>
-            <Font size="18.0"/>
-         </font>
-      </Label>
-      <Button layoutX="1055.0" layoutY="257.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="64.0" text="Sort"/>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="323.0" mnemonicParsing="false"
-              prefHeight="58.0" prefWidth="64.0" text="Available Sorts" textAlignment="CENTER" wrapText="true"/>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="388.0" mnemonicParsing="false"
-              prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="453.0" mnemonicParsing="false"
-              prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
-   </children>
+                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
+                        textFill="RED">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </VBox>
+        <TextField fx:id="viewUserIdField" alignment="CENTER" layoutX="293.0" layoutY="60.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Username"/>
+        <Button layoutX="294.0" layoutY="99.0" mnemonicParsing="false" onAction="#viewUser" prefHeight="32.0"
+                prefWidth="216.0" text="View User"/>
+        <Button layoutX="294.0" layoutY="135.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="32.0"
+                prefWidth="216.0" text="Delete User"/>
+        <Label layoutX="282.0" layoutY="40.0" text="Manage Product:"/>
+        <TextField fx:id="usernameField" alignment="CENTER" layoutX="293.0" layoutY="250.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Username"/>
+        <Label layoutX="282.0" layoutY="230.0" text="Create new Principal Account:"/>
+        <TextField fx:id="passwordField" alignment="CENTER" layoutX="293.0" layoutY="362.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Password"/>
+        <TextField fx:id="emailField" alignment="CENTER" layoutX="293.0" layoutY="399.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Email"/>
+        <TextField fx:id="phoneNumberField" alignment="CENTER" layoutX="293.0" layoutY="437.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Phone Number"/>
+        <TextField fx:id="firstNameField" alignment="CENTER" layoutX="293.0" layoutY="287.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="First Name"/>
+        <TextField fx:id="lastNameField" alignment="CENTER" layoutX="293.0" layoutY="325.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Last Name"/>
+        <Button layoutX="294.0" layoutY="480.0" mnemonicParsing="false" onAction="#createNewPrincipal" prefHeight="32.0"
+                prefWidth="216.0" text="Create New Principal"/>
+        <TableView fx:id="usersTable" layoutX="587.0" layoutY="236.0" prefHeight="276.0" prefWidth="460.0">
+            <columns>
+                <TableColumn fx:id="usernameCol" prefWidth="118.39996337890625" text="Username"/>
+                <TableColumn fx:id="userEmailCol" prefWidth="245.60003662109375" text="Email"/>
+                <TableColumn fx:id="userBalanceCol" prefWidth="93.60009765625" text="Balance"/>
+            </columns>
+        </TableView>
+        <Label fx:id="viewUserLabel" alignment="CENTER" layoutX="588.0" layoutY="40.0" prefHeight="162.0"
+               prefWidth="531.0" style="-fx-background-color: #eeeeee;" text="View User" textAlignment="JUSTIFY">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Button layoutX="1055.0" layoutY="257.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="64.0"
+                text="Sort"/>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="323.0" mnemonicParsing="false"
+                prefHeight="58.0" prefWidth="64.0" text="Available Sorts" textAlignment="CENTER" wrapText="true"/>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="388.0" mnemonicParsing="false"
+                prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="453.0" mnemonicParsing="false"
+                prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
+    </children>
 </AnchorPane>

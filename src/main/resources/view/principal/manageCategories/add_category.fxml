@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
+            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="ViewController.principal.manageCategories.AddCategoryController">
+    <children>
+        <Label alignment="CENTER" layoutY="55.0" prefHeight="27.0" prefWidth="400.0" text="Add category:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="62.0" layoutY="122.0" prefHeight="47.0" prefWidth="118.0" text="Name of Super Category:"
+               textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="supCategoryField" alignment="CENTER" layoutX="183.0" layoutY="132.0" prefHeight="30.0"
+                   prefWidth="155.0"/>
+        <Button layoutX="40.0" layoutY="176.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="47.0"
+                prefWidth="319.0" text="Add Category">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+        <Label alignment="CENTER" layoutX="93.0" layoutY="259.0" prefHeight="27.0" prefWidth="62.0" text="Feature:"
+               textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="featureField" alignment="CENTER" layoutX="183.0" layoutY="258.0" prefHeight="30.0"
+                   prefWidth="155.0"/>
+        <Label alignment="CENTER" layoutX="70.0" layoutY="295.0" prefHeight="27.0" prefWidth="107.0"
+               text="Feature Type:" textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font name="System Bold" size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="featureTypeField" alignment="CENTER" layoutX="183.0" layoutY="294.0" prefHeight="30.0"
+                   prefWidth="155.0" promptText="(number|text)"/>
+        <Button layoutX="40.0" layoutY="331.0" mnemonicParsing="false" onAction="#addFeature" prefHeight="47.0"
+                prefWidth="319.0" text="Add Feature">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

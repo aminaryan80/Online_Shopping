@@ -5,6 +5,7 @@ import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
 import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +21,8 @@ public class Category {
     private ArrayList<String> subCategoriesNames;
     private ArrayList<String> allProductsIds = new ArrayList<>();
     private String id;
-    public Category(String name,String supCategoryName, HashMap<String, Integer> features, ArrayList<String> allProductsIds) {
+
+    public Category(String name, String supCategoryName, HashMap<String, Integer> features, ArrayList<String> allProductsIds) {
         id = Identity.getId(); //future TODO category should be unified by id
         this.name = name;
         this.features = features;
@@ -46,6 +48,69 @@ public class Category {
         } catch (Exception ignored) {
 
         }
+    }
+
+    public static ArrayList<String> getAllCategoriesNames() {
+        ArrayList<String> allCategoriesNames = new ArrayList<>();
+        for (Category category : allCategories) {
+            allCategoriesNames.add(category.getName());
+        }
+        return allCategoriesNames;
+    }
+
+    public static boolean hasCategoryWithName(String name) {
+        for (Category category : allCategories) {
+            if (category.getName().equals(name))
+                return true;
+        }
+        return false;
+    }
+
+    public static Category getCategoryByName(String name) {
+        for (Category category : allCategories) {
+            if (category.getName().equals(name))
+                return category;
+        }
+        return null;
+    }
+
+    public static Category getCategoryById(String id) {
+        for (Category category : allCategories) {
+            if (category.getId().equals(id))
+                return category;
+        }
+        return null;
+    }
+
+    public static void open() throws Exception {
+        File folder = new File(Address.CATEGORIES.get());
+        if (!folder.exists()) folder.mkdirs();
+        else {
+            for (File file : folder.listFiles()) {
+                allCategories.add(open(file));
+            }
+        }
+    }
+
+    public static Category open(File file) throws Exception {
+        StringBuilder json = new StringBuilder();
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) json.append(reader.next());
+        reader.close();
+        return Gson.INSTANCE.get().fromJson(json.toString(), Category.class);
+    }
+
+    public static void save() throws Exception {
+        for (Category category : allCategories) {
+            save(category);
+        }
+    }
+
+    public static void save(Category category) throws Exception {
+        String jsonAccount = Gson.INSTANCE.get().toJson(category);
+        FileWriter file = new FileWriter(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
+        file.write(jsonAccount);
+        file.close();
     }
 
     public void changeCategoryNameForProducts() {
@@ -84,41 +149,12 @@ public class Category {
         }
     }
 
-    public static ArrayList<String> getAllCategoriesNames() {
-        ArrayList<String> allCategoriesNames = new ArrayList<>();
-        for (Category category : allCategories) {
-            allCategoriesNames.add(category.getName());
-        }
-        return allCategoriesNames;
-    }
-
-    public static boolean hasCategoryWithName(String name) {
-        for (Category category : allCategories) {
-            if (category.getName().equals(name))
-                return true;
-        }
-        return false;
-    }
+//    public List<Category> getSubCategories() {
+//        return subCategories;
+//    }
 
     public ArrayList<String> getFeaturesNames() {
         return new ArrayList<>(features.keySet());
-    }
-
-    public static Category getCategoryByName(String name) {
-        for (Category category : allCategories) {
-            if (category.getName().equals(name))
-                return category;
-        }
-        return null;
-    }
-
-
-    public static Category getCategoryById(String id) {
-        for (Category category : allCategories) {
-            if (category.getId().equals(id))
-                return category;
-        }
-        return null;
     }
 
     public ArrayList<Product> getAllProducts() {
@@ -153,10 +189,6 @@ public class Category {
         return false;
     }
 
-//    public List<Category> getSubCategories() {
-//        return subCategories;
-//    }
-
     public String getName() {
         return name;
     }
@@ -167,37 +199,6 @@ public class Category {
 
     public void addSubCategory(Category category) {
         this.subCategoriesNames.add(category.getName());
-    }
-
-    public static void open() throws Exception {
-        File folder = new File(Address.CATEGORIES.get());
-        if (!folder.exists()) folder.mkdirs();
-        else {
-            for (File file : folder.listFiles()) {
-                allCategories.add(open(file));
-            }
-        }
-    }
-
-    public static Category open(File file) throws Exception {
-        StringBuilder json = new StringBuilder();
-        Scanner reader = new Scanner(file);
-        while (reader.hasNext()) json.append(reader.next());
-        reader.close();
-        return Gson.INSTANCE.get().fromJson(json.toString(), Category.class);
-    }
-
-    public static void save() throws Exception {
-        for (Category category : allCategories) {
-            save(category);
-        }
-    }
-
-    public static void save(Category category) throws Exception {
-        String jsonAccount = Gson.INSTANCE.get().toJson(category);
-        FileWriter file = new FileWriter(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
-        file.write(jsonAccount);
-        file.close();
     }
 
 //    public static void loadReferences() {
@@ -211,10 +212,11 @@ public class Category {
 //
 //    }
 
-    public ArrayList<Product> getProducts(){
+    public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (String productsId : allProductsIds) {
-            products.add(Product.getProductById(productsId));
+            if (Product.getProductById(productsId) != null)
+                products.add(Product.getProductById(productsId));
         }
         return products;
     }

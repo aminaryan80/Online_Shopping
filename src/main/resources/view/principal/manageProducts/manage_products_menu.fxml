@@ -6,10 +6,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.principal.ManageRequestsController">
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.principal.ManageProductsController">
     <children>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
+              prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
                 <Button mnemonicParsing="false" onAction="#openUserPanel" prefHeight="38.0" prefWidth="234.0"
                         text="User Panel">
@@ -28,6 +28,14 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
+                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Sort">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                </Button>
                 <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
                         textFill="RED">
                     <font>
@@ -42,27 +50,18 @@
                 </Button>
             </children>
         </VBox>
-        <TextField fx:id="requestIdField" alignment="CENTER" layoutX="293.0" layoutY="60.0" prefHeight="32.0"
-                   prefWidth="218.0" promptText="Request Id"/>
-        <Button layoutX="294.0" layoutY="99.0" mnemonicParsing="false" onAction="#viewRequest" prefHeight="32.0"
-                prefWidth="216.0" text="View Request"/>
-        <Button layoutX="294.0" layoutY="135.0" mnemonicParsing="false" onAction="#acceptRequest" prefHeight="32.0"
-                prefWidth="216.0" text="Accept Request"/>
-        <Label layoutX="282.0" layoutY="40.0" text="Manage Request:"/>
-        <TableView fx:id="requestsTable" layoutX="489.0" layoutY="256.0" prefHeight="276.0" prefWidth="460.0">
+        <TextField fx:id="productIdField" alignment="CENTER" layoutX="317.0" layoutY="212.0" prefHeight="32.0"
+                   prefWidth="218.0" promptText="Product Id"/>
+        <Button layoutX="318.0" layoutY="249.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="32.0"
+                prefWidth="216.0" text="Delete Product"/>
+        <Label layoutX="306.0" layoutY="192.0" text="Manage Product:"/>
+        <TableView fx:id="productsTable" layoutX="570.0" layoutY="67.0" prefHeight="466.0" prefWidth="542.0">
             <columns>
-                <TableColumn fx:id="requestIdCol" prefWidth="118.39996337890625" text="Request Id"/>
-                <TableColumn fx:id="requestTypeCol" prefWidth="168.79998779296875" text="Type"/>
-                <TableColumn fx:id="requestSenderCol" prefWidth="172.00006103515625" text="Sender"/>
+                <TableColumn fx:id="productIdCol" prefWidth="105.60003662109375" text="Product Id"/>
+                <TableColumn fx:id="productNameCol" prefWidth="172.800048828125" text="Product Name"/>
+                <TableColumn fx:id="productPriceCol" prefWidth="108.79998779296875" text="Price"/>
+                <TableColumn fx:id="productSellerCol" prefWidth="152.79998779296875" text="Seller"/>
             </columns>
         </TableView>
-        <Label fx:id="viewRequestLabel" alignment="CENTER" layoutX="631.0" layoutY="40.0" prefHeight="162.0"
-               prefWidth="460.0" style="-fx-background-color: #eeeeee;" text="Request" textAlignment="JUSTIFY">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <Button layoutX="294.0" layoutY="171.0" mnemonicParsing="false" onAction="#deleteRequest" prefHeight="32.0"
-                prefWidth="216.0" text="Decline Request"/>
     </children>
 </AnchorPane>

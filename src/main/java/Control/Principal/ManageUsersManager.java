@@ -4,7 +4,6 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Principal;
 import Models.Shop.Category.Sort;
-import View.ErrorProcessor;
 import View.Principal.ManageUsersMenu;
 
 import java.util.ArrayList;
@@ -36,6 +35,7 @@ public class ManageUsersManager extends Manager {
     public String viewUsername(String username) {
         if (Account.hasAccountWithUsername(username))
             return Account.getAccountByUsername(username).toString();
+        else error("Invalid username.");
         return null;
     }
 
@@ -93,13 +93,15 @@ public class ManageUsersManager extends Manager {
     }
 
     public void deleteUsername(String username) {
-        if (!username.equals(account.getUsername()))
+        if (!username.equals(account.getUsername())) {
             Account.deleteAccount(Account.getAccountByUsername(username));
-        else ErrorProcessor.cantDeleteYourAccount();
+            success("Account deleted successfully.");
+        } else error("You can't delete your account.");
     }
 
     public void createManagerProfile(ArrayList<String> inputs) {
         // username, password, email, phoneNumber, firstName, lastName
         new Principal(inputs.get(0), inputs.get(4), inputs.get(5), inputs.get(2), inputs.get(3), inputs.get(1));
+        success("New principal account created.");
     }
 }

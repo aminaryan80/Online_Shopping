@@ -228,11 +228,19 @@ public abstract class Manager {
 
         MANAGE_USERS("view/principal/manage_users_menu.fxml"),
 
-        MANAGE_PRODUCTS("view/principal/manage_products_menu.fxml"),
+        MANAGE_PRODUCTS("view/principal/manageProducts/manage_products_menu.fxml"),
 
         MANAGE_REQUESTS("view/principal/manage_requests_menu.fxml"),
 
         MANAGE_CATEGORIES("view/principal/manageCategories/manage_categories_menu.fxml"),
+
+        ADD_CATEGORY("view/principal/manageCategories/add_category.fxml"),
+
+        EDIT_CATEGORY("view/principal/manageCategories/editCategory/edit_category_menu.fxml"),
+
+        EDIT_NAME_CATEGORY("view/principal/manageCategories/editCategory/edit_name_category_menu.fxml"),
+
+        EDIT_FEATURES_CATEGORY("view/principal/manageCategories/editCategory/edit_features_category_menu.fxml"),
 
         VIEW_DISCOUNT_CODES("view/principal/viewDiscountCodes/view_discount_codes_menu.fxml");
         private String address;
