@@ -73,11 +73,11 @@ public class ViewCartManager extends Manager {
                 "rating";
     }
 
-    public ArrayList<String> sort(String sort, boolean isAscending) {
+    public ArrayList<Product> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return productsInShort();
+        return (ArrayList<Product>) products;
     }
 
     private void applySort() {

@@ -63,8 +63,8 @@ public class ViewDiscountCodesMenu extends Menu {
         if (((ViewDiscountCodesManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<String> sortedDiscounts = ((ViewDiscountCodesManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (String sortedDiscount : sortedDiscounts) {
+            ArrayList<Discount> sortedDiscounts = ((ViewDiscountCodesManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Discount sortedDiscount : sortedDiscounts) {
                 System.out.println(sortedDiscount);
             }
         } else {

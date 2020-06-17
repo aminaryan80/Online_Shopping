@@ -45,9 +45,9 @@ public class ManageAllProductsMenu extends Menu {
         if (((ManageAllProductsManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending? (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<String> sortedProducts = ((ManageAllProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (String sortedProduct : sortedProducts) {
-                System.out.println(sortedProduct);
+            ArrayList<Product> sortedProducts = ((ManageAllProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Product sortedProduct : sortedProducts) {
+                System.out.println(sortedProduct.viewProductInShort());
             }
         } else {
             ErrorProcessor.invalidInput();

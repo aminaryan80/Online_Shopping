@@ -5,14 +5,10 @@ import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 
-import Models.Account.Seller;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.BuyingLog;
-import Models.Shop.Log.Log;
-import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
-import View.ErrorProcessor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,11 +58,11 @@ public class ViewOrdersManager extends Manager {
                 "date";
     }
 
-    public ArrayList<String> sort(String sort, boolean isAscending) {
+    public List<BuyingLog> sort(String sort, boolean isAscending) {
         logs = ((Customer) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return logsInShort();
+        return logs;
     }
 
     private void applySort() {

@@ -88,11 +88,11 @@ public class SellerManager extends Manager {
                 "date";
     }
 
-    public ArrayList<String> sort(String sort, boolean isAscending) {
+    public ArrayList<SellingLog> sort(String sort, boolean isAscending) {
         logs = ((Seller) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return logsInShort();
+        return logs;
     }
 
     private void applySort() {

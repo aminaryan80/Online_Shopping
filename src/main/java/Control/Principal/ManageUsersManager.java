@@ -47,11 +47,11 @@ public class ManageUsersManager extends Manager {
         return sort.equals("name");
     }
 
-    public ArrayList<String> sort(String sort, boolean isAscending) {
+    public ArrayList<Account> sort(String sort, boolean isAscending) {
         users = Account.getAllAccounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return userInShort();
+        return users;
     }
 
     private ArrayList<String> userInShort() {

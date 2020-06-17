@@ -183,9 +183,9 @@ public class AuctionsPageMenu extends Menu {
                     ErrorProcessor.invalidInput();
                 }
             }
-            ArrayList<String> sortedProducts = ((AuctionsPageManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (String sortedProduct : sortedProducts) {
-                System.out.println(sortedProduct);
+            ArrayList<Product> sortedProducts = ((AuctionsPageManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Product sortedProduct : sortedProducts) {
+                System.out.println(sortedProduct.viewProductInShort());
             }
         } else {
             ErrorProcessor.invalidInput();

@@ -2,6 +2,7 @@ package View.Principal;
 
 import Control.Manager;
 import Control.Principal.ManageUsersManager;
+import Models.Account.Account;
 import View.ErrorProcessor;
 import View.Menu;
 
@@ -62,8 +63,8 @@ public class ManageUsersMenu extends Menu {
         if (((ManageUsersManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<String> sortedUsers = ((ManageUsersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (String sortedUser : sortedUsers) {
+            ArrayList<Account> sortedUsers = ((ManageUsersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Account sortedUser : sortedUsers) {
                 System.out.println(sortedUser);
             }
         } else {

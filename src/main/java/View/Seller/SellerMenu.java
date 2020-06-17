@@ -6,6 +6,8 @@ import Control.Seller.OffsManager;
 import Control.Seller.SellerManager;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
+import Models.Shop.Log.Log;
+import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Menu;
@@ -105,8 +107,8 @@ public class SellerMenu extends Menu {
         if (((SellerManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<String> sortedLogs = ((SellerManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (String sortedLog : sortedLogs) {
+            ArrayList<SellingLog> sortedLogs = ((SellerManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Log sortedLog : sortedLogs) {
                 System.out.println(sortedLog);
             }
         } else {

@@ -67,11 +67,11 @@ public class ViewDiscountCodesManager extends Manager {
                 "endingdate";
     }
 
-    public ArrayList<String> sort(String sort, boolean isAscending) {
+    public ArrayList<Discount> sort(String sort, boolean isAscending) {
         discounts = Discount.getAllDiscounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return discountsInShort();
+        return discounts;
     }
 
     private void applySort() {

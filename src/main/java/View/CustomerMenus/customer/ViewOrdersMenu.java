@@ -4,12 +4,15 @@ import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Control.Manager;
 import Control.Seller.SellerManager;
+import Models.Shop.Log.BuyingLog;
+import Models.Shop.Log.Log;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 import View.Menu;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 
 public class ViewOrdersMenu extends Menu {
@@ -62,9 +65,9 @@ public class ViewOrdersMenu extends Menu {
         if (((ViewOrdersManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<String> sortedLogs = ((ViewOrdersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (String sortedLog : sortedLogs) {
-                System.out.println(sortedLog);
+            List<BuyingLog> sortedLogs = ((ViewOrdersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Log sortedLog : sortedLogs) {
+                System.out.println(sortedLog.viewLogInShort());
             }
         } else {
             ErrorProcessor.invalidInput();
