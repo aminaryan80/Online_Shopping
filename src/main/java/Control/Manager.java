@@ -220,9 +220,15 @@ public abstract class Manager {
     public enum Addresses {
         MAIN_MENU("view/main_menu.fxml"),
 
+        EDIT_PRODUCTS_MENU("view/userPanel/Seller/EditProducts.fxml"),
+
         USER_PANEL("view/userPanel/user_panel.fxml"),
 
         PRINCIPAL_MENU("view/principal/principal_menu.fxml"),
+
+        SELLER_MENU("view/userPanel/Seller/SellerMenu.fxml"),
+
+        EDIT_OFFS("view/userPanel/Seller/EditOff.fxml"),
 
         EDIT_PASSWORD("view/edit_password.fxml"),
 

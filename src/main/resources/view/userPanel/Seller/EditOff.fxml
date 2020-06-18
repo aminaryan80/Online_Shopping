@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="890.0"
-            xmlns="http://javafx.com/javafx/8.0.251">
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.userPanel.Seller.EditOffController">
     <children>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="back">
+                <Button mnemonicParsing="false" onMouseClicked="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+                <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -33,18 +36,18 @@
                 </Button>
             </children>
         </VBox>
-      <TableView layoutX="289.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="offs" layoutX="289.0" layoutY="65.0" onMouseClicked="#updateScene" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="124.0" text="Amount" />
+          <TableColumn fx:id="offsIdColumn" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="amountColumn" prefWidth="124.0" text="Amount" />
         </columns>
       </TableView>
       <Label layoutX="286.0" layoutY="41.0" text="Offs:" />
-      <TableView layoutX="289.0" layoutY="321.0" prefHeight="200.0" prefWidth="227.0">
+      <TableView fx:id="products" layoutX="289.0" layoutY="321.0" prefHeight="200.0" prefWidth="227.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="Price" />
+          <TableColumn fx:id="productsIdColumn" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
         </columns>
       </TableView>
       <Label layoutX="286.0" layoutY="292.0" text="Products:" />
@@ -68,12 +71,14 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField editable="false" layoutX="710.0" layoutY="78.0" />
-      <TextField layoutX="710.0" layoutY="122.0" />
-      <TextField layoutX="710.0" layoutY="174.0" />
-      <TextField layoutX="710.0" layoutY="226.0" />
-      <Button layoutX="645.0" layoutY="352.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css" text="Update" />
-      <Button layoutX="645.0" layoutY="430.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: green;" stylesheets="@../../../styles/styles.css" text="Add" />
+      <TextField fx:id="id" editable="false" layoutX="710.0" layoutY="78.0" />
+      <TextField fx:id="beginningDate" layoutX="710.0" layoutY="122.0" />
+      <TextField fx:id="endingDate" layoutX="710.0" layoutY="174.0" />
+      <TextField fx:id="amount" layoutX="710.0" layoutY="226.0" />
+      <Button layoutX="645.0" layoutY="394.0" mnemonicParsing="false" onMouseClicked="#update" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css" text="Update" />
+      <Button layoutX="645.0" layoutY="463.0" mnemonicParsing="false" onMouseClicked="#add" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: green;" stylesheets="@../../../styles/styles.css" text="Add" />
+      <TextField fx:id="productsIds" layoutX="620.0" layoutY="301.0" prefHeight="62.0" prefWidth="168.0" promptText="press enter after each id" />
+      <Label layoutX="625.0" layoutY="275.0" text="Products Ids" />
     </children>
 
 </AnchorPane>

@@ -34,6 +34,15 @@ public class Category {
         allCategories.add(this);
     }
 
+    public ArrayList<Feature> getFeatures() {
+        ArrayList<Feature> features = new ArrayList<>();
+        ArrayList<String> names = getFeaturesNames();
+        for (String name : names) {
+            features.add(new Feature(name, "iu"));
+        }
+        return features;
+    }
+
     public static void deleteCategory(Category category) throws IOException {
         getCategoryByName(category.supCategoryName).subCategoriesNames.remove(category.getName());
         allCategories.remove(category);

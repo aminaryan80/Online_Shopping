@@ -6,6 +6,8 @@ import Models.Account.Seller;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 import View.Seller.OffsMenu;
+import ViewController.Controller;
+import ViewController.userPanel.Seller.EditOffController;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +16,14 @@ public class OffsManager extends Manager {
     public OffsManager(Account account) {
         super(account);
         new OffsMenu(this);
+    }
+
+    public OffsManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        //new ManageUsersMenu(this);
+        Controller controller = loadFxml(Addresses.EDIT_OFFS);
+        ((EditOffController) controller).setSeller((Seller) account);
+        ((EditOffController) controller).init();
     }
 
     public String viewOffById(String id) {

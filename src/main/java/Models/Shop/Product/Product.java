@@ -33,7 +33,7 @@ public class Product {
     private String sellerUsername;
     private boolean isAvailable;
     //    private Category category;
-//    private String categoryName;
+    private String categoryName;
     private String categoryId;
     private String description;
     //    private ArrayList<Rate> allRates = new ArrayList<>();
@@ -56,7 +56,7 @@ public class Product {
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         if (category != null) {
-//            this.categoryName = category.getName();
+            this.categoryName = category.getName();
             this.categoryId = category.getId();
             category.addProduct(id);
         }
@@ -76,10 +76,17 @@ public class Product {
         return products;
     }
 
+    public ArrayList<Feature> getFeatures() {
+        return features;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public boolean hasAuction() {
         return auctionId != null;
     }
-
 
     public static ArrayList<Product> getAllProducts() {
         return allProducts;

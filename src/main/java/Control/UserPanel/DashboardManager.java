@@ -26,7 +26,7 @@ public class DashboardManager extends Manager {
         } else if (account instanceof Customer) {
             new CustomerManager(account);
         } else if (account instanceof Seller) {
-            new SellerManager(account);
+            new SellerManager(account, address, manager);
         }
     }
 }

@@ -20,7 +20,7 @@ public class Seller extends Account {
         this.companyName = companyName;
     }
 
-    protected ArrayList<Auction> getAuctions() {
+    public ArrayList<Auction> getAuctions() {
         ArrayList<Auction> auctions = new ArrayList<>();
         for (String auctionId : auctionsId) {
             auctions.add(Auction.getAuctionById(auctionId));

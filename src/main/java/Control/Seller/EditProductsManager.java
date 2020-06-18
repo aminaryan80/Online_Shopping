@@ -1,6 +1,7 @@
 package Control.Seller;
 
 import Control.Manager;
+import Control.Principal.ManageUsersManager;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Category.Category;
@@ -8,6 +9,8 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.Seller.EditProductsMenu;
+import ViewController.Controller;
+import ViewController.userPanel.Seller.EditProductsController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +24,13 @@ public class EditProductsManager extends Manager {
         super(account);
         products = Product.getAllProducts();
         new EditProductsMenu(this);
+    }
+
+    public EditProductsManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        //new ManageUsersMenu(this);
+        Controller controller = loadFxml(Addresses.EDIT_PRODUCTS_MENU);
+        ((EditProductsController) controller).init();
     }
 
     public String viewProductDetails(String id) {
