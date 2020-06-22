@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,11 +109,11 @@ public class EditProductsController extends Controller {
 
     public void add(MouseEvent mouseEvent) {
         if (!Category.hasCategoryWithName(category.getText()) && !category.getText().equals("mainCategory")) {
-            //TODO error popup
+            manager.error("wrong category name");
             return;
         }
         if (!manager.checkNumber(price.getText())) {
-            //TODO error popup
+            manager.error("wrong price format");
             return;
         }
         ArrayList<Feature> allFeatures = new ArrayList<>();
