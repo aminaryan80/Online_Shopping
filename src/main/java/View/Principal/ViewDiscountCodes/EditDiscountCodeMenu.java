@@ -65,7 +65,7 @@ public class EditDiscountCodeMenu extends Menu {
         System.out.println("Enter discount percent:");
         String input = scanner.nextLine().trim();
         if (manager.checkPercent(input)) {
-            ((EditDiscountCodeManager) manager).editDiscountPercent(Integer.parseInt(input));
+            ((EditDiscountCodeManager) manager).editDiscountPercent(input);
         } else ErrorProcessor.invalidInput();
     }
 
@@ -73,7 +73,7 @@ public class EditDiscountCodeMenu extends Menu {
         System.out.println("Enter maximum amount:");
         String input = scanner.nextLine();
         if (manager.checkNumber(input)) {
-            ((EditDiscountCodeManager) manager).editMaximumAmount(Double.parseDouble(input));
+            ((EditDiscountCodeManager) manager).editMaximumAmount(input);
         } else ErrorProcessor.invalidInput();
     }
 
@@ -81,7 +81,7 @@ public class EditDiscountCodeMenu extends Menu {
         System.out.println("Enter discount user count:");
         String input = scanner.nextLine();
         if(getMatcher(input, "^\\d+$").find()) {
-            ((EditDiscountCodeManager) manager).editDiscountUserCount(Integer.parseInt(input));
+            ((EditDiscountCodeManager) manager).editDiscountUserCount(input);
         } else ErrorProcessor.invalidInput();
     }
 }

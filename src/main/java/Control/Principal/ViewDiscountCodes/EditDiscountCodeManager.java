@@ -3,11 +3,8 @@ package Control.Principal.ViewDiscountCodes;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Off.Discount;
-import View.Principal.ViewDiscountCodes.EditDiscountCodeMenu;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class EditDiscountCodeManager extends Manager {
 
@@ -16,26 +13,42 @@ public class EditDiscountCodeManager extends Manager {
     public EditDiscountCodeManager(Account account, Discount discount) {
         super(account);
         this.discount = discount;
-        new EditDiscountCodeMenu(this);
+        //new EditDiscountCodeMenu(this);
+        loadFxml(Addresses.EDIT_DISCOUNTS);
     }
 
     public void editBeginningDate(String stringDate) {
-        discount.setBeginningDate(LocalDate.parse(stringDate));
+        if (checkDate(stringDate)) {
+            discount.setBeginningDate(LocalDate.parse(stringDate));
+            success("Discount changed successfully.");
+        } else error("Invalid date input");
     }
 
     public void editEndingDate(String stringDate) {
-        discount.setEndingDate(LocalDate.parse(stringDate));
+        if (checkDate(stringDate)) {
+            discount.setEndingDate(LocalDate.parse(stringDate));
+            success("Discount changed successfully.");
+        } else error("Invalid date input");
     }
 
-    public void editDiscountPercent(int percent) {
-        discount.setDiscountPercent(percent);
+    public void editDiscountPercent(String percent) {
+        if (checkPercent(percent)) {
+            discount.setDiscountPercent(Integer.parseInt(percent));
+            success("Discount changed successfully.");
+        } else error("Invalid input");
     }
 
-    public void editMaximumAmount(double maximumAmount) {
-        discount.setMaximumDiscount(maximumAmount);
+    public void editMaximumAmount(String maximumAmount) {
+        if (checkNumber(maximumAmount)) {
+            discount.setMaximumDiscount(Double.parseDouble(maximumAmount));
+            success("Discount changed successfully.");
+        } else error("Invalid input");
     }
 
-    public void editDiscountUserCount(int count) {
-        discount.setDiscountUseCount(count);
+    public void editDiscountUserCount(String count) {
+        if (count.matches("^\\d+$")) {
+            discount.setDiscountUseCount(Integer.parseInt(count));
+            success("Discount changed successfully.");
+        } else error("Invalid input");
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
+            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="ViewController.principal.viewDiscountCodes.EditDiscountController">
+    <children>
+        <Label alignment="CENTER" layoutY="39.0" prefHeight="27.0" prefWidth="400.0" text="Edit Discount:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Label layoutX="67.0" layoutY="195.0" text="New Value:">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="newValueField" layoutX="173.0" layoutY="193.0" prefHeight="30.0" prefWidth="155.0"/>
+        <Button layoutX="40.0" layoutY="237.0" mnemonicParsing="false" onAction="#editDiscount" prefHeight="47.0"
+                prefWidth="319.0" text="Edit Discount">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Button>
+        <RadioButton fx:id="beginningDateRB" contentDisplay="BOTTOM" layoutX="24.0" layoutY="79.0"
+                     mnemonicParsing="false" selected="true" text="Beginning Date">
+            <toggleGroup>
+                <ToggleGroup fx:id="t"/>
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="endingDateRB" contentDisplay="BOTTOM" layoutX="146.0" layoutY="79.0" mnemonicParsing="false"
+                     text="Ending Date" toggleGroup="$t"/>
+        <RadioButton fx:id="percentRB" contentDisplay="BOTTOM" layoutX="261.0" layoutY="79.0" mnemonicParsing="false"
+                     text="Percent" toggleGroup="$t"/>
+        <RadioButton fx:id="maxAmountRB" contentDisplay="BOTTOM" layoutX="77.0" layoutY="111.0" mnemonicParsing="false"
+                     text="Max Amount" toggleGroup="$t"/>
+        <RadioButton fx:id="useCountRB" contentDisplay="BOTTOM" layoutX="188.0" layoutY="111.0" mnemonicParsing="false"
+                     text="Use Count" toggleGroup="$t"/>
+    </children>
+</AnchorPane>

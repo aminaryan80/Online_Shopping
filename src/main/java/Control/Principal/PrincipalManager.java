@@ -7,6 +7,7 @@ import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
+import View.Principal.PrincipalMenu;
 import ViewController.principal.PrincipalController;
 
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ public class PrincipalManager extends Manager {
 
     public PrincipalManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //this.menu = new PrincipalMenu(this);
+        this.menu = new PrincipalMenu(this);
         PrincipalController controller = (PrincipalController) loadFxml(Addresses.PRINCIPAL_MENU);
         controller.setPrincipal(account);
         controller.init();
@@ -24,17 +25,35 @@ public class PrincipalManager extends Manager {
 
     public void createDiscountCode(ArrayList<String> newDiscountInputs, ArrayList<String> allowedCustomersNames) {
         // 0:discount percent - 1:maximumDiscount - 2:discountUseCount - 3:beginningDate - 4:endingDate
-        Discount discount = new Discount(
-                LocalDate.parse(newDiscountInputs.get(3)),
-                LocalDate.parse(newDiscountInputs.get(4)),
-                Integer.parseInt(newDiscountInputs.get(0)),
-                Double.parseDouble(newDiscountInputs.get(1)),
-                Integer.parseInt(newDiscountInputs.get(2)),
-                allowedCustomersNames
-        );
-        for (Customer customer : getCustomersListByNames(allowedCustomersNames)) {
-            customer.addDiscount(discount);
+        if (isDiscountInputsValid(newDiscountInputs)) {
+            Discount discount = new Discount(
+                    LocalDate.parse(newDiscountInputs.get(3)),
+                    LocalDate.parse(newDiscountInputs.get(4)),
+                    Integer.parseInt(newDiscountInputs.get(0)),
+                    Double.parseDouble(newDiscountInputs.get(1)),
+                    Integer.parseInt(newDiscountInputs.get(2)),
+                    allowedCustomersNames
+            );
+            for (Customer customer : getCustomersListByNames(allowedCustomersNames)) {
+                customer.addDiscount(discount);
+            }
+        } else error("Invalid input.");
+    }
+
+    private boolean isDiscountInputsValid(ArrayList<String> inputs) {
+        if (!checkPercent(inputs.get(0))) {
+            return false;
         }
+        if (!checkNumber(inputs.get(1))) {
+            return false;
+        }
+        if (!checkNumber(inputs.get(2))) {
+            return false;
+        }
+        if (!checkDate(inputs.get(3))) {
+            return false;
+        }
+        return checkDate(inputs.get(4));
     }
 
     private ArrayList<Customer> getCustomersListByNames(ArrayList<String> allowedCustomersNames) {

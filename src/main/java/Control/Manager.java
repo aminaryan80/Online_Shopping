@@ -248,7 +248,9 @@ public abstract class Manager {
 
         EDIT_FEATURES_CATEGORY("view/principal/manageCategories/editCategory/edit_features_category_menu.fxml"),
 
-        VIEW_DISCOUNT_CODES("view/principal/viewDiscountCodes/view_discount_codes_menu.fxml");
+        VIEW_DISCOUNT_CODES("view/principal/viewDiscountCodes/view_discount_codes_menu.fxml"),
+
+        EDIT_DISCOUNTS("view/principal/viewDiscountCodes/edit_discount_menu.fxml");
         private String address;
 
         Addresses(String address) {

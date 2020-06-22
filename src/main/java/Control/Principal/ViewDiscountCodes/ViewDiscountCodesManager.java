@@ -36,11 +36,17 @@ public class ViewDiscountCodesManager extends Manager {
     }
 
     public void deleteDiscountCode(String id) throws IOException {
-        Discount.getDiscountById(id).deleteDiscount();
+        if (Discount.hasDiscountWithId(id)) {
+            Discount.getDiscountById(id).deleteDiscount();
+            success("Discount deleted successfully.");
+        } else error("Invalid discount id");
     }
 
     public String viewDiscountCode(String id) {
-        return Discount.getDiscountById(id).toString();
+        if (Discount.hasDiscountWithId(id)) {
+            return Discount.getDiscountById(id).toString();
+        } else error("Invalid discount id");
+        return null;
     }
 
     public String currentSort() {
@@ -138,6 +144,8 @@ public class ViewDiscountCodesManager extends Manager {
     }
 
     public void editDiscountCode(String id) {
-        new EditDiscountCodeManager(account, Discount.getDiscountById(id));
+        if (Discount.hasDiscountWithId(id)) {
+            new EditDiscountCodeManager(account, Discount.getDiscountById(id));
+        } else error("Invalid discount id");
     }
 }

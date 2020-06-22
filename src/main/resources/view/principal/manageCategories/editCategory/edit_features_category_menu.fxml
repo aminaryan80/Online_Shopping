@@ -24,15 +24,15 @@
                 <Font size="18.0"/>
             </font>
         </Button>
-        <RadioButton fx:id="addRB" contentDisplay="BOTTOM" layoutX="35.0" layoutY="79.0" mnemonicParsing="false"
+        <RadioButton fx:id="addRB" contentDisplay="BOTTOM" layoutX="19.0" layoutY="79.0" mnemonicParsing="false"
                      onAction="#openAddFeature" selected="true" text="Add Feature">
             <toggleGroup>
                 <ToggleGroup fx:id="t"/>
             </toggleGroup>
         </RadioButton>
-        <RadioButton fx:id="editRB" contentDisplay="BOTTOM" layoutX="157.0" layoutY="79.0" mnemonicParsing="false"
+        <RadioButton fx:id="editRB" contentDisplay="BOTTOM" layoutX="141.0" layoutY="79.0" mnemonicParsing="false"
                      onAction="#openEditFeature" text="Edit Feature" toggleGroup="$t"/>
-        <RadioButton fx:id="deleteRB" contentDisplay="BOTTOM" layoutX="272.0" layoutY="79.0" mnemonicParsing="false"
+        <RadioButton fx:id="deleteRB" contentDisplay="BOTTOM" layoutX="256.0" layoutY="79.0" mnemonicParsing="false"
                      onAction="#openDeleteFeature" text="Delete Feature" toggleGroup="$t"/>
         <Label fx:id="newNameLabel" layoutX="66.0" layoutY="202.0" text="New Name:" visible="false">
             <font>
