@@ -16,4 +16,8 @@ public class UserPanelManager extends Manager {
         super(account, address, manager);
         UserPanelController controller = (UserPanelController) loadFxml(Addresses.USER_PANEL);
     }
+
+    public void openRegister() {
+        new CreateNewAccountManager(account);
+    }
 }

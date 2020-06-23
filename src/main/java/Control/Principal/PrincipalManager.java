@@ -7,7 +7,6 @@ import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
-import View.Principal.PrincipalMenu;
 import ViewController.principal.PrincipalController;
 
 import java.time.LocalDate;
@@ -17,10 +16,14 @@ public class PrincipalManager extends Manager {
 
     public PrincipalManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        this.menu = new PrincipalMenu(this);
+        //this.menu = new PrincipalMenu(this);
         PrincipalController controller = (PrincipalController) loadFxml(Addresses.PRINCIPAL_MENU);
         controller.setPrincipal(account);
         controller.init();
+    }
+
+    public void openCreateDiscountCode() {
+        loadFxml(Addresses.CREATE_DISCOUNT_CODE, true);
     }
 
     public void createDiscountCode(ArrayList<String> newDiscountInputs, ArrayList<String> allowedCustomersNames) {

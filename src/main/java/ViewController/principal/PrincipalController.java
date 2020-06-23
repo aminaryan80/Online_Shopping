@@ -78,16 +78,16 @@ public class PrincipalController extends Controller {
 
     private void initDiscounts() {
         discountsTable.setItems(FXCollections.observableArrayList(Discount.getAllDiscounts()));
-        discountIdCol.setCellValueFactory(new PropertyValueFactory<>("username"));
-        discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        discountBeginningDateCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        discountIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("discountPercent"));
+        discountBeginningDateCol.setCellValueFactory(new PropertyValueFactory<>("beginningDate"));
     }
 
     private void initRequests() {
         requestsTable.setItems(FXCollections.observableArrayList(Request.getAllRequests()));
-        requestIdCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        requestIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         requestTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        requestIdCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        requestIdCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
     }
 
     public void updateProfile(ActionEvent actionEvent) {
@@ -122,7 +122,7 @@ public class PrincipalController extends Controller {
     }
 
     public void createDiscountCode(ActionEvent actionEvent) {
-        //((PrincipalManager) manager).createDiscountCode();
+        ((PrincipalManager) manager).openCreateDiscountCode();
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {

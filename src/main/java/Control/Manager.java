@@ -220,13 +220,17 @@ public abstract class Manager {
     public enum Addresses {
         MAIN_MENU("view/main_menu.fxml"),
 
+        REGISTER("view/userPanel/register_menu.fxml"),
+
         EDIT_PRODUCTS_MENU("view/userPanel/Seller/EditProducts.fxml"),
 
         USER_PANEL("view/userPanel/user_panel.fxml"),
 
         PRINCIPAL_MENU("view/principal/principal_menu.fxml"),
 
-        SELLER_MENU("view/userPanel/Seller/SellerMenu.fxml"),
+        SELLER_MENU("view/userPanel/Seller/seller_menu.fxml"),
+
+        CUSTOMER_MENU("view/userPanel/dashboard/customer_dashboard_menu.fxml"),
 
         EDIT_OFFS("view/userPanel/Seller/EditOff.fxml"),
 
@@ -250,7 +254,15 @@ public abstract class Manager {
 
         VIEW_DISCOUNT_CODES("view/principal/viewDiscountCodes/view_discount_codes_menu.fxml"),
 
-        EDIT_DISCOUNTS("view/principal/viewDiscountCodes/edit_discount_menu.fxml");
+        CREATE_DISCOUNT_CODE("view/principal/create_new_discount.fxml"),
+
+        EDIT_DISCOUNTS("view/principal/viewDiscountCodes/edit_discount_menu.fxml"),
+
+        VIEW_CART("view/userPanel/Customer/ViewCart.fxml"),
+
+        VIEW_ORDERS("view/userPanel/Customer/ViewOrders.fxml");
+
+
         private String address;
 
         Addresses(String address) {
