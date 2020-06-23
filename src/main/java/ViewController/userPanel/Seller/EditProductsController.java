@@ -16,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class EditProductsController extends Controller {
                 Double.parseDouble(price.getText()), Boolean.parseBoolean(isAvailable.getText()), description.getText(), allFeatures);
     }
 
-    public void updateScene(ActionEvent actionEvent) {
+    public void updateScene(MouseEvent mouseEvent) {
         product = products.getSelectionModel().getSelectedItem();
         initBuyers();
         initFeatures();

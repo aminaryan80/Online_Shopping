@@ -70,7 +70,7 @@ public class SellerMenuController extends Controller {
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).editPassword();
+        manager.editPassword();
     }
 
     public void updateProfile(ActionEvent actionEvent) {

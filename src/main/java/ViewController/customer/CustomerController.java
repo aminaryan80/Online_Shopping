@@ -113,7 +113,7 @@ public class CustomerController extends Controller {
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).editPassword();
+        manager.editPassword();
     }
 
     public void openCart(ActionEvent actionEvent) {

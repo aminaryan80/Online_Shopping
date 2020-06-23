@@ -199,6 +199,10 @@ public abstract class Manager {
         return controller;
     }
 
+    public void editPassword() {
+        new EditPasswordManager(account);
+    }
+
     public void error(String message) {
         Alert a = new Alert(Alert.AlertType.NONE);
         a.setAlertType(Alert.AlertType.ERROR);

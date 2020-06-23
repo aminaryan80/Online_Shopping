@@ -1,6 +1,5 @@
 package Control.Principal;
 
-import Control.EditPasswordManager;
 import Control.Manager;
 import Control.Principal.ManageCategories.ManageCategoriesManager;
 import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
@@ -73,10 +72,6 @@ public class PrincipalManager extends Manager {
             return true;
         } else error("Invalid input");
         return false;
-    }
-
-    public void editPassword() {
-        new EditPasswordManager(account);
     }
 
     public void openManageUsers() {
