@@ -67,8 +67,8 @@ public class EditProductsController extends Controller {
     private TextField newFeaturesValues;
     private Product product;
 
-    public void init() {
-        products.setItems(FXCollections.observableArrayList(Product.getAllProducts()));
+    public void init(Seller seller) {
+        products.setItems(FXCollections.observableArrayList(Product.getProductsBySeller(seller)));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));

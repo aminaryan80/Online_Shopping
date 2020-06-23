@@ -76,6 +76,16 @@ public class Product {
         return products;
     }
 
+    public static ArrayList<Product> getProductsBySeller(Seller seller) {
+        ArrayList<Product> products = new ArrayList<>();
+        for (Product product : allProducts) {
+            if (product.getSeller().equals(seller)) {
+                products.add(product);
+            }
+        }
+        return products;
+    }
+
     public ArrayList<Feature> getFeatures() {
         return features;
     }

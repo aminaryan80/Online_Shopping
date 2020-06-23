@@ -30,7 +30,7 @@ public class EditProductsManager extends Manager {
         super(account, address, manager);
         //new ManageUsersMenu(this);
         Controller controller = loadFxml(Addresses.EDIT_PRODUCTS_MENU);
-        ((EditProductsController) controller).init();
+        ((EditProductsController) controller).init((Seller) account);
     }
 
     public String viewProductDetails(String id) {

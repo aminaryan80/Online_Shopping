@@ -17,7 +17,7 @@ public class PrincipalManager extends Manager {
 
     public PrincipalManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        this.menu = new PrincipalMenu(this);
+        //this.menu = new PrincipalMenu(this);
         PrincipalController controller = (PrincipalController) loadFxml(Addresses.PRINCIPAL_MENU);
         controller.setPrincipal(account);
         controller.init();
