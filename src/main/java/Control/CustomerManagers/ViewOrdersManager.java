@@ -4,7 +4,6 @@ import Control.Manager;
 import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
-
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Product.Product;
@@ -20,19 +19,27 @@ public class ViewOrdersManager extends Manager {
     private Sort currentSort;
     private List<BuyingLog> logs;
     private Customer customer = (Customer) account;
+
     public ViewOrdersManager(Account account) {
         super(account);
         logs = ((Customer) account).getAllLogs();
-        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
-        this.menu = new ViewOrdersMenu(this);
+        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
+            this.menu = new ViewOrdersMenu(this);
+    }
+
+    public ViewOrdersManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        logs = ((Customer) account).getAllLogs();
+        //this.menu = new ViewOrdersMenu(this);
+        loadFxml(Addresses.VIEW_ORDERS);
     }
 
     public boolean canShowOrderWithId(String logId) {
         return customer.getLogById(logId) != null;
     }
 
-    public boolean doesLogExist(String logId){
-        return customer.getLogById(logId)!=null;
+    public boolean doesLogExist(String logId) {
+        return customer.getLogById(logId) != null;
     }
 
     public String showOrderById(String logId) {

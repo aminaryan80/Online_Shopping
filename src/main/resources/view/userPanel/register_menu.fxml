@@ -4,261 +4,134 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0" styleClass="background"
-            stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.251">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="400.0" styleClass="background"
+            stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="ViewController.userPanel.RegisterController">
     <children>
-        <HBox layoutX="-2.0" layoutY="1.0" prefHeight="600.0" prefWidth="1200.0">
+        <VBox prefHeight="200.0" prefWidth="400.0">
             <children>
-                <VBox prefHeight="200.0" prefWidth="400.0">
-                    <padding>
-                        <Insets bottom="8.0" left="16.0" right="16.0" top="8.0"/>
-                    </padding>
+                <Label alignment="CENTER" prefHeight="35.0" prefWidth="397.0" text="Create New Account:"
+                       textAlignment="CENTER" textOverrun="CLIP">
+                    <font>
+                        <Font name="System Bold" size="24.0"/>
+                    </font>
+                </Label>
+                <HBox prefHeight="60.0" prefWidth="200.0">
                     <children>
-                        <Label alignment="CENTER" prefHeight="35.0" prefWidth="397.0" text="principal"
-                               textAlignment="CENTER" textOverrun="CLIP">
-                            <font>
-                                <Font name="System Bold" size="24.0"/>
-                            </font>
-                        </Label>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Username"
-                                   styleClass="text-field" stylesheets="@../../styles/styles.css">
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0" top="60.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Password"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Email"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Phone Number"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="First Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Last Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="384.0" text="Register">
-                            <VBox.margin>
-                                <Insets left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </Button>
+                        <RadioButton fx:id="principalRB" mnemonicParsing="false" onAction="#principalRBSelected"
+                                     text="Principal">
+                            <HBox.margin>
+                                <Insets left="13.0" right="57.0"/>
+                            </HBox.margin>
+                            <toggleGroup>
+                                <ToggleGroup fx:id="t"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="sellerRB" mnemonicParsing="false" onAction="#sellerRBSelected"
+                                     selected="true" text="Seller" toggleGroup="$t">
+                            <HBox.margin>
+                                <Insets right="56.0"/>
+                            </HBox.margin>
+                        </RadioButton>
+                        <RadioButton fx:id="customerRB" mnemonicParsing="false" onAction="#customerRBSelected"
+                                     text="Customer" toggleGroup="$t">
+                            <HBox.margin>
+                                <Insets/>
+                            </HBox.margin>
+                        </RadioButton>
                     </children>
-                    <HBox.margin>
-                        <Insets bottom="8.0"/>
-                    </HBox.margin>
-                </VBox>
-                <VBox prefHeight="200.0" prefWidth="400.0">
-                    <padding>
-                        <Insets bottom="8.0" left="16.0" right="16.0" top="8.0"/>
-                    </padding>
-                    <children>
-                        <Label alignment="CENTER" prefHeight="35.0" prefWidth="397.0" text="Seller"
-                               textAlignment="CENTER" textOverrun="CLIP">
-                            <font>
-                                <Font name="System Bold" size="24.0"/>
-                            </font>
-                        </Label>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Username"
-                                   styleClass="text-field" stylesheets="@../../styles/styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0" top="60.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Password"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Email"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Phone Number"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="First Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Last Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Balance"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Company Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="384.0" text="Register">
-                            <VBox.margin>
-                                <Insets left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </Button>
-                    </children>
-                </VBox>
-                <VBox prefHeight="200.0" prefWidth="400.0">
-                    <padding>
-                        <Insets bottom="8.0" left="16.0" right="16.0" top="8.0"/>
-                    </padding>
-                    <children>
-                        <Label alignment="CENTER" prefHeight="35.0" prefWidth="397.0" text="Customer"
-                               textAlignment="CENTER" textOverrun="CLIP">
-                            <font>
-                                <Font name="System Bold" size="24.0"/>
-                            </font>
-                        </Label>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Username"
-                                   styleClass="text-field" stylesheets="@../../styles/styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0" top="60.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Password"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Email"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Phone Number"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="First Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Last Name"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <TextField alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Balance"
-                                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
-                            <font>
-                                <Font size="17.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="8.0" left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="384.0" text="Register">
-                            <VBox.margin>
-                                <Insets left="8.0" right="8.0"/>
-                            </VBox.margin>
-                        </Button>
-                    </children>
-                    <HBox.margin>
-                        <Insets/>
-                    </HBox.margin>
-                </VBox>
+                    <VBox.margin>
+                        <Insets bottom="40.0" top="20.0"/>
+                    </VBox.margin>
+                </HBox>
+                <TextField fx:id="usernameField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="Username" styleClass="text-field" stylesheets="@../../styles/styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="passwordField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="Password" styleClass="text-field"
+                           stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="emailField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0" promptText="Email"
+                           styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="phoneNumberField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="Phone Number" styleClass="text-field"
+                           stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="firstNameField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="First Name" styleClass="text-field"
+                           stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="lastNameField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="Last Name" styleClass="text-field"
+                           stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="balanceField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="Balance" styleClass="text-field"
+                           stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <TextField fx:id="companyNameField" alignment="CENTER" prefHeight="40.0" prefWidth="384.0"
+                           promptText="Company Name" styleClass="text-field"
+                           stylesheets="@../../styles/user_panel_styles.css">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </TextField>
+                <Button mnemonicParsing="false" onAction="#register" prefHeight="42.0" prefWidth="384.0"
+                        text="Register">
+                    <VBox.margin>
+                        <Insets left="8.0" right="8.0"/>
+                    </VBox.margin>
+                </Button>
             </children>
-        </HBox>
+            <padding>
+                <Insets left="16.0" right="16.0" top="16.0"/>
+            </padding>
+        </VBox>
     </children>
 </AnchorPane>

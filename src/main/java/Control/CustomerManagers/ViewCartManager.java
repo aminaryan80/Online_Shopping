@@ -23,15 +23,22 @@ public class ViewCartManager extends Manager {
     public ViewCartManager(Account account) {
         super(account);
         products = Product.getAllProducts();
-        if(!account.getUsername().equals(UtilTestObject.CUSTOMER))
-        this.menu = new ViewCartMenu(this);
+        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
+            this.menu = new ViewCartMenu(this);
+    }
+
+    public ViewCartManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        products = Product.getAllProducts();
+        //this.menu = new ViewCartMenu(this);
+        loadFxml(Addresses.VIEW_CART);
     }
 
     public String showProducts() {
         List<String> productsInfos = customer.getCart().showProductsInShort();
         StringBuilder allProductsInfo = new StringBuilder();
         for (String productsInfo : productsInfos) {
-            allProductsInfo.append("\n"+productsInfo);
+            allProductsInfo.append("\n" + productsInfo);
         }
         return allProductsInfo.toString();
     }
