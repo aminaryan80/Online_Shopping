@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -19,9 +19,10 @@
                 <Font size="21.0" />
             </font>
         </Label>
-        <Button layoutX="269.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#editPassword" prefHeight="38.0" prefWidth="175.0" text="Edit Password">
+        <Button layoutX="269.0" layoutY="310.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="38.0"
+                prefWidth="175.0" text="Edit Password">
             <cursor>
-                <Cursor fx:constant="HAND" />
+                <Cursor fx:constant="HAND"/>
             </cursor>
         </Button>
         <Label alignment="CENTER" layoutX="281.0" layoutY="243.0" prefHeight="32.0" prefWidth="150.0" text="Balance:">
@@ -83,7 +84,8 @@
             </columns>
         </TableView>
         <Label layoutX="819.0" layoutY="296.0" text="Sales History:" />
-        <Button layoutX="481.0" layoutY="234.0" mnemonicParsing="false" onMouseClicked="#updateProfile" prefHeight="32.0" prefWidth="302.0" text="Update Profile" />
+        <Button layoutX="481.0" layoutY="234.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="32.0"
+                prefWidth="302.0" text="Update Profile"/>
         <Label alignment="CENTER" layoutX="280.0" layoutY="31.0" prefHeight="32.0" prefWidth="150.0" text="Seller">
             <font>
                 <Font size="21.0" />
@@ -101,35 +103,46 @@
         </Label>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="38.0" prefWidth="234.0" text="Manage Products">
+                <Button mnemonicParsing="false" onAction="#manageProducts" prefHeight="38.0" prefWidth="234.0"
+                        text="Manage Products">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#viewOffs" prefHeight="38.0" prefWidth="234.0" text="View Offs">
+                <Button mnemonicParsing="false" onAction="#viewOffs" prefHeight="38.0" prefWidth="234.0"
+                        text="View Offs">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onMouseClicked="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+                <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
+                        textFill="RED">
                     <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="12.0"/>
                     </font>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
             </children>
         </VBox>
-      <TreeView fx:id="categories" layoutX="832.0" layoutY="60.0" prefHeight="200.0" prefWidth="326.0" />
+        <TreeView fx:id="categories" layoutX="826.0" layoutY="50.0" prefHeight="200.0" prefWidth="326.0"/>
     </children>
 </AnchorPane>

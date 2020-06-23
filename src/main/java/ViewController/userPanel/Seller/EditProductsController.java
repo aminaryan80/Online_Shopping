@@ -9,19 +9,16 @@ import Models.Shop.Category.Feature;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.EditProductRequest;
 import ViewController.Controller;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EditProductsController extends Controller {
 
@@ -75,7 +72,7 @@ public class EditProductsController extends Controller {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
-    public void remove(MouseEvent mouseEvent) {
+    public void remove(ActionEvent actionEvent) {
         try {
             ((SellerManager) manager).deleteProductById(id.getText());
         } catch (IOException e) {
@@ -83,7 +80,7 @@ public class EditProductsController extends Controller {
         }
     }
 
-    public void update(MouseEvent mouseEvent) {
+    public void update(ActionEvent actionEvent) {
         if (!product.getName().equals(name.getText())) {
             Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), "name", name.getText());
             new EditProductRequest((Seller) manager.getAccount(), product1);
@@ -107,7 +104,7 @@ public class EditProductsController extends Controller {
         }
     }
 
-    public void add(MouseEvent mouseEvent) {
+    public void add(ActionEvent actionEvent) {
         if (!Category.hasCategoryWithName(category.getText()) && !category.getText().equals("mainCategory")) {
             manager.error("wrong category name");
             return;
@@ -126,7 +123,7 @@ public class EditProductsController extends Controller {
                 Double.parseDouble(price.getText()), Boolean.parseBoolean(isAvailable.getText()), description.getText(), allFeatures);
     }
 
-    public void updateScene(MouseEvent mouseEvent) {
+    public void updateScene(ActionEvent actionEvent) {
         product = products.getSelectionModel().getSelectedItem();
         initBuyers();
         initFeatures();

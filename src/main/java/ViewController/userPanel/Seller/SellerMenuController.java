@@ -7,10 +7,11 @@ import Models.Account.Seller;
 import Models.Shop.Log.SellingLog;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+
 import java.time.LocalDate;
 
 public class SellerMenuController extends Controller {
@@ -68,11 +69,11 @@ public class SellerMenuController extends Controller {
         categories.setRoot(((SellerManager) manager).getCategoriesInTable());
     }
 
-    public void editPassword(MouseEvent mouseEvent) {
+    public void editPassword(ActionEvent actionEvent) {
         ((PrincipalManager) manager).editPassword();
     }
 
-    public void updateProfile(MouseEvent mouseEvent) {
+    public void updateProfile(ActionEvent actionEvent) {
         String email = emailText.getText();
         String phoneNumber = phoneNumberText.getText();
         if (((PrincipalManager) manager).isEnteredInputValid(email, phoneNumber)) {
@@ -84,11 +85,11 @@ public class SellerMenuController extends Controller {
         }
     }
 
-    public void manageProducts(MouseEvent mouseEvent) {
+    public void manageProducts(ActionEvent actionEvent) {
         ((SellerManager) manager).openManageProducts();
     }
 
-    public void viewOffs(MouseEvent mouseEvent) {
+    public void viewOffs(ActionEvent actionEvent) {
         ((SellerManager) manager).openManageOffs();
     }
 }

@@ -8,13 +8,12 @@ import Models.Shop.Request.AddOffRequest;
 import Models.Shop.Request.EditOffRequest;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,7 +62,7 @@ public class EditOffController extends Controller {
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("discountAmount"));
     }
 
-    public void update(MouseEvent mouseEvent) {
+    public void update(ActionEvent actionEvent) {
         if (!off.getBeginningDate().equals(LocalDate.parse(beginningDate.getText()))) {
             Auction auction = ((OffsManager) manager).editOffAttribute(off.getId(), "beginningDate", beginningDate.getText());
             new EditOffRequest((Seller) manager.getAccount(), auction);
@@ -78,13 +77,13 @@ public class EditOffController extends Controller {
         }
     }
 
-    public void add(MouseEvent mouseEvent) {
+    public void add(ActionEvent actionEvent) {
         Auction auction = ((OffsManager) manager).addOff(beginningDate.getText(), endingDate.getText(),
                 Double.parseDouble(amount.getText()), (ArrayList<String>) Arrays.asList(productsIds.getText().split("\\s+")));
         new AddOffRequest((Seller) manager.getAccount(), auction);
     }
 
-    public void updateScene(MouseEvent mouseEvent) {
+    public void updateScene(ActionEvent actionEvent) {
         off = offs.getSelectionModel().getSelectedItem();
         id.setText(off.getId());
         beginningDate.setText(off.getBeginningDate().toString());
