@@ -61,9 +61,7 @@ public class ViewCartController extends Controller {
 
     public void select(MouseEvent mouseEvent) {
         System.out.println(mouseEvent.getSource().toString());
-        if (mouseEvent.getTarget() instanceof LabeledText) {
-            System.out.println(((LabeledText) mouseEvent.getTarget()).getParent().getClass());
-        } else {
+        if (!(mouseEvent.getTarget() instanceof LabeledText)) {
             TableRow tableRow = ((TableCell) mouseEvent.getTarget()).getTableRow();
             CartTableItem cartTableItem = (CartTableItem) tableView.getItems().get(tableRow.getIndex());
             if (cartTableItem != null)
@@ -102,5 +100,8 @@ public class ViewCartController extends Controller {
     public void clearCart(MouseEvent mouseEvent) {
         ((ViewCartManager) manager).clearCart();
         init();
+    }
+
+    public void openProductPage(MouseEvent mouseEvent) {
     }
 }
