@@ -33,7 +33,7 @@ public class SellerMenuController extends Controller {
     @FXML
     private TableView<SellingLog> salesHistory;
     @FXML
-    private TreeView categories;
+    private TreeView<String> categories;
     @FXML
     private TableColumn<SellingLog, String> idColumn;
     @FXML
@@ -66,7 +66,7 @@ public class SellerMenuController extends Controller {
     }
 
     private void initCategories() {
-        categories.setRoot(((SellerManager) manager).getCategoriesInTable());
+        categories.setRoot(manager.getCategoriesInTable());
     }
 
     public void editPassword(ActionEvent actionEvent) {

@@ -1,10 +1,14 @@
 package ViewController.products;
 
+import Control.Manager;
+import Control.Products.ProductsManager;
+import Models.Shop.Category.Category;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -13,16 +17,22 @@ import java.util.List;
 
 public class ProductsController extends Controller {
 
-    @FXML
-    private GridPane productsGridPane;
+    public GridPane productsGridPane;
+    public Label categoryNameLabel;
     private ArrayList<Product> products;
+    private Category currentCategory;
 
     public void setProducts(List<Product> products) {
         this.products = (ArrayList<Product>) products;
     }
 
+    public void setCategory(Category currentCategory) {
+        this.currentCategory = currentCategory;
+    }
+
     public void init() {
         try {
+            categoryNameLabel.setText(currentCategory.getName());
             int i = 0;
             productsGridPane.setPrefHeight(0);
             for (Product product : products) {
@@ -36,17 +46,28 @@ public class ProductsController extends Controller {
                 }
                 i++;
             }
-            /*AnchorPane product = FXMLLoader.load(getClass().getResource("../../view/products/Product.fxml"));
-            AnchorPane product2 = FXMLLoader.load(getClass().getResource("../../view/products/Product.fxml"));
-            AnchorPane product3 = FXMLLoader.load(getClass().getResource("../../view/products/Product.fxml"));
-            AnchorPane product4 = FXMLLoader.load(getClass().getResource("../../view/products/Product.fxml"));
-            productsGridPane.add(product, 0, 0);
-            productsGridPane.add(product2, 1, 0);
-            productsGridPane.add(product3, 2, 0);
-            productsGridPane.add(product4, 0, 1);
-            productsGridPane.setPrefHeight(760);*/
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void filter(ActionEvent actionEvent) {
+
+    }
+
+    public void sort(ActionEvent actionEvent) {
+
+    }
+
+    public void openUserPanel(ActionEvent actionEvent) {
+        openUserPanel(false, Manager.Addresses.MAIN_MENU);
+    }
+
+    public void viewCategories(ActionEvent actionEvent) {
+        ((ProductsManager) manager).viewCategories();
+    }
+
+    public void showProduct(ActionEvent actionEvent) {
+
     }
 }

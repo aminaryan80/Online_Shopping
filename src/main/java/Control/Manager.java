@@ -1,5 +1,6 @@
 package Control;
 
+import Control.Products.ProductsManager;
 import Models.Account.Account;
 import Models.Account.Principal;
 import Models.Shop.Cart;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -195,8 +197,25 @@ public abstract class Manager {
         return controller;
     }
 
+    public void openProductsMenu() {
+        new ProductsManager(account, Addresses.MAIN_MENU, this);
+    }
+
     public void editPassword() {
         new EditPasswordManager(account);
+    }
+
+    public TreeItem<String> getCategoriesInTable() {
+        return getCategoriesInTable(mainCategory);
+    }
+
+    private TreeItem<String> getCategoriesInTable(Category category) {
+        TreeItem<String> categories = new TreeItem<>(category.getName());
+        for (Category subCategory : category.getSubCategories()) {
+            categories.getChildren().add(getCategoriesInTable(subCategory));
+        }
+        categories.setExpanded(true);
+        return categories;
     }
 
     public void error(String message) {
@@ -221,6 +240,8 @@ public abstract class Manager {
         MAIN_MENU("view/main_menu.fxml"),
 
         PRODUCTS_MENU("view/products/products_menu.fxml"),
+
+        VIEW_CATEGORIES("view/products/view_categories.fxml"),
 
         REGISTER("view/userPanel/register_menu.fxml"),
 

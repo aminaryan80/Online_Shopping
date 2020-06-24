@@ -2,3 +2,11 @@
     -fx-background-color: palegreen;
     -fx-effect: dropshadow(three-pass-box, gray, 10, 0, 0, 0);
 }
+
+.product:hover {
+    -fx-background-color: #dddddd;
+}
+
+.product:pressed {
+    -fx-background-color: #dddddd;
+}

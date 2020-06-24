@@ -1,6 +1,5 @@
 package ViewController;
 
-import Control.MainManager;
 import Control.Manager;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -33,7 +32,7 @@ public class MainController extends Controller {
     }
 
     public void openProductsMenu(ActionEvent actionEvent) {
-        ((MainManager) manager).openProductsMenu();
+        manager.openProductsMenu();
     }
 
 }

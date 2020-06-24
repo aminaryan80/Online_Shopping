@@ -7,6 +7,7 @@ import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
 import ViewController.products.ProductsController;
+import ViewController.products.ViewCategoriesController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class ProductsManager extends Manager {
         products = Product.getAllProducts();
         ProductsController controller = (ProductsController) loadFxml(Addresses.PRODUCTS_MENU);
         controller.setProducts(products);
+        controller.setCategory(mainCategory);
         controller.init();
     }
 
@@ -371,5 +373,10 @@ public class ProductsManager extends Manager {
     // show product [productId]
     public void showProductById(String id) {
         new ProductPageManager(this.getAccount(), Product.getProductById(id));
+    }
+
+    public void viewCategories() {
+        ViewCategoriesController controller = (ViewCategoriesController) loadFxml(Addresses.VIEW_CATEGORIES, true);
+        controller.init();
     }
 }

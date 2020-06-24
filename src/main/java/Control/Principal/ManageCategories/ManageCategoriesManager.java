@@ -9,7 +9,6 @@ import View.ErrorProcessor;
 import View.Principal.ManageCategories.ManageCategoriesMenu;
 import ViewController.principal.manageCategories.AddCategoryController;
 import ViewController.principal.manageCategories.ManageCategoriesController;
-import javafx.scene.control.TreeItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,18 +74,5 @@ public class ManageCategoriesManager extends Manager {
         if (Category.hasCategoryWithName(categoryName))
             new EditCategoryManager(account, Category.getCategoryByName(categoryName));
         else error("Invalid category name");
-    }
-
-    public TreeItem<String> getCategoriesInTable() {
-        return getCategoriesInTable(mainCategory);
-    }
-
-    private TreeItem<String> getCategoriesInTable(Category category) {
-        TreeItem<String> categories = new TreeItem<>(category.getName());
-        for (Category subCategory : category.getSubCategories()) {
-            categories.getChildren().add(getCategoriesInTable(subCategory));
-        }
-        categories.setExpanded(true);
-        return categories;
     }
 }

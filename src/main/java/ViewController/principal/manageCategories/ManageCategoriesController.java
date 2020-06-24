@@ -15,7 +15,7 @@ public class ManageCategoriesController extends Controller {
     private TreeView<String> categoriesTableView;
 
     public void init() {
-        categoriesTableView.setRoot(((ManageCategoriesManager) manager).getCategoriesInTable());
+        categoriesTableView.setRoot(manager.getCategoriesInTable());
     }
 
     public void addCategory(ActionEvent actionEvent) {

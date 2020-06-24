@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="ViewController.products.ProductsController">
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.products.ProductsController">
     <children>
         <ScrollPane fitToWidth="true" layoutX="251.0" layoutY="63.0" prefHeight="538.0" prefWidth="950.0">
             <content>
@@ -25,7 +25,7 @@
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
               prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Filtering">
+                <Button mnemonicParsing="false" onAction="#filter" prefHeight="38.0" prefWidth="234.0" text="Filtering">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>
@@ -33,7 +33,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Sorting">
+                <Button mnemonicParsing="false" onAction="#sort" prefHeight="38.0" prefWidth="234.0" text="Sorting">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>
@@ -41,7 +41,8 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="View Categories">
+                <Button mnemonicParsing="false" onAction="#viewCategories" prefHeight="38.0" prefWidth="234.0"
+                        text="View Categories">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>
@@ -49,7 +50,8 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Show Product">
+                <Button mnemonicParsing="false" onAction="#showProduct" prefHeight="38.0" prefWidth="234.0"
+                        text="Show Product">
                     <cursor>
                         <Cursor fx:constant="HAND"/>
                     </cursor>
@@ -57,7 +59,8 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="User Panel">
+                <Button mnemonicParsing="false" onAction="#openUserPanel" prefHeight="38.0" prefWidth="234.0"
+                        text="User Panel">
                     <VBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
@@ -65,7 +68,7 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="back">
+                <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <VBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
@@ -73,7 +76,8 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
+                        textFill="RED">
                     <font>
                         <Font name="System Bold" size="12.0"/>
                     </font>
@@ -86,8 +90,8 @@
                 </Button>
             </children>
         </VBox>
-        <Label alignment="CENTER" layoutX="591.0" layoutY="22.0" prefHeight="18.0" prefWidth="270.0"
-               text="[CategoryName]">
+        <Label fx:id="categoryNameLabel" alignment="CENTER" layoutX="591.0" layoutY="22.0" prefHeight="18.0"
+               prefWidth="270.0" text="[CategoryName]">
             <font>
                 <Font size="18.0"/>
             </font>

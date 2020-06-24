@@ -1,7 +1,6 @@
 package Control.Seller;
 
 import Control.Manager;
-import Control.Principal.ManageUsersManager;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Category.Category;
@@ -11,10 +10,7 @@ import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
 import Models.Shop.Request.DeleteProductRequest;
-import View.Seller.SellerMenu;
-import ViewController.principal.PrincipalController;
 import ViewController.userPanel.Seller.SellerMenuController;
-import javafx.scene.control.TreeItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,19 +28,6 @@ public class SellerManager extends Manager {
         SellerMenuController controller = (SellerMenuController) loadFxml(Addresses.SELLER_MENU);
         controller.setSeller(account);
         controller.init();
-    }
-
-    public TreeItem<String> getCategoriesInTable() {
-        return getCategoriesInTable(mainCategory);
-    }
-
-    private TreeItem<String> getCategoriesInTable(Category category) {
-        TreeItem<String> categories = new TreeItem<>(category.getName());
-        for (Category subCategory : category.getSubCategories()) {
-            categories.getChildren().add(getCategoriesInTable(subCategory));
-        }
-        categories.setExpanded(true);
-        return categories;
     }
 
     // view company information

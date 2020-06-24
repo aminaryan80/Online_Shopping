@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -9,7 +10,8 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="380.0" prefWidth="310.0"
             xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.products.ProductItemController">
     <children>
-        <VBox alignment="TOP_CENTER" prefHeight="380.0" prefWidth="310.0">
+        <VBox alignment="TOP_CENTER" onMouseClicked="#openProduct" prefHeight="380.0" prefWidth="310.0"
+              styleClass="product" stylesheets="@../../styles/products_styles.css">
             <children>
                 <Label fx:id="idLabel" alignment="CENTER" prefHeight="27.0" prefWidth="310.0" text="Id">
                     <font>
@@ -55,6 +57,9 @@
                     </font>
                 </Label>
             </children>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
         </VBox>
     </children>
 </AnchorPane>
