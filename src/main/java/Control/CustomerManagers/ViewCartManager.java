@@ -29,7 +29,7 @@ public class ViewCartManager extends Manager {
         super(account, address, manager);
         products = Product.getAllProducts();
         //this.menu = new ViewCartMenu(this);
-        ViewCartController viewCartController =(ViewCartController) loadFxml(Addresses.VIEW_CART);
+        ViewCartController viewCartController = (ViewCartController) loadFxml(Addresses.VIEW_CART);
         viewCartController.init();
     }
 
