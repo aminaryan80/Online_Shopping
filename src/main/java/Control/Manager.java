@@ -153,10 +153,6 @@ public abstract class Manager {
         return Discount.getDiscountById(DiscountCodeId) != null;
     }
 
-    public boolean doesProductExist(String productId) {
-        return Product.getProductById(productId) != null;
-    }
-
     public Discount getDiscountById(String discountId) {
         return Discount.getDiscountById(discountId);
     }
@@ -223,6 +219,8 @@ public abstract class Manager {
 
     public enum Addresses {
         MAIN_MENU("view/main_menu.fxml"),
+
+        PRODUCTS_MENU("view/products/products_menu.fxml"),
 
         REGISTER("view/userPanel/register_menu.fxml"),
 

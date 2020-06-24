@@ -6,6 +6,8 @@ import Models.Account.Account;
 import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
+import ViewController.products.ProductsController;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,6 +27,15 @@ public class ProductsManager extends Manager {
         this.currentCategory = mainCategory;
         products = Product.getAllProducts();
         this.menu = new ProductsMenu(this, productsInShort());
+    }
+
+    public ProductsManager(Account account, Addresses address, Manager manager) {
+        super(account, address, manager);
+        this.currentCategory = mainCategory;
+        products = Product.getAllProducts();
+        ProductsController controller = (ProductsController) loadFxml(Addresses.PRODUCTS_MENU);
+        controller.setProducts(products);
+        controller.init();
     }
 
     // filtering

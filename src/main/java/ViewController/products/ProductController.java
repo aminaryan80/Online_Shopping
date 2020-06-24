@@ -1,5 +1,6 @@
-package ViewController;
+package ViewController.products;
 
+import ViewController.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProductController implements Initializable {
+public class ProductController extends Controller implements Initializable {
     @FXML
     private GridPane comments;
 

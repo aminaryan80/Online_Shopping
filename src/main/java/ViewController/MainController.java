@@ -1,7 +1,7 @@
 package ViewController;
 
+import Control.MainManager;
 import Control.Manager;
-import Control.Products.ProductsManager;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -33,7 +33,7 @@ public class MainController extends Controller {
     }
 
     public void openProductsMenu(ActionEvent actionEvent) {
-        new ProductsManager(manager.getAccount());
+        ((MainManager) manager).openProductsMenu();
     }
 
 }

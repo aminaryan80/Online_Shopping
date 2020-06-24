@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="ViewController.ProductsController">
+            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="ViewController.products.ProductsController">
     <children>
         <ScrollPane fitToWidth="true" layoutX="251.0" layoutY="63.0" prefHeight="538.0" prefWidth="950.0">
             <content>
-                <GridPane fx:id="products" prefWidth="940.0">
+                <GridPane fx:id="productsGridPane" prefWidth="940.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
