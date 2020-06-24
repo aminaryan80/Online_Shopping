@@ -2,11 +2,7 @@ package View;
 
 import Control.AuctionsPageManager;
 import Control.Manager;
-import Control.Products.ProductsManager;
-import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
-import View.ErrorProcessor;
-import View.Menu;
 
 import java.util.ArrayList;
 import java.util.List;

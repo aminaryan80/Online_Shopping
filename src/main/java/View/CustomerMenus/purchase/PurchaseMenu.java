@@ -1,6 +1,5 @@
 package View.CustomerMenus.purchase;
 
-import Control.CustomerManagers.PurchaseManager;
 import Control.Manager;
 import View.Menu;
 

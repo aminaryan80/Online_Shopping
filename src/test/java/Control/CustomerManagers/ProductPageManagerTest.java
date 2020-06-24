@@ -6,7 +6,7 @@ import Models.Account.Seller;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Comment;
-import Models.Shop.Product.Comment.*;
+import Models.Shop.Product.Comment.CommentStatus;
 import Models.Shop.Product.Product;
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ProductPageManagerTest {
 

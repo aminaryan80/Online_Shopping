@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.zip.CheckedOutputStream;
 
 public class Comment {
     private static ArrayList<Comment> allComments = new ArrayList<>();

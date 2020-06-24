@@ -4,24 +4,59 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            stylesheets="@../../../styles/publicStyle.css" xmlns="http://javafx.com/javafx/8.0.251"
-            fx:controller="ViewController.customer.ViewCartController">
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../styles/publicStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.ViewCartController">
 
     <children>
         <HBox layoutX="250.0" prefHeight="600.0" prefWidth="954.0">
             <children>
                 <ScrollPane prefHeight="600.0" prefWidth="954.0">
                     <content>
-                        <VBox fx:id="vBox" prefHeight="601.0" prefWidth="954.0"/>
+                        <VBox fx:id="vBox" prefHeight="601.0" prefWidth="954.0">
+                     <children>
+                        <Pane prefHeight="77.0" prefWidth="954.0">
+                           <children>
+                              <Label layoutX="1.0" layoutY="-3.0" prefHeight="84.0" prefWidth="942.0" text=" Products on your shopping cart : ">
+                                 <font>
+                                    <Font name="Book Antiqua" size="48.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <TableView fx:id="tableView" prefHeight="460.0" prefWidth="954.0">
+                          <columns>
+                            <TableColumn fx:id="numberColumn" prefWidth="35.99998474121094" text="#" />
+                              <TableColumn fx:id="idColumn"  minWidth="0.0" prefWidth="119.73333740234375" text="id" />
+                            <TableColumn fx:id="nameColumn" prefWidth="99.46670532226562" text="Name" />
+                              <TableColumn fx:id="descriptionColumn" prefWidth="268.2666931152344" text="description" />
+                              <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="90.39990234375" text="quantity" />
+                              <TableColumn fx:id="priceColumn" prefWidth="339.1999877929687" text="price" />
+                          </columns>
+                        </TableView>
+                        <Pane prefHeight="73.0" prefWidth="954.0">
+                           <children>
+                              <Button layoutX="838.0" layoutY="17.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="clear cart" />
+                              <Button layoutX="711.0" layoutY="15.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Purchase" />
+                              <Label layoutX="2.0" layoutY="1.0" prefHeight="59.0" prefWidth="248.0" text=" Total amount: ">
+                                 <font>
+                                    <Font name="Book Antiqua" size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="244.0" prefHeight="59.0" prefWidth="147.0" text="amount$">
+                                 <font>
+                                    <Font name="Book Antiqua" size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children></VBox>
                     </content>
                 </ScrollPane>
             </children>
         </HBox>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="User Panel">
+                <Button mnemonicParsing="false" onMouseClicked="#back" prefHeight="38.0" prefWidth="234.0" text="User Panel">
                     <VBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
@@ -29,7 +64,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="back">
+                <Button mnemonicParsing="false" onMouseClicked="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <VBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
@@ -37,7 +72,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+                <Button mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
@@ -72,6 +107,30 @@
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                </VBox.margin>
             </Button>
+            <Pane prefHeight="265.0" prefWidth="234.0">
+               <children>
+                  <Label alignment="CENTER" layoutY="57.0" prefHeight="62.0" prefWidth="236.0" text="Selected Product:" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="-1.0" layoutY="102.0" prefHeight="62.0" prefWidth="236.0" text="product id" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="55.0" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" text="+">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="123.0" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" text="-">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
             </children>
         </VBox>
     </children>

@@ -92,4 +92,8 @@ public class Cart {
     public void empty() {
         products = new HashMap<>();
     }
+
+    public HashMap<Product,Integer> getProductsMap() {
+        return (HashMap<Product, Integer>) products;
+    }
 }

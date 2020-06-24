@@ -1,6 +1,6 @@
 package Control;
+
 import Control.CustomerManagers.ProductPageManager;
-import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category.*;
 import Models.Shop.Product.Product;

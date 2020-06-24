@@ -43,15 +43,15 @@ public abstract class Manager {
         }
     }
 
-    public Manager(Account account, Addresses address, Manager manager) {
+    public Manager(Account account, Addresses previousAddress, Manager previousManager) {
         Manager.account = account;
         if (!Category.hasCategoryWithName("mainCategory")) {
             mainCategory = new Category("mainCategory", null, new HashMap<>(), new ArrayList<>());
         } else {
             mainCategory = Category.getCategoryByName("mainCategory");
         }
-        this.previousAddress = address;
-        this.previousManager = manager;
+        this.previousAddress = previousAddress;
+        this.previousManager = previousManager;
     }
 
     public static Cart getCart() {
@@ -184,15 +184,21 @@ public abstract class Manager {
         Controller controller = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+            System.out.println("done1");
             Parent root = loader.load();
+            System.out.println("done2");
             controller = loader.getController();
+            System.out.println("done3");
             Scene scene = new Scene(root);
+            System.out.println("done4");
             controller.setManager(manager);
+            System.out.println("done5");
             workingStage.setTitle("AP Project");
             workingStage.setScene(scene);
             workingStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("ERROR!");
         }
         return controller;
     }
@@ -284,7 +290,6 @@ public abstract class Manager {
         VIEW_CART("view/userPanel/Customer/ViewCart.fxml"),
 
         VIEW_ORDERS("view/userPanel/Customer/ViewOrders.fxml");
-
 
         private String address;
 

@@ -8,11 +8,9 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewCartMenu;
+import ViewController.customer.ViewCartController;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ViewCartManager extends Manager {
 
@@ -31,7 +29,8 @@ public class ViewCartManager extends Manager {
         super(account, address, manager);
         products = Product.getAllProducts();
         //this.menu = new ViewCartMenu(this);
-        loadFxml(Addresses.VIEW_CART);
+        ViewCartController viewCartController =(ViewCartController) loadFxml(Addresses.CUSTOMER_MENU);
+        viewCartController.init();
     }
 
     public String showProducts() {
@@ -60,6 +59,10 @@ public class ViewCartManager extends Manager {
 
     public boolean doesProductExistInCart(Product product) {
         return customer.getCart().getProducts().contains(product);
+    }
+
+    public HashMap<Product,Integer> getProductsInCart() {
+        return customer.getCart().getProductsMap();
     }
 
     public static class ProductDoNotExistAtAllException extends Exception {

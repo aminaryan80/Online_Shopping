@@ -3,13 +3,11 @@ package View.CustomerMenus.product;
 import Control.CustomerManagers.DigestMenuManager;
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
-import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 import View.Menu;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ProductPage extends Menu {

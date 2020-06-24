@@ -6,7 +6,6 @@ import Control.Manager;
 import Control.Seller.SellerManager;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Log.Log;
-import Models.Shop.Product.Product;
 import View.CustomerMenus.ConsoleCommand;
 import View.ErrorProcessor;
 import View.Menu;

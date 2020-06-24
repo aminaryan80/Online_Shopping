@@ -3,7 +3,6 @@ package View.CustomerMenus.product;
 import Control.CustomerManagers.DigestMenuManager;
 import Control.Manager;
 import View.CustomerMenus.ConsoleCommand;
-import View.CustomerMenus.customer.CustomerMenu;
 import View.ErrorProcessor;
 import View.Menu;
 

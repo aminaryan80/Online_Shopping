@@ -1,10 +1,8 @@
 package Control.Seller;
 
 import Control.Manager;
-import Control.Principal.ManageUsersManager;
 import Models.Account.Account;
 import Models.Account.Seller;
-import Models.Shop.Category.Category;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;

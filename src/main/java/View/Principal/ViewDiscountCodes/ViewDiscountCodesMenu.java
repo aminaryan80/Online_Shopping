@@ -2,13 +2,12 @@ package View.Principal.ViewDiscountCodes;
 
 import Control.Manager;
 import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
-import Control.Products.ProductsManager;
 import Models.Shop.Off.Discount;
 import View.ErrorProcessor;
 import View.Menu;
 
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class ViewDiscountCodesMenu extends Menu {
