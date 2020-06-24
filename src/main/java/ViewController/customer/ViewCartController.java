@@ -104,4 +104,7 @@ public class ViewCartController extends Controller {
 
     public void openProductPage(MouseEvent mouseEvent) {
     }
+
+    public void openPurchasePage(MouseEvent mouseEvent) {
+    }
 }
