@@ -21,6 +21,29 @@ public class CartTableItem {
         this.price =new SimpleDoubleProperty(price);
     }
 
+    public String getName() {
+        return name.get();
+    }
+
+    public String getId() {
+        return id.get();
+    }
+
+    public int getNumber() {
+        return number.get();
+    }
+
+    public double getPrice() {
+        return price.get();
+    }
+
+    public int getQuantity() {
+        return quantity.get();
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
     //    public TableColumn numberColumn;
 //    public TableColumn idColumn;
 //    public TableColumn nameColumn;

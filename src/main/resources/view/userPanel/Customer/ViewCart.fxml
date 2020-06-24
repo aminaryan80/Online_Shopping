@@ -1,58 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../styles/publicStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.ViewCartController">
 
     <children>
         <HBox layoutX="250.0" prefHeight="600.0" prefWidth="954.0">
-            <children>
-                <ScrollPane prefHeight="600.0" prefWidth="954.0">
-                    <content>
-                        <VBox fx:id="vBox" prefHeight="601.0" prefWidth="954.0">
-                     <children>
-                        <Pane prefHeight="77.0" prefWidth="954.0">
-                           <children>
-                              <Label layoutX="1.0" layoutY="-3.0" prefHeight="84.0" prefWidth="942.0" text=" Products on your shopping cart : ">
-                                 <font>
-                                    <Font name="Book Antiqua" size="48.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <TableView fx:id="tableView" prefHeight="460.0" prefWidth="954.0">
-                          <columns>
-                            <TableColumn fx:id="numberColumn" prefWidth="35.99998474121094" text="#" />
-                              <TableColumn fx:id="idColumn"  minWidth="0.0" prefWidth="119.73333740234375" text="id" />
-                            <TableColumn fx:id="nameColumn" prefWidth="99.46670532226562" text="Name" />
-                              <TableColumn fx:id="descriptionColumn" prefWidth="268.2666931152344" text="description" />
-                              <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="90.39990234375" text="quantity" />
-                              <TableColumn fx:id="priceColumn" prefWidth="339.1999877929687" text="price" />
-                          </columns>
-                        </TableView>
-                        <Pane prefHeight="73.0" prefWidth="954.0">
-                           <children>
-                              <Button layoutX="838.0" layoutY="17.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="clear cart" />
-                              <Button layoutX="711.0" layoutY="15.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Purchase" />
-                              <Label layoutX="2.0" layoutY="1.0" prefHeight="59.0" prefWidth="248.0" text=" Total amount: ">
-                                 <font>
-                                    <Font name="Book Antiqua" size="36.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="244.0" prefHeight="59.0" prefWidth="147.0" text="amount$">
-                                 <font>
-                                    <Font name="Book Antiqua" size="36.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                     </children></VBox>
-                    </content>
-                </ScrollPane>
-            </children>
+         <children>
+            <Pane prefHeight="600.0" prefWidth="1365.0">
+               <children>
+
+                   <VBox fx:id="vBox" prefHeight="601.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                       <children>
+                           <Pane prefHeight="77.0" prefWidth="954.0">
+                               <children>
+                                   <Label layoutX="1.0" layoutY="-3.0" prefHeight="84.0" prefWidth="942.0" text=" Products on your shopping cart : ">
+                                       <font>
+                                           <Font name="Book Antiqua" size="48.0" />
+                                       </font>
+                                   </Label>
+                               </children>
+                           </Pane>
+                           <TableView fx:id="tableView" onMouseClicked="#select" prefHeight="458.0" prefWidth="954.0">
+                               <columns>
+                                   <TableColumn fx:id="numberColumn" prefWidth="35.99998474121094" text="#" />
+                                   <TableColumn fx:id="idColumn" minWidth="0.0" prefWidth="119.73333740234375" text="id" />
+                                   <TableColumn fx:id="nameColumn" prefWidth="99.46670532226562" text="Name" />
+                                   <TableColumn fx:id="descriptionColumn" prefWidth="268.2666931152344" text="description" />
+                                   <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="90.39990234375" text="quantity" />
+                                   <TableColumn fx:id="priceColumn" prefWidth="190.93328857421875" text="price" />
+                              <TableColumn prefWidth="149.066650390625" text="click below" />
+                               </columns>
+                           </TableView>
+                           <Pane prefHeight="73.0" prefWidth="954.0">
+                               <children>
+                                   <Button layoutX="838.0" onMouseClicked="#clearCart" layoutY="17.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="clear cart" />
+                                   <Button layoutX="711.0" layoutY="15.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="100.0" text="Purchase" />
+                                   <Label layoutX="2.0" layoutY="1.0" prefHeight="59.0" prefWidth="248.0" text=" Total amount: ">
+                                       <font>
+                                           <Font name="Book Antiqua" size="36.0" />
+                                       </font>
+                                   </Label>
+                                   <Label layoutX="244.0" fx:id="totalAmount" prefHeight="59.0" prefWidth="147.0" text="amount$">
+                                       <font>
+                                           <Font name="Book Antiqua" size="36.0" />
+                                       </font>
+                                   </Label>
+                               </children>
+                           </Pane>
+                       </children>
+                   </VBox>
+
+               </children>
+            </Pane>
+         </children>
         </HBox>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
@@ -114,17 +125,17 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="-1.0" layoutY="102.0" prefHeight="62.0" prefWidth="236.0" text="product id" textAlignment="CENTER">
+                  <Label fx:id="selectedProduct" alignment="CENTER" layoutX="-1.0" layoutY="102.0" prefHeight="62.0" prefWidth="236.0" text="product id" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="55.0" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" text="+">
+                  <Button onMouseClicked="#addProduct" layoutX="55.0" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" text="+">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button layoutX="123.0" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" text="-">
+                  <Button layoutX="123.0" onMouseClicked="#reduceProduct" layoutY="168.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="64.0" text="-">
                      <font>
                         <Font size="24.0" />
                      </font>

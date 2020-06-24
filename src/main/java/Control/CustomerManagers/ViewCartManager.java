@@ -65,6 +65,10 @@ public class ViewCartManager extends Manager {
         return customer.getCart().getProductsMap();
     }
 
+    public void clearCart() {
+        customer.getCart().empty();
+    }
+
     public static class ProductDoNotExistAtAllException extends Exception {
         public ProductDoNotExistAtAllException(String message) {
             super(message);
