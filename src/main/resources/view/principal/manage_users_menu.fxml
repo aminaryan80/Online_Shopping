@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="ViewController.principal.ManageUsersController">
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.principal.ManageUsersController">
     <children>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
               prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
@@ -20,14 +20,22 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
+                <Button mnemonicParsing="false" onAction="#sort" prefHeight="38.0" prefWidth="234.0" text="Sort">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                </Button>
                 <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
-               <VBox.margin>
-                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
-               </VBox.margin>
-               <cursor>
-                   <Cursor fx:constant="HAND"/>
-               </cursor>
-            </Button>
+                    <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                    </VBox.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
                 <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
                         textFill="RED">
                     <font>
@@ -64,11 +72,11 @@
                    prefWidth="218.0" promptText="Last Name"/>
         <Button layoutX="294.0" layoutY="480.0" mnemonicParsing="false" onAction="#createNewPrincipal" prefHeight="32.0"
                 prefWidth="216.0" text="Create New Principal"/>
-        <TableView fx:id="usersTable" layoutX="587.0" layoutY="236.0" prefHeight="276.0" prefWidth="460.0">
+        <TableView fx:id="usersTable" layoutX="587.0" layoutY="236.0" prefHeight="276.0" prefWidth="531.0">
             <columns>
-                <TableColumn fx:id="usernameCol" prefWidth="118.39996337890625" text="Username"/>
-                <TableColumn fx:id="userEmailCol" prefWidth="245.60003662109375" text="Email"/>
-                <TableColumn fx:id="userBalanceCol" prefWidth="93.60009765625" text="Balance"/>
+                <TableColumn fx:id="usernameCol" prefWidth="132.0" text="Username"/>
+                <TableColumn fx:id="userEmailCol" prefWidth="270.4000244140625" text="Email"/>
+                <TableColumn fx:id="userBalanceCol" prefWidth="126.4000244140625" text="Balance"/>
             </columns>
         </TableView>
         <Label fx:id="viewUserLabel" alignment="CENTER" layoutX="588.0" layoutY="40.0" prefHeight="162.0"
@@ -77,13 +85,5 @@
                 <Font size="18.0"/>
             </font>
         </Label>
-        <Button layoutX="1055.0" layoutY="257.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="64.0"
-                text="Sort"/>
-        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="323.0" mnemonicParsing="false"
-                prefHeight="58.0" prefWidth="64.0" text="Available Sorts" textAlignment="CENTER" wrapText="true"/>
-        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="388.0" mnemonicParsing="false"
-                prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
-        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="1055.0" layoutY="453.0" mnemonicParsing="false"
-                prefHeight="58.0" prefWidth="64.0" text="Current Sorts" textAlignment="CENTER" wrapText="true"/>
     </children>
 </AnchorPane>
