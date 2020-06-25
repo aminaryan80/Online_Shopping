@@ -129,6 +129,14 @@ public class ManageAllProductsManager extends Manager {
         return field.equals("price") || field.equals("name") || field.equals("rating");
     }
 
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        return fields;
+    }
+
     public String currentSort() {
         return currentSort.toString();
     }

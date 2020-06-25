@@ -58,6 +58,14 @@ public class EditProductsManager extends Manager {
                 "rating";
     }
 
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        return fields;
+    }
+
     public ArrayList<Object> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);

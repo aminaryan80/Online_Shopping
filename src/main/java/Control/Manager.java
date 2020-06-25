@@ -121,6 +121,10 @@ public abstract class Manager {
         return "";
     }
 
+    public ArrayList<String> getSortFields() {
+        return null;
+    }
+
     public ArrayList<Object> sort(String sort, boolean isAscending) {
         return null;
     }

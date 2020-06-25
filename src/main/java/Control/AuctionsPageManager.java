@@ -243,6 +243,15 @@ public class AuctionsPageManager extends Manager {
                 "features";
     }
 
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        fields.addAll(currentCategory.getFeaturesNames());
+        return fields;
+    }
+
     public ArrayList<Object> sort(String sort, boolean isAscending) {
         products = Product.getAllAuctionedProducts();
         setFilters();

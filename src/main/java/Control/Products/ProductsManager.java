@@ -299,6 +299,15 @@ public class ProductsManager extends Manager {
         }
     }
 
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        fields.addAll(currentCategory.getFeaturesNames());
+        return fields;
+    }
+
     private void sortByPrice() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {

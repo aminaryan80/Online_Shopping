@@ -56,6 +56,12 @@ public class ManageUsersManager extends Manager {
         return objects;
     }
 
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("name");
+        return fields;
+    }
+
     private ArrayList<String> userInShort() {
         ArrayList<String> usersInShort = new ArrayList<>();
         for (Account user : users) {

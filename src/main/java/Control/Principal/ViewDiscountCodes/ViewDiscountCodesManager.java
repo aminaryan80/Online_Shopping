@@ -75,6 +75,14 @@ public class ViewDiscountCodesManager extends Manager {
                 "endingdate";
     }
 
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("discountpercent");
+        fields.add("beginningdate");
+        fields.add("endingdate");
+        return fields;
+    }
+
     public ArrayList<Object> sort(String sort, boolean isAscending) {
         discounts = Discount.getAllDiscounts();
         currentSort = new Sort(sort, isAscending);
