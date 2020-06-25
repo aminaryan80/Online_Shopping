@@ -28,7 +28,7 @@ public class MainController extends Controller {
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
-        System.out.println("Offs is open now.");
+        manager.openOffsMenu();
     }
 
     public void openProductsMenu(ActionEvent actionEvent) {

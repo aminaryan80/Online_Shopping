@@ -1,6 +1,5 @@
 package ViewController.products;
 
-import Control.Manager;
 import Control.Products.ProductsManager;
 import Models.Shop.Category.Category;
 import Models.Shop.Product.Product;
@@ -59,15 +58,7 @@ public class ProductsController extends Controller {
 
     }
 
-    public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel(false, Manager.Addresses.MAIN_MENU);
-    }
-
     public void viewCategories(ActionEvent actionEvent) {
         ((ProductsManager) manager).viewCategories();
-    }
-
-    public void showProduct(ActionEvent actionEvent) {
-
     }
 }

@@ -2,10 +2,8 @@ package ViewController.products;
 
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
-import Models.Address;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
-import com.sun.org.apache.xpath.internal.res.XPATHErrorResources_ko;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -13,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+
 import java.io.IOException;
 
 public class ProductPageController extends Controller {
@@ -27,14 +26,14 @@ public class ProductPageController extends Controller {
     public Label productId;
     @FXML
     private GridPane comments;
-
     private Product product;
+
     public void init() {
         product = ((ProductPageManager) manager).getProduct();
         initializeProduct();
         try {
-            AnchorPane comment = FXMLLoader.load(getClass().getResource(Manager.Addresses.COMMENT.getAddress()));
-            AnchorPane comment2 = FXMLLoader.load(getClass().getResource(Manager.Addresses.COMMENT.getAddress()));
+            AnchorPane comment = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
+            AnchorPane comment2 = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
             comments.add(comment, 0, 0);
             comments.add(comment2, 0, 1);
             comments.setPrefHeight(500);

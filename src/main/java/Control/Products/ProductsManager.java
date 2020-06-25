@@ -4,11 +4,11 @@ import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category.*;
+import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
 import ViewController.products.ProductsController;
 import ViewController.products.ViewCategoriesController;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,12 +31,18 @@ public class ProductsManager extends Manager {
         this.menu = new ProductsMenu(this, productsInShort());
     }
 
-    public ProductsManager(Account account, Addresses address, Manager manager) {
+    public ProductsManager(Account account, Addresses address, Manager manager, boolean isOffMenu) {
         super(account, address, manager);
         this.currentCategory = mainCategory;
         products = Product.getAllProducts();
         ProductsController controller = (ProductsController) loadFxml(Addresses.PRODUCTS_MENU);
-        controller.setProducts(products);
+        if (isOffMenu) {
+            ArrayList<Product> offProducts = new ArrayList<>();
+            for (Auction auction : Auction.getAllAuctions()) {
+                offProducts.addAll(auction.getProducts());
+            }
+            controller.setProducts(offProducts);
+        } else controller.setProducts(products);
         controller.setCategory(mainCategory);
         controller.init();
     }

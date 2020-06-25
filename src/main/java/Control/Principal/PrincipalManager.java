@@ -90,10 +90,6 @@ public class PrincipalManager extends Manager {
         new ManageRequestsManager(account, Addresses.PRINCIPAL_MENU, this);
     }
 
-    public void openOffsMenu() {
-        // TODO WTF
-    }
-
     public void openViewDiscountCodes() {
         new ViewDiscountCodesManager(account, Addresses.PRINCIPAL_MENU, this);
     }

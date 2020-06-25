@@ -184,27 +184,25 @@ public abstract class Manager {
         Controller controller = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
-            System.out.println("done1");
             Parent root = loader.load();
-            System.out.println("done2");
             controller = loader.getController();
-            System.out.println("done3");
             Scene scene = new Scene(root);
-            System.out.println("done4");
             controller.setManager(manager);
-            System.out.println("done5");
             workingStage.setTitle("AP Project");
             workingStage.setScene(scene);
             workingStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("ERROR!");
         }
         return controller;
     }
 
     public void openProductsMenu() {
-        new ProductsManager(account, Addresses.MAIN_MENU, this);
+        new ProductsManager(account, Addresses.MAIN_MENU, this, false);
+    }
+
+    public void openOffsMenu() {
+        new ProductsManager(account, Addresses.MAIN_MENU, this, true);
     }
 
     public void editPassword() {
