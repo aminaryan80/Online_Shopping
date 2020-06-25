@@ -6,9 +6,11 @@ import ViewController.Controller;
 import com.sun.javafx.scene.control.skin.LabeledText;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
@@ -46,11 +48,11 @@ public class ViewCartController extends Controller {
     }
 
 
-    public void back(MouseEvent mouseEvent) {
+    public void back(ActionEvent actionEvent) {
         super.back(null);
     }
 
-    public void logOut(MouseEvent mouseEvent) {
+    public void logOut(ActionEvent actionEvent) {
         super.logout();
     }
 
@@ -80,21 +82,21 @@ public class ViewCartController extends Controller {
         tableView.setItems(data);
     }
 
-    public void addProduct(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistInCartException {
+    public void addProduct(ActionEvent actionEvent) throws ViewCartManager.ProductDoNotExistInCartException {
         if (selectedProduct.getText().matches("\\S{8}")) {
             ((ViewCartManager) manager).productQuantity(selectedProduct.getText(), true);
             init();
         }
     }
 
-    public void reduceProduct(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistInCartException {
+    public void reduceProduct(ActionEvent actionEvent) throws ViewCartManager.ProductDoNotExistInCartException {
         if (selectedProduct.getText().matches("\\S{8}")) {
             ((ViewCartManager) manager).productQuantity(selectedProduct.getText(), false);
             init();
         }
     }
 
-    public void clearCart(MouseEvent mouseEvent) {
+    public void clearCart(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really wanna clear your cart?", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.YES) {
@@ -103,7 +105,7 @@ public class ViewCartController extends Controller {
         } else alert.close();
     }
 
-    public void openProductPage(MouseEvent mouseEvent) {
+    public void openProductPage(ActionEvent actionEvent) {
         if (selectedProduct.getText().matches("\\S{8}")) {
             ((ViewCartManager) manager).showProduct(selectedProduct.getText());
         } else {
@@ -112,6 +114,6 @@ public class ViewCartController extends Controller {
         }
     }
 
-    public void openPurchasePage(MouseEvent mouseEvent) {
+    public void openPurchasePage(ActionEvent actionEvent) {
     }
 }
