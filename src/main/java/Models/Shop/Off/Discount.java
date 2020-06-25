@@ -41,6 +41,10 @@ public class Discount {
         allDiscounts.add(this);
     }
 
+    public void addCustomerToDiscountUseCountMap(String id,int number) {
+        customerToDiscountUseCountMap.put(id,number);
+    }
+
     public static ArrayList<Discount> getAllDiscounts() {
         return allDiscounts;
     }

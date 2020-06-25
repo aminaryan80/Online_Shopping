@@ -74,6 +74,10 @@ public class ViewCartManager extends Manager {
         customer.getCart().empty();
     }
 
+    public void purchase() {
+        new PurchaseManager(account,Addresses.VIEW_CART,this);
+    }
+
     public static class ProductDoNotExistAtAllException extends Exception {
         public ProductDoNotExistAtAllException(String message) {
             super(message);

@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Optional;
 public class ViewCartController extends Controller {
 
-
     public TableView tableView;
     public TableColumn numberColumn;
     public TableColumn idColumn;
@@ -115,5 +114,6 @@ public class ViewCartController extends Controller {
     }
 
     public void openPurchasePage(ActionEvent actionEvent) {
+        ((ViewCartManager)manager).purchase();
     }
 }

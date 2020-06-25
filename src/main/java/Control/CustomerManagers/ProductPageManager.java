@@ -98,7 +98,7 @@ public class ProductPageManager extends Manager {
 
     public void addToCart() {
         if(customer==null) //TODO check
-        cart.addProduct(product);
+            cart.addProduct(product);
         else customer.getCart().addProduct(product);
     }
 

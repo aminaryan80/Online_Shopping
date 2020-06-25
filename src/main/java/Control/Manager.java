@@ -331,6 +331,8 @@ public abstract class Manager {
 
         ADD_COMMENT("view/userPanel/Customer/product/addCommentPage.fxml"),
 
+        PURCHASE_PAGE("view/userPanel/Customer/purchasePage.fxml"),
+
         PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml");
 
         private String address;
