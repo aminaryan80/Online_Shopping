@@ -16,6 +16,7 @@ import java.util.List;
 public class ProductPageManager extends Manager {
     private Customer customer = (Customer) account; //TODO should this field be static?
     private Product product;
+    private ProductPageController productPageController;
 
     public ProductPageManager(Account account, Product product) {
         super(account);
@@ -27,7 +28,7 @@ public class ProductPageManager extends Manager {
     public ProductPageManager(Account account, Product product, Addresses address, Manager manager) {
         super(account, address, manager);
         this.product = product;
-        ProductPageController productPageController = (ProductPageController) loadFxml(Addresses.PRODUCT_PAGE);
+        productPageController = (ProductPageController) loadFxml(Addresses.PRODUCT_PAGE);
         productPageController.init();
     }
 
@@ -58,12 +59,12 @@ public class ProductPageManager extends Manager {
         return comments;
     }
 
-    public HashMap<String,String> commentsFXML(){
-        HashMap<String,String> commentsFXML = new HashMap<>();
+    public HashMap<String, String> commentsFXML() {
+        HashMap<String, String> commentsFXML = new HashMap<>();
         for (Comment comment : product.getAllComments()) {
-            commentsFXML.put(comment.getAccount().getUsername(),comment.getText());
+            commentsFXML.put(comment.getAccount().getUsername(), comment.getText());
         }
-    return commentsFXML;
+        return commentsFXML;
     }
 
     public void addComment(String title, String content) {
@@ -75,6 +76,7 @@ public class ProductPageManager extends Manager {
         }
         Comment comment = new Comment(customer, product, title + ":\n" + "\t" + content, null, hasPurchased);
         product.addComment(comment);
+        productPageController.initializeComments();
     }
 
     public Product getProduct() {
@@ -82,6 +84,6 @@ public class ProductPageManager extends Manager {
     }
 
     public void addComment() {
-        loadFxml(Addresses.ADD_COMMENT,true);
+        loadFxml(Addresses.ADD_COMMENT, true);
     }
 }

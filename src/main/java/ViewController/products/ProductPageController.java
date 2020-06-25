@@ -45,8 +45,9 @@ public class ProductPageController extends Controller {
         initializeComments();
     }
 
-    private void initializeComments() {
+    public void initializeComments() {
         int row = 0;
+        comments.setPrefHeight(500);
         for (String senderName : ((ProductPageManager) manager).commentsFXML().keySet()) {
             try {
                 AnchorPane commentPane = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
@@ -55,7 +56,7 @@ public class ProductPageController extends Controller {
                 senderNameLabel.setText(senderName);
                 commentInfo.setText(((ProductPageManager) manager).commentsFXML().get(senderName));
                 comments.add(commentPane, 0, row);
-                comments.setPrefHeight((row+1)*500);
+                comments.setVgap(10);
                 row++;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -88,6 +89,5 @@ public class ProductPageController extends Controller {
 
     public void addComment(MouseEvent mouseEvent) {
         ((ProductPageManager) manager).addComment();
-        init();
     }
 }
