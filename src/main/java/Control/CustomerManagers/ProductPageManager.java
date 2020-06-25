@@ -79,6 +79,12 @@ public class ProductPageManager extends Manager {
         productPageController.initializeComments();
     }
 
+    public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
+        Product product = Product.getProductById(productId);
+        if(product != null) product.addRate(customer,score);
+        else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
+    }
+
     public Product getProduct() {
         return product;
     }
