@@ -89,7 +89,26 @@ public class ProductPageManager extends Manager {
         return product;
     }
 
+    public void addToCart() {
+        if(customer==null) //TODO check
+        cart.addProduct(product);
+        else customer.getCart().addProduct(product);
+    }
+
+    public boolean hasProductInCart(){
+        for (Product productInCart : customer.getCart().getProducts()) {
+            if(productInCart.getId().equals(product.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addComment() {
         loadFxml(Addresses.ADD_COMMENT, true);
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 }

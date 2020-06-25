@@ -70,7 +70,7 @@ public class ProductPageController extends Controller {
         sellerName.setText(product.getSeller().getName());
         companyName.setText(product.getCompanyName());
         double score = product.getRate();
-        rate.setText(("" + score).length() > 1 ? ("" + score).substring(0,3) :(""+ score).substring(0,1));
+        rate.setText(("" + score).length() > 1 ? ("" + score).substring(0, 3) : ("" + score).substring(0, 1));
         description.setText(product.getDescription());
         productId.setText("#" + product.getId());
         featureValueTable.setItems(FXCollections.observableArrayList(product.getFeatures()));
@@ -105,6 +105,14 @@ public class ProductPageController extends Controller {
     }
 
     public void addToCart(MouseEvent mouseEvent) {
+        if (((ProductPageManager) manager).getCustomer() != null && ((ProductPageManager) manager).hasProductInCart()) {
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "You have added this product to your cart before!", ButtonType.OK);
+                alert2.show();
+            } else {
+            ((ProductPageManager) manager).addToCart();
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION, product.getName() + " is added to your cart!", ButtonType.OK);
+            alert2.show();
+        }
     }
 
     public void addComment(MouseEvent mouseEvent) {

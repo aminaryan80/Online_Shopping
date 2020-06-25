@@ -18,6 +18,8 @@ public class AddCommentPageController extends Controller {
             ((ProductPageManager) manager).addComment(titleField.getText(), commentArea.getText());
             Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             stage.close();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "comment added!", ButtonType.OK);
+            alert.show();
         }
     }
 
