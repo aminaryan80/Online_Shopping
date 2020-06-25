@@ -14,10 +14,11 @@ import ViewController.userPanel.Seller.EditProductsController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class EditProductsManager extends Manager {
     private Sort currentSort;
-    private ArrayList<Product> products;
+    private List<Product> products;
 
     public EditProductsManager(Account account) {
         super(account);
@@ -94,7 +95,7 @@ public class EditProductsManager extends Manager {
                 }
             }
         }
-        products = (ArrayList<Product>) Arrays.asList(productsForSort);
+        products = Arrays.asList(productsForSort);
     }
 
     private void sortByName() {
@@ -108,7 +109,7 @@ public class EditProductsManager extends Manager {
                 }
             }
         }
-        products = (ArrayList<Product>) Arrays.asList(productsForSort);
+        products = Arrays.asList(productsForSort);
     }
 
     private void sortByRating() {
@@ -122,7 +123,7 @@ public class EditProductsManager extends Manager {
                 }
             }
         }
-        products = (ArrayList<Product>) Arrays.asList(productsForSort);
+        products = Arrays.asList(productsForSort);
     }
 
     public boolean isEnteredSortFieldValid(String field) {
