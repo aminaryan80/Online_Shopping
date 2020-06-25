@@ -24,7 +24,6 @@ public class ManageUsersManager extends Manager {
     public ManageUsersManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         this.users = Account.getAllAccounts();
-        //new ManageUsersMenu(this);
         loadFxml(Addresses.MANAGE_USERS);
     }
 

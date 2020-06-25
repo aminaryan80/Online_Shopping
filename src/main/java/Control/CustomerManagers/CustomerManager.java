@@ -5,6 +5,7 @@ import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import View.CustomerMenus.customer.CustomerMenu;
+import ViewController.Controller;
 import ViewController.customer.CustomerController;
 
 import java.util.ArrayList;
@@ -22,7 +23,12 @@ public class CustomerManager extends Manager {
         super(account, address, manager);
         //this.menu = new CustomerMenu(this);
         CustomerController controller = (CustomerController) loadFxml(Addresses.CUSTOMER_MENU);
-        controller.setPrincipal(account);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        CustomerController controller = (CustomerController) c;
+        controller.setCustomer(account);
         controller.init();
     }
 

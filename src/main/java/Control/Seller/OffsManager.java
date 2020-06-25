@@ -20,10 +20,14 @@ public class OffsManager extends Manager {
 
     public OffsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //new ManageUsersMenu(this);
         Controller controller = loadFxml(Addresses.EDIT_OFFS);
-        ((EditOffController) controller).setSeller((Seller) account);
-        ((EditOffController) controller).init();
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        EditOffController controller = (EditOffController) c;
+        controller.setSeller((Seller) account);
+        controller.init();
     }
 
     public String viewOffById(String id) {

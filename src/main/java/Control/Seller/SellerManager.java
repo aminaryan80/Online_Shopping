@@ -10,6 +10,7 @@ import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
 import Models.Shop.Request.DeleteProductRequest;
+import ViewController.Controller;
 import ViewController.userPanel.Seller.SellerMenuController;
 
 import java.io.IOException;
@@ -24,8 +25,12 @@ public class SellerManager extends Manager {
 
     public SellerManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //this.menu = new PrincipalMenu(this);
-        SellerMenuController controller = (SellerMenuController) loadFxml(Addresses.SELLER_MENU);
+        Controller controller = loadFxml(Addresses.SELLER_MENU);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        SellerMenuController controller = (SellerMenuController) c;
         controller.setSeller(account);
         controller.init();
     }

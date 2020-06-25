@@ -26,7 +26,6 @@ public class ManageAllProductsManager extends Manager {
     public ManageAllProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         products = Product.getAllProducts();
-        //new ManageAllProductsMenu(this);
         loadFxml(Addresses.MANAGE_PRODUCTS);
     }
 

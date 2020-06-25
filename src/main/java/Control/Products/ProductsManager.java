@@ -7,6 +7,7 @@ import Models.Shop.Category.*;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
+import ViewController.Controller;
 import ViewController.products.ProductsController;
 import ViewController.products.ViewCategoriesController;
 
@@ -23,6 +24,7 @@ public class ProductsManager extends Manager {
     private List<LengthFilter> lengthFilters = new ArrayList<>();
     private Sort currentSort = null;
     private List<Product> products;
+    private boolean isOffMenu;
 
     public ProductsManager(Account account) {
         super(account);
@@ -34,8 +36,14 @@ public class ProductsManager extends Manager {
     public ProductsManager(Account account, Addresses address, Manager manager, boolean isOffMenu) {
         super(account, address, manager);
         this.currentCategory = mainCategory;
-        products = Product.getAllProducts();
-        ProductsController controller = (ProductsController) loadFxml(Addresses.PRODUCTS_MENU);
+        this.products = Product.getAllProducts();
+        this.isOffMenu = isOffMenu;
+        Controller controller = loadFxml(Addresses.PRODUCTS_MENU);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        ProductsController controller = (ProductsController) c;
         if (isOffMenu) {
             ArrayList<Product> offProducts = new ArrayList<>();
             for (Auction auction : Auction.getAllAuctions()) {
@@ -378,8 +386,8 @@ public class ProductsManager extends Manager {
     }
 
     // show product [productId]
-    public void showProductById(String id) {
-        new ProductPageManager(this.getAccount(), Product.getProductById(id));
+    public void openProductPage(String id) {
+        new ProductPageManager(account, Product.getProductById(id), Addresses.PRODUCTS_MENU, this);
     }
 
     public void viewCategories() {

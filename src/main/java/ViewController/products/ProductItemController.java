@@ -1,5 +1,6 @@
 package ViewController.products;
 
+import Control.Products.ProductsManager;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.scene.control.Label;
@@ -29,6 +30,6 @@ public class ProductItemController extends Controller {
     }
 
     public void openProduct(MouseEvent mouseEvent) {
-        System.out.println("Clicked on Product#" + product.getId());
+        ((ProductsManager) manager).openProductPage(product.getId());
     }
 }

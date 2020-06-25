@@ -26,9 +26,13 @@ public class EditProductsManager extends Manager {
 
     public EditProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //new ManageUsersMenu(this);
         Controller controller = loadFxml(Addresses.EDIT_PRODUCTS_MENU);
-        ((EditProductsController) controller).init((Seller) account);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        EditProductsController controller = (EditProductsController) c;
+        controller.init((Seller) account);
     }
 
     public String viewProductDetails(String id) {
@@ -139,7 +143,7 @@ public class EditProductsManager extends Manager {
     }
 
     public boolean hasProductWithId(String id) {
-        return Product.hasProductWithId(id, ((Seller) account).getUsername());
+        return Product.hasProductWithId(id, account.getUsername());
     }
 
     public Product editProduct(String id, String field, String newValue) {

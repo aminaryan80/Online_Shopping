@@ -39,6 +39,7 @@ public class ProductsController extends Controller {
                 Parent root = loader.load();
                 ProductItemController controller = loader.getController();
                 controller.setInfos(product);
+                controller.setManager(manager);
                 productsGridPane.add(root, i % 3, i / 3);
                 if (i % 3 == 0) {
                     productsGridPane.setPrefHeight(productsGridPane.getPrefHeight() + 380);

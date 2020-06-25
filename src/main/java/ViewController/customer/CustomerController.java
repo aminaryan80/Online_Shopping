@@ -63,7 +63,7 @@ public class CustomerController extends Controller {
 
     private Customer customer;
 
-    public void setPrincipal(Account customer) {
+    public void setCustomer(Account customer) {
         this.customer = (Customer) customer;
     }
 

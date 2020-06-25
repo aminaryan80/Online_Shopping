@@ -7,6 +7,7 @@ import Models.Shop.Category.Category;
 import Models.Shop.Product.Product;
 import View.ErrorProcessor;
 import View.Principal.ManageCategories.ManageCategoriesMenu;
+import ViewController.Controller;
 import ViewController.principal.manageCategories.AddCategoryController;
 import ViewController.principal.manageCategories.ManageCategoriesController;
 
@@ -22,8 +23,12 @@ public class ManageCategoriesManager extends Manager {
 
     public ManageCategoriesManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //new ManageCategoriesMenu(this);
-        ManageCategoriesController controller = (ManageCategoriesController) loadFxml(Addresses.MANAGE_CATEGORIES);
+        Controller controller = loadFxml(Addresses.MANAGE_CATEGORIES);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        ManageCategoriesController controller = (ManageCategoriesController) c;
         controller.init();
     }
 

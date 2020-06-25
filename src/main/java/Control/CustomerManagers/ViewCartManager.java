@@ -8,6 +8,7 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewCartMenu;
+import ViewController.Controller;
 import ViewController.customer.cart.ViewCartController;
 
 import java.util.*;
@@ -28,9 +29,13 @@ public class ViewCartManager extends Manager {
     public ViewCartManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         products = Product.getAllProducts();
-        //this.menu = new ViewCartMenu(this);
-        ViewCartController viewCartController = (ViewCartController) loadFxml(Addresses.VIEW_CART);
-        viewCartController.init();
+        Controller controller = loadFxml(Addresses.VIEW_CART);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        ViewCartController controller = (ViewCartController) c;
+        controller.init();
     }
 
     public String showProducts() {

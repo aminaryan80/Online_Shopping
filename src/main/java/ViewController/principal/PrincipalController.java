@@ -102,7 +102,7 @@ public class PrincipalController extends Controller {
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).editPassword();
+        manager.editPassword();
     }
 
     public void openManageUsers(ActionEvent actionEvent) {
@@ -126,7 +126,7 @@ public class PrincipalController extends Controller {
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openOffsMenu();
+        manager.openOffsMenu();
     }
 
     public void openViewDiscountCodes(ActionEvent actionEvent) {

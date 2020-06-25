@@ -216,7 +216,7 @@ public class ProductsMenu extends Menu {
 
     private void showProduct(String id) {
         if (((ProductsManager) manager).hasProductWithId(id)) {
-            ((ProductsManager) manager).showProductById(id);
+            //((ProductsManager) manager).showProductById(id);
         } else {
             ErrorProcessor.invalidInput();
         }

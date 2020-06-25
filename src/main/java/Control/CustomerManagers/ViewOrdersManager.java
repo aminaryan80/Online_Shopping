@@ -30,7 +30,6 @@ public class ViewOrdersManager extends Manager {
     public ViewOrdersManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         logs = ((Customer) account).getAllLogs();
-        //this.menu = new ViewOrdersMenu(this);
         loadFxml(Addresses.VIEW_ORDERS);
     }
 

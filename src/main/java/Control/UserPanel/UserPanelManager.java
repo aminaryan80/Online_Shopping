@@ -8,7 +8,6 @@ public class UserPanelManager extends Manager {
     //TODO userPanel manager is handled in manager
     public UserPanelManager(Account account) {
         super(account);
-        //this.menu = new UserPanelMenu(this);
         loadFxml(Addresses.USER_PANEL);
     }
 

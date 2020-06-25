@@ -25,7 +25,6 @@ public class ViewDiscountCodesManager extends Manager {
     public ViewDiscountCodesManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         discounts = Discount.getAllDiscounts();
-        //new ViewDiscountCodesMenu(this);
         loadFxml(Addresses.VIEW_DISCOUNT_CODES);
     }
 

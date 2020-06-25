@@ -7,6 +7,7 @@ import Models.Account.Customer;
 import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.product.ProductPage;
+import ViewController.Controller;
 import ViewController.products.ProductPageController;
 
 import java.util.ArrayList;
@@ -27,8 +28,13 @@ public class ProductPageManager extends Manager {
     public ProductPageManager(Account account, Product product, Addresses address, Manager manager) {
         super(account, address, manager);
         this.product = product;
-        ProductPageController productPageController = (ProductPageController) loadFxml(Addresses.PRODUCT_PAGE);
-        productPageController.init();
+        Controller controller = loadFxml(Addresses.PRODUCT_PAGE);
+        update(controller);
+    }
+
+    public void update(Controller c) {
+        ProductPageController controller = (ProductPageController) c;
+        controller.init();
     }
 
     public void setCustomer(Customer customer) {

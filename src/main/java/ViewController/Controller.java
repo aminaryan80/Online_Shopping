@@ -13,6 +13,10 @@ public class Controller {
     protected static Scanner scanner = new Scanner(System.in);
     protected Manager manager;
 
+    public void init() {
+
+    }
+
     public void setManager(Manager manager) {
         this.manager = manager;
     }

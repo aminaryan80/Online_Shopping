@@ -13,7 +13,6 @@ public class CreateNewAccountManager extends Manager {
     public CreateNewAccountManager(Account account, String username, String type) {
         super(account);
         new CreateNewAccountMenu(this, username, type);
-        //loadFxml(Addresses.REGISTER, true);
     }
 
     public CreateNewAccountManager(Account account) {

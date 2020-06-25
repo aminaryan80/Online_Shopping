@@ -186,8 +186,8 @@ public abstract class Manager {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
             Parent root = loader.load();
             controller = loader.getController();
-            Scene scene = new Scene(root);
             controller.setManager(manager);
+            Scene scene = new Scene(root);
             workingStage.setTitle("AP Project");
             workingStage.setScene(scene);
             workingStage.show();
@@ -237,7 +237,12 @@ public abstract class Manager {
     }
 
     public void back() {
-        loadBack(previousAddress, previousManager);
+        Controller controller = loadBack(previousAddress, previousManager);
+        previousManager.update(controller);
+    }
+
+    public void update(Controller controller) {
+
     }
 
     public enum Addresses {

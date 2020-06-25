@@ -16,7 +16,6 @@ public class ManageRequestsManager extends Manager {
 
     public ManageRequestsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //new ManageRequestsMenu(this);
         loadFxml(Addresses.MANAGE_REQUESTS);
     }
 
