@@ -52,10 +52,12 @@ public class ViewDiscountCodesManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         discounts = Discount.getAllDiscounts();
-        return discountsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(discounts);
+        return objects;
     }
 
     private ArrayList<String> discountsInShort() {
@@ -72,11 +74,13 @@ public class ViewDiscountCodesManager extends Manager {
                 "endingdate";
     }
 
-    public ArrayList<Discount> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         discounts = Discount.getAllDiscounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return discounts;
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(discounts);
+        return objects;
     }
 
     private void applySort() {

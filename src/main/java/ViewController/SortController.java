@@ -1,11 +1,14 @@
 package ViewController;
 
 import Control.Seller.EditProductsManager;
+import Models.Shop.Product.Product;
 import ViewController.userPanel.Seller.EditProductsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+
+import java.util.ArrayList;
 
 public class SortController extends Controller {
 
@@ -22,22 +25,22 @@ public class SortController extends Controller {
     }
 
     public void sort(ActionEvent actionEvent) {
-        if (!((EditProductsManager) manager).isEnteredSortFieldValid(sortField.getText())) {
+        if (!manager.isEnteredSortFieldValid(sortField.getText())) {
             manager.error("wrong sort field");
         } else {
-            ((EditProductsController) controller).initProducts(((EditProductsManager) manager).sort(sortField.getText(), isAscending.isSelected()));
+            controller.initTable(manager.sort(sortField.getText(), isAscending.isSelected()));
         }
     }
 
     public void showAvailableSorts(ActionEvent actionEvent) {
-        textField.setText("Available sorts:\n" + ((EditProductsManager) manager).showAvailableSorts());
+        textField.setText("Available sorts:\n" + manager.showAvailableSorts());
     }
 
     public void currentSort(ActionEvent actionEvent) {
-        textField.setText("Current sort:\n" + ((EditProductsManager) manager).currentSort());
+        textField.setText("Current sort:\n" + manager.currentSort());
     }
 
     public void disableSort(ActionEvent actionEvent) {
-        ((EditProductsController) controller).initProducts(((EditProductsManager) manager).disableSort());
+        controller.initTable(manager.disableSort());
     }
 }

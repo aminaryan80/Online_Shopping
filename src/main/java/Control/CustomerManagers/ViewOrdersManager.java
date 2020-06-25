@@ -64,11 +64,13 @@ public class ViewOrdersManager extends Manager {
                 "date";
     }
 
-    public List<BuyingLog> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         logs = ((Customer) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return logs;
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(logs);
+        return objects;
     }
 
     private void applySort() {
@@ -122,9 +124,11 @@ public class ViewOrdersManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         logs = ((Customer) account).getAllLogs();
-        return logsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(logs);
+        return objects;
     }
 }

@@ -78,9 +78,9 @@ public class ViewCartMenu extends Menu {
         if (((ViewCartManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<Product> sortedProducts = ((ViewCartManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Product sortedProduct : sortedProducts) {
-                System.out.println(sortedProduct.viewProductInShort());
+            ArrayList<Object> sortedProducts = ((ViewCartManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedProduct : sortedProducts) {
+                System.out.println(((Product) sortedProduct).viewProductInShort());
             }
         } else {
             ErrorProcessor.invalidInput();
@@ -92,8 +92,8 @@ public class ViewCartMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> products = ((ViewCartManager) manager).disableSort();
-        for (String product : products) {
+        ArrayList<Object> products = ((ViewCartManager) manager).disableSort();
+        for (Object product : products) {
             System.out.println(product);
         }
     }

@@ -51,12 +51,21 @@ public class ProductsController extends Controller {
         }
     }
 
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Product> tableProducts = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableProducts.add((Product) tableProduct);
+        }
+        products = tableProducts;
+        init();
+    }
+
     public void filter(ActionEvent actionEvent) {
 
     }
 
     public void sort(ActionEvent actionEvent) {
-
+        manager.openSort(this, manager);
     }
 
     public void viewCategories(ActionEvent actionEvent) {

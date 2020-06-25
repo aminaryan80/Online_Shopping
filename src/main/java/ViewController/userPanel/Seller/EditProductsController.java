@@ -1,6 +1,5 @@
 package ViewController.userPanel.Seller;
 
-import Control.Manager;
 import Control.Seller.EditProductsManager;
 import Control.Seller.SellerManager;
 import Models.Account.Account;
@@ -10,7 +9,6 @@ import Models.Shop.Category.Feature;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.EditProductRequest;
 import ViewController.Controller;
-import ViewController.SortController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,10 +68,16 @@ public class EditProductsController extends Controller {
 
     public void init(Seller seller) {
         this.seller = seller;
-        initProducts(Product.getProductsBySeller(seller));
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(Product.getProductsBySeller(seller));
+        initTable(objects);
     }
 
-    public void initProducts(ArrayList<Product> tableProducts) {
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Product> tableProducts = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableProducts.add((Product) tableProduct);
+        }
         products.setItems(FXCollections.observableArrayList(tableProducts));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
@@ -166,6 +170,6 @@ public class EditProductsController extends Controller {
     }
 
     public void sort(ActionEvent actionEvent) {
-        ((EditProductsManager) manager).openSort(this);
+        manager.openSort(this, manager);
     }
 }

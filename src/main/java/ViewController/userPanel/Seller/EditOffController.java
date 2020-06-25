@@ -57,6 +57,16 @@ public class EditOffController extends Controller {
     }
 
     private void InitOffs() {
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(seller.getAuctions());
+        initTable(objects);
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Auction> tableAuctions = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableAuctions.add((Auction) tableProduct);
+        }
         offs.setItems(FXCollections.observableArrayList(seller.getAuctions()));
         offsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("discountAmount"));
@@ -93,5 +103,9 @@ public class EditOffController extends Controller {
         productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }

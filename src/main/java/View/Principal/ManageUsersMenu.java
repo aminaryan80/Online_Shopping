@@ -49,8 +49,8 @@ public class ManageUsersMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> users = ((ManageUsersManager) manager).disableSort();
-        for (String user : users) {
+        ArrayList<Object> users = ((ManageUsersManager) manager).disableSort();
+        for (Object user : users) {
             System.out.println(user);
         }
     }
@@ -63,8 +63,8 @@ public class ManageUsersMenu extends Menu {
         if (((ManageUsersManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<Account> sortedUsers = ((ManageUsersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Account sortedUser : sortedUsers) {
+            ArrayList<Object> sortedUsers = ((ManageUsersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedUser : sortedUsers) {
                 System.out.println(sortedUser);
             }
         } else {

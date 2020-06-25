@@ -179,9 +179,9 @@ public class AuctionsPageMenu extends Menu {
                     ErrorProcessor.invalidInput();
                 }
             }
-            ArrayList<Product> sortedProducts = ((AuctionsPageManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Product sortedProduct : sortedProducts) {
-                System.out.println(sortedProduct.viewProductInShort());
+            ArrayList<Object> sortedProducts = ((AuctionsPageManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedProduct : sortedProducts) {
+                System.out.println(((Product)sortedProduct).viewProductInShort());
             }
         } else {
             ErrorProcessor.invalidInput();
@@ -193,8 +193,8 @@ public class AuctionsPageMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> products = ((AuctionsPageManager) manager).disableSort();
-        for (String product : products) {
+        ArrayList<Object> products = ((AuctionsPageManager) manager).disableSort();
+        for (Object product : products) {
             System.out.println(product);
         }
     }

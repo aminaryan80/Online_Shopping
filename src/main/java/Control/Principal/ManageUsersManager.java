@@ -46,11 +46,13 @@ public class ManageUsersManager extends Manager {
         return sort.equals("name");
     }
 
-    public ArrayList<Account> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         users = Account.getAllAccounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return users;
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(users);
+        return objects;
     }
 
     private ArrayList<String> userInShort() {
@@ -65,10 +67,12 @@ public class ManageUsersManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         users = Account.getAllAccounts();
-        return userInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(users);
+        return objects;
     }
 
     private void applySort() {

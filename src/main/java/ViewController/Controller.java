@@ -5,6 +5,7 @@ import Control.UserPanel.DashboardManager;
 import Control.UserPanel.UserPanelManager;
 import javafx.event.ActionEvent;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +15,10 @@ public class Controller {
     protected Manager manager;
 
     public void init() {
+
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
 
     }
 

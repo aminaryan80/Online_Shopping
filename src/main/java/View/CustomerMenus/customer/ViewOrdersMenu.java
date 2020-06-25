@@ -64,9 +64,9 @@ public class ViewOrdersMenu extends Menu {
         if (((ViewOrdersManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            List<BuyingLog> sortedLogs = ((ViewOrdersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Log sortedLog : sortedLogs) {
-                System.out.println(sortedLog.viewLogInShort());
+            List<Object> sortedLogs = ((ViewOrdersManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedLog : sortedLogs) {
+                System.out.println(((Log) sortedLog).viewLogInShort());
             }
         } else {
             ErrorProcessor.invalidInput();
@@ -78,8 +78,8 @@ public class ViewOrdersMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> Logs = ((ViewOrdersManager) manager).disableSort();
-        for (String Log : Logs) {
+        ArrayList<Object> Logs = ((ViewOrdersManager) manager).disableSort();
+        for (Object Log : Logs) {
             System.out.println(Log);
         }
     }

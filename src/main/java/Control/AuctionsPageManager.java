@@ -243,12 +243,14 @@ public class AuctionsPageManager extends Manager {
                 "features";
     }
 
-    public ArrayList<Product> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         products = Product.getAllAuctionedProducts();
         setFilters();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return (ArrayList<Product>) products;
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(products);
+        return objects;
     }
 
     private void applySort() {
@@ -334,11 +336,13 @@ public class AuctionsPageManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         products = Product.getAllAuctionedProducts();
         setFilters();
-        return productsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(products);
+        return objects;
     }
 
     public boolean hasProductWithId(String id) {

@@ -2,6 +2,7 @@ package ViewController.principal;
 
 import Control.Principal.ManageUsersManager;
 import Models.Account.Account;
+import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -46,7 +47,17 @@ public class ManageUsersController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usersTable.setItems(FXCollections.observableArrayList(Account.getAllAccounts()));
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(Account.getAllAccounts());
+        initTable(objects);
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Account> tableAccounts = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableAccounts.add((Account) tableProduct);
+        }
+        usersTable.setItems(FXCollections.observableArrayList(tableAccounts));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         userBalanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
@@ -72,5 +83,9 @@ public class ManageUsersController extends Controller implements Initializable {
         inputs.add(firstNameField.getText());
         inputs.add(lastNameField.getText());
         ((ManageUsersManager) manager).createManagerProfile(inputs);
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }

@@ -2,6 +2,7 @@ package ViewController.principal.viewDiscountCodes;
 
 import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
 import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ViewDiscountCodesController extends Controller implements Initializable {
@@ -40,7 +42,17 @@ public class ViewDiscountCodesController extends Controller implements Initializ
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        discountsTable.setItems(FXCollections.observableArrayList(Discount.getAllDiscounts()));
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(Discount.getAllDiscounts());
+        initTable(objects);
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Discount> tableDiscounts = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableDiscounts.add((Discount) tableProduct);
+        }
+        discountsTable.setItems(FXCollections.observableArrayList(tableDiscounts));
         discountIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("discountPercent"));
         discountUseCountLimit.setCellValueFactory(new PropertyValueFactory<>("discountUseCount"));
@@ -65,5 +77,9 @@ public class ViewDiscountCodesController extends Controller implements Initializ
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }

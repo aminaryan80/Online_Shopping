@@ -57,11 +57,13 @@ public class EditProductsManager extends Manager {
                 "rating";
     }
 
-    public ArrayList<Product> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return products;
+        ArrayList<Object> productsObjects = new ArrayList<>();
+        productsObjects.addAll(products);
+        return productsObjects;
     }
 
     private void applySort() {
@@ -131,10 +133,12 @@ public class EditProductsManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<Product> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         products = mainCategory.getAllProducts();
-        return products;
+        ArrayList<Object> productsObjects = new ArrayList<>();
+        productsObjects.addAll(products);
+        return productsObjects;
     }
 
     public boolean hasProductWithId(String id) {
@@ -164,10 +168,5 @@ public class EditProductsManager extends Manager {
 
     public boolean isEnteredProductEditFieldValid(String field) {
         return Product.isEnteredProductFieldValid(field);
-    }
-
-    public void openSort(Controller controller) {
-        Controller myController = loadFxml(Manager.Addresses.SORT, true, this);
-        ((SortController) myController).init(controller);
     }
 }

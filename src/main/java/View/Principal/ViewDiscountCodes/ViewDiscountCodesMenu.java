@@ -48,8 +48,8 @@ public class ViewDiscountCodesMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> discounts = ((ViewDiscountCodesManager) manager).disableSort();
-        for (String discount : discounts) {
+        ArrayList<Object> discounts = ((ViewDiscountCodesManager) manager).disableSort();
+        for (Object discount : discounts) {
             System.out.println(discount);
         }
     }
@@ -62,8 +62,8 @@ public class ViewDiscountCodesMenu extends Menu {
         if (((ViewDiscountCodesManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<Discount> sortedDiscounts = ((ViewDiscountCodesManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Discount sortedDiscount : sortedDiscounts) {
+            ArrayList<Object> sortedDiscounts = ((ViewDiscountCodesManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedDiscount : sortedDiscounts) {
                 System.out.println(sortedDiscount);
             }
         } else {

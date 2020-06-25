@@ -95,11 +95,13 @@ public class SellerManager extends Manager {
                 "date";
     }
 
-    public ArrayList<SellingLog> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         logs = ((Seller) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return logs;
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(logs);
+        return objects;
     }
 
     private void applySort() {
@@ -153,10 +155,12 @@ public class SellerManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         logs = ((Seller) account).getAllLogs();
-        return logsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(logs);
+        return objects;
     }
 
     public void openManageProducts() {

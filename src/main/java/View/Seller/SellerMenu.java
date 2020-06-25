@@ -107,8 +107,8 @@ public class SellerMenu extends Menu {
         if (((SellerManager) manager).isEnteredSortFieldValid(sort)) {
             System.out.println("do you want it to be ascending (answer with true or false)");
             String isAscending = scanner.nextLine();
-            ArrayList<SellingLog> sortedLogs = ((SellerManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Log sortedLog : sortedLogs) {
+            ArrayList<Object> sortedLogs = ((SellerManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedLog : sortedLogs) {
                 System.out.println(sortedLog);
             }
         } else {
@@ -121,8 +121,8 @@ public class SellerMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> Logs = ((SellerManager) manager).disableSort();
-        for (String Log : Logs) {
+        ArrayList<Object> Logs = ((SellerManager) manager).disableSort();
+        for (Object Log : Logs) {
             System.out.println(Log);
         }
     }

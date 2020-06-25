@@ -1,6 +1,7 @@
 package ViewController.principal;
 
 import Control.Principal.ManageRequestsManager;
+import Models.Shop.Product.Product;
 import Models.Shop.Request.Request;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManageRequestsController extends Controller implements Initializable {
@@ -33,7 +35,17 @@ public class ManageRequestsController extends Controller implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        requestsTable.setItems(FXCollections.observableArrayList(Request.getAllRequests()));
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(Request.getAllRequests());
+        initTable(objects);
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Request> tableRequests = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableRequests.add((Request) tableProduct);
+        }
+        requestsTable.setItems(FXCollections.observableArrayList(tableRequests));
         requestIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         requestTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         requestSenderCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
@@ -50,5 +62,9 @@ public class ManageRequestsController extends Controller implements Initializabl
 
     public void deleteRequest(ActionEvent actionEvent) {
         ((ManageRequestsManager) manager).declineRequest(requestIdField.getText());
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }

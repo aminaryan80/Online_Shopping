@@ -10,6 +10,7 @@ import Models.Shop.Product.Product;
 //import View.Menu;
 import View.Menu;
 import ViewController.Controller;
+import ViewController.SortController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -107,6 +108,30 @@ public abstract class Manager {
     public boolean checkDate(String date) {
         //return date.matches("^\\d{2}-\\d{2}-\\d{4}$");
         return date.matches("^(\\d{4}-\\d{2}-\\d{2})$");
+    }
+    public boolean isEnteredSortFieldValid(String field) {
+        return false;
+    }
+
+    public String currentSort() {
+        return "";
+    }
+
+    public String showAvailableSorts() {
+        return "";
+    }
+
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
+        return null;
+    }
+
+    public ArrayList<Object> disableSort() {
+        return null;
+    }
+
+    public void openSort(Controller controller, Manager manager) {
+        Controller myController = loadFxml(Manager.Addresses.SORT, true, manager);
+        ((SortController) myController).init(controller);
     }
 
     protected Date parseDate(String stringDate) {

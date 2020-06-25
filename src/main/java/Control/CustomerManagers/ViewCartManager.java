@@ -92,11 +92,13 @@ public class ViewCartManager extends Manager {
                 "rating";
     }
 
-    public ArrayList<Product> sort(String sort, boolean isAscending) {
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        return (ArrayList<Product>) products;
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(products);
+        return objects;
     }
 
     private void applySort() {
@@ -166,10 +168,12 @@ public class ViewCartManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Object> disableSort() {
         currentSort = null;
         products = mainCategory.getAllProducts();
-        return productsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(products);
+        return objects;
     }
 
     private ArrayList<String> productsInShort() {

@@ -187,9 +187,9 @@ public class ProductsMenu extends Menu {
                     ErrorProcessor.invalidInput();
                 }
             }
-            ArrayList<Product> sortedProducts = ((ProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
-            for (Product sortedProduct : sortedProducts) {
-                System.out.println(sortedProduct.viewProductInShort());
+            ArrayList<Object> sortedProducts = ((ProductsManager) manager).sort(sort, Boolean.parseBoolean(isAscending));
+            for (Object sortedProduct : sortedProducts) {
+                System.out.println(((Product) sortedProduct).viewProductInShort());
             }
         } else {
             ErrorProcessor.invalidInput();
@@ -201,8 +201,8 @@ public class ProductsMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> products = ((ProductsManager) manager).disableSort();
-        for (String product : products) {
+        ArrayList<Object> products = ((ProductsManager) manager).disableSort();
+        for (Object product : products) {
             System.out.println(product);
         }
     }
