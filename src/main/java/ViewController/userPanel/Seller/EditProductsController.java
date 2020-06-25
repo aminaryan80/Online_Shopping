@@ -1,5 +1,6 @@
 package ViewController.userPanel.Seller;
 
+import Control.Manager;
 import Control.Seller.EditProductsManager;
 import Control.Seller.SellerManager;
 import Models.Account.Account;
@@ -9,6 +10,7 @@ import Models.Shop.Category.Feature;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.EditProductRequest;
 import ViewController.Controller;
+import ViewController.SortController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,9 +66,15 @@ public class EditProductsController extends Controller {
     @FXML
     private TextField newFeaturesValues;
     private Product product;
+    private Seller seller;
 
     public void init(Seller seller) {
-        products.setItems(FXCollections.observableArrayList(Product.getProductsBySeller(seller)));
+        this.seller = seller;
+        initProducts(Product.getProductsBySeller(seller));
+    }
+
+    public void initProducts(ArrayList<Product> tableProducts) {
+        products.setItems(FXCollections.observableArrayList(tableProducts));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -155,5 +163,9 @@ public class EditProductsController extends Controller {
     public void updateFeatures() {
         newFeatures.setItems(FXCollections.observableArrayList(Category.getCategoryByName(category.getText()).getFeatures()));
         newFeaturesColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        ((EditProductsManager) manager).openSort(this);
     }
 }

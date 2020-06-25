@@ -114,8 +114,8 @@ public class EditProductsMenu extends Menu {
     }
 
     private void disableSort() {
-        ArrayList<String> products = ((EditProductsManager) manager).disableSort();
-        for (String product : products) {
+        ArrayList<Product> products = ((EditProductsManager) manager).disableSort();
+        for (Product product : products) {
             System.out.println(product);
         }
     }
