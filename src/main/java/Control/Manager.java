@@ -289,7 +289,11 @@ public abstract class Manager {
 
         VIEW_CART("view/userPanel/Customer/ViewCart.fxml"),
 
-        VIEW_ORDERS("view/userPanel/Customer/ViewOrders.fxml");
+        VIEW_ORDERS("view/userPanel/Customer/ViewOrders.fxml"),
+
+        COMMENT("view/userPanel/Customer/product/Comment.fxml"),
+
+        PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml");
 
         private String address;
 

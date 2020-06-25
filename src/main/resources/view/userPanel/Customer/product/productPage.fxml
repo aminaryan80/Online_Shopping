@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.products.ProductPageController">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1200.0" stylesheets="@../../../../styles/products_styles.css">
+            <children>
+                <ImageView fitHeight="330.0" fitWidth="330.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
+                    <image>
+                        <Image url="@../../../../images/product.jpg" />
+                    </image>
+                </ImageView>
+                <Label layoutX="390.0" layoutY="46.0" text="Name:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="productName" alignment="CENTER" layoutX="452.0" layoutY="46.0" prefWidth="115.0" text="ProductName">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="398.0" layoutY="89.0" text="Seller:">
+                    <font>
+                        <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="sellerName" alignment="CENTER" layoutX="452.0" layoutY="89.0" prefHeight="27.0" prefWidth="115.0" text="SellerName">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="630.0" layoutY="46.0" text="Company:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="companyName" layoutX="720.0" layoutY="46.0" text="CompanyName">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="671.0" layoutY="89.0" text="Rate:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="rate" layoutX="723.0" layoutY="89.0" text="4.4">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="description" alignment="TOP_LEFT" layoutX="391.0" layoutY="204.0" prefHeight="160.0" prefWidth="455.0" text="This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. " textAlignment="JUSTIFY" wrapText="true">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label layoutX="391.0" layoutY="174.0" text="Description:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="featureValueTable" layoutX="870.0" layoutY="46.0" prefHeight="200.0" prefWidth="304.0">
+               <columns>
+                  <TableColumn prefWidth="159.2000732421875" text="Feature" />
+                  <TableColumn prefWidth="143.99993896484375" text="Value" />
+               </columns>
+            </TableView>
+            <Label fx:id="productId" alignment="CENTER" layoutX="34.0" layoutY="371.0" prefHeight="27.0" prefWidth="330.0" text="#ID">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="401.0" layoutY="129.0" text="Price:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="price" alignment="CENTER" layoutX="452.0" layoutY="129.0" prefWidth="115.0" text="2000$">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="1025.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#rate" prefHeight="44.0" prefWidth="149.0" text="Rate">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="870.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#addToCart" prefHeight="94.0" prefWidth="149.0" text="Add To Cart">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="1025.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#addComment" prefHeight="44.0" prefWidth="149.0" text="Comment">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="34.0" layoutY="397.0" text="Comments:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <GridPane fx:id="comments" layoutY="424.0" prefWidth="1200.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

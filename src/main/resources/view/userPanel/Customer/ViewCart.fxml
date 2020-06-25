@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../styles/publicStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.ViewCartController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../styles/publicStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.cart.ViewCartController">
 
     <children>
         <HBox layoutX="250.0" prefHeight="600.0" prefWidth="954.0">

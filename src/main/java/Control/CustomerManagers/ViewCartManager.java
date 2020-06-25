@@ -8,7 +8,7 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewCartMenu;
-import ViewController.customer.ViewCartController;
+import ViewController.customer.cart.ViewCartController;
 
 import java.util.*;
 
@@ -173,6 +173,10 @@ public class ViewCartManager extends Manager {
             productsInShort.add(product.viewProductInShort());
         }
         return productsInShort;
+    }
+
+    public void showProduct(String id){
+        new ProductPageManager(account,Product.getProductById(id),Addresses.VIEW_CART,this);
     }
 
     public boolean isCartEmpty() {

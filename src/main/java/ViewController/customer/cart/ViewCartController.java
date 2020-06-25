@@ -1,4 +1,4 @@
-package ViewController.customer;
+package ViewController.customer.cart;
 
 import Control.CustomerManagers.ViewCartManager;
 import Models.Shop.Product.Product;
@@ -6,17 +6,12 @@ import ViewController.Controller;
 import com.sun.javafx.scene.control.skin.LabeledText;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
-import javax.swing.text.View;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
-
+import java.util.Optional;
 public class ViewCartController extends Controller {
 
 
@@ -86,23 +81,35 @@ public class ViewCartController extends Controller {
     }
 
     public void addProduct(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistInCartException {
-        if (selectedProduct.getText().matches("\\S{8}"))
+        if (selectedProduct.getText().matches("\\S{8}")) {
             ((ViewCartManager) manager).productQuantity(selectedProduct.getText(), true);
-        init();
+            init();
+        }
     }
 
     public void reduceProduct(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistInCartException {
-        if (selectedProduct.getText().matches("\\S{8}"))
+        if (selectedProduct.getText().matches("\\S{8}")) {
             ((ViewCartManager) manager).productQuantity(selectedProduct.getText(), false);
-        init();
+            init();
+        }
     }
 
     public void clearCart(MouseEvent mouseEvent) {
-        ((ViewCartManager) manager).clearCart();
-        init();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really wanna clear your cart?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            ((ViewCartManager) manager).clearCart();
+            init();
+        } else alert.close();
     }
 
     public void openProductPage(MouseEvent mouseEvent) {
+        if (selectedProduct.getText().matches("\\S{8}")) {
+            ((ViewCartManager) manager).showProduct(selectedProduct.getText());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "None of the products is selected", ButtonType.OK);
+            alert.show();
+        }
     }
 
     public void openPurchasePage(MouseEvent mouseEvent) {
