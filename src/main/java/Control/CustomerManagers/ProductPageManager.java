@@ -34,8 +34,8 @@ public class ProductPageManager extends Manager {
     }
 
     public void update(Controller c) {
-        ProductPageController controller = (ProductPageController) c;
-        controller.init();
+        productPageController = (ProductPageController) c;
+        productPageController.init();
     }
 
     public void setCustomer(Customer customer) {
