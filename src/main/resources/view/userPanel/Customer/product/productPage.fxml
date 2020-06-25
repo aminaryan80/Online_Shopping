@@ -74,8 +74,8 @@
             </Label>
             <TableView fx:id="featureValueTable" layoutX="870.0" layoutY="46.0" prefHeight="200.0" prefWidth="304.0">
                <columns>
-                  <TableColumn prefWidth="159.2000732421875" text="Feature" />
-                  <TableColumn prefWidth="143.99993896484375" text="Value" />
+                  <TableColumn fx:id="featureColumn" prefWidth="159.2000732421875" text="Feature" />
+                  <TableColumn fx:id="valueColumn" prefWidth="143.99993896484375" text="Value" />
                </columns>
             </TableView>
             <Label fx:id="productId" alignment="CENTER" layoutX="34.0" layoutY="371.0" prefHeight="27.0" prefWidth="330.0" text="#ID">
@@ -121,6 +121,11 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
+            <Button layoutX="871.0" layoutY="357.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="55.0" prefWidth="304.0" text="back">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </content>

@@ -12,14 +12,18 @@ import java.util.Scanner;
 
 public class Rate {
     private static ArrayList<Rate> allRates = new ArrayList<>();
-    private Account account;
+//    private Account account;
+//    private Product product;
+
+    private String username;
+    private String productId;
     private int score;
-    private Product product;
     private String id;
+
     public Rate(Account account, int score, Product product) {
-        this.account = account;
+        this.username = account.getUsername();
         this.score = score;
-        this.product = product;
+        this.productId = product.getId();
         id = Identity.getId();
         allRates.add(this);
     }
@@ -57,7 +61,7 @@ public class Rate {
 
     public static Rate getRateById(String rateId) {
         for (Rate rate : allRates) {
-            if(rate.getId().equals(rateId)) return rate;
+            if (rate.getId().equals(rateId)) return rate;
         }
         return null;
     }

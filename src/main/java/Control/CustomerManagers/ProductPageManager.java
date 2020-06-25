@@ -10,6 +10,7 @@ import View.CustomerMenus.product.ProductPage;
 import ViewController.products.ProductPageController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProductPageManager extends Manager {
@@ -57,6 +58,14 @@ public class ProductPageManager extends Manager {
         return comments;
     }
 
+    public HashMap<String,String> commentsFXML(){
+        HashMap<String,String> commentsFXML = new HashMap<>();
+        for (Comment comment : product.getAllComments()) {
+            commentsFXML.put(comment.getAccount().getUsername(),comment.getText());
+        }
+    return commentsFXML;
+    }
+
     public void addComment(String title, String content) {
         boolean hasPurchased = false;
         for (Customer buyer : product.getAllBuyers()) {
@@ -70,5 +79,9 @@ public class ProductPageManager extends Manager {
 
     public Product getProduct() {
         return product;
+    }
+
+    public void addComment() {
+        loadFxml(Addresses.ADD_COMMENT,true);
     }
 }

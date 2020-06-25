@@ -12,15 +12,17 @@ import java.util.Scanner;
 
 public class Comment {
     private static ArrayList<Comment> allComments = new ArrayList<>();
-    private Account account;
-    private Product product;
+//    private Account account;
+//    private Product product;
+    private String username;
+    private String productId;
     private String text;
     private CommentStatus status;
     private boolean hasPurchased; //TODO use
     private String id;
     public Comment(Account account, Product product, String text, CommentStatus status, boolean hasPurchased) {
-        this.account = account;
-        this.product = product;
+        this.username = account.getUsername();
+        this.productId = product.getId();
         this.text = text;
         this.status = status;
         this.hasPurchased = hasPurchased;
@@ -30,6 +32,10 @@ public class Comment {
 
     public enum CommentStatus {
         PENDING, CONFIRMED, DENIED;
+    }
+
+    public Account getAccount() {
+        return Account.getAccountByUsername(username);
     }
 
     public String getText() {
@@ -75,7 +81,7 @@ public class Comment {
 
     public static void save(Comment comment) throws Exception {
         String jsonAccount = Gson.INSTANCE.get().toJson(comment);
-        FileWriter file = new FileWriter(Address.RATES.get() + "\\" + comment.getId() + ".json");
+        FileWriter file = new FileWriter(Address.COMMENTS.get() + "\\" + comment.getId() + ".json");
         file.write(jsonAccount);
         file.close();
     }
@@ -83,8 +89,8 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "account=" + account +
-                ", product=" + product +
+                "account=" + username +
+                ", product=" + Product.getProductById(productId) +
                 ", text='" + text + '\'' +
                 ", status=" + status +
                 ", hasPurchased=" + hasPurchased +

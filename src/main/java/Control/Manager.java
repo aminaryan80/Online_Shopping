@@ -291,6 +291,8 @@ public abstract class Manager {
 
         COMMENT("view/userPanel/Customer/product/Comment.fxml"),
 
+        ADD_COMMENT("view/userPanel/Customer/product/addCommentPage.fxml"),
+
         PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml");
 
         private String address;
