@@ -9,10 +9,11 @@ import View.Principal.ManageUsersMenu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class ManageUsersManager extends Manager {
 
-    private ArrayList<Account> users;
+    private List<Account> users;
     private Sort currentSort;
 
     public ManageUsersManager(Account account) {
@@ -92,7 +93,7 @@ public class ManageUsersManager extends Manager {
         if (!currentSort.isAscending()) {
             Collections.reverse(users);
         }
-        users = (ArrayList<Account>) Arrays.asList(usersForSort);
+        users = Arrays.asList(usersForSort);
     }
 
     public void deleteUsername(String username) {

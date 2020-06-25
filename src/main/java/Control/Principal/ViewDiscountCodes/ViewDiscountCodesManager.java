@@ -10,11 +10,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class ViewDiscountCodesManager extends Manager {
 
     private Sort currentSort;
-    private ArrayList<Discount> discounts;
+    private List<Discount> discounts;
 
     public ViewDiscountCodesManager(Account account) {
         super(account);
@@ -111,7 +112,7 @@ public class ViewDiscountCodesManager extends Manager {
                 }
             }
         }
-        discounts = (ArrayList<Discount>) Arrays.asList(discountsForSort);
+        discounts = Arrays.asList(discountsForSort);
     }
 
     private void sortByBeginningDate() {
@@ -125,7 +126,7 @@ public class ViewDiscountCodesManager extends Manager {
                 }
             }
         }
-        discounts = (ArrayList<Discount>) Arrays.asList(discountsForSort);
+        discounts = Arrays.asList(discountsForSort);
     }
 
     private void sortByEndingDate() {
@@ -139,7 +140,7 @@ public class ViewDiscountCodesManager extends Manager {
                 }
             }
         }
-        discounts = (ArrayList<Discount>) Arrays.asList(discountsForSort);
+        discounts = Arrays.asList(discountsForSort);
     }
 
     public boolean isEnteredSortFieldValid(String field) {
