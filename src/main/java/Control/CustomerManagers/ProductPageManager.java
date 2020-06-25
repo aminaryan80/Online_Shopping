@@ -17,6 +17,7 @@ import java.util.List;
 public class ProductPageManager extends Manager {
     private Customer customer = (Customer) account; //TODO should this field be static?
     private Product product;
+    private ProductPageController productPageController;
 
     public ProductPageManager(Account account, Product product) {
         super(account);
@@ -64,12 +65,12 @@ public class ProductPageManager extends Manager {
         return comments;
     }
 
-    public HashMap<String,String> commentsFXML(){
-        HashMap<String,String> commentsFXML = new HashMap<>();
+    public HashMap<String, String> commentsFXML() {
+        HashMap<String, String> commentsFXML = new HashMap<>();
         for (Comment comment : product.getAllComments()) {
-            commentsFXML.put(comment.getAccount().getUsername(),comment.getText());
+            commentsFXML.put(comment.getAccount().getUsername(), comment.getText());
         }
-    return commentsFXML;
+        return commentsFXML;
     }
 
     public void addComment(String title, String content) {
@@ -81,13 +82,39 @@ public class ProductPageManager extends Manager {
         }
         Comment comment = new Comment(customer, product, title + ":\n" + "\t" + content, null, hasPurchased);
         product.addComment(comment);
+        productPageController.initializeComments();
+    }
+
+    public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
+        Product product = Product.getProductById(productId);
+        if(product != null) product.addRate(customer,score);
+        else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
     }
 
     public Product getProduct() {
         return product;
     }
 
+    public void addToCart() {
+        if(customer==null) //TODO check
+        cart.addProduct(product);
+        else customer.getCart().addProduct(product);
+    }
+
+    public boolean hasProductInCart(){
+        for (Product productInCart : customer.getCart().getProducts()) {
+            if(productInCart.getId().equals(product.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addComment() {
-        loadFxml(Addresses.ADD_COMMENT,true);
+        loadFxml(Addresses.ADD_COMMENT, true);
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 }

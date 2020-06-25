@@ -28,6 +28,10 @@ public class Rate {
         allRates.add(this);
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public static void open() throws Exception {
         File folder = new File(Address.RATES.get());
         if (!folder.exists()) folder.mkdirs();
@@ -72,5 +76,13 @@ public class Rate {
 
     public int getScore() {
         return score;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

@@ -8,6 +8,7 @@ import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import View.Seller.EditProductsMenu;
 import ViewController.Controller;
+import ViewController.SortController;
 import ViewController.userPanel.Seller.EditProductsController;
 
 import java.util.ArrayList;
@@ -21,17 +22,19 @@ public class EditProductsManager extends Manager {
     public EditProductsManager(Account account) {
         super(account);
         products = Product.getAllProducts();
-        new EditProductsMenu(this);
+        //new EditProductsMenu(this);
     }
 
     public EditProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
+        //new ManageUsersMenu(this);
         Controller controller = loadFxml(Addresses.EDIT_PRODUCTS_MENU);
         update(controller);
     }
 
     public void update(Controller c) {
         EditProductsController controller = (EditProductsController) c;
+        controller.setManager(this);
         controller.init((Seller) account);
     }
 
@@ -59,14 +62,6 @@ public class EditProductsManager extends Manager {
         currentSort = new Sort(sort, isAscending);
         applySort();
         return products;
-    }
-
-    private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort= new ArrayList<>();
-        for (Product product : products) {
-            productsInShort.add(product.viewProductInShort());
-        }
-        return productsInShort;
     }
 
     private void applySort() {
@@ -136,14 +131,14 @@ public class EditProductsManager extends Manager {
         return currentSort.toString();
     }
 
-    public ArrayList<String> disableSort() {
+    public ArrayList<Product> disableSort() {
         currentSort = null;
         products = mainCategory.getAllProducts();
-        return productsInShort();
+        return products;
     }
 
     public boolean hasProductWithId(String id) {
-        return Product.hasProductWithId(id, account.getUsername());
+        return Product.hasProductWithId(id, ((Seller) account).getUsername());
     }
 
     public Product editProduct(String id, String field, String newValue) {
@@ -169,5 +164,10 @@ public class EditProductsManager extends Manager {
 
     public boolean isEnteredProductEditFieldValid(String field) {
         return Product.isEnteredProductFieldValid(field);
+    }
+
+    public void openSort(Controller controller) {
+        Controller myController = loadFxml(Manager.Addresses.SORT, true, this);
+        ((SortController) myController).init(controller);
     }
 }

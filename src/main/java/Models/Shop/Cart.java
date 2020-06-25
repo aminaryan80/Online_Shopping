@@ -53,7 +53,7 @@ public class Cart {
     }
 
     public void addProduct(Product product) {
-        if (products.containsKey(product)) {
+        if (hasProductInCartWithId(product.getId())) {
             products.replace(product, products.get(product) + 1);
         } else products.put(product, 1);
     }

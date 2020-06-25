@@ -152,8 +152,8 @@ public class Product {
         allProducts.remove(product);
         File file = new File(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
         try {
-            if(file.exists())
-            FileUtils.forceDelete(file);
+            if (file.exists())
+                FileUtils.forceDelete(file);
         } catch (Exception ignored) {
 
         }
@@ -330,12 +330,20 @@ public class Product {
         for (Rate rate : getAllRates()) {
             sum += rate.getScore();
         }
-        if (allRatesIds.size() != 0)
+        if (allRatesIds.size() != 0) {
             return sum / allRatesIds.size();
-        else return 0;
+        } else return 0;
     }
 
     public void addRate(Account account, int rate) {
+        for (String rateId : allRatesIds) {
+            Rate previousRate = Rate.getRateById(rateId);
+            if (previousRate.getUsername().equals(account.getUsername()) && previousRate.getProductId().equals(this.getId()))
+            {
+                previousRate.setScore(rate);
+                return;
+            }
+        }
         allRatesIds.add((new Rate(account, rate, this)).getId());
     }
 

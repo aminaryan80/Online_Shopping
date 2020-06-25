@@ -7,6 +7,7 @@ import Models.Shop.Cart;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
+//import View.Menu;
 import View.Menu;
 import ViewController.Controller;
 import javafx.fxml.FXMLLoader;
@@ -74,9 +75,9 @@ public abstract class Manager {
         return mainCategory;
     }
 
-    public Menu getMenu() {
+    /*public Menu getMenu() {
         return menu;
-    }
+    }*/
 
     public void logout() {
         account = null;
@@ -246,6 +247,9 @@ public abstract class Manager {
     }
 
     public enum Addresses {
+
+        SORT("view/sorting.fxml"),
+
         MAIN_MENU("view/main_menu.fxml"),
 
         PRODUCTS_MENU("view/products/products_menu.fxml"),
