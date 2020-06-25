@@ -1,5 +1,6 @@
 package ViewController.userPanel.Seller;
 
+import Control.Manager;
 import Control.Seller.EditProductsManager;
 import Control.Seller.SellerManager;
 import Models.Account.Account;
@@ -10,12 +11,12 @@ import Models.Shop.Product.Product;
 import Models.Shop.Request.EditProductRequest;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -29,8 +30,6 @@ public class EditProductsController extends Controller {
     private TableView<Feature> features;
     @FXML
     private TableView<Account> buyers;
-    @FXML
-    private TableView<Feature> newFeatures;
     @FXML
     private TableColumn<Product, String> idColumn;
     @FXML
@@ -46,8 +45,6 @@ public class EditProductsController extends Controller {
     @FXML
     private TableColumn<Feature, String> valueColumn;
     @FXML
-    private TableColumn<Feature, String> newFeaturesColumn;
-    @FXML
     private TextField id;
     @FXML
     private TextField name;
@@ -62,12 +59,24 @@ public class EditProductsController extends Controller {
     @FXML
     private TextField isAvailable;
     @FXML
-    private TextField newFeaturesValues;
+    private ChoiceBox changeableFeatures;
+    @FXML
+    private TextField changeableFeatureValue;
+    @FXML
+    private TextField featuresText;
+    @FXML
+    private Label featuresLabel;
     private Product product;
     private Seller seller;
+    private int i;
+    private ArrayList<String> featuresNames;
+    private ArrayList<Feature> allFeatures;
+    private int featuresNumbers;
 
     public void init(Seller seller) {
         this.seller = seller;
+        allFeatures = new ArrayList<>();
+        i = -1;
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(Product.getProductsBySeller(seller));
         initTable(objects);
@@ -110,30 +119,15 @@ public class EditProductsController extends Controller {
             Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), "description", description.getText());
             new EditProductRequest((Seller) manager.getAccount(), product1);
         }
-        Feature feature = features.getSelectionModel().getSelectedItem();
-        if (feature != null) {
-            Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), feature.getName(), newFeaturesValues.getText());
-            new EditProductRequest((Seller) manager.getAccount(), product1);
-        }
     }
 
     public void add(ActionEvent actionEvent) {
-        if (!Category.hasCategoryWithName(category.getText()) && !category.getText().equals("mainCategory")) {
-            manager.error("wrong category name");
-            return;
-        }
         if (!manager.checkNumber(price.getText())) {
             manager.error("wrong price format");
             return;
         }
-        ArrayList<Feature> allFeatures = new ArrayList<>();
-        String[] featuresNames = (String[]) product.getFeatures().toArray();
-        String[] featuresValues = newFeaturesValues.getText().split("//s+");
-        for (int i = 0; i < featuresNames.length; i++) {
-            allFeatures.add(new Feature(featuresNames[i], featuresValues[i]));
-        }
-        ((SellerManager) manager).addProduct(name.getText(), Category.getCategoryByName(category.getText()),
-                Double.parseDouble(price.getText()), Boolean.parseBoolean(isAvailable.getText()), description.getText(), allFeatures);
+        manager.loadFxml(Manager.Addresses.ADD_PRODUCT_POP_UP, true);
+        featuresLabel.setText("enter category");
     }
 
     public void updateScene(MouseEvent mouseEvent) {
@@ -157,6 +151,7 @@ public class EditProductsController extends Controller {
         features.setItems(FXCollections.observableArrayList(product.getFeatures()));
         featureColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        changeableFeatures.setItems(FXCollections.observableList(product.getCategory().getFeaturesNames()));
     }
 
     private void initBuyers() {
@@ -164,12 +159,38 @@ public class EditProductsController extends Controller {
         buyersNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
     }
 
-    public void updateFeatures() {
-        newFeatures.setItems(FXCollections.observableArrayList(Category.getCategoryByName(category.getText()).getFeatures()));
-        newFeaturesColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+    public void updateFeatures(){
+        Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), (String) changeableFeatures.getSelectionModel().getSelectedItem(), changeableFeatureValue.getText());
+        new EditProductRequest((Seller) manager.getAccount(), product1);
     }
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    public void next(ActionEvent actionEvent) {
+        if (i == -1) {
+            String categoryName = featuresText.getText();
+            if (!Category.hasCategoryWithName(categoryName)) {
+                manager.error("wrong category name");
+                return;
+            }
+            featuresNames = Category.getCategoryByName(categoryName).getFeaturesNames();
+            featuresNumbers = featuresNames.size();
+            i++;
+            featuresText.clear();
+            featuresLabel.setText(featuresNames.get(i));
+        } else if (i == featuresNumbers - 1){
+            ((SellerManager) manager).addProduct(name.getText(), Category.getCategoryByName(category.getText()),
+                    Double.parseDouble(price.getText()), Boolean.parseBoolean(isAvailable.getText()), description.getText(), allFeatures);
+            featuresText.clear();
+            featuresLabel.setText("its done close the pop up");
+        } else {
+            allFeatures.add(new Feature(featuresNames.get(i), featuresText.getText()));
+            i++;
+            featuresText.clear();
+            featuresLabel.setText(featuresNames.get(i));
+        }
+
     }
 }
