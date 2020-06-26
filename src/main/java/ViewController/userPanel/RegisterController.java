@@ -47,6 +47,14 @@ public class RegisterController extends Controller {
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
     }
 
+    public void registerAsPrincipal() {
+        customerRB.setDisable(true);
+        sellerRB.setDisable(true);
+        principalRB.setSelected(true);
+        principalRBSelected(null);
+
+    }
+
     public void principalRBSelected(ActionEvent actionEvent) {
         balanceField.setVisible(false);
         companyNameField.setVisible(false);
