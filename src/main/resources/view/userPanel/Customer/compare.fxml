@@ -11,10 +11,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.userPanel.Customer.Compare">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.CompareController">
 
 
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="1200.0" stylesheets="@../../../styles/products_styles.css">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="490.0" prefWidth="1115.0" stylesheets="@../../../styles/products_styles.css">
         <children>
             <ImageView fitHeight="188.0" fitWidth="159.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
                 <image>
@@ -93,13 +93,13 @@
                 </font>
             </Label>
          <TextField layoutX="716.0" layoutY="14.0" prefHeight="26.0" prefWidth="304.0" promptText="product id" />
-         <Button layoutX="1029.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="confirm" />
+         <Button layoutX="1029.0" layoutY="14.0" mnemonicParsing="false" onAction="#setOtherProduct" prefHeight="26.0" prefWidth="80.0" text="confirm" />
          <ImageView fitHeight="188.0" fitWidth="159.0" layoutX="544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
             <image>
                <Image url="@../../../images/product.jpg" />
             </image>
          </ImageView>
-         <Label fx:id="productId1" alignment="CENTER" layoutX="544.0" layoutY="179.0" prefHeight="27.0" prefWidth="159.0" text="#ID">
+         <Label fx:id="productIdOther" alignment="CENTER" layoutX="544.0" layoutY="179.0" prefHeight="27.0" prefWidth="159.0" text="#ID">
             <font>
                <Font size="18.0" />
             </font>
@@ -109,7 +109,7 @@
                <Font size="18.0" />
             </font>
          </Label>
-         <Label fx:id="productName1" alignment="CENTER" layoutX="611.0" layoutY="215.0" prefWidth="115.0" text="ProductName">
+         <Label fx:id="productNameOther" alignment="CENTER" layoutX="611.0" layoutY="215.0" prefWidth="115.0" text="ProductName">
             <font>
                <Font size="18.0" />
             </font>
@@ -119,12 +119,12 @@
                <Font size="18.0" />
             </font>
          </Label>
-         <Label fx:id="sellerName1" alignment="CENTER" layoutX="601.0" layoutY="242.0" prefHeight="27.0" prefWidth="115.0" text="SellerName">
+         <Label fx:id="sellerNameOther" alignment="CENTER" layoutX="601.0" layoutY="242.0" prefHeight="27.0" prefWidth="115.0" text="SellerName">
             <font>
                <Font size="18.0" />
             </font>
          </Label>
-         <Label fx:id="description1" alignment="TOP_LEFT" layoutX="659.0" layoutY="298.0" prefHeight="170.0" prefWidth="410.0" text="This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. " textAlignment="JUSTIFY" wrapText="true">
+         <Label fx:id="descriptionOther" alignment="TOP_LEFT" layoutX="659.0" layoutY="298.0" prefHeight="170.0" prefWidth="410.0" text="This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. " textAlignment="JUSTIFY" wrapText="true">
             <font>
                <Font size="17.0" />
             </font>
@@ -139,7 +139,7 @@
                <Font size="18.0" />
             </font>
          </Label>
-         <Label fx:id="price1" alignment="CENTER" layoutX="589.0" layoutY="268.0" prefHeight="27.0" prefWidth="80.0" text="2000$">
+         <Label fx:id="priceOther" alignment="CENTER" layoutX="589.0" layoutY="268.0" prefHeight="27.0" prefWidth="80.0" text="2000$">
             <font>
                <Font size="18.0" />
             </font>
@@ -150,7 +150,7 @@
                <Font size="18.0" />
             </font>
          </Label>
-         <Label fx:id="companyName1" layoutX="796.0" layoutY="45.0" text="CompanyName">
+         <Label fx:id="companyNameOther" layoutX="796.0" layoutY="45.0" text="CompanyName">
             <font>
                <Font size="18.0" />
             </font>
@@ -160,11 +160,17 @@
                <Font size="18.0" />
             </font>
          </Label>
-         <Label fx:id="rate1" layoutX="756.0" layoutY="72.0" text="4.4">
+         <Label fx:id="rateOther" layoutX="756.0" layoutY="72.0" text="4.4">
             <font>
                <Font size="18.0" />
             </font>
          </Label>
+         <TableView fx:id="featureValueTableOther" layoutX="780.0" layoutY="105.0" prefHeight="188.0" prefWidth="322.0">
+           <columns>
+             <TableColumn fx:id="featureColumnOther" prefWidth="167.2000732421875" text="Feature" />
+             <TableColumn fx:id="valueColumnOther" prefWidth="156.00006103515625" text="value" />
+           </columns>
+         </TableView>
         </children>
     </AnchorPane>
 

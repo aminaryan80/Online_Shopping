@@ -126,7 +126,7 @@
                         <Font size="18.0" />
                     </font>
                 </Button>
-            <Button layoutX="1026.0" layoutY="358.0" mnemonicParsing="false" onAction="#compare" onMouseClicked="#addComment" prefHeight="51.0" prefWidth="150.0" text="Compare">
+            <Button layoutX="1026.0" layoutY="357.0" mnemonicParsing="false" onAction="#compare" prefHeight="55.0" prefWidth="149.0" text="Compare">
                <font>
                   <Font size="18.0" />
                </font>

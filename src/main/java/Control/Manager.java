@@ -340,6 +340,8 @@ public abstract class Manager {
 
         PURCHASE_PAGE("view/userPanel/Customer/purchasePage.fxml"),
 
+        COMPARE("view/userPanel/Customer/compare.fxml"),
+
         SHOW_ORDER_PRODUCTS("view/userPanel/Customer/showOrderProducts.fxml"),
 
         PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml");

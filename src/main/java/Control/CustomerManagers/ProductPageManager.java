@@ -125,6 +125,6 @@ public class ProductPageManager extends Manager {
     }
 
     public void compare() {
-        loadFxml(Address.COMPARE,true);
+        loadFxml(Addresses.COMPARE,true);
     }
 }
