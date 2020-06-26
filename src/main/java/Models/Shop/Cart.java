@@ -3,14 +3,13 @@ package Models.Shop;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<Product, Integer> products;
+    private Map<Product, Integer> products; //should become id to number
 
     public Cart() {
         products = new HashMap<>();
@@ -25,7 +24,10 @@ public class Cart {
     }
 
     public boolean hasProductInCartWithId(String id) {
-        return true;
+        for (Product product : products.keySet()) {
+            if(product.getId().equals(id)) return true;
+        }
+        return false;
     }
 
     public Product getProductInCartById(String id) {
