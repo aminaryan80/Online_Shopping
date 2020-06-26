@@ -346,7 +346,9 @@ public abstract class Manager {
 
         SHOW_ORDER_PRODUCTS("view/userPanel/Customer/showOrderProducts.fxml"),
 
-        PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml");
+        PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml"),
+
+        AUCTION_DETAILS("view/products/AuctionDetails.fxml");
 
         private String address;
 

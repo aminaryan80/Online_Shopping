@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,18 +85,6 @@ public class Product {
             }
         }
         return products;
-    }
-
-    public ArrayList<Feature> getFeatures() {
-        return features;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public boolean hasAuction() {
-        return auctionId != null;
     }
 
     public static ArrayList<Product> getAllProducts() {
@@ -211,6 +200,26 @@ public class Product {
         FileWriter file = new FileWriter(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
         file.write(jsonAccount);
         file.close();
+    }
+
+    public ArrayList<Feature> getFeatures() {
+        return features;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean hasAuction() {
+        if (auctionId != null) {
+            Auction auction = Auction.getAuctionById(auctionId);
+            return (LocalDate.now().isBefore(auction.getEndingDate()) && LocalDate.now().isAfter(auction.getBeginningDate()));
+        }
+        return false;
     }
 
     public void addFeature(Feature feature) {
@@ -338,8 +347,7 @@ public class Product {
     public void addRate(Account account, int rate) {
         for (String rateId : allRatesIds) {
             Rate previousRate = Rate.getRateById(rateId);
-            if (previousRate.getUsername().equals(account.getUsername()) && previousRate.getProductId().equals(this.getId()))
-            {
+            if (previousRate.getUsername().equals(account.getUsername()) && previousRate.getProductId().equals(this.getId())) {
                 previousRate.setScore(rate);
                 return;
             }
@@ -397,10 +405,6 @@ public class Product {
             if (getAuction().isActive(LocalDate.now())) return price - getAuction().getDiscountAmount();
             else return price;
         }
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override

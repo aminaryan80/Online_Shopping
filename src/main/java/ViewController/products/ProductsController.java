@@ -40,7 +40,7 @@ public class ProductsController extends Controller {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/products/Product.fxml"));
                 Parent root = loader.load();
                 ProductItemController controller = loader.getController();
-                controller.setInfos(product);
+                controller.setInfos(product.getAuction(), product, product.hasAuction());
                 controller.setManager(manager);
                 productsGridPane.add(root, i % 3, i / 3);
                 if (i % 3 == 0) {
