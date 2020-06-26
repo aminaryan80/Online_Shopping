@@ -42,7 +42,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <Button mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="227.0" text="sort">
+            <Button mnemonicParsing="false" onAction="#sort" prefHeight="26.0" prefWidth="227.0" text="sort" >
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

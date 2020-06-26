@@ -40,6 +40,17 @@ public class PurchasePageController extends Controller {
     public void init() {
         totalAmount.setText(((PurchaseManager) manager).getTotalPrice((Discount) null) + "$");
         ArrayList<CartTableItem> cartTableItems = getCartTableItems();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(cartTableItems);
+        initTable(objects);
+    }
+
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            cartTableItems.add((CartTableItem) tableProduct);
+        }
         ObservableList<CartTableItem> data = FXCollections.observableList(cartTableItems);
         numberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("number"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("name"));
@@ -199,5 +210,9 @@ public class PurchasePageController extends Controller {
                 checkPurchaseOption();
             }
         }
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }

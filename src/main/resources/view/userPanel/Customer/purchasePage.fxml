@@ -44,12 +44,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
-                </Button>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="sort">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+                </Button>د
             </children>
         </VBox>
       <GridPane layoutX="250.0" layoutY="-1.0" prefHeight="601.0" prefWidth="952.0">

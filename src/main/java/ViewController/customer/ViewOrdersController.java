@@ -33,15 +33,23 @@ public class ViewOrdersController extends Controller {
 
     public void init() {
         ArrayList<OrderTableItem> orderTableItems = getOrderTableItems();
-        ObservableList<OrderTableItem> data = FXCollections.observableList(orderTableItems);
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(orderTableItems);
+        initTable(objects);
+    }
 
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            orderTableItems.add((OrderTableItem) tableProduct);
+        }
+        ObservableList<OrderTableItem> data = FXCollections.observableList(orderTableItems);
         numberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("number"));
         orderIdColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("id"));
         sellerNameColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("sellerName"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("status"));
         phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("phoneNumber"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Double>("address"));
-
         tableView.setItems(data);
     }
 
@@ -90,5 +98,9 @@ public class ViewOrdersController extends Controller {
                 }
             }
         }
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }
