@@ -31,26 +31,26 @@ public class FilteringController extends Controller {
 
     public void init(Controller controller) {
         this.controller = controller;
-        filterTypesNames = ((ProductsManager) manager).getFilterTypes();
+        filterTypesNames = manager.getFilterTypes();
         filterTypes.setItems(FXCollections.observableArrayList(filterTypesNames));
     }
 
     public void disableFilter(ActionEvent actionEvent) {
-        controller.initTable(((ProductsManager) manager).disableFilter((String) filterTypes.getSelectionModel().getSelectedItem()));
+        controller.initTable(manager.disableFilter(currentFilters.getSelectionModel().getSelectedItem().getField()));
         initCurrentFiltersTable();
         filterTypesNames.add((String) filterTypes.getSelectionModel().getSelectedItem());
         filterTypes.setItems(FXCollections.observableArrayList(filterTypesNames));
     }
 
     public void filter(ActionEvent actionEvent) {
-        controller.initTable(((ProductsManager) manager).applyFilter((String) filterTypes.getSelectionModel().getSelectedItem(), filterValue.getText()));
+        controller.initTable(manager.applyFilter((String) filterTypes.getSelectionModel().getSelectedItem(), filterValue.getText()));
         initCurrentFiltersTable();
         filterTypesNames.remove(filterTypes.getSelectionModel().getSelectedItem());
         filterTypes.setItems(FXCollections.observableArrayList(filterTypesNames));
     }
 
     public void initCurrentFiltersTable() {
-        currentFilters.setItems(FXCollections.observableArrayList(((ProductsManager) manager).currentFilters()));
+        currentFilters.setItems(FXCollections.observableArrayList(manager.currentFilters()));
         filterTypeColumn.setCellValueFactory(new PropertyValueFactory<>("field"));
         filterValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
     }

@@ -1,5 +1,6 @@
 package Control.Products;
 
+import Control.AuctionsPageManager;
 import Control.CustomerManagers.ProductPageManager;
 import Control.Manager;
 import Models.Account.Account;
@@ -312,7 +313,12 @@ public class ProductsManager extends Manager {
     }
 
     public void openFilter(Controller controller) {
-        Controller myController = loadFxml(Addresses.FILTER, true, this);
+        Controller myController;
+        if (isOffMenu) {
+            myController = loadFxml(Addresses.FILTER, true, new AuctionsPageManager(null));
+        } else {
+            myController = loadFxml(Addresses.FILTER, true, this);
+        }
         ((FilteringController) myController).init(controller);
     }
 

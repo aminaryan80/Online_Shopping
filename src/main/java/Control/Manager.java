@@ -5,6 +5,8 @@ import Models.Account.Account;
 import Models.Account.Principal;
 import Models.Shop.Cart;
 import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
+import Models.Shop.Category.Filter;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.Menu;
@@ -18,12 +20,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 //import View.Menu;
 
@@ -365,5 +369,21 @@ public abstract class Manager {
     public static void exit() {
         stage.close();
         System.exit(0);
+    }
+
+    public ArrayList<Object> disableFilter(String filterType) {
+        return null;
+    }
+
+    public ArrayList<Object> applyFilter(String filterType, String value) {
+        return null;
+    }
+
+    public List<Filter> currentFilters() {
+        return null;
+    }
+
+    public ArrayList<String> getFilterTypes() {
+        return null;
     }
 }
