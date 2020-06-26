@@ -3,14 +3,9 @@ package ViewController.products;
 import Control.CustomerManagers.ProductPageManager;
 import Control.CustomerManagers.ViewCartManager;
 import Control.Manager;
-import Models.Address;
-import Models.Shop.Category.Feature;
-import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
-import com.sun.org.apache.xpath.internal.res.XPATHErrorResources_ko;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -47,7 +42,7 @@ public class ProductPageController extends Controller {
 
     public void initializeComments() {
         int row = 0;
-        comments.setPrefHeight(500);
+        comments.setPrefHeight(0);
         for (String senderName : ((ProductPageManager) manager).commentsFXML().keySet()) {
             try {
                 AnchorPane commentPane = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
@@ -58,6 +53,7 @@ public class ProductPageController extends Controller {
                 comments.add(commentPane, 0, row);
                 comments.setVgap(10);
                 row++;
+                comments.setPrefHeight(comments.getPrefHeight() + 250);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -78,16 +74,13 @@ public class ProductPageController extends Controller {
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
 
-    public void back(MouseEvent mouseEvent) {
-        super.back(null);
-    }
 
     public void rate(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistAtAllException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Rate " + product.getName());
         alert.setHeaderText("How good is this product in your eyes");
         alert.setContentText("Choose your option.");
-        ButtonType buttonType[] = new ButtonType[5];
+        ButtonType[] buttonType = new ButtonType[5];
         alert.getButtonTypes().clear();
         for (int i = 0; i < 5; i++) {
             buttonType[i] = new ButtonType("" + (i + 1));

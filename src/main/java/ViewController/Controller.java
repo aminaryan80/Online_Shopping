@@ -59,7 +59,8 @@ public class Controller {
     }
 
     public void logout(ActionEvent actionEvent) {
-        // TODO
+        logout();
+        System.out.println("LOGOUT");
     }
 
 }

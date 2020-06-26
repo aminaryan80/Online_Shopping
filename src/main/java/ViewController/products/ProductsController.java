@@ -4,8 +4,10 @@ import Control.Products.ProductsManager;
 import Models.Shop.Category.Category;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -57,6 +59,8 @@ public class ProductsController extends Controller {
             tableProducts.add((Product) tableProduct);
         }
         products = tableProducts;
+        ObservableList<Node> children = productsGridPane.getChildren();
+        productsGridPane.getChildren().removeAll(children);
         init();
     }
 
