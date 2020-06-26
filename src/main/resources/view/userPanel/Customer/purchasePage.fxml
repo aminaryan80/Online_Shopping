@@ -44,7 +44,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
-                </Button>د
+                </Button>
             </children>
         </VBox>
       <GridPane layoutX="250.0" layoutY="-1.0" prefHeight="601.0" prefWidth="952.0">
@@ -70,7 +70,7 @@
          <children>
             <TextField fx:id="phoneNumberField" prefHeight="26.0" prefWidth="445.0" promptText="phone number" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="addressField" prefHeight="26.0" prefWidth="445.0" promptText="address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="phoneNumberConfirm" mnemonicParsing="false" onAction="#confirmPhoneNumberField" styleClass="Button" text="confirm" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Button fx:id="phoneNumberConfirm" onAction="#confirmPhoneNumberField" mnemonicParsing="false" styleClass="Button" text="confirm" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#clearAddressField" styleClass="Button" text="clear" GridPane.columnIndex="5" GridPane.rowIndex="3" />
             <TextField fx:id="discountCodeField" promptText="discount code(a discount code or *no* for no code)" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#confirmAddress" styleClass="Button" text="confirm" GridPane.columnIndex="4" GridPane.rowIndex="3" />
