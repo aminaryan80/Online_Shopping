@@ -3,14 +3,3 @@
     -fx-text-fill: #000675;
 }
 
-.addButton {
-    -fx-font-size: 22;
-    -fx-fill-color: green;
--fx-background-color: #5af357;
-}
-
-.reduceButton {
-    -fx-font-size:22;
-    -fx-fill-color: #810000;
-    -fx-background-color: #ff0011;
-}
