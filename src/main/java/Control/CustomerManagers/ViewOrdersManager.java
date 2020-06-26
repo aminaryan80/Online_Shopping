@@ -8,6 +8,7 @@ import Models.Shop.Category.Sort;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
+import ViewController.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,13 @@ public class ViewOrdersManager extends Manager {
     public ViewOrdersManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         logs = ((Customer) account).getAllLogs();
-        loadFxml(Addresses.VIEW_ORDERS);
+        Controller controller = loadFxml(Addresses.VIEW_ORDERS);
+        update(controller);
+    }
+
+    @Override
+    public void update(Controller controller) {
+        controller.init();
     }
 
     public boolean canShowOrderWithId(String logId) {
@@ -47,12 +54,12 @@ public class ViewOrdersManager extends Manager {
 
     public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
         Product product = Product.getProductById(productId);
-        if(product != null) product.addRate(customer,score);
+        if (product != null) product.addRate(customer, score);
         else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
     }
 
     private ArrayList<String> logsInShort() {
-        ArrayList<String> logsInShort= new ArrayList<>();
+        ArrayList<String> logsInShort = new ArrayList<>();
         for (BuyingLog log : logs) {
             logsInShort.add(log.viewLogInShort());
         }
@@ -130,5 +137,13 @@ public class ViewOrdersManager extends Manager {
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(logs);
         return objects;
+    }
+
+    public BuyingLog getLogById(String id) {
+        return customer.getLogById(id);
+    }
+
+    public ArrayList<BuyingLog> getLogs() {
+        return customer.getAllLogs();
     }
 }

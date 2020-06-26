@@ -5,6 +5,7 @@ import Models.Shop.Product.Product;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class Log {
@@ -15,6 +16,7 @@ public abstract class Log {
     protected String address;
     protected String phoneNumber;
     protected List<Product> products =  new ArrayList<>(); //Selling log : sold by seller | Buying log :  bought by buyer
+    protected HashMap<String,Integer> productIdToNumberMap = new HashMap<>();
     protected String name; //Selling log : buyer's name |  Buying log : seller's name
     protected Status status;
 
@@ -29,6 +31,10 @@ public abstract class Log {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.status = status;
+    }
+
+    public void addProductsNumbers(String productId,int number) {
+        productIdToNumberMap.put(productId,number);
     }
 
     public double getMoney() {
@@ -64,5 +70,25 @@ public abstract class Log {
 
     public enum Status {
         TO_BE_SEND, ON_THE_WAY, RECEIVED
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public HashMap<String, Integer> getProductIdToNumberMap() {
+        return productIdToNumberMap;
     }
 }

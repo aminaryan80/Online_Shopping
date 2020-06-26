@@ -65,7 +65,7 @@ public class Customer extends Account {
         return null;
     }
 
-    public Log getLogById(String id) {
+    public BuyingLog getLogById(String id) {
         for (BuyingLog log : allLogs) {
             if(log.getId().equals(id)){
                 return log;
@@ -97,4 +97,12 @@ public class Customer extends Account {
                 "balance = " + balance;
     }
 
+    public boolean hasBoughtProduct(String productId) {
+        for (BuyingLog log : allLogs) {
+            for (String boughtProductId : log.getProductIdToNumberMap().keySet()) {
+                if(productId.equals(boughtProductId)) return true;
+            }
+        }
+        return false;
+    }
 }

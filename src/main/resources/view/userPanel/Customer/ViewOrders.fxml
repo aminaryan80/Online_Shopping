@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/8.0.251" fx:controller="View.CustomerMenus.customer.ViewOrdersMenu">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.ViewOrdersController">
     <children>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="User Panel">
+                <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="User Panel">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="back">
+                <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <VBox.margin>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
@@ -38,78 +42,56 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
+            <Pane prefHeight="425.0" prefWidth="234.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="-5.0" layoutY="-1.0" prefHeight="92.0" prefWidth="236.0" text="selected Order:">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="orderIdLabel" alignment="CENTER" layoutX="-2.0" layoutY="65.0" prefHeight="50.0" prefWidth="239.0" text="#id">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="9.0" layoutY="311.0" mnemonicParsing="false" onAction="#showBoughtProducts" prefHeight="54.0" prefWidth="220.0" text="Show bought Products">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="dateLabel" alignment="CENTER" layoutX="-1.0" layoutY="129.0" prefHeight="50.0" prefWidth="239.0" text="date: ">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="moneyPaidLabel" alignment="CENTER" layoutX="-2.0" layoutY="183.0" prefHeight="50.0" prefWidth="239.0" text="money paid:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="discountAmountLabel" alignment="CENTER" layoutX="-3.0" layoutY="242.0" prefHeight="50.0" prefWidth="239.0" text="discount amount:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
             </children>
         </VBox>
-      <ScrollPane layoutX="249.0" layoutY="-2.0" prefHeight="605.0" prefWidth="953.0">
-         <content>
-            <GridPane prefHeight="840.0" prefWidth="939.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order1" GridPane.rowSpan="2">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Text>
-                        <Button mnemonicParsing="false" text="show" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="134.0" text="Rate" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </GridPane>
-                  <GridPane GridPane.columnIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Order2" GridPane.rowSpan="2">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Text>
-                        <Button mnemonicParsing="false" text="show" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="78.0" prefWidth="134.0" text="Rate" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </GridPane>
-               </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
+      <Pane layoutX="250.0" prefHeight="601.0" prefWidth="967.0">
+         <children>
+            <TableView fx:id="tableView" onMouseClicked="#select" layoutX="15.0" layoutY="10.0" prefHeight="575.0" prefWidth="933.0">
+              <columns>
+                <TableColumn fx:id="numberColumn" prefWidth="32.79998779296875" text="#" />
+                <TableColumn fx:id="orderIdColumn" prefWidth="95.99996948242188" text="Id" />
+                  <TableColumn fx:id="sellerNameColumn" prefWidth="141.3333740234375" text="seller name" />
+                  <TableColumn fx:id="statusColumn" prefWidth="90.66668701171875" text="status" />
+                  <TableColumn fx:id="addressColumn" prefWidth="315.7332763671875" text="address" />
+                  <TableColumn fx:id="phoneNumberColumn" prefWidth="140.533447265625" text="phone number" />
+                  <TableColumn prefWidth="116.26666259765625" text="select section" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>

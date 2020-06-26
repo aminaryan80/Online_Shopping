@@ -26,6 +26,21 @@ public class ViewCartController extends Controller {
     public Label selectedProduct;
     public Label totalAmount;
 
+    public void init() {
+        totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
+        ArrayList<CartTableItem> cartTableItems = getCartTableItems();
+        ObservableList<CartTableItem> data = FXCollections.observableList(cartTableItems);
+
+        numberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("number"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("name"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("description"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("quantity"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Double>("price"));
+
+        tableView.setItems(data);
+    }
+
     private ArrayList<CartTableItem> getCartTableItems() {
         ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
         if (manager instanceof ViewCartManager) {
@@ -56,7 +71,6 @@ public class ViewCartController extends Controller {
     }
 
     public void select(MouseEvent mouseEvent) {
-        System.out.println(mouseEvent.getSource().toString());
         if (!(mouseEvent.getTarget() instanceof LabeledText)) {
             TableRow tableRow = ((TableCell) mouseEvent.getTarget()).getTableRow();
             CartTableItem cartTableItem = (CartTableItem) tableView.getItems().get(tableRow.getIndex());
@@ -65,21 +79,6 @@ public class ViewCartController extends Controller {
         }
     }
 
-
-    public void init() {
-        totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
-        ArrayList<CartTableItem> cartTableItems = getCartTableItems();
-        ObservableList<CartTableItem> data = FXCollections.observableList(cartTableItems);
-
-        numberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("number"));
-        idColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("name"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("description"));
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("quantity"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Double>("price"));
-
-        tableView.setItems(data);
-    }
 
     public void addProduct(ActionEvent actionEvent) throws ViewCartManager.ProductDoNotExistInCartException {
         if (selectedProduct.getText().matches("\\S{8}")) {

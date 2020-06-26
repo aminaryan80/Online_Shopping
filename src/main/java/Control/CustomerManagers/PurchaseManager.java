@@ -144,7 +144,7 @@ public class PurchaseManager extends Manager {
 
 
     private BuyingLog getBuyingLog(ArrayList<String> receiverInformation, Discount discount, Seller seller, ArrayList<Product> productsBoughtFromThisSeller) {
-        return new BuyingLog(
+        BuyingLog buyingLog = new BuyingLog(
                 LocalDateTime.now(),
                 getMoneyPaidByCustomer(productsBoughtFromThisSeller, discount),
                 getAmountOfDiscountCodeApplied(productsBoughtFromThisSeller, discount),
@@ -154,10 +154,14 @@ public class PurchaseManager extends Manager {
                 receiverInformation.get(1),
                 Log.Status.TO_BE_SEND
         );
+        for (Product product : productsBoughtFromThisSeller) {
+            buyingLog.addProductsNumbers(product.getId(),Integer.parseInt(customer.getCart().getProductNumberInCartById(product.getId())));
+        }
+        return buyingLog;
     }
 
     private SellingLog getSellingLog(ArrayList<String> receiverInformation, ArrayList<Product> productsBoughtFromThisSeller) {
-        return new SellingLog(
+        SellingLog sellingLog = new SellingLog(
                 LocalDateTime.now(),
                 getMoneyReceivedBySeller(productsBoughtFromThisSeller),
                 getAmountOfAuctionApplied(productsBoughtFromThisSeller),
@@ -167,6 +171,10 @@ public class PurchaseManager extends Manager {
                 receiverInformation.get(1),
                 Log.Status.TO_BE_SEND
         );
+        for (Product product : productsBoughtFromThisSeller) {
+            sellingLog.addProductsNumbers(product.getId(),Integer.parseInt(customer.getCart().getProductNumberInCartById(product.getId())));
+        }
+        return sellingLog;
     }
 
     private double getAmountOfDiscountCodeApplied(ArrayList<Product> productsBoughtFromThisSeller, Discount discount) {

@@ -5,6 +5,7 @@ import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Category.Sort;
+import Models.Shop.Log.BuyingLog;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewCartMenu;

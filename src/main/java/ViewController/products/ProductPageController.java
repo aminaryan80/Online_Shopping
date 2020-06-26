@@ -96,9 +96,13 @@ public class ProductPageController extends Controller {
         Optional<ButtonType> result = alert.showAndWait();
         for (int i = 0; i < 5; i++) {
             if (result.isPresent() && result.get() == buttonType[i]) {
-                ((ProductPageManager) manager).rateProduct(product.getId(), i + 1);
-                Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Rate added to product!", ButtonType.OK);
-                alert2.show();
+                if(((ProductPageManager) manager).rateProduct(product.getId(), i + 1)) {
+                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Rate added to product!", ButtonType.OK);
+                    alert2.show();
+                } else {
+                    Alert alert2 = new Alert(Alert.AlertType.WARNING, "You should buy the product to rate it!", ButtonType.OK);
+                    alert2.show();
+                }
             }
         }
         initializeProduct();

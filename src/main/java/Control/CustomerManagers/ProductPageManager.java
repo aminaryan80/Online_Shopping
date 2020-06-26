@@ -86,10 +86,15 @@ public class ProductPageManager extends Manager {
         // JESUS FUCKING CHRIST HELLO
     }
 
-    public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
-        Product product = Product.getProductById(productId);
-        if(product != null) product.addRate(customer,score);
-        else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
+    public boolean rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
+        if (customer.hasBoughtProduct(productId)) {
+
+            Product product = Product.getProductById(productId);
+            if (product != null) product.addRate(customer, score);
+            else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
+
+            return true;
+        } else return false;
     }
 
     public Product getProduct() {
@@ -97,14 +102,14 @@ public class ProductPageManager extends Manager {
     }
 
     public void addToCart() {
-        if(customer==null) //TODO check
+        if (customer == null) //TODO check
             cart.addProduct(product);
         else customer.getCart().addProduct(product);
     }
 
-    public boolean hasProductInCart(){
+    public boolean hasProductInCart() {
         for (Product productInCart : customer.getCart().getProducts()) {
-            if(productInCart.getId().equals(product.getId())) {
+            if (productInCart.getId().equals(product.getId())) {
                 return true;
             }
         }
