@@ -11,12 +11,16 @@ public class UserPanelManager extends Manager {
         loadFxml(Addresses.USER_PANEL);
     }
 
-    public UserPanelManager(Account account, Addresses address, Manager manager) {
+    public UserPanelManager(Account account, Addresses address, Manager manager, boolean status) {
         super(account, address, manager);
-        UserPanelController controller = (UserPanelController) loadFxml(Addresses.USER_PANEL);
+        if (status) {
+            new CreateNewAccountManager(account, status);
+        } else {
+            UserPanelController controller = (UserPanelController) loadFxml(Addresses.USER_PANEL);
+        }
     }
 
     public void openRegister() {
-        new CreateNewAccountManager(account);
+        new CreateNewAccountManager(account, false);
     }
 }

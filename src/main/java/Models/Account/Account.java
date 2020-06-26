@@ -52,6 +52,15 @@ public abstract class Account {
         return false;
     }
 
+    public static boolean isPrincipalExists() {
+        for(Account account : allAccounts) {
+            if(account instanceof Principal) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static ArrayList<String> showAccountsInShort() {
         ArrayList<String> accountsInShort = new ArrayList<>();
         for (Account account : allAccounts) {

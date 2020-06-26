@@ -37,9 +37,7 @@ public class Controller {
 
     protected void openUserPanel(boolean status, Manager.Addresses address) {
         if (manager.getAccount() == null) {
-            new UserPanelManager(manager.getAccount(), address, manager);
-            if (status)
-                return;
+            new UserPanelManager(manager.getAccount(), address, manager, false);
         }
         if (manager.getAccount() != null) {
             new DashboardManager(manager.getAccount(), address, manager);
@@ -55,7 +53,7 @@ public class Controller {
     }
 
     public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel(true);
+        openUserPanel(false);
     }
 
     public void logout(ActionEvent actionEvent) {
