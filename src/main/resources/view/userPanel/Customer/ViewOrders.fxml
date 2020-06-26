@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.ViewOrdersController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@customerStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.ViewOrdersController">
     <children>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
@@ -42,61 +42,61 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <Button mnemonicParsing="false" onAction="#sort" prefHeight="26.0" prefWidth="227.0" text="sort" >
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Pane prefHeight="425.0" prefWidth="234.0">
-               <children>
-                  <Label alignment="CENTER" layoutX="-5.0" layoutY="-1.0" prefHeight="92.0" prefWidth="236.0" text="selected Order:">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="orderIdLabel" alignment="CENTER" layoutX="-2.0" layoutY="65.0" prefHeight="50.0" prefWidth="239.0" text="#id">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="9.0" layoutY="311.0" mnemonicParsing="false" onAction="#showBoughtProducts" prefHeight="54.0" prefWidth="220.0" text="Show bought Products">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="dateLabel" alignment="CENTER" layoutX="-1.0" layoutY="129.0" prefHeight="50.0" prefWidth="239.0" text="date: ">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="moneyPaidLabel" alignment="CENTER" layoutX="-2.0" layoutY="183.0" prefHeight="50.0" prefWidth="239.0" text="money paid:">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="discountAmountLabel" alignment="CENTER" layoutX="-3.0" layoutY="242.0" prefHeight="50.0" prefWidth="239.0" text="discount amount:">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
+                <Button mnemonicParsing="false" onAction="#sort" prefHeight="26.0" prefWidth="227.0" text="sort">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Pane prefHeight="425.0" prefWidth="234.0">
+                    <children>
+                        <Label alignment="CENTER" layoutX="-5.0" layoutY="-1.0" prefHeight="92.0" prefWidth="236.0" text="selected Order:">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="orderIdLabel" alignment="CENTER" layoutX="-2.0" layoutY="65.0" prefHeight="50.0" prefWidth="239.0" text="#id">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                        </Label>
+                        <Button layoutX="9.0" layoutY="311.0" mnemonicParsing="false" onAction="#showBoughtProducts" prefHeight="54.0" prefWidth="220.0" text="Show bought Products">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Button>
+                        <Label fx:id="dateLabel" alignment="CENTER" layoutX="-1.0" layoutY="129.0" prefHeight="50.0" prefWidth="239.0" text="date: ">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="moneyPaidLabel" alignment="CENTER" layoutX="-2.0" layoutY="183.0" prefHeight="50.0" prefWidth="239.0" text="money paid:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="discountAmountLabel" alignment="CENTER" layoutX="-3.0" layoutY="242.0" prefHeight="50.0" prefWidth="239.0" text="discount amount:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
             </children>
         </VBox>
-      <Pane layoutX="250.0" prefHeight="601.0" prefWidth="967.0">
-         <children>
-            <TableView fx:id="tableView" layoutX="15.0" layoutY="10.0" onMouseClicked="#select" prefHeight="575.0" prefWidth="933.0">
-              <columns>
-                <TableColumn fx:id="numberColumn" prefWidth="32.79998779296875" text="#" />
-                <TableColumn fx:id="orderIdColumn" prefWidth="95.99996948242188" text="Id" />
-                  <TableColumn fx:id="sellerNameColumn" prefWidth="141.3333740234375" text="seller name" />
-                  <TableColumn fx:id="statusColumn" prefWidth="90.66668701171875" text="status" />
-                  <TableColumn fx:id="addressColumn" prefWidth="315.7332763671875" text="address" />
-                  <TableColumn fx:id="phoneNumberColumn" prefWidth="140.533447265625" text="phone number" />
-                  <TableColumn prefWidth="116.26666259765625" text="select section" />
-              </columns>
-            </TableView>
-         </children>
-      </Pane>
+        <Pane layoutX="250.0" prefHeight="601.0" prefWidth="967.0">
+            <children>
+                <TableView fx:id="tableView" layoutX="15.0" layoutY="10.0" onMouseClicked="#select" prefHeight="575.0" prefWidth="933.0" styleClass="table-view">
+                    <columns>
+                        <TableColumn fx:id="numberColumn" prefWidth="32.79998779296875" text="#" />
+                        <TableColumn fx:id="orderIdColumn" prefWidth="95.99996948242188" text="Id" />
+                        <TableColumn fx:id="sellerNameColumn" prefWidth="141.3333740234375" text="seller name" />
+                        <TableColumn fx:id="statusColumn" prefWidth="170.4000244140625" text="status" />
+                        <TableColumn fx:id="addressColumn" prefWidth="260.79998779296875" text="address" />
+                        <TableColumn fx:id="phoneNumberColumn" prefWidth="132.79998779296875" text="phone number" />
+                        <TableColumn prefWidth="100.800048828125" text="select section" />
+                    </columns>
+                </TableView>
+            </children>
+        </Pane>
     </children>
 </AnchorPane>
