@@ -166,7 +166,7 @@ public class SellerMenu extends Menu {
         }
         Category category = Category.getCategoryByName(categoryName);
         ArrayList<Feature> allFeatures = getFeatures(category);
-        ((SellerManager) manager).addProduct(name, category, price, isAvailable, description, allFeatures);
+        //(SellerManager) manager).addProduct(name, category, price, isAvailable, description, allFeatures);
     }
 
     private ArrayList<Feature> getFeatures(Category category) {

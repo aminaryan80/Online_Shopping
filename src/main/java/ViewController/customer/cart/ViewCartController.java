@@ -30,15 +30,23 @@ public class ViewCartController extends Controller {
     public void init() {
         totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
         ArrayList<CartTableItem> cartTableItems = getCartTableItems();
-        ObservableList<CartTableItem> data = FXCollections.observableList(cartTableItems);
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(cartTableItems);
+        initTable(objects);
+    }
 
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            cartTableItems.add((CartTableItem) tableProduct);
+        }
+        ObservableList<CartTableItem> data = FXCollections.observableList(cartTableItems);
         numberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("number"));
         idColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, String>("description"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Double>("price"));
-
         tableView.setItems(data);
     }
 
@@ -127,5 +135,9 @@ public class ViewCartController extends Controller {
             Alert alert = new Alert(Alert.AlertType.ERROR, "cart is empty \nYou wanna buy air?", ButtonType.OK);
             alert.show();
         }
+    }
+
+    public void sort(ActionEvent actionEvent) {
+        manager.openSort(this, manager);
     }
 }

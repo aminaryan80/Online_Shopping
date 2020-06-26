@@ -282,6 +282,8 @@ public abstract class Manager {
 
     public enum Addresses {
 
+        FILTER("view/products/filtering.fxml"),
+
         ADD_PRODUCT_POP_UP("view/userPanel/Seller/FeaturesPopUp.fxml"),
 
         SORT("view/sorting.fxml"),

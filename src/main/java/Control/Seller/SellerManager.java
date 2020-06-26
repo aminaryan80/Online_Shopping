@@ -55,14 +55,6 @@ public class SellerManager extends Manager {
         return Product.viewProductsInShort((Seller) account);
     }
 
-    // add product
-    public void addProduct(String name, Category category, double price, boolean isAvailable,
-                           String description, ArrayList<Feature> features) {
-        String companyName = ((Seller) account).getCompanyName();
-        Product product = new Product(name, companyName, price, (Seller) account, isAvailable, category, description, features);
-        new AddProductRequest((Seller) account, product);
-    }
-
     // remove product [productId]
     public boolean isItSellersProduct(String id) {
         return Product.getProductById(id).getSeller().equals(account);

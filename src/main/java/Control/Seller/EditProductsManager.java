@@ -3,13 +3,17 @@ package Control.Seller;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
+import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
+import Models.Shop.Request.AddProductRequest;
 import View.Seller.EditProductsMenu;
 import ViewController.Controller;
 import ViewController.SortController;
 import ViewController.userPanel.Seller.EditProductsController;
+import ViewController.userPanel.Seller.FeaturesPopUpController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,6 +68,18 @@ public class EditProductsManager extends Manager {
         fields.add("name");
         fields.add("rating");
         return fields;
+    }
+
+    public void featuresPopUp(Controller controller) {
+        Controller myController = loadFxml(Manager.Addresses.ADD_PRODUCT_POP_UP, true);
+        ((FeaturesPopUpController) myController).init(controller);
+    }
+
+    public void addProduct(String name, Category category, double price, boolean isAvailable,
+                           String description, ArrayList<Feature> features) {
+        String companyName = ((Seller) account).getCompanyName();
+        Product product = new Product(name, companyName, price, (Seller) account, isAvailable, category, description, features);
+        new AddProductRequest((Seller) account, product);
     }
 
     public ArrayList<Object> sort(String sort, boolean isAscending) {

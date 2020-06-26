@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
-            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.251">
+
+<AnchorPane prefHeight="450.0" prefWidth="400.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.products.FilteringController">
     <children>
-        <Label alignment="CENTER" layoutY="55.0" prefHeight="27.0" prefWidth="400.0" text="Filtering:">
+        <Label alignment="CENTER" layoutY="27.0" prefHeight="27.0" prefWidth="400.0" text="Filtering:">
             <font>
-                <Font size="18.0"/>
+                <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="74.0" layoutY="143.0" text="Filter Type:">
+        <Label layoutX="74.0" layoutY="69.0" text="Filter Type:">
             <font>
-                <Font name="System Bold" size="16.0"/>
+                <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField layoutX="173.0" layoutY="141.0" prefHeight="30.0" prefWidth="155.0"/>
-        <Label layoutX="92.0" layoutY="183.0" text="Value:">
+        <Label layoutX="93.0" layoutY="117.0" text="Value:">
             <font>
-                <Font name="System Bold" size="16.0"/>
+                <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <TextField layoutX="173.0" layoutY="181.0" prefHeight="30.0" prefWidth="155.0"/>
-        <Button layoutX="40.0" layoutY="225.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="319.0"
-                text="Filter">
+        <TextField fx:id="filterValue" layoutX="173.0" layoutY="115.0" prefHeight="30.0" prefWidth="155.0" />
+        <Button layoutX="41.0" layoutY="158.0" mnemonicParsing="false" onAction="#filter" prefHeight="47.0" prefWidth="319.0" text="Filter">
             <font>
-                <Font size="18.0"/>
+                <Font size="18.0" />
             </font>
         </Button>
+      <ChoiceBox fx:id="filterTypes" layoutX="176.0" layoutY="69.0" prefWidth="150.0" />
+      <Label layoutX="41.0" layoutY="225.0" text="current filters" />
+      <TableView fx:id="currentFilters" layoutX="140.0" layoutY="217.0" prefHeight="200.0" prefWidth="150.0">
+        <columns>
+          <TableColumn fx:id="filterTypeColumn" prefWidth="75.0" text="type" />
+          <TableColumn fx:id="filterValueColumn" prefWidth="75.0" text="value" />
+        </columns>
+      </TableView>
+      <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#disableFilter" prefHeight="25.0" prefWidth="84.0" text="disable filter" />
     </children>
 </AnchorPane>
