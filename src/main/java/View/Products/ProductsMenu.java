@@ -114,28 +114,28 @@ public class ProductsMenu extends Menu {
         if (((ProductsManager) manager).isEnteredFilterFieldValid(filterType)) {
             System.out.println("enter the value of the filter");
             String filterValue = scanner.nextLine();
-            ArrayList<String> filteredProducts = ((ProductsManager) manager).applyFilter(filterType, filterValue);
+            /*ArrayList<String> filteredProducts = ((ProductsManager) manager).applyFilter(filterType, filterValue);
             for (String filteredProduct : filteredProducts) {
                 System.out.println(filteredProduct);
-            }
+            }*/
         } else {
             ErrorProcessor.invalidInput();
         }
     }
 
     private void currentFilters() {
-        List<String> currentFilters = ((ProductsManager) manager).currentFilters();
+        /*List<String> currentFilters = ((ProductsManager) manager).currentFilters();
         for (String currentFilter : currentFilters) {
             System.out.println(currentFilter);
-        }
+        }*/
     }
 
     private void disableFilter(String filter) {
         if (((ProductsManager) manager).isItSelectedFilter(filter)) {
-            List<String> products = ((ProductsManager) manager).disableFilter(filter);
+            /*List<String> products = ((ProductsManager) manager).disableFilter(filter);
             for (String product : products) {
                 System.out.println(product);
-            }
+            }*/
         } else {
             ErrorProcessor.invalidInput();
         }

@@ -312,7 +312,7 @@ public class ProductsManager extends Manager {
 
     public void openFilter(Controller controller) {
         Controller myController = loadFxml(Addresses.FILTER, true, this);
-        ((FilteringController) controller).init(controller);
+        ((FilteringController) myController).init(controller);
     }
 
     public ArrayList<String> getSortFields() {
