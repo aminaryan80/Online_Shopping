@@ -43,8 +43,11 @@ public class ProductPageController extends Controller {
     private Label amount;
 
     private Product product;
+    int row;
+
 
     public void init() {
+        row = 0;
         product = ((ProductPageManager) manager).getProduct();
         initializeProduct();
         initializeComments();
@@ -57,8 +60,6 @@ public class ProductPageController extends Controller {
     }
 
     public void initializeComments() {
-        int row = 0;
-        comments.setPrefHeight(0);
         for (String senderName : ((ProductPageManager) manager).commentsFXML().keySet()) {
             try {
                 AnchorPane commentPane = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
@@ -69,7 +70,7 @@ public class ProductPageController extends Controller {
                 comments.add(commentPane, 0, row);
                 comments.setVgap(10);
                 row++;
-                comments.setPrefHeight(comments.getPrefHeight() + 250);
+                comments.setPrefHeight(comments.getPrefHeight() + 300);
             } catch (IOException e) {
                 e.printStackTrace();
             }
