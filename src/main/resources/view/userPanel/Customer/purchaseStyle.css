@@ -67,7 +67,7 @@
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
     -fx-font-size: 1.1em;
-    -fx-font-size: 8;
+    -fx-font-size: 12;
 }
 .Button:hover {
     -fx-background-color:
