@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -32,6 +33,14 @@ public class ProductPageController extends Controller {
     public TableColumn valueColumn;
     @FXML
     private GridPane comments;
+    @FXML
+    private Pane discountPane;
+    @FXML
+    private Label beginning;
+    @FXML
+    private Label ending;
+    @FXML
+    private Label amount;
 
     private Product product;
 
@@ -39,6 +48,12 @@ public class ProductPageController extends Controller {
         product = ((ProductPageManager) manager).getProduct();
         initializeProduct();
         initializeComments();
+        if (product.hasAuction()) {
+            discountPane.setVisible(true);
+            beginning.setText(product.getAuction().getBeginningDate().toString());
+            ending.setText(product.getAuction().getEndingDate().toString());
+            amount.setText(String.valueOf(product.getAuction().getDiscountAmount()));
+        }
     }
 
     public void initializeComments() {

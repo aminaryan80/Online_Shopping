@@ -35,4 +35,7 @@ public class MainController extends Controller {
         manager.openProductsMenu();
     }
 
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
+    }
 }
