@@ -11,6 +11,7 @@ import java.util.List;
 public abstract class Log {
     protected String id;
     protected LocalDateTime date;
+    protected String stringDate;
     protected double money; //Selling log : received by seller | Buying log : paid by customer
     protected double amount; //Selling log : of auction | Buying log :  of discount
     protected String address;
@@ -31,6 +32,7 @@ public abstract class Log {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.status = status;
+        stringDate = "Date: " + date.getYear() + "/" + date.getMonth() + "/" + date.getDayOfMonth();
     }
 
     public void addProductsNumbers(String productId,int number) {
@@ -43,6 +45,10 @@ public abstract class Log {
 
     public LocalDateTime getDate() {
         return date;
+    }
+
+    public String getStringDate() {
+        return stringDate;
     }
 
     public abstract String viewLogInShort();

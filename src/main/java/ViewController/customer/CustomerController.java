@@ -97,7 +97,7 @@ public class CustomerController extends Controller {
     private void initOrders() {
         ordersTable.setItems(FXCollections.observableArrayList(customer.getAllLogs()));
         orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        orderDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        orderDate.setCellValueFactory(new PropertyValueFactory<>("stringDate"));
         orderAmount.setCellValueFactory(new PropertyValueFactory<>("money"));
     }
 
