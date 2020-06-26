@@ -44,7 +44,12 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
-                </Button>د
+                </Button>
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="sort">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children>
         </VBox>
       <GridPane layoutX="250.0" layoutY="-1.0" prefHeight="601.0" prefWidth="952.0">
@@ -70,7 +75,7 @@
          <children>
             <TextField fx:id="phoneNumberField" prefHeight="26.0" prefWidth="445.0" promptText="phone number" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="addressField" prefHeight="26.0" prefWidth="445.0" promptText="address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="phoneNumberConfirm" mnemonicParsing="false" onAction="#confirmPhoneNumberField" styleClass="Button" text="confirm" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Button fx:id="phoneNumberConfirm" onAction="#confirmPhoneNumberField" mnemonicParsing="false" styleClass="Button" text="confirm" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" onAction="#clearAddressField" styleClass="Button" text="clear" GridPane.columnIndex="5" GridPane.rowIndex="3" />
             <TextField fx:id="discountCodeField" promptText="discount code(a discount code or *no* for no code)" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#confirmAddress" styleClass="Button" text="confirm" GridPane.columnIndex="4" GridPane.rowIndex="3" />
@@ -88,7 +93,7 @@
                   <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="108.79997558593755" text="number" />
               </columns>
             </TableView>
-            <Label fx:id="addressMassage" text="Label" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <Label fx:id="addressMassage" text="Label" GridPane.columnIndex="6" GridPane.rowIndex="3" />
             <Label fx:id="phoneNumberMassage" text="Label" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="4" />
             <Label fx:id="discountCodeMassage" text="Label" visible="false" GridPane.columnIndex="6" GridPane.rowIndex="5" />
             <Label fx:id="totalAmountToPay" prefHeight="30.0" prefWidth="311.0" text="payable amount: amount$" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
