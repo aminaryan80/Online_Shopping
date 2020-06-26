@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class Menu {
     protected Manager manager;
-    protected static Scanner scanner = new Scanner(System.in);
+    protected static Scanner scanner;
 
     public Menu(Manager manager) {
         this.manager = manager;

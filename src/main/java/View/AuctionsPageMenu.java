@@ -106,28 +106,28 @@ public class AuctionsPageMenu extends Menu {
         if (((AuctionsPageManager) manager).isEnteredFilterFieldValid(filterType)) {
             System.out.println("enter the value of the filter");
             String filterValue = scanner.nextLine();
-            ArrayList<String> filteredProducts = ((AuctionsPageManager) manager).applyFilter(filterType, filterValue);
+            /*ArrayList<String> filteredProducts = ((AuctionsPageManager) manager).applyFilter(filterType, filterValue);
             for (String filteredProduct : filteredProducts) {
                 System.out.println(filteredProduct);
-            }
+            }*/
         } else {
             ErrorProcessor.invalidInput();
         }
     }
 
     private void currentFilters() {
-        List<String> currentFilters = ((AuctionsPageManager) manager).currentFilters();
+        /*List<String> currentFilters = ((AuctionsPageManager) manager).currentFilters();
         for (String currentFilter : currentFilters) {
             System.out.println(currentFilter);
-        }
+        }*/
     }
 
     private void disableFilter(String filter) {
         if (((AuctionsPageManager) manager).isItSelectedFilter(filter)) {
-            List<String> products = ((AuctionsPageManager) manager).disableFilter(filter);
+            /*List<String> products = ((AuctionsPageManager) manager).disableFilter(filter);
             for (String product : products) {
                 System.out.println(product);
-            }
+            }*/
         } else {
             ErrorProcessor.invalidInput();
         }
