@@ -98,12 +98,17 @@ public class ViewCartController extends Controller {
     }
 
     public void clearCart(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really wanna clear your cart?", ButtonType.YES, ButtonType.NO);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.YES) {
-            ((ViewCartManager) manager).clearCart();
-            init();
-        } else alert.close();
+        if(!((ViewCartManager)manager).isCartEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really wanna clear your cart?", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {
+                ((ViewCartManager) manager).clearCart();
+                init();
+            } else alert.close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "cart is empty!", ButtonType.OK);
+            alert.show();
+        }
     }
 
     public void openProductPage(ActionEvent actionEvent) {
@@ -116,6 +121,11 @@ public class ViewCartController extends Controller {
     }
 
     public void openPurchasePage(ActionEvent actionEvent) {
+        if(!((ViewCartManager)manager).isCartEmpty())
         ((ViewCartManager)manager).purchase();
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "cart is empty \nYou wanna buy air?", ButtonType.OK);
+            alert.show();
+        }
     }
 }
