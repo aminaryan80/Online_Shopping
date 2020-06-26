@@ -340,7 +340,7 @@ public abstract class Manager {
 
         ADD_COMMENT("view/userPanel/Customer/product/addCommentPage.fxml"),
 
-        PURCHASE_PAGE(""),
+        PURCHASE_PAGE("view/userPanel/Customer/purchase.fxml"),
 
         COMPARE("view/userPanel/Customer/compare.fxml"),
 
