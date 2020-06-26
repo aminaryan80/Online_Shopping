@@ -8,6 +8,7 @@ import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
 import ViewController.Controller;
+import ViewController.products.FilteringController;
 import ViewController.products.ProductsController;
 import ViewController.products.ViewCategoriesController;
 
@@ -67,6 +68,19 @@ public class ProductsManager extends Manager {
                 currentCategory.getFeaturesNames().toString();
     }
 
+    public ArrayList<String> getFilterTypes() {
+        ArrayList<String> filterTypes = new ArrayList<>();
+        filterTypes.add("status");
+        filterTypes.add("name");
+        filterTypes.add("companyName");
+        filterTypes.add("price");
+        filterTypes.add("seller");
+        filterTypes.add("isAvailable");
+        filterTypes.add("category");
+        filterTypes.addAll(currentCategory.getFeaturesNames());
+        return filterTypes;
+    }
+
     public boolean hasFeatureWithName(String name) {
         if (currentCategory == getMainCategory()) {
             return false;
@@ -89,7 +103,7 @@ public class ProductsManager extends Manager {
         return field.equals("category") && currentCategory.getSubCategories() != null;
     }
 
-    public ArrayList<String> applyFilter(String filterType, String filterValue) {
+    public ArrayList<Object> applyFilter(String filterType, String filterValue) {
         filters.add(new Filter(filterType, filterValue));
         if (filterType.equals("category")) {
             currentCategory = Category.getCategoryByName(filterValue);
@@ -97,7 +111,9 @@ public class ProductsManager extends Manager {
         products = Product.getAllProducts();
         setFilters();
         applySort();
-        return productsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(products);
+        return objects;
     }
 
     public ArrayList<String> applyFilter(String filterType, String minValue, String maxValue) {
@@ -199,15 +215,8 @@ public class ProductsManager extends Manager {
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public List<String> currentFilters() {
-        ArrayList<String> filtersNames = new ArrayList<String>();
-        for (Filter filter : filters) {
-            filtersNames.add(filter.toString());
-        }
-        for (LengthFilter lengthFilter : lengthFilters) {
-            filtersNames.add(lengthFilter.toString());
-        }
-        return filtersNames;
+    public List<Filter> currentFilters() {
+        return filters;
     }
 
     public boolean isItSelectedFilter(String filterName) {
@@ -232,7 +241,7 @@ public class ProductsManager extends Manager {
         return "price";
     }
 
-    public List<String> disableFilter(String filterField) {
+    public ArrayList<Object> disableFilter(String filterField) {
         Object filter = getFilterByField(filterField);
         if (filter instanceof Filter) {
             filters.remove(filter);
@@ -245,7 +254,9 @@ public class ProductsManager extends Manager {
         }
         setFilters();
         applySort();
-        return productsInShort();
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.addAll(products);
+        return objects;
     }
 
     private Object getFilterByField(String field) {
@@ -297,6 +308,11 @@ public class ProductsManager extends Manager {
         if (!currentSort.isAscending()) {
             Collections.reverse(products);
         }
+    }
+
+    public void openFilter(Controller controller) {
+        Controller myController = loadFxml(Addresses.FILTER, true, this);
+        ((FilteringController) controller).init(controller);
     }
 
     public ArrayList<String> getSortFields() {

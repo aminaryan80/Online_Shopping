@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="273.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.userPanel.Seller.EditProductsController">
+<AnchorPane prefHeight="273.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.userPanel.Seller.FeaturesPopUpController">
    <children>
       <TextField fx:id="featuresText" layoutX="151.0" layoutY="81.0" prefHeight="34.0" prefWidth="149.0" />
       <Button layoutX="200.0" layoutY="137.0" mnemonicParsing="false" onAction="#next" text="next" />
-      <Label layoutX="151.0" layoutY="56.0" text="featuresLabel" />
+      <Label layoutX="151.0" layoutY="56.0" fx:id="featuresLabel" />
    </children>
 </AnchorPane>

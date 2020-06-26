@@ -58,21 +58,11 @@ public class EditProductsController extends Controller {
     private ChoiceBox changeableFeatures;
     @FXML
     private TextField changeableFeatureValue;
-    @FXML
-    private TextField featuresText;
-    @FXML
-    private Label featuresLabel;
     private Product product;
     private Seller seller;
-    private int i;
-    private ArrayList<String> featuresNames;
-    private ArrayList<Feature> allFeatures;
-    private int featuresNumbers;
 
     public void init(Seller seller) {
         this.seller = seller;
-        allFeatures = new ArrayList<>();
-        i = -1;
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(Product.getProductsBySeller(seller));
         initTable(objects);
@@ -122,8 +112,12 @@ public class EditProductsController extends Controller {
             manager.error("wrong price format");
             return;
         }
-        manager.loadFxml(Manager.Addresses.ADD_PRODUCT_POP_UP, true);
-        featuresLabel.setText("enter category");
+        ((EditProductsManager) manager).featuresPopUp(this);
+    }
+
+    public void addProduct(ArrayList<Feature> allFeatures) {
+        ((EditProductsManager) manager).addProduct(name.getText(), Category.getCategoryByName(category.getText()),
+                Double.parseDouble(price.getText()), Boolean.parseBoolean(isAvailable.getText()), description.getText(), allFeatures);
     }
 
     public void updateScene(MouseEvent mouseEvent) {
@@ -164,29 +158,4 @@ public class EditProductsController extends Controller {
         manager.openSort(this, manager);
     }
 
-    public void next(ActionEvent actionEvent) {
-        if (i == -1) {
-            String categoryName = featuresText.getText();
-            if (!Category.hasCategoryWithName(categoryName)) {
-                manager.error("wrong category name");
-                return;
-            }
-            featuresNames = Category.getCategoryByName(categoryName).getFeaturesNames();
-            featuresNumbers = featuresNames.size();
-            i++;
-            featuresText.clear();
-            featuresLabel.setText(featuresNames.get(i));
-        } else if (i == featuresNumbers - 1){
-            ((SellerManager) manager).addProduct(name.getText(), Category.getCategoryByName(category.getText()),
-                    Double.parseDouble(price.getText()), Boolean.parseBoolean(isAvailable.getText()), description.getText(), allFeatures);
-            featuresText.clear();
-            featuresLabel.setText("its done close the pop up");
-        } else {
-            allFeatures.add(new Feature(featuresNames.get(i), featuresText.getText()));
-            i++;
-            featuresText.clear();
-            featuresLabel.setText(featuresNames.get(i));
-        }
-
-    }
 }

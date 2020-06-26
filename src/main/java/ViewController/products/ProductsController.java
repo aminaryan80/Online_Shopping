@@ -65,7 +65,7 @@ public class ProductsController extends Controller {
     }
 
     public void filter(ActionEvent actionEvent) {
-
+        ((ProductsManager) manager).openFilter(this);
     }
 
     public void sort(ActionEvent actionEvent) {
