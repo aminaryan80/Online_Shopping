@@ -1,165 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.customer.CustomerController">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.CustomerController">
     <children>
-        <ImageView fitHeight="125.0" fitWidth="123.0" layoutX="294.0" layoutY="69.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="125.0" fitWidth="123.0" layoutX="294.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../images/user.png"/>
+                <Image url="@../../../images/user.png" />
             </image>
         </ImageView>
-        <Label fx:id="usernameLabel" alignment="CENTER" layoutX="281.0" layoutY="209.0" prefHeight="32.0"
-               prefWidth="150.0" text="Username">
+        <Label fx:id="usernameLabel" alignment="CENTER" layoutX="281.0" layoutY="209.0" prefHeight="32.0" prefWidth="150.0" text="Username">
             <font>
-                <Font size="21.0"/>
+                <Font size="21.0" />
             </font>
         </Label>
-        <Button layoutX="269.0" layoutY="310.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="38.0"
-                prefWidth="175.0" text="Edit Password">
+        <Button layoutX="269.0" layoutY="310.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="38.0" prefWidth="175.0" text="Edit Password">
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
         <Label alignment="CENTER" layoutX="281.0" layoutY="243.0" prefHeight="32.0" prefWidth="150.0" text="Balance:">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <Label fx:id="balanceLabel" alignment="CENTER" layoutX="281.0" layoutY="272.0" prefHeight="30.0"
-               prefWidth="150.0" text="20$">
+        <Label fx:id="balanceLabel" alignment="CENTER" layoutX="281.0" layoutY="272.0" prefHeight="30.0" prefWidth="150.0" text="20$">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
         <TableView fx:id="cartTable" layoutX="826.0" layoutY="50.0" prefHeight="213.0" prefWidth="326.0">
             <columns>
-                <TableColumn fx:id="productIdCol" editable="false" prefWidth="86.39996337890625" resizable="false"
-                             text="Product Id:"/>
-                <TableColumn fx:id="productNameCol" editable="false" prefWidth="160.79986572265625" resizable="false"
-                             text="Product Name:"/>
-                <TableColumn fx:id="priceCol" editable="false" prefWidth="79.2000732421875" resizable="false"
-                             text="Price"/>
+                <TableColumn fx:id="productIdCol" editable="false" prefWidth="86.39996337890625" resizable="false" text="Product Id:" />
+                <TableColumn fx:id="productNameCol" editable="false" prefWidth="160.79986572265625" resizable="false" text="Product Name:" />
+                <TableColumn fx:id="priceCol" editable="false" prefWidth="79.2000732421875" resizable="false" text="Price" />
             </columns>
         </TableView>
-        <Label layoutX="820.0" layoutY="30.0" text="Cart:"/>
-        <TableView fx:id="discountsTable" layoutX="469.0" layoutY="317.0" prefHeight="214.0" prefWidth="326.0">
+        <Label layoutX="820.0" layoutY="30.0" text="Cart:" />
+        <TableView fx:id="discountsTable" layoutX="469.0" layoutY="317.0" prefHeight="214.0" prefWidth="378.0">
             <columns>
-                <TableColumn fx:id="discountIdCol" prefWidth="75.0" text="Id"/>
-                <TableColumn fx:id="discountPercentCol" prefWidth="57.5999755859375" text="Percent"/>
-                <TableColumn fx:id="discountUseLimitCol" prefWidth="66.39996337890625" text="Use Limit"/>
-                <TableColumn fx:id="discountBeginningDateCol" prefWidth="127.20001220703125" text="Beginning Date"/>
+                <TableColumn fx:id="discountIdCol" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="discountPercentCol" prefWidth="57.5999755859375" text="Percent" />
+                <TableColumn fx:id="discountBeginningDateCol" prefWidth="127.20001220703125" text="Beginning Date" />
+            <TableColumn fx:id="discountEndingDateCol" prefWidth="116.79996337890623" text="Ending Date" />
             </columns>
         </TableView>
-        <Label layoutX="464.0" layoutY="295.0" text="Discounts:"/>
-        <TableView fx:id="ordersTable" layoutX="826.0" layoutY="317.0" prefHeight="214.0" prefWidth="326.0">
+        <Label layoutX="464.0" layoutY="295.0" text="Discounts:" />
+        <TableView fx:id="ordersTable" layoutX="872.0" layoutY="317.0" prefHeight="214.0" prefWidth="279.0">
             <columns>
-                <TableColumn fx:id="orderIdCol" prefWidth="75.0" text="Id"/>
-                <TableColumn fx:id="orderDate" prefWidth="125.5999755859375" text="Date"/>
-                <TableColumn fx:id="orderAmount" prefWidth="124.0" text="Amount"/>
+                <TableColumn fx:id="orderIdCol" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="orderDate" prefWidth="125.5999755859375" text="Date" />
+                <TableColumn fx:id="orderAmount" prefWidth="77.5999755859375" text="Amount" />
             </columns>
         </TableView>
-        <Label layoutX="819.0" layoutY="296.0" text="Orders:"/>
+        <Label layoutX="869.0" layoutY="296.0" text="Orders:" />
         <Label alignment="CENTER" layoutX="280.0" layoutY="31.0" prefHeight="32.0" prefWidth="150.0" text="Customer">
             <font>
-                <Font size="21.0"/>
+                <Font size="21.0" />
             </font>
         </Label>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" onAction="#openCart" prefHeight="38.0" prefWidth="234.0"
-                        text="View Cart">
+                <Button mnemonicParsing="false" onAction="#openCart" prefHeight="38.0" prefWidth="234.0" text="View Cart">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#openOrders" prefHeight="38.0" prefWidth="234.0"
-                        text="View Orders">
+                <Button mnemonicParsing="false" onAction="#openOrders" prefHeight="38.0" prefWidth="234.0" text="View Orders">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
-                        textFill="RED">
+                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
                     <font>
-                        <Font name="System Bold" size="12.0"/>
+                        <Font name="System Bold" size="12.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
             </children>
         </VBox>
-        <TextField fx:id="firstNameField" layoutX="610.0" layoutY="65.0" prefHeight="32.0" prefWidth="175.0"
-                   styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
+        <TextField fx:id="firstNameField" layoutX="610.0" layoutY="65.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0"/>
+                <Insets left="8.0" right="8.0" />
             </padding>
         </TextField>
         <Label layoutX="501.0" layoutY="68.0" text="First Name:">
             <font>
-                <Font size="17.0"/>
+                <Font size="17.0" />
             </font>
         </Label>
-        <TextField fx:id="lastNameField" layoutX="610.0" layoutY="107.0" prefHeight="32.0" prefWidth="175.0"
-                   styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
+        <TextField fx:id="lastNameField" layoutX="610.0" layoutY="107.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0"/>
+                <Insets left="8.0" right="8.0" />
             </padding>
         </TextField>
         <Label layoutX="501.0" layoutY="110.0" text="Last Name:">
             <font>
-                <Font size="17.0"/>
+                <Font size="17.0" />
             </font>
         </Label>
-        <TextField fx:id="emailField" layoutX="610.0" layoutY="149.0" prefHeight="32.0" prefWidth="175.0"
-                   styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
+        <TextField fx:id="emailField" layoutX="610.0" layoutY="149.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0"/>
+                <Insets left="8.0" right="8.0" />
             </padding>
         </TextField>
         <Label layoutX="521.0" layoutY="152.0" text="Email:">
             <font>
-                <Font size="17.0"/>
+                <Font size="17.0" />
             </font>
         </Label>
-        <TextField fx:id="phoneNumberField" layoutX="610.0" layoutY="191.0" prefHeight="32.0" prefWidth="175.0"
-                   styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
+        <TextField fx:id="phoneNumberField" layoutX="610.0" layoutY="191.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0"/>
+                <Insets left="8.0" right="8.0" />
             </padding>
         </TextField>
         <Label layoutX="483.0" layoutY="194.0" text="Phone Number:">
             <font>
-                <Font size="17.0"/>
+                <Font size="17.0" />
             </font>
         </Label>
-        <Button layoutX="482.0" layoutY="233.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="32.0"
-                prefWidth="302.0" text="Update Profile"/>
+        <Button layoutX="482.0" layoutY="233.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="32.0" prefWidth="302.0" text="Update Profile" />
     </children>
 </AnchorPane>

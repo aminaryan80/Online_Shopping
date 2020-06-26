@@ -8,6 +8,7 @@ import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 import View.Products.ProductsMenu;
 import ViewController.Controller;
+import ViewController.products.AuctionDetailsController;
 import ViewController.products.FilteringController;
 import ViewController.products.ProductsController;
 import ViewController.products.ViewCategoriesController;
@@ -422,5 +423,10 @@ public class ProductsManager extends Manager {
     public void viewCategories() {
         ViewCategoriesController controller = (ViewCategoriesController) loadFxml(Addresses.VIEW_CATEGORIES, true);
         controller.init();
+    }
+
+    public void openAuctionDetails(Auction auction, Product product) {
+        AuctionDetailsController controller = (AuctionDetailsController) loadFxml(Addresses.AUCTION_DETAILS, true);
+        controller.setInfos(auction, product);
     }
 }

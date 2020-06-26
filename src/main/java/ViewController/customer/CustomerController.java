@@ -47,9 +47,9 @@ public class CustomerController extends Controller {
     @FXML
     private TableColumn<Discount, Integer> discountPercentCol;
     @FXML
-    private TableColumn<Discount, Integer> discountUseLimitCol;
-    @FXML
     private TableColumn<Discount, LocalDate> discountBeginningDateCol;
+    @FXML
+    public TableColumn<Discount, LocalDate> discountEndingDateCol;
 
 
     @FXML
@@ -90,8 +90,8 @@ public class CustomerController extends Controller {
         discountsTable.setItems(FXCollections.observableArrayList(Discount.getAllDiscounts()));
         discountIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("discountPercent"));
-        discountUseLimitCol.setCellValueFactory(new PropertyValueFactory<>("discountUseCount"));
         discountBeginningDateCol.setCellValueFactory(new PropertyValueFactory<>("beginningDate"));
+        discountEndingDateCol.setCellValueFactory(new PropertyValueFactory<>("endingDate"));
     }
 
     private void initOrders() {
