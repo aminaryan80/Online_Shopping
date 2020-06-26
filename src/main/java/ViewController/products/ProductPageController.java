@@ -6,6 +6,7 @@ import Control.Manager;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -114,5 +115,9 @@ public class ProductPageController extends Controller {
 
     public void addComment(MouseEvent mouseEvent) {
         ((ProductPageManager) manager).addComment();
+    }
+
+    public void compare(ActionEvent actionEvent) {
+        ((ProductPageManager)manager).compare();
     }
 }

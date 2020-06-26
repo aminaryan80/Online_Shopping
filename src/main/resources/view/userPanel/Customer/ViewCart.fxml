@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../../styles/publicStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.customer.cart.ViewCartController">
 
     <children>
@@ -32,26 +42,21 @@
                                    <TableColumn fx:id="descriptionColumn" prefWidth="268.2666931152344" text="description" />
                                    <TableColumn fx:id="quantityColumn" minWidth="0.0" prefWidth="90.39990234375" text="quantity" />
                                    <TableColumn fx:id="priceColumn" prefWidth="190.93328857421875" text="price" />
-                                   <TableColumn prefWidth="149.066650390625" text="click here"/>
+                                   <TableColumn prefWidth="149.066650390625" text="click here" />
                                </columns>
                            </TableView>
                            <Pane prefHeight="73.0" prefWidth="954.0">
                                <children>
-                                   <Button layoutX="838.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearCart"
-                                           prefHeight="42.0" prefWidth="100.0" text="clear cart"/>
-                                   <Button layoutX="711.0" layoutY="15.0" mnemonicParsing="false"
-                                           onAction="#openPurchasePage" prefHeight="42.0" prefWidth="100.0"
-                                           text="Purchase"/>
-                                   <Label layoutX="2.0" layoutY="1.0" prefHeight="59.0" prefWidth="248.0"
-                                          text=" Total amount: ">
+                                   <Button layoutX="838.0" layoutY="17.0" mnemonicParsing="false" onAction="#clearCart" prefHeight="42.0" prefWidth="100.0" text="clear cart" />
+                                   <Button layoutX="711.0" layoutY="15.0" mnemonicParsing="false" onAction="#openPurchasePage" prefHeight="42.0" prefWidth="100.0" text="Purchase" />
+                                   <Label layoutX="2.0" layoutY="1.0" prefHeight="59.0" prefWidth="248.0" text=" Total amount: ">
                                        <font>
-                                           <Font name="Book Antiqua" size="36.0"/>
+                                           <Font name="Book Antiqua" size="36.0" />
                                        </font>
                                    </Label>
-                                   <Label fx:id="totalAmount" layoutX="244.0" prefHeight="59.0" prefWidth="147.0"
-                                          text="amount$">
+                                   <Label fx:id="totalAmount" layoutX="244.0" prefHeight="59.0" prefWidth="147.0" text="amount$">
                                        <font>
-                                           <Font name="Book Antiqua" size="36.0"/>
+                                           <Font name="Book Antiqua" size="36.0" />
                                        </font>
                                    </Label>
                                </children>
@@ -67,49 +72,32 @@
             <children>
                 <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="User Panel">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#logOut" prefHeight="38.0" prefWidth="234.0" text="Logout"
-                        textFill="RED">
+                <Button mnemonicParsing="false" onAction="#logOut" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
                     <font>
-                        <Font name="System Bold" size="12.0"/>
+                        <Font name="System Bold" size="12.0" />
                     </font>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="show available sorts">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="current sort">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="disable sort">
+            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="234.0" text="Sort">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -139,22 +127,19 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                         <Button mnemonicParsing="false" onAction="#addProduct" prefHeight="63.0" prefWidth="64.0"
-                                 text="+">
+                         <Button mnemonicParsing="false" onAction="#addProduct" prefHeight="63.0" prefWidth="64.0" text="+">
                              <font>
-                                 <Font size="24.0"/>
+                                 <Font size="24.0" />
                              </font>
                          </Button>
-                         <Button mnemonicParsing="false" onAction="#reduceProduct" prefHeight="63.0" prefWidth="64.0"
-                                 text="-" GridPane.columnIndex="1">
+                         <Button mnemonicParsing="false" onAction="#reduceProduct" prefHeight="63.0" prefWidth="64.0" text="-" GridPane.columnIndex="1">
                              <font>
-                                 <Font size="24.0"/>
+                                 <Font size="24.0" />
                              </font>
                          </Button>
-                         <Button mnemonicParsing="false" onAction="#openProductPage" prefHeight="63.0" prefWidth="68.0"
-                                 text="⋗" GridPane.columnIndex="2">
+                         <Button mnemonicParsing="false" onAction="#openProductPage" prefHeight="63.0" prefWidth="68.0" text="⋗" GridPane.columnIndex="2">
                              <font>
-                                 <Font size="24.0"/>
+                                 <Font size="24.0" />
                              </font>
                          </Button>
                      </children>

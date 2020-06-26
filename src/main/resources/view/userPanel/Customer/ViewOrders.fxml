@@ -42,6 +42,11 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
+            <Button mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="227.0" text="sort">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             <Pane prefHeight="425.0" prefWidth="234.0">
                <children>
                   <Label alignment="CENTER" layoutX="-5.0" layoutY="-1.0" prefHeight="92.0" prefWidth="236.0" text="selected Order:">
@@ -80,7 +85,7 @@
         </VBox>
       <Pane layoutX="250.0" prefHeight="601.0" prefWidth="967.0">
          <children>
-            <TableView fx:id="tableView" onMouseClicked="#select" layoutX="15.0" layoutY="10.0" prefHeight="575.0" prefWidth="933.0">
+            <TableView fx:id="tableView" layoutX="15.0" layoutY="10.0" onMouseClicked="#select" prefHeight="575.0" prefWidth="933.0">
               <columns>
                 <TableColumn fx:id="numberColumn" prefWidth="32.79998779296875" text="#" />
                 <TableColumn fx:id="orderIdColumn" prefWidth="95.99996948242188" text="Id" />

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.userPanel.Customer.Compare">
+
+
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="489.0" prefWidth="1200.0" stylesheets="@../../../styles/products_styles.css">
+        <children>
+            <ImageView fitHeight="188.0" fitWidth="159.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
+                <image>
+                    <Image url="@../../../images/product.jpg" />
+                </image>
+            </ImageView>
+            <Label layoutX="17.0" layoutY="215.0" text="Name:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="productName" alignment="CENTER" layoutX="69.0" layoutY="215.0" prefWidth="115.0" text="ProductName">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="242.0" text="Seller:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="sellerName" alignment="CENTER" layoutX="59.0" layoutY="242.0" prefHeight="27.0" prefWidth="115.0" text="SellerName">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="201.0" layoutY="32.0" text="Company:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="companyName" layoutX="281.0" layoutY="32.0" text="CompanyName">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="201.0" layoutY="59.0" text="Rate:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="rate" layoutX="241.0" layoutY="59.0" text="4.4">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="description" alignment="TOP_LEFT" layoutX="117.0" layoutY="298.0" prefHeight="170.0" prefWidth="410.0" text="This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. " textAlignment="JUSTIFY" wrapText="true">
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="293.0" text="Description:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <TableView fx:id="featureValueTable" layoutX="221.0" layoutY="93.0" prefHeight="200.0" prefWidth="304.0">
+                <columns>
+                    <TableColumn fx:id="featureColumn" prefWidth="159.2000732421875" text="Feature" />
+                    <TableColumn fx:id="valueColumn" prefWidth="143.99993896484375" text="Value" />
+                </columns>
+            </TableView>
+            <Label fx:id="productId" alignment="CENTER" layoutX="14.0" layoutY="179.0" prefHeight="27.0" prefWidth="159.0" text="#ID">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="268.0" text="Price:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="price" alignment="CENTER" layoutX="47.0" layoutY="268.0" prefHeight="27.0" prefWidth="80.0" text="2000$">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+         <TextField layoutX="716.0" layoutY="14.0" prefHeight="26.0" prefWidth="304.0" promptText="product id" />
+         <Button layoutX="1029.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="confirm" />
+         <ImageView fitHeight="188.0" fitWidth="159.0" layoutX="544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
+            <image>
+               <Image url="@../../../images/product.jpg" />
+            </image>
+         </ImageView>
+         <Label fx:id="productId1" alignment="CENTER" layoutX="544.0" layoutY="179.0" prefHeight="27.0" prefWidth="159.0" text="#ID">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label layoutX="559.0" layoutY="215.0" text="Name:">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label fx:id="productName1" alignment="CENTER" layoutX="611.0" layoutY="215.0" prefWidth="115.0" text="ProductName">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label layoutX="556.0" layoutY="242.0" text="Seller:">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label fx:id="sellerName1" alignment="CENTER" layoutX="601.0" layoutY="242.0" prefHeight="27.0" prefWidth="115.0" text="SellerName">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label fx:id="description1" alignment="TOP_LEFT" layoutX="659.0" layoutY="298.0" prefHeight="170.0" prefWidth="410.0" text="This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. This is a example Text, but i made it myself; and i have to use all shits to test it. " textAlignment="JUSTIFY" wrapText="true">
+            <font>
+               <Font size="17.0" />
+            </font>
+         </Label>
+         <Label layoutX="557.0" layoutY="293.0" text="Description:">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label layoutX="559.0" layoutY="268.0" text="Price:">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label fx:id="price1" alignment="CENTER" layoutX="589.0" layoutY="268.0" prefHeight="27.0" prefWidth="80.0" text="2000$">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Line endX="23.0" endY="-4.95910626341356E-6" layoutX="512.0" layoutY="-1.0" startX="23.0" startY="489.5999755859375" />
+         <Label layoutX="716.0" layoutY="45.0" text="Company:">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label fx:id="companyName1" layoutX="796.0" layoutY="45.0" text="CompanyName">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label layoutX="716.0" layoutY="72.0" text="Rate:">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+         <Label fx:id="rate1" layoutX="756.0" layoutY="72.0" text="4.4">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Label>
+        </children>
+    </AnchorPane>
+
+
+
+
+</AnchorPane>

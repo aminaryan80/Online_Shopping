@@ -4,6 +4,7 @@ import Control.Manager;
 import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
+import Models.Address;
 import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.product.ProductPage;
@@ -121,5 +122,9 @@ public class ProductPageManager extends Manager {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public void compare() {
+        loadFxml(Address.COMPARE,true);
     }
 }
