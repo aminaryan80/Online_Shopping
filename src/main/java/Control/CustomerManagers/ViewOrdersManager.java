@@ -10,10 +10,7 @@ import Models.Shop.Product.Product;
 import View.CustomerMenus.customer.ViewOrdersMenu;
 import ViewController.Controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ViewOrdersManager extends Manager {
 
@@ -145,5 +142,21 @@ public class ViewOrdersManager extends Manager {
 
     public ArrayList<BuyingLog> getLogs() {
         return customer.getAllLogs();
+    }
+
+    BuyingLog logToShowProducts;
+
+    public void showProductsByLogId(String logId) {
+        logToShowProducts = customer.getLogById(logId);
+        Controller controller = loadFxml(Addresses.SHOW_ORDER_PRODUCTS,true);
+        controller.init();
+    }
+
+    public HashMap<Product, Integer> getOrderProductsToShow() {
+        HashMap<Product,Integer> orderProductsToShow= new HashMap<>();
+        for (String productId : logToShowProducts.getProductIdToNumberMap().keySet()) {
+            orderProductsToShow.put(Product.getProductById(productId),logToShowProducts.getProductIdToNumberMap().get(productId));
+        }
+        return orderProductsToShow;
     }
 }

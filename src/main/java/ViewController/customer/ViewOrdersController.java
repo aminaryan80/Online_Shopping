@@ -32,6 +32,8 @@ public class ViewOrdersController extends Controller {
     public TableColumn phoneNumberColumn;
     public TableView tableView;
 
+    private String logId;
+
     public void init() {
         ArrayList<OrderTableItem> orderTableItems = getOrderTableItems();
         ObservableList<OrderTableItem> data = FXCollections.observableList(orderTableItems);
@@ -68,7 +70,12 @@ public class ViewOrdersController extends Controller {
 
 
     public void showBoughtProducts(ActionEvent actionEvent) {
-
+        if (!orderIdLabel.getText().isEmpty())
+            ((ViewOrdersManager) manager).showProductsByLogId(logId);
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Select an Order then proceed to show products!", ButtonType.OK);
+            alert.show();
+        }
     }
 
     public void select(MouseEvent mouseEvent) {
@@ -76,11 +83,12 @@ public class ViewOrdersController extends Controller {
             TableRow tableRow = ((TableCell) mouseEvent.getTarget()).getTableRow();
             OrderTableItem orderTableItem = (OrderTableItem) tableView.getItems().get(tableRow.getIndex());
             if (orderTableItem != null) {
-                BuyingLog log = ((ViewOrdersManager)manager).getLogById(orderTableItem.getId());
-                orderIdLabel.setText("#"+log.getId());
-                dateLabel.setText("Date: "+ log.getDate().toString());
-                moneyPaidLabel.setText("Paid money: "+log.getMoney()+"$");
-                discountAmountLabel.setText("Discount amount: "+log.getAmount()+"$");
+                BuyingLog log = ((ViewOrdersManager) manager).getLogById(orderTableItem.getId());
+                logId = log.getId();
+                orderIdLabel.setText("#" + logId);
+                dateLabel.setText("Date: " + log.getDate().getYear() + "/" + log.getDate().getMonth() + "/" + log.getDate().getDayOfMonth());
+                moneyPaidLabel.setText("Paid money: " + log.getMoney() + "$");
+                discountAmountLabel.setText("Discount amount: " + log.getAmount() + "$");
             }
         }
     }
