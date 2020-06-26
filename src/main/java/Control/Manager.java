@@ -7,7 +7,6 @@ import Models.Shop.Cart;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-//import View.Menu;
 import View.Menu;
 import ViewController.Controller;
 import ViewController.SortController;
@@ -24,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+
+//import View.Menu;
 
 public abstract class Manager {
     protected static Account account;
@@ -81,8 +82,12 @@ public abstract class Manager {
     }*/
 
     public void logout() {
-        account = null;
-//        cart = new Cart();
+        if (account != null) {
+            account = null;
+//          cart = new Cart();
+            new MainManager(null);
+            success("You successfully logged out.");
+        } else error("You haven't logged in yet.");
     }
 
     public boolean userExistsWithUsername(String username) {

@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -93,16 +94,18 @@ public class EditOffController extends Controller {
         new AddOffRequest((Seller) manager.getAccount(), auction);
     }
 
-    public void updateScene(ActionEvent actionEvent) {
+    public void updateScene(MouseEvent mouseEvent) {
         off = offs.getSelectionModel().getSelectedItem();
-        id.setText(off.getId());
-        beginningDate.setText(off.getBeginningDate().toString());
-        endingDate.setText(off.getEndingDate().toString());
-        amount.setText(String.valueOf(off.getDiscountAmount()));
-        products.setItems(FXCollections.observableArrayList(off.getProducts()));
-        productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        if (off != null) {
+            id.setText(off.getId());
+            beginningDate.setText(off.getBeginningDate().toString());
+            endingDate.setText(off.getEndingDate().toString());
+            amount.setText(String.valueOf(off.getDiscountAmount()));
+            products.setItems(FXCollections.observableArrayList(off.getProducts()));
+            productsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        }
     }
 
     public void sort(ActionEvent actionEvent) {

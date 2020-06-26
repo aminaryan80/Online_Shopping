@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+
 public class ViewCartController extends Controller {
 
     public TableView tableView;
@@ -73,9 +74,11 @@ public class ViewCartController extends Controller {
     public void select(MouseEvent mouseEvent) {
         if (!(mouseEvent.getTarget() instanceof LabeledText)) {
             TableRow tableRow = ((TableCell) mouseEvent.getTarget()).getTableRow();
-            CartTableItem cartTableItem = (CartTableItem) tableView.getItems().get(tableRow.getIndex());
-            if (cartTableItem != null)
-                selectedProduct.setText(cartTableItem.getId());
+            if (tableRow.getIndex() < tableView.getItems().size()) {
+                CartTableItem cartTableItem = (CartTableItem) tableView.getItems().get(tableRow.getIndex());
+                if (cartTableItem != null)
+                    selectedProduct.setText(cartTableItem.getId());
+            }
         }
     }
 

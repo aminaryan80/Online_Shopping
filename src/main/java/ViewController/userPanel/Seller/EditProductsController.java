@@ -11,12 +11,10 @@ import Models.Shop.Product.Product;
 import Models.Shop.Request.EditProductRequest;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -36,8 +34,6 @@ public class EditProductsController extends Controller {
     private TableColumn<Product, String> productsNameColumn;
     @FXML
     private TableColumn<Product, Double> priceColumn;
-    @FXML
-    private TableColumn<Product, String> categoryColumn;
     @FXML
     private TableColumn<Account, String> buyersNameColumn;
     @FXML
@@ -89,7 +85,7 @@ public class EditProductsController extends Controller {
         }
         products.setItems(FXCollections.observableArrayList(tableProducts));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
+        //categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     }

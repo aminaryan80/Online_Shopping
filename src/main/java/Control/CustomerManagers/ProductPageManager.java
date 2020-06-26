@@ -83,7 +83,6 @@ public class ProductPageManager extends Manager {
         Comment comment = new Comment(customer, product, title + ":\n" + "\t" + content, null, hasPurchased);
         product.addComment(comment);
         productPageController.initializeComments();
-        // JESUS FUCKING CHRIST HELLO
     }
 
     public boolean rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK

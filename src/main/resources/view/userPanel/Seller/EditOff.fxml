@@ -3,10 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="890.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/11.0.1" fx:controller="ViewController.userPanel.Seller.EditOffController">
     <children>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
@@ -42,54 +41,53 @@
                 </Button>
             </children>
         </VBox>
-      <TableView fx:id="offs" layoutX="289.0" layoutY="65.0" onMouseClicked="#updateScene" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="offsIdColumn" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="amountColumn" prefWidth="124.0" text="Amount" />
-        </columns>
-      </TableView>
+        <TableView fx:id="offs" layoutX="289.0" layoutY="65.0" onMouseClicked="#updateScene" prefHeight="200.0"
+                   prefWidth="318.0">
+            <columns>
+                <TableColumn fx:id="offsIdColumn" prefWidth="146.39999389648438" text="Id"/>
+                <TableColumn fx:id="amountColumn" prefWidth="171.19998779296873" text="Amount"/>
+            </columns>
+        </TableView>
       <Label layoutX="286.0" layoutY="41.0" text="Offs:" />
-      <TableView fx:id="products" layoutX="289.0" layoutY="321.0" prefHeight="200.0" prefWidth="227.0">
-        <columns>
-          <TableColumn fx:id="productsIdColumn" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-        </columns>
-      </TableView>
+        <TableView fx:id="products" layoutX="289.0" layoutY="321.0" prefHeight="200.0" prefWidth="318.0">
+            <columns>
+                <TableColumn fx:id="productsIdColumn" prefWidth="107.19998168945312" text="Id"/>
+                <TableColumn fx:id="nameColumn" prefWidth="141.5999755859375" text="Name"/>
+                <TableColumn fx:id="priceColumn" minWidth="4.0" prefWidth="68.00006103515625" text="Price"/>
+            </columns>
+        </TableView>
       <Label layoutX="286.0" layoutY="292.0" text="Products:" />
-      <Label layoutX="583.0" layoutY="77.0" text="Id">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="583.0" layoutY="121.0" text="BeginningDate">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="583.0" layoutY="173.0" text="EndingDate">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-        <Label layoutX="583.0" layoutY="225.0" text="Amount">
+        <Label layoutX="799.0" layoutY="77.0" text="Id:">
             <font>
                 <Font size="17.0"/>
             </font>
         </Label>
-        <TextField fx:id="id" editable="false" layoutX="710.0" layoutY="78.0"/>
-        <TextField fx:id="beginningDate" layoutX="710.0" layoutY="122.0"/>
-        <TextField fx:id="endingDate" layoutX="710.0" layoutY="174.0"/>
-        <TextField fx:id="amount" layoutX="710.0" layoutY="226.0"/>
-        <Button layoutX="645.0" layoutY="394.0" mnemonicParsing="false" onAction="#update" prefHeight="42.0"
-                prefWidth="120.0" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css"
-                text="Update"/>
-        <Button layoutX="645.0" layoutY="463.0" mnemonicParsing="false" onAction="#add" prefHeight="42.0"
-                prefWidth="120.0" style="-fx-background-color: green;" stylesheets="@../../../styles/styles.css"
-                text="Add"/>
-        <TextField fx:id="productsIds" layoutX="620.0" layoutY="301.0" prefHeight="62.0" prefWidth="168.0"
+        <Label layoutX="751.0" layoutY="124.0" text="BeginningDate:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <Label layoutX="762.0" layoutY="171.0" text="EndingDate:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <Label layoutX="777.0" layoutY="218.0" text="Amount:">
+            <font>
+                <Font size="17.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="id" editable="false" layoutX="878.0" layoutY="78.0"/>
+        <TextField fx:id="beginningDate" layoutX="878.0" layoutY="125.0"/>
+        <TextField fx:id="endingDate" layoutX="878.0" layoutY="172.0"/>
+        <TextField fx:id="amount" layoutX="878.0" layoutY="219.0"/>
+        <Button layoutX="774.0" layoutY="378.0" mnemonicParsing="false" onAction="#update" prefHeight="42.0"
+                prefWidth="120.0" text="Update"/>
+        <Button layoutX="904.0" layoutY="378.0" mnemonicParsing="false" onAction="#add" prefHeight="42.0"
+                prefWidth="120.0" text="Add"/>
+        <TextField fx:id="productsIds" layoutX="774.0" layoutY="297.0" prefHeight="62.0" prefWidth="250.0"
                    promptText="press enter after each id"/>
-        <Label layoutX="625.0" layoutY="275.0" text="Products Ids"/>
+        <Label layoutX="775.0" layoutY="279.0" text="Products Ids:"/>
     </children>
 
 </AnchorPane>

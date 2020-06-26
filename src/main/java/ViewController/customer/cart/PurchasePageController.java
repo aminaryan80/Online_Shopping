@@ -1,7 +1,6 @@
 package ViewController.customer.cart;
 
 import Control.CustomerManagers.PurchaseManager;
-import Control.CustomerManagers.ViewCartManager;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
@@ -101,6 +100,7 @@ public class PurchasePageController extends Controller {
             ((PurchaseManager) manager).pay(info, discountCodeField.getText());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Purchase was successful!", ButtonType.OK);
             alert.show();
+            back(null);
         } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You can't pay!", ButtonType.OK);
             alert.show();

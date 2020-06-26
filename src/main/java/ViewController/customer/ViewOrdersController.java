@@ -1,9 +1,7 @@
 package ViewController.customer;
 
-import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Models.Shop.Log.BuyingLog;
-import Models.Shop.Product.Product;
 import ViewController.Controller;
 import ViewController.customer.cart.CartTableItem;
 import com.sun.javafx.scene.control.skin.LabeledText;
@@ -15,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ViewOrdersController extends Controller {
 
@@ -81,14 +78,16 @@ public class ViewOrdersController extends Controller {
     public void select(MouseEvent mouseEvent) {
         if (!(mouseEvent.getTarget() instanceof LabeledText)) {
             TableRow tableRow = ((TableCell) mouseEvent.getTarget()).getTableRow();
-            OrderTableItem orderTableItem = (OrderTableItem) tableView.getItems().get(tableRow.getIndex());
-            if (orderTableItem != null) {
-                BuyingLog log = ((ViewOrdersManager) manager).getLogById(orderTableItem.getId());
-                logId = log.getId();
-                orderIdLabel.setText("#" + logId);
-                dateLabel.setText("Date: " + log.getDate().getYear() + "/" + log.getDate().getMonth() + "/" + log.getDate().getDayOfMonth());
-                moneyPaidLabel.setText("Paid money: " + log.getMoney() + "$");
-                discountAmountLabel.setText("Discount amount: " + log.getAmount() + "$");
+            if (tableRow.getIndex() < tableView.getItems().size()) {
+                OrderTableItem orderTableItem = (OrderTableItem) tableView.getItems().get(tableRow.getIndex());
+                if (orderTableItem != null) {
+                    BuyingLog log = ((ViewOrdersManager) manager).getLogById(orderTableItem.getId());
+                    logId = log.getId();
+                    orderIdLabel.setText("#" + logId);
+                    dateLabel.setText("Date: " + log.getDate().getYear() + "/" + log.getDate().getMonth() + "/" + log.getDate().getDayOfMonth());
+                    moneyPaidLabel.setText("Paid money: " + log.getMoney() + "$");
+                    discountAmountLabel.setText("Discount amount: " + log.getAmount() + "$");
+                }
             }
         }
     }
