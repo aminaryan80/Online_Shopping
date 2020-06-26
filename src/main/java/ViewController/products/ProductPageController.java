@@ -75,7 +75,6 @@ public class ProductPageController extends Controller {
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
 
-
     public void rate(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistAtAllException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Rate " + product.getName());

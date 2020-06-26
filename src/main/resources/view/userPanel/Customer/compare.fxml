@@ -92,7 +92,7 @@
                     <Font size="18.0" />
                 </font>
             </Label>
-         <TextField layoutX="716.0" layoutY="14.0" prefHeight="26.0" prefWidth="304.0" promptText="product id" />
+         <TextField fx:id="otherProductIdField" layoutX="716.0" layoutY="14.0" prefHeight="26.0" prefWidth="304.0" promptText="product id" />
          <Button layoutX="1029.0" layoutY="14.0" mnemonicParsing="false" onAction="#setOtherProduct" prefHeight="26.0" prefWidth="80.0" text="confirm" />
          <ImageView fitHeight="188.0" fitWidth="159.0" layoutX="544.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
             <image>

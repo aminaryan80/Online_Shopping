@@ -9,6 +9,7 @@ import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
 import View.CustomerMenus.product.ProductPage;
 import ViewController.Controller;
+import ViewController.customer.CompareController;
 import ViewController.products.ProductPageController;
 
 import java.util.ArrayList;
@@ -125,6 +126,7 @@ public class ProductPageManager extends Manager {
     }
 
     public void compare() {
-        loadFxml(Addresses.COMPARE,true);
+        Controller controller = loadFxml(Addresses.COMPARE,true);
+        ((CompareController)controller).init();
     }
 }
