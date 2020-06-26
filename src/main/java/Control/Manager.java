@@ -10,6 +10,7 @@ import Models.Shop.Product.Product;
 import View.Menu;
 import ViewController.Controller;
 import ViewController.SortController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -359,5 +360,10 @@ public abstract class Manager {
         public String getAddress() {
             return address;
         }
+    }
+
+    public static void exit() {
+        stage.close();
+        System.exit(0);
     }
 }

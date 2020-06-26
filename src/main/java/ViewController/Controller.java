@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
-    protected static Scanner scanner = new Scanner(System.in);
+    //protected static Scanner scanner;
     protected Manager manager;
 
     public void init() {

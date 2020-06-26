@@ -6,13 +6,14 @@ import Control.UserPanel.UserPanelManager;
 import ViewController.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class UserPanelController extends Controller {
     @FXML
     private TextField userNameField;
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     public void login(ActionEvent actionEvent) {
         String username = userNameField.getText();

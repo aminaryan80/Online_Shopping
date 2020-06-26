@@ -31,6 +31,9 @@
                         <URL value="@../styles/main_menu_styles.css" />
                         <URL value="@../styles/styles.css" />
                     </stylesheets>
+               <font>
+                  <Font name="Bookshelf Symbol 7" size="12.0" />
+               </font>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#openProductsMenu" prefHeight="42.0" prefWidth="167.0" styleClass="button" text="Products">
                     <VBox.margin>
