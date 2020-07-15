@@ -57,7 +57,7 @@ public class ViewOrdersMenu extends Menu {
     }
 
     private void showAvailableSorts() {
-        System.out.println(((SellerManager) manager).showAvailableSorts());
+        System.out.println((manager).showAvailableSorts());
     }
 
     private void sort(String sort) {

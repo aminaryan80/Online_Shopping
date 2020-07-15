@@ -94,7 +94,7 @@ public class EditProductsController extends Controller {
             new EditProductRequest((Seller) manager.getAccount(), product1);
         }
         if (product.getPrice() != Double.parseDouble(price.getText())) {
-            Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), "price", id.getText());
+            Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), "price", price.getText());
             new EditProductRequest((Seller) manager.getAccount(), product1);
         }
         if (product.isAvailable() != Boolean.parseBoolean(isAvailable.getText())) {

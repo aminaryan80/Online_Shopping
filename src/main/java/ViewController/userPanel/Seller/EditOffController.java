@@ -90,7 +90,7 @@ public class EditOffController extends Controller {
 
     public void add(ActionEvent actionEvent) {
         Auction auction = ((OffsManager) manager).addOff(beginningDate.getText(), endingDate.getText(),
-                Double.parseDouble(amount.getText()), (ArrayList<String>) Arrays.asList(productsIds.getText().split("\\s+")));
+                Double.parseDouble(amount.getText()), Arrays.asList(productsIds.getText().split("\\s+")));
         new AddOffRequest((Seller) manager.getAccount(), auction);
     }
 
