@@ -15,7 +15,6 @@ public class EditCategoryManager extends Manager {
         super(account);
         this.editingCategory = category;
         this.features = category.getFeaturesNames();
-        //new EditCategoryMenu(this);
         loadFxml(Addresses.EDIT_CATEGORY, true);
     }
 

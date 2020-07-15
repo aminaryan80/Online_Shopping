@@ -13,39 +13,26 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Product {
-    private final static String[] changeableFields = {"name", "price", "isAvailable",
-            "description", "features"};
     private static ArrayList<Product> allProducts = new ArrayList<>();
     private String id;
     private ProductStatus status;
     private String name;
     private String companyName;
     private double price;
-    //    private Seller seller;
     private String sellerUsername;
     private boolean isAvailable;
-    //    private Category category;
-    private String categoryName;
     private String categoryId;
     private String description;
-    //    private ArrayList<Rate> allRates = new ArrayList<>();
     private ArrayList<String> allRatesIds = new ArrayList<>();
-    //    private ArrayList<Customer> allBuyers = new ArrayList<>();
-//    private ArrayList<String> allBuyersNames = new ArrayList<>();
     private ArrayList<String> allBuyersUsernames = new ArrayList<>();
-    //    private List<Comment> allComments = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
-    //    private Auction auction;
     private String auctionId;
 
     public Product(String name, String companyName, double price, Seller seller,
@@ -57,7 +44,6 @@ public class Product {
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
         if (category != null) {
-            this.categoryName = category.getName();
             this.categoryId = category.getId();
             category.addProduct(id);
         }
@@ -91,28 +77,9 @@ public class Product {
         return allProducts;
     }
 
-    public static ArrayList<Product> getProductsByName(String name) {
-        ArrayList<Product> products = new ArrayList<>();
-        for (Product product : allProducts) {
-            if (product.getName().equals(name)) {
-                products.add(product);
-            }
-        }
-        return products;
-    }
-
     public static boolean hasProductWithId(String id) {
         for (Product product : allProducts) {
             if (product.getId().toLowerCase().equals(id.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean hasProductWithId(String id, String sellerUsername) {
-        for (Product product : allProducts) {
-            if (product.getId().toLowerCase().equals(id.toLowerCase()) && product.getSeller().getUsername().equals(sellerUsername)) {
                 return true;
             }
         }
@@ -128,16 +95,11 @@ public class Product {
         return null;
     }
 
-    public static boolean isEnteredProductFieldValid(String field) {
-        List<String> fields = Arrays.asList(changeableFields);
-        return fields.contains(field);
-    }
-
     public static void addProduct(Product product) {
         allProducts.add(product);
     }
 
-    public static void deleteProduct(Product product) throws IOException {
+    public static void deleteProduct(Product product) {
         allProducts.remove(product);
         File file = new File(Address.PRODUCTS.get() + "\\" + product.getId() + ".json");
         try {
@@ -146,16 +108,6 @@ public class Product {
         } catch (Exception ignored) {
 
         }
-    }
-
-    public static ArrayList<String> viewProductsInShort(Seller seller) {
-        ArrayList<String> allProductsInShort = new ArrayList<String>();
-        for (Product product : allProducts) {
-            if (product.getSeller().equals(seller)) {
-                allProductsInShort.add(product.viewProductInShort());
-            }
-        }
-        return allProductsInShort;
     }
 
     public static ProductStatus parseProductStatus(String statusName) {
@@ -263,10 +215,6 @@ public class Product {
         this.name = name;
     }
 
-    public String viewProductInShort() {
-        return "#" + id + " : " + name + " | " + price + "$";
-    }
-
     public String getId() {
         return id;
     }
@@ -277,16 +225,6 @@ public class Product {
             allComments.add(Comment.getCommentById(commentId));
         }
         return allComments;
-    }
-
-    public List<String> getComments() {
-        List<String> comments = new ArrayList<>();
-        int i = 1;
-        for (Comment comment : getAllComments()) {
-            comments.add("comment " + i + ":" + "\n" + comment.getText() + "\n");
-            i++;
-        }
-        return comments;
     }
 
     public Seller getSeller() {
@@ -303,27 +241,6 @@ public class Product {
 
     public void setStatus(ProductStatus status) {
         this.status = status;
-    }
-
-    public String getAttributes() {
-        if (sellerUsername == null || categoryId == null) throw new NullPointerException();
-        //TODO make better
-        return "Name: " + name +
-                "\nId: " + id +
-                "\nCompany name: " + companyName +
-                "\nSeller: " + Seller.getAccountByUsername(sellerUsername).getName() +
-                "\nDescription: " + description +
-                "\n" + Category.getCategoryById(categoryId).getFeaturesNames().toString();
-    }
-
-    public String digest() {
-        if (auctionId != null)
-            return "\nDescription: " + description +
-                    "\nPrice: " + price +
-                    "\nAuction amount: " + getAuction().getDiscountAmount();
-        else return "\nDescription: " + description +
-                "\nPrice: " + price +
-                "\nNot on any auction";
     }
 
     public ArrayList<Rate> getAllRates() {

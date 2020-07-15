@@ -61,14 +61,6 @@ public abstract class Account {
         return false;
     }
 
-    public static ArrayList<String> showAccountsInShort() {
-        ArrayList<String> accountsInShort = new ArrayList<>();
-        for (Account account : allAccounts) {
-            accountsInShort.add(account.getUsername() + " : |" + account.email + "|  |" + account.getBalance() + "$|");
-        }
-        return accountsInShort;
-    }
-
     public static void deleteAccount(Account account) {
         allAccounts.remove(account);
     }
@@ -182,18 +174,12 @@ public abstract class Account {
         return null;
     }
 
-    public abstract ArrayList<String> getChangeableFields();
-
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public boolean canChangePassword(String currentPassword) {
-        return currentPassword.equals(password);
     }
 
     public double getBalance() {

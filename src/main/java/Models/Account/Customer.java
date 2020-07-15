@@ -2,51 +2,21 @@ package Models.Account;
 
 import Models.Shop.Cart;
 import Models.Shop.Log.BuyingLog;
-import Models.Shop.Log.Log;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Customer extends Account {
-    private final String[] changeableFields = {"password", "email", "firstName", "lastName", "phoneNumber", "balance"};
     private Cart cart;
     private ArrayList<BuyingLog> allLogs;
-//    private ArrayList<Discount> discounts;
-    private ArrayList<String> discountsIds= new ArrayList<>();
+    private ArrayList<String> discountsIds;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.cart = new Cart();
         this.allLogs = new ArrayList<>();
-        //this.discounts = new ArrayList<>();
         discountsIds = new ArrayList<>();
-    }
-
-    public ArrayList<BuyingLog> getAllLogs() {
-        return allLogs;
-    }
-
-    public void addDiscount(Discount discount) {
-        if(discount != null)
-        discountsIds.add(discount.getId());
-    }
-
-    public void deleteDiscount(Discount discount) {
-        discountsIds.remove(discount.getId());
-    }
-
-    public ArrayList<Discount> getDiscounts(){
-        ArrayList<Discount> discounts = new ArrayList<>();
-        for (String discountId : discountsIds) {
-            discounts.add(Discount.getDiscountById(discountId));
-        }
-        return discounts;
-    }
-
-    public ArrayList<String> getChangeableFields() {
-        return new ArrayList<>(Arrays.asList(changeableFields));
     }
 
     public static void deleteProductFromCarts(Product product) {
@@ -61,13 +31,22 @@ public class Customer extends Account {
         }
     }
 
-    public ArrayList<String> viewLogsInShort() {
-        return null;
+    public ArrayList<BuyingLog> getAllLogs() {
+        return allLogs;
+    }
+
+    public void addDiscount(Discount discount) {
+        if (discount != null)
+            discountsIds.add(discount.getId());
+    }
+
+    public void deleteDiscount(Discount discount) {
+        discountsIds.remove(discount.getId());
     }
 
     public BuyingLog getLogById(String id) {
         for (BuyingLog log : allLogs) {
-            if(log.getId().equals(id)){
+            if (log.getId().equals(id)) {
                 return log;
             }
         }
@@ -79,7 +58,12 @@ public class Customer extends Account {
     }
 
     public boolean hasProductById(String id) {
-        return true;
+        for (Product product : cart.getProducts()) {
+            if (product.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addLog(BuyingLog buyingLog) {
@@ -100,7 +84,7 @@ public class Customer extends Account {
     public boolean hasBoughtProduct(String productId) {
         for (BuyingLog log : allLogs) {
             for (String boughtProductId : log.getProductIdToNumberMap().keySet()) {
-                if(productId.equals(boughtProductId)) return true;
+                if (productId.equals(boughtProductId)) return true;
             }
         }
         return false;

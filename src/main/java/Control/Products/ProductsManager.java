@@ -7,7 +7,6 @@ import Models.Account.Account;
 import Models.Shop.Category.*;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
-import View.Products.ProductsMenu;
 import ViewController.Controller;
 import ViewController.products.AuctionDetailsController;
 import ViewController.products.FilteringController;
@@ -28,13 +27,6 @@ public class ProductsManager extends Manager {
     private Sort currentSort = null;
     private List<Product> products;
     private boolean isOffMenu;
-
-    public ProductsManager(Account account) {
-        super(account);
-        this.currentCategory = mainCategory;
-        products = Product.getAllProducts();
-        this.menu = new ProductsMenu(this, productsInShort());
-    }
 
     public ProductsManager(Account account, Addresses address, Manager manager, boolean isOffMenu) {
         super(account, address, manager);
@@ -58,18 +50,6 @@ public class ProductsManager extends Manager {
         controller.init();
     }
 
-    // filtering
-    public String showAvailableFilters() {
-        return "status\n" +
-                "name\n" +
-                "companyName\n" +
-                "price\n" +
-                "seller\n" +
-                "isAvailable\n" +
-                "category\n" +
-                currentCategory.getFeaturesNames().toString();
-    }
-
     public ArrayList<String> getFilterTypes() {
         ArrayList<String> filterTypes = new ArrayList<>();
         filterTypes.add("status");
@@ -83,28 +63,6 @@ public class ProductsManager extends Manager {
         return filterTypes;
     }
 
-    public boolean hasFeatureWithName(String name) {
-        if (currentCategory == getMainCategory()) {
-            return false;
-        }
-        return currentCategory.getFeaturesNames().contains(name);
-    }
-
-    public boolean isEnteredFilterFieldValid(String field) {
-        for (Filter filter : filters) {
-            if (filter.getField().equals(field)) {
-                return false;
-            }
-        }
-        if (field.equals("status") || field.equals("name") || field.equals("companyName") ||
-                field.equals("price") || field.equals("seller") || field.equals("isAvailable")) {
-            return true;
-        }
-        if (!currentCategory.equals(mainCategory) && currentCategory.getFeaturesNames().contains(field))
-            return true;
-        return field.equals("category") && currentCategory.getSubCategories() != null;
-    }
-
     public ArrayList<Object> applyFilter(String filterType, String filterValue) {
         filters.add(new Filter(filterType, filterValue));
         if (filterType.equals("category")) {
@@ -113,17 +71,7 @@ public class ProductsManager extends Manager {
         products = Product.getAllProducts();
         setFilters();
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
-    }
-
-    public ArrayList<String> applyFilter(String filterType, String minValue, String maxValue) {
-        lengthFilters.add(new LengthFilter(filterType, minValue, maxValue));
-        products = Product.getAllProducts();
-        setFilters();
-        applySort();
-        return productsInShort();
+        return new ArrayList<>(products);
     }
 
     private void setFilters() {
@@ -154,18 +102,8 @@ public class ProductsManager extends Manager {
         }
     }
 
-    private ArrayList<Product> setPriceLengthFilter(LengthFilter filter) {
-        return products.stream().filter(product -> {
-            return product.getPrice() <= Double.parseDouble(filter.getMaxValue()) || product.getPrice() >= Double.parseDouble(filter.getMinValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort = new ArrayList<>();
-        for (Product product : products) {
-            productsInShort.add(product.viewProductInShort());
-        }
-        return productsInShort;
+    private void setPriceLengthFilter(LengthFilter filter) {
+        products.stream().filter(product -> product.getPrice() <= Double.parseDouble(filter.getMaxValue()) || product.getPrice() >= Double.parseDouble(filter.getMinValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setFeaturesFilter(Filter filter) {
@@ -176,71 +114,35 @@ public class ProductsManager extends Manager {
     }
 
     private ArrayList<Product> setCategoryFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getCategory().equals(Category.getCategoryByName(filter.getValue()));
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getCategory().equals(Category.getCategoryByName(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setIsAvailableFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.isAvailable() == Boolean.parseBoolean(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.isAvailable() == Boolean.parseBoolean(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setSellerFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getSeller().equals(Account.getAccountByUsername(filter.getValue()));
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getSeller().equals(Account.getAccountByUsername(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setPriceFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getPrice() == Double.parseDouble(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getPrice() == Double.parseDouble(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setCompanyNameFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getCompanyName().equals(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getCompanyName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setNameFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getName().equals(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setStatusFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getStatus().equals(Product.parseProductStatus(filter.getValue()));
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getStatus().equals(Product.parseProductStatus(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<Filter> currentFilters() {
         return filters;
-    }
-
-    public boolean isItSelectedFilter(String filterName) {
-        for (Filter filter : filters) {
-            if (filter.getField().equals(filterName)) {
-                return true;
-            }
-        }
-        for (LengthFilter lengthFilter : lengthFilters) {
-            if (lengthFilter.getField().equals(filterName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isEnteredLengthFilterFieldValid(String field) {
-        return field.equals("price");
-    }
-
-    public String showAvailableLengthFilter() {
-        return "price";
     }
 
     public ArrayList<Object> disableFilter(String filterField) {
@@ -256,9 +158,7 @@ public class ProductsManager extends Manager {
         }
         setFilters();
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 
     private Object getFilterByField(String field) {
@@ -288,9 +188,7 @@ public class ProductsManager extends Manager {
         setFilters();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 
     private void applySort() {
@@ -387,41 +285,13 @@ public class ProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    public boolean isEnteredSortFieldValid(String field) {
-        return field.equals("price") || field.equals("name") || field.equals("rating") || field.equals("features");
-    }
-
-    public String currentSort() {
-        return currentSort.toString();
-    }
-
     public ArrayList<Object> disableSort() {
         currentSort = null;
         products = Product.getAllProducts();
         setFilters();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 
-    public boolean hasProductWithId(String id) {
-        for (Product product : products) {
-            if (product.getId().equals(id)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // show products
-    public List<String> showProducts() {
-        products = currentCategory.getAllProducts();
-        setFilters();
-        applySort();
-        return productsInShort();
-    }
-
-    // show product [productId]
     public void openProductPage(String id) {
         new ProductPageManager(account, Product.getProductById(id), Addresses.PRODUCTS_MENU, this);
     }

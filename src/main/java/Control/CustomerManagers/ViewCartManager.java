@@ -1,14 +1,11 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
-import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Category.Sort;
-import Models.Shop.Log.BuyingLog;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.customer.ViewCartMenu;
 import ViewController.Controller;
 import ViewController.customer.cart.ViewCartController;
 
@@ -20,13 +17,6 @@ public class ViewCartManager extends Manager {
     private List<Product> products;
     private Customer customer = (Customer) account;
 
-    public ViewCartManager(Account account) {
-        super(account);
-        products = Product.getAllProducts();
-        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
-            this.menu = new ViewCartMenu(this);
-    }
-
     public ViewCartManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         products = Product.getAllProducts();
@@ -37,15 +27,6 @@ public class ViewCartManager extends Manager {
     public void update(Controller c) {
         ViewCartController controller = (ViewCartController) c;
         controller.init();
-    }
-
-    public String showProducts() {
-        List<String> productsInfos = customer.getCart().showProductsInShort();
-        StringBuilder allProductsInfo = new StringBuilder();
-        for (String productsInfo : productsInfos) {
-            allProductsInfo.append("\n" + productsInfo);
-        }
-        return allProductsInfo.toString();
     }
 
     public void productQuantity(String id, boolean isIncrease) throws ProductDoNotExistInCartException {
@@ -61,10 +42,6 @@ public class ViewCartManager extends Manager {
 
     public double getTotalPrice(Discount discount) {
         return customer.getCart().getTotalPrice(discount);
-    }
-
-    public boolean doesProductExistInCart(Product product) {
-        return customer.getCart().getProducts().contains(product);
     }
 
     public HashMap<Product,Integer> getProductsInCart() {
@@ -101,9 +78,7 @@ public class ViewCartManager extends Manager {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 
     private void applySort() {
@@ -176,17 +151,7 @@ public class ViewCartManager extends Manager {
     public ArrayList<Object> disableSort() {
         currentSort = null;
         products = mainCategory.getAllProducts();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
-    }
-
-    private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort = new ArrayList<>();
-        for (Product product : products) {
-            productsInShort.add(product.viewProductInShort());
-        }
-        return productsInShort;
+        return new ArrayList<>(products);
     }
 
     public void showProduct(String id){

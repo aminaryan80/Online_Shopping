@@ -4,7 +4,6 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Principal;
 import Models.Shop.Category.Sort;
-import View.Principal.ManageUsersMenu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,20 +15,10 @@ public class ManageUsersManager extends Manager {
     private List<Account> users;
     private Sort currentSort;
 
-    public ManageUsersManager(Account account) {
-        super(account);
-        this.users = Account.getAllAccounts();
-        new ManageUsersMenu(this);
-    }
-
     public ManageUsersManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         this.users = Account.getAllAccounts();
         loadFxml(Addresses.MANAGE_USERS);
-    }
-
-    public ArrayList<String> showUsers() {
-        return Account.showAccountsInShort();
     }
 
     public String viewUsername(String username) {
@@ -51,23 +40,13 @@ public class ManageUsersManager extends Manager {
         users = Account.getAllAccounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(users);
-        return objects;
+        return new ArrayList<>(users);
     }
 
     public ArrayList<String> getSortFields() {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("name");
         return fields;
-    }
-
-    private ArrayList<String> userInShort() {
-        ArrayList<String> usersInShort = new ArrayList<>();
-        for (Account user : users) {
-            userInShort().add(user.getUsername() + "  " + user.getName() + "  " + user.getLastName());
-        }
-        return usersInShort;
     }
 
     public String currentSort() {
@@ -77,9 +56,7 @@ public class ManageUsersManager extends Manager {
     public ArrayList<Object> disableSort() {
         currentSort = null;
         users = Account.getAllAccounts();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(users);
-        return objects;
+        return new ArrayList<>(users);
     }
 
     private void applySort() {

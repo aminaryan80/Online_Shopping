@@ -3,6 +3,7 @@ package Models.Shop;
 import Models.Account.Customer;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,16 +43,6 @@ public class Cart {
             if (product.getId().equals(id)) return products.get(product).toString();
         }
         return null;
-    }
-
-    public ArrayList<String> showProductsInShort() {
-        ArrayList<String> productsNamesAndIds = new ArrayList<>();
-        for (Product product : getProducts()) {
-            productsNamesAndIds.add("Name: " + product.getName() +
-                    "\nId: " + product.getId() +
-                    "\nNumber: " + products.get(product));
-        }
-        return productsNamesAndIds;
     }
 
     public void addProduct(Product product) {

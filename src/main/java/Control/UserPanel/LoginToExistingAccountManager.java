@@ -4,14 +4,8 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Cart;
-import View.UserPanel.LoginToExistingAccountMenu;
 
 public class LoginToExistingAccountManager extends Manager {
-    public LoginToExistingAccountManager(Account account, String username) {
-        super(account);
-        new LoginToExistingAccountMenu(this, username);
-    }
-
     public LoginToExistingAccountManager(Account account, String username, String password) {
         super(account);
         if (canLogin(username)) {

@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class Comment {
     private static ArrayList<Comment> allComments = new ArrayList<>();
-//    private Account account;
-//    private Product product;
     private String username;
     private String productId;
     private String text;
@@ -31,7 +29,7 @@ public class Comment {
     }
 
     public enum CommentStatus {
-        PENDING, CONFIRMED, DENIED;
+        PENDING, CONFIRMED, DENIED
     }
 
     public Account getAccount() {

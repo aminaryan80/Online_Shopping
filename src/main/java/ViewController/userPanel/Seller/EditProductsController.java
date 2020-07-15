@@ -1,6 +1,5 @@
 package ViewController.userPanel.Seller;
 
-import Control.Manager;
 import Control.Seller.EditProductsManager;
 import Control.Seller.SellerManager;
 import Models.Account.Account;
@@ -13,11 +12,13 @@ import ViewController.Controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditProductsController extends Controller {
@@ -59,12 +60,9 @@ public class EditProductsController extends Controller {
     @FXML
     private TextField changeableFeatureValue;
     private Product product;
-    private Seller seller;
 
     public void init(Seller seller) {
-        this.seller = seller;
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(Product.getProductsBySeller(seller));
+        ArrayList<Object> objects = new ArrayList<>(Product.getProductsBySeller(seller));
         initTable(objects);
     }
 
@@ -75,17 +73,12 @@ public class EditProductsController extends Controller {
         }
         products.setItems(FXCollections.observableArrayList(tableProducts));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        //categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
     public void remove(ActionEvent actionEvent) {
-        try {
-            ((SellerManager) manager).deleteProductById(id.getText());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ((SellerManager) manager).deleteProductById(id.getText());
     }
 
     public void update(ActionEvent actionEvent) {
@@ -149,7 +142,7 @@ public class EditProductsController extends Controller {
         buyersNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
     }
 
-    public void updateFeatures(){
+    public void updateFeatures() {
         Product product1 = ((EditProductsManager) manager).editProduct(id.getText(), (String) changeableFeatures.getSelectionModel().getSelectedItem(), changeableFeatureValue.getText());
         new EditProductRequest((Seller) manager.getAccount(), product1);
     }

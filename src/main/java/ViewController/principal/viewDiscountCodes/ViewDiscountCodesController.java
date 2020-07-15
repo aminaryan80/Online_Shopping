@@ -2,7 +2,6 @@ package ViewController.principal.viewDiscountCodes;
 
 import Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
 import Models.Shop.Off.Discount;
-import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -42,8 +41,7 @@ public class ViewDiscountCodesController extends Controller implements Initializ
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(Discount.getAllDiscounts());
+        ArrayList<Object> objects = new ArrayList<>(Discount.getAllDiscounts());
         initTable(objects);
     }
 

@@ -5,14 +5,11 @@ import Models.Account.Account;
 import Models.Account.Principal;
 import Models.Shop.Cart;
 import Models.Shop.Category.Category;
-import Models.Shop.Category.Feature;
 import Models.Shop.Category.Filter;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-import View.Menu;
 import ViewController.Controller;
 import ViewController.SortController;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,12 +17,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,7 +32,6 @@ public abstract class Manager {
     protected static Stage popup = new Stage();
     protected Addresses previousAddress;
     protected Manager previousManager;
-    protected Menu menu;
     protected boolean isPrincipalExists = Principal.isPrincipalExists();
 
     public Manager(Account account) {
@@ -70,6 +62,11 @@ public abstract class Manager {
         Manager.stage = stage;
     }
 
+    public static void exit() {
+        stage.close();
+        System.exit(0);
+    }
+
     public Account getAccount() {
         return account;
     }
@@ -78,18 +75,9 @@ public abstract class Manager {
         Manager.account = account;
     }
 
-    public Category getMainCategory() {
-        return mainCategory;
-    }
-
-    /*public Menu getMenu() {
-        return menu;
-    }*/
-
     public void logout() {
         if (account != null) {
             account = null;
-//          cart = new Cart();
             new MainManager(null);
             success("You successfully logged out.");
         } else error("You haven't logged in yet.");
@@ -97,10 +85,6 @@ public abstract class Manager {
 
     public boolean userExistsWithUsername(String username) {
         return Account.hasAccountWithUsername(username);
-    }
-
-    protected boolean checkAccountType(String type) {
-        return type.matches("^(customer|seller|principal)$");
     }
 
     public boolean checkEmail(String email) {
@@ -116,19 +100,7 @@ public abstract class Manager {
     }
 
     public boolean checkDate(String date) {
-        //return date.matches("^\\d{2}-\\d{2}-\\d{4}$");
         return date.matches("^(\\d{4}-\\d{2}-\\d{2})$");
-    }
-    public boolean isEnteredSortFieldValid(String field) {
-        return false;
-    }
-
-    public String currentSort() {
-        return "";
-    }
-
-    public String showAvailableSorts() {
-        return "";
     }
 
     public ArrayList<String> getSortFields() {
@@ -148,47 +120,12 @@ public abstract class Manager {
         ((SortController) myController).init(controller);
     }
 
-    protected Date parseDate(String stringDate) {
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = null;
-        try {
-            date = format.parse(stringDate);
-        } catch (Exception ignored) {
-
-        }
-        return date;
-    }
-
     public boolean checkPercent(String date) {
         return date.matches("^(100|(\\d{1,2}))$");
     }
 
-    public String showCategories() {
-        StringBuilder result = new StringBuilder();
-        buildCategoryList(mainCategory, result, 1);
-        return result.toString();
-    }
-
-    private void buildCategoryList(Category currentCategory, StringBuilder categoryField, int categoryLevel) {
-        if (currentCategory != mainCategory) {
-            categoryField.append("\n");
-        }
-        for (int i = 0; i < categoryLevel; i++) {
-            categoryField.append("-");
-        }
-        categoryField.append(currentCategory.getName());
-        for (Category category : currentCategory.getSubCategories()) {
-            buildCategoryList(category, categoryField, categoryLevel + 1);
-        }
-    }
-
     public boolean isPrincipalExists() {
         return isPrincipalExists;
-    }
-
-    public void viewPersonalInfo() {
-        System.out.println(account.toString());
-        new ViewPersonalInfoManager(account);
     }
 
     public boolean isDiscountCodeValid(String DiscountCodeId) {
@@ -285,6 +222,22 @@ public abstract class Manager {
 
     }
 
+    public ArrayList<Object> disableFilter(String filterType) {
+        return null;
+    }
+
+    public ArrayList<Object> applyFilter(String filterType, String value) {
+        return null;
+    }
+
+    public List<Filter> currentFilters() {
+        return null;
+    }
+
+    public ArrayList<String> getFilterTypes() {
+        return null;
+    }
+
     public enum Addresses {
 
         FILTER("view/products/filtering.fxml"),
@@ -364,26 +317,5 @@ public abstract class Manager {
         public String getAddress() {
             return address;
         }
-    }
-
-    public static void exit() {
-        stage.close();
-        System.exit(0);
-    }
-
-    public ArrayList<Object> disableFilter(String filterType) {
-        return null;
-    }
-
-    public ArrayList<Object> applyFilter(String filterType, String value) {
-        return null;
-    }
-
-    public List<Filter> currentFilters() {
-        return null;
-    }
-
-    public ArrayList<String> getFilterTypes() {
-        return null;
     }
 }

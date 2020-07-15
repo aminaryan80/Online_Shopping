@@ -11,8 +11,8 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Identity {
-    private String id = "";
     private static ArrayList<String> identities = new ArrayList<>();
+    private String id = "";
 
     private static boolean doesExist(String id) {
         for (String identity : identities) {
@@ -33,13 +33,12 @@ public class Identity {
     }
 
     public static void open() throws Exception {
-        File file = new File(Address.IDNETITIES.get()+"\\" + "identities.json");
+        File file = new File(Address.IDENTITIES.get() + "\\" + "identities.json");
         if (!file.exists()) {
-            File folder = new File(Address.IDNETITIES.get());
+            File folder = new File(Address.IDENTITIES.get());
             folder.mkdirs();
             file.createNewFile();
-        }
-        else {
+        } else {
             identities.addAll(open(file));
         }
     }
@@ -61,13 +60,13 @@ public class Identity {
     }
 
     private static void save(String identity) throws IOException {
-        File file = new File(Address.IDNETITIES.get() + "\\" + "identities.json");
-        if(!file.exists()) {
+        File file = new File(Address.IDENTITIES.get() + "\\" + "identities.json");
+        if (!file.exists()) {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("\n" + identity);
             fileWriter.close();
         } else {
-            FileWriter fileWriter = new FileWriter(file,true);
+            FileWriter fileWriter = new FileWriter(file, true);
             fileWriter.write("\n" + identity);
             fileWriter.close();
         }

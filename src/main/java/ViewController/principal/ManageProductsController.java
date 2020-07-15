@@ -3,7 +3,6 @@ package ViewController.principal;
 import Control.Principal.ManageAllProductsManager;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
-import javafx.beans.binding.ObjectExpression;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,8 +37,7 @@ public class ManageProductsController extends Controller implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(Product.getAllProducts());
+        ArrayList<Object> objects = new ArrayList<>(Product.getAllProducts());
         initTable(objects);
     }
 

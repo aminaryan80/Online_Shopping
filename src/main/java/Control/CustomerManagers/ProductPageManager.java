@@ -1,32 +1,19 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
-import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
-import Models.Address;
 import Models.Shop.Product.Comment;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.product.ProductPage;
 import ViewController.Controller;
-import ViewController.customer.CompareController;
 import ViewController.products.ProductPageController;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ProductPageManager extends Manager {
     private Customer customer = (Customer) account; //TODO should this field be static?
     private Product product;
     private ProductPageController productPageController;
-
-    public ProductPageManager(Account account, Product product) {
-        super(account);
-        this.product = product;
-        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
-            this.menu = new ProductPage(this);
-    }
 
     public ProductPageManager(Account account, Product product, Addresses address, Manager manager) {
         super(account, address, manager);
@@ -38,33 +25,6 @@ public class ProductPageManager extends Manager {
     public void update(Controller c) {
         productPageController = (ProductPageController) c;
         productPageController.init();
-    }
-
-    public void setCustomer(Customer customer) {
-        ProductPageManager.setAccount(customer);
-        this.customer = customer;
-    }
-
-    public String digest() {
-        return product.digest();
-    }
-
-    // attributes
-    public String attributes() {
-        return product.getAttributes();
-    }
-
-    // compare [productId]
-    public String compare(Product otherProduct) {
-        return product.getAttributes() + "\nCompared to\n" + otherProduct.getAttributes();
-    }
-
-    // comments
-    public List<String> comments() {
-        List<String> comments = new ArrayList<>();
-        comments.add("Rate:" + product.getRate() + "\n");
-        comments.addAll(product.getComments());
-        return comments;
     }
 
     public HashMap<String, String> commentsFXML() {
@@ -80,6 +40,7 @@ public class ProductPageManager extends Manager {
         for (Customer buyer : product.getAllBuyers()) {
             if (customer.getUsername().equals(buyer.getUsername())) {
                 hasPurchased = true;
+                break;
             }
         }
         Comment comment = new Comment(customer, product, title + ":\n" + "\t" + content, null, hasPurchased);
@@ -125,8 +86,13 @@ public class ProductPageManager extends Manager {
         return customer;
     }
 
+    public void setCustomer(Customer customer) {
+        ProductPageManager.setAccount(customer);
+        this.customer = customer;
+    }
+
     public void compare() {
-        Controller controller = loadFxml(Addresses.COMPARE,true);
-        ((CompareController)controller).init();
+        Controller controller = loadFxml(Addresses.COMPARE, true);
+        controller.init();
     }
 }

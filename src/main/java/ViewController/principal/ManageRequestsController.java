@@ -1,7 +1,6 @@
 package ViewController.principal;
 
 import Control.Principal.ManageRequestsManager;
-import Models.Shop.Product.Product;
 import Models.Shop.Request.Request;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
@@ -35,8 +34,7 @@ public class ManageRequestsController extends Controller implements Initializabl
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(Request.getAllRequests());
+        ArrayList<Object> objects = new ArrayList<>(Request.getAllRequests());
         initTable(objects);
     }
 

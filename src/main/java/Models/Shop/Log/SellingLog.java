@@ -27,9 +27,4 @@ public class SellingLog extends Log {
                 ", status=" + status +
                 '}';
     }
-
-    @Override
-    public String viewLogInShort() {
-        return id + date + money;
-    }
 }

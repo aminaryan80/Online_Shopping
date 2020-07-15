@@ -4,7 +4,6 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Category.Sort;
 import Models.Shop.Off.Discount;
-import View.Principal.ViewDiscountCodes.ViewDiscountCodesMenu;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,22 +16,10 @@ public class ViewDiscountCodesManager extends Manager {
     private Sort currentSort;
     private List<Discount> discounts;
 
-    public ViewDiscountCodesManager(Account account) {
-        super(account);
-        discounts = Discount.getAllDiscounts();
-        new ViewDiscountCodesMenu(this);
-    }
-
     public ViewDiscountCodesManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         discounts = Discount.getAllDiscounts();
         loadFxml(Addresses.VIEW_DISCOUNT_CODES);
-    }
-
-    public void showDiscounts() {
-        for (String discountInShort : Discount.getDiscountInShort()) {
-            System.out.println(discountInShort);
-        }
     }
 
     public void deleteDiscountCode(String id) throws IOException {
@@ -56,17 +43,7 @@ public class ViewDiscountCodesManager extends Manager {
     public ArrayList<Object> disableSort() {
         currentSort = null;
         discounts = Discount.getAllDiscounts();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(discounts);
-        return objects;
-    }
-
-    private ArrayList<String> discountsInShort() {
-        ArrayList<String> discountsInShort = new ArrayList<>();
-        for (Discount discount : discounts) {
-            discountsInShort.add(discount.getId() + "  " + discount.getDiscountPercent() + "  " + discount.getBeginningDate() + "  " + discount.getEndingDate());
-        }
-        return discountsInShort;
+        return new ArrayList<>(discounts);
     }
 
     public String showAvailableSorts() {
@@ -87,9 +64,7 @@ public class ViewDiscountCodesManager extends Manager {
         discounts = Discount.getAllDiscounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(discounts);
-        return objects;
+        return new ArrayList<>(discounts);
     }
 
     private void applySort() {

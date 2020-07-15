@@ -37,17 +37,7 @@ public class CartTableItem {
         return price.get();
     }
 
-    public int getQuantity() {
-        return quantity.get();
-    }
-
     public String getDescription() {
         return description.get();
     }
-    //    public TableColumn numberColumn;
-//    public TableColumn idColumn;
-//    public TableColumn nameColumn;
-//    public TableColumn descriptionColumn;
-//    public TableColumn quantityColumn;
-//    public TableColumn priceColumn;
 }

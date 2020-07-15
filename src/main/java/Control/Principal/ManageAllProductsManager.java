@@ -5,9 +5,7 @@ import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Category.Sort;
 import Models.Shop.Product.Product;
-import View.Principal.ManageAllProductsMenu;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,13 +15,6 @@ public class ManageAllProductsManager extends Manager {
 
     private Sort currentSort;
     private List<Product> products;
-
-    public ManageAllProductsManager(Account account) {
-        super(account);
-        products = Product.getAllProducts();
-        new ManageAllProductsMenu(this);
-    }
-
     public ManageAllProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         products = Product.getAllProducts();
@@ -32,37 +23,17 @@ public class ManageAllProductsManager extends Manager {
 
     public void removeProductById(String id) {
         if (Product.hasProductWithId(id)) {
-            try {
-                Product.deleteProduct(Product.getProductById(id));
-                Customer.deleteProductFromCarts(Product.getProductById(id));
-                success("Product deleted successfully.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Product.deleteProduct(Product.getProductById(id));
+            Customer.deleteProductFromCarts(Product.getProductById(id));
+            success("Product deleted successfully.");
         } else error("Invalid id");
-    }
-
-    public String showAvailableSorts() {
-        return "price\n" +
-                "name\n" +
-                "rating";
     }
 
     public ArrayList<Object> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
-    }
-
-    private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort = new ArrayList<>();
-        for (Product product : products) {
-            productsInShort.add(product.viewProductInShort());
-        }
-        return productsInShort;
+        return new ArrayList<>(products);
     }
 
     private void applySort() {
@@ -124,11 +95,6 @@ public class ManageAllProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-
-    public boolean isEnteredSortFieldValid(String field) {
-        return field.equals("price") || field.equals("name") || field.equals("rating");
-    }
-
     public ArrayList<String> getSortFields() {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("price");
@@ -137,15 +103,9 @@ public class ManageAllProductsManager extends Manager {
         return fields;
     }
 
-    public String currentSort() {
-        return currentSort.toString();
-    }
-
     public ArrayList<Object> disableSort() {
         currentSort = null;
         products = mainCategory.getAllProducts();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 }

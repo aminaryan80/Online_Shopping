@@ -3,16 +3,10 @@ package Control.Principal;
 import Control.Manager;
 import Models.Account.Account;
 import Models.Shop.Request.Request;
-import View.ErrorProcessor;
-import View.Principal.ManageRequestsMenu;
 
 import java.io.IOException;
 
 public class ManageRequestsManager extends Manager {
-    public ManageRequestsManager(Account account) {
-        super(account);
-        new ManageRequestsMenu(this);
-    }
 
     public ManageRequestsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
@@ -30,7 +24,7 @@ public class ManageRequestsManager extends Manager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else ErrorProcessor.invalidRequestId();
+        } else error("Invalid id");
     }
 
     public void declineRequest(String id) {
@@ -40,6 +34,6 @@ public class ManageRequestsManager extends Manager {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else ErrorProcessor.invalidRequestId();
+        } else error("Invalid id");
     }
 }

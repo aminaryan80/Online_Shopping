@@ -1,13 +1,11 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
-import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Shop.Category.Sort;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.customer.ViewOrdersMenu;
 import ViewController.Controller;
 
 import java.util.*;
@@ -17,13 +15,6 @@ public class ViewOrdersManager extends Manager {
     private Sort currentSort;
     private List<BuyingLog> logs;
     private Customer customer = (Customer) account;
-
-    public ViewOrdersManager(Account account) {
-        super(account);
-        logs = ((Customer) account).getAllLogs();
-        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
-            this.menu = new ViewOrdersMenu(this);
-    }
 
     public ViewOrdersManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
@@ -37,32 +28,6 @@ public class ViewOrdersManager extends Manager {
         controller.init();
     }
 
-    public boolean canShowOrderWithId(String logId) {
-        return customer.getLogById(logId) != null;
-    }
-
-    public boolean doesLogExist(String logId) {
-        return customer.getLogById(logId) != null;
-    }
-
-    public String showOrderById(String logId) {
-        return customer.getLogById(logId).toString();
-    }
-
-    public void rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
-        Product product = Product.getProductById(productId);
-        if (product != null) product.addRate(customer, score);
-        else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
-    }
-
-    private ArrayList<String> logsInShort() {
-        ArrayList<String> logsInShort = new ArrayList<>();
-        for (BuyingLog log : logs) {
-            logsInShort.add(log.viewLogInShort());
-        }
-        return logsInShort;
-    }
-
     public String showAvailableSorts() {
         return "money\n" +
                 "date";
@@ -72,9 +37,7 @@ public class ViewOrdersManager extends Manager {
         logs = ((Customer) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(logs);
-        return objects;
+        return new ArrayList<>(logs);
     }
 
     private void applySort() {
@@ -131,9 +94,7 @@ public class ViewOrdersManager extends Manager {
     public ArrayList<Object> disableSort() {
         currentSort = null;
         logs = ((Customer) account).getAllLogs();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(logs);
-        return objects;
+        return new ArrayList<>(logs);
     }
 
     public BuyingLog getLogById(String id) {

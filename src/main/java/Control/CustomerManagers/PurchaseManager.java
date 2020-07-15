@@ -1,7 +1,6 @@
 package Control.CustomerManagers;
 
 import Control.Manager;
-import Control.UtilTestObject;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
@@ -11,7 +10,6 @@ import Models.Shop.Log.SellingLog;
 import Models.Shop.Off.Auction;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.purchase.PurchaseMenu;
 import ViewController.Controller;
 import ViewController.customer.cart.PurchasePageController;
 
@@ -23,29 +21,22 @@ import java.util.HashSet;
 
 public class PurchaseManager extends Manager {
     private Customer customer = (Customer) account;
-    private PurchasePageController purchasePageController;
-
-    public PurchaseManager(Account account) {
-        super(account);
-        if (!account.getUsername().equals(UtilTestObject.CUSTOMER))
-            this.menu = new PurchaseMenu(this);
-    }
 
     public PurchaseManager(Account account, Addresses viewCart, ViewCartManager viewCartManager) {
-        super(account,viewCart,viewCartManager);
-        Controller controller = loadFxml(Addresses.PURCHASE_PAGE,false,this);
+        super(account, viewCart, viewCartManager);
+        Controller controller = loadFxml(Addresses.PURCHASE_PAGE, false, this);
         update(controller);
     }
 
     @Override
     public void update(Controller controller) {
-        purchasePageController =(PurchasePageController) controller;
+        PurchasePageController purchasePageController = (PurchasePageController) controller;
         purchasePageController.init();
     }
 
     public boolean canPay(String discountId) throws WrongDiscountIdException, UsedDiscountIdException {
-        if(!discountId.matches("\\S{8}"))
-            discountId=null;
+        if (!discountId.matches("\\S{8}"))
+            discountId = null;
         if (discountId == null) {
             return customer.getCart().getTotalPrice(null) <= customer.getBalance();
         }
@@ -61,7 +52,7 @@ public class PurchaseManager extends Manager {
         }
     }
 
-    public boolean isDiscountActive(String discountId){
+    public boolean isDiscountActive(String discountId) {
         Discount discount = Discount.getDiscountById(discountId);
         return discount.isActive(LocalDate.now());
     }
@@ -86,15 +77,13 @@ public class PurchaseManager extends Manager {
 
 
     public boolean hasDiscountCode(String discountId) {
-        if(discountId.matches("(?i)no")) {
-            return false;
-        } else return true;
+        return !discountId.matches("(?i)no");
     }
 
     // purchase
     public void pay(ArrayList<String> receiverInformation, String discountId) throws WrongDiscountIdException {
-        if(!discountId.matches("\\S{8}"))
-            discountId=null;
+        if (!discountId.matches("\\S{8}"))
+            discountId = null;
         Discount discount = getDiscountById(discountId);
         if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
             throw new WrongDiscountIdException("Wrong Discount Id has been entered");
@@ -155,7 +144,7 @@ public class PurchaseManager extends Manager {
                 Log.Status.TO_BE_SEND
         );
         for (Product product : productsBoughtFromThisSeller) {
-            buyingLog.addProductsNumbers(product.getId(),Integer.parseInt(customer.getCart().getProductNumberInCartById(product.getId())));
+            buyingLog.addProductsNumbers(product.getId(), Integer.parseInt(customer.getCart().getProductNumberInCartById(product.getId())));
         }
         return buyingLog;
     }
@@ -172,7 +161,7 @@ public class PurchaseManager extends Manager {
                 Log.Status.TO_BE_SEND
         );
         for (Product product : productsBoughtFromThisSeller) {
-            sellingLog.addProductsNumbers(product.getId(),Integer.parseInt(customer.getCart().getProductNumberInCartById(product.getId())));
+            sellingLog.addProductsNumbers(product.getId(), Integer.parseInt(customer.getCart().getProductNumberInCartById(product.getId())));
         }
         return sellingLog;
     }
@@ -229,6 +218,15 @@ public class PurchaseManager extends Manager {
         return customer.getCart().getProductsMap();
     }
 
+    public double getTotalPrice(Discount discount) {
+        return customer.getCart().getTotalPrice(discount);
+    }
+
+    public double getTotalPrice(String discountId) {
+        Discount discount = Discount.getDiscountById(discountId);
+        return customer.getCart().getTotalPrice(discount);
+    }
+
     public static class WrongDiscountIdException extends Exception {
         public WrongDiscountIdException(String message) {
             super(message);
@@ -239,14 +237,5 @@ public class PurchaseManager extends Manager {
         public UsedDiscountIdException(String message) {
             super(message);
         }
-    }
-
-    public double getTotalPrice(Discount discount){
-        return customer.getCart().getTotalPrice(discount);
-    }
-
-    public double getTotalPrice(String discountId){
-        Discount discount = Discount.getDiscountById(discountId);
-        return customer.getCart().getTotalPrice(discount);
     }
 }

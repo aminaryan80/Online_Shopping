@@ -6,12 +6,9 @@ import Models.Account.Seller;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
 import Models.Shop.Category.Sort;
-import Models.Shop.Log.SellingLog;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
-import View.Seller.EditProductsMenu;
 import ViewController.Controller;
-import ViewController.SortController;
 import ViewController.userPanel.Seller.EditProductsController;
 import ViewController.userPanel.Seller.FeaturesPopUpController;
 
@@ -24,15 +21,8 @@ public class EditProductsManager extends Manager {
     private Sort currentSort;
     private List<Product> products;
 
-    public EditProductsManager(Account account) {
-        super(account);
-        products = Product.getAllProducts();
-        //new EditProductsMenu(this);
-    }
-
     public EditProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        //new ManageUsersMenu(this);
         Controller controller = loadFxml(Addresses.EDIT_PRODUCTS_MENU);
         update(controller);
     }
@@ -41,19 +31,6 @@ public class EditProductsManager extends Manager {
         EditProductsController controller = (EditProductsController) c;
         controller.setManager(this);
         controller.init((Seller) account);
-    }
-
-    public String viewProductDetails(String id) {
-        return Product.getProductById(id).toString();
-    }
-
-    public ArrayList<String> viewProductBuyers(String id) {
-        ArrayList<SellingLog> allLogs = ((Seller) account).getAllLogs();
-        ArrayList<String> allBuyers = new ArrayList<String>();
-        for (SellingLog log : allLogs) {
-            allBuyers.add(log.getName());
-        }
-        return allBuyers;
     }
 
     public String showAvailableSorts() {
@@ -86,9 +63,7 @@ public class EditProductsManager extends Manager {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> productsObjects = new ArrayList<>();
-        productsObjects.addAll(products);
-        return productsObjects;
+        return new ArrayList<>(products);
     }
 
     private void applySort() {
@@ -161,13 +136,7 @@ public class EditProductsManager extends Manager {
     public ArrayList<Object> disableSort() {
         currentSort = null;
         products = mainCategory.getAllProducts();
-        ArrayList<Object> productsObjects = new ArrayList<>();
-        productsObjects.addAll(products);
-        return productsObjects;
-    }
-
-    public boolean hasProductWithId(String id) {
-        return Product.hasProductWithId(id, ((Seller) account).getUsername());
+        return new ArrayList<>(products);
     }
 
     public Product editProduct(String id, String field, String newValue) {
@@ -185,13 +154,5 @@ public class EditProductsManager extends Manager {
         }
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_EDITING);
         return product;
-    }
-
-    public boolean isFeatureFieldValid(String field, String id) {
-        return Product.getProductById(id).getCategory().getFeaturesNames().contains(field);
-    }
-
-    public boolean isEnteredProductEditFieldValid(String field) {
-        return Product.isEnteredProductFieldValid(field);
     }
 }

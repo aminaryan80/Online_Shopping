@@ -1,16 +1,10 @@
 package ViewController;
 
-import Control.Seller.EditProductsManager;
-import Models.Shop.Product.Product;
-import ViewController.userPanel.Seller.EditProductsController;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-
-import java.util.ArrayList;
 
 public class SortController extends Controller {
 

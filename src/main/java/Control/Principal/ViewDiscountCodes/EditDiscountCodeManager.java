@@ -13,7 +13,6 @@ public class EditDiscountCodeManager extends Manager {
     public EditDiscountCodeManager(Account account, Discount discount) {
         super(account);
         this.discount = discount;
-        //new EditDiscountCodeMenu(this);
         loadFxml(Addresses.EDIT_DISCOUNTS);
     }
 

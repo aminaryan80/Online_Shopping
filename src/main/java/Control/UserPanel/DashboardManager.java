@@ -10,11 +10,6 @@ import Models.Account.Principal;
 import Models.Account.Seller;
 
 public class DashboardManager extends Manager {
-    public DashboardManager(Account account) {
-        super(account);
-        //dashboard(account);
-    }
-
     public DashboardManager(Account account, Addresses address, Manager manager) {
         super(account);
         dashboard(account, address, manager);

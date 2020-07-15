@@ -2,7 +2,6 @@ package ViewController.principal;
 
 import Control.Principal.ManageUsersManager;
 import Models.Account.Account;
-import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -47,8 +46,7 @@ public class ManageUsersController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(Account.getAllAccounts());
+        ArrayList<Object> objects = new ArrayList<>(Account.getAllAccounts());
         initTable(objects);
     }
 

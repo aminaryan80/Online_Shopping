@@ -19,7 +19,7 @@ public class UserPanelController extends Controller {
         String username = userNameField.getText();
         String password = passwordField.getText();
         new LoginToExistingAccountManager(manager.getAccount(), username, password);
-        openUserPanel(false, Manager.Addresses.MAIN_MENU);
+        openUserPanel(Manager.Addresses.MAIN_MENU);
     }
 
     public void openRegister(ActionEvent actionEvent) {

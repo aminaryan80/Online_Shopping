@@ -1,10 +1,7 @@
 package ViewController.userPanel.Seller;
 
-import Control.Seller.SellerManager;
-import Models.Account.Seller;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
-import Models.Shop.Product.Product;
 import ViewController.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

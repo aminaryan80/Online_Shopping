@@ -1,6 +1,5 @@
 package ViewController.customer;
 
-import Control.CustomerManagers.ViewCartManager;
 import Control.CustomerManagers.ViewOrdersManager;
 import Models.Shop.Product.Product;
 import ViewController.Controller;
@@ -11,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.HashMap;
 

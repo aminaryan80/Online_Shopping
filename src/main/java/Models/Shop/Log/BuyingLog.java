@@ -13,11 +13,6 @@ public class BuyingLog extends Log {
     }
 
     @Override
-    public String viewLogInShort() {
-        return id + date + money;
-    }
-
-    @Override
     public String toString() {
         return "BuyingLog{" +
                 "id='" + id + '\'' +

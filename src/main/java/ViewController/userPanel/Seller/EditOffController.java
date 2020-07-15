@@ -58,8 +58,7 @@ public class EditOffController extends Controller {
     }
 
     private void InitOffs() {
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(seller.getAuctions());
+        ArrayList<Object> objects = new ArrayList<>(seller.getAuctions());
         initTable(objects);
     }
 

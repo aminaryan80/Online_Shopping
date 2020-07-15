@@ -1,12 +1,9 @@
 package Control;
 
-import Control.CustomerManagers.ProductPageManager;
 import Models.Account.Account;
 import Models.Shop.Category.*;
 import Models.Shop.Product.Product;
-import View.Products.ProductsMenu;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,41 +22,6 @@ public class AuctionsPageManager extends Manager {
         super(account);
         this.currentCategory = mainCategory;
         products = Product.getAllAuctionedProducts();
-        this.menu = new ProductsMenu(this, productsInShort());
-    }
-
-    // filtering
-    public String showAvailableFilters() {
-        return "status\n" +
-                "name\n" +
-                "companyName\n" +
-                "price\n" +
-                "seller\n" +
-                "isAvailable\n" +
-                "category\n" +
-                currentCategory.getFeaturesNames().toString();
-    }
-
-    public boolean hasFeatureWithName(String name) {
-        if (currentCategory == getMainCategory()) {
-            return false;
-        }
-        return currentCategory.getFeaturesNames().contains(name);
-    }
-
-    public boolean isEnteredFilterFieldValid(String field) {
-        for (Filter filter : filters) {
-            if (filter.getField().equals(field)) {
-                return false;
-            }
-        }
-        if (field.equals("status") || field.equals("name") || field.equals("companyName") ||
-                field.equals("price") || field.equals("seller") || field.equals("isAvailable")) {
-            return true;
-        }
-        if (!currentCategory.equals(mainCategory) && currentCategory.getFeaturesNames().contains(field))
-            return true;
-        return field.equals("category") && currentCategory.getSubCategories() != null;
     }
 
     public ArrayList<Object> applyFilter(String filterType, String filterValue) {
@@ -73,14 +35,6 @@ public class AuctionsPageManager extends Manager {
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(products);
         return objects;
-    }
-
-    public ArrayList<String> applyFilter(String filterType, String minValue, String maxValue) {
-        lengthFilters.add(new LengthFilter(filterType, minValue, maxValue));
-        products = Product.getAllAuctionedProducts();
-        setFilters();
-        applySort();
-        return productsInShort();
     }
 
     private void setFilters() {
@@ -111,18 +65,8 @@ public class AuctionsPageManager extends Manager {
         }
     }
 
-    private ArrayList<Product> setPriceLengthFilter(LengthFilter filter) {
-        return products.stream().filter(product -> {
-            return product.getPrice() <= Double.parseDouble(filter.getMaxValue()) || product.getPrice() >= Double.parseDouble(filter.getMinValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    private ArrayList<String> productsInShort() {
-        ArrayList<String> productsInShort = new ArrayList<>();
-        for (Product product : products) {
-            productsInShort.add(product.getId() + "  " + product.getName() + "  " + product.getPrice() + "  " + (product.getPrice() - product.getAuction().getDiscountAmount()));
-        }
-        return productsInShort;
+    private void setPriceLengthFilter(LengthFilter filter) {
+        products.stream().filter(product -> product.getPrice() <= Double.parseDouble(filter.getMaxValue()) || product.getPrice() >= Double.parseDouble(filter.getMinValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setFeaturesFilter(Filter filter) {
@@ -133,45 +77,31 @@ public class AuctionsPageManager extends Manager {
     }
 
     private ArrayList<Product> setCategoryFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getCategory().equals(Category.getCategoryByName(filter.getValue()));
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getCategory().equals(Category.getCategoryByName(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setIsAvailableFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.isAvailable() == Boolean.parseBoolean(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.isAvailable() == Boolean.parseBoolean(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setSellerFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getSeller().equals(Account.getAccountByUsername(filter.getValue()));
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getSeller().equals(Account.getAccountByUsername(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setPriceFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getPrice() == Double.parseDouble(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getPrice() == Double.parseDouble(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setCompanyNameFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getCompanyName().equals(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getCompanyName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setNameFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getName().equals(filter.getValue());
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setStatusFilter(Filter filter) {
-        return products.stream().filter(product -> {
-            return product.getStatus().equals(Product.parseProductStatus(filter.getValue()));
-        }).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getStatus().equals(Product.parseProductStatus(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<Filter> currentFilters() {
@@ -191,28 +121,6 @@ public class AuctionsPageManager extends Manager {
         return filterTypes;
     }
 
-    public boolean isItSelectedFilter(String filterName) {
-        for (Filter filter : filters) {
-            if (filter.getField().equals(filterName)) {
-                return true;
-            }
-        }
-        for (LengthFilter lengthFilter : lengthFilters) {
-            if (lengthFilter.getField().equals(filterName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean isEnteredLengthFilterFieldValid(String field) {
-        return field.equals("price");
-    }
-
-    public String showAvailableLengthFilter() {
-        return "price";
-    }
-
     public ArrayList<Object> disableFilter(String filterField) {
         Object filter = getFilterByField(filterField);
         if (filter instanceof Filter) {
@@ -226,9 +134,7 @@ public class AuctionsPageManager extends Manager {
         }
         setFilters();
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 
     private Object getFilterByField(String field) {
@@ -267,9 +173,7 @@ public class AuctionsPageManager extends Manager {
         setFilters();
         currentSort = new Sort(sort, isAscending);
         applySort();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
+        return new ArrayList<>(products);
     }
 
     private void applySort() {
@@ -359,32 +263,6 @@ public class AuctionsPageManager extends Manager {
         currentSort = null;
         products = Product.getAllAuctionedProducts();
         setFilters();
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.addAll(products);
-        return objects;
-    }
-
-    public boolean hasProductWithId(String id) {
-        for (Product product : products) {
-            if (product.getId().equals(id)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // show products
-    public List<String> showProducts() {
-        products = currentCategory.getAllProducts().stream().filter(product -> {
-            return product.getAuction().getBeginningDate().compareTo(LocalDate.now()) < 0 && product.getAuction().getEndingDate().compareTo(LocalDate.now()) > 0;
-        }).collect(Collectors.toCollection(ArrayList::new));
-        setFilters();
-        applySort();
-        return productsInShort();
-    }
-
-    // show product [productId]
-    public void showProductById(String id) {
-        new ProductPageManager(this.getAccount(), Product.getProductById(id));
+        return new ArrayList<>(products);
     }
 }

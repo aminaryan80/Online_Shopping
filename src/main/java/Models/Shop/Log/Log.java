@@ -16,8 +16,8 @@ public abstract class Log {
     protected double amount; //Selling log : of auction | Buying log :  of discount
     protected String address;
     protected String phoneNumber;
-    protected List<Product> products =  new ArrayList<>(); //Selling log : sold by seller | Buying log :  bought by buyer
-    protected HashMap<String,Integer> productIdToNumberMap = new HashMap<>();
+    protected List<Product> products; //Selling log : sold by seller | Buying log :  bought by buyer
+    protected HashMap<String, Integer> productIdToNumberMap = new HashMap<>();
     protected String name; //Selling log : buyer's name |  Buying log : seller's name
     protected Status status;
 
@@ -47,24 +47,8 @@ public abstract class Log {
         return date;
     }
 
-    public String getStringDate() {
-        return stringDate;
-    }
-
-    public abstract String viewLogInShort();
-
     @Override
     public abstract String toString();
-
-    public boolean hasProductInLog(Product product) {
-        for (Product p : products) {
-            if (p == product)
-                return true;
-        }
-        return false;
-    }
-
-
 
     public String getId() {
         return id;

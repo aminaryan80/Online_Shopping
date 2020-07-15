@@ -24,7 +24,7 @@ public class MainController extends Controller {
     }
 
     public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel(false, Manager.Addresses.MAIN_MENU);
+        openUserPanel(Manager.Addresses.MAIN_MENU);
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {

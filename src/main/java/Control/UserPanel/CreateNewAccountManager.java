@@ -5,22 +5,15 @@ import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Shop.Request.AddSellerRequest;
-import View.UserPanel.CreateNewAccountMenu;
-import ViewController.Controller;
 import ViewController.userPanel.RegisterController;
 
 import java.util.ArrayList;
 
 public class CreateNewAccountManager extends Manager {
-    public CreateNewAccountManager(Account account, String username, String type) {
-        super(account);
-        new CreateNewAccountMenu(this, username, type);
-    }
-
     public CreateNewAccountManager(Account account, boolean status) {
         super(account);
         RegisterController controller = (RegisterController) loadFxml(Addresses.REGISTER, true);
-        if(status) {
+        if (status) {
             controller.registerAsPrincipal();
         }
     }

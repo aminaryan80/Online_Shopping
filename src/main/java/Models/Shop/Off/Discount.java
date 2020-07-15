@@ -8,7 +8,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +21,6 @@ public class Discount {
     private int discountPercent;
     private double maximumDiscount;
     private int discountUseCount;
-    //    private ArrayList<Customer> allCustomers;
     private ArrayList<String> allCustomersUsernames;
     private HashMap<String, Integer> customerToDiscountUseCountMap = new HashMap<>();
 
@@ -39,10 +37,6 @@ public class Discount {
             customerToDiscountUseCountMap.put(username, discountUseCount);
         }
         allDiscounts.add(this);
-    }
-
-    public void addCustomerToDiscountUseCountMap(String id,int number) {
-        customerToDiscountUseCountMap.put(id,number);
     }
 
     public static ArrayList<Discount> getAllDiscounts() {
@@ -63,17 +57,6 @@ public class Discount {
                 return discount;
         }
         return null;
-    }
-
-    public static ArrayList<String> getDiscountInShort() {
-        ArrayList<String> discountsInShort = new ArrayList<>();
-        for (Discount discount : allDiscounts) {
-//            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-            //String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + dateFormat.format(discount.endingDate);
-            String discountInShort = "#" + discount.id + " : " + discount.discountPercent + "% - " + discount.endingDate;
-            discountsInShort.add(discountInShort);
-        }
-        return discountsInShort;
     }
 
     public static void open() throws Exception {
@@ -186,7 +169,7 @@ public class Discount {
 //                "\nallowed customers = " + allCustomersNames;
     }
 
-    public void deleteDiscount() throws IOException {
+    public void deleteDiscount() {
         for (Customer customer : getAllCustomers()) {
             customer.deleteDiscount(this);
         }

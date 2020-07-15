@@ -6,12 +6,10 @@ import Control.UserPanel.UserPanelManager;
 import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
-    //protected static Scanner scanner;
     protected Manager manager;
 
     public void init() {
@@ -31,11 +29,11 @@ public class Controller {
         return pattern.matcher(input);
     }
 
-    protected void openUserPanel(boolean status) {
-        openUserPanel(status, Manager.Addresses.MAIN_MENU);
+    protected void openUserPanel() {
+        openUserPanel(Manager.Addresses.MAIN_MENU);
     }
 
-    protected void openUserPanel(boolean status, Manager.Addresses address) {
+    protected void openUserPanel(Manager.Addresses address) {
         if (manager.getAccount() == null) {
             new UserPanelManager(manager.getAccount(), address, manager, false);
         }
@@ -53,7 +51,7 @@ public class Controller {
     }
 
     public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel(false);
+        openUserPanel();
     }
 
     public void logout(ActionEvent actionEvent) {

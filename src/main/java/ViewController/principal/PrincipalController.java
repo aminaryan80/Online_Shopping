@@ -87,7 +87,7 @@ public class PrincipalController extends Controller {
         requestsTable.setItems(FXCollections.observableArrayList(Request.getAllRequests()));
         requestIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         requestTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        requestIdCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
+        requestSenderCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
     }
 
     public void updateProfile(ActionEvent actionEvent) {

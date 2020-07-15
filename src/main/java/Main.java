@@ -12,8 +12,6 @@ import Models.Shop.Request.Request;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -36,26 +34,6 @@ public class Main extends Application {
         }
     }
 
-    private static void connectObjects() {
-        //Account.loadReferences();
-        //Category.loadReferences();
-//        try {
-//            Request.loadReferences();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        //Auction.loadReferences();
-        //Discount.loadReferences();
-        //Product.loadReferences();
-    }
-
-    /*public static void main(String[] args) {
-        openFiles();
-        connectObjects();
-        Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
-        MainManager manager = new MainManager(null);
-    }*/
-
     private static void saveFiles() {
         try {
             Rate.save();
@@ -73,21 +51,14 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         openFiles();
-        connectObjects();
         Runtime.getRuntime().addShutdownHook(new Thread(Main::saveFiles));
         initialize(stage);
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("view/products/products_menu.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setTitle("AP Project");
-        stage.setScene(scene);
-        stage.show();*/
     }
 
-    private void initialize(Stage stage) throws IOException {
+    private void initialize(Stage stage) {
         Manager.setStage(stage);
-        MainManager manager = new MainManager(null);
+        new MainManager(null);
     }
 }

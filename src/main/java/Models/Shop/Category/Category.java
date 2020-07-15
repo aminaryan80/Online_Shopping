@@ -8,7 +8,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -19,7 +18,7 @@ public class Category {
     private String name;
     private HashMap<String, Integer> features; // featureName - featureType // 0 : int - 1 : String
     private ArrayList<String> subCategoriesNames;
-    private ArrayList<String> allProductsIds = new ArrayList<>();
+    private ArrayList<String> allProductsIds;
     private String id;
 
     public Category(String name, String supCategoryName, HashMap<String, Integer> features, ArrayList<String> allProductsIds) {
@@ -32,39 +31,6 @@ public class Category {
             getSupCategory().addSubCategory(this);
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
-    }
-
-    public ArrayList<Feature> getFeatures() {
-        ArrayList<Feature> features = new ArrayList<>();
-        ArrayList<String> names = getFeaturesNames();
-        for (String name : names) {
-            features.add(new Feature(name, "iu"));
-        }
-        return features;
-    }
-
-    public static void deleteCategory(Category category) throws IOException {
-        getCategoryByName(category.supCategoryName).subCategoriesNames.remove(category.getName());
-        allCategories.remove(category);
-        ArrayList<Category> subCats = new ArrayList<>(category.getSubCategories());
-        for (Category subCategory : subCats) {
-            deleteCategory(subCategory);
-        }
-        File file = new File(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
-        try {
-            if (file.exists())
-                FileUtils.forceDelete(file);
-        } catch (Exception ignored) {
-
-        }
-    }
-
-    public static ArrayList<String> getAllCategoriesNames() {
-        ArrayList<String> allCategoriesNames = new ArrayList<>();
-        for (Category category : allCategories) {
-            allCategoriesNames.add(category.getName());
-        }
-        return allCategoriesNames;
     }
 
     public static boolean hasCategoryWithName(String name) {
@@ -120,6 +86,15 @@ public class Category {
         FileWriter file = new FileWriter(Address.CATEGORIES.get() + "\\" + category.getName() + ".json");
         file.write(jsonAccount);
         file.close();
+    }
+
+    public ArrayList<Feature> getFeatures() {
+        ArrayList<Feature> features = new ArrayList<>();
+        ArrayList<String> names = getFeaturesNames();
+        for (String name : names) {
+            features.add(new Feature(name, "iu"));
+        }
+        return features;
     }
 
     public void changeCategoryNameForProducts() {

@@ -12,8 +12,6 @@ import java.util.Scanner;
 
 public class Rate {
     private static ArrayList<Rate> allRates = new ArrayList<>();
-//    private Account account;
-//    private Product product;
 
     private String username;
     private String productId;

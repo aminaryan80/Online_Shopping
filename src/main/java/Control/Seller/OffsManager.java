@@ -4,21 +4,13 @@ import Control.Manager;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Off.Auction;
-import Models.Shop.Product.Product;
-import View.Seller.OffsMenu;
 import ViewController.Controller;
 import ViewController.userPanel.Seller.EditOffController;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OffsManager extends Manager {
-    public OffsManager(Account account) {
-        super(account);
-        new OffsMenu(this);
-    }
-
     public OffsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         Controller controller = loadFxml(Addresses.EDIT_OFFS);
@@ -29,19 +21,6 @@ public class OffsManager extends Manager {
         EditOffController controller = (EditOffController) c;
         controller.setSeller((Seller) account);
         controller.init();
-    }
-
-    public String viewOffById(String id) {
-        return ((Seller) account).getAuctionById(id).toString();
-    }
-
-    public boolean isOffFieldValid(String field) {
-        return field.equals("beginningDate") || field.equals("endingDate") || field.equals("status") ||
-                field.equals("amount");
-    }
-
-    public boolean isEnteredIdValid(String id) {
-        return ((Seller) account).hasAuctionWithId(id);
     }
 
     public Auction editOffAttribute(String id, String field, String newValue) {
@@ -58,30 +37,9 @@ public class OffsManager extends Manager {
     }
 
     public Auction addOff(String beginningDate, String endingDate,
-                       double discountAmount, List<String> productsIds) {
-        Auction auction = new Auction( productsIds, LocalDate.parse(beginningDate), LocalDate.parse(endingDate), discountAmount);
+                          double discountAmount, List<String> productsIds) {
+        Auction auction = new Auction(productsIds, LocalDate.parse(beginningDate), LocalDate.parse(endingDate), discountAmount);
         ((Seller) account).addAuction(auction);
         return auction;
-    }
-
-    public boolean hasProductWithId(String id) {
-        return Product.hasProductWithId(id, account.getUsername());
-    }
-
-    public boolean hasAuction(String id) {
-        return Product.getProductById(id).hasAuction();
-    }
-
-    private ArrayList<Product> getProductsListByNames(ArrayList<String> productsNames) {
-        ArrayList<Product> products = new ArrayList<Product>();
-        for (String productsName : productsNames) {
-            ArrayList<Product> productsWithTheSameName = Product.getProductsByName(productsName);
-            for (Product product : productsWithTheSameName) {
-                if (product.getSeller().equals(account)) {
-                    products.add(product);
-                }
-            }
-        }
-        return products;
     }
 }

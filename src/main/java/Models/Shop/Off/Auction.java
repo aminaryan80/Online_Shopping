@@ -52,30 +52,6 @@ public class Auction {
         return discountAmount;
     }
 
-    public static ArrayList<String> getAuctionedProducts() {
-        ArrayList<String> productsInShort = new ArrayList<>();
-        for (Auction auction : allAuctions) {
-            for (Product product : auction.getProducts())
-                productsInShort.add("#" + product.getId() + " : \n" +
-                        "price = " + product.getPrice() +
-                        "\nAuctioned price = " + product.getAuctionedPrice() +
-                        "\nAuction's ending date = " + auction.endingDate +
-                        "\n--------------------------------------------"); // TODO localDate shit
-        }
-        return productsInShort;
-    }
-
-    public ArrayList<String> getAuctionProducts() {
-        ArrayList<String> productsInShort = new ArrayList<>();
-        for (Product product : getProducts())
-            productsInShort.add("#" + product.getId() + " : \n" +
-                    "price = " + product.getPrice() +
-                    "\nAuctioned price = " + product.getAuctionedPrice() +
-                    "\nAuction's ending date = " + endingDate +
-                    "\n--------------------------------------------"); // TODO localDate shit
-        return productsInShort;
-    }
-
     public static void addAuction(Auction auction) {
         allAuctions.add(auction);
     }
@@ -92,10 +68,6 @@ public class Auction {
         this.endingDate = endingDate;
     }
 
-//    public void setProducts(List<Product> products) {
-//        this.products = products;
-//    }
-
     public void setStatus(AuctionStatus status) {
         this.status = status;
     }
@@ -110,19 +82,6 @@ public class Auction {
                 ", endingDate=" + endingDate +
                 ", discountAmount=" + discountAmount +
                 '}';
-    }
-
-    public static AuctionStatus parseAuctionStatus(String status) {
-        switch (status) {
-            case "UNDER_REVIEW_FOR_CONSTRUCTION":
-                return AuctionStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
-            case "UNDER_REVIEW_FOR_EDITING":
-                return AuctionStatus.UNDER_REVIEW_FOR_EDITING;
-            case "CONFIRMED":
-                return AuctionStatus.CONFIRMED;
-            default:
-                return null;
-        }
     }
 
     public AuctionStatus getStatus() {

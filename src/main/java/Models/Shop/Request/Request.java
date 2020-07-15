@@ -38,14 +38,6 @@ public abstract class Request {
         return allRequests;
     }
 
-    public static ArrayList<String> viewRequestsInShort() {
-        ArrayList<String> allRequestsShortViews = new ArrayList<>();
-        for (Request request : allRequests) {
-            allRequestsShortViews.add(request.id + " : " + request.type);
-        }
-        return allRequestsShortViews;
-    }
-
     public static Request getRequestById(String id) {
         for (Request request : allRequests) {
             if (request.id.equals(id)) {
@@ -64,7 +56,7 @@ public abstract class Request {
         return false;
     }
 
-    protected static void deleteRequest(Request request, String address) throws IOException {
+    protected static void deleteRequest(Request request, String address) {
         allRequests.remove(request);
         File file = new File(Address.REQUESTS.get() + "\\" + address + "\\" + request.getId() + ".json");
         try {

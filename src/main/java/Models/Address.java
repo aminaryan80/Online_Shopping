@@ -21,7 +21,7 @@ public enum Address {
     ADD_SELLER_REQUEST("database" + "\\" + "requests" + "\\" + "add seller requests"),
     EDIT_OFF_REQUESTS("database"+"\\"+"requests"+"\\"+"edit off requests"),
     AUCTIONS("database"+"\\"+"auctions"),
-    IDNETITIES("database" + "\\" + "identities")
+    IDENTITIES("database" + "\\" + "identities")
     ;
     private final String address;
     Address(String address) {

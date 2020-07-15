@@ -2,13 +2,11 @@ package ViewController.customer;
 
 import Control.CustomerManagers.ProductPageManager;
 import Models.Shop.Product.Product;
-import View.CustomerMenus.product.ProductPage;
 import ViewController.Controller;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.omg.CORBA.MARSHAL;
 
 public class CompareController extends Controller {
 
