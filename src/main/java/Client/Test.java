@@ -19,9 +19,9 @@ public class Test {
         //System.out.println(sendRequest("Hello. I'm working."));
 
         String response = sendRequest("GET_ALL_ACCOUNTS");
-        Type AccountListType = new TypeToken<ArrayList<Account>>() {
-        }.getType();
-        Account[] userArray = Gson.INSTANCE.get().fromJson(response, Account[].class);
+        System.out.println(response);
+        // it goes like this:
+        ArrayList<Account> userArray = Gson.INSTANCE.get().fromJson(response,new TypeToken<ArrayList<Account>>(){}.getType());
         for (Account account : userArray) {
             System.out.println(account.getUsername());
         }
