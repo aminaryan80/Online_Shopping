@@ -1,6 +1,6 @@
 package Models.Shop.Off;
 
-import Control.Identity;
+import Client.Control.Identity;
 import Models.Account.Customer;
 import Models.Address;
 import Models.Gson;

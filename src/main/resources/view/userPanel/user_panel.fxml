@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.userPanel.UserPanelController">
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0" styleClass="background"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Client.ViewController.userPanel.UserPanelController">
     <children>
-        <TextField fx:id="userNameField" layoutX="280.0" layoutY="167.0" prefHeight="34.0" prefWidth="222.0" styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css" />
+        <TextField fx:id="userNameField" layoutX="280.0" layoutY="167.0" prefHeight="34.0" prefWidth="222.0"
+                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css"/>
         <Label layoutX="179.0" layoutY="170.0" text="Username:">
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </Label>
         <Label layoutX="181.0" layoutY="218.0" text="Password:">
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </Label>
         <Button layoutX="181.0" layoutY="266.0" mnemonicParsing="false" onAction="#login" prefHeight="42.0" prefWidth="321.0" stylesheets="@../../styles/styles.css" text="Login" />

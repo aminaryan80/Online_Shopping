@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static Client.Control.Manager.sendRequest;
+
 public abstract class Account {
     protected static ArrayList<Account> allAccounts = new ArrayList<>();
     protected String username;
@@ -33,6 +35,7 @@ public abstract class Account {
     }
 
     public static ArrayList<Account> getAllAccounts() {
+        sendRequest("GET_ALL_ACCOUNTS");
         return allAccounts;
     }
 
@@ -225,14 +228,6 @@ public abstract class Account {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-//    public static void loadReferences() {
-//        for (Account account : allAccounts) {
-////            account.loadReference();
-//        }
-//    }
-//
-////    protected abstract void loadReference();
 
     public String getEmail() {
         return email;

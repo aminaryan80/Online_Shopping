@@ -1,6 +1,6 @@
 package Models.Shop.Category;
 
-import Control.Identity;
+import Client.Control.Identity;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
