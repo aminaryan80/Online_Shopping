@@ -35,7 +35,6 @@ public abstract class Account {
     }
 
     public static ArrayList<Account> getAllAccounts() {
-        sendRequest("GET_ALL_ACCOUNTS");
         return allAccounts;
     }
 
