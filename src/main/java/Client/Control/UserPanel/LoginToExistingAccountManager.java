@@ -27,11 +27,11 @@ public class LoginToExistingAccountManager extends Manager {
                     cart = ((Customer) account).getCart();
                 }
                 if(account instanceof Principal) {
-                    return "P&&&" + Gson.INSTANCE.get().toJson(account);
+                    return "P&&&" + account.getUsername();
                 } else if(account instanceof Customer) {
-                    return "C&&&" + Gson.INSTANCE.get().toJson(account);
+                    return "C&&&" + account.getUsername();
                 } else if(account instanceof Seller) {
-                    return "S&&&" + Gson.INSTANCE.get().toJson(account);
+                    return "S&&&" + account.getUsername();
                 }
                 return null;
             } else return "2";

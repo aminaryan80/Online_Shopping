@@ -26,13 +26,8 @@ public class UserPanelController extends Controller {
         //new LoginToExistingAccountManager(manager.getAccount(), username, password);
         String response = sendRequest("LOGIN " + username + " " + password);
         String[] res = response.split("&&&");
-        if(res[0].equals("P")) {
-            account = Gson.INSTANCE.get().fromJson(res[1], Principal.class);
-        } else if(res[0].equals("C")) {
-            account = Gson.INSTANCE.get().fromJson(res[1], Customer.class);
-        } else if(res[0].equals("S")) {
-            account = Gson.INSTANCE.get().fromJson(res[1], Seller.class);
-        }
+        accountType = res[0];
+        accountUsername = res[1];
         openUserPanel();
     }
 

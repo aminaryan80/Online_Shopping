@@ -16,14 +16,14 @@ public class PrincipalManager extends Manager {
 
     public PrincipalManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        Controller controller = loadFxml(Addresses.PRINCIPAL_MENU);
-        update(controller);
+        /*Controller controller = loadFxml(Addresses.PRINCIPAL_MENU);
+        update(controller);*/
     }
 
     public void update(Controller c) {
-        PrincipalController controller = (PrincipalController) c;
+        /*PrincipalController controller = (PrincipalController) c;
         controller.setPrincipal(account);
-        controller.init();
+        controller.init();*/
     }
 
     public void openCreateDiscountCode() {

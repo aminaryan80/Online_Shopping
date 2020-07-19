@@ -6,6 +6,10 @@ import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Account.Seller;
+import Models.Gson;
+import Models.Shop.Off.Discount;
+import Models.Shop.Request.*;
+import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +22,8 @@ import java.util.ArrayList;
 
 public class Controller {
     protected Manager manager;
-    protected static Account account;
+    protected static String accountUsername;
+    protected static String accountType;
     protected Manager.Addresses backAddress;
     protected static Stage stage;
     protected static Stage popup = new Stage();
@@ -42,30 +47,57 @@ public class Controller {
     public void setBack(Manager.Addresses backAddress) {
         this.backAddress = backAddress;
     }
-//
-//    protected void openUserPanel() {
-//        openUserPanel(Manager.Addresses.MAIN_MENU);
-//    }
 
     protected String sendRequest(String request) {
         return RequestProcessor.processRequest(request);
     }
 
     protected void openUserPanel() {
-        if (account == null) {
+        if (accountUsername == null) {
             //new UserPanelManager(manager.getAccount(), address, manager, false);
             loadFxml(Manager.Addresses.USER_PANEL);
         }
-        if (account != null) {
+        if (accountUsername != null) {
             //new DashboardManager(manager.getAccount(), address, manager);
-            if (account instanceof Principal) {
+            if (accountType.equals("P")) {
                 loadFxml(Manager.Addresses.PRINCIPAL_MENU);
-            } else if (account instanceof Customer) {
+            } else if (accountType.equals("C")) {
                 loadFxml(Manager.Addresses.CUSTOMER_MENU);
-            } else if (account instanceof Seller) {
+            } else if (accountType.equals("S")) {
                 loadFxml(Manager.Addresses.SELLER_MENU);
             }
         }
+    }
+
+    protected ArrayList<Account> getAllAccounts() {
+        ArrayList<Principal> principals = new ArrayList<>(Gson.INSTANCE.get().fromJson(
+                sendRequest("GET_ALL_PRINCIPALS"), new TypeToken<ArrayList<Principal>>() {}.getType()));
+        ArrayList<Customer> customers = new ArrayList<>(Gson.INSTANCE.get().fromJson(
+                sendRequest("GET_ALL_CUSTOMERS"), new TypeToken<ArrayList<Customer>>() {}.getType()));
+        ArrayList<Seller> sellers = new ArrayList<>(Gson.INSTANCE.get().fromJson(
+                sendRequest("GET_ALL_SELLERS"), new TypeToken<ArrayList<Seller>>() {}.getType()));
+        ArrayList<Account> accounts = new ArrayList<>();
+        accounts.addAll(principals);
+        accounts.addAll(customers);
+        accounts.addAll(sellers);
+        return accounts;
+    }
+
+    protected ArrayList<Discount> getAllDiscounts() {
+        return new ArrayList<>(Gson.INSTANCE.get().fromJson(
+                sendRequest("GET_ALL_DISCOUNTS"), new TypeToken<ArrayList<Discount>>() {}.getType()));
+    }
+
+    protected ArrayList<Request> getAllRequests() {
+        String[] response = sendRequest("GET_ALL_REQUESTS").split("&&&");
+        ArrayList<Request> requests = new ArrayList<>();
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[0], new TypeToken<ArrayList<AddOffRequest>>() {}.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[1], new TypeToken<ArrayList<AddProductRequest>>() {}.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[2], new TypeToken<ArrayList<AddSellerRequest>>() {}.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[3], new TypeToken<ArrayList<DeleteProductRequest>>() {}.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[4], new TypeToken<ArrayList<EditOffRequest>>() {}.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[5], new TypeToken<ArrayList<EditProductRequest>>() {}.getType()));
+        return requests;
     }
 
     protected void logout() {

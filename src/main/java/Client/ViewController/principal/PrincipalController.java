@@ -3,62 +3,55 @@ package Client.ViewController.principal;
 import Client.Control.Principal.PrincipalManager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
+import Models.Account.Customer;
 import Models.Account.Principal;
+import Models.Account.Seller;
+import Models.Gson;
 import Models.Shop.Off.Discount;
 import Models.Shop.Request.Request;
+import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class PrincipalController extends Controller {
-    @FXML
-    private Label usernameLabel;
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField emailField;
-    @FXML
-    private TextField phoneNumberField;
-    @FXML
-    private TableView<Account> usersTable;
-    @FXML
-    private TableColumn<Account, String> usernameCol;
-    @FXML
-    private TableColumn<Account, String> userTypeCol;
-    @FXML
-    private TableColumn<Account, Double> userBalanceCol;
-    @FXML
-    private TableView<Discount> discountsTable;
-    @FXML
-    private TableColumn<Discount, String> discountIdCol;
-    @FXML
-    private TableColumn<Discount, Integer> discountPercentCol;
-    @FXML
-    private TableColumn<Discount, LocalDate> discountBeginningDateCol;
-    @FXML
-    private TableView<Request> requestsTable;
-    @FXML
-    private TableColumn<Request, String> requestIdCol;
-    @FXML
-    private TableColumn<Request, String> requestTypeCol;
-    @FXML
-    private TableColumn<Request, String> requestSenderCol;
-    private Principal principal;
+public class PrincipalController extends Controller implements Initializable {
+    public Label usernameLabel;
+    public TextField firstNameField;
+    public TextField lastNameField;
+    public TextField emailField;
+    public TextField phoneNumberField;
+    public TableView<Account> usersTable;
+    public TableColumn<Account, String> usernameCol;
+    public TableColumn<Account, String> userTypeCol;
+    public TableColumn<Account, Double> userBalanceCol;
+    public TableView<Discount> discountsTable;
+    public TableColumn<Discount, String> discountIdCol;
+    public TableColumn<Discount, Integer> discountPercentCol;
+    public TableColumn<Discount, LocalDate> discountBeginningDateCol;
+    public TableView<Request> requestsTable;
+    public TableColumn<Request, String> requestIdCol;
+    public TableColumn<Request, String> requestTypeCol;
+    public TableColumn<Request, String> requestSenderCol;
+    //private Principal principal;
 
-    public void setPrincipal(Account principal) {
-        this.principal = (Principal) principal;
-    }
+//    public void setPrincipal(Account principal) {
+//        this.principal = (Principal) principal;
+//    }
 
-    public void init() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Principal principal;
+        principal = Gson.INSTANCE.get().fromJson(sendRequest("GET_ACCOUNT " + accountUsername), Principal.class);
         usernameLabel.setText(principal.getUsername());
         firstNameField.setText(principal.getFirstName());
         lastNameField.setText(principal.getLastName());
@@ -70,21 +63,21 @@ public class PrincipalController extends Controller {
     }
 
     private void initUsers() {
-        usersTable.setItems(FXCollections.observableArrayList(Account.getAllAccounts()));
+        usersTable.setItems(FXCollections.observableArrayList(getAllAccounts()));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         userTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         userBalanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
     }
 
     private void initDiscounts() {
-        discountsTable.setItems(FXCollections.observableArrayList(Discount.getAllDiscounts()));
+        discountsTable.setItems(FXCollections.observableArrayList(getAllDiscounts()));
         discountIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("discountPercent"));
         discountBeginningDateCol.setCellValueFactory(new PropertyValueFactory<>("beginningDate"));
     }
 
     private void initRequests() {
-        requestsTable.setItems(FXCollections.observableArrayList(Request.getAllRequests()));
+        requestsTable.setItems(FXCollections.observableArrayList(getAllRequests()));
         requestIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         requestTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         requestSenderCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
@@ -94,10 +87,10 @@ public class PrincipalController extends Controller {
         String email = emailField.getText();
         String phoneNumber = phoneNumberField.getText();
         if (((PrincipalManager) manager).isEnteredInputValid(email, phoneNumber)) {
-            principal.setFirstName(firstNameField.getText());
+            /*principal.setFirstName(firstNameField.getText());
             principal.setLastName(lastNameField.getText());
             principal.setEmail(emailField.getText());
-            principal.setPhoneNumber(phoneNumberField.getText());
+            principal.setPhoneNumber(phoneNumberField.getText());*/
         }
     }
 
