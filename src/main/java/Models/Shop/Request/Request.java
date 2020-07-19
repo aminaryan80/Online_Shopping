@@ -229,7 +229,7 @@ public abstract class Request {
     private static void saveEditOffRequest(Request request) throws Exception {
         EditOffRequest editOffRequest = (EditOffRequest) request;
         String jsonRequest = Gson.INSTANCE.get().toJson(editOffRequest);
-        write(request, jsonRequest, Address.EDIT_PRODUCT_REQUESTS);
+        write(request, jsonRequest, Address.EDIT_OFF_REQUESTS);
     }
 
     private static void saveEditProductRequest(Request request) throws Exception {

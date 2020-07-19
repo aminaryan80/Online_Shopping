@@ -56,7 +56,7 @@ public class Product {
     public static ArrayList<Product> getAllAuctionedProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (Product product : allProducts) {
-            if (product.getAuction().getBeginningDate().compareTo(LocalDate.now()) < 0 && product.getAuction().getEndingDate().compareTo(LocalDate.now()) > 0) {
+            if (product.hasAuction() && (product.getAuction().getBeginningDate().compareTo(LocalDate.now()) < 0 && product.getAuction().getEndingDate().compareTo(LocalDate.now()) > 0)) {
                 products.add(product);
             }
         }

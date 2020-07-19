@@ -111,7 +111,7 @@
       <Button layoutX="400.0" layoutY="263.0" mnemonicParsing="false" onAction="#sort" text="Sort" />
       <ChoiceBox fx:id="changeableFeatures" layoutX="878.0" layoutY="358.0" prefWidth="150.0" />
       <TextField fx:id="changeableFeatureValue" layoutX="879.0" layoutY="421.0" promptText="new feature value" />
-      <Button fx:id="updateFeatures" layoutX="888.0" layoutY="467.0" mnemonicParsing="false" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css" text="Update Features" />
+      <Button onAction="#updateFeatures" layoutX="888.0" layoutY="467.0" mnemonicParsing="false" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css" text="Update Features" />
     </children>
 
 </AnchorPane>
