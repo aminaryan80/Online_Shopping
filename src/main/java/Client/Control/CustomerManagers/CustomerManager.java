@@ -7,20 +7,18 @@ import Models.Account.Account;
 
 public class CustomerManager extends Manager {
 
+    public CustomerManager(Account account) {
+        super(account);
+    }
+
     public CustomerManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        CustomerController controller = (CustomerController) loadFxml(Addresses.CUSTOMER_MENU);
-        update(controller);
     }
 
     public void update(Controller c) {
-        CustomerController controller = (CustomerController) c;
+        /*CustomerController controller = (CustomerController) c;
         controller.setCustomer(account);
-        controller.init();
-    }
-
-    public void openCart() {
-        new ViewCartManager(account, Addresses.CUSTOMER_MENU, this);
+        controller.init();*/
     }
 
     public void openOrders() {

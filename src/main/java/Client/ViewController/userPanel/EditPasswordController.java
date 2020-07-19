@@ -1,6 +1,5 @@
 package Client.ViewController.userPanel;
 
-import Client.Control.EditPasswordManager;
 import Client.ViewController.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +15,12 @@ public class EditPasswordController extends Controller {
     private TextField newPasswordField;
 
     public void editPassword(ActionEvent actionEvent) {
-        ((EditPasswordManager) manager).editPassword(currentPasswordField.getText(), newPasswordField.getText());
+        String response = sendRequest("EDIT_PASSWORD " + accountUsername + " " + currentPasswordField.getText() + " " + newPasswordField.getText());
+        if (response.equals("0")) {
+            success("Password successfully edited.");
+        } else {
+            error("Something went wrong.");
+        }
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
     }
 }

@@ -25,9 +25,11 @@ public class UserPanelController extends Controller {
         String password = passwordField.getText();
         //new LoginToExistingAccountManager(manager.getAccount(), username, password);
         String response = sendRequest("LOGIN " + username + " " + password);
-        String[] res = response.split("&&&");
-        accountType = res[0];
-        accountUsername = res[1];
+        if(!response.equals("1") && !response.equals("2")) {
+            String[] res = response.split("&&&");
+            accountType = res[0];
+            accountUsername = res[1];
+        } else error("Username or Password is wrong.");
         openUserPanel();
     }
 

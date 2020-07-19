@@ -146,6 +146,6 @@
                 </Button>
             </children>
         </VBox>
-        <TreeView fx:id="categories" layoutX="826.0" layoutY="50.0" prefHeight="200.0" prefWidth="326.0"/>
+        <TreeView fx:id="categoriesTable" layoutX="826.0" layoutY="50.0" prefHeight="200.0" prefWidth="326.0"/>
     </children>
 </AnchorPane>

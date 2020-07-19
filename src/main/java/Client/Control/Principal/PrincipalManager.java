@@ -14,6 +14,10 @@ import java.util.ArrayList;
 
 public class PrincipalManager extends Manager {
 
+    public PrincipalManager(Account account) {
+        super(account);
+    }
+
     public PrincipalManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         /*Controller controller = loadFxml(Addresses.PRINCIPAL_MENU);
@@ -72,11 +76,7 @@ public class PrincipalManager extends Manager {
     }
 
     public boolean isEnteredInputValid(String email, String phoneNumber) {
-        if (checkEmail(email) && checkPhoneNumber(phoneNumber)) {
-            success("Profile updated successfully.");
-            return true;
-        } else error("Invalid input");
-        return false;
+        return checkEmail(email) && checkPhoneNumber(phoneNumber);
     }
 
     public void openManageUsers() {

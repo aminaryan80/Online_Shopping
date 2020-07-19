@@ -1,15 +1,13 @@
 package Client.ViewController.principal;
 
+import Client.Control.Manager;
 import Client.Control.Principal.PrincipalManager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
-import Models.Account.Customer;
 import Models.Account.Principal;
-import Models.Account.Seller;
 import Models.Gson;
 import Models.Shop.Off.Discount;
 import Models.Shop.Request.Request;
-import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -84,18 +82,19 @@ public class PrincipalController extends Controller implements Initializable {
     }
 
     public void updateProfile(ActionEvent actionEvent) {
-        String email = emailField.getText();
-        String phoneNumber = phoneNumberField.getText();
-        if (((PrincipalManager) manager).isEnteredInputValid(email, phoneNumber)) {
-            /*principal.setFirstName(firstNameField.getText());
-            principal.setLastName(lastNameField.getText());
-            principal.setEmail(emailField.getText());
-            principal.setPhoneNumber(phoneNumberField.getText());*/
-        }
+        ArrayList<String> inputs = new ArrayList<>();
+        inputs.add(firstNameField.getText());
+        inputs.add(lastNameField.getText());
+        inputs.add(emailField.getText());
+        inputs.add(phoneNumberField.getText());
+        String response = sendRequest("UPDATE_PROFILE " + accountUsername + " " + Gson.INSTANCE.get().toJson(inputs));
+        if(response.equals("0")) {
+            success("Profile changed successfully.");
+        } else error("something went wrong.");
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        manager.editPassword();
+        loadFxml(Manager.Addresses.EDIT_PASSWORD, true);
     }
 
     public void openManageUsers(ActionEvent actionEvent) {

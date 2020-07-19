@@ -19,16 +19,18 @@ public class SellerManager extends Manager {
     private Sort currentSort;
     private ArrayList<SellingLog> logs;
 
+    public SellerManager(Account account) {
+        super(account);
+    }
+
     public SellerManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
-        Controller controller = loadFxml(Addresses.SELLER_MENU);
-        update(controller);
     }
 
     public void update(Controller c) {
-        SellerMenuController controller = (SellerMenuController) c;
+        /*SellerMenuController controller = (SellerMenuController) c;
         controller.setSeller(account);
-        controller.init();
+        controller.init();*/
     }
 
     public void deleteProductById(String id) {

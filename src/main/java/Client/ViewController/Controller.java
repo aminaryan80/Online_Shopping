@@ -7,6 +7,7 @@ import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Account.Seller;
 import Models.Gson;
+import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import Models.Shop.Request.*;
 import com.google.gson.reflect.TypeToken;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -54,11 +56,9 @@ public class Controller {
 
     protected void openUserPanel() {
         if (accountUsername == null) {
-            //new UserPanelManager(manager.getAccount(), address, manager, false);
             loadFxml(Manager.Addresses.USER_PANEL);
         }
         if (accountUsername != null) {
-            //new DashboardManager(manager.getAccount(), address, manager);
             if (accountType.equals("P")) {
                 loadFxml(Manager.Addresses.PRINCIPAL_MENU);
             } else if (accountType.equals("C")) {
@@ -71,11 +71,14 @@ public class Controller {
 
     protected ArrayList<Account> getAllAccounts() {
         ArrayList<Principal> principals = new ArrayList<>(Gson.INSTANCE.get().fromJson(
-                sendRequest("GET_ALL_PRINCIPALS"), new TypeToken<ArrayList<Principal>>() {}.getType()));
+                sendRequest("GET_ALL_PRINCIPALS"), new TypeToken<ArrayList<Principal>>() {
+                }.getType()));
         ArrayList<Customer> customers = new ArrayList<>(Gson.INSTANCE.get().fromJson(
-                sendRequest("GET_ALL_CUSTOMERS"), new TypeToken<ArrayList<Customer>>() {}.getType()));
+                sendRequest("GET_ALL_CUSTOMERS"), new TypeToken<ArrayList<Customer>>() {
+                }.getType()));
         ArrayList<Seller> sellers = new ArrayList<>(Gson.INSTANCE.get().fromJson(
-                sendRequest("GET_ALL_SELLERS"), new TypeToken<ArrayList<Seller>>() {}.getType()));
+                sendRequest("GET_ALL_SELLERS"), new TypeToken<ArrayList<Seller>>() {
+                }.getType()));
         ArrayList<Account> accounts = new ArrayList<>();
         accounts.addAll(principals);
         accounts.addAll(customers);
@@ -85,23 +88,59 @@ public class Controller {
 
     protected ArrayList<Discount> getAllDiscounts() {
         return new ArrayList<>(Gson.INSTANCE.get().fromJson(
-                sendRequest("GET_ALL_DISCOUNTS"), new TypeToken<ArrayList<Discount>>() {}.getType()));
+                sendRequest("GET_ALL_DISCOUNTS"), new TypeToken<ArrayList<Discount>>() {
+                }.getType()));
     }
 
     protected ArrayList<Request> getAllRequests() {
         String[] response = sendRequest("GET_ALL_REQUESTS").split("&&&");
         ArrayList<Request> requests = new ArrayList<>();
-        requests.addAll(Gson.INSTANCE.get().fromJson(response[0], new TypeToken<ArrayList<AddOffRequest>>() {}.getType()));
-        requests.addAll(Gson.INSTANCE.get().fromJson(response[1], new TypeToken<ArrayList<AddProductRequest>>() {}.getType()));
-        requests.addAll(Gson.INSTANCE.get().fromJson(response[2], new TypeToken<ArrayList<AddSellerRequest>>() {}.getType()));
-        requests.addAll(Gson.INSTANCE.get().fromJson(response[3], new TypeToken<ArrayList<DeleteProductRequest>>() {}.getType()));
-        requests.addAll(Gson.INSTANCE.get().fromJson(response[4], new TypeToken<ArrayList<EditOffRequest>>() {}.getType()));
-        requests.addAll(Gson.INSTANCE.get().fromJson(response[5], new TypeToken<ArrayList<EditProductRequest>>() {}.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[0], new TypeToken<ArrayList<AddOffRequest>>() {
+        }.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[1], new TypeToken<ArrayList<AddProductRequest>>() {
+        }.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[2], new TypeToken<ArrayList<AddSellerRequest>>() {
+        }.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[3], new TypeToken<ArrayList<DeleteProductRequest>>() {
+        }.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[4], new TypeToken<ArrayList<EditOffRequest>>() {
+        }.getType()));
+        requests.addAll(Gson.INSTANCE.get().fromJson(response[5], new TypeToken<ArrayList<EditProductRequest>>() {
+        }.getType()));
         return requests;
     }
 
     protected void logout() {
         manager.logout();
+    }
+
+    public TreeItem<String> getCategoriesInTable() {
+        ArrayList<Category> categories = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_ALL_CATEGORIES"),
+                new TypeToken<ArrayList<Category>>() {
+                }.getType()));
+        return getCategoriesInTable(categories, getCategoryByName(categories, "mainCategory"));
+    }
+
+    private TreeItem<String> getCategoriesInTable(ArrayList<Category> allCategories, Category category) {
+        TreeItem<String> categories = new TreeItem<>(category.getName());
+        ArrayList<Category> subCategories = new ArrayList<>();
+        for (String subCategoriesName : category.getSubCategoriesNames()) {
+            subCategories.add(getCategoryByName(allCategories, subCategoriesName));
+        }
+        for (Category subCategory : subCategories) {
+            categories.getChildren().add(getCategoriesInTable(allCategories, subCategory));
+        }
+        categories.setExpanded(true);
+        return categories;
+    }
+
+    private Category getCategoryByName(ArrayList<Category> allCategories, String name) {
+        for (Category category : allCategories) {
+            if (category.getName().equals(name)) {
+                return category;
+            }
+        }
+        return null;
     }
 
     public void back(ActionEvent actionEvent) {

@@ -33,6 +33,14 @@ public class Category {
         allCategories.add(this);
     }
 
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
+
+    public ArrayList<String> getSubCategoriesNames() {
+        return subCategoriesNames;
+    }
+
     public static boolean hasCategoryWithName(String name) {
         for (Category category : allCategories) {
             if (category.getName().equals(name))
