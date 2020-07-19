@@ -20,8 +20,13 @@ public class ViewCartManager extends Manager {
     public ViewCartManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         products = Product.getAllProducts();
-        Controller controller = loadFxml(Addresses.VIEW_CART);
-        update(controller);
+//        Controller controller = loadFxml(Addresses.VIEW_CART);
+//        update(controller);
+    }
+
+    public ViewCartManager(Account account) {
+        super(account);
+        products = Product.getAllProducts();
     }
 
     public void update(Controller c) {
@@ -29,7 +34,7 @@ public class ViewCartManager extends Manager {
         controller.init();
     }
 
-    public void productQuantity(String id, boolean isIncrease) throws ProductDoNotExistInCartException {
+    public void productQuantity(String id, boolean isIncrease) {
         Product product;
         if ((product = customer.getCart().getProductInCartById(id)) != null) {
             if (isIncrease)
@@ -37,14 +42,15 @@ public class ViewCartManager extends Manager {
             else {
                 customer.getCart().removeProduct(product);
             }
-        } else throw new ProductDoNotExistInCartException("Product does not exist in cart");
+        }
+//        } else throw new ProductDoNotExistInCartException("Product does not exist in cart");
     }
 
     public double getTotalPrice(Discount discount) {
         return customer.getCart().getTotalPrice(discount);
     }
 
-    public HashMap<Product,Integer> getProductsInCart() {
+    public HashMap<Product, Integer> getProductsInCart() {
         return customer.getCart().getProductsMap();
     }
 
@@ -53,7 +59,7 @@ public class ViewCartManager extends Manager {
     }
 
     public void purchase() {
-        new PurchaseManager(account,Addresses.VIEW_CART,this);
+        new PurchaseManager(account, Addresses.VIEW_CART, this);
     }
 
     public static class ProductDoNotExistAtAllException extends Exception {
@@ -154,8 +160,8 @@ public class ViewCartManager extends Manager {
         return new ArrayList<>(products);
     }
 
-    public void showProduct(String id){
-        new ProductPageManager(account,Product.getProductById(id),Addresses.VIEW_CART,this);
+    public void showProduct(String id) {
+        new ProductPageManager(account, Product.getProductById(id), Addresses.VIEW_CART, this);
     }
 
     public boolean isCartEmpty() {

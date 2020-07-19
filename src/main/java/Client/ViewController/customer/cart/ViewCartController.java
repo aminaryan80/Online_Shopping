@@ -2,20 +2,25 @@ package Client.ViewController.customer.cart;
 
 import Client.Control.CustomerManagers.ViewCartManager;
 import Client.ViewController.Controller;
+import Models.Gson;
 import Models.Shop.Product.Product;
+import com.google.gson.reflect.TypeToken;
 import com.sun.javafx.scene.control.skin.LabeledText;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class ViewCartController extends Controller {
+public class ViewCartController extends Controller implements Initializable {
 
     public TableView tableView;
     public TableColumn numberColumn;
@@ -28,7 +33,8 @@ public class ViewCartController extends Controller {
     public Label totalAmount;
 
     public void init() {
-        totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
+//        totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
+        totalAmount.setText(sendRequest("TOTAL_AMOUNT"+" "+accountUsername));
         ArrayList<CartTableItem> cartTableItems = getCartTableItems();
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(cartTableItems);
@@ -52,8 +58,9 @@ public class ViewCartController extends Controller {
 
     private ArrayList<CartTableItem> getCartTableItems() {
         ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
-        if (manager instanceof ViewCartManager) {
-            HashMap<Product, Integer> productsInCart = ((ViewCartManager) manager).getProductsInCart();
+//        if (manager instanceof ViewCartManager) {
+//            HashMap<Product, Integer> productsInCart = ((ViewCartManager) manager).getProductsInCart();
+            HashMap<Product, Integer> productsInCart = Gson.INSTANCE.get().fromJson(sendRequest("GET_CART_PRODUCTS"+" "+accountUsername),new TypeToken<HashMap<Product,Integer>>() {}.getType());
             int number = 1;
             for (Product product : productsInCart.keySet()) {
                 cartTableItems.add(new CartTableItem(
@@ -66,7 +73,6 @@ public class ViewCartController extends Controller {
                 ));
                 number++;
             }
-        }
         return cartTableItems;
     }
 
@@ -91,26 +97,26 @@ public class ViewCartController extends Controller {
     }
 
 
-    public void addProduct(ActionEvent actionEvent) throws ViewCartManager.ProductDoNotExistInCartException {
+    public void addProduct(ActionEvent actionEvent)  {
         if (selectedProduct.getText().matches("\\S{8}")) {
-            ((ViewCartManager) manager).productQuantity(selectedProduct.getText(), true);
+            System.out.println(sendRequest("PRODUCT_QUANTITY"+" "+"INCREASE"+" "+selectedProduct.getText()+" "+accountUsername));
             init();
         }
     }
 
-    public void reduceProduct(ActionEvent actionEvent) throws ViewCartManager.ProductDoNotExistInCartException {
+    public void reduceProduct(ActionEvent actionEvent) {
         if (selectedProduct.getText().matches("\\S{8}")) {
-            ((ViewCartManager) manager).productQuantity(selectedProduct.getText(), false);
+            System.out.println(sendRequest("PRODUCT_QUANTITY"+" "+"DECREASE"+" "+selectedProduct.getText()+" "+accountUsername));
             init();
         }
     }
 
     public void clearCart(ActionEvent actionEvent) {
-        if(!((ViewCartManager)manager).isCartEmpty()) {
+        if(sendRequest("IS_CART_EMPTY"+" "+accountUsername).equals("NO")) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really wanna clear your cart?", ButtonType.YES, ButtonType.NO);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
-                ((ViewCartManager) manager).clearCart();
+                System.out.println(sendRequest("CLEAR_CART"+" "+accountUsername));
                 init();
             } else alert.close();
         } else {
@@ -139,5 +145,10 @@ public class ViewCartController extends Controller {
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        init();
     }
 }

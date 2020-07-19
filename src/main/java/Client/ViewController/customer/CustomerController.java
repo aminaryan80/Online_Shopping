@@ -1,6 +1,7 @@
 package Client.ViewController.customer;
 
 import Client.Control.CustomerManagers.CustomerManager;
+import Client.Control.Manager;
 import Client.Control.Principal.PrincipalManager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
@@ -117,7 +118,8 @@ public class CustomerController extends Controller {
     }
 
     public void openCart(ActionEvent actionEvent) {
-        ((CustomerManager) manager).openCart();
+        loadFxml(Manager.Addresses.VIEW_CART);
+//        ((CustomerManager) manager).openCart();
     }
 
     public void openOrders(ActionEvent actionEvent) {

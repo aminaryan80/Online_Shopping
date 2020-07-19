@@ -37,6 +37,10 @@ public class CartTableItem {
         return price.get();
     }
 
+    public int getQuantity() {
+        return quantity.get();
+    }
+
     public String getDescription() {
         return description.get();
     }
