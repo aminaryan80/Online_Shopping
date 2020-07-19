@@ -9,14 +9,6 @@ public class MainController extends Controller {
 
     public Label test;
 
-    private void help() {
-        System.out.println("user panel\n" +
-                "products\n" +
-                "offs\n" +
-                "help\n" +
-                "exit");
-    }
-
     public void aboutUs(ActionEvent actionEvent) {
         Alert a = new Alert(Alert.AlertType.NONE);
         a.setAlertType(Alert.AlertType.CONFIRMATION);
@@ -24,7 +16,7 @@ public class MainController extends Controller {
     }
 
     public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel(Manager.Addresses.MAIN_MENU);
+        openUserPanel();
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
@@ -36,6 +28,7 @@ public class MainController extends Controller {
     }
 
     public void exit(ActionEvent actionEvent) {
-        Manager.exit();
+        //Manager.exit();
+        System.exit(0);
     }
 }

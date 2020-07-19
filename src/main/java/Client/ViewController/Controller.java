@@ -1,16 +1,27 @@
 package Client.ViewController;
 
 import Client.Control.Manager;
-import Client.Control.UserPanel.DashboardManager;
-import Client.Control.UserPanel.UserPanelManager;
+import Client.Control.RequestProcessor.RequestProcessor;
+import Models.Account.Account;
+import Models.Account.Customer;
+import Models.Account.Principal;
+import Models.Account.Seller;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Controller {
     protected Manager manager;
+    protected static Account account;
+    protected Manager.Addresses backAddress;
+    protected static Stage stage;
+    protected static Stage popup = new Stage();
 
     public void init() {
 
@@ -20,25 +31,40 @@ public class Controller {
 
     }
 
+    public static void setStage(Stage stage) {
+        Controller.stage = stage;
+    }
+
     public void setManager(Manager manager) {
         this.manager = manager;
     }
 
-    protected Matcher getMatcher(String input, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(input);
+    public void setBack(Manager.Addresses backAddress) {
+        this.backAddress = backAddress;
+    }
+//
+//    protected void openUserPanel() {
+//        openUserPanel(Manager.Addresses.MAIN_MENU);
+//    }
+
+    protected String sendRequest(String request) {
+        return RequestProcessor.processRequest(request);
     }
 
     protected void openUserPanel() {
-        openUserPanel(Manager.Addresses.MAIN_MENU);
-    }
-
-    protected void openUserPanel(Manager.Addresses address) {
-        if (manager.getAccount() == null) {
-            new UserPanelManager(manager.getAccount(), address, manager, false);
+        if (account == null) {
+            //new UserPanelManager(manager.getAccount(), address, manager, false);
+            loadFxml(Manager.Addresses.USER_PANEL);
         }
-        if (manager.getAccount() != null) {
-            new DashboardManager(manager.getAccount(), address, manager);
+        if (account != null) {
+            //new DashboardManager(manager.getAccount(), address, manager);
+            if (account instanceof Principal) {
+                loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+            } else if (account instanceof Customer) {
+                loadFxml(Manager.Addresses.CUSTOMER_MENU);
+            } else if (account instanceof Seller) {
+                loadFxml(Manager.Addresses.SELLER_MENU);
+            }
         }
     }
 
@@ -47,11 +73,8 @@ public class Controller {
     }
 
     public void back(ActionEvent actionEvent) {
-        manager.back();
-    }
-
-    public void openUserPanel(ActionEvent actionEvent) {
-        openUserPanel();
+        //manager.back();
+        System.out.println("Back");
     }
 
     public void logout(ActionEvent actionEvent) {
@@ -59,4 +82,39 @@ public class Controller {
         System.out.println("LOGOUT");
     }
 
+    public void error(String message) {
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setAlertType(Alert.AlertType.ERROR);
+        a.setContentText(message);
+        a.show();
+    }
+
+    public void success(String message) {
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setAlertType(Alert.AlertType.CONFIRMATION);
+        a.setContentText(message);
+        a.show();
+    }
+
+    public void loadFxml(Manager.Addresses address) {
+        loadFxml(address, false);
+    }
+
+    public void loadFxml(Manager.Addresses address, boolean isPopup) {
+        Stage workingStage;
+        if (isPopup)
+            workingStage = popup;
+        else
+            workingStage = stage;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            workingStage.setTitle("AP Project");
+            workingStage.setScene(scene);
+            workingStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

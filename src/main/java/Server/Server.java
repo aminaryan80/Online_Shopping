@@ -1,14 +1,12 @@
 package Server;
 
-import Server.RequestProcessor.AccountRequestsProcessor;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
 
-    AccountRequestsProcessor accountRequestsProcessor = new AccountRequestsProcessor();
+    //AccountRequestsProcessor accountRequestsProcessor = new AccountRequestsProcessor();
 
     public Server() {
         ServerSocket server;
@@ -44,7 +42,7 @@ public class Server {
 
     private String processRequest(String request) {
         if (request.equals("GET_ALL_ACCOUNTS")) {
-            return accountRequestsProcessor.getAllAccounts();
+            //return accountRequestsProcessor.getAllAccounts();
         }
         return null;
     }
