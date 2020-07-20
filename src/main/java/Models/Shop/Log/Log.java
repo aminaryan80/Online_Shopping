@@ -1,6 +1,6 @@
 package Models.Shop.Log;
 
-import Control.Identity;
+import Client.Control.Identity;
 import Models.Shop.Product.Product;
 
 import java.time.LocalDateTime;

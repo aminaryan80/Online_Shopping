@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="400.0" styleClass="background"
             stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="ViewController.userPanel.RegisterController">
+            fx:controller="Client.ViewController.userPanel.RegisterController">
     <children>
         <VBox prefHeight="200.0" prefWidth="400.0">
             <children>

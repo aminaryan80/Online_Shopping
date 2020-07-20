@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-
-<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.products.ProductPageController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" vbarPolicy="ALWAYS"
+            xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="Client.ViewController.products.ProductPageController">
     <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1200.0" stylesheets="@../../../../styles/products_styles.css">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="1200.0"
+                    stylesheets="@../../../../styles/products_styles.css">
             <children>
-                <ImageView fitHeight="330.0" fitWidth="330.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" styleClass="product_image">
+                <ImageView fitHeight="330.0" fitWidth="330.0" layoutX="34.0" layoutY="34.0" pickOnBounds="true"
+                           preserveRatio="true" styleClass="product_image">
                     <image>
-                        <Image url="@../../../../images/product.jpg" />
+                        <Image url="@../../../../images/product.jpg"/>
                     </image>
                 </ImageView>
                 <Label layoutX="390.0" layoutY="46.0" text="Name:">

@@ -1,6 +1,6 @@
 package Models.Shop.Category;
 
-import Control.Identity;
+import Client.Control.Identity;
 import Models.Address;
 import Models.Gson;
 import Models.Shop.Product.Product;
@@ -31,6 +31,14 @@ public class Category {
             getSupCategory().addSubCategory(this);
         this.subCategoriesNames = new ArrayList<>();
         allCategories.add(this);
+    }
+
+    public static ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
+
+    public ArrayList<String> getSubCategoriesNames() {
+        return subCategoriesNames;
     }
 
     public static boolean hasCategoryWithName(String name) {

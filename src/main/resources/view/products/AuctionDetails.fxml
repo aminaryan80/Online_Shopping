@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="450.0" prefWidth="400.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ViewController.products.AuctionDetailsController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="450.0" prefWidth="400.0"
+            style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="Client.ViewController.products.AuctionDetailsController">
     <children>
-        <Label fx:id="auctionLabel" alignment="CENTER" layoutY="44.0" prefHeight="27.0" prefWidth="400.0" text="Auction #[id]:">
+        <Label fx:id="auctionLabel" alignment="CENTER" layoutY="44.0" prefHeight="27.0" prefWidth="400.0"
+               text="Auction #[id]:">
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </Label>
         <Label layoutX="55.0" layoutY="134.0" text="Beginning Date:">
             <font>
-                <Font name="System Bold" size="16.0" />
+                <Font name="System Bold" size="16.0"/>
             </font>
         </Label>
         <TextField fx:id="beginningDateTextField" editable="false" layoutX="190.0" layoutY="132.0" prefHeight="30.0" prefWidth="155.0" />
