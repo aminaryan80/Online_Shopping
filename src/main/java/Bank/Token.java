@@ -1,21 +1,34 @@
 package Bank;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 public class Token {
 
     private String token;
-    private LocalTime time;
+    private Timer timer;
     private Account account;
+    private boolean expired;
     private static ArrayList<Token> tokens = new ArrayList<>();
 
     public Token(Account account) {
         this.account = account;
         this.token = UUID.randomUUID().toString();
-        this.time = LocalTime.now();
+        this.expired = false;
+        this.timer = new Timer();
+        Date date = new Date();
+        date.setTime(System.currentTimeMillis() + 60 * 60 * 1000);
+        this.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                setExpired();
+            }
+        }, date);
         tokens.add(this);
+    }
+
+    private void setExpired() {
+        expired = true;
     }
 
     public String getToken() {
@@ -45,9 +58,6 @@ public class Token {
     }
 
     public boolean isExpired() {
-        if (LocalTime.now().minusHours(1).isBefore(time)) {
-            return false;
-        }
-        return true;
+        return expired;
     }
 }

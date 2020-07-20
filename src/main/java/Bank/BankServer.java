@@ -55,13 +55,13 @@ public class BankServer {
     }
 
     public String handleCommand(String command) {
-        if (command.matches("create_acccount \\S+ \\S+ \\S+ \\S+ \\S+")) {
+        if (command.matches("create_account \\S+ \\S+ \\S+ \\S+ \\S+")) {
             return createAccount(command.split(" "));
         } else if (command.matches("get_token \\S+ \\S+")) {
             return getToken(command.split(" "));
         } else if (command.matches("create_receipt \\S+ \\S+ \\S+ \\S+ \\S+ (\\S+)?")) {
             return createReceipt(command.split(" "));
-        } else if (command.equals("get_transactions \\S+ \\S+")) {
+        } else if (command.matches("get_transactions \\S+ \\S+")) {
             return getTransactions(command.split(" "));
         } else if (command.matches("pay \\S+")) {
             return pay(command.split(" ")[1]);
@@ -110,7 +110,9 @@ public class BankServer {
         for (Receipt validReceipt : validReceipts) {
             respond.append(Gson.INSTANCE.get().toJson(validReceipt) + "*");
         }
-        respond.deleteCharAt(respond.length() - 1);
+        if (respond.length() != 0) {
+            respond.deleteCharAt(respond.length() - 1);
+        }
         return respond.toString();
     }
 

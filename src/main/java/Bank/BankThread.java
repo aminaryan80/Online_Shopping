@@ -30,6 +30,9 @@ public class BankThread extends Thread{
                 if (command.equals("exit")) {
                     break;
                 }
+                if (command.equals("exit_all")) {
+                    System.exit(1);
+                }
                 dataOutputStream.writeUTF(server.handleCommand(command));
                 dataOutputStream.flush();
             } catch (IOException e) {
