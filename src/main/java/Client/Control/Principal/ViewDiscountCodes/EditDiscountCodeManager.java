@@ -10,44 +10,71 @@ public class EditDiscountCodeManager extends Manager {
 
     private Discount discount;
 
+    public EditDiscountCodeManager(Account account) {
+        super(account);
+    }
+
     public EditDiscountCodeManager(Account account, Discount discount) {
         super(account);
         this.discount = discount;
         loadFxml(Addresses.EDIT_DISCOUNTS);
     }
 
-    public void editBeginningDate(String stringDate) {
+    public int editDiscount(String discountId, String field, String newValue) {
+        if (Discount.hasDiscountWithId(discountId)) {
+            discount = Discount.getDiscountById(discountId);
+            if (field.equals("BEGINNING_DATE")) {
+                return editBeginningDate(newValue);
+            } else if (field.equals("ENDING_DATE")) {
+                return editEndingDate(newValue);
+            } else if (field.equals("PERCENT")) {
+                return editDiscountPercent(newValue);
+            } else if (field.equals("MAXIMUM_AMOUNT")) {
+                return editMaximumAmount(newValue);
+            } else if (field.equals("USE_COUNT")) {
+                return editDiscountUserCount(newValue);
+            }
+        }
+        return 1;
+    }
+
+    public int editBeginningDate(String stringDate) {
         if (checkDate(stringDate)) {
             discount.setBeginningDate(LocalDate.parse(stringDate));
-            success("Discount changed successfully.");
-        } else error("Invalid date input");
+            return 0;
+        }
+        return 1;
     }
 
-    public void editEndingDate(String stringDate) {
+    public int editEndingDate(String stringDate) {
         if (checkDate(stringDate)) {
             discount.setEndingDate(LocalDate.parse(stringDate));
-            success("Discount changed successfully.");
-        } else error("Invalid date input");
+            return 0;
+        }
+        return 1;
     }
 
-    public void editDiscountPercent(String percent) {
+    public int editDiscountPercent(String percent) {
         if (checkPercent(percent)) {
             discount.setDiscountPercent(Integer.parseInt(percent));
-            success("Discount changed successfully.");
-        } else error("Invalid input");
+            return 0;
+        }
+        return 1;
     }
 
-    public void editMaximumAmount(String maximumAmount) {
+    public int editMaximumAmount(String maximumAmount) {
         if (checkNumber(maximumAmount)) {
             discount.setMaximumDiscount(Double.parseDouble(maximumAmount));
-            success("Discount changed successfully.");
-        } else error("Invalid input");
+            return 0;
+        }
+        return 1;
     }
 
-    public void editDiscountUserCount(String count) {
+    public int editDiscountUserCount(String count) {
         if (count.matches("^\\d+$")) {
             discount.setDiscountUseCount(Integer.parseInt(count));
-            success("Discount changed successfully.");
-        } else error("Invalid input");
+            return 0;
+        }
+        return 1;
     }
 }

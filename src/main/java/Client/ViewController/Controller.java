@@ -9,6 +9,7 @@ import Models.Account.Seller;
 import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import Models.Shop.Request.*;
 import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
@@ -54,7 +55,7 @@ public class Controller {
         return RequestProcessor.processRequest(request);
     }
 
-    protected void openUserPanel() {
+    public void openUserPanel() {
         if (accountUsername == null) {
             loadFxml(Manager.Addresses.USER_PANEL);
         }
@@ -89,6 +90,12 @@ public class Controller {
     protected ArrayList<Discount> getAllDiscounts() {
         return new ArrayList<>(Gson.INSTANCE.get().fromJson(
                 sendRequest("GET_ALL_DISCOUNTS"), new TypeToken<ArrayList<Discount>>() {
+                }.getType()));
+    }
+
+    protected ArrayList<Product> getAllProducts() {
+        return new ArrayList<>(Gson.INSTANCE.get().fromJson(
+                sendRequest("GET_ALL_PRODUCTS"), new TypeToken<ArrayList<Product>>() {
                 }.getType()));
     }
 

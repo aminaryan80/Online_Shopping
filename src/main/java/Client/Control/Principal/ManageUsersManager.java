@@ -15,6 +15,11 @@ public class ManageUsersManager extends Manager {
     private List<Account> users;
     private Sort currentSort;
 
+    public ManageUsersManager(Account account) {
+        super(account);
+        this.users = Account.getAllAccounts();
+    }
+
     public ManageUsersManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         this.users = Account.getAllAccounts();
@@ -79,16 +84,20 @@ public class ManageUsersManager extends Manager {
         users = Arrays.asList(usersForSort);
     }
 
-    public void deleteUsername(String username) {
-        if (!username.equals(account.getUsername())) {
-            Account.deleteAccount(Account.getAccountByUsername(username));
-            success("Account deleted successfully.");
-        } else error("You can't delete your account.");
+    public int deleteUsername(String username, String target) {
+        if (!target.equals(username)) {
+            Account.deleteAccount(Account.getAccountByUsername(target));
+            return 0;
+        }
+        return 1;
     }
 
-    public void createManagerProfile(ArrayList<String> inputs) {
+    public int createManagerProfile(ArrayList<String> inputs) {
         // username, password, email, phoneNumber, firstName, lastName
-        new Principal(inputs.get(0), inputs.get(4), inputs.get(5), inputs.get(2), inputs.get(3), inputs.get(1));
-        success("New principal account created.");
+        if(Account.hasAccountWithUsername(inputs.get(0))) {
+            new Principal(inputs.get(0), inputs.get(4), inputs.get(5), inputs.get(2), inputs.get(3), inputs.get(1));
+            return 0;
+        }
+        return 1;
     }
 }

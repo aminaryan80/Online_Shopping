@@ -1,11 +1,13 @@
 package Client.ViewController.principal;
 
-import Client.Control.Principal.ManageUsersManager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
+import Models.Account.Customer;
+import Models.Account.Principal;
+import Models.Account.Seller;
+import Models.Gson;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -19,43 +21,22 @@ import java.util.ResourceBundle;
 
 
 public class ManageUsersController extends Controller implements Initializable {
-    @FXML
-    private TableView<Account> usersTable;
-    @FXML
-    private TableColumn<Account, String> usernameCol;
-    @FXML
-    private TableColumn<Account, String> userEmailCol;
-    @FXML
-    private TableColumn<Account, Double> userBalanceCol;
-    @FXML
-    private TextField viewUserIdField;
-    @FXML
-    private Label viewUserLabel;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private TextField passwordField;
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private TextField emailField;
-    @FXML
-    private TextField phoneNumberField;
+    public TableView<Account> usersTable;
+    public TableColumn<Account, String> usernameCol;
+    public TableColumn<Account, String> userEmailCol;
+    public TableColumn<Account, Double> userBalanceCol;
+    public TextField viewUserIdField;
+    public Label viewUserLabel;
+    public TextField usernameField;
+    public TextField passwordField;
+    public TextField firstNameField;
+    public TextField lastNameField;
+    public TextField emailField;
+    public TextField phoneNumberField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>(Account.getAllAccounts());
-        initTable(objects);
-    }
-
-    public void initTable(ArrayList<Object> tableObjects) {
-        ArrayList<Account> tableAccounts = new ArrayList<>();
-        for (Object tableProduct : tableObjects) {
-            tableAccounts.add((Account) tableProduct);
-        }
-        usersTable.setItems(FXCollections.observableArrayList(tableAccounts));
+        usersTable.setItems(FXCollections.observableArrayList(getAllAccounts()));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         userBalanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
@@ -63,12 +44,24 @@ public class ManageUsersController extends Controller implements Initializable {
 
     public void viewUser(ActionEvent actionEvent) {
         String username = viewUserIdField.getText();
-        viewUserLabel.setText(((ManageUsersManager) manager).viewUsername(username));
+        String[] response = sendRequest("GET_ACCOUNT " + username).split("&&&");
+        Account account = null;
+        if (response[0].equals("P")) {
+            account = Gson.INSTANCE.get().fromJson(response[1], Principal.class);
+        } else if (response[0].equals("C")) {
+            account = Gson.INSTANCE.get().fromJson(response[1], Customer.class);
+        } else if (response[0].equals("S")) {
+            account = Gson.INSTANCE.get().fromJson(response[1], Seller.class);
+        }
+        viewUserLabel.setText(account.toString());
     }
 
     public void deleteUser(ActionEvent actionEvent) {
         String username = viewUserIdField.getText();
-        ((ManageUsersManager) manager).deleteUsername(username);
+        String response = sendRequest("DELETE_ACCOUNT " + accountUsername + " " + username);
+        if (response.equals("0")) {
+            success("Account deleted successfully.");
+        } else error("Something went wrong.");
     }
 
     public void createNewPrincipal(ActionEvent actionEvent) {
@@ -80,7 +73,10 @@ public class ManageUsersController extends Controller implements Initializable {
         inputs.add(phoneNumberField.getText());
         inputs.add(firstNameField.getText());
         inputs.add(lastNameField.getText());
-        ((ManageUsersManager) manager).createManagerProfile(inputs);
+        String response = sendRequest("CREATE_PROFILE_MANAGER " + Gson.INSTANCE.get().toJson(inputs));
+        if (response.equals("0")) {
+            success("New principal created successfully.");
+        } else error("Invalid inputs.");
     }
 
     public void sort(ActionEvent actionEvent) {

@@ -1,9 +1,11 @@
 package Client.ViewController.principal;
 
+import Client.Control.Manager;
 import Client.Control.Principal.PrincipalManager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Customer;
+import Models.Gson;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
@@ -28,9 +30,9 @@ public class CreateNewDiscountController extends Controller {
         inputs.add(useCountField.getText());
         inputs.add(beginningDateField.getText());
         inputs.add(endingDateField.getText());
-        ((PrincipalManager) manager).createDiscountCode(inputs, customersNames);
+        sendRequest("CREATE_DISCOUNT " + Gson.INSTANCE.get().toJson(inputs) + "&&&" + Gson.INSTANCE.get().toJson(customersNames));
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
-
+        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
     }
 
     public void addCustomer(ActionEvent actionEvent) {

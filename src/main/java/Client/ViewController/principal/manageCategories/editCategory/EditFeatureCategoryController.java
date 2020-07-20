@@ -1,29 +1,21 @@
 package Client.ViewController.principal.manageCategories.editCategory;
 
-import Client.Control.Principal.ManageCategories.EditCategoryManager;
-import Client.ViewController.Controller;
+import Client.Control.Manager;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditFeatureCategoryController extends Controller {
+public class EditFeatureCategoryController extends EditCategoryController {
 
-    @FXML
-    private RadioButton addRB;
-    @FXML
-    private RadioButton editRB;
-    @FXML
-    private RadioButton deleteRB;
-    @FXML
-    private TextField featureNameField;
-    @FXML
-    private TextField newNameField;
-    @FXML
-    private Label newNameLabel;
+    public RadioButton addRB;
+    public RadioButton editRB;
+    public RadioButton deleteRB;
+    public TextField featureNameField;
+    public TextField newNameField;
+    public Label newNameLabel;
 
     public void editCategory(ActionEvent actionEvent) {
         if (addRB.isSelected()) {
@@ -34,18 +26,31 @@ public class EditFeatureCategoryController extends Controller {
             deleteFeature();
         }
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
+        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
     }
 
     private void addFeature() {
-        ((EditCategoryManager) manager).addFeature(featureNameField.getText());
+        //((EditCategoryManager) manager).addFeature(featureNameField.getText());
+        String response = sendRequest("EDIT_CATEGORY ADD_FEATURE " + categoryName + " " + featureNameField.getText());
+        if (response.equals("0")) {
+            success("Feature added successfully.");
+        } else error("Something went wrong.");
     }
 
     private void editFeature() {
-        ((EditCategoryManager) manager).editFeature(featureNameField.getText(), newNameField.getText());
+        //((EditCategoryManager) manager).editFeature(featureNameField.getText(), newNameField.getText());
+        String response = sendRequest("EDIT_CATEGORY EDIT_FEATURE " + categoryName + " " + featureNameField.getText() + " " + newNameField.getText());
+        if (response.equals("0")) {
+            success("Feature added successfully.");
+        } else error("Something went wrong.");
     }
 
     private void deleteFeature() {
-        ((EditCategoryManager) manager).removeFeature(featureNameField.getText());
+        //((EditCategoryManager) manager).removeFeature(featureNameField.getText());
+        String response = sendRequest("EDIT_CATEGORY DELETE_FEATURE " + categoryName + " " + featureNameField.getText());
+        if (response.equals("0")) {
+            success("Feature added successfully.");
+        } else error("Something went wrong.");
     }
 
     public void openAddFeature(ActionEvent actionEvent) {

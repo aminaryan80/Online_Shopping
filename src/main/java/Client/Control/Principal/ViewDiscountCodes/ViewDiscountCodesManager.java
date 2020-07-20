@@ -16,24 +16,30 @@ public class ViewDiscountCodesManager extends Manager {
     private Sort currentSort;
     private List<Discount> discounts;
 
+    public ViewDiscountCodesManager(Account account) {
+        super(account);
+        discounts = Discount.getAllDiscounts();
+    }
+
     public ViewDiscountCodesManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         discounts = Discount.getAllDiscounts();
         loadFxml(Addresses.VIEW_DISCOUNT_CODES);
     }
 
-    public void deleteDiscountCode(String id) throws IOException {
+    public int deleteDiscountCode(String id) {
         if (Discount.hasDiscountWithId(id)) {
             Discount.getDiscountById(id).deleteDiscount();
-            success("Discount deleted successfully.");
-        } else error("Invalid discount id");
+            return 0;
+        }
+        return 1;
     }
 
     public String viewDiscountCode(String id) {
         if (Discount.hasDiscountWithId(id)) {
             return Discount.getDiscountById(id).toString();
-        } else error("Invalid discount id");
-        return null;
+        }
+        return "Not Found";
     }
 
     public String currentSort() {

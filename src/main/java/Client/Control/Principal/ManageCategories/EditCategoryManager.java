@@ -11,6 +11,10 @@ public class EditCategoryManager extends Manager {
     private Category editingCategory;
     private ArrayList<String> features;
 
+    public EditCategoryManager(Account account) {
+        super(account);
+    }
+
     public EditCategoryManager(Account account, Category category) {
         super(account);
         this.editingCategory = category;
@@ -18,53 +22,70 @@ public class EditCategoryManager extends Manager {
         loadFxml(Addresses.EDIT_CATEGORY, true);
     }
 
-    public void editName(String newName) {
-        if (!Category.hasCategoryWithName(newName)) {
-            editingCategory.editName(newName);
-        } else error("Category exists with this name.");
-    }
-
-    public boolean hasFeatureWithName(String name) {
+    private boolean hasFeatureWithName(String name) {
         return features.contains(name);
     }
 
-    public void addFeature(String feature) {
-        if (feature.equals("")) {
+    public int editName(String newName) {
+        if (!Category.hasCategoryWithName(newName)) {
+            editingCategory.editName(newName);
+            return 0;
+        }
+        return 1;
+    }
+
+    public int addFeature(String feature) {
+        if (!feature.equals("")) {
             if (!hasFeatureWithName(feature)) {
                 features.add(feature);
                 editingCategory.addFeature(feature);
-            } else error("Category has feature with this name.");
-        } else error("Invalid input");
-
+                return 0;
+            }
+        }
+        return 1;
     }
 
-    public void editFeature(String oldName, String newName) {
-        if (oldName.equals("") || newName.equals("")) {
+    public int editFeature(String inputs) {
+        String[] input = inputs.split(" ");
+        String oldName = input[0];
+        String newName = input[1];
+        if (!oldName.equals("") && !newName.equals("")) {
             if (hasFeatureWithName(oldName)) {
                 if (!hasFeatureWithName(newName)) {
                     features.remove(oldName);
                     features.add(newName);
                     editingCategory.editFeature(oldName, newName);
-                } else error("Category has feature with this name.");
-            } else error("Invalid feature name");
-        } else error("Invalid input");
+                    return 0;
+                } else return 3;
+            }else return 2;
+        }else return 1;
     }
 
-    public void removeFeature(String feature) {
-        if (feature.equals("")) {
+    public int removeFeature(String feature) {
+        if (!feature.equals("")) {
             if (hasFeatureWithName(feature)) {
                 features.remove(feature);
                 editingCategory.removeFeature(feature);
-            } else error("Invalid feature name");
-        } else error("Invalid input");
+                return 0;
+            } else return 1;
+        } else return 2;
     }
 
-    public void editCategory(String featureName) {
-        if (featureName.equals("name")) {
-            openEditName();
-        } else if (featureName.equals("feature")) {
-            openEditFeatures();
-        } else error("Invalid input");
+    public int editCategory(String featureName, String categoryName, String inputs) {
+        if (Category.hasCategoryWithName(categoryName)) {
+            editingCategory = Category.getCategoryByName(categoryName);
+            features = editingCategory.getFeaturesNames();
+            if (featureName.equals("EDIT_NAME")) {
+                return editName(inputs);
+            } else if (featureName.equals("ADD_FEATURE")) {
+                return addFeature(inputs);
+            } else if (featureName.equals("EDIT_FEATURE")) {
+                return editFeature(inputs);
+            } else if (featureName.equals("DELETE_FEATURE")) {
+                return removeFeature(inputs);
+            }
+        }
+        return 1;
     }
 
     private void openEditName() {

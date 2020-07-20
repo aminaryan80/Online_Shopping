@@ -40,16 +40,12 @@ public class PrincipalController extends Controller implements Initializable {
     public TableColumn<Request, String> requestIdCol;
     public TableColumn<Request, String> requestTypeCol;
     public TableColumn<Request, String> requestSenderCol;
-    //private Principal principal;
-
-//    public void setPrincipal(Account principal) {
-//        this.principal = (Principal) principal;
-//    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String[] response = sendRequest("GET_ACCOUNT " + accountUsername).split("&&&");
         Principal principal;
-        principal = Gson.INSTANCE.get().fromJson(sendRequest("GET_ACCOUNT " + accountUsername), Principal.class);
+        principal = Gson.INSTANCE.get().fromJson(response[1], Principal.class);
         usernameLabel.setText(principal.getUsername());
         firstNameField.setText(principal.getFirstName());
         lastNameField.setText(principal.getLastName());
@@ -98,31 +94,31 @@ public class PrincipalController extends Controller implements Initializable {
     }
 
     public void openManageUsers(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openManageUsers();
+        loadFxml(Manager.Addresses.MANAGE_USERS);
     }
 
     public void openManageProducts(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openManageProducts();
-    }
-
-    public void openManageCategories(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openManageCategories();
+        loadFxml(Manager.Addresses.MANAGE_PRODUCTS);
     }
 
     public void openManageRequests(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openManageRequests();
+        loadFxml(Manager.Addresses.MANAGE_REQUESTS);
+    }
+
+    public void openManageCategories(ActionEvent actionEvent) {
+        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
     }
 
     public void createDiscountCode(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openCreateDiscountCode();
+        loadFxml(Manager.Addresses.CREATE_DISCOUNT_CODE, true);
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
-        manager.openOffsMenu();
+        manager.openOffsMenu(); // TODO
     }
 
     public void openViewDiscountCodes(ActionEvent actionEvent) {
-        ((PrincipalManager) manager).openViewDiscountCodes();
+        loadFxml(Manager.Addresses.VIEW_DISCOUNT_CODES);
 
     }
 }
