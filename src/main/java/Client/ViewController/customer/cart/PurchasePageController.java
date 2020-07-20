@@ -2,18 +2,23 @@ package Client.ViewController.customer.cart;
 
 import Client.Control.CustomerManagers.PurchaseManager;
 import Client.ViewController.Controller;
+import Models.Gson;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
+import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
-public class PurchasePageController extends Controller {
+public class PurchasePageController extends Controller implements Initializable {
 
     public TableView tableView;
     public TableColumn numberColumn;
@@ -35,16 +40,14 @@ public class PurchasePageController extends Controller {
     public Button discountCodeConfirm;
     public Button discountCodeClear;
 
-
     @Override
     public void init() {
-        totalAmount.setText(((PurchaseManager) manager).getTotalPrice((Discount) null) + "$");
+        totalAmount.setText(sendRequest("TOTAL_AMOUNT" + " " + accountUsername));
         ArrayList<CartTableItem> cartTableItems = getCartTableItems();
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(cartTableItems);
         initTable(objects);
     }
-
 
     public void initTable(ArrayList<Object> tableObjects) {
         ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
@@ -62,20 +65,21 @@ public class PurchasePageController extends Controller {
 
     private ArrayList<CartTableItem> getCartTableItems() {
         ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
-        if (manager instanceof PurchaseManager) {
-            HashMap<Product, Integer> productsInCart = ((PurchaseManager) manager).getProductsInCart();
-            int number = 1;
-            for (Product product : productsInCart.keySet()) {
-                cartTableItems.add(new CartTableItem(
-                        number,
-                        product.getId(),
-                        product.getName(),
-                        product.getDescription(),
-                        productsInCart.get(product),
-                        product.getPrice()
-                ));
-                number++;
-            }
+//        if (manager instanceof PurchaseManager) {
+//            HashMap<Product, Integer> productsInCart = ((PurchaseManager) manager).getProductsInCart();
+        HashMap<Product, Integer> productsInCart = Gson.INSTANCE.get().fromJson(sendRequest("GET_CART_PRODUCTS" + " " + accountUsername), new TypeToken<HashMap<Product, Integer>>() {
+        }.getType());
+        int number = 1;
+        for (Product product : productsInCart.keySet()) {
+            cartTableItems.add(new CartTableItem(
+                    number,
+                    product.getId(),
+                    product.getName(),
+                    product.getDescription(),
+                    productsInCart.get(product),
+                    product.getPrice()
+            ));
+            number++;
         }
         return cartTableItems;
     }
@@ -104,11 +108,13 @@ public class PurchasePageController extends Controller {
     }
 
     public void purchase(ActionEvent actionEvent) throws PurchaseManager.WrongDiscountIdException, PurchaseManager.UsedDiscountIdException {
-        ArrayList<String> info = new ArrayList<>();
-        info.add(addressField.getText());
-        info.add(phoneNumberField.getText());
-        if (((PurchaseManager) manager).canPay(discountCodeField.getText())) {
-            ((PurchaseManager) manager).pay(info, discountCodeField.getText());
+//        ArrayList<String> info = new ArrayList<>();
+//        info.add(addressField.getText());
+//        info.add(phoneNumberField.getText());
+//        if (((PurchaseManager) manager).canPay(discountCodeField.getText())) {
+        if (sendRequest("CAN_PAY" + " " + accountUsername + " " + discountCodeField.getText()).equals("YES")) {
+            sendRequest("PAY" + " " + accountUsername + " " + discountCodeField.getText() + " " + addressField.getText() + " " + phoneNumberField.getText());
+//            ((PurchaseManager) manager).pay(info, discountCodeField.getText());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Purchase was successful!", ButtonType.OK);
             alert.show();
             back(null);
@@ -140,13 +146,14 @@ public class PurchasePageController extends Controller {
             alert.show();
         } else {
             String discountId = discountCodeField.getText();
-            PurchaseManager purchaseManager = ((PurchaseManager) manager);
-            if (purchaseManager.hasDiscountCode(discountId)) {
-                if (purchaseManager.isDiscountCodeValid(discountId)) {
-                    if (purchaseManager.doesDiscountBelongToCustomer(discountId)) {
-                        if (purchaseManager.canUseDiscount(discountId)) {
-                            if (purchaseManager.isDiscountActive(discountId)) {
-                                totalAmountToPay.setText("Amount to pay: " + purchaseManager.getTotalPrice(discountId) + "$");
+//            PurchaseManager purchaseManager = ((PurchaseManager) manager);
+//            if (purchaseManager.hasDiscountCode(discountId)) {
+            if (!discountId.matches("(?i)no")) {
+                if (sendRequest("IS_DISCOUNTCODE_VALID" + " " + accountUsername + " " + discountId).equals("YES")) {
+                    if (sendRequest("DOES_DISCOUNT_BELONG_TO_CUSTOMER" + " " + accountUsername + " " + discountId).equals("YES")) {
+                        if (sendRequest("CAN_USE_DISCOUNT" + " " + accountUsername + " " + discountId).equals("YES")) {
+                            if (sendRequest("IS_DISCOUNTCODE_ACTIVE" + " " + accountUsername + " " + discountId).equals("YES")) {
+                                totalAmountToPay.setText("Amount to pay: " + sendRequest("TOTAL_AMOUNT" + " " + accountUsername + " " + discountId));
                                 totalAmountToPay.setVisible(true);
                                 discountCodeMassage.setText("CONFIRMED!");
                                 discountCodeMassage.setStyle("-fx-fill: green");
@@ -176,7 +183,7 @@ public class PurchasePageController extends Controller {
                 discountCodeMassage.setText("CONFIRMED!");
                 discountCodeMassage.setStyle("-fx-fill: green");
                 discountCodeMassage.setVisible(true);
-                totalAmountToPay.setText("Amount to pay: " + purchaseManager.getTotalPrice((Discount) null) + "$");
+                totalAmountToPay.setText("Amount to pay: " + sendRequest("TOTAL_AMOUNT" + " " + accountUsername));
                 totalAmountToPay.setVisible(true);
                 checkPurchaseOption();
             }
@@ -196,7 +203,7 @@ public class PurchasePageController extends Controller {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Fill the text first!", ButtonType.OK);
             alert.show();
         } else {
-            if (!(manager.checkPhoneNumber(phoneNumberField.getText()))) {
+            if (sendRequest("IS_PHONENUMBER_VALID" + " " + phoneNumberField.getText()).equals("NO")) {
                 phoneNumberMassage.setText("format : 09127773333 ");
                 phoneNumberMassage.setStyle("-fx-fill: red");
                 phoneNumberMassage.setVisible(true);
@@ -214,5 +221,10 @@ public class PurchasePageController extends Controller {
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        init();
     }
 }

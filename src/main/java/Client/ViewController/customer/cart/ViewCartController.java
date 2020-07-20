@@ -1,6 +1,7 @@
 package Client.ViewController.customer.cart;
 
 import Client.Control.CustomerManagers.ViewCartManager;
+import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Gson;
 import Models.Shop.Product.Product;
@@ -135,8 +136,10 @@ public class ViewCartController extends Controller implements Initializable {
     }
 
     public void openPurchasePage(ActionEvent actionEvent) {
-        if(!((ViewCartManager)manager).isCartEmpty())
-        ((ViewCartManager)manager).purchase();
+        if(sendRequest("IS_CART_EMPTY"+" "+accountUsername).equals("NO")){
+//            ((ViewCartManager)manager).purchase();
+            loadFxml(Manager.Addresses.PURCHASE_PAGE);
+        }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "cart is empty \nYou wanna buy air?", ButtonType.OK);
             alert.show();

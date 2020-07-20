@@ -1,8 +1,8 @@
 package Client.Control.RequestProcessor;
 
+import Client.Control.CustomerManagers.PurchaseManager;
 import Client.Control.CustomerManagers.ViewCartManager;
 import Client.Control.EditPasswordManager;
-import Client.Control.MainManager;
 import Client.Control.Manager;
 import Client.Control.Principal.PrincipalManager;
 import Client.Control.UserPanel.LoginToExistingAccountManager;
@@ -52,7 +52,7 @@ public class RequestProcessor {
         } else if (getMatcher(request, "GET_ALL_CATEGORIES").find()) {
             response = getAllCategories();
         } else if ((matcher = getMatcher(request, "TOTAL_AMOUNT (\\S+)")).find()) {
-            response = getTotalAmount(matcher.group(1));
+            response = getTotalAmount(matcher.group(1),null);
         } else if ((matcher = getMatcher(request, "GET_CART_PRODUCTS (\\S+)")).find()) {
             response = getCartProducts(matcher.group(1));
         } else if ((matcher = getMatcher(request, "PRODUCT_QUANTITY (INCREASE|DECREASE) (\\S+) (\\S+)")).find()) {
@@ -61,8 +61,87 @@ public class RequestProcessor {
             response = isCartEmpty(matcher.group(1));
         } else if ((matcher = getMatcher(request, "CLEAR_CART (\\S+)")).find()) {
             response = clearCart(matcher.group(1));
+        } else if ((matcher = getMatcher(request, "CAN_PAY (\\S+) (\\S+)")).find()) {
+            response = canPay(matcher.group(1), matcher.group(2));
+        } else if (((matcher = getMatcher(request, "IS_DISCOUNTCODE_VALID (\\S+) (\\S+)")).find())) {
+            response = isDiscountcodeValid(matcher.group(1), matcher.group(2));
+        } else if (((matcher = getMatcher(request, "DOES_DISCOUNT_BELONG_TO_CUSTOMER (\\S+) (\\S+)")).find())) {
+            response = doesDiscountBelongToCustomer(matcher.group(1), matcher.group(2));
+        } else if (((matcher = getMatcher(request, "CAN_USE_DISCOUNT (\\S+) (\\S+)")).find())) {
+            response = canUseDiscount(matcher.group(1), matcher.group(2));
+        } else if (((matcher = getMatcher(request, "IS_DISCOUNTCODE_ACTIVE (\\S+) (\\S+)")).find())) {
+            response = isDiscountActive(matcher.group(1), matcher.group(2));
+        } else if (((matcher = getMatcher(request, "TOTAL_AMOUNT (\\S+) (\\S+)")).find())) {
+            response = getTotalAmount(matcher.group(1), matcher.group(2));
+        } else if (((matcher = getMatcher(request, "IS_PHONENUMBER_VALID (\\S+)")).find())) {
+            response = isPhoneNumberValid(matcher.group(1));
+        } else if ((matcher = getMatcher(request,"PAY (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
+            response = pay(matcher.group(1),matcher.group(2),matcher.group(3),matcher.group(4));
         }
-        return response;
+            return response;
+
+    }
+
+    private static String pay(String username, String discountId, String address, String phoneNumber) {
+        PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
+        ArrayList<String> info = new ArrayList<>();
+        info.add(address);
+        info.add(phoneNumber);
+        try {
+            purchaseManager.pay(info,discountId);
+        } catch (PurchaseManager.WrongDiscountIdException e) {
+            e.printStackTrace();
+        } finally {
+            return "purchased successfully!";
+        }
+    }
+
+    private static String isPhoneNumberValid(String phoneNumber) {
+        Manager manager = new Manager(null) {
+            @Override
+            public boolean checkPhoneNumber(String phoneNumber) {
+                return super.checkPhoneNumber(phoneNumber);
+            }
+        };
+        if(manager.checkPhoneNumber(phoneNumber)) return "YES";
+        else return "NO";
+    }
+
+    private static String isDiscountActive(String username, String discountId) {
+        PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
+        if(purchaseManager.isDiscountActive(discountId)) return "YES";
+        else return "NO";
+    }
+
+    private static String canUseDiscount(String username, String discountId) {
+        PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
+        if(purchaseManager.canUseDiscount(discountId)) return "YES";
+        else return "NO";
+    }
+
+    private static String doesDiscountBelongToCustomer(String username, String discountId) {
+        PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
+        if(purchaseManager.doesDiscountBelongToCustomer(discountId)) return "YES";
+        else return "NO";
+    }
+
+    private static String isDiscountcodeValid(String username, String discountId) {
+        PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
+        if (purchaseManager.isDiscountCodeValid(discountId)) return "YES";
+        else return "NO";
+    }
+
+    private static String canPay(String username, String discountId) {
+        PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
+        try {
+            if (purchaseManager.canPay(discountId)) return "YES";
+            else return "NO";
+        } catch (PurchaseManager.WrongDiscountIdException e) {
+            e.printStackTrace();
+        } catch (PurchaseManager.UsedDiscountIdException e) {
+            e.printStackTrace();
+        }
+        return "NO";
     }
 
     private static String getAllCategories() {
@@ -106,8 +185,9 @@ public class RequestProcessor {
         return Gson.INSTANCE.get().toJson(productIntegerHashMap);
     }
 
-    private static String getTotalAmount(String username) {
-        return "" + ((Customer) Account.getAccountByUsername(username)).getCart().getTotalPrice(null) + "$";
+    private static String getTotalAmount(String username,String discountId) {
+        Discount discount = Discount.getDiscountById(discountId);
+        return "" + ((Customer) Account.getAccountByUsername(username)).getCart().getTotalPrice(discount) + "$";
     }
 
     private static String editPassword(Matcher matcher) {

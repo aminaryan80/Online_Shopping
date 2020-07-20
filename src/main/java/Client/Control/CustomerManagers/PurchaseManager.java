@@ -28,6 +28,10 @@ public class PurchaseManager extends Manager {
         update(controller);
     }
 
+    public PurchaseManager(Account account) {
+        super(account);
+    }
+
     @Override
     public void update(Controller controller) {
         PurchasePageController purchasePageController = (PurchasePageController) controller;
