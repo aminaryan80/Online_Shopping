@@ -15,18 +15,24 @@ public class ManageAllProductsManager extends Manager {
 
     private Sort currentSort;
     private List<Product> products;
+    public ManageAllProductsManager(Account account) {
+        super(account);
+        products = Product.getAllProducts();
+    }
+
     public ManageAllProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         products = Product.getAllProducts();
         loadFxml(Addresses.MANAGE_PRODUCTS);
     }
 
-    public void removeProductById(String id) {
+    public int removeProductById(String id) {
         if (Product.hasProductWithId(id)) {
             Product.deleteProduct(Product.getProductById(id));
             Customer.deleteProductFromCarts(Product.getProductById(id));
-            success("Product deleted successfully.");
-        } else error("Invalid id");
+            return 0;
+        }
+        return 1;
     }
 
     public ArrayList<Object> sort(String sort, boolean isAscending) {

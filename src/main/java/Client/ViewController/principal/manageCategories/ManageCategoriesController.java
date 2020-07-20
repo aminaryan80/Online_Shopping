@@ -1,29 +1,39 @@
 package Client.ViewController.principal.manageCategories;
 
+import Client.Control.Manager;
 import Client.Control.Principal.ManageCategories.ManageCategoriesManager;
 import Client.ViewController.Controller;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeView;
 
-public class ManageCategoriesController extends Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    @FXML
-    private TextField categoryNameField;
-    @FXML
-    private TreeView<String> categoriesTableView;
+public class ManageCategoriesController extends Controller implements Initializable {
 
-    public void init() {
-        categoriesTableView.setRoot(manager.getCategoriesInTable());
+    protected static String categoryName;
+    public TextField categoryNameField;
+    public TreeView<String> categoriesTableView;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initialize();
+    }
+
+    private void initialize() {
+        categoriesTableView.setRoot(getCategoriesInTable());
     }
 
     public void addCategory(ActionEvent actionEvent) {
-        ((ManageCategoriesManager) manager).openAddCategory(categoryNameField.getText());
+        categoryName = categoryNameField.getText();
+        loadFxml(Manager.Addresses.ADD_CATEGORY, true);
     }
 
     public void editCategory(ActionEvent actionEvent) {
         ((ManageCategoriesManager) manager).openEditCategory(categoryNameField.getText());
+        categoryName = categoryNameField.getText();
+        loadFxml(Manager.Addresses.EDIT_CATEGORY, true);
     }
-
 }

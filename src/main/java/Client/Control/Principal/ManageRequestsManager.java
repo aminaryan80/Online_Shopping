@@ -8,32 +8,43 @@ import java.io.IOException;
 
 public class ManageRequestsManager extends Manager {
 
+    public ManageRequestsManager(Account account) {
+        super(account);
+    }
+
     public ManageRequestsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         loadFxml(Addresses.MANAGE_REQUESTS);
     }
 
     public String showRequestDetails(String id) {
-        return Request.getRequestById(id).toString();
+        if(Request.hasRequestById(id)) {
+            return Request.getRequestById(id).toString();
+        }
+        return "Not Found";
     }
 
-    public void acceptRequest(String id) {
+    public int acceptRequest(String id) {
         if (Request.hasRequestById(id)) {
             try {
                 Request.getRequestById(id).accept();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else error("Invalid id");
+            return 0;
+        }
+        return 1;
     }
 
-    public void declineRequest(String id) {
+    public int declineRequest(String id) {
         if (Request.hasRequestById(id)) {
             try {
                 Request.getRequestById(id).decline();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else error("Invalid id");
+            return 0;
+        }
+        return 1;
     }
 }

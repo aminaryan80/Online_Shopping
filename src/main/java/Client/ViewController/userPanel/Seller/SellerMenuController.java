@@ -35,8 +35,9 @@ public class SellerMenuController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String[] response = sendRequest("GET_ACCOUNT " + accountUsername).split("&&&");
         Seller seller;
-        seller = Gson.INSTANCE.get().fromJson(sendRequest("GET_ACCOUNT " + accountUsername), Seller.class);
+        seller = Gson.INSTANCE.get().fromJson(response[1], Seller.class);
         userName.setText(seller.getUsername());
         balance.setText(String.valueOf(seller.getBalance()));
         firstName.setText(seller.getFirstName());

@@ -2,7 +2,6 @@ package Client.Control.Principal.ManageCategories;
 
 import Client.Control.Manager;
 import Client.ViewController.Controller;
-import Client.ViewController.principal.manageCategories.AddCategoryController;
 import Client.ViewController.principal.manageCategories.ManageCategoriesController;
 import Models.Account.Account;
 import Models.Shop.Category.Category;
@@ -11,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ManageCategoriesManager extends Manager {
+    public ManageCategoriesManager(Account account) {
+        super(account);
+    }
+
     public ManageCategoriesManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         Controller controller = loadFxml(Addresses.MANAGE_CATEGORIES);
@@ -22,13 +25,13 @@ public class ManageCategoriesManager extends Manager {
         controller.init();
     }
 
-    public void addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsIds) {
+    public int addCategory(String supCategoryName, String categoryName, HashMap<String, Integer> features, ArrayList<String> productsIds) {
         if (canAddCategory(supCategoryName, categoryName)) {
             new Category(categoryName, supCategoryName, features, productsIds);
-            success("Category created successfully.");
+            return 0;
         }
+        return 1;
     }
-
 
     public boolean canAddCategory(String supCategoryName, String categoryName) {
         if (Category.hasCategoryWithName(supCategoryName)) {
@@ -39,14 +42,10 @@ public class ManageCategoriesManager extends Manager {
         return false;
     }
 
-    public void openAddCategory(String categoryName) {
-        AddCategoryController controller = (AddCategoryController) loadFxml(Addresses.ADD_CATEGORY, true);
-        controller.setCategoryName(categoryName);
-    }
-
     public void openEditCategory(String categoryName) {
         if (Category.hasCategoryWithName(categoryName))
             new EditCategoryManager(account, Category.getCategoryByName(categoryName));
         else error("Invalid category name");
+        loadFxml(Addresses.EDIT_CATEGORY, true);
     }
 }

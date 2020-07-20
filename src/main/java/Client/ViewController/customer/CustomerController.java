@@ -48,8 +48,9 @@ public class CustomerController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String[] response = sendRequest("GET_ACCOUNT " + accountUsername).split("&&&");
         Customer customer;
-        customer = Gson.INSTANCE.get().fromJson(sendRequest("GET_ACCOUNT " + accountUsername), Customer.class);
+        customer = Gson.INSTANCE.get().fromJson(response[1], Customer.class);
         usernameLabel.setText(customer.getUsername());
         balanceLabel.setText(customer.getBalance() + "");
         firstNameField.setText(customer.getFirstName());

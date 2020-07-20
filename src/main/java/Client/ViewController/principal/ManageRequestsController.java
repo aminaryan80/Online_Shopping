@@ -5,7 +5,6 @@ import Client.ViewController.Controller;
 import Models.Shop.Request.Request;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -14,36 +13,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ManageRequestsController extends Controller implements Initializable {
 
-    @FXML
-    private TableView<Request> requestsTable;
-    @FXML
-    private TableColumn<Request, String> requestIdCol;
-    @FXML
-    private TableColumn<Request, String> requestTypeCol;
-    @FXML
-    private TableColumn<Request, String> requestSenderCol;
-    @FXML
-    private TextField requestIdField;
-    @FXML
-    private Label viewRequestLabel;
+    public TableView<Request> requestsTable;
+    public TableColumn<Request, String> requestIdCol;
+    public TableColumn<Request, String> requestTypeCol;
+    public TableColumn<Request, String> requestSenderCol;
+    public TextField requestIdField;
+    public Label viewRequestLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>(Request.getAllRequests());
-        initTable(objects);
-    }
-
-    public void initTable(ArrayList<Object> tableObjects) {
-        ArrayList<Request> tableRequests = new ArrayList<>();
-        for (Object tableProduct : tableObjects) {
-            tableRequests.add((Request) tableProduct);
-        }
-        requestsTable.setItems(FXCollections.observableArrayList(tableRequests));
+        requestsTable.setItems(FXCollections.observableArrayList(getAllRequests()));
         requestIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         requestTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         requestSenderCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
@@ -51,15 +34,24 @@ public class ManageRequestsController extends Controller implements Initializabl
 
     public void viewRequest(ActionEvent actionEvent) {
         String requestId = requestIdField.getText();
-        viewRequestLabel.setText(((ManageRequestsManager) manager).showRequestDetails(requestId));
+        viewRequestLabel.setText(sendRequest("GET_REQUEST_DETAILS " + requestId));
     }
 
     public void acceptRequest(ActionEvent actionEvent) {
-        ((ManageRequestsManager) manager).acceptRequest(requestIdField.getText());
+        String requestId = requestIdField.getText();
+        String response = sendRequest("ACCEPT_REQUEST " + requestId);
+        if (response.equals("0")) {
+            success("Request accepted successfully.");
+        } else error("Something went wrong.");
     }
 
     public void deleteRequest(ActionEvent actionEvent) {
-        ((ManageRequestsManager) manager).declineRequest(requestIdField.getText());
+        String requestId = requestIdField.getText();
+        ((ManageRequestsManager) manager).declineRequest(requestId);
+        String response = sendRequest("DECLINE_REQUEST " + requestId);
+        if (response.equals("0")) {
+            success("Request declined successfully.");
+        } else error("Something went wrong.");
     }
 
     public void sort(ActionEvent actionEvent) {

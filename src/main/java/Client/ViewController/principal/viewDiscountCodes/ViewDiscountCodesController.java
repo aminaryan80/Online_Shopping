@@ -1,11 +1,10 @@
 package Client.ViewController.principal.viewDiscountCodes;
 
-import Client.Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
+import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Shop.Off.Discount;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,44 +12,29 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ViewDiscountCodesController extends Controller implements Initializable {
 
-
-    @FXML
-    private TextField discountIdField;
-    @FXML
-    private Label viewDiscountLabel;
-    @FXML
-    private TableView<Discount> discountsTable;
-    @FXML
-    private TableColumn<Discount, String> discountIdCol;
-    @FXML
-    private TableColumn<Discount, Double> discountPercentCol;
-    @FXML
-    private TableColumn<Discount, Integer> discountUseCountLimit;
-    @FXML
-    private TableColumn<Discount, LocalDate> beginningDateCol;
-    @FXML
-    private TableColumn<Discount, LocalDate> endingDateCol;
+    protected static String discountId;
+    public TextField discountIdField;
+    public Label viewDiscountLabel;
+    public TableView<Discount> discountsTable;
+    public TableColumn<Discount, String> discountIdCol;
+    public TableColumn<Discount, Double> discountPercentCol;
+    public TableColumn<Discount, Integer> discountUseCountLimit;
+    public TableColumn<Discount, LocalDate> beginningDateCol;
+    public TableColumn<Discount, LocalDate> endingDateCol;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Object> objects = new ArrayList<>(Discount.getAllDiscounts());
-        initTable(objects);
+        initialize();
     }
 
-    public void initTable(ArrayList<Object> tableObjects) {
-        ArrayList<Discount> tableDiscounts = new ArrayList<>();
-        for (Object tableProduct : tableObjects) {
-            tableDiscounts.add((Discount) tableProduct);
-        }
-        discountsTable.setItems(FXCollections.observableArrayList(tableDiscounts));
+    private void initialize() {
+        discountsTable.setItems(FXCollections.observableArrayList(getAllDiscounts()));
         discountIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("discountPercent"));
         discountUseCountLimit.setCellValueFactory(new PropertyValueFactory<>("discountUseCount"));
@@ -59,22 +43,21 @@ public class ViewDiscountCodesController extends Controller implements Initializ
     }
 
     public void viewDiscount(ActionEvent actionEvent) {
-        if (((ViewDiscountCodesManager) manager).viewDiscountCode(discountIdField.getText()) != null) {
-            viewDiscountLabel.setText(((ViewDiscountCodesManager) manager).viewDiscountCode(discountIdField.getText()));
-        }
-
+        viewDiscountLabel.setText(sendRequest("GET_DISCOUNT_DETAILS " + discountIdField.getText()));
     }
 
     public void editDiscount(ActionEvent actionEvent) {
-        ((ViewDiscountCodesManager) manager).editDiscountCode(discountIdField.getText());
+        discountId = discountIdField.getText();
+        loadFxml(Manager.Addresses.EDIT_DISCOUNTS, true);
     }
 
     public void deleteDiscount(ActionEvent actionEvent) {
-        try {
-            ((ViewDiscountCodesManager) manager).deleteDiscountCode(discountIdField.getText());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        discountId = discountIdField.getText();
+        String response = sendRequest("DELETE_DISCOUNT " + discountId);
+        if (response.equals("0")) {
+            success("Discount deleted successfully.");
+        } else error("Something went wrong.");
+        initialize();
     }
 
     public void sort(ActionEvent actionEvent) {

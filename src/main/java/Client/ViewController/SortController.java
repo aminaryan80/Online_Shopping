@@ -8,10 +8,8 @@ import javafx.scene.control.ChoiceBox;
 
 public class SortController extends Controller {
 
-    @FXML
-    private CheckBox isAscending;
-    @FXML
-    private ChoiceBox sortFields;
+    public CheckBox isAscending;
+    public ChoiceBox sortFields;
     private Controller controller;
 
     public void init(Controller controller) {

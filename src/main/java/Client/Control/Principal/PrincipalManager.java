@@ -34,7 +34,7 @@ public class PrincipalManager extends Manager {
         loadFxml(Addresses.CREATE_DISCOUNT_CODE, true);
     }
 
-    public void createDiscountCode(ArrayList<String> newDiscountInputs, ArrayList<String> allowedCustomersNames) {
+    public int createDiscountCode(ArrayList<String> newDiscountInputs, ArrayList<String> allowedCustomersNames) {
         // 0:discount percent - 1:maximumDiscount - 2:discountUseCount - 3:beginningDate - 4:endingDate
         if (isDiscountInputsValid(newDiscountInputs)) {
             Discount discount = new Discount(
@@ -48,7 +48,9 @@ public class PrincipalManager extends Manager {
             for (Customer customer : getCustomersListByNames(allowedCustomersNames)) {
                 customer.addDiscount(discount);
             }
-        } else error("Invalid input.");
+            return 0;
+        }
+        return 1;
     }
 
     private boolean isDiscountInputsValid(ArrayList<String> inputs) {

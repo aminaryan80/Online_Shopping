@@ -1,20 +1,22 @@
 package Client.ViewController.principal.manageCategories;
 
-import Client.Control.Principal.ManageCategories.ManageCategoriesManager;
-import Client.ViewController.Controller;
+import Client.Control.Manager;
+import Models.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
-public class AddCategoryController extends Controller {
+public class AddCategoryController extends ManageCategoriesController implements Initializable {
 
     HashMap<String, Integer> features = new HashMap<>();
-    private String categoryName;
+    //private String categoryName;
     @FXML
     private TextField supCategoryField;
     @FXML
@@ -22,14 +24,18 @@ public class AddCategoryController extends Controller {
     @FXML
     private TextField featureTypeField;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public void addCategory(ActionEvent actionEvent) {
-        ((ManageCategoriesManager) manager).addCategory(supCategoryField.getText(), categoryName, features, new ArrayList<>());
+        String response = sendRequest("ADD_CATEGORY " + supCategoryField.getText() + "&&&" + categoryName + "&&&" + Gson.INSTANCE.get().toJson(features));
+        if (response.equals("0")) {
+            success("Category added successfully.");
+        } else error("Something went wrong.");
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
+        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
     }
 
     public void addFeature(ActionEvent actionEvent) {
