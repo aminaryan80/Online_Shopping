@@ -1,6 +1,7 @@
 package Client.ViewController.customer.cart;
 
 import Client.Control.CustomerManagers.PurchaseManager;
+import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Gson;
 import Models.Shop.Off.Discount;
@@ -217,6 +218,11 @@ public class PurchasePageController extends Controller implements Initializable 
                 checkPurchaseOption();
             }
         }
+    }
+
+    @Override
+    public void back(ActionEvent actionEvent) {
+        loadFxml(Manager.Addresses.VIEW_CART);
     }
 
     public void sort(ActionEvent actionEvent) {

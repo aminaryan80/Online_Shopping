@@ -113,6 +113,7 @@ public class CustomerController extends Controller implements Initializable {
     }
 
     public void openOrders(ActionEvent actionEvent) {
-        ((CustomerManager) manager).openOrders();
+        loadFxml(Manager.Addresses.VIEW_ORDERS);
+//        ((CustomerManager) manager).openOrders();
     }
 }

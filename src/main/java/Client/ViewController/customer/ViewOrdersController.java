@@ -1,20 +1,31 @@
 package Client.ViewController.customer;
 
 import Client.Control.CustomerManagers.ViewOrdersManager;
+import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Client.ViewController.customer.cart.CartTableItem;
+import Models.Gson;
 import Models.Shop.Log.BuyingLog;
+import com.google.gson.reflect.TypeToken;
 import com.sun.javafx.scene.control.skin.LabeledText;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class ViewOrdersController extends Controller {
+public class ViewOrdersController extends Controller implements Initializable {
 
 
     public Label orderIdLabel;
@@ -55,9 +66,10 @@ public class ViewOrdersController extends Controller {
 
     private ArrayList<OrderTableItem> getOrderTableItems() {
         ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
-        if (manager instanceof ViewOrdersManager) {
-            ArrayList<BuyingLog> logs = ((ViewOrdersManager) manager).getLogs();
-            int number = 1;
+//        if (manager instanceof ViewOrdersManager) {
+//            ArrayList<BuyingLog> logs = ((ViewOrdersManager) manager).getLogs();
+        ArrayList<BuyingLog> logs = Gson.INSTANCE.get().fromJson(sendRequest("GET_BUYING_LOGS"+" "+accountUsername),new TypeToken<ArrayList<BuyingLog>>(){}.getType());
+        int number = 1;
             for (BuyingLog log : logs) {
                 orderTableItems.add(new OrderTableItem(
                         number,
@@ -69,14 +81,29 @@ public class ViewOrdersController extends Controller {
                 ));
                 number++;
             }
-        }
+
         return orderTableItems;
     }
 
 
     public void showBoughtProducts(ActionEvent actionEvent) {
-        if (!orderIdLabel.getText().isEmpty())
-            ((ViewOrdersManager) manager).showProductsByLogId(logId);
+        if (!orderIdLabel.getText().isEmpty()) {
+            Stage workingStage = new Stage();
+            ShowOrderProductsController controller = null;
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(Manager.Addresses.SHOW_ORDER_PRODUCTS.getAddress()));
+                Parent root = loader.load();
+                controller = loader.getController();
+                controller.init(sendRequest("SHOW_BOUGHT_PRODUCTS" + " " + accountUsername + " " + logId));
+                Scene scene = new Scene(root);
+                workingStage.setTitle("AP Project");
+                workingStage.setScene(scene);
+                workingStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+//            ((ViewOrdersManager) manager).showProductsByLogId(logId);
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Select an Order then proceed to show products!", ButtonType.OK);
             alert.show();
@@ -89,7 +116,7 @@ public class ViewOrdersController extends Controller {
             if (tableRow.getIndex() < tableView.getItems().size()) {
                 OrderTableItem orderTableItem = (OrderTableItem) tableView.getItems().get(tableRow.getIndex());
                 if (orderTableItem != null) {
-                    BuyingLog log = ((ViewOrdersManager) manager).getLogById(orderTableItem.getId());
+                    BuyingLog log = Gson.INSTANCE.get().fromJson(sendRequest("GET_BUYING_LOG"+" "+accountUsername+" "+orderTableItem.getId()),BuyingLog.class);
                     logId = log.getId();
                     orderIdLabel.setText("#" + logId);
                     dateLabel.setText("Date: " + log.getDate().getYear() + "/" + log.getDate().getMonth() + "/" + log.getDate().getDayOfMonth());
@@ -102,5 +129,15 @@ public class ViewOrdersController extends Controller {
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    @Override
+    public void back(ActionEvent actionEvent) {
+        loadFxml(Manager.Addresses.CUSTOMER_MENU);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        init();
     }
 }

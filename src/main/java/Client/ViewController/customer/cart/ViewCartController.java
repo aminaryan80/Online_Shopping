@@ -35,7 +35,7 @@ public class ViewCartController extends Controller implements Initializable {
 
     public void init() {
 //        totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
-        totalAmount.setText(sendRequest("TOTAL_AMOUNT"+" "+accountUsername));
+        totalAmount.setText(sendRequest("TOTAL_AMOUNT" + " " + accountUsername));
         ArrayList<CartTableItem> cartTableItems = getCartTableItems();
         ArrayList<Object> objects = new ArrayList<>();
         objects.addAll(cartTableItems);
@@ -61,25 +61,26 @@ public class ViewCartController extends Controller implements Initializable {
         ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
 //        if (manager instanceof ViewCartManager) {
 //            HashMap<Product, Integer> productsInCart = ((ViewCartManager) manager).getProductsInCart();
-            HashMap<Product, Integer> productsInCart = Gson.INSTANCE.get().fromJson(sendRequest("GET_CART_PRODUCTS"+" "+accountUsername),new TypeToken<HashMap<Product,Integer>>() {}.getType());
-            int number = 1;
-            for (Product product : productsInCart.keySet()) {
-                cartTableItems.add(new CartTableItem(
-                        number,
-                        product.getId(),
-                        product.getName(),
-                        product.getDescription(),
-                        productsInCart.get(product),
-                        product.getPrice()
-                ));
-                number++;
-            }
+        HashMap<Product, Integer> productsInCart = Gson.INSTANCE.get().fromJson(sendRequest("GET_CART_PRODUCTS" + " " + accountUsername), new TypeToken<HashMap<Product, Integer>>() {
+        }.getType());
+        int number = 1;
+        for (Product product : productsInCart.keySet()) {
+            cartTableItems.add(new CartTableItem(
+                    number,
+                    product.getId(),
+                    product.getName(),
+                    product.getDescription(),
+                    productsInCart.get(product),
+                    product.getPrice()
+            ));
+            number++;
+        }
         return cartTableItems;
     }
 
 
     public void back(ActionEvent actionEvent) {
-        super.back(null);
+        loadFxml(Manager.Addresses.CUSTOMER_MENU);
     }
 
     public void logOut(ActionEvent actionEvent) {
@@ -98,26 +99,26 @@ public class ViewCartController extends Controller implements Initializable {
     }
 
 
-    public void addProduct(ActionEvent actionEvent)  {
+    public void addProduct(ActionEvent actionEvent) {
         if (selectedProduct.getText().matches("\\S{8}")) {
-            System.out.println(sendRequest("PRODUCT_QUANTITY"+" "+"INCREASE"+" "+selectedProduct.getText()+" "+accountUsername));
+            System.out.println(sendRequest("PRODUCT_QUANTITY" + " " + "INCREASE" + " " + selectedProduct.getText() + " " + accountUsername));
             init();
         }
     }
 
     public void reduceProduct(ActionEvent actionEvent) {
         if (selectedProduct.getText().matches("\\S{8}")) {
-            System.out.println(sendRequest("PRODUCT_QUANTITY"+" "+"DECREASE"+" "+selectedProduct.getText()+" "+accountUsername));
+            System.out.println(sendRequest("PRODUCT_QUANTITY" + " " + "DECREASE" + " " + selectedProduct.getText() + " " + accountUsername));
             init();
         }
     }
 
     public void clearCart(ActionEvent actionEvent) {
-        if(sendRequest("IS_CART_EMPTY"+" "+accountUsername).equals("NO")) {
+        if (sendRequest("IS_CART_EMPTY" + " " + accountUsername).equals("NO")) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really wanna clear your cart?", ButtonType.YES, ButtonType.NO);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
-                System.out.println(sendRequest("CLEAR_CART"+" "+accountUsername));
+                System.out.println(sendRequest("CLEAR_CART" + " " + accountUsername));
                 init();
             } else alert.close();
         } else {
@@ -136,15 +137,15 @@ public class ViewCartController extends Controller implements Initializable {
     }
 
     public void openPurchasePage(ActionEvent actionEvent) {
-        if(sendRequest("IS_CART_EMPTY"+" "+accountUsername).equals("NO")){
+        if (sendRequest("IS_CART_EMPTY" + " " + accountUsername).equals("NO")) {
 //            ((ViewCartManager)manager).purchase();
             loadFxml(Manager.Addresses.PURCHASE_PAGE);
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "cart is empty \nYou wanna buy air?", ButtonType.OK);
             alert.show();
         }
     }
+
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);

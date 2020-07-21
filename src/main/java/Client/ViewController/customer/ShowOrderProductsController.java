@@ -3,15 +3,21 @@ package Client.ViewController.customer;
 import Client.Control.CustomerManagers.ViewOrdersManager;
 import Client.ViewController.Controller;
 import Client.ViewController.customer.cart.CartTableItem;
+import Models.Gson;
 import Models.Shop.Product.Product;
+import com.google.gson.reflect.TypeToken;
+import com.sun.org.apache.xml.internal.security.Init;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 public class ShowOrderProductsController extends Controller {
 
@@ -23,9 +29,8 @@ public class ShowOrderProductsController extends Controller {
     public TableColumn quantityColumn;
     public TableColumn priceColumn;
 
-    @Override
-    public void init() {
-        ArrayList<CartTableItem> cartTableItems = getCartTableItems();
+    public void init(String boughtProducts) {
+        ArrayList<CartTableItem> cartTableItems = getCartTableItems(boughtProducts);
         ObservableList<CartTableItem> data = FXCollections.observableList(cartTableItems);
 
         numberColumn.setCellValueFactory(new PropertyValueFactory<CartTableItem, Integer>("number"));
@@ -38,23 +43,24 @@ public class ShowOrderProductsController extends Controller {
         tableView.setItems(data);
     }
 
-    private ArrayList<CartTableItem> getCartTableItems() {
+    private ArrayList<CartTableItem> getCartTableItems(String boughtProducts) {
         ArrayList<CartTableItem> cartTableItems = new ArrayList<>();
-        if (manager instanceof ViewOrdersManager) {
-            HashMap<Product, Integer> productsInCart = ((ViewOrdersManager) manager).getOrderProductsToShow();
-            int number = 1;
-            for (Product product : productsInCart.keySet()) {
-                cartTableItems.add(new CartTableItem(
-                        number,
-                        product.getId(),
-                        product.getName(),
-                        product.getDescription(),
-                        productsInCart.get(product),
-                        product.getPrice()
-                ));
-                number++;
-            }
+//        if (manager instanceof ViewOrdersManager) {
+//            HashMap<Product, Integer> productsInCart = ((ViewOrdersManager) manager).getOrderProductsToShow();
+        HashMap<Product, Integer> productsInCart = Gson.INSTANCE.get().fromJson(boughtProducts, new TypeToken<HashMap<Product,Integer>>() {}.getType());
+        int number = 1;
+        for (Product product : productsInCart.keySet()) {
+            cartTableItems.add(new CartTableItem(
+                    number,
+                    product.getId(),
+                    product.getName(),
+                    product.getDescription(),
+                    productsInCart.get(product),
+                    product.getPrice()
+            ));
+            number++;
         }
         return cartTableItems;
     }
+
 }

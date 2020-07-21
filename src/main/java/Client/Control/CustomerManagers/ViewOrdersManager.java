@@ -23,6 +23,10 @@ public class ViewOrdersManager extends Manager {
         update(controller);
     }
 
+    public ViewOrdersManager(Account account) {
+        super(account);
+    }
+
     @Override
     public void update(Controller controller) {
         controller.init();
@@ -111,6 +115,10 @@ public class ViewOrdersManager extends Manager {
         logToShowProducts = customer.getLogById(logId);
         Controller controller = loadFxml(Addresses.SHOW_ORDER_PRODUCTS,true);
         controller.init();
+    }
+
+    public void setLogToShowProducts(String logId) {
+        logToShowProducts = customer.getLogById(logId);
     }
 
     public HashMap<Product, Integer> getOrderProductsToShow() {

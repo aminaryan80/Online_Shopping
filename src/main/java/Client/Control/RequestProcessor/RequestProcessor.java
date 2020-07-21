@@ -2,6 +2,7 @@ package Client.Control.RequestProcessor;
 
 import Client.Control.CustomerManagers.PurchaseManager;
 import Client.Control.CustomerManagers.ViewCartManager;
+import Client.Control.CustomerManagers.ViewOrdersManager;
 import Client.Control.EditPasswordManager;
 import Client.Control.Manager;
 import Client.Control.Principal.ManageAllProductsManager;
@@ -111,9 +112,31 @@ public class RequestProcessor {
             response = isPhoneNumberValid(matcher.group(1));
         } else if ((matcher = getMatcher(request,"PAY (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
             response = pay(matcher.group(1),matcher.group(2),matcher.group(3),matcher.group(4));
+        } else if ((matcher = getMatcher(request, "GET_BUYING_LOGS (\\S+)")).find()){
+            response = getBuyingLogs(matcher.group(1));
+        } else if ((matcher = getMatcher(request,"SHOW_BOUGHT_PRODUCTS (\\S+) (\\S+)")).find()){
+            response = showBoughtProducts(matcher.group(1),matcher.group(2));
+        } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()){
+            response = getBuyingLog(matcher.group(1),matcher.group(2));
         }
             return response;
 
+    }
+
+    private static String getBuyingLog(String username, String lodId) {
+        ViewOrdersManager viewOrdersManager = new ViewOrdersManager(Account.getAccountByUsername(username));
+        return Gson.INSTANCE.get().toJson(viewOrdersManager.getLogById(lodId));
+    }
+
+    private static String showBoughtProducts(String username, String logId) {
+        ViewOrdersManager viewOrdersManager = new ViewOrdersManager(Account.getAccountByUsername(username));
+        viewOrdersManager.setLogToShowProducts(logId);
+        return Gson.INSTANCE.get().toJson(viewOrdersManager.getOrderProductsToShow());
+    }
+
+    private static String getBuyingLogs(String username) {
+        ViewOrdersManager viewOrdersManager = new ViewOrdersManager(Account.getAccountByUsername(username));
+        return Gson.INSTANCE.get().toJson(viewOrdersManager.getLogs());
     }
 
     private static String pay(String username, String discountId, String address, String phoneNumber) {
