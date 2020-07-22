@@ -1,5 +1,6 @@
 package Client.ViewController.principal;
 
+import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -81,5 +82,9 @@ public class ManageUsersController extends Controller implements Initializable {
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    public void back() {
+        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
     }
 }

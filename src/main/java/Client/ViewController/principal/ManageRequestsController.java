@@ -1,5 +1,6 @@
 package Client.ViewController.principal;
 
+import Client.Control.Manager;
 import Client.Control.Principal.ManageRequestsManager;
 import Client.ViewController.Controller;
 import Models.Shop.Request.Request;
@@ -56,5 +57,9 @@ public class ManageRequestsController extends Controller implements Initializabl
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    public void back() {
+        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
     }
 }

@@ -1,14 +1,21 @@
 package Client.ViewController.customer;
 
-import Client.Control.CustomerManagers.ProductPageManager;
-import Client.ViewController.Controller;
+import Client.ViewController.products.ProductPageController;
+import Models.Gson;
+import Models.Shop.Category.Feature;
 import Models.Shop.Product.Product;
+import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class CompareController extends Controller {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+public class CompareController extends ProductPageController implements Initializable {
 
     public Label productId;
     public Label productName;
@@ -32,24 +39,19 @@ public class CompareController extends Controller {
     public TableColumn valueColumnOther;
     public TextField otherProductIdField;
 
-    Product product;
-
     @Override
-    public void init() {
-        product = ((ProductPageManager) manager).getProduct();
-        initializeProduct(product);
-    }
-
-    private void initializeProduct(Product product) {
+    public void initialize(URL location, ResourceBundle resources) {
         productName.setText(product.getName());
         price.setText(product.getPrice() + "$");
-        sellerName.setText(product.getSeller().getName());
+        sellerName.setText(product.getSellerUsername());
         companyName.setText(product.getCompanyName());
-        double score = product.getRate();
+        double score = Double.parseDouble(sendRequest("GET_PRODUCT_RATE " + product.getId()));
         rate.setText(("" + score).length() > 1 ? ("" + score).substring(0, 3) : ("" + score).substring(0, 1));
         description.setText(product.getDescription());
         productId.setText("#" + product.getId());
-        featureValueTable.setItems(FXCollections.observableArrayList(product.getFeatures()));
+        ArrayList<Feature> features = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_FEATURES " + product.getId()),
+                new TypeToken<ArrayList<Feature>>() {}.getType()));
+        featureValueTable.setItems(FXCollections.observableArrayList(features));
         featureColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
@@ -57,32 +59,32 @@ public class CompareController extends Controller {
     private void initializeOtherProduct(Product product) {
         productNameOther.setText(product.getName());
         priceOther.setText(product.getPrice() + "$");
-        sellerNameOther.setText(product.getSeller().getName());
+        sellerNameOther.setText(product.getSellerUsername());
         companyNameOther.setText(product.getCompanyName());
-        double score = product.getRate();
+        double score = Double.parseDouble(sendRequest("GET_PRODUCT_RATE " + product.getId()));
         rateOther.setText(("" + score).length() > 1 ? ("" + score).substring(0, 3) : ("" + score).substring(0, 1));
         descriptionOther.setText(product.getDescription());
         productIdOther.setText("#" + product.getId());
-        featureValueTableOther.setItems(FXCollections.observableArrayList(product.getFeatures()));
+        ArrayList<Feature> features = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_FEATURES " + product.getId()),
+                new TypeToken<ArrayList<Feature>>() {}.getType()));
+        featureValueTableOther.setItems(FXCollections.observableArrayList(features));
         featureColumnOther.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumnOther.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
 
     public void setOtherProduct(ActionEvent actionEvent) {
-        if(otherProductIdField.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Fill the fields then confirm!", ButtonType.OK);
-            alert.show();
+        if (otherProductIdField.getText().isEmpty()) {
+            error("Fill the fields then confirm!");
         } else {
-            if(manager.getProduct(otherProductIdField.getText())!=null){
-                if(!otherProductIdField.getText().equals(product.getId())){
-                    initializeOtherProduct(manager.getProduct(otherProductIdField.getText()));
-                }else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "Can not compare to itself!", ButtonType.OK);
-                    alert.show();
+            Product product = Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT " + otherProductIdField.getText()), Product.class);
+            if (product != null) {
+                if (!otherProductIdField.getText().equals(product.getId())) {
+                    initializeOtherProduct(product);
+                } else {
+                    error("Can not compare to itself!");
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Wrong Id!", ButtonType.OK);
-                alert.show();
+                error("Wrong Id!");
             }
         }
     }

@@ -332,7 +332,9 @@ public abstract class Manager {
 
         PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml"),
 
-        AUCTION_DETAILS("view/products/AuctionDetails.fxml");
+        AUCTION_DETAILS("view/products/AuctionDetails.fxml"),
+
+        PRODUCT_ITEM("view/products/Product.fxml");
 
         private String address;
 

@@ -3,11 +3,10 @@ package Client.ViewController;
 import Client.Control.Manager;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 
 public class MainController extends Controller {
 
-    public Label test;
+    protected static boolean isOffsMenu;
 
     public void aboutUs(ActionEvent actionEvent) {
         Alert a = new Alert(Alert.AlertType.NONE);
@@ -20,11 +19,13 @@ public class MainController extends Controller {
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
-        manager.openOffsMenu();
+        isOffsMenu = true;
+        loadFxml(Manager.Addresses.PRODUCTS_MENU);
     }
 
     public void openProductsMenu(ActionEvent actionEvent) {
-        manager.openProductsMenu();
+        isOffsMenu = false;
+        loadFxml(Manager.Addresses.PRODUCTS_MENU);
     }
 
     public void exit(ActionEvent actionEvent) {

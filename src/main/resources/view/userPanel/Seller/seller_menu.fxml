@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="Client.ViewController.userPanel.Seller.SellerMenuController">
+            fx:controller="Client.ViewController.seller.SellerMenuController">
     <children>
         <ImageView fitHeight="125.0" fitWidth="123.0" layoutX="294.0" layoutY="69.0" pickOnBounds="true"
                    preserveRatio="true">

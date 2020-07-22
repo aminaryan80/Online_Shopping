@@ -1,5 +1,6 @@
 package Client.Control.RequestProcessor;
 
+import Client.Control.CustomerManagers.ProductPageManager;
 import Client.Control.CustomerManagers.PurchaseManager;
 import Client.Control.CustomerManagers.ViewCartManager;
 import Client.Control.CustomerManagers.ViewOrdersManager;
@@ -13,14 +14,19 @@ import Client.Control.Principal.ManageUsersManager;
 import Client.Control.Principal.PrincipalManager;
 import Client.Control.Principal.ViewDiscountCodes.EditDiscountCodeManager;
 import Client.Control.Principal.ViewDiscountCodes.ViewDiscountCodesManager;
+import Client.Control.Products.ProductsManager;
+import Client.Control.Seller.ManageProductsManager;
+import Client.Control.Seller.SellerManager;
+import Client.Control.Seller.ViewOffsManager;
 import Client.Control.UserPanel.LoginToExistingAccountManager;
-import Client.ViewController.principal.viewDiscountCodes.ViewDiscountCodesController;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Account.Seller;
 import Models.Gson;
 import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
+import Models.Shop.Off.Auction;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.*;
@@ -28,6 +34,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,24 +61,56 @@ public class RequestProcessor {
             response = deleteProduct(matcher);
         } else if ((matcher = getMatcher(request, "DELETE_DISCOUNT (\\S+)")).find()) {
             response = deleteDiscount(matcher);
+        } else if ((matcher = getMatcher(request, "DELETE_SELLER_PRODUCT (\\S+) (\\S+)")).find()) {
+            response = deleteProductBySeller(matcher);
         } else if ((matcher = getMatcher(request, "ADD_CATEGORY ((.|\\n)+)")).find()) {
             response = addCategory(matcher);
         } else if ((matcher = getMatcher(request, "CREATE_DISCOUNT ((.|\\n)+)")).find()) {
             response = createDiscount(matcher);
+        } else if ((matcher = getMatcher(request, "CREATE_AUCTION ((.|\\n)+)")).find()) {
+            response = createAuction(matcher);
+        } else if ((matcher = getMatcher(request, "CREATE_PRODUCT ((.|\\n)+)")).find()) {
+            response = createProduct(matcher);
+        } else if ((matcher = getMatcher(request, "CREATE_PROFILE_MANAGER ((.|\\n)+)")).find()) {
+            response = createProfileManager(matcher);
+        } else if ((matcher = getMatcher(request, "ADD_COMMENT (\\S+) (\\S+) ((.|\\n)+)")).find()) {
+            response = addComment(matcher);
         } else if ((matcher = getMatcher(request, "EDIT_CATEGORY (\\S+) (\\S+) (.+)")).find()) {
             response = editCategory(matcher);
-        } else if ((matcher = getMatcher(request, "UPDATE_PROFILE (\\S+) ((.|\\n)+)")).find()) {
-            response = updateProfile(matcher);
+        } else if ((matcher = getMatcher(request, "EDIT_DISCOUNT (\\S+) (\\S+) (\\S+)")).find()) {
+            response = editDiscount(matcher);
+        } else if ((matcher = getMatcher(request, "EDIT_AUCTION (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
+            response = editAuction(matcher);
+        } else if ((matcher = getMatcher(request, "EDIT_PRODUCT (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
+            response = editProduct(matcher);
         } else if ((matcher = getMatcher(request, "EDIT_PASSWORD (\\S+) (\\S+) (\\S+)")).find()) {
             response = editPassword(matcher);
+        } else if ((matcher = getMatcher(request, "UPDATE_PROFILE (\\S+) ((.|\\n)+)")).find()) {
+            response = updateProfile(matcher);
         } else if ((matcher = getMatcher(request, "GET_CUSTOMER_LOGS (\\S+)")).find()) {
             response = getCustomerLogs(matcher);
         } else if ((matcher = getMatcher(request, "GET_SELLER_LOGS (\\S+)")).find()) {
             response = getSellerLogs(matcher);
-        } else if ((matcher = getMatcher(request, "CREATE_PROFILE_MANAGER ((.|\\n)+)")).find()) {
-            response = createProfileManager(matcher);
-        } else if ((matcher = getMatcher(request, "EDIT_DISCOUNT (\\S+) (\\S+) (\\S+)")).find()) {
-            response = editDiscount(matcher);
+        } else if ((matcher = getMatcher(request, "GET_SELLER_AUCTIONS (\\S+)")).find()) {
+            response = getSellerAuctions(matcher);
+        } else if ((matcher = getMatcher(request, "GET_SELLER_PRODUCTS (\\S+)")).find()) {
+            response = getSellerProducts(matcher);
+        } else if ((matcher = getMatcher(request, "GET_AUCTION_PRODUCTS (\\S+)")).find()) {
+            response = getAuctionProducts(matcher);
+        } else if ((matcher = getMatcher(request, "GET_PRODUCT_BUYERS (\\S+)")).find()) {
+            response = getProductBuyers(matcher);
+        } else if ((matcher = getMatcher(request, "GET_CATEGORY (\\S+)")).find()) {
+            response = getCategoryByName(matcher);
+        } else if ((matcher = getMatcher(request, "GET_PRODUCT_PRICE (\\S+)")).find()) {
+            response = getProductPrice(matcher);
+        } else if ((matcher = getMatcher(request, "GET_PRODUCT_RATE (\\S+)")).find()) {
+            response = getProductRate(matcher);
+        } else if ((matcher = getMatcher(request, "GET_PRODUCT_COMMENTS (\\S+)")).find()) {
+            response = getProductComments(matcher);
+        } else if ((matcher = getMatcher(request, "GET_PRODUCT_FEATURES (\\S+)")).find()) {
+            response = getProductFeatures(matcher);
+        } else if ((matcher = getMatcher(request, "GET_PRODUCT_AUCTION (\\S+)")).find()) {
+            response = getProductAuction(matcher);
         } else if (getMatcher(request, "GET_ALL_PRINCIPALS").find()) {
             response = getAllPrincipals();
         } else if (getMatcher(request, "GET_ALL_CUSTOMERS").find()) {
@@ -86,8 +125,16 @@ public class RequestProcessor {
             response = getAllCategories();
         } else if (getMatcher(request, "GET_ALL_PRODUCTS").find()) {
             response = getAllProducts();
+        } else if ((matcher = getMatcher(request, "LOAD_PRODUCTS (\\S+)")).find()) {
+            response = loadProducts(matcher);
+        } else if ((matcher = getMatcher(request, "HAS_PRODUCT_IN_CART (\\S+) (\\S+)")).find()) {
+            response = hasProductInCart(matcher);
+        } else if ((matcher = getMatcher(request, "ADD_PRODUCT_TO_CART (\\S+) (\\S+)")).find()) {
+            response = addProductToCart(matcher);
+        } else if ((matcher = getMatcher(request, "RATE_PRODUCT (\\S+) (\\S+)")).find()) {
+            response = rateProduct(matcher);
         } else if ((matcher = getMatcher(request, "TOTAL_AMOUNT (\\S+)")).find()) {
-            response = getTotalAmount(matcher.group(1),null);
+            response = getTotalAmount(matcher.group(1), null);
         } else if ((matcher = getMatcher(request, "GET_CART_PRODUCTS (\\S+)")).find()) {
             response = getCartProducts(matcher.group(1));
         } else if ((matcher = getMatcher(request, "PRODUCT_QUANTITY (INCREASE|DECREASE) (\\S+) (\\S+)")).find()) {
@@ -110,16 +157,16 @@ public class RequestProcessor {
             response = getTotalAmount(matcher.group(1), matcher.group(2));
         } else if (((matcher = getMatcher(request, "IS_PHONENUMBER_VALID (\\S+)")).find())) {
             response = isPhoneNumberValid(matcher.group(1));
-        } else if ((matcher = getMatcher(request,"PAY (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
-            response = pay(matcher.group(1),matcher.group(2),matcher.group(3),matcher.group(4));
-        } else if ((matcher = getMatcher(request, "GET_BUYING_LOGS (\\S+)")).find()){
+        } else if ((matcher = getMatcher(request, "PAY (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
+            response = pay(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4));
+        } else if ((matcher = getMatcher(request, "GET_BUYING_LOGS (\\S+)")).find()) {
             response = getBuyingLogs(matcher.group(1));
-        } else if ((matcher = getMatcher(request,"SHOW_BOUGHT_PRODUCTS (\\S+) (\\S+)")).find()){
-            response = showBoughtProducts(matcher.group(1),matcher.group(2));
-        } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()){
-            response = getBuyingLog(matcher.group(1),matcher.group(2));
+        } else if ((matcher = getMatcher(request, "SHOW_BOUGHT_PRODUCTS (\\S+) (\\S+)")).find()) {
+            response = showBoughtProducts(matcher.group(1), matcher.group(2));
+        } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()) {
+            response = getBuyingLog(matcher.group(1), matcher.group(2));
         }
-            return response;
+        return response;
 
     }
 
@@ -145,12 +192,11 @@ public class RequestProcessor {
         info.add(address);
         info.add(phoneNumber);
         try {
-            purchaseManager.pay(info,discountId);
+            purchaseManager.pay(info, discountId);
         } catch (PurchaseManager.WrongDiscountIdException e) {
             e.printStackTrace();
-        } finally {
-            return "purchased successfully!";
         }
+        return "purchased successfully!";
     }
 
     private static String isPhoneNumberValid(String phoneNumber) {
@@ -160,25 +206,25 @@ public class RequestProcessor {
                 return super.checkPhoneNumber(phoneNumber);
             }
         };
-        if(manager.checkPhoneNumber(phoneNumber)) return "YES";
+        if (manager.checkPhoneNumber(phoneNumber)) return "YES";
         else return "NO";
     }
 
     private static String isDiscountActive(String username, String discountId) {
         PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
-        if(purchaseManager.isDiscountActive(discountId)) return "YES";
+        if (purchaseManager.isDiscountActive(discountId)) return "YES";
         else return "NO";
     }
 
     private static String canUseDiscount(String username, String discountId) {
         PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
-        if(purchaseManager.canUseDiscount(discountId)) return "YES";
+        if (purchaseManager.canUseDiscount(discountId)) return "YES";
         else return "NO";
     }
 
     private static String doesDiscountBelongToCustomer(String username, String discountId) {
         PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
-        if(purchaseManager.doesDiscountBelongToCustomer(discountId)) return "YES";
+        if (purchaseManager.doesDiscountBelongToCustomer(discountId)) return "YES";
         else return "NO";
     }
 
@@ -193,9 +239,7 @@ public class RequestProcessor {
         try {
             if (purchaseManager.canPay(discountId)) return "YES";
             else return "NO";
-        } catch (PurchaseManager.WrongDiscountIdException e) {
-            e.printStackTrace();
-        } catch (PurchaseManager.UsedDiscountIdException e) {
+        } catch (PurchaseManager.WrongDiscountIdException | PurchaseManager.UsedDiscountIdException e) {
             e.printStackTrace();
         }
         return "NO";
@@ -204,8 +248,33 @@ public class RequestProcessor {
     private static String createDiscount(Matcher matcher) {
         String[] inputs = matcher.group(1).split("&&&");
         PrincipalManager principalManager = new PrincipalManager(null);
-        return principalManager.createDiscountCode(Gson.INSTANCE.get().fromJson(inputs[0], new TypeToken<ArrayList<String>>() {}.getType()),
-                Gson.INSTANCE.get().fromJson(inputs[1], new TypeToken<ArrayList<String>>() {}.getType())) + "";
+        return principalManager.createDiscountCode(Gson.INSTANCE.get().fromJson(inputs[0], new TypeToken<ArrayList<String>>() {
+                }.getType()),
+                Gson.INSTANCE.get().fromJson(inputs[1], new TypeToken<ArrayList<String>>() {
+                }.getType())) + "";
+    }
+
+    private static String createAuction(Matcher matcher) {
+        String[] inputs = matcher.group(1).split("&&&");
+        ArrayList<String> input = new ArrayList<>(Gson.INSTANCE.get().fromJson(inputs[0], new TypeToken<ArrayList<String>>() {
+        }.getType()));
+        ViewOffsManager viewOffsManager = new ViewOffsManager(null);
+        viewOffsManager.addOff(input.get(0), input.get(1), input.get(2), Double.parseDouble(input.get(3)),
+                Gson.INSTANCE.get().fromJson(inputs[1], new TypeToken<List<String>>() {
+                }.getType()));
+        return "0";
+    }
+
+    private static String createProduct(Matcher matcher) {
+        String[] inputs = matcher.group(1).split("&&&");
+        ArrayList<String> input = new ArrayList<>(Gson.INSTANCE.get().fromJson(inputs[0], new TypeToken<ArrayList<String>>() {
+        }.getType()));
+        ManageProductsManager manageProductsManager = new ManageProductsManager(null);
+        manageProductsManager.addProduct(input.get(0), Category.getCategoryByName(input.get(1)),
+                Double.parseDouble(input.get(2)), Boolean.parseBoolean(input.get(3)), input.get(4),
+                Gson.INSTANCE.get().fromJson(inputs[1], new TypeToken<ArrayList<Feature>>() {
+                }.getType()));
+        return "0";
     }
 
     private static String acceptRequest(Matcher matcher) {
@@ -233,6 +302,18 @@ public class RequestProcessor {
         return editDiscountCodeManager.editDiscount(matcher.group(1), matcher.group(2), matcher.group(3)) + "";
     }
 
+    private static String editAuction(Matcher matcher) {
+        ViewOffsManager viewOffsManager = new ViewOffsManager(null);
+        viewOffsManager.editOffAttribute(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4));
+        return "0";
+    }
+
+    private static String editProduct(Matcher matcher) {
+        ManageProductsManager manageProductsManager = new ManageProductsManager(null);
+        manageProductsManager.editProduct(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4));
+        return "0";
+    }
+
     private static String editCategory(Matcher matcher) {
         EditCategoryManager editCategoryManager = new EditCategoryManager(null);
         return editCategoryManager.editCategory(matcher.group(1), matcher.group(2), matcher.group(3)) + "";
@@ -250,6 +331,32 @@ public class RequestProcessor {
         return Gson.INSTANCE.get().toJson(Product.getAllProducts());
     }
 
+    private static String loadProducts(Matcher matcher) {
+        ProductsManager productsManager;
+        if (matcher.group(1).equals("true"))
+            productsManager = new ProductsManager(null, true);
+        else
+            productsManager = new ProductsManager(null, false);
+        return Gson.INSTANCE.get().toJson((productsManager.loadProducts()));
+    }
+
+    private static String hasProductInCart(Matcher matcher) {
+        Account account = Account.getAccountByUsername(matcher.group(1));
+        ProductPageManager productPageManager = new ProductPageManager(account, matcher.group(2));
+        return productPageManager.hasProductInCart() + "";
+    }
+
+    private static String addProductToCart(Matcher matcher) {
+        Account account = Account.getAccountByUsername(matcher.group(1));
+        ProductPageManager productPageManager = new ProductPageManager(account, matcher.group(2));
+        return productPageManager.addToCart() + "";
+    }
+
+    private static String rateProduct(Matcher matcher) {
+        ProductPageManager productPageManager = new ProductPageManager(null, matcher.group(1));
+        return productPageManager.rateProduct(matcher.group(1), Integer.parseInt(matcher.group(2)));
+    }
+
     private static String createProfileManager(Matcher matcher) {
         ManageUsersManager manageUsersManager = new ManageUsersManager(null);
         return manageUsersManager.createManagerProfile(Gson.INSTANCE.get().fromJson(matcher.group(1),
@@ -257,6 +364,14 @@ public class RequestProcessor {
                 }.getType())) + "";
     }
 
+    private static String addComment(Matcher matcher) {
+        Account account = Account.getAccountByUsername(matcher.group(1));
+        ProductPageManager productPageManager = new ProductPageManager(account, matcher.group(2));
+        ArrayList<String> inputs = new ArrayList<>(Gson.INSTANCE.get().fromJson(matcher.group(3),
+                new TypeToken<ArrayList<String>>() {}.getType()));
+        productPageManager.addComment(inputs.get(0), inputs.get(1));
+        return "0";
+    }
     private static String getAllCategories() {
         return Gson.INSTANCE.get().toJson(Category.getAllCategories());
     }
@@ -269,6 +384,56 @@ public class RequestProcessor {
     private static String getSellerLogs(Matcher matcher) {
         Seller seller = (Seller) Seller.getAccountByUsername(matcher.group(1));
         return Gson.INSTANCE.get().toJson(seller.getAllLogs());
+    }
+
+    private static String getSellerAuctions(Matcher matcher) {
+        Seller seller = (Seller) Seller.getAccountByUsername(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(seller.getAuctions());
+    }
+
+    private static String getSellerProducts(Matcher matcher) {
+        Seller seller = (Seller) Seller.getAccountByUsername(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(Product.getProductsBySeller(seller));
+    }
+
+    private static String getAuctionProducts(Matcher matcher) {
+        Auction auction = Auction.getAuctionById(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(auction.getProducts());
+    }
+
+    private static String getProductBuyers(Matcher matcher) {
+        Product product = Product.getProductById(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(product.getAllBuyers());
+    }
+
+    private static String getCategoryByName(Matcher matcher) {
+        Category category = Category.getCategoryByName(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(category);
+    }
+
+    private static String getProductPrice(Matcher matcher) {
+        Product product = Product.getProductById(matcher.group(1));
+        return product.getAuctionedPrice() + "";
+    }
+
+    private static String getProductRate(Matcher matcher) {
+        Product product = Product.getProductById(matcher.group(1));
+        return product.getRate() + "";
+    }
+
+    private static String getProductComments(Matcher matcher) {
+        ProductPageManager productPageManager = new ProductPageManager(null, matcher.group(1));
+        return Gson.INSTANCE.get().toJson(productPageManager.commentsFXML());
+    }
+
+    private static String getProductFeatures(Matcher matcher) {
+        Product product = Product.getProductById(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(product.getFeatures());
+    }
+
+    private static String getProductAuction(Matcher matcher) {
+        Product product = Product.getProductById(matcher.group(1));
+        return Gson.INSTANCE.get().toJson(product.getAuction());
     }
 
     private static String clearCart(String username) {
@@ -298,7 +463,7 @@ public class RequestProcessor {
         return Gson.INSTANCE.get().toJson(productIntegerHashMap);
     }
 
-    private static String getTotalAmount(String username,String discountId) {
+    private static String getTotalAmount(String username, String discountId) {
         Discount discount = Discount.getDiscountById(discountId);
         return "" + ((Customer) Account.getAccountByUsername(username)).getCart().getTotalPrice(discount) + "$";
     }
@@ -407,6 +572,12 @@ public class RequestProcessor {
     private static String deleteProduct(Matcher matcher) {
         ManageAllProductsManager manageUsersManager = new ManageAllProductsManager(null);
         return manageUsersManager.removeProductById(matcher.group(1)) + "";
+    }
+
+    private static String deleteProductBySeller(Matcher matcher) {
+        SellerManager sellerManager = new SellerManager(null);
+        sellerManager.deleteProductById(matcher.group(1), matcher.group(2));
+        return "0";
     }
 
     private static String deleteDiscount(Matcher matcher) {

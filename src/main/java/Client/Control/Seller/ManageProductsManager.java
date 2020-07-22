@@ -2,8 +2,6 @@ package Client.Control.Seller;
 
 import Client.Control.Manager;
 import Client.ViewController.Controller;
-import Client.ViewController.userPanel.Seller.EditProductsController;
-import Client.ViewController.userPanel.Seller.FeaturesPopUpController;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Category.Category;
@@ -11,26 +9,31 @@ import Models.Shop.Category.Feature;
 import Models.Shop.Category.Sort;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.AddProductRequest;
+import Models.Shop.Request.EditProductRequest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class EditProductsManager extends Manager {
+public class ManageProductsManager extends Manager {
     private Sort currentSort;
     private List<Product> products;
 
-    public EditProductsManager(Account account, Addresses address, Manager manager) {
+    public ManageProductsManager(Account account) {
+        super(account);
+    }
+
+    public ManageProductsManager(Account account, Addresses address, Manager manager) {
         super(account, address, manager);
         Controller controller = loadFxml(Addresses.EDIT_PRODUCTS_MENU);
         update(controller);
     }
 
     public void update(Controller c) {
-        EditProductsController controller = (EditProductsController) c;
+        /*ManageProductsController controller = (ManageProductsController) c;
         controller.setManager(this);
-        controller.init((Seller) account);
+        controller.init((Seller) account);*/
     }
 
     public String showAvailableSorts() {
@@ -45,11 +48,6 @@ public class EditProductsManager extends Manager {
         fields.add("name");
         fields.add("rating");
         return fields;
-    }
-
-    public void featuresPopUp(Controller controller) {
-        Controller myController = loadFxml(Manager.Addresses.ADD_PRODUCT_POP_UP, true);
-        ((FeaturesPopUpController) myController).init(controller);
     }
 
     public void addProduct(String name, Category category, double price, boolean isAvailable,
@@ -139,20 +137,21 @@ public class EditProductsManager extends Manager {
         return new ArrayList<>(products);
     }
 
-    public Product editProduct(String id, String field, String newValue) {
+    public void editProduct(String sellerUsername, String id, String field, String newValue) {
+        Seller seller = (Seller) Account.getAccountByUsername(sellerUsername);
         Product product = Product.getProductById(id);
-        if (field.equals("name")) {
+        if (field.equals("NAME")) {
             product.setName(newValue);
-        } else if (field.equals("description")) {
+        } else if (field.equals("DESCRIPTION")) {
             product.setDescription(newValue);
-        } else if (field.equals("isAvailable")) {
+        } else if (field.equals("IS_AVAILABLE")) {
             product.setAvailable(Boolean.parseBoolean(newValue));
-        } else if (field.equals("price")) {
+        } else if (field.equals("PRICE")) {
             product.setPrice(Double.parseDouble(newValue));
         } else {
             product.getFeatureByName(field).setValue(newValue);
         }
         product.setStatus(Product.ProductStatus.UNDER_REVIEW_FOR_EDITING);
-        return product;
+        new EditProductRequest(seller, product);
     }
 }

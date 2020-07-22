@@ -117,10 +117,6 @@ public class Controller {
         return requests;
     }
 
-    protected void logout() {
-        manager.logout();
-    }
-
     public TreeItem<String> getCategoriesInTable() {
         ArrayList<Category> categories = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_ALL_CATEGORIES"),
                 new TypeToken<ArrayList<Category>>() {
@@ -150,13 +146,11 @@ public class Controller {
         return null;
     }
 
-    public void back(ActionEvent actionEvent) {
-        //manager.back();
+    /*public void back(ActionEvent actionEvent) {
         System.out.println("Back");
-    }
+    }*/
 
-    public void logout(ActionEvent actionEvent) {
-        logout();
+    public void logout() {
         System.out.println("LOGOUT");
     }
 
@@ -185,7 +179,8 @@ public class Controller {
         else
             workingStage = stage;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+//            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+            FXMLLoader loader = getLoader(address);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             workingStage.setTitle("AP Project");
@@ -194,5 +189,9 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public FXMLLoader getLoader(Manager.Addresses address) {
+        return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
     }
 }

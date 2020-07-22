@@ -1,13 +1,16 @@
 package Client.ViewController.products;
 
-import Client.Control.CustomerManagers.ProductPageManager;
-import Client.Control.CustomerManagers.ViewCartManager;
 import Client.Control.Manager;
 import Client.ViewController.Controller;
+import Models.Account.Account;
+import Models.Account.Customer;
+import Models.Gson;
+import Models.Shop.Category.Feature;
+import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
+import com.google.gson.reflect.TypeToken;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +20,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class ProductPageController extends Controller {
@@ -31,42 +36,39 @@ public class ProductPageController extends Controller {
     public Label productId;
     public TableColumn featureColumn;
     public TableColumn valueColumn;
-    @FXML
-    private GridPane comments;
-    @FXML
-    private Pane discountPane;
-    @FXML
-    private Label beginning;
-    @FXML
-    private Label ending;
-    @FXML
-    private Label amount;
+    public GridPane comments;
+    public Pane discountPane;
+    public Label beginning;
+    public Label ending;
+    public Label amount;
 
-    private Product product;
+    protected static Product product;
+    protected static Auction auction;
     int row;
-
 
     public void init() {
         row = 0;
-        product = ((ProductPageManager) manager).getProduct();
         initializeProduct();
         initializeComments();
         if (product.hasAuction()) {
             discountPane.setVisible(true);
-            beginning.setText(product.getAuction().getBeginningDate().toString());
-            ending.setText(product.getAuction().getEndingDate().toString());
-            amount.setText(String.valueOf(product.getAuction().getDiscountAmount()));
+            beginning.setText(auction.getBeginningDate().toString());
+            ending.setText(auction.getEndingDate().toString());
+            amount.setText(String.valueOf(auction.getDiscountAmount()));
         }
     }
 
     public void initializeComments() {
-        for (String senderName : ((ProductPageManager) manager).commentsFXML().keySet()) {
+        HashMap<String, String> commentsHashMap = new HashMap<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_COMMENTS " + product.getId()),
+                new TypeToken<HashMap<String, String>>() {
+                }.getType()));
+        for (String senderName : commentsHashMap.keySet()) {
             try {
                 AnchorPane commentPane = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
                 Label senderNameLabel = (Label) commentPane.getChildren().get(0);
                 Label commentInfo = (Label) commentPane.getChildren().get(1);
                 senderNameLabel.setText(senderName);
-                commentInfo.setText(((ProductPageManager) manager).commentsFXML().get(senderName));
+                commentInfo.setText(commentsHashMap.get(senderName));
                 comments.add(commentPane, 0, row);
                 comments.setVgap(10);
                 row++;
@@ -80,18 +82,26 @@ public class ProductPageController extends Controller {
     private void initializeProduct() {
         productName.setText(product.getName());
         price.setText(product.getPrice() + "$");
-        sellerName.setText(product.getSeller().getName());
+        sellerName.setText(product.getSellerUsername());
         companyName.setText(product.getCompanyName());
-        double score = product.getRate();
+        double score = Double.parseDouble(sendRequest("GET_PRODUCT_RATE " + product.getId()));
         rate.setText(("" + score).length() > 1 ? ("" + score).substring(0, 3) : ("" + score).substring(0, 1));
         description.setText(product.getDescription());
         productId.setText("#" + product.getId());
-        featureValueTable.setItems(FXCollections.observableArrayList(product.getFeatures()));
+        ArrayList<Feature> features = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_FEATURES " + product.getId()),
+                new TypeToken<ArrayList<Feature>>() {
+                }.getType()));
+        featureValueTable.setItems(FXCollections.observableArrayList(features));
         featureColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
 
-    public void rate(MouseEvent mouseEvent) throws ViewCartManager.ProductDoNotExistAtAllException {
+    public void setInfos(Product product, Auction auction) {
+        ProductPageController.product = product;
+        ProductPageController.auction = auction;
+    }
+
+    public void rate(MouseEvent mouseEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Rate " + product.getName());
         alert.setHeaderText("How good is this product in your eyes");
@@ -105,12 +115,11 @@ public class ProductPageController extends Controller {
         Optional<ButtonType> result = alert.showAndWait();
         for (int i = 0; i < 5; i++) {
             if (result.isPresent() && result.get() == buttonType[i]) {
-                if(((ProductPageManager) manager).rateProduct(product.getId(), i + 1)) {
-                    Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "Rate added to product!", ButtonType.OK);
-                    alert2.show();
+                String response = sendRequest("RATE_PRODUCT " + product.getId() + " " + i + 1);
+                if (response.equals("0")) {
+                    success("Rate added to product!");
                 } else {
-                    Alert alert2 = new Alert(Alert.AlertType.WARNING, "You should buy the product to rate it!", ButtonType.OK);
-                    alert2.show();
+                    error("You should buy the product to rate it!");
                 }
             }
         }
@@ -118,21 +127,41 @@ public class ProductPageController extends Controller {
     }
 
     public void addToCart(MouseEvent mouseEvent) {
-        if (((ProductPageManager) manager).getCustomer() != null && ((ProductPageManager) manager).hasProductInCart()) {
-                Alert alert2 = new Alert(Alert.AlertType.INFORMATION, "You have added this product to your cart before!", ButtonType.OK);
-                alert2.show();
+        Account account = Account.getAccountByUsername(accountUsername);
+        if (account instanceof Customer) {
+            //((ProductPageManager) manager).hasProductInCart()
+            if (!sendRequest("HAS_PRODUCT_IN_CART " + account.getUsername() + " " + product.getId()).equals("0")) {
+                error("You have added this product to your cart before!");
             } else {
-            ((ProductPageManager) manager).addToCart();
-            Alert alert2 = new Alert(Alert.AlertType.INFORMATION, product.getName() + " is added to your cart!", ButtonType.OK);
-            alert2.show();
-        }
+                //((ProductPageManager) manager).addToCart();
+                sendRequest("ADD_PRODUCT_TO_CART " + account.getUsername() + " " + product.getId());
+                success(product.getName() + " is added to your cart!");
+            }
+        } else error("Something went wrong.");
     }
 
     public void addComment(MouseEvent mouseEvent) {
-        ((ProductPageManager) manager).addComment();
+        loadFxml(Manager.Addresses.ADD_COMMENT, true);
     }
 
     public void compare(ActionEvent actionEvent) {
-        ((ProductPageManager)manager).compare();
+        //((ProductPageManager) manager).compare();
+        /*try {
+            FXMLLoader loader = getLoader(Manager.Addresses.COMPARE);
+            Parent root = loader.load();
+            CompareController controller = loader.getController();
+            controller.setManager(manager);
+            Scene scene = new Scene(root);
+            popup.setTitle("AP Project");
+            popup.setScene(scene);
+            popup.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        loadFxml(Manager.Addresses.COMPARE, true);
+    }
+
+    public void back() {
+        loadFxml(Manager.Addresses.PRODUCTS_MENU);
     }
 }

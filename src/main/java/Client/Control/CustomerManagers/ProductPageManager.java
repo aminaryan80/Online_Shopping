@@ -15,6 +15,11 @@ public class ProductPageManager extends Manager {
     private Product product;
     private ProductPageController productPageController;
 
+    public ProductPageManager(Account account, String productId) {
+        super(account);
+        this.product = Product.getProductById(productId);
+    }
+
     public ProductPageManager(Account account, Product product, Addresses address, Manager manager) {
         super(account, address, manager);
         this.product = product;
@@ -48,34 +53,35 @@ public class ProductPageManager extends Manager {
         productPageController.initializeComments();
     }
 
-    public boolean rateProduct(String productId, int score) throws ViewCartManager.ProductDoNotExistAtAllException { //TODO RECHECK
+    public String rateProduct(String productId, int score) { //TODO RECHECK
         if (customer.hasBoughtProduct(productId)) {
-
             Product product = Product.getProductById(productId);
-            if (product != null) product.addRate(customer, score);
-            else throw new ViewCartManager.ProductDoNotExistAtAllException("Product does not exist");
-
-            return true;
-        } else return false;
+            if (product != null) {
+                product.addRate(customer, score);
+                return "0";
+            }
+        }
+        return "1";
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public void addToCart() {
+    public int addToCart() {
         if (customer == null) //TODO check
             cart.addProduct(product);
         else customer.getCart().addProduct(product);
+        return 0;
     }
 
-    public boolean hasProductInCart() {
+    public int hasProductInCart() {
         for (Product productInCart : customer.getCart().getProducts()) {
             if (productInCart.getId().equals(product.getId())) {
-                return true;
+                return 0;
             }
         }
-        return false;
+        return 1;
     }
 
     public void addComment() {

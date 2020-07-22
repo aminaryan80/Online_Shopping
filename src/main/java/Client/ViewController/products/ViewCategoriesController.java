@@ -1,13 +1,18 @@
 package Client.ViewController.products;
 
 import Client.ViewController.Controller;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TreeView;
 
-public class ViewCategoriesController extends Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ViewCategoriesController extends Controller implements Initializable {
 
     public TreeView<String> categoriesTreeView;
 
-    public void init() {
-        categoriesTreeView.setRoot(manager.getCategoriesInTable());
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        categoriesTreeView.setRoot(getCategoriesInTable());
     }
 }

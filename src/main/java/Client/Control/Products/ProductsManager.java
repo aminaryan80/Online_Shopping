@@ -28,6 +28,13 @@ public class ProductsManager extends Manager {
     private List<Product> products;
     private boolean isOffMenu;
 
+    public ProductsManager(Account account, boolean isOffMenu) {
+        super(account);
+        this.currentCategory = mainCategory;
+        this.products = Product.getAllProducts();
+        this.isOffMenu = isOffMenu;
+    }
+
     public ProductsManager(Account account, Addresses address, Manager manager, boolean isOffMenu) {
         super(account, address, manager);
         this.currentCategory = mainCategory;
@@ -37,17 +44,27 @@ public class ProductsManager extends Manager {
         update(controller);
     }
 
-    public void update(Controller c) {
-        ProductsController controller = (ProductsController) c;
+//    public void update(Controller c) {
+//        ProductsController controller = (ProductsController) c;
+//        if (isOffMenu) {
+//            ArrayList<Product> offProducts = new ArrayList<>();
+//            for (Auction auction : Auction.getAllAuctions()) {
+//                offProducts.addAll(auction.getProducts());
+//            }
+//            controller.setProducts(offProducts);
+//        } else controller.setProducts(products);
+//        controller.setCategory(mainCategory);
+//        controller.init();
+//    }
+
+    public ArrayList<Product> loadProducts() {
         if (isOffMenu) {
             ArrayList<Product> offProducts = new ArrayList<>();
             for (Auction auction : Auction.getAllAuctions()) {
                 offProducts.addAll(auction.getProducts());
             }
-            controller.setProducts(offProducts);
-        } else controller.setProducts(products);
-        controller.setCategory(mainCategory);
-        controller.init();
+            return offProducts;
+        } else return (ArrayList<Product>) products;
     }
 
     public ArrayList<String> getFilterTypes() {

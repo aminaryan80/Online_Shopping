@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1123.0"
             xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="Client.ViewController.userPanel.Seller.EditProductsController">
+            fx:controller="Client.ViewController.seller.ManageProductsController">
     <children>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
               prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
@@ -34,7 +34,7 @@
                 </Button>
             </children>
         </VBox>
-      <TableView fx:id="products" layoutX="275.0" layoutY="40.0" onMouseClicked="#updateScene" prefHeight="200.0" prefWidth="302.0">
+      <TableView fx:id="productTableView" layoutX="275.0" layoutY="40.0" onMouseClicked="#updateScene" prefHeight="200.0" prefWidth="302.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="productsNameColumn" prefWidth="75.0" text="Name" />

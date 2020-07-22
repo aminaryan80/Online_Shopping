@@ -1,6 +1,5 @@
 package Client.ViewController.customer;
 
-import Client.Control.CustomerManagers.CustomerManager;
 import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Customer;
@@ -64,7 +63,8 @@ public class CustomerController extends Controller implements Initializable {
 
     private void initCart() {
         HashMap<Product, Integer> hashMap = Gson.INSTANCE.get().fromJson(sendRequest("GET_CART_PRODUCTS" + " " + accountUsername),
-                new TypeToken<HashMap<Product, Integer>>() {}.getType());
+                new TypeToken<HashMap<Product, Integer>>() {
+                }.getType());
         cartTable.setItems(FXCollections.observableArrayList(hashMap.keySet()));
         productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -88,7 +88,8 @@ public class CustomerController extends Controller implements Initializable {
 
     private ArrayList<BuyingLog> getAllLogs() {
         return Gson.INSTANCE.get().fromJson(sendRequest("GET_CUSTOMER_LOGS " + accountUsername),
-                new TypeToken<ArrayList<BuyingLog>>() {}.getType());
+                new TypeToken<ArrayList<BuyingLog>>() {
+                }.getType());
     }
 
     public void updateProfile(ActionEvent actionEvent) {
@@ -109,11 +110,13 @@ public class CustomerController extends Controller implements Initializable {
 
     public void openCart(ActionEvent actionEvent) {
         loadFxml(Manager.Addresses.VIEW_CART);
-//        ((CustomerManager) manager).openCart();
     }
 
     public void openOrders(ActionEvent actionEvent) {
         loadFxml(Manager.Addresses.VIEW_ORDERS);
-//        ((CustomerManager) manager).openOrders();
+    }
+
+    public void back() {
+        loadFxml(Manager.Addresses.MAIN_MENU);
     }
 }

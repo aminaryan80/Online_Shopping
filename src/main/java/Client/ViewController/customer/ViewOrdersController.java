@@ -131,7 +131,6 @@ public class ViewOrdersController extends Controller implements Initializable {
         manager.openSort(this, manager);
     }
 
-    @Override
     public void back(ActionEvent actionEvent) {
         loadFxml(Manager.Addresses.CUSTOMER_MENU);
     }

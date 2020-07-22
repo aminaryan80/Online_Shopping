@@ -1,7 +1,6 @@
 package Client.ViewController.principal;
 
 import Client.Control.Manager;
-import Client.Control.Principal.PrincipalManager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Principal;
@@ -84,7 +83,7 @@ public class PrincipalController extends Controller implements Initializable {
         inputs.add(emailField.getText());
         inputs.add(phoneNumberField.getText());
         String response = sendRequest("UPDATE_PROFILE " + accountUsername + " " + Gson.INSTANCE.get().toJson(inputs));
-        if(response.equals("0")) {
+        if (response.equals("0")) {
             success("Profile changed successfully.");
         } else error("something went wrong.");
     }
@@ -119,6 +118,9 @@ public class PrincipalController extends Controller implements Initializable {
 
     public void openViewDiscountCodes(ActionEvent actionEvent) {
         loadFxml(Manager.Addresses.VIEW_DISCOUNT_CODES);
+    }
 
+    public void back() {
+        loadFxml(Manager.Addresses.MAIN_MENU);
     }
 }

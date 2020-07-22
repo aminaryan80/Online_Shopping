@@ -1,7 +1,6 @@
-package Client.ViewController.userPanel.Seller;
+package Client.ViewController.seller;
 
 import Client.Control.Manager;
-import Client.Control.Seller.SellerManager;
 import Client.ViewController.Controller;
 import Models.Account.Seller;
 import Models.Gson;
@@ -62,7 +61,8 @@ public class SellerMenuController extends Controller implements Initializable {
 
     private ArrayList<SellingLog> getAllLogs() {
         return Gson.INSTANCE.get().fromJson(sendRequest("GET_SELLER_LOGS " + accountUsername),
-                new TypeToken<ArrayList<SellingLog>>() {}.getType());
+                new TypeToken<ArrayList<SellingLog>>() {
+                }.getType());
     }
 
     public void editPassword(ActionEvent actionEvent) {
@@ -83,10 +83,14 @@ public class SellerMenuController extends Controller implements Initializable {
     }
 
     public void manageProducts(ActionEvent actionEvent) {
-        ((SellerManager) manager).openManageProducts();
+        loadFxml(Manager.Addresses.EDIT_PRODUCTS_MENU);
     }
 
     public void viewOffs(ActionEvent actionEvent) {
-        ((SellerManager) manager).openManageOffs();
+        loadFxml(Manager.Addresses.EDIT_OFFS);
+    }
+
+    public void back() {
+        loadFxml(Manager.Addresses.MAIN_MENU);
     }
 }

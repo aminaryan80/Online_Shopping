@@ -135,19 +135,6 @@ public class Auction {
         file.close();
     }
 
-//    public static void loadReferences() {
-//        for (Auction auction : allAuctions) {
-//            auction.loadReference();
-//        }
-//    }
-
-//    private void loadReference() {
-//        products = new ArrayList<>();
-//        for (String productsId : productsIds) {
-//            products.add(Product.getProductById(productsId));
-//        }
-//    }
-
     public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (String productsId : productsIds) {

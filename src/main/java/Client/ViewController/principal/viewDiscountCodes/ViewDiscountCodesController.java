@@ -63,4 +63,8 @@ public class ViewDiscountCodesController extends Controller implements Initializ
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
     }
+
+    public void back() {
+        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+    }
 }

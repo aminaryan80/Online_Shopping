@@ -63,6 +63,10 @@ public class Product {
         return products;
     }
 
+    public String getSellerUsername() {
+        return sellerUsername;
+    }
+
     public static ArrayList<Product> getProductsBySeller(Seller seller) {
         ArrayList<Product> products = new ArrayList<>();
         for (Product product : allProducts) {
@@ -167,11 +171,12 @@ public class Product {
     }
 
     public boolean hasAuction() {
-        if (auctionId != null) {
+        /*if (auctionId != null) {
             Auction auction = Auction.getAuctionById(auctionId);
             return (LocalDate.now().isBefore(auction.getEndingDate()) && LocalDate.now().isAfter(auction.getBeginningDate()));
         }
-        return false;
+        return false;*/
+        return auctionId != null;
     }
 
     public void addFeature(Feature feature) {
@@ -319,7 +324,8 @@ public class Product {
     public double getAuctionedPrice() {
         if (getAuction() == null || !getAuction().isActive(LocalDate.now())) return price;
         else {
-            if (getAuction().isActive(LocalDate.now())) return price - getAuction().getDiscountAmount();
+            if (getAuction().isActive(LocalDate.now()))
+                return price - getAuction().getDiscountAmount();
             else return price;
         }
     }

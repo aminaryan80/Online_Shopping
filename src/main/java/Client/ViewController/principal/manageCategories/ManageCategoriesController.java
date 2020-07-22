@@ -36,4 +36,8 @@ public class ManageCategoriesController extends Controller implements Initializa
         categoryName = categoryNameField.getText();
         loadFxml(Manager.Addresses.EDIT_CATEGORY, true);
     }
+
+    public void back() {
+        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+    }
 }

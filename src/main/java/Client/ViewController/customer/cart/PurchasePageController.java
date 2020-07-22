@@ -220,7 +220,6 @@ public class PurchasePageController extends Controller implements Initializable 
         }
     }
 
-    @Override
     public void back(ActionEvent actionEvent) {
         loadFxml(Manager.Addresses.VIEW_CART);
     }

@@ -1,6 +1,6 @@
 package Client.ViewController.principal;
 
-import Client.Control.Principal.ManageAllProductsManager;
+import Client.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Shop.Product.Product;
 import javafx.collections.FXCollections;
@@ -34,12 +34,16 @@ public class ManageProductsController extends Controller implements Initializabl
     public void deleteProduct(ActionEvent actionEvent) {
         String productId = productIdField.getText();
         String response = sendRequest("DELETE_PRODUCT " + productId);
-        if(response.equals("0")) {
+        if (response.equals("0")) {
             success("Product deleted successfully.");
         } else error("Something went wrong.");
     }
 
     public void sort(ActionEvent actionEvent) {
         manager.openSort(this, manager);
+    }
+
+    public void back() {
+        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
     }
 }

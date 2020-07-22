@@ -1,47 +1,54 @@
 package Client.ViewController.products;
 
+import Client.Control.Manager;
 import Client.Control.Products.ProductsManager;
-import Client.ViewController.Controller;
+import Client.ViewController.MainController;
+import Models.Gson;
 import Models.Shop.Category.Category;
+import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
+import com.google.gson.reflect.TypeToken;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.ResourceBundle;
 
-public class ProductsController extends Controller {
+public class ProductsController extends MainController implements Initializable {
 
     public GridPane productsGridPane;
     public Label categoryNameLabel;
-    private ArrayList<Product> products;
-    private Category currentCategory;
+    private static Category currentCategory;
 
-    public void setProducts(List<Product> products) {
-        this.products = (ArrayList<Product>) products;
-    }
-
-    public void setCategory(Category currentCategory) {
-        this.currentCategory = currentCategory;
-    }
-
-    public void init() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         try {
+            if(currentCategory == null) {
+                currentCategory = Gson.INSTANCE.get().fromJson(sendRequest("GET_CATEGORY mainCategory"), Category.class);
+            }
+            ObservableList<Node> children = productsGridPane.getChildren();
+            productsGridPane.getChildren().removeAll(children);
             categoryNameLabel.setText(currentCategory.getName());
             int i = 0;
             productsGridPane.setPrefHeight(0);
+            ArrayList<Product> products = new ArrayList<>();
+            products.addAll(Gson.INSTANCE.get().fromJson(sendRequest("LOAD_PRODUCTS " + isOffsMenu),
+                    new TypeToken<ArrayList<Product>>() {
+                    }.getType()));
             for (Product product : products) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/products/Product.fxml"));
+                FXMLLoader loader = getLoader(Manager.Addresses.PRODUCT_ITEM);
                 Parent root = loader.load();
                 ProductItemController controller = loader.getController();
-                controller.setInfos(product.getAuction(), product, product.hasAuction());
-                controller.setManager(manager);
+                Auction auction = Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_AUCTION " + product.getId()), Auction.class);
+                controller.setInfos(auction, product, product.hasAuction());
                 productsGridPane.add(root, i % 3, i / 3);
                 if (i % 3 == 0) {
                     productsGridPane.setPrefHeight(productsGridPane.getPrefHeight() + 380);
@@ -53,15 +60,8 @@ public class ProductsController extends Controller {
         }
     }
 
-    public void initTable(ArrayList<Object> tableObjects) {
-        ArrayList<Product> tableProducts = new ArrayList<>();
-        for (Object tableProduct : tableObjects) {
-            tableProducts.add((Product) tableProduct);
-        }
-        products = tableProducts;
-        ObservableList<Node> children = productsGridPane.getChildren();
-        productsGridPane.getChildren().removeAll(children);
-        init();
+    public void viewCategories(ActionEvent actionEvent) {
+        loadFxml(Manager.Addresses.VIEW_CATEGORIES, true);
     }
 
     public void filter(ActionEvent actionEvent) {
@@ -72,7 +72,7 @@ public class ProductsController extends Controller {
         manager.openSort(this, manager);
     }
 
-    public void viewCategories(ActionEvent actionEvent) {
-        ((ProductsManager) manager).viewCategories();
+    public void back() {
+        loadFxml(Manager.Addresses.MAIN_MENU);
     }
 }

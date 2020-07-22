@@ -2,7 +2,6 @@ package Client.Control.Seller;
 
 import Client.Control.Manager;
 import Client.ViewController.Controller;
-import Client.ViewController.userPanel.Seller.SellerMenuController;
 import Models.Account.Account;
 import Models.Account.Seller;
 import Models.Shop.Category.Sort;
@@ -33,8 +32,9 @@ public class SellerManager extends Manager {
         controller.init();*/
     }
 
-    public void deleteProductById(String id) {
-        new DeleteProductRequest((Seller) account, Product.getProductById(id));
+    public void deleteProductById(String sellerUsername, String id) {
+        Seller seller = (Seller) Account.getAccountByUsername(sellerUsername);
+        new DeleteProductRequest(seller, Product.getProductById(id));
     }
 
     public String showAvailableSorts() {
@@ -107,10 +107,10 @@ public class SellerManager extends Manager {
     }
 
     public void openManageProducts() {
-        new EditProductsManager(account, Addresses.SELLER_MENU, this);
+        new ManageProductsManager(account, Addresses.SELLER_MENU, this);
     }
 
     public void openManageOffs() {
-        new OffsManager(account, Addresses.SELLER_MENU, this);
+        new ViewOffsManager(account, Addresses.SELLER_MENU, this);
     }
 }
