@@ -145,12 +145,11 @@ public class Controller {
         return null;
     }
 
-    /*public void back(ActionEvent actionEvent) {
-        System.out.println("Back");
-    }*/
-
     public void logout() {
         System.out.println("LOGOUT");
+        accountType = null;
+        accountUsername = null;
+        loadFxml(Manager.Addresses.MAIN_MENU);
     }
 
     public void error(String message) {
