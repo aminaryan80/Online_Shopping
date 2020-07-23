@@ -39,7 +39,6 @@ public class BankServer {
 
     private void run() {
         ServerSocket serverSocket = null;
-        Socket socket = null;
         try {
             serverSocket = new ServerSocket(5555);
         } catch (IOException e) {
@@ -47,10 +46,13 @@ public class BankServer {
         }
         while (true) {
             try {
-                socket = serverSocket.accept();
+                Socket socket = serverSocket.accept();
                 DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
                 String command = dataInputStream.readUTF();
+                if (command.equals("exit_all")) {
+                    System.exit(1);
+                }
                 String respond = handleCommand(command);
                 dataOutputStream.writeUTF(respond);
                 dataOutputStream.flush();
