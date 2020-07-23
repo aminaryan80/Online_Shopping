@@ -18,6 +18,7 @@ import Client.Control.Products.ProductsManager;
 import Client.Control.Seller.ManageProductsManager;
 import Client.Control.Seller.SellerManager;
 import Client.Control.Seller.ViewOffsManager;
+import Client.Control.UserPanel.CreateNewAccountManager;
 import Client.Control.UserPanel.LoginToExistingAccountManager;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -45,6 +46,10 @@ public class RequestProcessor {
         String response = null;
         if ((matcher = getMatcher(request, "LOGIN (\\S+) (\\S+)")).find()) {
             response = login(matcher);
+        } else if ((matcher = getMatcher(request, "REGISTER (\\S+) (\\S+) ((.|\\n)+)")).find()) {
+            response = register(matcher);
+        } else if (getMatcher(request, "IS_PRINCIPAL_EXISTS").find()) {
+            response = isPrincipalExists(matcher);
         } else if ((matcher = getMatcher(request, "GET_ACCOUNT (\\S+)")).find()) {
             response = getAccount(matcher);
         } else if ((matcher = getMatcher(request, "GET_REQUEST_DETAILS (\\S+)")).find()) {
@@ -368,10 +373,12 @@ public class RequestProcessor {
         Account account = Account.getAccountByUsername(matcher.group(1));
         ProductPageManager productPageManager = new ProductPageManager(account, matcher.group(2));
         ArrayList<String> inputs = new ArrayList<>(Gson.INSTANCE.get().fromJson(matcher.group(3),
-                new TypeToken<ArrayList<String>>() {}.getType()));
+                new TypeToken<ArrayList<String>>() {
+                }.getType()));
         productPageManager.addComment(inputs.get(0), inputs.get(1));
         return "0";
     }
+
     private static String getAllCategories() {
         return Gson.INSTANCE.get().toJson(Category.getAllCategories());
     }
@@ -590,6 +597,19 @@ public class RequestProcessor {
         return l.login(matcher.group(1), matcher.group(2));
     }
 
+    private static String register(Matcher matcher) {
+        CreateNewAccountManager createNewAccountManager = new CreateNewAccountManager(null);
+        ArrayList<String> inputs = new ArrayList<>(Gson.INSTANCE.get().fromJson(matcher.group(3),
+                new TypeToken<ArrayList<String>>() {
+                }.getType()));
+        return createNewAccountManager.createNewAccount(matcher.group(1), matcher.group(2), inputs) + "";
+    }
+
+    private static String isPrincipalExists(Matcher matcher) {
+        if (Principal.isPrincipalExists()) {
+            return "true";
+        } else return "false";
+    }
 
     private static Matcher getMatcher(String input, String regex) {
         Pattern pattern = Pattern.compile(regex);

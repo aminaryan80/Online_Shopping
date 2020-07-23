@@ -1,16 +1,19 @@
 package Client.ViewController.userPanel;
 
-import Client.Control.UserPanel.CreateNewAccountManager;
-import Client.ViewController.Controller;
+import Client.ViewController.MainController;
+import Models.Gson;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class RegisterController extends Controller {
+public class RegisterController extends MainController implements Initializable {
 
     public TextField usernameField;
     public TextField passwordField;
@@ -23,6 +26,13 @@ public class RegisterController extends Controller {
     public RadioButton principalRB;
     public RadioButton sellerRB;
     public RadioButton customerRB;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (!isPrincipalExists) {
+            registerAsPrincipal();
+        }
+    }
 
     public void register(ActionEvent actionEvent) {
         // 0password, 1email, 2phoneNumber, 3firstName, 4lastName, 5(balance), 6(companyName)
@@ -37,13 +47,17 @@ public class RegisterController extends Controller {
         inputs.add(companyNameField.getText());
         String type = "";
         if (principalRB.isSelected()) {
-            type = "principal";
+            type = "PRINCIPAL";
         } else if (sellerRB.isSelected()) {
-            type = "seller";
+            type = "SELLER";
         } else if (customerRB.isSelected()) {
-            type = "customer";
+            type = "CUSTOMER";
         }
-        ((CreateNewAccountManager) manager).createNewAccount(inputs, username, type);
+        String response = sendRequest("REGISTER " + username + " " + type + " " + Gson.INSTANCE.get().toJson(inputs));
+        if (response.equals("0")) {
+            success("Account created successfully.");
+        } else error("Something went wrong.");
+        //((CreateNewAccountManager) manager).createNewAccount(username, type, inputs);
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
     }
 
@@ -52,7 +66,6 @@ public class RegisterController extends Controller {
         sellerRB.setDisable(true);
         principalRB.setSelected(true);
         principalRBSelected(null);
-
     }
 
     public void principalRBSelected(ActionEvent actionEvent) {

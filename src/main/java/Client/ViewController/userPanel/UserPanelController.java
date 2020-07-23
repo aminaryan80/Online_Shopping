@@ -1,29 +1,18 @@
 package Client.ViewController.userPanel;
 
 import Client.Control.Manager;
-import Client.Control.UserPanel.LoginToExistingAccountManager;
-import Client.Control.UserPanel.UserPanelManager;
 import Client.ViewController.Controller;
-import Models.Account.Account;
-import Models.Account.Customer;
-import Models.Account.Principal;
-import Models.Account.Seller;
-import Models.Gson;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class UserPanelController extends Controller {
-    @FXML
-    private TextField userNameField;
-    @FXML
-    private PasswordField passwordField;
+    public TextField userNameField;
+    public PasswordField passwordField;
 
     public void login(ActionEvent actionEvent) {
         String username = userNameField.getText();
         String password = passwordField.getText();
-        //new LoginToExistingAccountManager(manager.getAccount(), username, password);
         String response = sendRequest("LOGIN " + username + " " + password);
         if(!response.equals("1") && !response.equals("2")) {
             String[] res = response.split("&&&");
@@ -34,7 +23,7 @@ public class UserPanelController extends Controller {
     }
 
     public void openRegister(ActionEvent actionEvent) {
-        ((UserPanelManager) manager).openRegister();
+        loadFxml(Manager.Addresses.REGISTER, true);
     }
 
     public void back(ActionEvent actionEvent) {

@@ -77,8 +77,8 @@ public class ManageProductsController extends Controller implements Initializabl
     }
 
     public void add(ActionEvent actionEvent) {
-        if (!manager.checkNumber(price.getText())) {
-            manager.error("wrong price format");
+        if (price.getText().matches("^\\d+(\\.\\d+)?$")) {
+            error("wrong price format");
             return;
         }
         //((ManageProductsManager) manager).featuresPopUp(this);

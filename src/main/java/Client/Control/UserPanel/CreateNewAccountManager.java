@@ -10,6 +10,11 @@ import Models.Shop.Request.AddSellerRequest;
 import java.util.ArrayList;
 
 public class CreateNewAccountManager extends Manager {
+    public CreateNewAccountManager(Account account) {
+        super(account);
+        //loadFxml(Addresses.REGISTER, true);
+    }
+
     public CreateNewAccountManager(Account account, boolean status) {
         super(account);
         RegisterController controller = (RegisterController) loadFxml(Addresses.REGISTER, true);
@@ -18,28 +23,29 @@ public class CreateNewAccountManager extends Manager {
         }
     }
 
-    public void createNewAccount(ArrayList<String> inputs, String username, String type) {
+    public int createNewAccount(String username, String type, ArrayList<String> inputs) {
         // 0password, 1email, 2phoneNumber, 3firstName, 4lastName, 5(balance), 6(companyName)
         if (canCreateNewAccount(username, type)) {
             if (isEnteredInputValid(inputs, type)) {
                 switch (type) {
-                    case "customer":
+                    case "CUSTOMER":
                         // String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance
                         new Customer(username, inputs.get(3), inputs.get(4), inputs.get(1), inputs.get(2), inputs.get(0), Double.parseDouble(inputs.get(5)));
                         break;
-                    case "seller":
+                    case "SELLER":
                         // String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName
                         new AddSellerRequest(username, inputs.get(3), inputs.get(4), inputs.get(1), inputs.get(2),
                                 inputs.get(0), Double.parseDouble(inputs.get(5)), inputs.get(6));
                         break;
-                    case "principal":
+                    case "PRINCIPAL":
                         // String username, String firstName, String lastName, String email, String phoneNumber, String password
                         new Principal(username, inputs.get(3), inputs.get(4), inputs.get(1), inputs.get(2), inputs.get(0));
                         isPrincipalExists = true;
                         break;
                 }
-            } else error("Invalid input");
+            } else return 1;
         }
+        return 0;
     }
 
     public boolean canCreateNewAccount(String username, String type) {

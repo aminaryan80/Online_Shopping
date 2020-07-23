@@ -7,8 +7,8 @@ public class MainManager extends Manager {
     public MainManager(Account account) {
         super(account);
         //loadFxml(Addresses.MAIN_MENU);
-        /*if (!Account.isPrincipalExists()) {
+        if (!Account.isPrincipalExists()) {
             new UserPanelManager(account, Addresses.MAIN_MENU, this, true);
-        }*/
+        }
     }
 }

@@ -61,11 +61,6 @@ public abstract class Manager {
         Manager.stage = stage;
     }
 
-    public static void exit() {
-        stage.close();
-        System.exit(0);
-    }
-
     public Account getAccount() {
         return account;
     }

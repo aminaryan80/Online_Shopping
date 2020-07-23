@@ -3,18 +3,24 @@ package Client.ViewController.customer.cart;
 import Client.Control.CustomerManagers.ViewCartManager;
 import Client.Control.Manager;
 import Client.ViewController.Controller;
+import Client.ViewController.products.ProductPageController;
 import Models.Gson;
+import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 import com.google.gson.reflect.TypeToken;
 import com.sun.javafx.scene.control.skin.LabeledText;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,10 +135,30 @@ public class ViewCartController extends Controller implements Initializable {
 
     public void openProductPage(ActionEvent actionEvent) {
         if (selectedProduct.getText().matches("\\S{8}")) {
-            ((ViewCartManager) manager).showProduct(selectedProduct.getText());
+            //((ViewCartManager) manager).showProduct(selectedProduct.getText());
+            showProduct(selectedProduct.getText());
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "None of the products is selected", ButtonType.OK);
             alert.show();
+        }
+    }
+
+    private void showProduct(String productId) {
+        try {
+            FXMLLoader loader = getLoader(Manager.Addresses.PRODUCT_PAGE);
+            Parent root = loader.load();
+            ProductPageController controller = loader.getController();
+            Product product = Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT " + productId), Product.class);
+            Auction auction = Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_AUCTION " + productId), Auction.class);
+            controller.setInfos(product, auction);
+            controller.init();
+            Scene scene = new Scene(root);
+            stage.setTitle("AP Project");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
