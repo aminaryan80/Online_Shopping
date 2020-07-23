@@ -32,7 +32,7 @@ public class ManageCategoriesController extends Controller implements Initializa
     }
 
     public void editCategory(ActionEvent actionEvent) {
-        ((ManageCategoriesManager) manager).openEditCategory(categoryNameField.getText());
+        //((ManageCategoriesManager) manager).openEditCategory(categoryNameField.getText());
         categoryName = categoryNameField.getText();
         loadFxml(Manager.Addresses.EDIT_CATEGORY, true);
     }

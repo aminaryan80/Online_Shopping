@@ -2,11 +2,26 @@ package Client.ViewController;
 
 import Client.Control.Manager;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
-public class MainController extends Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class MainController extends Controller implements Initializable {
+
+    protected static boolean isPrincipalExists;
     protected static boolean isOffsMenu;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (sendRequest("IS_PRINCIPAL_EXISTS").equals("true")) {
+            isPrincipalExists = true;
+        } else {
+            isPrincipalExists = false;
+            loadFxml(Manager.Addresses.REGISTER, true);
+        }
+    }
 
     public void aboutUs(ActionEvent actionEvent) {
         Alert a = new Alert(Alert.AlertType.NONE);
