@@ -1,7 +1,8 @@
 package Bank;
 
 import Models.Gson;
-import java.io.IOException;
+
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -47,10 +48,16 @@ public class BankServer {
         while (true) {
             try {
                 socket = serverSocket.accept();
+                DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                String command = dataInputStream.readUTF();
+                String respond = handleCommand(command);
+                dataOutputStream.writeUTF(respond);
+                dataOutputStream.flush();
+                socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            new BankThread(this, socket).run();
         }
     }
 
@@ -83,7 +90,7 @@ public class BankServer {
         return String.valueOf(token1.getAccount().getMoney());
     }
 
-    private synchronized String pay(String id) {
+    private String pay(String id) {
         if (!Receipt.isThereReceiptWithId(id)) {
             return "invalid receipt id";
         }
@@ -177,7 +184,7 @@ public class BankServer {
         return new Token(Account.getAccountByName(data[1])).getToken();
     }
 
-    private synchronized String createAccount(String[] data) {
+    private String createAccount(String[] data) {
         if (!data[4].equals(data[5])) {
             return "passwords do not match";
         }
