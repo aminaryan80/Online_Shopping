@@ -4,6 +4,8 @@ import Models.Shop.Log.SellingLog;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
 
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,22 @@ public class Seller extends Account {
 
     public void addAuction(Auction auction) {
         auctionsId.add(auction.getId());
+    }
+
+    @Override
+    protected void createBankAccount(Account account) {
+        try {
+            Socket socket = new Socket("127.0.0.1", BANK_PORT);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("create_account"+" "+firstName+" "+lastName+" "+username+" "+password+" "+password);
+            dataOutputStream.flush();
+            String bankId = dataInputStream.readUTF();
+            this.setBankId(bankId);
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

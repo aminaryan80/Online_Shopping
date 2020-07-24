@@ -5,6 +5,8 @@ import Models.Shop.Log.BuyingLog;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Customer extends Account {
@@ -12,11 +14,28 @@ public class Customer extends Account {
     private ArrayList<BuyingLog> allLogs;
     private ArrayList<String> discountsIds;
     private Wallet wallet;
+    private String bankId;
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.cart = new Cart();
         this.allLogs = new ArrayList<>();
         discountsIds = new ArrayList<>();
+    }
+
+    @Override
+    protected void createBankAccount(Account account) {
+        try {
+            Socket socket = new Socket("127.0.0.1", BANK_PORT);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("create_account"+" "+firstName+" "+lastName+" "+username+" "+password+" "+password);
+            dataOutputStream.flush();
+            String bankId = dataInputStream.readUTF();
+            this.setBankId(bankId);
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void deleteProductFromCarts(Product product) {

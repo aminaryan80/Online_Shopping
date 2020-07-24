@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public abstract class Account {
     protected static ArrayList<Account> allAccounts = new ArrayList<>();
+    protected static int BANK_PORT = 5555;
     protected String username;
     protected String firstName;
     protected String lastName;
@@ -19,7 +20,7 @@ public abstract class Account {
     protected String password;
     protected double balance;
     protected boolean isGuest;
-
+    protected String bankId;
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         this.username = username;
         this.firstName = firstName;
@@ -30,7 +31,18 @@ public abstract class Account {
         this.balance = balance;
         this.isGuest = false;
         allAccounts.add(this);
+        createBankAccount(this);
     }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
+
+    protected abstract void createBankAccount(Account account);
 
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
