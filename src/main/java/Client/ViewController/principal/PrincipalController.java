@@ -1,6 +1,7 @@
 package Client.ViewController.principal;
 
-import Client.Control.Manager;
+import Client.ViewController.MainController;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Principal;
@@ -89,38 +90,38 @@ public class PrincipalController extends Controller implements Initializable {
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.EDIT_PASSWORD, true);
+        loadFxml(Addresses.EDIT_PASSWORD, true);
     }
 
     public void openManageUsers(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.MANAGE_USERS);
+        loadFxml(Addresses.MANAGE_USERS);
     }
 
     public void openManageProducts(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.MANAGE_PRODUCTS);
+        loadFxml(Addresses.MANAGE_PRODUCTS);
     }
 
     public void openManageRequests(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.MANAGE_REQUESTS);
+        loadFxml(Addresses.MANAGE_REQUESTS);
     }
 
     public void openManageCategories(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
+        loadFxml(Addresses.MANAGE_CATEGORIES);
     }
 
     public void createDiscountCode(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.CREATE_DISCOUNT_CODE, true);
+        loadFxml(Addresses.CREATE_DISCOUNT_CODE, true);
     }
 
     public void openOffsMenu(ActionEvent actionEvent) {
-        manager.openOffsMenu(); // TODO
+        openOffsMenu();
     }
 
     public void openViewDiscountCodes(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.VIEW_DISCOUNT_CODES);
+        loadFxml(Addresses.VIEW_DISCOUNT_CODES);
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.MAIN_MENU);
+        loadFxml(Addresses.MAIN_MENU);
     }
 }

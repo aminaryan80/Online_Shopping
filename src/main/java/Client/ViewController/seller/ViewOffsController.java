@@ -1,7 +1,6 @@
 package Client.ViewController.seller;
 
-import Client.Control.Manager;
-import Client.Control.Seller.ViewOffsManager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Gson;
 import Models.Shop.Off.Auction;
@@ -104,6 +103,6 @@ public class ViewOffsController extends Controller implements Initializable {
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.SELLER_MENU);
+        loadFxml(Addresses.SELLER_MENU);
     }
 }

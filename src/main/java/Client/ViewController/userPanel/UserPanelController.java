@@ -1,6 +1,6 @@
 package Client.ViewController.userPanel;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
@@ -23,10 +23,10 @@ public class UserPanelController extends Controller {
     }
 
     public void openRegister(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.REGISTER, true);
+        loadFxml(Addresses.REGISTER, true);
     }
 
     public void back(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.MAIN_MENU);
+        loadFxml(Addresses.MAIN_MENU);
     }
 }

@@ -1,7 +1,7 @@
 package Client.ViewController.principal;
 
-import Client.Control.Manager;
-import Client.Control.Principal.ManageRequestsManager;
+import Server.Control.Manager;
+import Server.Control.Principal.ManageRequestsManager;
 import Client.ViewController.Controller;
 import Models.Shop.Request.Request;
 import javafx.collections.FXCollections;
@@ -60,6 +60,6 @@ public class ManageRequestsController extends Controller implements Initializabl
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+        loadFxml(Addresses.PRINCIPAL_MENU);
     }
 }

@@ -1,6 +1,6 @@
 package Client.ViewController.customer;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Customer;
 import Models.Gson;
@@ -105,18 +105,18 @@ public class CustomerController extends Controller implements Initializable {
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.EDIT_PASSWORD, true);
+        loadFxml(Addresses.EDIT_PASSWORD, true);
     }
 
     public void openCart(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.VIEW_CART);
+        loadFxml(Addresses.VIEW_CART);
     }
 
     public void openOrders(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.VIEW_ORDERS);
+        loadFxml(Addresses.VIEW_ORDERS);
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.MAIN_MENU);
+        loadFxml(Addresses.MAIN_MENU);
     }
 }

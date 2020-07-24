@@ -1,6 +1,6 @@
 package Client.ViewController.principal.viewDiscountCodes;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -37,7 +37,7 @@ public class EditDiscountController extends ViewDiscountCodesController implemen
             editDiscountUserCount();
         }
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
-        loadFxml(Manager.Addresses.VIEW_DISCOUNT_CODES);
+        loadFxml(Addresses.VIEW_DISCOUNT_CODES);
     }
 
     private void editBeginningDate() {

@@ -1,6 +1,6 @@
 package Client.ViewController.seller;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -82,7 +82,7 @@ public class ManageProductsController extends Controller implements Initializabl
             return;
         }
         //((ManageProductsManager) manager).featuresPopUp(this);
-        loadFxml(Manager.Addresses.ADD_PRODUCT_POP_UP, true);
+        loadFxml(Addresses.ADD_PRODUCT_POP_UP, true);
     }
 
     public void addProduct(ArrayList<Feature> allFeatures) {
@@ -141,6 +141,6 @@ public class ManageProductsController extends Controller implements Initializabl
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.SELLER_MENU);
+        loadFxml(Addresses.SELLER_MENU);
     }
 }

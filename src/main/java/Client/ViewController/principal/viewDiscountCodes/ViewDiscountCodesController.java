@@ -1,6 +1,6 @@
 package Client.ViewController.principal.viewDiscountCodes;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Shop.Off.Discount;
 import javafx.collections.FXCollections;
@@ -48,7 +48,7 @@ public class ViewDiscountCodesController extends Controller implements Initializ
 
     public void editDiscount(ActionEvent actionEvent) {
         discountId = discountIdField.getText();
-        loadFxml(Manager.Addresses.EDIT_DISCOUNTS, true);
+        loadFxml(Addresses.EDIT_DISCOUNTS, true);
     }
 
     public void deleteDiscount(ActionEvent actionEvent) {
@@ -65,6 +65,6 @@ public class ViewDiscountCodesController extends Controller implements Initializ
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+        loadFxml(Addresses.PRINCIPAL_MENU);
     }
 }
