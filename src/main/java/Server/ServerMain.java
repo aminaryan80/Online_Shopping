@@ -11,6 +11,10 @@ import Models.Shop.Request.Request;
 import Server.Control.Identity;
 import Server.Control.RequestProcessor.RequestProcessor;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+
 public class ServerMain {
 
     private static void openFiles() {
@@ -41,6 +45,11 @@ public class ServerMain {
             Discount.save();
             Product.save();
             Identity.save();
+            Socket socket = new Socket("127.0.0.1", 5555);
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("exit_all");
+            dataOutputStream.flush();
+            socket.close();
         } catch (Exception e) {
             e.getStackTrace();
         }

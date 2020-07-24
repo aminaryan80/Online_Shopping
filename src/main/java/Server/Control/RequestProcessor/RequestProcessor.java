@@ -70,8 +70,18 @@ public class RequestProcessor {
                 if (request.matches("CREATE_PRODUCT ((.|\\n)+)") && response.equals("0")) {
                     if (!fileName.equals("-1")) {
                         try {
-                            FileWriter dataOutputStream = new FileWriter("database" + "\\" + "\\" + fileName);
+                            FileWriter dataOutputStream = new FileWriter("database" + "\\" + fileName);
                             IOUtils.copy(input, dataOutputStream);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                }
+                if (request.matches("PAY (\\S+) (\\S+) (\\S+) (\\S+) (\\S+)") && !response.isEmpty()) {
+                    if (!fileName.equals("-1")) {
+                        try {
+                            FileReader inputStream = new FileReader("database" + "\\" + fileName);
+                            IOUtils.copy(inputStream, output);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -287,12 +297,17 @@ public class RequestProcessor {
         ArrayList<String> info = new ArrayList<>();
         info.add(address);
         info.add(phoneNumber);
+        String respond = "";
         try {
-            purchaseManager.pay(info, discountId,payingMethod);
+            respond = purchaseManager.pay(info, discountId,payingMethod);
         } catch (PurchaseManager.WrongDiscountIdException e) {
             e.printStackTrace();
         }
-        return "purchased successfully!";
+        if (!respond.isEmpty()) {
+            fileName = Product.getProductById(respond).getFileName();
+            return fileName;
+        }
+        return "";
     }
 
     private static String isPhoneNumberValid(String phoneNumber) {

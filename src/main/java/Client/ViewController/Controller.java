@@ -66,6 +66,10 @@ public class Controller {
         return output;
     }
 
+    public static DataInputStream getInput() {
+        return input;
+    }
+
     protected static String sendRequest(String request) {
         String response = null;
         try {

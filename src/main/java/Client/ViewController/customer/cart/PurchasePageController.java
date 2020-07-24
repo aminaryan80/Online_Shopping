@@ -12,7 +12,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.commons.io.IOUtils;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,7 +122,14 @@ public class PurchasePageController extends Controller implements Initializable 
         if(directCheckBox.isSelected()) payingMethod="direct";
         else payingMethod = "credit";
         if (sendRequest("CAN_PAY" + " " + accountUsername + " " + discountCodeField.getText()+" "+payingMethod).equals("YES")) {
-            sendRequest("PAY" + " " + accountUsername + " " + discountCodeField.getText() + " " + addressField.getText() + " " + phoneNumberField.getText() + " " +payingMethod);
+            String fileName = sendRequest("PAY" + " " + accountUsername + " " + discountCodeField.getText() + " " + addressField.getText() + " " + phoneNumberField.getText() + " " +payingMethod);
+            try {
+                FileWriter output = new FileWriter(fileName);
+                IOUtils.copy(getInput(), output);
+                close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Purchase was successful!", ButtonType.OK);
             alert.show();
             back(null);
