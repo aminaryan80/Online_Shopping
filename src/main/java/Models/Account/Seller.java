@@ -25,6 +25,16 @@ public class Seller extends Account {
         return wallet;
     }
 
+    public static ArrayList<SellingLog> getLogs() {
+        ArrayList<SellingLog> logs = new ArrayList<>();
+        for (Account account : allAccounts) {
+            if (account instanceof Seller) {
+                logs.addAll(((Seller) account).getAllLogs());
+            }
+        }
+        return logs;
+    }
+
     public ArrayList<Auction> getAuctions() {
         ArrayList<Auction> auctions = new ArrayList<>();
         for (String auctionId : auctionsId) {

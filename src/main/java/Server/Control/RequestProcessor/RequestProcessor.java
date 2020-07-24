@@ -7,6 +7,7 @@ import Models.Account.Seller;
 import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
+import Models.Shop.Log.SellingLog;
 import Models.Shop.Off.Auction;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
@@ -220,9 +221,28 @@ public class RequestProcessor {
             response = showBoughtProducts(matcher.group(1), matcher.group(2));
         } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()) {
             response = getBuyingLog(matcher.group(1), matcher.group(2));
+        } else if ((matcher = getMatcher(request, "GET_ALL_LOGS")).find()) {
+            response = getAllLogs();
+        } else if ((matcher = getMatcher(request, "EDIT_LOG (\\S+)")).find()) {
+            response = editLog(matcher.group(1));
         }
         return response;
 
+    }
+
+    private static String editLog(String id) {
+        ArrayList<SellingLog> logs = Seller.getLogs();
+        for (SellingLog log : logs) {
+            if (log.getId().equals(id)) {
+                log.setStatus();
+                return "0";
+            }
+        }
+        return "1";
+    }
+
+    private static String getAllLogs() {
+        return Gson.INSTANCE.get().toJson(Seller.getLogs());
     }
 
     private static String getBuyingLog(String username, String lodId) {
