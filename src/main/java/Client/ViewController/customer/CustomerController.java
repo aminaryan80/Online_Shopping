@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -46,9 +47,17 @@ public class CustomerController extends Controller implements Initializable {
     public TableColumn<BuyingLog, LocalDate> orderDate;
     public TableColumn<BuyingLog, Double> orderAmount;
     public TableColumn<BuyingLog, Log.Status> orderStatusCol;
+    public TextField chargeWalletField;
+    public Label moneyInBankField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        init();
+    }
+
+    @Override
+    public void init() {
+        moneyInBankField.setText(sendRequest("GET_MONEY_IN_BANK" + " " + accountUsername + " " + accountType));
         String[] response = sendRequest("GET_ACCOUNT " + accountUsername).split("&&&");
         Customer customer;
         customer = Gson.INSTANCE.get().fromJson(response[1], Customer.class);
@@ -121,5 +130,15 @@ public class CustomerController extends Controller implements Initializable {
 
     public void back() {
         loadFxml(Addresses.MAIN_MENU);
+    }
+
+    public void charge(MouseEvent mouseEvent) {
+        if (!chargeWalletField.getText().isEmpty()) {
+            Integer chargeAmount = Integer.parseInt(chargeWalletField.getText());
+            if (chargeAmount > 0 && chargeAmount < Double.parseDouble(moneyInBankField.getText())) {
+                System.out.println(sendRequest("PUT_TO_WALLET"+" "+accountUsername+" "+accountType+" "+chargeAmount));
+                init();
+            }
+        }
     }
 }
