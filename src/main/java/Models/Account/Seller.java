@@ -11,7 +11,7 @@ public class Seller extends Account {
     private List<String> auctionsId = new ArrayList<>();
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<>();
-
+    private Wallet wallet;
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.companyName = companyName;

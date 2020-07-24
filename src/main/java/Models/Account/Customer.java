@@ -11,7 +11,7 @@ public class Customer extends Account {
     private Cart cart;
     private ArrayList<BuyingLog> allLogs;
     private ArrayList<String> discountsIds;
-
+    private Wallet wallet;
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.cart = new Cart();
