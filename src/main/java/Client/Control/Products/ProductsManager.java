@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 public class ProductsManager extends Manager {
 
     private Category currentCategory;
-    private List<Filter> filters = new ArrayList<>();
-    private List<LengthFilter> lengthFilters = new ArrayList<>();
-    private Sort currentSort = null;
-    private List<Product> products;
+    private static List<Filter> filters = new ArrayList<>();
+    private static List<LengthFilter> lengthFilters = new ArrayList<>();
+    private static Sort currentSort = null;
+    private static List<Product> products;
     private boolean isOffMenu;
 
     public ProductsManager(Account account, boolean isOffMenu) {
@@ -91,7 +91,7 @@ public class ProductsManager extends Manager {
         return new ArrayList<>(products);
     }
 
-    private void setFilters() {
+    private static void setFilters() {
         for (Filter filter : filters) {
             String field = filter.getField();
             if (field.equals("status")) {
@@ -119,42 +119,42 @@ public class ProductsManager extends Manager {
         }
     }
 
-    private void setPriceLengthFilter(LengthFilter filter) {
+    private static void setPriceLengthFilter(LengthFilter filter) {
         products.stream().filter(product -> product.getPrice() <= Double.parseDouble(filter.getMaxValue()) || product.getPrice() >= Double.parseDouble(filter.getMinValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setFeaturesFilter(Filter filter) {
+    private static ArrayList<Product> setFeaturesFilter(Filter filter) {
         return products.stream().filter(product -> {
             Feature feature = product.getFeatureByName(filter.getField());
             return feature.getValue().equals(filter.getValue());
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setCategoryFilter(Filter filter) {
+    private static ArrayList<Product> setCategoryFilter(Filter filter) {
         return products.stream().filter(product -> product.getCategory().equals(Category.getCategoryByName(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setIsAvailableFilter(Filter filter) {
+    private static ArrayList<Product> setIsAvailableFilter(Filter filter) {
         return products.stream().filter(product -> product.isAvailable() == Boolean.parseBoolean(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setSellerFilter(Filter filter) {
+    private static ArrayList<Product> setSellerFilter(Filter filter) {
         return products.stream().filter(product -> product.getSeller().equals(Account.getAccountByUsername(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setPriceFilter(Filter filter) {
+    private static ArrayList<Product> setPriceFilter(Filter filter) {
         return products.stream().filter(product -> product.getPrice() == Double.parseDouble(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setCompanyNameFilter(Filter filter) {
+    private static ArrayList<Product> setCompanyNameFilter(Filter filter) {
         return products.stream().filter(product -> product.getCompanyName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setNameFilter(Filter filter) {
+    private static ArrayList<Product> setNameFilter(Filter filter) {
         return products.stream().filter(product -> product.getName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private ArrayList<Product> setStatusFilter(Filter filter) {
+    private static ArrayList<Product> setStatusFilter(Filter filter) {
         return products.stream().filter(product -> product.getStatus().equals(Product.parseProductStatus(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -200,7 +200,7 @@ public class ProductsManager extends Manager {
                 "features";
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         products = Product.getAllProducts();
         setFilters();
         currentSort = new Sort(sort, isAscending);
@@ -208,7 +208,7 @@ public class ProductsManager extends Manager {
         return new ArrayList<>(products);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }
@@ -237,7 +237,7 @@ public class ProductsManager extends Manager {
         ((FilteringController) myController).init(controller);
     }
 
-    public ArrayList<String> getSortFields() {
+    public static ArrayList<String> getSortFields(Category currentCategory) {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("price");
         fields.add("name");
@@ -246,7 +246,7 @@ public class ProductsManager extends Manager {
         return fields;
     }
 
-    private void sortByPrice() {
+    private static void sortByPrice() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -260,7 +260,7 @@ public class ProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByName() {
+    private static void sortByName() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -274,7 +274,7 @@ public class ProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByFeature() {
+    private static void sortByFeature() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -288,7 +288,7 @@ public class ProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByRating() {
+    private static void sortByRating() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {

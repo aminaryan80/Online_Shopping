@@ -13,8 +13,8 @@ import java.util.List;
 
 public class ManageAllProductsManager extends Manager {
 
-    private Sort currentSort;
-    private List<Product> products;
+    private static Sort currentSort;
+    private static List<Product> products;
     public ManageAllProductsManager(Account account) {
         super(account);
         products = Product.getAllProducts();
@@ -35,14 +35,14 @@ public class ManageAllProductsManager extends Manager {
         return 1;
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
         return new ArrayList<>(products);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }
@@ -59,7 +59,7 @@ public class ManageAllProductsManager extends Manager {
         }
     }
 
-    private void sortByPrice() {
+    private static void sortByPrice() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -73,7 +73,7 @@ public class ManageAllProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByName() {
+    private static void sortByName() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -87,7 +87,7 @@ public class ManageAllProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByRating() {
+    private static void sortByRating() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -101,7 +101,7 @@ public class ManageAllProductsManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    public ArrayList<String> getSortFields() {
+    public static ArrayList<String> getSortFields() {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("price");
         fields.add("name");

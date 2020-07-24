@@ -81,7 +81,7 @@ public class ManageUsersController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "principalManageUsers lk");
     }
 
     public void back() {

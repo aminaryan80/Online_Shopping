@@ -12,8 +12,8 @@ import java.util.*;
 
 public class ViewOrdersManager extends Manager {
 
-    private Sort currentSort;
-    private List<BuyingLog> logs;
+    private static Sort currentSort;
+    private static List<BuyingLog> logs;
     private Customer customer = (Customer) account;
 
     public ViewOrdersManager(Account account, Addresses address, Manager manager) {
@@ -37,14 +37,14 @@ public class ViewOrdersManager extends Manager {
                 "date";
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         logs = ((Customer) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
         return new ArrayList<>(logs);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }
@@ -59,7 +59,7 @@ public class ViewOrdersManager extends Manager {
         }
     }
 
-    private void sortByMoney() {
+    private static void sortByMoney() {
         BuyingLog[] logsForSort = logs.toArray(new BuyingLog[0]);
         for (int i = 0; i < logsForSort.length; i++) {
             for (int j = i + 1; j < logsForSort.length; j++) {
@@ -73,7 +73,7 @@ public class ViewOrdersManager extends Manager {
         logs = Arrays.asList(logsForSort);
     }
 
-    private void sortByDate() {
+    private static void sortByDate() {
         BuyingLog[] logsForSort = logs.toArray(new BuyingLog[0]);
         for (int i = 0; i < logsForSort.length; i++) {
             for (int j = i + 1; j < logsForSort.length; j++) {
@@ -127,5 +127,12 @@ public class ViewOrdersManager extends Manager {
             orderProductsToShow.put(Product.getProductById(productId),logToShowProducts.getProductIdToNumberMap().get(productId));
         }
         return orderProductsToShow;
+    }
+
+    public static ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("money");
+        fields.add("date");
+        return fields;
     }
 }

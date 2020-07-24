@@ -9,6 +9,7 @@ import Models.Shop.Request.AddOffRequest;
 import Models.Shop.Request.EditOffRequest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewOffsManager extends Manager {
@@ -49,5 +50,12 @@ public class ViewOffsManager extends Manager {
         Seller seller = (Seller) Account.getAccountByUsername(accountUsername);
         seller.addAuction(auction);
         new AddOffRequest(seller, auction);
+    }
+
+    public static ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("money");
+        fields.add("date");
+        return fields;
     }
 }

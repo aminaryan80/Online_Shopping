@@ -153,13 +153,6 @@ public class Controller {
         System.out.println("LOGOUT");
     }
 
-    public void error(String message) {
-        Alert a = new Alert(Alert.AlertType.NONE);
-        a.setAlertType(Alert.AlertType.ERROR);
-        a.setContentText(message);
-        a.show();
-    }
-
     public void success(String message) {
         Alert a = new Alert(Alert.AlertType.NONE);
         a.setAlertType(Alert.AlertType.CONFIRMATION);
@@ -171,15 +164,16 @@ public class Controller {
         loadFxml(address, false);
     }
 
-    public void loadFxml(Manager.Addresses address, boolean isPopup) {
+    public Controller loadFxml(Manager.Addresses address, boolean isPopup) {
         Stage workingStage;
+        FXMLLoader loader = null;
         if (isPopup)
             workingStage = popup;
         else
             workingStage = stage;
         try {
 //            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
-            FXMLLoader loader = getLoader(address);
+            loader = getLoader(address);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             workingStage.setTitle("AP Project");
@@ -188,9 +182,22 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return loader.getController();
     }
 
     public FXMLLoader getLoader(Manager.Addresses address) {
         return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+    }
+
+    public void openSort(Controller controller, String type) {
+        Controller myController = loadFxml(Manager.Addresses.SORT, true);
+        ((SortController) myController).init(controller, type);
+    }
+
+    public void error(String message) {
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setAlertType(Alert.AlertType.ERROR);
+        a.setContentText(message);
+        a.show();
     }
 }

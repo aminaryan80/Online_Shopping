@@ -225,7 +225,7 @@ public class PurchasePageController extends Controller implements Initializable 
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "purchasePage lk");
     }
 
     @Override

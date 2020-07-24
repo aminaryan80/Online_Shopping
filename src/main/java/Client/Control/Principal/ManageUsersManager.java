@@ -12,8 +12,8 @@ import java.util.List;
 
 public class ManageUsersManager extends Manager {
 
-    private List<Account> users;
-    private Sort currentSort;
+    private static List<Account> users;
+    private static Sort currentSort;
 
     public ManageUsersManager(Account account) {
         super(account);
@@ -41,14 +41,14 @@ public class ManageUsersManager extends Manager {
         return sort.equals("name");
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         users = Account.getAllAccounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
         return new ArrayList<>(users);
     }
 
-    public ArrayList<String> getSortFields() {
+    public static ArrayList<String> getSortFields() {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("name");
         return fields;
@@ -64,7 +64,7 @@ public class ManageUsersManager extends Manager {
         return new ArrayList<>(users);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }

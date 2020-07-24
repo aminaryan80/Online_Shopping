@@ -128,7 +128,7 @@ public class ViewOrdersController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "customerViewOrders");
     }
 
     public void back(ActionEvent actionEvent) {

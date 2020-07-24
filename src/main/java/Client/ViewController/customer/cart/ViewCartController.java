@@ -174,7 +174,7 @@ public class ViewCartController extends Controller implements Initializable {
 
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "viewCart lk");
     }
 
     @Override

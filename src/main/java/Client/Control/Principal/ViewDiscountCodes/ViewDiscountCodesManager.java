@@ -13,8 +13,8 @@ import java.util.List;
 
 public class ViewDiscountCodesManager extends Manager {
 
-    private Sort currentSort;
-    private List<Discount> discounts;
+    private static Sort currentSort;
+    private static List<Discount> discounts;
 
     public ViewDiscountCodesManager(Account account) {
         super(account);
@@ -58,7 +58,7 @@ public class ViewDiscountCodesManager extends Manager {
                 "endingdate";
     }
 
-    public ArrayList<String> getSortFields() {
+    public static ArrayList<String> getSortFields() {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("discountpercent");
         fields.add("beginningdate");
@@ -66,14 +66,14 @@ public class ViewDiscountCodesManager extends Manager {
         return fields;
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         discounts = Discount.getAllDiscounts();
         currentSort = new Sort(sort, isAscending);
         applySort();
         return new ArrayList<>(discounts);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }
@@ -90,7 +90,7 @@ public class ViewDiscountCodesManager extends Manager {
         }
     }
 
-    private void sortByDiscountPercentage() {
+    private static void sortByDiscountPercentage() {
         Discount[] discountsForSort = discounts.toArray(new Discount[0]);
         for (int i = 0; i < discountsForSort.length; i++) {
             for (int j = i + 1; j < discountsForSort.length; j++) {
@@ -104,7 +104,7 @@ public class ViewDiscountCodesManager extends Manager {
         discounts = Arrays.asList(discountsForSort);
     }
 
-    private void sortByBeginningDate() {
+    private static void sortByBeginningDate() {
         Discount[] discountsForSort = discounts.toArray(new Discount[0]);
         for (int i = 0; i < discountsForSort.length; i++) {
             for (int j = i + 1; j < discountsForSort.length; j++) {
@@ -118,7 +118,7 @@ public class ViewDiscountCodesManager extends Manager {
         discounts = Arrays.asList(discountsForSort);
     }
 
-    private void sortByEndingDate() {
+    private static void sortByEndingDate() {
         Discount[] discountsForSort = discounts.toArray(new Discount[0]);
         for (int i = 0; i < discountsForSort.length; i++) {
             for (int j = i + 1; j < discountsForSort.length; j++) {

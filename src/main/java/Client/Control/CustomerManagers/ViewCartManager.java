@@ -13,8 +13,8 @@ import java.util.*;
 
 public class ViewCartManager extends Manager {
 
-    private Sort currentSort;
-    private List<Product> products;
+    private static Sort currentSort;
+    private static List<Product> products;
     private Customer customer = (Customer) account;
 
     public ViewCartManager(Account account, Addresses address, Manager manager) {
@@ -80,14 +80,14 @@ public class ViewCartManager extends Manager {
                 "rating";
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         products = mainCategory.getAllProducts();
         currentSort = new Sort(sort, isAscending);
         applySort();
         return new ArrayList<>(products);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }
@@ -104,7 +104,7 @@ public class ViewCartManager extends Manager {
         }
     }
 
-    private void sortByPrice() {
+    private static void sortByPrice() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -118,7 +118,7 @@ public class ViewCartManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByName() {
+    private static void sortByName() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -132,7 +132,7 @@ public class ViewCartManager extends Manager {
         products = Arrays.asList(productsForSort);
     }
 
-    private void sortByRating() {
+    private static void sortByRating() {
         Product[] productsForSort = products.toArray(new Product[0]);
         for (int i = 0; i < productsForSort.length; i++) {
             for (int j = i + 1; j < productsForSort.length; j++) {
@@ -166,5 +166,13 @@ public class ViewCartManager extends Manager {
 
     public boolean isCartEmpty() {
         return customer.getCart().getProducts().size() == 0;
+    }
+
+    public static ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        return fields;
     }
 }

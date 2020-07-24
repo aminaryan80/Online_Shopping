@@ -37,10 +37,8 @@ public class CreateNewDiscountController extends Controller {
 
     public void addCustomer(ActionEvent actionEvent) {
         Account account;
-        if ((account = Account.getAccountByUsername(customerField.getText())) != null) {
-            if (account instanceof Customer) {
-                customersNames.add(customerField.getText());
-            } else manager.error("Customer doesn't exists with this name.");
-        } else manager.error("Customer doesn't exists with this name.");
+        if ((account = Account.getAccountByUsername(customerField.getText())) != null && account instanceof Customer) {
+            customersNames.add(customerField.getText());
+        } else error("Customer doesn't exists with this name.");
     }
 }

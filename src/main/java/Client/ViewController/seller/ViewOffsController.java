@@ -100,7 +100,7 @@ public class ViewOffsController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "sellerViewOffs lk");
     }
 
     public void back() {

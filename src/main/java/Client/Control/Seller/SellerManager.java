@@ -15,8 +15,8 @@ import java.util.Collections;
 
 public class SellerManager extends Manager {
 
-    private Sort currentSort;
-    private ArrayList<SellingLog> logs;
+    private static Sort currentSort;
+    private static ArrayList<SellingLog> logs;
 
     public SellerManager(Account account) {
         super(account);
@@ -42,14 +42,14 @@ public class SellerManager extends Manager {
                 "date";
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         logs = ((Seller) account).getAllLogs();
         currentSort = new Sort(sort, isAscending);
         applySort();
         return new ArrayList<>(logs);
     }
 
-    private void applySort() {
+    private static void applySort() {
         if (currentSort == null) {
             return;
         }
@@ -64,7 +64,7 @@ public class SellerManager extends Manager {
         }
     }
 
-    private void sortByMoney() {
+    private static void sortByMoney() {
         SellingLog[] logsForSort = logs.toArray(new SellingLog[0]);
         for (int i = 0; i < logsForSort.length; i++) {
             for (int j = i + 1; j < logsForSort.length; j++) {
@@ -78,7 +78,7 @@ public class SellerManager extends Manager {
         logs = (ArrayList<SellingLog>) Arrays.asList(logsForSort);
     }
 
-    private void sortByDate() {
+    private static void sortByDate() {
         SellingLog[] logsForSort = logs.toArray(new SellingLog[0]);
         for (int i = 0; i < logsForSort.length; i++) {
             for (int j = i + 1; j < logsForSort.length; j++) {

@@ -137,7 +137,7 @@ public class ManageProductsController extends Controller implements Initializabl
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "sellerManageProducts lk");
     }
 
     public void back() {

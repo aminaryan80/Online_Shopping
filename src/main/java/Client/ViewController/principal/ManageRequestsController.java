@@ -48,7 +48,6 @@ public class ManageRequestsController extends Controller implements Initializabl
 
     public void deleteRequest(ActionEvent actionEvent) {
         String requestId = requestIdField.getText();
-        ((ManageRequestsManager) manager).declineRequest(requestId);
         String response = sendRequest("DECLINE_REQUEST " + requestId);
         if (response.equals("0")) {
             success("Request declined successfully.");
@@ -56,7 +55,7 @@ public class ManageRequestsController extends Controller implements Initializabl
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "principalManageRequests lk");
     }
 
     public void back() {
