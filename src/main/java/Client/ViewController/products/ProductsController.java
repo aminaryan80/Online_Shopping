@@ -193,7 +193,7 @@ public class ProductsController extends MainController implements Initializable 
     }
 
     private ArrayList<Product> setSellerFilter(Filter filter) {
-        return products.stream().filter(product -> product.getSeller().equals(Gson.INSTANCE.get().fromJson(sendRequest("GET_ACCOUNT " + filter.getValue()), Account.class))).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getSellerUsername().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setPriceFilter(Filter filter) {

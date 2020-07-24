@@ -96,6 +96,7 @@ public class ManageProductsController extends Controller implements Initializabl
         inputs.add(price.getText());
         inputs.add(isAvailable.getText());
         inputs.add(description.getText());
+        inputs.add(accountUsername);
         sendRequest("CREATE_PRODUCT " + Gson.INSTANCE.get().toJson(inputs) + "&&&" + Gson.INSTANCE.get().toJson(allFeatures));
         success("Product added successfully.");
     }
