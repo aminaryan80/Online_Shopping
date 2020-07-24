@@ -90,7 +90,8 @@ public class PurchaseManager extends Manager {
     }
 
     // purchase
-    public void pay(ArrayList<String> receiverInformation, String discountId,String payingMethod) throws WrongDiscountIdException {
+    public String pay(ArrayList<String> receiverInformation, String discountId,String payingMethod) throws WrongDiscountIdException {
+        String respond = "";
             if (!discountId.matches("\\S{8}"))
                 discountId = null;
             Discount discount = getDiscountById(discountId);
@@ -103,11 +104,18 @@ public class PurchaseManager extends Manager {
                 double paymentAmount = customer.getCart().getTotalPrice(discount);
                 ArrayList<Product> boughtProducts = customer.getCart().getProducts(); //TODO number of products not handled.
                 addBuyers(boughtProducts);
+                for (Product product : boughtProducts) {
+                    if (product.getCategoryName().equals("file")) {
+                        respond = product.getId();
+                        break;
+                    }
+                }
                 addLogs(receiverInformation, discount, boughtProducts);
                 customer.payMoney(paymentAmount,payingMethod);
                 sellersGetPaid(boughtProducts,payingMethod);
                 customer.getCart().empty();
             }
+            return respond;
     }
 
     private void addLogs(ArrayList<String> receiverInformation, Discount discount, ArrayList<Product> boughtProducts) {
