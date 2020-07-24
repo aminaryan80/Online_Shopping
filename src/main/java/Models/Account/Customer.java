@@ -38,6 +38,7 @@ public class Customer extends Account {
             DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
+//         create_account ali rezaei ali 6153 6153
             dataOutputStream.flush();
             String bankId = dataInputStream.readUTF();
             this.setMyBankId(bankId);
