@@ -1,5 +1,10 @@
 package Client.ViewController;
 
+import Models.Account.Account;
+import Models.Gson;
+import Models.Shop.Log.BuyingLog;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +31,22 @@ public class SortController extends Controller {
     public void sort(ActionEvent actionEvent) {
         String sorted = sendRequest("SORT " + type + " " + sortFields.getSelectionModel().getSelectedItem() + " " + isAscending.isSelected());
         String[] things = sorted.split("  ");
+        Class myClass = null;
+        if (type.equals("customerViewOrders")) {
+            myClass = BuyingLog.class;
+        } else if (type.equals("viewCart") || type.equals("principalManageProducts") || type.equals("products") || type.equals("sellerManageProducts")) {
+            myClass = Product.class;
+        } else if (type.equals("principalManageUsers")) {
+            myClass = Account.class;
+        } else if (type.equals("principalViewDiscounts")) {
+            myClass = Discount.class;
+        } else if (type.equals("sellerViewOffs")) {
+
+        }
         ArrayList<Object> objects = new ArrayList<>();
         for (String thing : things) {
-            objects.add(thing);
+            System.out.println(thing);
+            objects.add(Gson.INSTANCE.get().fromJson(thing, myClass));
         }
         controller.initTable(objects);
     }

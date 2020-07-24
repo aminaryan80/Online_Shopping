@@ -203,8 +203,7 @@ public class Controller {
         loadFxml(address, false);
     }
 
-    public Controller loadFxml(Manager.Addresses address, boolean isPopup) {
-    public void loadFxml(Addresses address, boolean isPopup) {
+    public Controller loadFxml(Addresses address, boolean isPopup) {
         Stage workingStage;
         FXMLLoader loader = null;
         if (isPopup)
@@ -212,35 +211,27 @@ public class Controller {
         else
             workingStage = stage;
         try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+//           FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
             loader = getLoader(address);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             workingStage.setTitle("AP Project");
             workingStage.setScene(scene);
             workingStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return loader.getController();
         }
-        return loader.getController();
-    }
 
-    public FXMLLoader getLoader(Addresses address) {
-        return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
-    }
+        public FXMLLoader getLoader (Addresses address){
+            return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+        }
 
-    public void openSort(Controller controller, String type) {
-        Controller myController = loadFxml(Manager.Addresses.SORT, true);
-        ((SortController) myController).init(controller, type);
-    }
-
-    public void error(String message) {
-        Alert a = new Alert(Alert.AlertType.NONE);
-        a.setAlertType(Alert.AlertType.ERROR);
-        a.setContentText(message);
-        a.show();
-    }
-
+        public void openSort (Controller controller, String type){
+            Controller myController = loadFxml(Addresses.SORT, true);
+            ((SortController) myController).init(controller, type);
+        }
     public enum Addresses {
         FILTER("view/products/filtering.fxml"),
 
@@ -323,3 +314,4 @@ public class Controller {
         }
     }
 }
+

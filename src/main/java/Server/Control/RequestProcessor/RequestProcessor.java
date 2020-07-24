@@ -233,7 +233,7 @@ public class RequestProcessor {
         }
         StringBuilder respond = new StringBuilder();
         for (Object thing : things) {
-            respond.append(thing + "  ");
+            respond.append(Gson.INSTANCE.get().toJson(thing) + "  ");
         }
         return respond.toString();
     }
