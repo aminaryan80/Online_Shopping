@@ -46,10 +46,9 @@ public class ServerMain {
         }
     }
 
-
     public static void main(String[] args) {
         openFiles();
         Runtime.getRuntime().addShutdownHook(new Thread(ServerMain::saveFiles));
-        RequestProcessor requestProcessor = new RequestProcessor();
+        new RequestProcessor();
     }
 }

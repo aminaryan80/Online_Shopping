@@ -12,11 +12,12 @@ import Models.Shop.Request.DeleteProductRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class SellerManager extends Manager {
 
     private static Sort currentSort;
-    private static ArrayList<SellingLog> logs;
+    private static List<SellingLog> logs;
 
     public SellerManager(Account account) {
         super(account);
@@ -79,7 +80,7 @@ public class SellerManager extends Manager {
                 }
             }
         }
-        logs = (ArrayList<SellingLog>) Arrays.asList(logsForSort);
+        logs = Arrays.asList(logsForSort);
     }
 
     public boolean isEnteredSortFieldValid(String field) {

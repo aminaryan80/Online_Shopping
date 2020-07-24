@@ -1,7 +1,5 @@
 package Client.ViewController;
 
-import Server.Control.Manager;
-import Server.Control.RequestProcessor.RequestProcessor;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
@@ -11,7 +9,9 @@ import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.*;
+import Server.Control.Manager;
 import com.google.gson.reflect.TypeToken;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +30,10 @@ public class Controller {
     protected Addresses backAddress;
     protected static Stage stage;
     protected static Stage popup = new Stage();
+
+    public static void closeClient() {
+        logout();
+    }
 
     public void init() {
 
@@ -55,7 +59,7 @@ public class Controller {
         return RequestProcessor.processRequest(request);
     }*/
 
-    protected String sendRequest(String request) {
+    protected static String sendRequest(String request) {
         Socket socket;
         DataInputStream input;
         DataOutputStream output;
@@ -178,10 +182,15 @@ public class Controller {
         return null;
     }
 
-    public void logout() {
+    public static void logout() {
         System.out.println("LOGOUT");
+        sendRequest("LOGOUT " + accountUsername);
         accountType = null;
         accountUsername = null;
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        logout();
         loadFxml(Addresses.MAIN_MENU);
     }
 
@@ -203,8 +212,7 @@ public class Controller {
         loadFxml(address, false);
     }
 
-    public Controller loadFxml(Manager.Addresses address, boolean isPopup) {
-    public void loadFxml(Addresses address, boolean isPopup) {
+    public Controller loadFxml(Addresses address, boolean isPopup) {
         Stage workingStage;
         FXMLLoader loader = null;
         if (isPopup)
@@ -212,35 +220,27 @@ public class Controller {
         else
             workingStage = stage;
         try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+//           FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
             loader = getLoader(address);
             Parent root = loader.load();
             Scene scene = new Scene(root);
             workingStage.setTitle("AP Project");
             workingStage.setScene(scene);
             workingStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return loader.getController();
         }
-        return loader.getController();
-    }
 
-    public FXMLLoader getLoader(Addresses address) {
-        return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
-    }
+        public FXMLLoader getLoader (Addresses address){
+            return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
+        }
 
-    public void openSort(Controller controller, String type) {
-        Controller myController = loadFxml(Manager.Addresses.SORT, true);
-        ((SortController) myController).init(controller, type);
-    }
-
-    public void error(String message) {
-        Alert a = new Alert(Alert.AlertType.NONE);
-        a.setAlertType(Alert.AlertType.ERROR);
-        a.setContentText(message);
-        a.show();
-    }
-
+        public void openSort (Controller controller, String type){
+            Controller myController = loadFxml(Addresses.SORT, true);
+            ((SortController) myController).init(controller, type);
+        }
     public enum Addresses {
         FILTER("view/products/filtering.fxml"),
 

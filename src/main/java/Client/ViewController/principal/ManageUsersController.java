@@ -1,6 +1,5 @@
 package Client.ViewController.principal;
 
-import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -26,6 +25,7 @@ public class ManageUsersController extends Controller implements Initializable {
     public TableColumn<Account, String> usernameCol;
     public TableColumn<Account, String> userEmailCol;
     public TableColumn<Account, Double> userBalanceCol;
+    public TableColumn<Account, String> userStatusCol;
     public TextField viewUserIdField;
     public Label viewUserLabel;
     public TextField usernameField;
@@ -41,6 +41,7 @@ public class ManageUsersController extends Controller implements Initializable {
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         userBalanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        userStatusCol.setCellValueFactory(new PropertyValueFactory<>("isOnline"));
     }
 
     public void viewUser(ActionEvent actionEvent) {

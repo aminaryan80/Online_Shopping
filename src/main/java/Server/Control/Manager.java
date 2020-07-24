@@ -61,11 +61,11 @@ public abstract class Manager {
         return date.matches("^(\\d{4}-\\d{2}-\\d{2})$");
     }
 
-    public ArrayList<String> getSortFields() {
+    public static ArrayList<String> getSortFields() {
         return null;
     }
 
-    public ArrayList<Object> sort(String sort, boolean isAscending) {
+    public static ArrayList<Object> sort(String sort, boolean isAscending) {
         return null;
     }
 

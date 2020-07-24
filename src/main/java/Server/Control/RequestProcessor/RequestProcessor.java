@@ -1,5 +1,16 @@
 package Server.Control.RequestProcessor;
 
+import Models.Account.Account;
+import Models.Account.Customer;
+import Models.Account.Principal;
+import Models.Account.Seller;
+import Models.Gson;
+import Models.Shop.Category.Category;
+import Models.Shop.Category.Feature;
+import Models.Shop.Off.Auction;
+import Models.Shop.Off.Discount;
+import Models.Shop.Product.Product;
+import Models.Shop.Request.*;
 import Server.Control.CustomerManagers.ProductPageManager;
 import Server.Control.CustomerManagers.PurchaseManager;
 import Server.Control.CustomerManagers.ViewCartManager;
@@ -20,17 +31,6 @@ import Server.Control.Seller.SellerManager;
 import Server.Control.Seller.ViewOffsManager;
 import Server.Control.UserPanel.CreateNewAccountManager;
 import Server.Control.UserPanel.LoginToExistingAccountManager;
-import Models.Account.Account;
-import Models.Account.Customer;
-import Models.Account.Principal;
-import Models.Account.Seller;
-import Models.Gson;
-import Models.Shop.Category.Category;
-import Models.Shop.Category.Feature;
-import Models.Shop.Off.Auction;
-import Models.Shop.Off.Discount;
-import Models.Shop.Product.Product;
-import Models.Shop.Request.*;
 import com.google.gson.reflect.TypeToken;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
@@ -81,6 +81,8 @@ public class RequestProcessor {
         String response = null;
         if ((matcher = getMatcher(request, "LOGIN (\\S+) (\\S+)")).find()) {
             response = login(matcher);
+        } else if ((matcher = getMatcher(request, "LOGOUT (\\S+)")).find()) {
+            response = logout(matcher);
         } else if ((matcher = getMatcher(request, "REGISTER (\\S+) (\\S+) ((.|\\n)+)")).find()) {
             response = register(matcher);
         } else if (getMatcher(request, "IS_PRINCIPAL_EXISTS").find()) {
@@ -233,7 +235,7 @@ public class RequestProcessor {
         }
         StringBuilder respond = new StringBuilder();
         for (Object thing : things) {
-            respond.append(thing + "  ");
+            respond.append(Gson.INSTANCE.get().toJson(thing) + "  ");
         }
         return respond.toString();
     }
@@ -684,6 +686,11 @@ public class RequestProcessor {
     private static String login(Matcher matcher) {
         LoginToExistingAccountManager l = new LoginToExistingAccountManager(null);
         return l.login(matcher.group(1), matcher.group(2));
+    }
+
+    private static String logout(Matcher matcher) {
+        LoginToExistingAccountManager l = new LoginToExistingAccountManager(null);
+        return l.logout(matcher.group(1));
     }
 
     private static String register(Matcher matcher) {

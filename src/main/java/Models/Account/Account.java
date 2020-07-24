@@ -21,6 +21,8 @@ public abstract class Account {
     protected double balance;
     protected boolean isGuest;
     protected String bankId;
+    protected boolean isOnline;
+
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         this.username = username;
         this.firstName = firstName;
@@ -29,7 +31,7 @@ public abstract class Account {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.balance = balance;
-        this.isGuest = false;
+        this.isOnline = false;
         allAccounts.add(this);
         createBankAccount(this);
     }
@@ -43,6 +45,17 @@ public abstract class Account {
     }
 
     protected abstract void createBankAccount(Account account);
+
+    public String getIsOnline() {
+        if(isOnline)
+            return "On";
+        else
+            return "Off";
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
+    }
 
     public static ArrayList<Account> getAllAccounts() {
         return allAccounts;
@@ -143,6 +156,7 @@ public abstract class Account {
     }
 
     public static void save(Account account) throws Exception {
+        account.setOnline(false);
         if (account instanceof Customer) {
             saveCustomer(account);
         } else if (account instanceof Seller) {
