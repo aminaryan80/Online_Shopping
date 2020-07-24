@@ -1,167 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.ViewController.principal.PrincipalController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Client.ViewController.principal.PrincipalController">
     <children>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+              prefWidth="250.0" styleClass="menu" stylesheets="@../../styles/dashboard_styles.css">
             <children>
-                <Button mnemonicParsing="false" onAction="#openManageUsers" prefHeight="38.0" prefWidth="234.0" text="Manage Users">
+                <Button mnemonicParsing="false" onAction="#openManageUsers" prefHeight="38.0" prefWidth="234.0"
+                        text="Manage Users">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#openManageProducts" prefHeight="38.0" prefWidth="234.0" text="Manage Products">
+                <Button mnemonicParsing="false" onAction="#openManageProducts" prefHeight="38.0" prefWidth="234.0"
+                        text="Manage Products">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#openManageRequests" prefHeight="38.0" prefWidth="234.0" text="Manage Requests">
+                <Button mnemonicParsing="false" onAction="#openManageRequests" prefHeight="38.0" prefWidth="234.0"
+                        text="Manage Requests">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#openManageCategories" prefHeight="38.0" prefWidth="234.0" text="Manage Categories">
+                <Button mnemonicParsing="false" onAction="#openManageCategories" prefHeight="38.0" prefWidth="234.0"
+                        text="Manage Categories">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#createDiscountCode" prefHeight="38.0" prefWidth="234.0" text="Create Discount Code">
+                <Button mnemonicParsing="false" onAction="#createDiscountCode" prefHeight="38.0" prefWidth="234.0"
+                        text="Create Discount Code">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#openViewDiscountCodes" prefHeight="38.0" prefWidth="234.0" text="View Discount Codes">
+                <Button mnemonicParsing="false" onAction="#openViewDiscountCodes" prefHeight="38.0" prefWidth="234.0"
+                        text="View Discount Codes">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#openOffsMenu" prefHeight="38.0" prefWidth="234.0" text="Offs">
+                <Button mnemonicParsing="false" onAction="#openOffsMenu" prefHeight="38.0" prefWidth="234.0"
+                        text="Offs">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="Back">
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
+                <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout"
+                        textFill="RED">
                     <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="12.0"/>
                     </font>
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </Button>
             </children>
         </VBox>
-        <ImageView fitHeight="125.0" fitWidth="123.0" layoutX="294.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="125.0" fitWidth="123.0" layoutX="294.0" layoutY="97.0" pickOnBounds="true"
+                   preserveRatio="true">
             <image>
-                <Image url="@../../images/user.png" />
+                <Image url="@../../images/user.png"/>
             </image>
         </ImageView>
-        <Label fx:id="usernameLabel" alignment="CENTER" layoutX="281.0" layoutY="237.0" prefHeight="32.0" prefWidth="150.0" text="Username">
+        <Label fx:id="usernameLabel" alignment="CENTER" layoutX="281.0" layoutY="237.0" prefHeight="32.0"
+               prefWidth="150.0" text="Username">
             <font>
-                <Font size="21.0" />
+                <Font size="21.0"/>
             </font>
         </Label>
-        <Button layoutX="269.0" layoutY="280.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="38.0" prefWidth="175.0" text="Edit Password">
+        <Button layoutX="269.0" layoutY="280.0" mnemonicParsing="false" onAction="#editPassword" prefHeight="38.0"
+                prefWidth="175.0" text="Edit Password">
             <cursor>
-                <Cursor fx:constant="HAND" />
+                <Cursor fx:constant="HAND"/>
             </cursor>
         </Button>
-        <TextField fx:id="firstNameField" layoutX="609.0" layoutY="63.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
+        <TextField fx:id="firstNameField" layoutX="609.0" layoutY="63.0" prefHeight="32.0" prefWidth="175.0"
+                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0" />
+                <Insets left="8.0" right="8.0"/>
             </padding>
         </TextField>
         <Label layoutX="500.0" layoutY="66.0" text="First Name:">
             <font>
-                <Font size="17.0" />
+                <Font size="17.0"/>
             </font>
         </Label>
-        <TextField fx:id="lastNameField" layoutX="609.0" layoutY="105.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
+        <TextField fx:id="lastNameField" layoutX="609.0" layoutY="105.0" prefHeight="32.0" prefWidth="175.0"
+                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0" />
+                <Insets left="8.0" right="8.0"/>
             </padding>
         </TextField>
         <Label layoutX="500.0" layoutY="108.0" text="Last Name:">
             <font>
-                <Font size="17.0" />
+                <Font size="17.0"/>
             </font>
         </Label>
-        <TextField fx:id="emailField" layoutX="609.0" layoutY="147.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
+        <TextField fx:id="emailField" layoutX="609.0" layoutY="147.0" prefHeight="32.0" prefWidth="175.0"
+                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0" />
+                <Insets left="8.0" right="8.0"/>
             </padding>
         </TextField>
         <Label layoutX="520.0" layoutY="150.0" text="Email:">
             <font>
-                <Font size="17.0" />
+                <Font size="17.0"/>
             </font>
         </Label>
-        <TextField fx:id="phoneNumberField" layoutX="609.0" layoutY="189.0" prefHeight="32.0" prefWidth="175.0" styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
+        <TextField fx:id="phoneNumberField" layoutX="609.0" layoutY="189.0" prefHeight="32.0" prefWidth="175.0"
+                   styleClass="text-field" stylesheets="@../../styles/user_panel_styles.css">
             <padding>
-                <Insets left="8.0" right="8.0" />
+                <Insets left="8.0" right="8.0"/>
             </padding>
         </TextField>
         <Label layoutX="482.0" layoutY="192.0" text="Phone Number:">
             <font>
-                <Font size="17.0" />
+                <Font size="17.0"/>
             </font>
         </Label>
         <TableView fx:id="usersTable" layoutX="826.0" layoutY="50.0" prefHeight="213.0" prefWidth="326.0">
             <columns>
-                <TableColumn fx:id="usernameCol" editable="false" prefWidth="91.20001220703125" resizable="false" style="-fx-alignment: center;" text="Username" />
-                <TableColumn fx:id="userTypeCol" editable="false" prefWidth="112.7999267578125" resizable="false" style="-fx-alignment: center;" text="Type" />
-                <TableColumn fx:id="userBalanceCol" editable="false" prefWidth="121.60001220703123" resizable="false" style="-fx-alignment: center;" text="Balance" />
+                <TableColumn fx:id="usernameCol" editable="false" prefWidth="91.20001220703125" resizable="false"
+                             style="-fx-alignment: center;" text="Username"/>
+                <TableColumn fx:id="userTypeCol" editable="false" prefWidth="112.7999267578125" resizable="false"
+                             style="-fx-alignment: center;" text="Type"/>
+                <TableColumn fx:id="userBalanceCol" editable="false" prefWidth="121.60001220703123" resizable="false"
+                             style="-fx-alignment: center;" text="Balance"/>
             </columns>
         </TableView>
-        <Label layoutX="820.0" layoutY="30.0" text="Users:" />
+        <Label layoutX="820.0" layoutY="30.0" text="Users:"/>
         <TableView fx:id="discountsTable" layoutX="469.0" layoutY="317.0" prefHeight="214.0" prefWidth="326.0">
             <columns>
-                <TableColumn fx:id="discountIdCol" prefWidth="75.0" style="-fx-alignment: center;" text="Id" />
-                <TableColumn fx:id="discountPercentCol" prefWidth="87.20001220703125" style="-fx-alignment: center;" text="Percent" />
-                <TableColumn fx:id="discountBeginningDateCol" prefWidth="161.5999755859375" style="-fx-alignment: center;" text="Beginning Date" />
+                <TableColumn fx:id="discountIdCol" prefWidth="75.0" style="-fx-alignment: center;" text="Id"/>
+                <TableColumn fx:id="discountPercentCol" prefWidth="87.20001220703125" style="-fx-alignment: center;"
+                             text="Percent"/>
+                <TableColumn fx:id="discountBeginningDateCol" prefWidth="161.5999755859375"
+                             style="-fx-alignment: center;" text="Beginning Date"/>
             </columns>
         </TableView>
         <Label layoutX="463.0" layoutY="295.0" text="Discounts:" />
@@ -169,9 +185,15 @@
         <Button layoutX="481.0" layoutY="231.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="32.0" prefWidth="302.0" text="Update Profile" />
         <Label alignment="CENTER" layoutX="280.0" layoutY="59.0" prefHeight="32.0" prefWidth="150.0" text="Principal">
             <font>
-                <Font size="21.0" />
+                <Font size="21.0"/>
             </font>
         </Label>
+      <TextField fx:id="minAmountField" layoutX="269.0" layoutY="450.0" prefHeight="26.0" prefWidth="94.0" promptText="5" />
+      <TextField fx:id="wageField" layoutX="268.0" layoutY="531.0" prefHeight="26.0" prefWidth="94.0" promptText="0.05" />
+      <Label layoutX="267.0" layoutY="416.0" prefHeight="18.0" prefWidth="175.0" text="Minimum amount in wallet:" />
+      <Label layoutX="269.0" layoutY="495.0" prefHeight="18.0" prefWidth="175.0" text="Wage:" />
+      <Button fx:id="minAmountButton" onMouseClicked="#minAmountSet" layoutX="365.0" layoutY="451.0" mnemonicParsing="false" text="ok" />
+      <Button fx:id="wageButton" onMouseClicked="#wageSet" layoutX="365.0" layoutY="531.0" mnemonicParsing="false" text="ok" />
       <TableView fx:id="logTable" layoutX="826.0" layoutY="324.0" prefHeight="200.0" prefWidth="326.0">
         <columns>
           <TableColumn fx:id="logIdCol" prefWidth="75.0" text="id" />
