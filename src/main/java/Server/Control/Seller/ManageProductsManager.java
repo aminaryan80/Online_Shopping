@@ -38,10 +38,10 @@ public class ManageProductsManager extends Manager {
         return fields;
     }
 
-    public void addProduct(String name, Category category, double price, boolean isAvailable,
-                           String description, ArrayList<Feature> features) {
+    public void addProduct(String name, String category, double price, boolean isAvailable,
+                           String description, ArrayList<Feature> features, String fileName) {
         String companyName = ((Seller) account).getCompanyName();
-        Product product = new Product(name, companyName, price, (Seller) account, isAvailable, category, description, features);
+        Product product = new Product(name, companyName, price, (Seller) account, isAvailable, category, description, features, fileName);
         new AddProductRequest((Seller) account, product);
     }
 

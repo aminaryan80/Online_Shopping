@@ -103,7 +103,7 @@ public class ProductsManager extends Manager {
     }
 
     private static ArrayList<Product> setCategoryFilter(Filter filter) {
-        return products.stream().filter(product -> product.getCategory().equals(Category.getCategoryByName(filter.getValue()))).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> product.getCategoryName().equals(filter.getValue())).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private static ArrayList<Product> setIsAvailableFilter(Filter filter) {

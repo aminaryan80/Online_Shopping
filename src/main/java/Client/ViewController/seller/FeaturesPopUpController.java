@@ -19,6 +19,7 @@ public class FeaturesPopUpController extends Controller implements Initializable
 
     public TextField featuresText;
     public Label featuresLabel;
+    private String category;
 
     private int i;
     private ArrayList<String> featuresNames;
@@ -40,6 +41,7 @@ public class FeaturesPopUpController extends Controller implements Initializable
     public void next(ActionEvent actionEvent) {
         if (i == -1) {
             String categoryName = featuresText.getText();
+            category = categoryName;
             Category category = Gson.INSTANCE.get().fromJson(sendRequest("GET_CATEGORY " + categoryName), Category.class);
             if (category == null) {
                 error("Wrong category name.");
@@ -51,8 +53,9 @@ public class FeaturesPopUpController extends Controller implements Initializable
             featuresText.clear();
             featuresLabel.setText(featuresNames.get(i));
         } else if (i == featuresNumbers - 1) {
+            allFeatures.add(new Feature(featuresLabel.getText(), featuresText.getText()));
             featuresText.clear();
-            controller.addProduct(allFeatures);
+            controller.addProduct(allFeatures, category);
             ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
         } else {
             allFeatures.add(new Feature(featuresNames.get(i), featuresText.getText()));

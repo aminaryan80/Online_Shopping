@@ -27,30 +27,37 @@ public class Product {
     private double price;
     private String sellerUsername;
     private boolean isAvailable;
-    private String categoryId;
+    private String categoryName;
     private String description;
     private ArrayList<String> allRatesIds = new ArrayList<>();
     private ArrayList<String> allBuyersUsernames = new ArrayList<>();
     private List<String> allCommentsIds = new ArrayList<>();
     private ArrayList<Feature> features;
     private String auctionId;
+    private String fileName;
 
     public Product(String name, String companyName, double price, Seller seller,
-                   boolean isAvailable, Category category, String description, ArrayList<Feature> features) {
+                   boolean isAvailable, String category, String description, ArrayList<Feature> features, String fileName) {
         this.id = Identity.getId();
         this.name = name;
         this.companyName = companyName;
         this.price = price;
         this.sellerUsername = seller.getUsername();
         this.isAvailable = isAvailable;
-        if (category != null) {
-            this.categoryId = category.getId();
-            category.addProduct(id);
-        }
+        this.categoryName = category;
         this.description = description;
         this.features = features;
         this.status = ProductStatus.UNDER_REVIEW_FOR_CONSTRUCTION;
         allProducts.add(this);
+        this.fileName = fileName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 
     public static ArrayList<Product> getAllAuctionedProducts() {
@@ -290,11 +297,11 @@ public class Product {
     }
 
     public Category getCategory() {
-        return Category.getCategoryById(categoryId);
+        return Category.getCategoryByName(categoryName);
     }
 
     public void setCategory(Category category) {
-        this.categoryId = category.getId();
+        this.categoryName = category.getName();
     }
 
     public boolean isAvailable() {
@@ -339,7 +346,7 @@ public class Product {
                 "\nprice = " + price +
                 "\nseller = '" + Seller.getAccountByUsername(sellerUsername) + '\'' +
                 "\nisAvailable = " + isAvailable +
-                "\ncategory = '" + Category.getCategoryById(categoryId).getName() + '\'' +
+                "\ncategory = '" + categoryName + '\'' +
                 "\ndescription = '" + description + '\'' +
                 "\nfeatures = '" + features + '\'';
     }

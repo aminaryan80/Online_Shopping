@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1123.0"
-            xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="Client.ViewController.seller.ManageProductsController">
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1123.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.ViewController.seller.ManageProductsController">
     <children>
-        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-              prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" styleClass="menu" stylesheets="@../../../styles/dashboard_styles.css">
             <children>
                 <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="234.0" text="back">
                     <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                     </VBox.margin>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#logout" prefHeight="38.0" prefWidth="234.0" text="Logout" textFill="RED">
@@ -108,7 +111,13 @@
       <Button layoutX="400.0" layoutY="263.0" mnemonicParsing="false" onAction="#sort" text="Sort" />
       <ChoiceBox fx:id="changeableFeatures" layoutX="878.0" layoutY="358.0" prefWidth="150.0" />
       <TextField fx:id="changeableFeatureValue" layoutX="879.0" layoutY="421.0" promptText="new feature value" />
-      <Button onAction="#updateFeatures" layoutX="888.0" layoutY="467.0" mnemonicParsing="false" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css" text="Update Features" />
+      <Button layoutX="888.0" layoutY="467.0" mnemonicParsing="false" onAction="#updateFeatures" style="-fx-background-color: yellow;" stylesheets="@../../../styles/styles.css" text="Update Features" />
+      <Label layoutX="620.0" layoutY="23.0" text="fileName">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fileName" layoutX="729.0" layoutY="19.0" promptText="-1 if not file" />
     </children>
 
 </AnchorPane>

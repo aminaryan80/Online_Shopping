@@ -1,5 +1,6 @@
 package Client.ViewController.seller;
 
+import Models.Shop.Category.Category;
 import Models.Shop.Category.Sort;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
@@ -18,7 +19,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.apache.commons.io.IOUtils;
 
+import java.io.*;
+import java.net.Socket;
 import java.net.URL;
 import java.util.*;
 
@@ -42,6 +46,7 @@ public class ManageProductsController extends Controller implements Initializabl
     public TextField isAvailable;
     public ChoiceBox changeableFeatures;
     public TextField changeableFeatureValue;
+    public TextField fileName;
     private Sort currentSort;
     private List<Product> products;
     private List<Product> myProducts;
@@ -89,23 +94,35 @@ public class ManageProductsController extends Controller implements Initializabl
         ((FeaturesPopUpController) loadFxml(Addresses.ADD_PRODUCT_POP_UP, true)).setController(this);
     }
 
-    public void addProduct(ArrayList<Feature> allFeatures) {
+    public void addProduct(ArrayList<Feature> allFeatures, String categoryName) {
         ArrayList<String> inputs = new ArrayList<>();
         inputs.add(name.getText());
-        inputs.add(category.getText());
+        inputs.add(categoryName);
         inputs.add(price.getText());
         inputs.add(isAvailable.getText());
         inputs.add(description.getText());
         inputs.add(accountUsername);
+        inputs.add(fileName.getText());
         sendRequest("CREATE_PRODUCT " + Gson.INSTANCE.get().toJson(inputs) + "&&&" + Gson.INSTANCE.get().toJson(allFeatures));
+        if (!fileName.getText().equals("-1")) {
+            try {
+                File file = new File(fileName.getText());
+                OutputStream outputStream = getOutput();
+                InputStream inputStream = new FileInputStream(file);
+                IOUtils.copy(inputStream, outputStream);
+                close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
         success("Product added successfully.");
     }
 
     public void updateScene(MouseEvent mouseEvent) {
         product = productTableView.getSelectionModel().getSelectedItem();
+        initFields();
         initBuyers();
         initFeatures();
-        initFields();
     }
 
     private void initFields() {
@@ -114,7 +131,7 @@ public class ManageProductsController extends Controller implements Initializabl
         description.setText(product.getDescription());
         rate.setText(String.valueOf(product.getRate()));
         price.setText(String.valueOf(product.getPrice()));
-        category.setText(product.getCategory().getName());
+        category.setText(product.getCategoryName());
         isAvailable.setText(String.valueOf(product.isAvailable()));
     }
 
@@ -122,7 +139,7 @@ public class ManageProductsController extends Controller implements Initializabl
         features.setItems(FXCollections.observableArrayList(product.getFeatures()));
         featureColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        changeableFeatures.setItems(FXCollections.observableList(product.getCategory().getFeaturesNames()));
+        changeableFeatures.setItems(FXCollections.observableList(Gson.INSTANCE.get().fromJson(sendRequest("GET_CATEGORY " + category.getText()), Category.class).getFeaturesNames()));
     }
 
     private void initBuyers() {

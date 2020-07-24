@@ -185,7 +185,7 @@ public class ProductsController extends MainController implements Initializable 
     }
 
     private ArrayList<Product> setCategoryFilter(Filter filter) {
-        return products.stream().filter(product -> product.getCategory().equals(Gson.INSTANCE.get().fromJson(sendRequest("GET_CATEGORY " + filter.getValue()), Category.class))).collect(Collectors.toCollection(ArrayList::new));
+        return products.stream().filter(product -> Gson.INSTANCE.get().fromJson(sendRequest("GET_CATEGORY " + product.getCategoryName()), Category.class).equals(Gson.INSTANCE.get().fromJson(sendRequest("GET_CATEGORY " + filter.getValue()), Category.class))).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ArrayList<Product> setIsAvailableFilter(Filter filter) {

@@ -25,6 +25,9 @@ import java.util.ArrayList;
 public class Controller {
     protected Manager manager;
     protected static String accountUsername;
+    private static Socket socket;
+    private static DataInputStream input;
+    private static DataOutputStream output;
     protected static String accountType;
     protected Addresses backAddress;
     protected static Stage stage;
@@ -58,10 +61,11 @@ public class Controller {
         return RequestProcessor.processRequest(request);
     }*/
 
+    public DataOutputStream getOutput() {
+        return output;
+    }
+
     protected static String sendRequest(String request) {
-        Socket socket;
-        DataInputStream input;
-        DataOutputStream output;
         String response = null;
         try {
             socket = new Socket("localhost", 8080);
@@ -83,6 +87,16 @@ public class Controller {
             e.printStackTrace();
         }
         return response;
+    }
+
+    public void close() {
+        try {
+            input.close();
+            output.close();
+            socket.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void openUserPanel() {

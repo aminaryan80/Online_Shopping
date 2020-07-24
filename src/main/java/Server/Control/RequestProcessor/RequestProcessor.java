@@ -33,6 +33,7 @@ import Server.Control.UserPanel.CreateNewAccountManager;
 import Server.Control.UserPanel.LoginToExistingAccountManager;
 import com.google.gson.reflect.TypeToken;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -44,6 +45,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RequestProcessor {
+
+    private static String fileName;
 
     public RequestProcessor() {
         ServerSocket server;
@@ -63,9 +66,19 @@ public class RequestProcessor {
                 String request;
                 // reads message
                 request = input.readUTF();
-                String response = processRequest(request);
+                String response = processRequest(request, input, output);
                 output.writeUTF(response);
                 output.flush();
+                if (request.matches("CREATE_PRODUCT ((.|\\n)+)") && response.equals("0")) {
+                    if (!fileName.equals("-1")) {
+                        try {
+                            FileWriter dataOutputStream = new FileWriter("database" + "\\" + "\\" + fileName);
+                            IOUtils.copy(input, dataOutputStream);
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                }
                 // close connection
                 socket.close();
                 input.close();
@@ -76,7 +89,7 @@ public class RequestProcessor {
         }
     }
 
-    public static String processRequest(String request) {
+    public static String processRequest(String request, DataInputStream input, DataOutputStream output) {
         Matcher matcher;
         String response = null;
         if ((matcher = getMatcher(request, "LOGIN (\\S+) (\\S+)")).find()) {
@@ -112,7 +125,7 @@ public class RequestProcessor {
         } else if ((matcher = getMatcher(request, "CREATE_AUCTION ((.|\\n)+)")).find()) {
             response = createAuction(matcher);
         } else if ((matcher = getMatcher(request, "CREATE_PRODUCT ((.|\\n)+)")).find()) {
-            response = createProduct(matcher);
+            response = createProduct(matcher, input, output);
         } else if ((matcher = getMatcher(request, "CREATE_PROFILE_MANAGER ((.|\\n)+)")).find()) {
             response = createProfileManager(matcher);
         } else if ((matcher = getMatcher(request, "ADD_COMMENT (\\S+) (\\S+) ((.|\\n)+)")).find()) {
@@ -307,15 +320,16 @@ public class RequestProcessor {
         return "0";
     }
 
-    private static String createProduct(Matcher matcher) {
+    private static String createProduct(Matcher matcher, DataInputStream inputStream, DataOutputStream outputStream) {
         String[] inputs = matcher.group(1).split("&&&");
         ArrayList<String> input = new ArrayList<>(Gson.INSTANCE.get().fromJson(inputs[0], new TypeToken<ArrayList<String>>() {
         }.getType()));
         ManageProductsManager manageProductsManager = new ManageProductsManager(Account.getAccountByUsername(input.get(5)));
-        manageProductsManager.addProduct(input.get(0), Category.getCategoryByName(input.get(1)),
+        manageProductsManager.addProduct(input.get(0), input.get(1),
                 Double.parseDouble(input.get(2)), Boolean.parseBoolean(input.get(3)), input.get(4),
                 Gson.INSTANCE.get().fromJson(inputs[1], new TypeToken<ArrayList<Feature>>() {
-                }.getType()));
+                }.getType()), input.get(6));
+        fileName = input.get(6);
         return "0";
     }
 
