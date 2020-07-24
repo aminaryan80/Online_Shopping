@@ -1,7 +1,6 @@
 package Client.ViewController.principal.manageCategories;
 
-import Client.Control.Manager;
-import Client.Control.Principal.ManageCategories.ManageCategoriesManager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -28,16 +27,16 @@ public class ManageCategoriesController extends Controller implements Initializa
 
     public void addCategory(ActionEvent actionEvent) {
         categoryName = categoryNameField.getText();
-        loadFxml(Manager.Addresses.ADD_CATEGORY, true);
+        loadFxml(Addresses.ADD_CATEGORY, true);
     }
 
     public void editCategory(ActionEvent actionEvent) {
         //((ManageCategoriesManager) manager).openEditCategory(categoryNameField.getText());
         categoryName = categoryNameField.getText();
-        loadFxml(Manager.Addresses.EDIT_CATEGORY, true);
+        loadFxml(Addresses.EDIT_CATEGORY, true);
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+        loadFxml(Addresses.PRINCIPAL_MENU);
     }
 }

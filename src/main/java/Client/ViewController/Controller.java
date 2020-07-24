@@ -1,7 +1,7 @@
 package Client.ViewController;
 
-import Client.Control.Manager;
-import Client.Control.RequestProcessor.RequestProcessor;
+import Server.Control.Manager;
+import Server.Control.RequestProcessor.RequestProcessor;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
@@ -19,14 +19,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 
 public class Controller {
     protected Manager manager;
     protected static String accountUsername;
     protected static String accountType;
-    protected Manager.Addresses backAddress;
+    protected Addresses backAddress;
     protected static Stage stage;
     protected static Stage popup = new Stage();
 
@@ -46,27 +47,59 @@ public class Controller {
         this.manager = manager;
     }
 
-    public void setBack(Manager.Addresses backAddress) {
+    public void setBack(Addresses backAddress) {
         this.backAddress = backAddress;
     }
 
-    protected String sendRequest(String request) {
+    /*protected String sendRequest(String request) {
         return RequestProcessor.processRequest(request);
+    }*/
+
+    protected String sendRequest(String request) {
+        Socket socket;
+        DataInputStream input;
+        DataOutputStream output;
+        String response = null;
+        try {
+            socket = new Socket("localhost", 8080);
+            System.out.println("Connected");
+            // takes input from terminal
+            input = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            output = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            // Sends request and Receives response
+            output.writeUTF(request);
+            output.flush();
+            do {
+                response = input.readUTF();
+            } while (response == null);
+            // close the connection
+            input.close();
+            output.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 
     public void openUserPanel() {
         if (accountUsername == null) {
-            loadFxml(Manager.Addresses.USER_PANEL);
+            loadFxml(Addresses.USER_PANEL);
         }
         if (accountUsername != null) {
             if (accountType.equals("P")) {
-                loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+                loadFxml(Addresses.PRINCIPAL_MENU);
             } else if (accountType.equals("C")) {
-                loadFxml(Manager.Addresses.CUSTOMER_MENU);
+                loadFxml(Addresses.CUSTOMER_MENU);
             } else if (accountType.equals("S")) {
-                loadFxml(Manager.Addresses.SELLER_MENU);
+                loadFxml(Addresses.SELLER_MENU);
             }
         }
+    }
+
+    public void openOffsMenu() {
+        MainController.isOffsMenu = true;
+        loadFxml(Addresses.PRODUCTS_MENU);
     }
 
     protected ArrayList<Account> getAllAccounts() {
@@ -145,12 +178,18 @@ public class Controller {
         return null;
     }
 
-    /*public void back(ActionEvent actionEvent) {
-        System.out.println("Back");
-    }*/
-
     public void logout() {
         System.out.println("LOGOUT");
+        accountType = null;
+        accountUsername = null;
+        loadFxml(Addresses.MAIN_MENU);
+    }
+
+    public void error(String message) {
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setAlertType(Alert.AlertType.ERROR);
+        a.setContentText(message);
+        a.show();
     }
 
     public void success(String message) {
@@ -160,11 +199,12 @@ public class Controller {
         a.show();
     }
 
-    public void loadFxml(Manager.Addresses address) {
+    public void loadFxml(Addresses address) {
         loadFxml(address, false);
     }
 
     public Controller loadFxml(Manager.Addresses address, boolean isPopup) {
+    public void loadFxml(Addresses address, boolean isPopup) {
         Stage workingStage;
         FXMLLoader loader = null;
         if (isPopup)
@@ -185,7 +225,7 @@ public class Controller {
         return loader.getController();
     }
 
-    public FXMLLoader getLoader(Manager.Addresses address) {
+    public FXMLLoader getLoader(Addresses address) {
         return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
     }
 
@@ -199,5 +239,87 @@ public class Controller {
         a.setAlertType(Alert.AlertType.ERROR);
         a.setContentText(message);
         a.show();
+    }
+
+    public enum Addresses {
+        FILTER("view/products/filtering.fxml"),
+
+        ADD_PRODUCT_POP_UP("view/userPanel/Seller/FeaturesPopUp.fxml"),
+
+        SORT("view/sorting.fxml"),
+
+        MAIN_MENU("view/main_menu.fxml"),
+
+        PRODUCTS_MENU("view/products/products_menu.fxml"),
+
+        VIEW_CATEGORIES("view/products/view_categories.fxml"),
+
+        REGISTER("view/userPanel/register_menu.fxml"),
+
+        EDIT_PRODUCTS_MENU("view/userPanel/Seller/EditProducts.fxml"),
+
+        USER_PANEL("view/userPanel/user_panel.fxml"),
+
+        PRINCIPAL_MENU("view/principal/principal_menu.fxml"),
+
+        SELLER_MENU("view/userPanel/Seller/seller_menu.fxml"),
+
+        CUSTOMER_MENU("view/userPanel/dashboard/customer_dashboard_menu.fxml"),
+
+        EDIT_OFFS("view/userPanel/Seller/EditOff.fxml"),
+
+        EDIT_PASSWORD("view/edit_password.fxml"),
+
+        MANAGE_USERS("view/principal/manage_users_menu.fxml"),
+
+        MANAGE_PRODUCTS("view/principal/manageProducts/manage_products_menu.fxml"),
+
+        MANAGE_REQUESTS("view/principal/manage_requests_menu.fxml"),
+
+        MANAGE_CATEGORIES("view/principal/manageCategories/manage_categories_menu.fxml"),
+
+        ADD_CATEGORY("view/principal/manageCategories/add_category.fxml"),
+
+        EDIT_CATEGORY("view/principal/manageCategories/editCategory/edit_category_menu.fxml"),
+
+        EDIT_NAME_CATEGORY("view/principal/manageCategories/editCategory/edit_name_category_menu.fxml"),
+
+        EDIT_FEATURES_CATEGORY("view/principal/manageCategories/editCategory/edit_features_category_menu.fxml"),
+
+        VIEW_DISCOUNT_CODES("view/principal/viewDiscountCodes/view_discount_codes_menu.fxml"),
+
+        CREATE_DISCOUNT_CODE("view/principal/create_new_discount.fxml"),
+
+        EDIT_DISCOUNTS("view/principal/viewDiscountCodes/edit_discount_menu.fxml"),
+
+        VIEW_CART("view/userPanel/Customer/ViewCart.fxml"),
+
+        VIEW_ORDERS("view/userPanel/Customer/ViewOrders.fxml"),
+
+        COMMENT("view/userPanel/Customer/product/Comment.fxml"),
+
+        ADD_COMMENT("view/userPanel/Customer/product/addCommentPage.fxml"),
+
+        PURCHASE_PAGE("view/userPanel/Customer/purchase.fxml"),
+
+        COMPARE("view/userPanel/Customer/compare.fxml"),
+
+        SHOW_ORDER_PRODUCTS("view/userPanel/Customer/showOrderProducts.fxml"),
+
+        PRODUCT_PAGE("view/userPanel/Customer/product/productPage.fxml"),
+
+        AUCTION_DETAILS("view/products/AuctionDetails.fxml"),
+
+        PRODUCT_ITEM("view/products/Product.fxml");
+
+        private String address;
+
+        Addresses(String address) {
+            this.address = address;
+        }
+
+        public String getAddress() {
+            return address;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package Models.Shop.Request;
 
-import Client.Control.Identity;
-import Client.Control.Manager;
+import Server.Control.Identity;
+import Server.Control.Manager;
 import Models.Account.Seller;
 import Models.Address;
 import Models.Gson;

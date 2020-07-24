@@ -1,6 +1,6 @@
 package Client.ViewController.seller;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Seller;
 import Models.Gson;
@@ -66,7 +66,7 @@ public class SellerMenuController extends Controller implements Initializable {
     }
 
     public void editPassword(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.EDIT_PASSWORD, true);
+        loadFxml(Addresses.EDIT_PASSWORD, true);
     }
 
     public void updateProfile(ActionEvent actionEvent) {
@@ -83,14 +83,14 @@ public class SellerMenuController extends Controller implements Initializable {
     }
 
     public void manageProducts(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.EDIT_PRODUCTS_MENU);
+        loadFxml(Addresses.EDIT_PRODUCTS_MENU);
     }
 
     public void viewOffs(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.EDIT_OFFS);
+        loadFxml(Addresses.EDIT_OFFS);
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.MAIN_MENU);
+        loadFxml(Addresses.MAIN_MENU);
     }
 }

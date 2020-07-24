@@ -1,6 +1,6 @@
 package Client.ViewController.principal.manageCategories.editCategory;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -26,7 +26,7 @@ public class EditFeatureCategoryController extends EditCategoryController {
             deleteFeature();
         }
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
-        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
+        loadFxml(Addresses.MANAGE_CATEGORIES);
     }
 
     private void addFeature() {

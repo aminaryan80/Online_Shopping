@@ -1,6 +1,6 @@
 package Client.ViewController.products;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -64,7 +64,7 @@ public class ProductPageController extends Controller {
                 }.getType()));
         for (String senderName : commentsHashMap.keySet()) {
             try {
-                AnchorPane commentPane = FXMLLoader.load(getClass().getClassLoader().getResource(Manager.Addresses.COMMENT.getAddress()));
+                AnchorPane commentPane = FXMLLoader.load(getClass().getClassLoader().getResource(Addresses.COMMENT.getAddress()));
                 Label senderNameLabel = (Label) commentPane.getChildren().get(0);
                 Label commentInfo = (Label) commentPane.getChildren().get(1);
                 senderNameLabel.setText(senderName);
@@ -141,13 +141,13 @@ public class ProductPageController extends Controller {
     }
 
     public void addComment(MouseEvent mouseEvent) {
-        loadFxml(Manager.Addresses.ADD_COMMENT, true);
+        loadFxml(Addresses.ADD_COMMENT, true);
     }
 
     public void compare(ActionEvent actionEvent) {
         //((ProductPageManager) manager).compare();
         /*try {
-            FXMLLoader loader = getLoader(Manager.Addresses.COMPARE);
+            FXMLLoader loader = getLoader(Addresses.COMPARE);
             Parent root = loader.load();
             CompareController controller = loader.getController();
             controller.setManager(manager);
@@ -158,10 +158,10 @@ public class ProductPageController extends Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        loadFxml(Manager.Addresses.COMPARE, true);
+        loadFxml(Addresses.COMPARE, true);
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.PRODUCTS_MENU);
+        loadFxml(Addresses.PRODUCTS_MENU);
     }
 }

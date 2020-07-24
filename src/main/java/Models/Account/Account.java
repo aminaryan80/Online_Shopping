@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Client.Control.Manager.sendRequest;
-
 public abstract class Account {
     protected static ArrayList<Account> allAccounts = new ArrayList<>();
     protected String username;

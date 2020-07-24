@@ -1,6 +1,6 @@
 package Models.Shop.Product;
 
-import Client.Control.Identity;
+import Server.Control.Identity;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
