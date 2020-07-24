@@ -14,9 +14,11 @@ public class Seller extends Account {
     private String companyName;
     private ArrayList<SellingLog> allLogs = new ArrayList<>();
     private Wallet wallet;
+
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.companyName = companyName;
+        wallet = new Wallet(balance, username, password, bankId);
     }
 
     public ArrayList<Auction> getAuctions() {
@@ -59,7 +61,7 @@ public class Seller extends Account {
             Socket socket = new Socket("127.0.0.1", BANK_PORT);
             DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-            dataOutputStream.writeUTF("create_account"+" "+firstName+" "+lastName+" "+username+" "+password+" "+password);
+            dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
             dataOutputStream.flush();
             String bankId = dataInputStream.readUTF();
             this.setBankId(bankId);
@@ -85,7 +87,11 @@ public class Seller extends Account {
         allLogs.add(log);
     }
 
-    public void receiveProductMoney(Product product) {
-        balance += product.getAuctionedPrice();
+    public void receiveProductMoney(Product product, String payingMethod) {
+        if (payingMethod.equals("credit")) {
+            wallet.addAmount((1 - Wallet.getWage()) * product.getAuctionedPrice());
+        } else {
+            wallet.chargeWallet((1 - Wallet.getWage()) * product.getAuctionedPrice(), Principal.getTheBankId());
+        }
     }
 }

@@ -15,11 +15,21 @@ public class Customer extends Account {
     private ArrayList<String> discountsIds;
     private Wallet wallet;
     private String bankId;
+
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.cart = new Cart();
         this.allLogs = new ArrayList<>();
         discountsIds = new ArrayList<>();
+        wallet = new Wallet(balance, username, password, bankId);
+    }
+
+    public void payMoney(double money,String payingMethod) {
+        if(payingMethod.equals("credit")){
+            wallet.addAmount(-money);
+        } else {
+            wallet.moveInBank(money,Principal.getTheBankId());
+        }
     }
 
     @Override
@@ -28,7 +38,7 @@ public class Customer extends Account {
             Socket socket = new Socket("127.0.0.1", BANK_PORT);
             DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-            dataOutputStream.writeUTF("create_account"+" "+firstName+" "+lastName+" "+username+" "+password+" "+password);
+            dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
             dataOutputStream.flush();
             String bankId = dataInputStream.readUTF();
             this.setBankId(bankId);
@@ -48,6 +58,10 @@ public class Customer extends Account {
 
             }
         }
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 
     public ArrayList<BuyingLog> getAllLogs() {

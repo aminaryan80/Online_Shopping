@@ -30,11 +30,11 @@ public class Principal extends Account {
         }
     }
 
-    private String getTheBankId() {
+    public static String getTheBankId() {
         for (Account account : allAccounts) {
             if (account instanceof Principal)
                 if(account.getBankId()!=null) {
-                    return bankId;
+                    return account.getBankId();
                 }
         }
         return null;

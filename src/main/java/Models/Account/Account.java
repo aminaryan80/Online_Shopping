@@ -236,10 +236,6 @@ public abstract class Account {
         this.password = password;
     }
 
-    public void payMoney(double money) {
-        this.balance = balance - money;
-    }
-
     public String getUsername() {
         return username;
     }
