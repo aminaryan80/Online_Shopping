@@ -232,7 +232,6 @@ public class RequestProcessor {
             response = getAllLogs();
         } else if ((matcher = getMatcher(request, "EDIT_LOG (\\S+)")).find()) {
             response = editLog(matcher.group(1));
-        } else if ((matcher = getMatcher(request,"SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
         } else if ((matcher = getMatcher(request, "SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
             response = setMinimumAmountInWallet(matcher.group(1));
         } else if ((matcher = getMatcher(request, "SET_WAGE_IN_WALLET (\\S+)")).find()) {
