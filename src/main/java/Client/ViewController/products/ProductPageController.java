@@ -127,17 +127,14 @@ public class ProductPageController extends Controller {
     }
 
     public void addToCart(MouseEvent mouseEvent) {
-        Account account = Account.getAccountByUsername(accountUsername);
-        if (account instanceof Customer) {
             //((ProductPageManager) manager).hasProductInCart()
-            if (!sendRequest("HAS_PRODUCT_IN_CART " + account.getUsername() + " " + product.getId()).equals("0")) {
+            if (sendRequest("HAS_PRODUCT_IN_CART " + accountUsername + " " + product.getId()).equals("0")) {
                 error("You have added this product to your cart before!");
             } else {
                 //((ProductPageManager) manager).addToCart();
-                sendRequest("ADD_PRODUCT_TO_CART " + account.getUsername() + " " + product.getId());
+                sendRequest("ADD_PRODUCT_TO_CART " + accountUsername + " " + product.getId());
                 success(product.getName() + " is added to your cart!");
             }
-        } else error("Something went wrong.");
     }
 
     public void addComment(MouseEvent mouseEvent) {

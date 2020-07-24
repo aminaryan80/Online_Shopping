@@ -38,7 +38,7 @@ public class SellerMenuController extends Controller implements Initializable {
         Seller seller;
         seller = Gson.INSTANCE.get().fromJson(response[1], Seller.class);
         userName.setText(seller.getUsername());
-        balance.setText(String.valueOf(seller.getBalance()));
+        balance.setText(""+seller.getWallet().getAmount());
         firstName.setText(seller.getFirstName());
         lastName.setText(seller.getLastName());
         emailText.setText(seller.getEmail());

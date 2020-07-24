@@ -21,6 +21,10 @@ public class Seller extends Account {
         wallet = new Wallet(balance, username, password, myBankId);
     }
 
+    public Wallet getWallet() {
+        return wallet;
+    }
+
     public ArrayList<Auction> getAuctions() {
         ArrayList<Auction> auctions = new ArrayList<>();
         for (String auctionId : auctionsId) {

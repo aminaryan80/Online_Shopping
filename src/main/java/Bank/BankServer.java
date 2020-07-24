@@ -69,7 +69,7 @@ public class BankServer {
             return createAccount(command.split(" "));
         } else if (command.matches("get_token \\S+ \\S+")) {
             return getToken(command.split(" "));
-        } else if (command.matches("create_receipt \\S+ \\S+ \\S+ \\S+ \\S+ (\\S+)?")) {
+        } else if (command.matches("create_receipt \\S+ \\S+ \\S+ \\S+ \\S+( \\S+)?")) {
             return createReceipt(command.split(" "));
         } else if (command.matches("get_transactions \\S+ \\S+")) {
             return getTransactions(command.split(" "));
@@ -174,7 +174,7 @@ public class BankServer {
         if (data.length == 7 && !data[6].matches("\\w+")) {
             return "your input contains invalid characters";
         }
-        return new Receipt(data[2], data[3], data[4], data[5], data[6]).getId();
+        return new Receipt(data[2], data[3], data[4], data[5], null).getId();
     }
 
     private String getToken(String[] data) {
