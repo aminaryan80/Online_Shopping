@@ -40,7 +40,7 @@ public class Customer extends Account {
             dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
             dataOutputStream.flush();
             String bankId = dataInputStream.readUTF();
-            this.setBankId(bankId);
+            this.setMyBankId(bankId);
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
