@@ -4,10 +4,20 @@ import java.io.*;
 import java.net.Socket;
 
 public class Wallet {
-    private static double MINIMUM_AMOUNT;
-    private static double WAGE;
+    private static double MINIMUM_AMOUNT = 5;
+    private static double WAGE = 0.05;
     private static int BANK_PORT = 5555;
     private double amount;
+    private String username;
+    private String password;
+    private String bankId;
+
+    public Wallet(double amount, String username, String password, String bankId) {
+        this.amount = amount;
+        this.username = username;
+        this.password = password;
+        this.bankId = bankId;
+    }
 
     public static void setMinimumAmount(double minimumAmount) {
         MINIMUM_AMOUNT = minimumAmount;
@@ -17,31 +27,39 @@ public class Wallet {
         Wallet.WAGE = WAGE;
     }
 
-    public void chargeWallet(String username,String password,double amount,String bankId){
-        String token = getToken(username,password);
+    public static double getMinimumAmount() {
+        return MINIMUM_AMOUNT;
+    }
+
+    public static double getWage() {
+        return WAGE;
+    }
+
+    public void chargeWallet(double amount,String bankId){
+        String token = getToken();
         try {
             Socket socket = new Socket("127.0.0.1", BANK_PORT);
             DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-            dataOutputStream.writeUTF("create_receipt"+" "+token+" "+"withdraw"+" "+amount+" "+"-1"+" "+bankId);
+            dataOutputStream.writeUTF("create_receipt"+" "+token+" "+"withdraw"+" "+amount+" "+bankId+" "+"-1");
             dataOutputStream.flush();
             String receiptID = dataInputStream.readUTF();
             dataOutputStream.writeUTF("pay"+" "+receiptID);
             dataOutputStream.flush();
-            System.out.println(dataInputStream.readUTF());
+            if(dataInputStream.readUTF().equals("done successfully")) this.addAmount(amount);
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void moveInBank(String username,String password,double amount,String BankId,String otherBankId) {
-        String token = getToken(username,password);
+    public void moveInBank(double amount,String otherBankId) {
+        String token = getToken();
         try {
             Socket socket = new Socket("127.0.0.1", BANK_PORT);
             DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-            dataOutputStream.writeUTF("create_receipt"+" "+token+" "+"move"+" "+amount+" "+BankId+" "+otherBankId);
+            dataOutputStream.writeUTF("create_receipt"+" "+token+" "+"move"+" "+amount+" "+bankId+" "+otherBankId);
             dataOutputStream.flush();
             String receiptID = dataInputStream.readUTF();
             dataOutputStream.writeUTF("pay"+" "+receiptID);
@@ -60,11 +78,28 @@ public class Wallet {
         }
     }
 
-    private void addAmount(double v) {
+    public void addAmount(double v) {
         amount += v;
     }
 
-    private String getToken(String username,String password) {
+    public void withdrawFromWallet(double amount) {
+        String token = getToken();
+        try {
+            Socket socket = new Socket("127.0.0.1", BANK_PORT);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("create_receipt"+" "+token+" "+"deposit"+" "+amount+" "+"-1"+" "+bankId);
+            dataOutputStream.flush();
+            String receiptID = dataInputStream.readUTF();
+            dataOutputStream.writeUTF("pay"+" "+receiptID);
+            if(dataInputStream.readUTF().equals("done successfully")) this.addAmount(-amount);
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getToken() {
         try {
             Socket socket = new Socket("127.0.0.1", BANK_PORT);
             DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -86,5 +121,22 @@ public class Wallet {
 
     public double getAmount() {
         return amount;
+    }
+
+    public double getAmountInBank() {
+        String token = getToken();
+        try {
+            Socket socket = new Socket("127.0.0.1", BANK_PORT);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("get_balance"+" "+token);
+            dataOutputStream.flush();
+            String balance = dataInputStream.readUTF();
+            if(balance!=null && !balance.isEmpty()) return Double.parseDouble(balance);
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

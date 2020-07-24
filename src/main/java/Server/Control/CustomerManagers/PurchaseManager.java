@@ -3,6 +3,7 @@ package Server.Control.CustomerManagers;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Seller;
+import Models.Account.Wallet;
 import Models.Shop.Log.BuyingLog;
 import Models.Shop.Log.Log;
 import Models.Shop.Log.SellingLog;
@@ -24,21 +25,39 @@ public class PurchaseManager extends Manager {
         super(account);
     }
 
-    public boolean canPay(String discountId) throws WrongDiscountIdException, UsedDiscountIdException {
-        if (!discountId.matches("\\S{8}"))
-            discountId = null;
-        if (discountId == null) {
-            return customer.getCart().getTotalPrice(null) <= customer.getBalance();
-        }
-        Discount discount = getDiscountById(discountId);
-        if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
-            throw new WrongDiscountIdException("Wrong Discount Id has been entered");
+    public boolean canPay(String discountId,String payingMethod) throws WrongDiscountIdException, UsedDiscountIdException {
+        if(payingMethod.equals("credit")) {
+            if (!discountId.matches("\\S{8}"))
+                discountId = null;
+            if (discountId == null) {
+                return customer.getWallet().getAmount() - customer.getCart().getTotalPrice(null) >= Wallet.getMinimumAmount();
+            }
+            Discount discount = getDiscountById(discountId);
+            if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
+                throw new WrongDiscountIdException("Wrong Discount Id has been entered");
+            } else {
+                if (doesDiscountBelongToCustomer(discount)) {
+                    if (!canUseDiscount(discount)) {
+                        throw new UsedDiscountIdException("you can not use this discount anymore");
+                    } else return  customer.getWallet().getAmount()  - customer.getCart().getTotalPrice(discount) >= Wallet.getMinimumAmount();
+                } else throw new WrongDiscountIdException("Discount Id entered DOES NOT BELONG TO YOU");
+            }
         } else {
-            if (doesDiscountBelongToCustomer(discount)) {
-                if (!canUseDiscount(discount)) {
-                    throw new UsedDiscountIdException("you can not use this discount anymore");
-                } else return customer.getCart().getTotalPrice(discount) <= customer.getBalance();
-            } else throw new WrongDiscountIdException("Discount Id entered DOES NOT BELONG TO YOU");
+            if (!discountId.matches("\\S{8}"))
+                discountId = null;
+            if (discountId == null) {
+                return customer.getWallet().getAmountInBank() - customer.getCart().getTotalPrice(null) >= 0;
+            }
+            Discount discount = getDiscountById(discountId);
+            if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
+                throw new WrongDiscountIdException("Wrong Discount Id has been entered");
+            } else {
+                if (doesDiscountBelongToCustomer(discount)) {
+                    if (!canUseDiscount(discount)) {
+                        throw new UsedDiscountIdException("you can not use this discount anymore");
+                    } else return  customer.getWallet().getAmountInBank() - customer.getCart().getTotalPrice(discount) >= 0;
+                } else throw new WrongDiscountIdException("Discount Id entered DOES NOT BELONG TO YOU");
+            }
         }
     }
 
@@ -71,24 +90,24 @@ public class PurchaseManager extends Manager {
     }
 
     // purchase
-    public void pay(ArrayList<String> receiverInformation, String discountId) throws WrongDiscountIdException {
-        if (!discountId.matches("\\S{8}"))
-            discountId = null;
-        Discount discount = getDiscountById(discountId);
-        if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
-            throw new WrongDiscountIdException("Wrong Discount Id has been entered");
-        } else {
-            if (hasDiscountCode(discount)) {
-                discount.useDiscount(customer); //if customer could'nt use it, he would'nt get here
+    public void pay(ArrayList<String> receiverInformation, String discountId,String payingMethod) throws WrongDiscountIdException {
+            if (!discountId.matches("\\S{8}"))
+                discountId = null;
+            Discount discount = getDiscountById(discountId);
+            if (DiscountWithThisIdDoesNotExist(discountId, discount)) {
+                throw new WrongDiscountIdException("Wrong Discount Id has been entered");
+            } else {
+                if (hasDiscountCode(discount)) {
+                    discount.useDiscount(customer); //if customer could'nt use it, he would'nt get here
+                }
+                double paymentAmount = customer.getCart().getTotalPrice(discount);
+                ArrayList<Product> boughtProducts = customer.getCart().getProducts(); //TODO number of products not handled.
+                addBuyers(boughtProducts);
+                addLogs(receiverInformation, discount, boughtProducts);
+                customer.payMoney(paymentAmount,payingMethod);
+                sellersGetPaid(boughtProducts,payingMethod);
+                customer.getCart().empty();
             }
-            double paymentAmount = customer.getCart().getTotalPrice(discount);
-            ArrayList<Product> boughtProducts = customer.getCart().getProducts(); //TODO number of products not handled.
-            addBuyers(boughtProducts);
-            addLogs(receiverInformation, discount, boughtProducts);
-            customer.payMoney(paymentAmount);
-            sellersGetPaid(boughtProducts);
-            customer.getCart().empty();
-        }
     }
 
     private void addLogs(ArrayList<String> receiverInformation, Discount discount, ArrayList<Product> boughtProducts) {
@@ -198,9 +217,9 @@ public class PurchaseManager extends Manager {
         return moneyReceivedBySeller;
     }
 
-    private void sellersGetPaid(ArrayList<Product> boughtProducts) {
+    private void sellersGetPaid(ArrayList<Product> boughtProducts,String payingMethod) {
         for (Product product : boughtProducts) {
-            product.getSeller().receiveProductMoney(product);
+            product.getSeller().receiveProductMoney(product,payingMethod);
         }
     }
 

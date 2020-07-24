@@ -39,6 +39,8 @@ public class PurchasePageController extends Controller implements Initializable 
     public Button purchaseButton;
     public Button discountCodeConfirm;
     public Button discountCodeClear;
+    public CheckBox directCheckBox;
+    public CheckBox creditCheckBox;
 
     @Override
     public void init() {
@@ -108,13 +110,16 @@ public class PurchasePageController extends Controller implements Initializable 
     }
 
     public void purchase(ActionEvent actionEvent) throws PurchaseManager.WrongDiscountIdException, PurchaseManager.UsedDiscountIdException {
-//        ArrayList<String> info = new ArrayList<>();
-//        info.add(addressField.getText());
-//        info.add(phoneNumberField.getText());
-//        if (((PurchaseManager) manager).canPay(discountCodeField.getText())) {
-        if (sendRequest("CAN_PAY" + " " + accountUsername + " " + discountCodeField.getText()).equals("YES")) {
-            sendRequest("PAY" + " " + accountUsername + " " + discountCodeField.getText() + " " + addressField.getText() + " " + phoneNumberField.getText());
-//            ((PurchaseManager) manager).pay(info, discountCodeField.getText());
+        if((directCheckBox.isSelected() && creditCheckBox.isSelected())|| (!directCheckBox.isSelected()&&!creditCheckBox.isSelected())){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "select ONE of paying methods", ButtonType.OK);
+            alert.show();
+            return;
+        }
+        String payingMethod;
+        if(directCheckBox.isSelected()) payingMethod="direct";
+        else payingMethod = "credit";
+        if (sendRequest("CAN_PAY" + " " + accountUsername + " " + discountCodeField.getText()+" "+payingMethod).equals("YES")) {
+            sendRequest("PAY" + " " + accountUsername + " " + discountCodeField.getText() + " " + addressField.getText() + " " + phoneNumberField.getText() + " " +payingMethod);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Purchase was successful!", ButtonType.OK);
             alert.show();
             back(null);
@@ -195,6 +200,8 @@ public class PurchasePageController extends Controller implements Initializable 
             if (phoneNumberMassage.getText().equals("CONFIRMED!"))
                 if (addressMassage.getText().equals("CONFIRMED!")) {
                     purchaseButton.setVisible(true);
+                    creditCheckBox.setVisible(true);
+                    directCheckBox.setVisible(true);
                 }
     }
 
