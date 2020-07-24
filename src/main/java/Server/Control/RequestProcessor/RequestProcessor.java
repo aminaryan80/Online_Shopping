@@ -207,7 +207,7 @@ public class RequestProcessor {
         } else if ((matcher = getMatcher(request, "CLEAR_CART (\\S+)")).find()) {
             response = clearCart(matcher.group(1));
         } else if ((matcher = getMatcher(request, "CAN_PAY (\\S+) (\\S+) (\\S+)")).find()) {
-            response = canPay(matcher.group(1), matcher.group(2),matcher.group(3));
+            response = canPay(matcher.group(1), matcher.group(2), matcher.group(3));
         } else if (((matcher = getMatcher(request, "IS_DISCOUNTCODE_VALID (\\S+) (\\S+)")).find())) {
             response = isDiscountcodeValid(matcher.group(1), matcher.group(2));
         } else if (((matcher = getMatcher(request, "DOES_DISCOUNT_BELONG_TO_CUSTOMER (\\S+) (\\S+)")).find())) {
@@ -221,7 +221,7 @@ public class RequestProcessor {
         } else if (((matcher = getMatcher(request, "IS_PHONENUMBER_VALID (\\S+)")).find())) {
             response = isPhoneNumberValid(matcher.group(1));
         } else if ((matcher = getMatcher(request, "PAY (\\S+) (\\S+) (\\S+) (\\S+) (\\S+)")).find()) {
-            response = pay(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4),matcher.group(5));
+            response = pay(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4), matcher.group(5));
         } else if ((matcher = getMatcher(request, "GET_BUYING_LOGS (\\S+)")).find()) {
             response = getBuyingLogs(matcher.group(1));
         } else if ((matcher = getMatcher(request, "SHOW_BOUGHT_PRODUCTS (\\S+) (\\S+)")).find()) {
@@ -233,16 +233,49 @@ public class RequestProcessor {
         } else if ((matcher = getMatcher(request, "EDIT_LOG (\\S+)")).find()) {
             response = editLog(matcher.group(1));
         } else if ((matcher = getMatcher(request,"SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
+        } else if ((matcher = getMatcher(request, "SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
             response = setMinimumAmountInWallet(matcher.group(1));
-        } else if ((matcher = getMatcher(request,"SET_WAGE_IN_WALLET (\\S+)")).find()) {
+        } else if ((matcher = getMatcher(request, "SET_WAGE_IN_WALLET (\\S+)")).find()) {
             response = setWageInWallet(matcher.group(1));
-        } else if (getMatcher(request,"GET_WAGE_IN_WALLET").find()){
+        } else if (getMatcher(request, "GET_WAGE_IN_WALLET").find()) {
             response = getWalletStuff(true);
-        } else if (getMatcher(request,"GET_MINIMUM_AMOUNT_IN_WALLET").find()){
+        } else if (getMatcher(request, "GET_MINIMUM_AMOUNT_IN_WALLET").find()) {
             response = getWalletStuff(false);
+        } else if ((matcher = getMatcher(request, "GET_MONEY_IN_BANK (\\S+) (\\S+)")).find()) {
+            response = getMoneyInBank(matcher.group(1), matcher.group(2));
+        } else if ((matcher = getMatcher(request, "TAKE_FROM_WALLET (\\S+) (\\S+)")).find()) {
+            response = takeMoneyFromWallet(matcher.group(1),matcher.group(2));
+        } else if ((matcher = getMatcher(request, "PUT_TO_WALLET (\\S+) (\\S+) (\\S+)")).find()) {
+            response = putMoneyInWallet(matcher.group(1),matcher.group(2),matcher.group(3));
         }
         return response;
+    }
 
+    private static String putMoneyInWallet(String username, String type, String amount) {
+        if(type.equals("S")){
+            Seller seller = (Seller) Account.getAccountByUsername(username);
+            seller.getWallet().chargeWallet(Double.parseDouble(amount));
+        } else {
+            Customer customer = (Customer) Account.getAccountByUsername(username);
+            customer.getWallet().chargeWallet(Double.parseDouble(amount));
+        }
+        return "successful";
+    }
+
+    private static String takeMoneyFromWallet(String username, String amount) {
+        Seller seller = (Seller) Account.getAccountByUsername(username);
+        seller.getWallet().withdrawFromWallet(Double.parseDouble(amount));
+        return "successful";
+    }
+
+    private static String getMoneyInBank(String username, String type) {
+        if (type.equals("S")) {
+            Seller seller = (Seller) Account.getAccountByUsername(username);
+            return "" + seller.getWallet().getAmountInBank();
+        } else {
+            Customer customer = (Customer) Account.getAccountByUsername(username);
+            return "" + customer.getWallet().getAmountInBank();
+        }
     }
 
     private static String editLog(String id) {
@@ -261,19 +294,19 @@ public class RequestProcessor {
     }
 
     private static String getWalletStuff(boolean isWage) {
-        if(isWage)
-        return ""+Wallet.getWage();
-        else return ""+Wallet.getMinimumAmount();
+        if (isWage)
+            return "" + Wallet.getWage();
+        else return "" + Wallet.getMinimumAmount();
     }
 
     private static String setWageInWallet(String wage) {
         Wallet.setWAGE(Double.parseDouble(wage));
-        return "new wage is "+Wallet.getWage();
+        return "new wage is " + Wallet.getWage();
     }
 
     private static String setMinimumAmountInWallet(String minimumAmount) {
         Wallet.setMinimumAmount(Double.parseDouble(minimumAmount));
-        return "new min is "+Wallet.getMinimumAmount();
+        return "new min is " + Wallet.getMinimumAmount();
     }
 
     private static String getBuyingLog(String username, String lodId) {
@@ -292,7 +325,7 @@ public class RequestProcessor {
         return Gson.INSTANCE.get().toJson(viewOrdersManager.getLogs());
     }
 
-    private static String pay(String username, String discountId, String address, String phoneNumber,String payingMethod) {
+    private static String pay(String username, String discountId, String address, String phoneNumber, String payingMethod) {
         PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
         ArrayList<String> info = new ArrayList<>();
         info.add(address);
@@ -345,10 +378,10 @@ public class RequestProcessor {
         else return "NO";
     }
 
-    private static String canPay(String username, String discountId,String payingMethod) {
+    private static String canPay(String username, String discountId, String payingMethod) {
         PurchaseManager purchaseManager = new PurchaseManager(Account.getAccountByUsername(username));
         try {
-            if (purchaseManager.canPay(discountId,payingMethod)) return "YES";
+            if (purchaseManager.canPay(discountId, payingMethod)) return "YES";
             else return "NO";
         } catch (PurchaseManager.WrongDiscountIdException | PurchaseManager.UsedDiscountIdException e) {
             e.printStackTrace();
