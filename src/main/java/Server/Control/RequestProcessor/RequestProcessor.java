@@ -1,9 +1,6 @@
 package Server.Control.RequestProcessor;
 
-import Models.Account.Account;
-import Models.Account.Customer;
-import Models.Account.Principal;
-import Models.Account.Seller;
+import Models.Account.*;
 import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
@@ -220,9 +217,33 @@ public class RequestProcessor {
             response = showBoughtProducts(matcher.group(1), matcher.group(2));
         } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()) {
             response = getBuyingLog(matcher.group(1), matcher.group(2));
+        } else if ((matcher = getMatcher(request,"SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
+            response = setMinimumAmountInWallet(matcher.group(1));
+        } else if ((matcher = getMatcher(request,"SET_WAGE_IN_WALLET (\\S+)")).find()) {
+            response = setWageInWallet(matcher.group(1));
+        } else if (getMatcher(request,"GET_WAGE_IN_WALLET").find()){
+            response = getWalletStuff(true);
+        } else if (getMatcher(request,"GET_MINIMUM_AMOUNT_IN_WALLET").find()){
+            response = getWalletStuff(false);
         }
         return response;
 
+    }
+
+    private static String getWalletStuff(boolean isWage) {
+        if(isWage)
+        return ""+Wallet.getWage();
+        else return ""+Wallet.getMinimumAmount();
+    }
+
+    private static String setWageInWallet(String wage) {
+        Wallet.setWAGE(Double.parseDouble(wage));
+        return "new wage is "+Wallet.getWage();
+    }
+
+    private static String setMinimumAmountInWallet(String minimumAmount) {
+        Wallet.setMinimumAmount(Double.parseDouble(minimumAmount));
+        return "new min is "+Wallet.getMinimumAmount();
     }
 
     private static String getBuyingLog(String username, String lodId) {

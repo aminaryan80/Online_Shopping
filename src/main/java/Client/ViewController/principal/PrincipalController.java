@@ -11,11 +11,9 @@ import Models.Shop.Request.Request;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -40,9 +38,15 @@ public class PrincipalController extends Controller implements Initializable {
     public TableColumn<Request, String> requestIdCol;
     public TableColumn<Request, String> requestTypeCol;
     public TableColumn<Request, String> requestSenderCol;
+    public TextField minAmountField;
+    public TextField wageField;
+    public Button minAmountButton;
+    public Button wageButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        minAmountField.setPromptText(sendRequest("GET_MINIMUM_AMOUNT_IN_WALLET"));
+        wageField.setPromptText(sendRequest("GET_WAGE_IN_WALLET"));
         String[] response = sendRequest("GET_ACCOUNT " + accountUsername).split("&&&");
         Principal principal;
         principal = Gson.INSTANCE.get().fromJson(response[1], Principal.class);
@@ -123,5 +127,24 @@ public class PrincipalController extends Controller implements Initializable {
 
     public void back() {
         loadFxml(Addresses.MAIN_MENU);
+    }
+
+    public void minAmountSet(MouseEvent mouseEvent) {
+        if(!minAmountField.getText().isEmpty()) {
+            if(minAmountField.getText().matches("\\d+")) {
+                int minAmount = Integer.parseInt(minAmountField.getText());
+                System.out.println(sendRequest("SET_MINIMUM_AMOUNT_IN_WALLET"+" "+minAmount));
+                minAmountField.setPromptText(minAmount+"");
+            }
+        }
+    }
+
+    public void wageSet(MouseEvent mouseEvent) {
+        if(!wageField.getText().isEmpty()){
+            if(Double.parseDouble(wageField.getText())>0 && Double.parseDouble(wageField.getText()) < 1){
+                System.out.println(sendRequest("SET_WAGE_IN_WALLET"+" "+wageField.getText()));
+                wageField.setPromptText(wageField.getText());
+            }
+        }
     }
 }
