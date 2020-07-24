@@ -1,7 +1,7 @@
 package Client.ViewController.products;
 
-import Client.Control.Manager;
-import Client.Control.Products.ProductsManager;
+import Server.Control.Manager;
+import Server.Control.Products.ProductsManager;
 import Client.ViewController.MainController;
 import Models.Gson;
 import Models.Shop.Category.Category;
@@ -44,7 +44,7 @@ public class ProductsController extends MainController implements Initializable 
                     new TypeToken<ArrayList<Product>>() {
                     }.getType()));
             for (Product product : products) {
-                FXMLLoader loader = getLoader(Manager.Addresses.PRODUCT_ITEM);
+                FXMLLoader loader = getLoader(Addresses.PRODUCT_ITEM);
                 Parent root = loader.load();
                 ProductItemController controller = loader.getController();
                 Auction auction = Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT_AUCTION " + product.getId()), Auction.class);
@@ -61,7 +61,7 @@ public class ProductsController extends MainController implements Initializable 
     }
 
     public void viewCategories(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.VIEW_CATEGORIES, true);
+        loadFxml(Addresses.VIEW_CATEGORIES, true);
     }
 
     public void filter(ActionEvent actionEvent) {
@@ -69,10 +69,10 @@ public class ProductsController extends MainController implements Initializable 
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "products " + currentCategory.getName());
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.MAIN_MENU);
+        loadFxml(Addresses.MAIN_MENU);
     }
 }

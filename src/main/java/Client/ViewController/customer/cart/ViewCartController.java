@@ -1,7 +1,6 @@
 package Client.ViewController.customer.cart;
 
-import Client.Control.CustomerManagers.ViewCartManager;
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Client.ViewController.products.ProductPageController;
 import Models.Gson;
@@ -86,7 +85,7 @@ public class ViewCartController extends Controller implements Initializable {
 
 
     public void back(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.CUSTOMER_MENU);
+        loadFxml(Addresses.CUSTOMER_MENU);
     }
 
     public void logOut(ActionEvent actionEvent) {
@@ -145,7 +144,7 @@ public class ViewCartController extends Controller implements Initializable {
 
     private void showProduct(String productId) {
         try {
-            FXMLLoader loader = getLoader(Manager.Addresses.PRODUCT_PAGE);
+            FXMLLoader loader = getLoader(Addresses.PRODUCT_PAGE);
             Parent root = loader.load();
             ProductPageController controller = loader.getController();
             Product product = Gson.INSTANCE.get().fromJson(sendRequest("GET_PRODUCT " + productId), Product.class);
@@ -165,7 +164,7 @@ public class ViewCartController extends Controller implements Initializable {
     public void openPurchasePage(ActionEvent actionEvent) {
         if (sendRequest("IS_CART_EMPTY" + " " + accountUsername).equals("NO")) {
 //            ((ViewCartManager)manager).purchase();
-            loadFxml(Manager.Addresses.PURCHASE_PAGE);
+            loadFxml(Addresses.PURCHASE_PAGE);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "cart is empty \nYou wanna buy air?", ButtonType.OK);
             alert.show();
@@ -174,7 +173,7 @@ public class ViewCartController extends Controller implements Initializable {
 
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "viewCart lk");
     }
 
     @Override

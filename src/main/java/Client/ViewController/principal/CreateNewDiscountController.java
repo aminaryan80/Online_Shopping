@@ -1,7 +1,6 @@
 package Client.ViewController.principal;
 
-import Client.Control.Manager;
-import Client.Control.Principal.PrincipalManager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
 import Models.Account.Customer;
@@ -32,7 +31,7 @@ public class CreateNewDiscountController extends Controller {
         inputs.add(endingDateField.getText());
         sendRequest("CREATE_DISCOUNT " + Gson.INSTANCE.get().toJson(inputs) + "&&&" + Gson.INSTANCE.get().toJson(customersNames));
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
-        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+        loadFxml(Addresses.PRINCIPAL_MENU);
     }
 
     public void addCustomer(ActionEvent actionEvent) {
@@ -40,7 +39,7 @@ public class CreateNewDiscountController extends Controller {
         if ((account = Account.getAccountByUsername(customerField.getText())) != null) {
             if (account instanceof Customer) {
                 customersNames.add(customerField.getText());
-            } else manager.error("Customer doesn't exists with this name.");
-        } else manager.error("Customer doesn't exists with this name.");
+            } else error("Customer doesn't exists with this name.");
+        } else error("Customer doesn't exists with this name.");
     }
 }

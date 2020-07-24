@@ -1,6 +1,6 @@
 package Client.ViewController.principal;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Shop.Product.Product;
 import javafx.collections.FXCollections;
@@ -40,10 +40,10 @@ public class ManageProductsController extends Controller implements Initializabl
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "principalManageProducts lk");
     }
 
     public void back() {
-        loadFxml(Manager.Addresses.PRINCIPAL_MENU);
+        loadFxml(Addresses.PRINCIPAL_MENU);
     }
 }

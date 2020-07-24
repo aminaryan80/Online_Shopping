@@ -1,7 +1,6 @@
 package Client.ViewController.principal.manageCategories.editCategory;
 
-import Client.Control.Manager;
-import Client.Control.Principal.ManageCategories.EditCategoryManager;
+import Server.Control.Manager;
 import Client.ViewController.principal.manageCategories.ManageCategoriesController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,9 +24,9 @@ public class EditCategoryController extends ManageCategoriesController implement
         String featureName = editField.getText();
         //((EditCategoryManager) manager).editCategory(editField.getText());
         if (featureName.equals("name")) {
-            loadFxml(Manager.Addresses.EDIT_NAME_CATEGORY, true);
+            loadFxml(Addresses.EDIT_NAME_CATEGORY, true);
         } else if (featureName.equals("feature")) {
-            loadFxml(Manager.Addresses.EDIT_FEATURES_CATEGORY, true);
+            loadFxml(Addresses.EDIT_FEATURES_CATEGORY, true);
         } else error("Invalid input");
     }
 }

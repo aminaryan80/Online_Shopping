@@ -1,6 +1,6 @@
 package Client.ViewController.principal.manageCategories.editCategory;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,6 +19,6 @@ public class EditNameCategoryController extends EditCategoryController {
             success("Feature added successfully.");
         } else error("Something went wrong.");
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
-        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
+        loadFxml(Addresses.MANAGE_CATEGORIES);
     }
 }

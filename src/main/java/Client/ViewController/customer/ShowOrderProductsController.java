@@ -1,23 +1,18 @@
 package Client.ViewController.customer;
 
-import Client.Control.CustomerManagers.ViewOrdersManager;
 import Client.ViewController.Controller;
 import Client.ViewController.customer.cart.CartTableItem;
 import Models.Gson;
 import Models.Shop.Product.Product;
 import com.google.gson.reflect.TypeToken;
-import com.sun.org.apache.xml.internal.security.Init;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 public class ShowOrderProductsController extends Controller {
 

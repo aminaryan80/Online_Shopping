@@ -1,7 +1,6 @@
 package Client.ViewController.customer;
 
-import Client.Control.CustomerManagers.ViewOrdersManager;
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Client.ViewController.customer.cart.CartTableItem;
 import Models.Gson;
@@ -91,7 +90,7 @@ public class ViewOrdersController extends Controller implements Initializable {
             Stage workingStage = new Stage();
             ShowOrderProductsController controller = null;
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(Manager.Addresses.SHOW_ORDER_PRODUCTS.getAddress()));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(Addresses.SHOW_ORDER_PRODUCTS.getAddress()));
                 Parent root = loader.load();
                 controller = loader.getController();
                 controller.init(sendRequest("SHOW_BOUGHT_PRODUCTS" + " " + accountUsername + " " + logId));
@@ -128,11 +127,11 @@ public class ViewOrdersController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        manager.openSort(this, manager);
+        openSort(this, "customerViewOrders");
     }
 
     public void back(ActionEvent actionEvent) {
-        loadFxml(Manager.Addresses.CUSTOMER_MENU);
+        loadFxml(Addresses.CUSTOMER_MENU);
     }
 
     @Override

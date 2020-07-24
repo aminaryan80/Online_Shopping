@@ -1,6 +1,5 @@
 package Client.ViewController;
 
-import Client.Control.Manager;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -19,7 +18,7 @@ public class MainController extends Controller implements Initializable {
             isPrincipalExists = true;
         } else {
             isPrincipalExists = false;
-            loadFxml(Manager.Addresses.REGISTER, true);
+            loadFxml(Addresses.REGISTER, true);
         }
     }
 
@@ -35,12 +34,12 @@ public class MainController extends Controller implements Initializable {
 
     public void openOffsMenu(ActionEvent actionEvent) {
         isOffsMenu = true;
-        loadFxml(Manager.Addresses.PRODUCTS_MENU);
+        loadFxml(Addresses.PRODUCTS_MENU);
     }
 
     public void openProductsMenu(ActionEvent actionEvent) {
         isOffsMenu = false;
-        loadFxml(Manager.Addresses.PRODUCTS_MENU);
+        loadFxml(Addresses.PRODUCTS_MENU);
     }
 
     public void exit(ActionEvent actionEvent) {

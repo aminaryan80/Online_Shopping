@@ -1,6 +1,6 @@
 package Client.ViewController.products;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Shop.Off.Auction;
 import Models.Shop.Product.Product;
@@ -47,7 +47,7 @@ public class ProductItemController extends Controller {
     public void openProduct(MouseEvent mouseEvent) {
         //((ProductsManager) manager).openProductPage(product.getId());
         try {
-            FXMLLoader loader = getLoader(Manager.Addresses.PRODUCT_PAGE);
+            FXMLLoader loader = getLoader(Addresses.PRODUCT_PAGE);
             Parent root = loader.load();
             ProductPageController controller = loader.getController();
             controller.setInfos(product, auction);
@@ -65,7 +65,7 @@ public class ProductItemController extends Controller {
     public void auctionDetails(ActionEvent actionEvent) {
         //((ProductsManager) manager).openAuctionDetails(auction, product);
         try {
-            FXMLLoader loader = getLoader(Manager.Addresses.AUCTION_DETAILS);
+            FXMLLoader loader = getLoader(Addresses.AUCTION_DETAILS);
             Parent root = loader.load();
             AuctionDetailsController controller = loader.getController();
             controller.setInfos(auction, product);

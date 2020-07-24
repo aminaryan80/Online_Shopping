@@ -1,6 +1,6 @@
 package Client.ViewController.principal.manageCategories;
 
-import Client.Control.Manager;
+import Server.Control.Manager;
 import Models.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,7 +35,7 @@ public class AddCategoryController extends ManageCategoriesController implements
             success("Category added successfully.");
         } else error("Something went wrong.");
         ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
-        loadFxml(Manager.Addresses.MANAGE_CATEGORIES);
+        loadFxml(Addresses.MANAGE_CATEGORIES);
     }
 
     public void addFeature(ActionEvent actionEvent) {
