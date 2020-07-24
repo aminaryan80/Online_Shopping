@@ -35,7 +35,7 @@ public class Wallet {
         return WAGE;
     }
 
-    public void chargeWallet(double amount, String bankId) {
+    public void chargeWallet(double amount) {
         String token = getToken();
         try {
             Socket socket = new Socket("127.0.0.1", BANK_PORT);
@@ -55,6 +55,28 @@ public class Wallet {
             e.printStackTrace();
         }
     }
+
+    public void chargeWallet(double amount,String bankId) {
+        String token = getToken();
+        try {
+            Socket socket = new Socket("127.0.0.1", BANK_PORT);
+            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("create_receipt" + " " + token + " " + "withdraw" + " " + ((int) amount) + " " + bankId + " " + "-1");
+            dataOutputStream.flush();
+            String receiptID = dataInputStream.readUTF();
+            socket = new Socket("127.0.0.1", BANK_PORT);
+            dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+            dataOutputStream.writeUTF("pay" + " " + receiptID);
+            dataOutputStream.flush();
+            if (dataInputStream.readUTF().equals("done successfully")) this.addAmount(((int) amount));
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void moveInBank(double amount, String otherBankId) {
         String token = getToken();
@@ -102,6 +124,7 @@ public class Wallet {
             dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
             dataOutputStream.writeUTF("pay" + " " + receiptID);
+            dataOutputStream.flush();
             if (dataInputStream.readUTF().equals("done successfully")) this.addAmount(-((int) amount));
             socket.close();
         } catch (IOException e) {

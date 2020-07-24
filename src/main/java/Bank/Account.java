@@ -51,10 +51,14 @@ public class Account {
     }
 
     public static boolean isPasswordCorrect(String userName, String passWord) {
-        if (getAccountByName(userName).passWord.equals(passWord)) {
+        if (getAccountByName(userName).getPassWord().equals(passWord)) {
             return true;
         }
         return false;
+    }
+
+    public String getPassWord() {
+        return passWord;
     }
 
     public static Account getAccountByName(String userName) {
