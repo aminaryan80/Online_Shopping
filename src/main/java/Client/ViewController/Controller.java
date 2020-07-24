@@ -212,6 +212,18 @@ public class Controller {
         loadFxml(address, false);
     }
 
+    public ArrayList<String> getSortFields() {
+        return null;
+    }
+
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
+        return null;
+    }
+
+    public ArrayList<Object> disableSort() {
+        return null;
+    }
+
     public Controller loadFxml(Addresses address, boolean isPopup) {
         Stage workingStage;
         FXMLLoader loader = null;
@@ -237,9 +249,9 @@ public class Controller {
             return new FXMLLoader(getClass().getClassLoader().getResource(address.getAddress()));
         }
 
-        public void openSort (Controller controller, String type){
+        public void openSort (Controller controller){
             Controller myController = loadFxml(Addresses.SORT, true);
-            ((SortController) myController).init(controller, type);
+            ((SortController) myController).init(controller);
         }
     public enum Addresses {
         FILTER("view/products/filtering.fxml"),

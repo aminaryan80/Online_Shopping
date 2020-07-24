@@ -55,7 +55,7 @@ public class ManageRequestsController extends Controller implements Initializabl
     }
 
     public void sort(ActionEvent actionEvent) {
-        openSort(this, "principalManageRequests lk");
+        openSort(this);
     }
 
     public void back() {

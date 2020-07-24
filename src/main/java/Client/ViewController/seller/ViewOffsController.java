@@ -1,5 +1,7 @@
 package Client.ViewController.seller;
 
+import Models.Shop.Category.Sort;
+import Models.Shop.Log.SellingLog;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Gson;
@@ -19,6 +21,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewOffsController extends Controller implements Initializable {
@@ -35,7 +38,9 @@ public class ViewOffsController extends Controller implements Initializable {
     public TableColumn<Product, String> nameColumn;
     public TableColumn<Product, Double> priceColumn;
     public TextField productsIds;
-
+    private Sort currentSort;
+    private List<SellingLog> logs;
+    private List<SellingLog> myLogs;
     private Auction off;
 
     @Override
@@ -99,7 +104,7 @@ public class ViewOffsController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        openSort(this, "sellerViewOffs lk");
+        openSort(this);
     }
 
     public void back() {

@@ -1,5 +1,6 @@
 package Client.ViewController.customer.cart;
 
+import Models.Shop.Category.Sort;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Client.ViewController.products.ProductPageController;
@@ -21,10 +22,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ViewCartController extends Controller implements Initializable {
 
@@ -37,6 +35,9 @@ public class ViewCartController extends Controller implements Initializable {
     public TableColumn priceColumn;
     public Label selectedProduct;
     public Label totalAmount;
+    private Sort currentSort;
+    private List<Product> products;
+    private List<Product> myProducts;
 
     public void init() {
 //        totalAmount.setText(((ViewCartManager) manager).getTotalPrice(null) + "$");
@@ -68,6 +69,13 @@ public class ViewCartController extends Controller implements Initializable {
 //            HashMap<Product, Integer> productsInCart = ((ViewCartManager) manager).getProductsInCart();
         HashMap<Product, Integer> productsInCart = Gson.INSTANCE.get().fromJson(sendRequest("GET_CART_PRODUCTS" + " " + accountUsername), new TypeToken<HashMap<Product, Integer>>() {
         }.getType());
+        List<Object> objects = Arrays.asList(productsInCart.keySet().toArray());
+        myProducts = new ArrayList<>();
+        for (Object object : objects) {
+            myProducts.add((Product) object);
+        }
+        products = new ArrayList<>();
+        products.addAll(myProducts);
         int number = 1;
         for (Product product : productsInCart.keySet()) {
             cartTableItems.add(new CartTableItem(
@@ -173,11 +181,91 @@ public class ViewCartController extends Controller implements Initializable {
 
 
     public void sort(ActionEvent actionEvent) {
-        openSort(this, "viewCart lk");
+        openSort(this);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init();
+    }
+
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
+        products = new ArrayList<>();
+        products.addAll(myProducts);
+        currentSort = new Sort(sort, isAscending);
+        applySort();
+        return new ArrayList<>(products);
+    }
+
+    private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
+        String field = currentSort.getField();
+        if (field.equals("price")) {
+            sortByPrice();
+        } else if (field.equals("name")) {
+            sortByName();
+        } else {
+            sortByRating();
+        }
+        if (!currentSort.isAscending()) {
+            Collections.reverse(products);
+        }
+    }
+
+    private void sortByPrice() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getPrice() > productsForSort[j].getPrice()) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    private void sortByName() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getName().compareTo(productsForSort[j].getName()) > 0) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    private void sortByRating() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getRate() > productsForSort[j].getRate()) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    public ArrayList<Object> disableSort() {
+        currentSort = null;
+        return new ArrayList<>(myProducts);
+    }
+
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        return fields;
     }
 }

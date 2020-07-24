@@ -1,5 +1,8 @@
 package Client.ViewController.customer;
 
+import Models.Account.Customer;
+import Models.Shop.Category.Sort;
+import Models.Shop.Log.Log;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Client.ViewController.customer.cart.CartTableItem;
@@ -21,8 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ViewOrdersController extends Controller implements Initializable {
 
@@ -38,7 +40,9 @@ public class ViewOrdersController extends Controller implements Initializable {
     public TableColumn addressColumn;
     public TableColumn phoneNumberColumn;
     public TableView tableView;
-
+    private Sort currentSort;
+    private List<BuyingLog> logs;
+    private List<BuyingLog> log;
     private String logId;
 
     public void init() {
@@ -67,8 +71,10 @@ public class ViewOrdersController extends Controller implements Initializable {
         ArrayList<OrderTableItem> orderTableItems = new ArrayList<>();
 //        if (manager instanceof ViewOrdersManager) {
 //            ArrayList<BuyingLog> logs = ((ViewOrdersManager) manager).getLogs();
-        ArrayList<BuyingLog> logs = Gson.INSTANCE.get().fromJson(sendRequest("GET_BUYING_LOGS"+" "+accountUsername),new TypeToken<ArrayList<BuyingLog>>(){}.getType());
+        logs = Gson.INSTANCE.get().fromJson(sendRequest("GET_BUYING_LOGS"+" "+accountUsername),new TypeToken<ArrayList<BuyingLog>>(){}.getType());
         int number = 1;
+        log = new ArrayList<>();
+        log.addAll(logs);
             for (BuyingLog log : logs) {
                 orderTableItems.add(new OrderTableItem(
                         number,
@@ -127,7 +133,7 @@ public class ViewOrdersController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        openSort(this, "customerViewOrders");
+        openSort(this);
     }
 
     public void back(ActionEvent actionEvent) {
@@ -137,5 +143,69 @@ public class ViewOrdersController extends Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init();
+    }
+
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
+        currentSort = new Sort(sort, isAscending);
+        log = new ArrayList<>();
+        log.addAll(logs);
+        applySort();
+        return new ArrayList<>(log);
+    }
+
+    private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
+        String field = currentSort.getField();
+        if (field.equals("money")) {
+            sortByMoney();
+        } else {
+            sortByDate();
+        }
+        if (!currentSort.isAscending()) {
+            Collections.reverse(log);
+        }
+    }
+
+    private void sortByMoney() {
+        BuyingLog[] logsForSort = log.toArray(new BuyingLog[0]);
+        for (int i = 0; i < logsForSort.length; i++) {
+            for (int j = i + 1; j < logsForSort.length; j++) {
+                if (logsForSort[i].getMoney() > logsForSort[j].getMoney()) {
+                    BuyingLog temp = logsForSort[i];
+                    logsForSort[i] = logsForSort[j];
+                    logsForSort[j] = temp;
+                }
+            }
+        }
+        log = Arrays.asList(logsForSort);
+    }
+
+    private void sortByDate() {
+        BuyingLog[] logsForSort = log.toArray(new BuyingLog[0]);
+        for (int i = 0; i < logsForSort.length; i++) {
+            for (int j = i + 1; j < logsForSort.length; j++) {
+                if (logsForSort[i].getDate().isBefore(logsForSort[j].getDate())) {
+                    BuyingLog temp = logsForSort[i];
+                    logsForSort[i] = logsForSort[j];
+                    logsForSort[j] = temp;
+                }
+            }
+        }
+        log = Arrays.asList(logsForSort);
+    }
+
+    public ArrayList<Object> disableSort() {
+        currentSort = null;
+        log = logs;
+        return new ArrayList<>(log);
+    }
+
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("money");
+        fields.add("date");
+        return fields;
     }
 }

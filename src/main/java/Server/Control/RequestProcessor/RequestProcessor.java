@@ -207,63 +207,9 @@ public class RequestProcessor {
             response = showBoughtProducts(matcher.group(1), matcher.group(2));
         } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()) {
             response = getBuyingLog(matcher.group(1), matcher.group(2));
-        } else if ((matcher = getMatcher(request, "GET_SORT_FIELDS (\\S+) (\\S+)")).find()) {
-            response = getSortFields(matcher.group(1), matcher.group(2));
-        } else if ((matcher = getMatcher(request, "SORT (\\S+) (\\S+) (\\S+)")).find()) {
-            response = sort(matcher.group(1), matcher.group(2), matcher.group(3));
         }
         return response;
 
-    }
-
-    private static String sort(String type, String field, String isAscending) {
-        ArrayList<Object> things = null;
-        if (type.equals("sellerManageProducts")) {
-            things = ManageProductsManager.sort(field, Boolean.parseBoolean(isAscending));
-        } else if (type.equals("principalManageProducts")) {
-            things = ManageAllProductsManager.sort(field, Boolean.parseBoolean(isAscending));
-        } else if (type.equals("principalViewDiscounts")) {
-            things = ViewDiscountCodesManager.sort(field, Boolean.parseBoolean(isAscending));
-        } else if (type.equals("principalManageUsers")) {
-            things = ManageUsersManager.sort(field, Boolean.parseBoolean(isAscending));
-        } else if (type.equals("customerViewOrders")) {
-            things = ViewOrdersManager.sort(field, Boolean.parseBoolean(isAscending));
-        } else if (type.equals("viewCart")) {
-            things = ViewCartManager.sort(field, Boolean.parseBoolean(isAscending));
-        } else if (type.equals("sellerViewOffs")) {
-            things = SellerManager.sort(field, Boolean.parseBoolean(isAscending));
-        }
-        StringBuilder respond = new StringBuilder();
-        for (Object thing : things) {
-            respond.append(Gson.INSTANCE.get().toJson(thing) + "  ");
-        }
-        return respond.toString();
-    }
-
-    private static String getSortFields(String type, String category) {
-        ArrayList<String> sortFields = null;
-        if (type.equals("products")) {
-            sortFields = ProductsManager.getSortFields(Category.getCategoryByName(category));
-        } else if (type.equals("sellerManageProducts")) {
-            sortFields = ManageProductsManager.getSortFields();
-        } else if (type.equals("principalManageProducts")) {
-            sortFields = ManageAllProductsManager.getSortFields();
-        } else if (type.equals("principalViewDiscounts")) {
-            sortFields = ViewDiscountCodesManager.getSortFields();
-        } else if (type.equals("principalManageUsers")) {
-            sortFields = ManageUsersManager.getSortFields();
-        } else if (type.equals("customerViewOrders")) {
-            sortFields = ViewOrdersManager.getSortFields();
-        } else if (type.equals("viewCart")) {
-            sortFields = ViewCartManager.getSortFields();
-        } else if (type.equals("sellerViewOffs")) {
-            sortFields = ViewOffsManager.getSortFields();
-        }
-        StringBuilder respond = new StringBuilder();
-        for (String sortField : sortFields) {
-            respond.append(sortField + "  ");
-        }
-        return respond.toString();
     }
 
     private static String getBuyingLog(String username, String lodId) {

@@ -6,6 +6,7 @@ import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Account.Seller;
 import Models.Gson;
+import Models.Shop.Category.Sort;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -16,8 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class ManageUsersController extends Controller implements Initializable {
@@ -34,14 +34,31 @@ public class ManageUsersController extends Controller implements Initializable {
     public TextField lastNameField;
     public TextField emailField;
     public TextField phoneNumberField;
+    private List<Account> users;
+    private List<Account> myUsers;
+    private Sort currentSort;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usersTable.setItems(FXCollections.observableArrayList(getAllAccounts()));
+        myUsers = getAllAccounts();
+        users = new ArrayList<>();
+        users.addAll(myUsers);
+        usersTable.setItems(FXCollections.observableArrayList(myUsers));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         userBalanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
         userStatusCol.setCellValueFactory(new PropertyValueFactory<>("isOnline"));
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Account> tableAccounts = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableAccounts.add((Account) tableProduct);
+        }
+        usersTable.setItems(FXCollections.observableArrayList(tableAccounts));
+        usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        userEmailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
+        userBalanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
     }
 
     public void viewUser(ActionEvent actionEvent) {
@@ -82,10 +99,49 @@ public class ManageUsersController extends Controller implements Initializable {
     }
 
     public void sort(ActionEvent actionEvent) {
-        openSort(this, "principalManageUsers lk");
+        openSort(this);
     }
 
     public void back() {
         loadFxml(Addresses.PRINCIPAL_MENU);
+    }
+
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
+        users = new ArrayList<>();
+        users.addAll(myUsers);
+        currentSort = new Sort(sort, isAscending);
+        applySort();
+        return new ArrayList<>(users);
+    }
+
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("name");
+        return fields;
+    }
+
+    public ArrayList<Object> disableSort() {
+        currentSort = null;
+        return new ArrayList<>(myUsers);
+    }
+
+    private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
+        Account[] usersForSort = users.toArray(new Account[0]);
+        for (int i = 0; i < usersForSort.length; i++) {
+            for (int j = i + 1; j < usersForSort.length; j++) {
+                if (usersForSort[i].getName().compareTo(usersForSort[j].getName()) > 0) {
+                    Account temp = usersForSort[i];
+                    usersForSort[i] = usersForSort[j];
+                    usersForSort[j] = temp;
+                }
+            }
+        }
+        if (!currentSort.isAscending()) {
+            Collections.reverse(users);
+        }
+        users = Arrays.asList(usersForSort);
     }
 }

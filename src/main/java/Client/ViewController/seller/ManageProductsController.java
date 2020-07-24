@@ -1,5 +1,6 @@
 package Client.ViewController.seller;
 
+import Models.Shop.Category.Sort;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
@@ -19,8 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ManageProductsController extends Controller implements Initializable {
 
@@ -42,15 +42,19 @@ public class ManageProductsController extends Controller implements Initializabl
     public TextField isAvailable;
     public ChoiceBox changeableFeatures;
     public TextField changeableFeatureValue;
-
+    private Sort currentSort;
+    private List<Product> products;
+    private List<Product> myProducts;
     private Product product;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Product> products = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_SELLER_PRODUCTS " + accountUsername),
+        myProducts = new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_SELLER_PRODUCTS " + accountUsername),
                 new TypeToken<ArrayList<Product>>() {
                 }.getType()));
+        products = new ArrayList<>();
+        products.addAll(myProducts);
         productTableView.setItems(FXCollections.observableArrayList(products));
         productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -137,10 +141,103 @@ public class ManageProductsController extends Controller implements Initializabl
     }
 
     public void sort(ActionEvent actionEvent) {
-        openSort(this, "sellerManageProducts lk");
+        openSort(this);
     }
 
     public void back() {
         loadFxml(Addresses.SELLER_MENU);
     }
+
+    public ArrayList<String> getSortFields() {
+        ArrayList<String> fields = new ArrayList<>();
+        fields.add("price");
+        fields.add("name");
+        fields.add("rating");
+        return fields;
+    }
+
+    public ArrayList<Object> sort(String sort, boolean isAscending) {
+        products = new ArrayList<>();
+        products.addAll(myProducts);
+        currentSort = new Sort(sort, isAscending);
+        applySort();
+        return new ArrayList<>(products);
+    }
+
+    private void applySort() {
+        if (currentSort == null) {
+            return;
+        }
+        String field = currentSort.getField();
+        if (field.equals("price")) {
+            sortByPrice();
+        } else if (field.equals("name")) {
+            sortByName();
+        } else {
+            sortByRating();
+        }
+        if (!currentSort.isAscending()) {
+            Collections.reverse(products);
+        }
+    }
+
+    private void sortByPrice() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getPrice() > productsForSort[j].getPrice()) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    private void sortByName() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getName().compareTo(productsForSort[j].getName()) > 0) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    private void sortByRating() {
+        Product[] productsForSort = products.toArray(new Product[0]);
+        for (int i = 0; i < productsForSort.length; i++) {
+            for (int j = i + 1; j < productsForSort.length; j++) {
+                if (productsForSort[i].getRate() > productsForSort[j].getRate()) {
+                    Product temp = productsForSort[i];
+                    productsForSort[i] = productsForSort[j];
+                    productsForSort[j] = temp;
+                }
+            }
+        }
+        products = Arrays.asList(productsForSort);
+    }
+
+    public ArrayList<Object> disableSort() {
+        currentSort = null;
+        return new ArrayList<>(myProducts);
+    }
+
+    public void initTable(ArrayList<Object> tableObjects) {
+        ArrayList<Product> tableProducts = new ArrayList<>();
+        for (Object tableProduct : tableObjects) {
+            tableProducts.add((Product) tableProduct);
+        }
+        productTableView.setItems(FXCollections.observableArrayList(tableProducts));
+        productsNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        //categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categoryName"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    }
 }
+
