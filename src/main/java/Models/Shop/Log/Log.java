@@ -54,6 +54,10 @@ public abstract class Log {
         return id;
     }
 
+    public void setStatus() {
+        this.status = Status.RECEIVED;
+    }
+
     public String getName() {
         return name;
     }

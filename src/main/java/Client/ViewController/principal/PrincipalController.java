@@ -1,6 +1,8 @@
 package Client.ViewController.principal;
 
 import Client.ViewController.MainController;
+import Models.Shop.Log.Log;
+import Models.Shop.Log.SellingLog;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Account;
@@ -17,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -34,10 +37,12 @@ public class PrincipalController extends Controller implements Initializable {
     public TableColumn<Discount, String> discountIdCol;
     public TableColumn<Discount, Integer> discountPercentCol;
     public TableColumn<Discount, LocalDate> discountBeginningDateCol;
-    public TableView<Request> requestsTable;
-    public TableColumn<Request, String> requestIdCol;
-    public TableColumn<Request, String> requestTypeCol;
-    public TableColumn<Request, String> requestSenderCol;
+    public TableView<SellingLog> logTable;
+    public TableColumn<SellingLog, String> logIdCol;
+    public TableColumn<SellingLog, Double> logMoneyCol;
+    public TableColumn<SellingLog, LocalDateTime> logDateCol;
+    public TableColumn<SellingLog, Log.Status> logStatusCol;
+    public TextField logId;
     public TextField minAmountField;
     public TextField wageField;
     public Button minAmountButton;
@@ -57,7 +62,24 @@ public class PrincipalController extends Controller implements Initializable {
         phoneNumberField.setText(principal.getPhoneNumber());
         initUsers();
         initDiscounts();
-        initRequests();
+        initLogs();
+    }
+
+    public void setLog() {
+        String respond = sendRequest("EDIT_LOG " + logId.getText());
+        if (respond.equals("0")) {
+            success("done");
+        } else {
+            error("probably wrong id");
+        }
+    }
+
+    private void initLogs() {
+        logTable.setItems(FXCollections.observableArrayList(getLogs()));
+        logIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        logDateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        logMoneyCol.setCellValueFactory(new PropertyValueFactory<>("money"));
+        logStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     private void initUsers() {
@@ -72,13 +94,6 @@ public class PrincipalController extends Controller implements Initializable {
         discountIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         discountPercentCol.setCellValueFactory(new PropertyValueFactory<>("discountPercent"));
         discountBeginningDateCol.setCellValueFactory(new PropertyValueFactory<>("beginningDate"));
-    }
-
-    private void initRequests() {
-        requestsTable.setItems(FXCollections.observableArrayList(getAllRequests()));
-        requestIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        requestTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        requestSenderCol.setCellValueFactory(new PropertyValueFactory<>("sellerName"));
     }
 
     public void updateProfile(ActionEvent actionEvent) {

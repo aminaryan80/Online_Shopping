@@ -4,6 +4,7 @@ import Models.Account.*;
 import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
+import Models.Shop.Log.SellingLog;
 import Models.Shop.Off.Auction;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
@@ -216,6 +217,11 @@ public class RequestProcessor {
             response = showBoughtProducts(matcher.group(1), matcher.group(2));
         } else if ((matcher = getMatcher(request, "GET_BUYING_LOG (\\S+) (\\S+)")).find()) {
             response = getBuyingLog(matcher.group(1), matcher.group(2));
+        } else if ((matcher = getMatcher(request, "GET_ALL_LOGS")).find()) {
+            response = getAllLogs();
+        } else if ((matcher = getMatcher(request, "EDIT_LOG (\\S+)")).find()) {
+            response = editLog(matcher.group(1));
+        } else if ((matcher = getMatcher(request,"SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
         } else if ((matcher = getMatcher(request, "SET_MINIMUM_AMOUNT_IN_WALLET (\\S+)")).find()) {
             response = setMinimumAmountInWallet(matcher.group(1));
         } else if ((matcher = getMatcher(request, "SET_WAGE_IN_WALLET (\\S+)")).find()) {
@@ -259,6 +265,21 @@ public class RequestProcessor {
             Customer customer = (Customer) Account.getAccountByUsername(username);
             return "" + customer.getWallet().getAmountInBank();
         }
+    }
+
+    private static String editLog(String id) {
+        ArrayList<SellingLog> logs = Seller.getLogs();
+        for (SellingLog log : logs) {
+            if (log.getId().equals(id)) {
+                log.setStatus();
+                return "0";
+            }
+        }
+        return "1";
+    }
+
+    private static String getAllLogs() {
+        return Gson.INSTANCE.get().toJson(Seller.getLogs());
     }
 
     private static String getWalletStuff(boolean isWage) {

@@ -6,6 +6,7 @@ import Models.Account.Principal;
 import Models.Account.Seller;
 import Models.Gson;
 import Models.Shop.Category.Category;
+import Models.Shop.Log.SellingLog;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.*;
@@ -146,6 +147,10 @@ public class Controller {
         return new ArrayList<>(Gson.INSTANCE.get().fromJson(
                 sendRequest("GET_ALL_PRODUCTS"), new TypeToken<ArrayList<Product>>() {
                 }.getType()));
+    }
+
+    protected ArrayList<SellingLog> getLogs() {
+        return new ArrayList<>(Gson.INSTANCE.get().fromJson(sendRequest("GET_ALL_LOGS"), new TypeToken<ArrayList<SellingLog>>() {}.getType()));
     }
 
     protected ArrayList<Request> getAllRequests() {

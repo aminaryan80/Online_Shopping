@@ -1,5 +1,6 @@
 package Client.ViewController.customer;
 
+import Models.Shop.Log.Log;
 import Server.Control.Manager;
 import Client.ViewController.Controller;
 import Models.Account.Customer;
@@ -44,6 +45,7 @@ public class CustomerController extends Controller implements Initializable {
     public TableColumn<BuyingLog, String> orderIdCol;
     public TableColumn<BuyingLog, LocalDate> orderDate;
     public TableColumn<BuyingLog, Double> orderAmount;
+    public TableColumn<BuyingLog, Log.Status> orderStatusCol;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,6 +86,7 @@ public class CustomerController extends Controller implements Initializable {
         orderIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         orderDate.setCellValueFactory(new PropertyValueFactory<>("stringDate"));
         orderAmount.setCellValueFactory(new PropertyValueFactory<>("money"));
+        orderStatusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
     private ArrayList<BuyingLog> getAllLogs() {
