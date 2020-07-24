@@ -311,7 +311,7 @@ public class RequestProcessor {
         String[] inputs = matcher.group(1).split("&&&");
         ArrayList<String> input = new ArrayList<>(Gson.INSTANCE.get().fromJson(inputs[0], new TypeToken<ArrayList<String>>() {
         }.getType()));
-        ManageProductsManager manageProductsManager = new ManageProductsManager(null);
+        ManageProductsManager manageProductsManager = new ManageProductsManager(Account.getAccountByUsername(input.get(5)));
         manageProductsManager.addProduct(input.get(0), Category.getCategoryByName(input.get(1)),
                 Double.parseDouble(input.get(2)), Boolean.parseBoolean(input.get(3)), input.get(4),
                 Gson.INSTANCE.get().fromJson(inputs[1], new TypeToken<ArrayList<Feature>>() {
