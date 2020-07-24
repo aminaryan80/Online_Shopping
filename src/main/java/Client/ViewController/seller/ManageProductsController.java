@@ -81,12 +81,12 @@ public class ManageProductsController extends Controller implements Initializabl
     }
 
     public void add(ActionEvent actionEvent) {
-        if (price.getText().matches("^\\d+(\\.\\d+)?$")) {
+        if (!price.getText().matches("^\\d+(\\.\\d+)?$")) {
             error("wrong price format");
             return;
         }
         //((ManageProductsManager) manager).featuresPopUp(this);
-        loadFxml(Addresses.ADD_PRODUCT_POP_UP, true);
+        ((FeaturesPopUpController) loadFxml(Addresses.ADD_PRODUCT_POP_UP, true)).setController(this);
     }
 
     public void addProduct(ArrayList<Feature> allFeatures) {

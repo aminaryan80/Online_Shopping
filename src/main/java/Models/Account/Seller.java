@@ -18,7 +18,7 @@ public class Seller extends Account {
     public Seller(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance, String companyName) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.companyName = companyName;
-        wallet = new Wallet(balance, username, password, bankId);
+        wallet = new Wallet(balance, username, password, myBankId);
     }
 
     public ArrayList<Auction> getAuctions() {
@@ -64,7 +64,7 @@ public class Seller extends Account {
             dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
             dataOutputStream.flush();
             String bankId = dataInputStream.readUTF();
-            this.setBankId(bankId);
+            this.setMyBankId(bankId);
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();

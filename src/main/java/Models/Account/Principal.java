@@ -20,21 +20,21 @@ public class Principal extends Account {
                 dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
                 dataOutputStream.flush();
                 String bankId = dataInputStream.readUTF();
-                this.setBankId(bankId);
+                this.setMyBankId(bankId);
                 socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            this.setBankId(myBankId);
+            this.setMyBankId(myBankId);
         }
     }
 
     public static String getTheBankId() {
         for (Account account : allAccounts) {
             if (account instanceof Principal)
-                if(account.getBankId()!=null) {
-                    return account.getBankId();
+                if(account.getMyBankId()!=null) {
+                    return account.getMyBankId();
                 }
         }
         return null;
@@ -43,7 +43,7 @@ public class Principal extends Account {
     public static String shopBankId(){
         for (Account account : allAccounts) {
             if (account instanceof Principal)
-                return account.getBankId();
+                return account.getMyBankId();
         }
         return null;
     }

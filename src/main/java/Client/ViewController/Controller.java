@@ -18,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TreeItem;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;

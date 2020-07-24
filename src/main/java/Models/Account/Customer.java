@@ -14,14 +14,13 @@ public class Customer extends Account {
     private ArrayList<BuyingLog> allLogs;
     private ArrayList<String> discountsIds;
     private Wallet wallet;
-    private String bankId;
 
     public Customer(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         super(username, firstName, lastName, email, phoneNumber, password, balance);
         this.cart = new Cart();
         this.allLogs = new ArrayList<>();
         discountsIds = new ArrayList<>();
-        wallet = new Wallet(balance, username, password, bankId);
+        wallet = new Wallet(balance, username, password, myBankId);
     }
 
     public void payMoney(double money,String payingMethod) {
@@ -41,7 +40,7 @@ public class Customer extends Account {
             dataOutputStream.writeUTF("create_account" + " " + firstName + " " + lastName + " " + username + " " + password + " " + password);
             dataOutputStream.flush();
             String bankId = dataInputStream.readUTF();
-            this.setBankId(bankId);
+            this.setMyBankId(bankId);
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();

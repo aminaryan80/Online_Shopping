@@ -1,5 +1,6 @@
 package Client.ViewController.seller;
 
+import Client.ViewController.Controller;
 import Models.Gson;
 import Models.Shop.Category.Category;
 import Models.Shop.Category.Feature;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class FeaturesPopUpController extends ManageProductsController implements Initializable {
+public class FeaturesPopUpController extends Controller implements Initializable {
 
     public TextField featuresText;
     public Label featuresLabel;
@@ -23,12 +24,17 @@ public class FeaturesPopUpController extends ManageProductsController implements
     private ArrayList<String> featuresNames;
     private ArrayList<Feature> allFeatures;
     private int featuresNumbers;
+    private ManageProductsController controller;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         allFeatures = new ArrayList<>();
         i = -1;
         featuresLabel.setText("Enter category:");
+    }
+
+    public void setController(ManageProductsController controller) {
+        this.controller = controller;
     }
 
     public void next(ActionEvent actionEvent) {
@@ -46,7 +52,7 @@ public class FeaturesPopUpController extends ManageProductsController implements
             featuresLabel.setText(featuresNames.get(i));
         } else if (i == featuresNumbers - 1) {
             featuresText.clear();
-            addProduct(allFeatures);
+            controller.addProduct(allFeatures);
             ((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
         } else {
             allFeatures.add(new Feature(featuresNames.get(i), featuresText.getText()));

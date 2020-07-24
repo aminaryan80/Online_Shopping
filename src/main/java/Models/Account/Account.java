@@ -20,7 +20,7 @@ public abstract class Account {
     protected String password;
     protected double balance;
     protected boolean isGuest;
-    protected String bankId;
+    protected String myBankId;
     protected boolean isOnline;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
@@ -36,12 +36,12 @@ public abstract class Account {
         createBankAccount(this);
     }
 
-    public String getBankId() {
-        return bankId;
+    public String getMyBankId() {
+        return myBankId;
     }
 
-    public void setBankId(String bankId) {
-        this.bankId = bankId;
+    public void setMyBankId(String myBankId) {
+        this.myBankId = myBankId;
     }
 
     protected abstract void createBankAccount(Account account);

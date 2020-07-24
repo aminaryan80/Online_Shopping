@@ -87,7 +87,8 @@ public class ProductsController extends MainController implements Initializable 
             int i = 0;
             productsGridPane.setPrefHeight(0);
             for (Product product : products) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/products/Product.fxml"));
+                //FXMLLoader loader = new FXMLLoader(getClass().getResource("../../view/products/Product.fxml"));
+                FXMLLoader loader = getLoader(Addresses.PRODUCT_ITEM);
                 Parent root = loader.load();
                 ProductItemController controller = loader.getController();
                 controller.setInfos(product.getAuction(), product, product.hasAuction());
