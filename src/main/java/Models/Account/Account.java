@@ -18,7 +18,7 @@ public abstract class Account {
     protected String phoneNumber;
     protected String password;
     protected double balance;
-    protected boolean isGuest;
+    protected boolean isOnline;
 
     public Account(String username, String firstName, String lastName, String email, String phoneNumber, String password, double balance) {
         this.username = username;
@@ -28,8 +28,19 @@ public abstract class Account {
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.balance = balance;
-        this.isGuest = false;
+        this.isOnline = false;
         allAccounts.add(this);
+    }
+
+    public String getIsOnline() {
+        if(isOnline)
+            return "On";
+        else
+            return "Off";
+    }
+
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 
     public static ArrayList<Account> getAllAccounts() {
@@ -131,6 +142,7 @@ public abstract class Account {
     }
 
     public static void save(Account account) throws Exception {
+        account.setOnline(false);
         if (account instanceof Customer) {
             saveCustomer(account);
         } else if (account instanceof Seller) {

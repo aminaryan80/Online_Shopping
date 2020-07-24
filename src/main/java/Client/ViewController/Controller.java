@@ -1,7 +1,5 @@
 package Client.ViewController;
 
-import Server.Control.Manager;
-import Server.Control.RequestProcessor.RequestProcessor;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
@@ -11,7 +9,9 @@ import Models.Shop.Category.Category;
 import Models.Shop.Off.Discount;
 import Models.Shop.Product.Product;
 import Models.Shop.Request.*;
+import Server.Control.Manager;
 import com.google.gson.reflect.TypeToken;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +30,10 @@ public class Controller {
     protected Addresses backAddress;
     protected static Stage stage;
     protected static Stage popup = new Stage();
+
+    public static void closeClient() {
+        logout();
+    }
 
     public void init() {
 
@@ -55,7 +59,7 @@ public class Controller {
         return RequestProcessor.processRequest(request);
     }*/
 
-    protected String sendRequest(String request) {
+    protected static String sendRequest(String request) {
         Socket socket;
         DataInputStream input;
         DataOutputStream output;
@@ -178,10 +182,15 @@ public class Controller {
         return null;
     }
 
-    public void logout() {
+    public static void logout() {
         System.out.println("LOGOUT");
+        sendRequest("LOGOUT " + accountUsername);
         accountType = null;
         accountUsername = null;
+    }
+
+    public void logout(ActionEvent actionEvent) {
+        logout();
         loadFxml(Addresses.MAIN_MENU);
     }
 
@@ -314,4 +323,3 @@ public class Controller {
         }
     }
 }
-

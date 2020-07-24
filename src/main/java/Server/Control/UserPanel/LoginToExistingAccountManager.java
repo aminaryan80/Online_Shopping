@@ -1,11 +1,11 @@
 package Server.Control.UserPanel;
 
-import Server.Control.Manager;
 import Models.Account.Account;
 import Models.Account.Customer;
 import Models.Account.Principal;
 import Models.Account.Seller;
 import Models.Shop.Cart;
+import Server.Control.Manager;
 
 public class LoginToExistingAccountManager extends Manager {
     public LoginToExistingAccountManager(Account account) {
@@ -26,6 +26,7 @@ public class LoginToExistingAccountManager extends Manager {
                         Cart.addCartToCustomerCart((Customer) (Manager.account), cart);
                         cart = ((Customer) account).getCart();
                     }
+                    account.setOnline(true);
                     if (account instanceof Principal) {
                         return "P&&&" + account.getUsername();
                     } else if (account instanceof Customer) {
@@ -37,5 +38,11 @@ public class LoginToExistingAccountManager extends Manager {
                 } else return "2";
             } else return "1";
         } else return "3";
+    }
+
+    public String logout(String username) {
+        Account account = Account.getAccountByUsername(username);
+        account.setOnline(false);
+        return "0";
     }
 }

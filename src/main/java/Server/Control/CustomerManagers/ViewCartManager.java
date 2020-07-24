@@ -127,14 +127,6 @@ public class ViewCartManager extends Manager {
         return new ArrayList<>(products);
     }
 
-    /*public void showProduct(String id) {
-        new ProductPageManager(account, Product.getProductById(id), Controller.Addresses.VIEW_CART, this);
-    }*/
-
-    public boolean isCartEmpty() {
-        return customer.getCart().getProducts().size() == 0;
-    }
-
     public static ArrayList<String> getSortFields() {
         ArrayList<String> fields = new ArrayList<>();
         fields.add("price");

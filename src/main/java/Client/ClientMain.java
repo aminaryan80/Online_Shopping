@@ -19,6 +19,10 @@ public class ClientMain extends Application {
         initialize(stage);
     }
 
+    private static void closeClient() {
+        Controller.closeClient();
+    }
+
     private void initialize(Stage stage) {
         Controller.setStage(stage);
         try {
@@ -31,5 +35,6 @@ public class ClientMain extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Runtime.getRuntime().addShutdownHook(new Thread(ClientMain::closeClient));
     }
 }
